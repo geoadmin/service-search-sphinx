@@ -8,18 +8,19 @@ import sys, time
 if not sys.argv[1:]:
         print "Usage: python test.py [OPTIONS] query words\n"
         print "Options are:"
-        print "-h, --host <HOST>\tconnect to searchd at host HOST"
-        print "-p, --port\t\tconnect to searchd at port PORT"
-        print "-i, --index <IDX>\tsearch through index(es) specified by IDX"
-        print "-s, --sortby <EXPR>\tsort matches by 'EXPR'"
-        print "-a, --any\t\tuse 'match any word' matching mode"
-        print "-b, --boolean\t\tuse 'boolean query' matching mode"
-        print "-e, --extended\t\tuse 'extended query' matching mode"
-        print "-f, --filter <ATTR>\tfilter by attribute 'ATTR' (default is 'group_id')"
-        print "-v, --value <VAL>\tadd VAL to allowed 'group_id' values list"
-        print "-g, --groupby <EXPR>\tgroup matches by 'EXPR'"
-        print "-gs,--groupsort <EXPR>\tsort groups by 'EXPR'"
-        print "-l, --limit <COUNT>\tretrieve COUNT matches (default is 20)"
+        print "-h, --host <HOST>\t\tconnect to searchd at host HOST"
+        print "-p, --port\t\t\tconnect to searchd at port PORT"
+        print "-i, --index <IDX>\t\tsearch through index(es) specified by IDX"
+        print "-s, --sortby <EXPR>\t\tsort matches by 'EXPR'"
+        print "-a, --any\t\t\tuse 'match any word' matching mode"
+        print "-b, --boolean\t\t\tuse 'boolean query' matching mode"
+        print "-e, --extended\t\t\tuse 'extended query' matching mode"
+        print "-f, --filter <ATTR>\t\tfilter by attribute 'ATTR' (default is 'group_id')"
+        print "-v, --value <VAL>\t\tadd VAL to allowed 'group_id' values list"
+        print "-g, --groupby <EXPR>\t\tgroup matches by 'EXPR'"
+        print "-gs,--groupsort <EXPR>\t\tsort groups by 'EXPR'"
+        print "-l, --limit <COUNT>\t\tretrieve COUNT matches (default is 20)"
+        print "-ga, --geoanchor <LAT> <LON>\tsets GeoAnchor at given lat/lon (in minutes decimal). Index must contain lat/lon attributes"
         sys.exit(0)
 
 q = ''
@@ -33,6 +34,7 @@ sortby = ''
 groupby = ''
 groupsort = '@group desc'
 limit = 0
+geoanchor = []
 
 i = 1
 while (i<len(sys.argv)):
@@ -70,6 +72,11 @@ while (i<len(sys.argv)):
         elif arg=='-l' or arg=='--limit':
                 i += 1
                 limit = int(sys.argv[i])
+        elif arg=='-ga' or arg=='--geoanchor':
+                i += 1
+                geoanchor.append(float(sys.argv[i]))
+                i += 1
+                geoanchor.append(float(sys.argv[i]))
         else:
                 q = '%s%s ' % ( q, arg )
         i += 1
@@ -78,6 +85,8 @@ while (i<len(sys.argv)):
 cl = SphinxClient()
 cl.SetServer ( host, port )
 cl.SetMatchMode ( mode )
+if len(geoanchor) > 1:
+        cl.SetGeoAnchor('lat', 'lon', geoanchor[0], geoanchor[1])
 if filtervals:
         cl.SetFilter ( filtercol, filtervals )
 if groupby:
