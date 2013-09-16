@@ -24,24 +24,32 @@ Object    | Path
 **Configuration:**|/etc/sphinxsearch/sphinx.conf|
 
 ###Search Daemon:
-`$ sudo su - sphinxsearch`
+```bash
+$ sudo su - sphinxsearch
+```
+
 ####stop
-`$ searchd --stop`
+```bash
+$ searchd --stop
+```
 ####start
-`$ searchd --start`
+```bash
+$ searchd --start
+```
 ###Rebuild / update Indexes:
 ####rebuild / build some indexes index1 index2 index3
 There will be a service restart after every index
-
-`$indexer --verbose --rotate --sighup-each index1 index2 index3 `
-
+```bash
+$ indexer --verbose --rotate --sighup-each index1 index2 index3 
+```
 ####rebuild / build all indexes
-
-`$indexer --verbose --rotate --sighup-each --all`
-
+```bash
+$ indexer --verbose --rotate --sighup-each --all
+```
 multithread indexer is not possible: http://sphinxsearch.com/forum/view.html?id=3936
 
 ###Command line debugging with python sphinx api
-`$ cd lib/sphinxapi`
-
-`$ python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"`
+```bash
+$ cd lib/sphinxapi
+$ python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
+```
