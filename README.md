@@ -20,7 +20,7 @@ Object    | Path
 -----------|------|
 **PID:**    | /var/run/sphinxsearch  | 
 **Log:**|/var/log/sphinxsearch/|
-**Indexes:**|/var/lib/sphinxsearch/data/|
+**Indexes:**|/var/lib/sphinxsearch/data/index/|
 **Configuration:**|/etc/sphinxsearch/sphinx.conf|
 
 ###Search Daemon:
