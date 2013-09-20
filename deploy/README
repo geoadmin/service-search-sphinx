@@ -1,0 +1,9 @@
+# Sphinxsearch Deploy script:
+# 
+
+usage:
+deploy to integration:
+$ bash deploy_wrapper.sh ab
+
+deploy to production:
+$ bash deploy_wrapper.sh prod
