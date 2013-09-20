@@ -20,6 +20,7 @@ if not sys.argv[1:]:
         print "-g, --groupby <EXPR>\tgroup matches by 'EXPR'"
         print "-gs,--groupsort <EXPR>\tsort groups by 'EXPR'"
         print "-l, --limit <COUNT>\tretrieve COUNT matches (default is 20)"
+        print "-ga, --geoanchor <LAT> <LON>\tsets GeoAnchor at given lat/lon (in minutes decimal). Index must contain lat/lon attributes"
         sys.exit(0)
 
 q = ''
@@ -33,6 +34,7 @@ sortby = ''
 groupby = ''
 groupsort = '@group desc'
 limit = 0
+geoanchor = []
 
 i = 1
 while (i<len(sys.argv)):
@@ -70,6 +72,11 @@ while (i<len(sys.argv)):
         elif arg=='-l' or arg=='--limit':
                 i += 1
                 limit = int(sys.argv[i])
+        elif arg=='-ga' or arg=='--geoanchor':
+                i += 1
+                geoanchor.append(float(sys.argv[i]))
+                i += 1
+                geoanchor.append(float(sys.argv[i]))
         else:
                 q = '%s%s ' % ( q, arg )
         i += 1
@@ -78,6 +85,8 @@ while (i<len(sys.argv)):
 cl = SphinxClient()
 cl.SetServer ( host, port )
 cl.SetMatchMode ( mode )
+if len(geoanchor) > 1:
+        cl.SetGeoAnchor('lat', 'lon', geoanchor[0], geoanchor[1])
 if filtervals:
         cl.SetFilter ( filtercol, filtervals )
 if groupby:
