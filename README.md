@@ -34,7 +34,7 @@ $ searchd --stop
 ```
 ####start
 ```bash
-$ searchd --start
+$ searchd
 ```
 ###Rebuild / update Indexes:
 ####rebuild / build some indexes index1 index2 index3
