@@ -5,8 +5,10 @@ Sphinx Search service for RE3
 ---------------------------------------------------
 
 ###SPHINX doc (2.0.4):
-**http://sphinxsearch.com/docs/archives/2.0.4/
-**http://sphinxsearch.com/docs/archives/manual-2.0.4.html
+```bash
+http://sphinxsearch.com/docs/archives/2.0.4/
+http://sphinxsearch.com/docs/archives/manual-2.0.4.html
+```
 
 ###SPHINX Service Adresses:
 Staging    | URL
