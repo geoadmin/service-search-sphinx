@@ -1,5 +1,4 @@
 
-SED_RULE := 's/$$PGUSER/$(PGUSER)/'
 
 .PHONY: help
 
@@ -9,9 +8,12 @@ help:
 	@echo "Possible targets:"
 	@echo
 	@echo "- index            Build indices"
+	@echo "- template         Create sphinx config file"
+	@echo
 
 .PHONY: index
-index:	echo 'toto'
+index:
+	indexer --verbose --rotate --config etc/sphinxsearch/sphinx.conf  --sighup-each layers_de
 
 
 .PHONY: template
