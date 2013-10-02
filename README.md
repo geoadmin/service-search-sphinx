@@ -25,9 +25,9 @@ Staging    | URL
 Object    | Path
 -----------|------|
 **PID:**    | /var/run/sphinxsearch  | 
-**Log:**|/var/log/sphinxsearch/|
+**Log:**|/var/www/vhosts/service-sphinxsearch/logs/sphinxsearch/|
 **Indexes:**|/var/lib/sphinxsearch/data/index/|
-**Configuration:**|/etc/sphinxsearch/sphinx.conf|
+**Configuration:**|/var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/etc/sphinxsearch/sphinx.conf|
 
 ###Search Daemon:
 ```bash
@@ -40,7 +40,7 @@ $ searchd --stop
 ```
 ####start
 ```bash
-$ searchd
+$ searchd --config /var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/etc/sphinxsearch/sphinx.conf
 ```
 ###Rebuild / update Indexes:
 ####rebuild / build some indexes index1 index2 index3
