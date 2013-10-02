@@ -9,6 +9,7 @@ CODE_DIR=$2 # = dest = /tmp/sphinxsearch/data.tmp/
 
 BASEDIR=/var/lib/sphinxsearch/data
 PID=/var/run/sphinxsearch/searchd.pid
+CONFIG=/var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/etc/sphinxsearch/sphinx.conf
 
 if [ -d "$BASEDIR/index.tmp/" ] 
 then
@@ -47,7 +48,7 @@ echo "replace sphinx config file ..."
 cp $BASEDIR/index/sphinx.conf /etc/sphinxsearch
 
 echo "starting sphinx service ..."
-sudo -u sphinxsearch /etc/init.d/sphinxsearch start
+sudo -u sphinxsearch /etc/init.d/sphinxsearch --conf $CONF start
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "service offline time: $DIFF"
