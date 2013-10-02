@@ -1,3 +1,4 @@
+
 source def_pqsql
 {
     type = pgsql
@@ -453,8 +454,8 @@ indexer
 searchd
 {
     port = 9312
-    log = /var/log/sphinxsearch/searchd.log
-    query_log = /var/log/sphinxsearch/query.log
+    log = /var/www/vhosts/service-sphinxsearch/logs/searchd.log
+    query_log = /var/www/vhosts/service-sphinxsearch/logs/query.log
     pid_file = /var/run/sphinxsearch/searchd.pid
     dist_threads = 3
     read_timeout = 5
