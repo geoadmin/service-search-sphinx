@@ -8,6 +8,7 @@ help:
 	@echo "Possible targets:"
 	@echo
 	@echo "- index      Build indices (does NOT re-create config file)"
+	@echo "             Do 'sudo su sphinxsearch' before using this"
 	@echo "- template   Create sphinx config file from template"
 	@echo
 
