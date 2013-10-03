@@ -217,34 +217,37 @@ source src_layers_rm : layers
         from re3.view_bod_layer_info_rm
 }
 
-source src_ch_astra_ivs-nat : def_pqsql
+source def_searchable_features : def_pqsql
 {
-    sql_db = uvek
-    sql_query = \
-        SELECT \
-            nat_id::bigint as id \
-            , ivs_nummer as label \
-            , 'feature' as origin \
-            , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
-            , 'ch.astra.ivs-nat' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d   \
-            , nat_id::bigint as id \
-        from astra.ivs_nat
     sql_attr_bigint = id
     sql_attr_string = origin
     sql_attr_string = layer
     sql_attr_string = geom_st_box2d
     sql_attr_string = label
-#    sql_attr_float = lat
-#    sql_attr_float = lon
+    sql_attr_float = lat
+    sql_attr_float = lon
     sql_field_string = geom_quadindex
-    sql_field_string = detail 
+    sql_field_string = detail
 }
 
-source src_ch_astra_ivs-reg_loc : def_pqsql
+source src_ch_astra_ivs-nat : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT nat_id::bigint as id \
+            , ivs_nummer as label \
+            , 'feature' as origin \
+            , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
+            , 'ch.astra.ivs-nat' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d   \
+            , nat_id::bigint as id \
+        from astra.ivs_nat
+}
+
+source src_ch_astra_ivs-reg_loc : def_searchable_features
 {
     sql_db = uvek
     sql_query = \
@@ -254,20 +257,28 @@ source src_ch_astra_ivs-reg_loc : def_pqsql
             , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
             , 'ch.astra.ivs-reg_loc' as layer \
             , quadindex(the_geom) as geom_quadindex \
-#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , reg_loc_id::bigint as id \
         from astra.ivs_reg_loc
-    sql_attr_bigint = id
-    sql_attr_string = origin
-    sql_attr_string = layer
-    sql_attr_string = label
-    sql_attr_string = geom_st_box2d
-#    sql_attr_float = lat
-#    sql_attr_float = lon
-    sql_field_string = geom_quadindex
-    sql_field_string = detail
+}
+
+source src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT nr::bigint as id \
+            , zaehlstellen_bezeichnung as label \
+            , 'feature' as origin \
+            , nr||' '||remove_accents(zaehlstellen_bezeichnung) as detail \
+            , 'ch.astra.strassenverkehrszaehlung_messstellen-uebergeordnet' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::bigint as id \
+        from astra.verkehr_ueber
 }
 
 # Not needed now as we only support searchable layers right now
@@ -349,12 +360,13 @@ index address : zipcode
     path = /var/lib/sphinxsearch/data/index/address
 }
 
-index address_fuzzy : zipcode
-{
-    source = src_address
-    path = /var/lib/sphinxsearch/data/index/address_fuzzy
-    morphology = soundex, metaphone
-}
+# Not needed currently
+#index address_fuzzy : zipcode
+#{
+#    source = src_address
+#    path = /var/lib/sphinxsearch/data/index/address_fuzzy
+#    morphology = soundex, metaphone
+#}
 
 index swisssearch
 {
@@ -403,6 +415,7 @@ index layers_rm : layers_de
     path = /var/lib/sphinxsearch/data/index/layers_rm
 }
 
+#First searchable layers. Serves as base
 index ch_astra_ivs-nat
 {
     type = plain
@@ -417,18 +430,16 @@ index ch_astra_ivs-nat
     enable_star = 1
 }
 
-index ch_astra_ivs-reg_loc
+index ch_astra_ivs-reg_loc : ch_astra_ivs-nat
 {
-    type = plain # Which is also the default value
     source = src_ch_astra_ivs-reg_loc
     path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-reg_loc
-    docinfo = extern
-    charset_type = utf-8
-    min_infix_len = 2
-    infix_fields = detail
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
-    enable_star = 1
+}
+
+index ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : ch_astra_ivs-nat
+{
+    source =  src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet
+    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet
 }
 
 # Not needed right now because we only support searchable layers
