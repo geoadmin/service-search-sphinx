@@ -1,4 +1,3 @@
-
 source def_pqsql
 {
     type = pgsql
