@@ -281,6 +281,313 @@ source src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : def_sea
         from astra.verkehr_ueber
 }
 
+source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT nr::bigint as id \
+            , zaehlstellen_bezeichnung as label \
+            , 'feature' as origin \
+            , nr||' '||remove_accents(zaehlstellen_bezeichnung) as detail \
+            , 'ch.astra.strassenverkehrszaehlung_messstellen-regional_lokal' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::bigint as id \
+        from astra.verkehr_reg_loc
+}
+
+source src_ch_swisstopo_fixpunkte-lfp1 : def_searchable_features
+{
+    sql_db = kogis
+    sql_query = \
+        SELECT gid::bigint as id \
+            , pointid as label \
+            , 'feature' as origin \
+            , remove_accents(pointid)||' '||remove_accents(nummer) as detail \
+            , 'ch.swisstopo.fixpunkte-lfp1' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::bigint as id \
+        from fpds.punkt_lage_lfp1
+}
+
+source src_ch_swisstopo_fixpunkte-lfp2 : def_searchable_features
+{
+    sql_db = kogis
+    sql_query = \
+        SELECT gid::bigint as id \
+            , pointid as label \
+            , 'feature' as origin \
+            , remove_accents(pointid)||' '||remove_accents(nummer) as detail \
+            , 'ch.swisstopo.fixpunkte-lfp2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::bigint as id \
+        from fpds.punkt_lage_lfp2
+}
+
+source src_ch_swisstopo_fixpunkte-hfp1 : def_searchable_features
+{
+    sql_db = kogis
+    sql_query = \
+        SELECT gid::bigint as id \
+            , pointid as label \
+            , 'feature' as origin \
+            , remove_accents(pointid)||' '||remove_accents(nummer)||' '||remove_accents(bgdi_label) as detail \
+            , 'ch.swisstopo.fixpunkte-hfp1' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::bigint as id \
+        from fpds.punkt_hoehe_hfp1
+}
+
+source src_ch_swisstopo_fixpunkte-hfp2 : def_searchable_features
+{
+    sql_db = kogis
+    sql_query = \
+        SELECT gid::bigint as id \
+            , pointid as label \
+            , 'feature' as origin \
+            , remove_accents(pointid)||' '||remove_accents(nummer) as detail \
+            , 'ch.swisstopo.fixpunkte-hfp2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::bigint as id \
+        from fpds.punkt_hoehe_hfp2
+}
+
+# FIXME creation of this index creates alot of warnings because of quadindex...
+source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_features
+{
+    sql_db = stopo
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+    sql_query = \
+        SELECT id::bigint as id \
+            , name_ads as label \
+            , 'feature' as origin \
+            , name_ads as detail \
+            , 'ch.swisstopo.geologie-rohstoffe-industrieminerale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , id::bigint as id \
+        from geol.rohstoffe_industrieminerale
+}
+
+# FIXME creation of this index creates alot of warnings because of quadindex...
+source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchable_features
+{
+    sql_db = stopo
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+    sql_query = \
+        SELECT id::bigint as id \
+            , name_ads as label \
+            , 'feature' as origin \
+            , name_ads as detail \
+            , 'ch.swisstopo.geologie-rohstoffe-kohlen_bitumen_erdgas' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , id::bigint as id \
+        from geol.rohstoffe_kohlen_bitumen_erdgas
+}
+
+# FIXME creation of this index creates alot of warnings because of quadindex...
+source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
+{
+   sql_db = stopo
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+   sql_query = \
+      SELECT id::bigint as id \
+          , name as label \
+          , 'feature' as origin \
+          , name as detail \
+          , 'ch.swisstopo.verschiebungsvektoren-tsp1' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::bigint as id \
+      from geodaesie.verschiebungsvektoren_tsp1
+}
+
+# FIXME creation of this index creates alot of warnings because of quadindex...
+source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
+{
+   sql_db = stopo
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+   sql_query = \
+      SELECT id::bigint as id \
+          , name as label \
+          , 'feature' as origin \
+          , name as detail \
+          , 'ch.swisstopo.verschiebungsvektoren-tsp2' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::bigint as id \
+      from geodaesie.verschiebungsvektoren_tsp2
+}
+
+# FIXME creation of this index creates alot of warnings because of quadindex...
+source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
+{
+   sql_db = stopo
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+   sql_query = \
+      SELECT id::bigint as id \
+          , name_ads as label \
+          , 'feature' as origin \
+          , name_ads as detail \
+          , 'ch.swisstopo.geologie-rohstoffe-vererzungen' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::bigint as id \
+      from geol.rohstoffe_vererzungen
+}
+
+# FIXME creation of this index creates alot of warnings because of quadindex...
+source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_features
+{
+   sql_db = stopo
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+   sql_query = \
+      SELECT id::bigint as id \
+          , ziegelei_2 as label \
+          , 'feature' as origin \
+          , ziegelei_2 as detail \
+          , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1907' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::bigint as id \
+      from geol.geotechnik_ziegeleien_1907
+}
+
+# FIXME creation of this index creates alot of warnings because of quadindex...
+source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_features
+{
+   sql_db = stopo
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+   sql_query = \
+      SELECT id::bigint as id \
+          , ziegelei as label \
+          , 'feature' as origin \
+          , ziegelei as detail \
+          , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1965' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::bigint as id \
+      from geol.geotechnik_ziegeleien_1965
+}
+
+# FIXME creation of this index creates alot of warnings because of quadindex...
+source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_features
+{
+   sql_db = stopo
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+   sql_query = \
+      SELECT id::bigint as id \
+          , ziegeleien as label \
+          , 'feature' as origin \
+          , ziegeleien as detail \
+          , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1995' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::bigint as id \
+      from geol.geotechnik_ziegeleien_1995
+}
+
+source src_ch_babs_kulturgueter : def_searchable_features
+{
+    sql_db = vbs
+# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
+# FIXME: function quadindex does not exist in this db, add it and adapt the script
+    sql_query = \
+        SELECT kgs_nr::bigint as id \
+            , zkob as label \
+            , 'feature' as origin \
+            , zkob as detail \
+            , 'ch.babs.kulturgueter' as layer \
+            , the_geom as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , kgs_nr::bigint as id \
+        from babs.kgs
+}
+
+source src_ch_bakom_radio-fernsehsender : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(name)||' '||remove_accents(code) as detail \
+            , 'ch.bakom.radio-fernsehsender' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , id::bigint as id \
+        from bakom.nisdb_bro_tooltip
+}
+
+source src_ch_bakom_versorgungsgebiet-tv : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT gid::bigint as id \
+            , prog as label \
+            , 'feature' as origin \
+            , remove_accents(prog) as detail \
+            , 'ch.bakom.versorgungsgebiet-tv' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::bigint as id \
+        from bakom.tv_gebiet
+}
+
+source src_ch_bakom_versorgungsgebiet-ukw : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT gid::bigint as id \
+            , prog as label \
+            , 'feature' as origin \
+            , remove_accents(prog) as detail \
+            , 'ch.bakom.versorgungsgebiet-ukw' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::bigint as id \
+        from bakom.ukw_gebiet
+}
+
 # Not needed now as we only support searchable layers right now
 #source src_ch_bfs_gebaeude_wohnungs_register : def_pqsql
 #{
@@ -430,6 +737,11 @@ index ch_astra_ivs-nat
     enable_star = 1
 }
 
+index ch_astra_ivs-nat-verlaeufe : ch_astra_ivs-nat
+{
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-nat-verlaeufe
+}
+
 index ch_astra_ivs-reg_loc : ch_astra_ivs-nat
 {
     source = src_ch_astra_ivs-reg_loc
@@ -440,6 +752,108 @@ index ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : ch_astra_ivs
 {
     source =  src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet
     path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet
+}
+
+index ch_astra_strassenverkehrszaehlung_messstellen-regional_lokal : ch_astra_ivs-nat
+{
+    source =  src_ch_astra_strassenverkehrszaehlung_lokal
+    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen-regional_lokal
+}
+
+index ch_swisstopo_fixpunkte-lfp1 : ch_astra_ivs-nat
+{
+    source =  src_ch_swisstopo_fixpunkte-lfp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-lfp1
+}
+
+index ch_swisstopo_fixpunkte-lfp2 : ch_astra_ivs-nat
+{
+    source =  src_ch_swisstopo_fixpunkte-lfp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-lfp1
+}
+
+index ch_swisstopo_fixpunkte-hfp1 : ch_astra_ivs-nat
+{
+    source =  src_ch_swisstopo_fixpunkte-hfp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-hfp1
+}
+
+index ch_swisstopo_fixpunkte-hfp2 : ch_astra_ivs-nat
+{
+    source =  src_ch_swisstopo_fixpunkte-hfp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-hfp2
+}
+
+index ch_swisstopo_verschiebungsvektoren-tsp1 : ch_astra_ivs-nat
+{
+    source = src_ch_swisstopo_verschiebungsvektoren-tsp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren-tsp1
+}
+
+index ch_swisstopo_verschiebungsvektoren-tsp2 : ch_astra_ivs-nat
+{
+    source = src_ch_swisstopo_verschiebungsvektoren-tsp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren-tsp2
+}
+
+index ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : ch_astra_ivs-nat
+{
+    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1907
+}
+
+index ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : ch_astra_ivs-nat
+{
+    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1965
+}
+
+index ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : ch_astra_ivs-nat
+{
+    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1995
+}
+
+index ch_swisstopo_geologie-rohstoffe-vererzungen : ch_astra_ivs-nat
+{
+    source = src_ch_swisstopo_geologie-rohstoffe-vererzungen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-vererzungen
+}
+
+index ch_swisstopo_geologie-rohstoffe-industrieminerale : ch_astra_ivs-nat
+{
+    source = src_ch_swisstopo_geologie-rohstoffe-industrieminerale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-industrieminerale
+}
+
+index ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : ch_astra_ivs-nat
+{
+    source = src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas
+}
+
+index ch_babs_kulturgueter : ch_astra_ivs-nat
+{
+    source = src_ch_babs_kulturgueter
+    path = /var/lib/sphinxsearch/data/index/ch_babs_kulturgueter
+}
+
+index ch_bakom_radio-fernsehsender : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_radio-fernsehsender
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_radio-fernsehsender
+}
+
+index ch_bakom_versorgungsgebiet-tv : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_versorgungsgebiet-tv
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet-tv
+}
+
+index ch_bakom_versorgungsgebiet-ukw : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_versorgungsgebiet-ukw
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet-ukw
 }
 
 # Not needed right now because we only support searchable layers

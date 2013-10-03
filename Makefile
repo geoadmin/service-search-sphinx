@@ -14,7 +14,7 @@ help:
 
 .PHONY: index
 index:
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each layers_de
+	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each --all
 
 .PHONY: template
 template: conf/sphinx.conf.in
