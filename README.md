@@ -27,7 +27,7 @@ Object    | Path
 **PID:**    | /var/run/sphinxsearch  | 
 **Log:**|/var/www/vhosts/service-sphinxsearch/logs/sphinxsearch/|
 **Indexes:**|/var/lib/sphinxsearch/data/index/|
-**Configuration:**|/var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/etc/sphinxsearch/sphinx.conf|
+**Configuration:**|/var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/conf/sphinx.conf|
 
 ###Search Daemon:
 ```bash
@@ -40,20 +40,34 @@ $ searchd --stop
 ```
 ####start
 ```bash
-$ searchd --config /var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/etc/sphinxsearch/sphinx.conf
+$ searchd --config /var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/conf/sphinx.conf
 ```
 ###Rebuild / update Indexes:
 ####rebuild / build some indexes index1 index2 index3
 There will be a service restart after every index
 ```bash
-$ indexer --verbose --rotate --sighup-each index1 index2 index3 
+$ indexer --verbose --rotate --sighup-each --config /var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/conf/sphinx.conf index1 index2 index3 
 ```
 ####rebuild / build all indexes
 ```bash
-$ indexer --verbose --rotate --sighup-each --all
+$ indexer --verbose --rotate --sighup-each --config /var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/conf/sphinx.conf --all
 ```
-multithread indexer is not possible: http://sphinxsearch.com/forum/view.html?id=3936
+multithread indexer is not possible: http://sphinxsearch.com/forum/view.html?id=3936a
 
+####Alternative
+You can use the makefile in any directory containing this repository
+
+To see options of make
+```
+$ make
+```
+
+To create all indices
+```
+make template
+sudo su sphinxsearch
+make index
+```
 ###Command line debugging with python sphinx api
 ```bash
 $ cd lib/sphinxapi
