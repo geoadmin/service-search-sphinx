@@ -11,6 +11,7 @@ source def_pqsql
 source src_swisssearch : def_pqsql
 {
     sql_db = search
+    sql_attr_uint = len
     sql_attr_bigint = id
     sql_attr_uint = rank
     sql_attr_string = label
@@ -25,6 +26,7 @@ source src_address : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
+        , textlen(search_name) as len \
         , strname1||' '||deinr||' <b>'||plz||' '||ort_27||'</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -40,6 +42,7 @@ source src_parcel : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
+        , textlen(search_name) as len \
         , gemname||' '||name as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -55,6 +58,7 @@ source src_sn25 : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
+        , textlen(search_name) as len \
         , '<b>'||name||'</b> ('||kanton||') - '||gemname as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -70,6 +74,7 @@ source src_gg25 : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
+        , textlen(search_name) as len \
         , '<b>'||gemname||' ('||kanton||')</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -85,6 +90,7 @@ source src_kantone : src_swisssearch
         SELECT \
         gid as id \
         , remove_accents(search_name) as detail \
+        , textlen(search_name) as len \
         , '<b>'||name||'</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -100,6 +106,7 @@ source src_district : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
+        , textlen(search_name) as len \
         , '<b>'||name||'</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -115,6 +122,7 @@ source src_zipcode : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
+        , textlen(search_name) as len \
         , '<b>'||plz||' - '||ort_27||' ('||kanton||')</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -366,16 +374,14 @@ source src_ch_swisstopo_fixpunkte-hfp2 : def_searchable_features
         from fpds.punkt_hoehe_hfp2
 }
 
-# FIXME creation of this index creates alot of warnings because of quadindex...
 source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_features
 {
     sql_db = stopo
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
     sql_query = \
         SELECT id::bigint as id \
             , name_ads as label \
             , 'feature' as origin \
-            , name_ads as detail \
+            , remove_accents(name_ads) as detail \
             , 'ch.swisstopo.geologie-rohstoffe-industrieminerale' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -385,16 +391,14 @@ source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_fe
         from geol.rohstoffe_industrieminerale
 }
 
-# FIXME creation of this index creates alot of warnings because of quadindex...
 source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchable_features
 {
     sql_db = stopo
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
     sql_query = \
         SELECT id::bigint as id \
             , name_ads as label \
             , 'feature' as origin \
-            , name_ads as detail \
+            , remove_accents(name_ads) as detail \
             , 'ch.swisstopo.geologie-rohstoffe-kohlen_bitumen_erdgas' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -404,16 +408,14 @@ source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchabl
         from geol.rohstoffe_kohlen_bitumen_erdgas
 }
 
-# FIXME creation of this index creates alot of warnings because of quadindex...
 source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
 {
    sql_db = stopo
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
    sql_query = \
       SELECT id::bigint as id \
           , name as label \
           , 'feature' as origin \
-          , name as detail \
+          , remove_accents(name) as detail \
           , 'ch.swisstopo.verschiebungsvektoren-tsp1' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -423,16 +425,14 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
       from geodaesie.verschiebungsvektoren_tsp1
 }
 
-# FIXME creation of this index creates alot of warnings because of quadindex...
 source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
 {
    sql_db = stopo
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
    sql_query = \
       SELECT id::bigint as id \
           , name as label \
           , 'feature' as origin \
-          , name as detail \
+          , remove_accents(name) as detail \
           , 'ch.swisstopo.verschiebungsvektoren-tsp2' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -442,16 +442,14 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
       from geodaesie.verschiebungsvektoren_tsp2
 }
 
-# FIXME creation of this index creates alot of warnings because of quadindex...
 source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
 {
    sql_db = stopo
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
    sql_query = \
       SELECT id::bigint as id \
           , name_ads as label \
           , 'feature' as origin \
-          , name_ads as detail \
+          , remove_accents(name_ads) as detail \
           , 'ch.swisstopo.geologie-rohstoffe-vererzungen' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -461,16 +459,14 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
       from geol.rohstoffe_vererzungen
 }
 
-# FIXME creation of this index creates alot of warnings because of quadindex...
 source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_features
 {
    sql_db = stopo
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
    sql_query = \
       SELECT id::bigint as id \
           , ziegelei_2 as label \
           , 'feature' as origin \
-          , ziegelei_2 as detail \
+          , remove_accents(ziegelei_2) as detail \
           , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1907' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -480,16 +476,14 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_fea
       from geol.geotechnik_ziegeleien_1907
 }
 
-# FIXME creation of this index creates alot of warnings because of quadindex...
 source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_features
 {
    sql_db = stopo
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
    sql_query = \
       SELECT id::bigint as id \
           , ziegelei as label \
           , 'feature' as origin \
-          , ziegelei as detail \
+          , remove_accents(ziegelei) as detail \
           , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1965' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -499,16 +493,14 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_fea
       from geol.geotechnik_ziegeleien_1965
 }
 
-# FIXME creation of this index creates alot of warnings because of quadindex...
 source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_features
 {
    sql_db = stopo
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
    sql_query = \
       SELECT id::bigint as id \
           , ziegeleien as label \
           , 'feature' as origin \
-          , ziegeleien as detail \
+          , remove_accents(ziegeleien) as detail \
           , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1995' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -521,15 +513,13 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_fea
 source src_ch_babs_kulturgueter : def_searchable_features
 {
     sql_db = vbs
-# FIXME: we should use remove_accents here (in the as detail part), but its not supported for this type...
-# FIXME: function quadindex does not exist in this db, add it and adapt the script
     sql_query = \
         SELECT kgs_nr::bigint as id \
             , zkob as label \
             , 'feature' as origin \
-            , zkob as detail \
+            , remove_accents(zkob) as detail \
             , 'ch.babs.kulturgueter' as layer \
-            , the_geom as geom_quadindex \
+            , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
