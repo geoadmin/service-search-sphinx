@@ -619,7 +619,7 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
         SELECT gid::bigint as id \
             , au_name as label \
             , 'feature' as origin \
-            , remove_accents(nr)||' '||remove_accents(au_name) as detail \
+            , au_obj::text||' '||remove_accents(au_name) as detail \
             , 'ch.bafu.bundesinventare-auen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
