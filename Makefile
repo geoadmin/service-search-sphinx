@@ -14,8 +14,8 @@ help:
 
 .PHONY: index
 index:
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each --all
 	cp conf/sphinx.conf /var/lib/sphinxsearch/data/index/sphinx.conf
+	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each --all
 
 .PHONY: template
 template: conf/sphinx.conf.in
