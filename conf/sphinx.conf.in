@@ -154,11 +154,19 @@ source src_layers_de : layers
             , 'layer' as origin \
             , volltextsuche as detail \
             , bod_layer_id as layer \
-            , 'de' as lang \
-            , projekte as topics \
+            , 'rm' as lang \
+            , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from re3.view_bod_layer_info_de
+        from (SELECT view_layers_js.bgdi_id, \
+            view_bod_layer_info_de.kurzbezeichnung, \
+            view_bod_layer_info_de.volltextsuche, \
+            view_bod_layer_info_de.bod_layer_id, \
+            view_layers_js.topics, \
+            view_layers_js.staging \
+        from re3.view_layers_js, \
+            re3.view_bod_layer_info_de \
+            where view_layers_js.bod_layer_id = view_bod_layer_info_de.bod_layer_id) as res
 }
 
 source src_layers_fr : layers
@@ -170,11 +178,19 @@ source src_layers_fr : layers
             , 'layer' as origin \
             , volltextsuche as detail \
             , bod_layer_id as layer \
-            , 'fr' as lang \
-            , projekte as topics \
+            , 'rm' as lang \
+            , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from re3.view_bod_layer_info_fr
+        from (SELECT view_layers_js.bgdi_id, \
+            view_bod_layer_info_fr.kurzbezeichnung, \
+            view_bod_layer_info_fr.volltextsuche, \
+            view_bod_layer_info_fr.bod_layer_id, \
+            view_layers_js.topics, \
+            view_layers_js.staging \
+        from re3.view_layers_js, \
+            re3.view_bod_layer_info_fr \
+            where view_layers_js.bod_layer_id = view_bod_layer_info_fr.bod_layer_id) as res
 }
 
 source src_layers_en : layers
@@ -186,11 +202,19 @@ source src_layers_en : layers
             , 'layer' as origin \
             , volltextsuche as detail \
             , bod_layer_id as layer \
-            , 'en' as lang \
-            , projekte as topics \
+            , 'rm' as lang \
+            , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from re3.view_bod_layer_info_en
+        from (SELECT view_layers_js.bgdi_id, \
+            view_bod_layer_info_en.kurzbezeichnung, \
+            view_bod_layer_info_en.volltextsuche, \
+            view_bod_layer_info_en.bod_layer_id, \
+            view_layers_js.topics, \
+            view_layers_js.staging \
+        from re3.view_layers_js, \
+            re3.view_bod_layer_info_en \
+            where view_layers_js.bod_layer_id = view_bod_layer_info_en.bod_layer_id) as res
 }
 
 source src_layers_it : layers
@@ -202,11 +226,19 @@ source src_layers_it : layers
             , 'layer' as origin \
             , volltextsuche as detail \
             , bod_layer_id as layer \
-            , 'it' as lang \
-            , projekte as topics \
+            , 'rm' as lang \
+            , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from re3.view_bod_layer_info_it
+        from (SELECT view_layers_js.bgdi_id, \
+            view_bod_layer_info_it.kurzbezeichnung, \
+            view_bod_layer_info_it.volltextsuche, \
+            view_bod_layer_info_it.bod_layer_id, \
+            view_layers_js.topics, \
+            view_layers_js.staging \
+        from re3.view_layers_js, \
+            re3.view_bod_layer_info_it \
+            where view_layers_js.bod_layer_id = view_bod_layer_info_it.bod_layer_id) as res
 }
 
 source src_layers_rm : layers
@@ -219,10 +251,18 @@ source src_layers_rm : layers
             , volltextsuche as detail \
             , bod_layer_id as layer \
             , 'rm' as lang \
-            , projekte as topics \
+            , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from re3.view_bod_layer_info_rm
+        from (SELECT view_layers_js.bgdi_id, \
+            view_bod_layer_info_rm.kurzbezeichnung, \
+            view_bod_layer_info_rm.volltextsuche, \
+            view_bod_layer_info_rm.bod_layer_id, \
+            view_layers_js.topics, \
+            view_layers_js.staging \
+        from re3.view_layers_js, \
+            re3.view_bod_layer_info_rm \
+            where view_layers_js.bod_layer_id = view_bod_layer_info_rm.bod_layer_id) as res
 }
 
 source def_searchable_features : def_pqsql
