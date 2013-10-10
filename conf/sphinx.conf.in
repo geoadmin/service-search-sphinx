@@ -154,7 +154,7 @@ source src_layers_de : layers
             , 'layer' as origin \
             , volltextsuche as detail \
             , bod_layer_id as layer \
-            , 'rm' as lang \
+            , 'de' as lang \
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
@@ -178,7 +178,7 @@ source src_layers_fr : layers
             , 'layer' as origin \
             , volltextsuche as detail \
             , bod_layer_id as layer \
-            , 'rm' as lang \
+            , 'fr' as lang \
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
@@ -202,7 +202,7 @@ source src_layers_en : layers
             , 'layer' as origin \
             , volltextsuche as detail \
             , bod_layer_id as layer \
-            , 'rm' as lang \
+            , 'en' as lang \
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
@@ -226,7 +226,7 @@ source src_layers_it : layers
             , 'layer' as origin \
             , volltextsuche as detail \
             , bod_layer_id as layer \
-            , 'rm' as lang \
+            , 'it' as lang \
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
