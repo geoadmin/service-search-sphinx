@@ -47,6 +47,7 @@ echo "replace sphinx config file ..."
 cp $BASEDIR/index/sphinx.conf /etc/sphinxsearch
 
 echo "starting sphinx service ..."
+sleep 1
 sudo -u sphinxsearch /etc/init.d/sphinxsearch start
 END=$(date +%s)
 DIFF=$(( $END - $START ))
