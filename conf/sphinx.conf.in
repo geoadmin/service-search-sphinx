@@ -11,7 +11,7 @@ source def_pqsql
 source src_swisssearch : def_pqsql
 {
     sql_db = search
-    sql_attr_uint = len
+    sql_attr_uint = num
     sql_attr_bigint = id
     sql_attr_uint = rank
     sql_attr_string = label
@@ -31,6 +31,7 @@ source src_address : src_swisssearch
         , st_box2d(the_geom) as geom_st_box2d \
         , 6 as rank \
         , gid as id \
+        , NULLIF(regexp_replace(deinr::text, '[^0-9]'::text, ''::text, 'g'::text), ''::text)::integer as num \
         from swiss_search \
         where origin = 'address'
 }
@@ -46,6 +47,7 @@ source src_parcel : src_swisssearch
         , st_box2d(the_geom) as geom_st_box2d \
         , 7 as rank \
         , gid as id \
+        , SUBSTRING(name FROM '([0-9]+)')::int as num \
         from swiss_search \
         where origin = 'parcel'
 }
@@ -61,6 +63,7 @@ source src_sn25 : src_swisssearch
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
         , gid as id \
+        , 1 as num \
         from swiss_search \
         where origin = 'sn25'
 }
@@ -76,6 +79,7 @@ source src_gg25 : src_swisssearch
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
         , gid as id \
+        , 1 as num \
         from swiss_search \
         where origin = 'gg25'
 }
@@ -91,6 +95,7 @@ source src_kantone : src_swisssearch
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
         , gid as id \
+        , 1 as num \
         from swiss_search \
         where origin = 'kantone'
 }
@@ -106,6 +111,7 @@ source src_district : src_swisssearch
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
         , gid as id \
+        , 1 as num \
         from swiss_search \
         where origin = 'district'
 }
@@ -121,6 +127,7 @@ source src_zipcode : src_swisssearch
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
         , gid as id \
+        , 1 as num \
         from swiss_search \
         where origin = 'zipcode'
 }
