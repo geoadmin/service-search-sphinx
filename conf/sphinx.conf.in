@@ -26,7 +26,7 @@ source src_address : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
-        , strname1||' '||deinr||' <b>'||plz||' '||ort_27||'</b>' as label \
+        , coalesce(strname1,'')||' '||coalesce(deinr,'')||' <b>'||coalesce(plz,'')||' '||coalesce(ort_27,'')||'</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , 6 as rank \
@@ -42,7 +42,7 @@ source src_parcel : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
-        , gemname||' '||name as label \
+        , coalesce(gemname,'')||' '||coalesce(name,'') as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , 7 as rank \
@@ -58,7 +58,7 @@ source src_sn25 : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
-        , '<b>'||name||'</b> ('||kanton||') - '||gemname as label \
+        , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
@@ -74,7 +74,7 @@ source src_gg25 : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
-        , '<b>'||gemname||' ('||kanton||')</b>' as label \
+        , '<b>'||coalesce(gemname,'')||' ('||coalesce(kanton,'')||')</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
@@ -122,7 +122,7 @@ source src_zipcode : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
-        , '<b>'||plz||' - '||ort_27||' ('||kanton||')</b>' as label \
+        , '<b>'||coalesce(plz,'')||' - '||coalesce(ort_27,'')||' ('||coalesce(kanton,'')||')</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
