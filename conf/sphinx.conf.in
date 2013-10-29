@@ -13,6 +13,7 @@ source src_swisssearch : def_pqsql
     sql_db = search
     sql_attr_uint = num
     sql_attr_bigint = id
+    sql_attr_bigint = len
     sql_attr_uint = rank
     sql_attr_string = label
     sql_attr_string = origin
@@ -27,6 +28,7 @@ source src_address : src_swisssearch
         gid as id \
         , search_name as detail \
         , coalesce(strname1,'')||' '||coalesce(deinr,'')||' <b>'||coalesce(plz,'')||' '||coalesce(ort_27,'')||'</b>' as label \
+        , textlen(search_name) as len \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
@@ -43,6 +45,7 @@ source src_parcel : src_swisssearch
         gid as id \
         , search_name as detail \
         , coalesce(gemname,'')||' '||coalesce(name,'') as label \
+        , textlen(search_name) as len \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
@@ -59,6 +62,7 @@ source src_sn25 : src_swisssearch
         gid as id \
         , search_name as detail \
         , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label \
+        , textlen(search_name) as len \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
@@ -75,6 +79,7 @@ source src_gg25 : src_swisssearch
         gid as id \
         , search_name as detail \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(kanton,'')||')</b>' as label \
+        , textlen(search_name) as len \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
@@ -90,6 +95,7 @@ source src_kantone : src_swisssearch
         SELECT \
         gid as id \
         , remove_accents(search_name) as detail \
+        , textlen(search_name) as len \
         , '<b>'||name||'</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -106,6 +112,7 @@ source src_district : src_swisssearch
         SELECT \
         gid as id \
         , search_name as detail \
+        , textlen(search_name) as len \
         , '<b>'||name||'</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
@@ -123,6 +130,7 @@ source src_zipcode : src_swisssearch
         gid as id \
         , search_name as detail \
         , '<b>'||coalesce(plz,'')||' - '||coalesce(ort_27,'')||' ('||coalesce(kanton,'')||')</b>' as label \
+        , textlen(search_name) as len \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
