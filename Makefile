@@ -7,13 +7,13 @@ help:
 	@echo "Possible targets:"
 	@echo
 	@echo "Indexing only for updates (sudo su sphinxsearch):"
-	@echo "- index-all      	Update all indices (does NOT re-create config file)"
-	@echo "- index-search		Update swisssearch indices (does NOT re-create config file)"
-	@echo "- index-layers      	Update all the layers indices (does NOT re-create config file)"
-	@echo "- index-features		Update all the features indices (does NOT re-create config file)"
+	@echo "- index-all	Update all indices (does NOT re-create config file)"
+	@echo "- index-search	Update swisssearch indices (does NOT re-create config file)"
+	@echo "- index-layer	Update all the layers indices (does NOT re-create config file)"
+	@echo "- index-feature	Update all the features indices (does NOT re-create config file)"
 	@echo
 	@echo "Generate configuration template:"
-	@echo "- template   		Create sphinx config file from template"
+	@echo "- template	Create sphinx config file from template"
 	@echo
 
 .PHONY: index-all
@@ -24,12 +24,12 @@ index-all: move-template
 index-search: move-template
 	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each address parcel sn25 gg25 kantone district zipcode
 
-.PHONY: index-layers
-index-layers: move-template
+.PHONY: index-layer
+index-layer: move-template
 	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each layers_de layers_fr layers_it layers_en layers_rm
 
-.PHONY: index-features
-index-features: move-template
+.PHONY: index-feature
+index-feature: move-template
 	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each $(FEATURES_INDICES)
 
 .PHONY: template
