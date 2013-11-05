@@ -46,12 +46,31 @@ sudo -u sphinxsearch mv $BASEDIR/index.tmp $BASEDIR/index
 echo "replace sphinx config file ..."
 cp $BASEDIR/index/sphinx.conf /etc/sphinxsearch
 
+WAITFORSPHINX=20
+COUNTER=1
+while [ -f $PID ]
+do
+	echo "service still running, waiting for sphinx service to stop, restart-force in $(($WAITFORSPHINX-$COUNTER+1))s ..."
+	sleep 1
+	COUNTER=$(($COUNTER +1))
+	if test $COUNTER -gt $WAITFORSPHINX
+	then
+		"service is not stopping, force stop"
+		sudo -u sphinxsearch /etc/init.d/sphinxsearch force-stop
+		sleep 1
+		break
+	fi
+done
+
 echo "starting sphinx service ..."
-sleep 1
 sudo -u sphinxsearch /etc/init.d/sphinxsearch start
+
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "service offline time: $DIFF"
+
+echo "removing temporary deploy folder on deploy target /tmp/sphinxsearch ..."
+rm -rf /tmp/sphinxsearch
 
 sudo -u sphinxsearch /etc/init.d/sphinxsearch status
 

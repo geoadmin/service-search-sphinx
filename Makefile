@@ -39,3 +39,4 @@ template: conf/sphinx.conf.in
 .PHONY: move-template
 move-template:
 	cp conf/sphinx.conf /var/lib/sphinxsearch/data/index/sphinx.conf
+	cp conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
