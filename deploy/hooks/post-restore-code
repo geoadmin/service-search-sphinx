@@ -56,6 +56,7 @@ do
 	if test $COUNTER -gt $WAITFORSPHINX
 	then
 		"service is not stopping, force stop"
+   		START=$(date +%s)
 		sudo -u sphinxsearch /etc/init.d/sphinxsearch force-stop
 		sleep 1
 		break
