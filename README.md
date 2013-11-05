@@ -66,7 +66,7 @@ To create all indices
 ```
 make template
 sudo su sphinxsearch
-make index
+make index-all
 ```
 ###Command line debugging with python sphinx api
 ```bash
