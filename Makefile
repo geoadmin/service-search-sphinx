@@ -15,6 +15,9 @@ help:
 	@echo "Generate configuration template:"
 	@echo "- template	Create sphinx config file from template"
 	@echo
+	@echo "Deploy:"
+	@echo "- deploy-ab	Deploy all the indices in integration"
+	@echo "- deploy-prod	Deploy all the indices in production"
 
 .PHONY: index-all
 index-all: move-template
@@ -35,6 +38,14 @@ index-feature: move-template
 .PHONY: template
 template: conf/sphinx.conf.in
 	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/'  conf/sphinx.conf.in  > conf/sphinx.conf
+
+.PHONY: deploy-ab
+deploy-ab:
+	sudo -u deploy deploy  -r deploy/deploy.cfg ab
+
+.PHONY: deploy-prod
+deploy-prod:
+	sudo -u deploy deploy  -r deploy/deploy.cfg prod
 
 .PHONY: move-template
 move-template:
