@@ -11,6 +11,7 @@ help:
 	@echo "- index-search	Update swisssearch indices (does NOT re-create config file)"
 	@echo "- index-layer	Update all the layers indices (does NOT re-create config file)"
 	@echo "- index-feature	Update all the features indices (does NOT re-create config file)"
+	@echo "- move-template	Move template to the apropriate locations"
 	@echo
 	@echo "Generate configuration template:"
 	@echo "- template	Create sphinx config file from template"
