@@ -22,6 +22,9 @@ source src_swisssearch : def_pqsql
 
 source src_address : src_swisssearch
 {
+    sql_attr_float = lat
+    sql_attr_float = lon
+    sql_field_string = geom_quadindex
     sql_query = \
         SELECT \
         gid as id \
