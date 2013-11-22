@@ -83,6 +83,7 @@ while (i<len(sys.argv)):
 
 # do query
 cl = SphinxClient()
+cl.SetConnectTimeout(5.)
 cl.SetServer ( host, port )
 cl.SetMatchMode ( mode )
 if len(geoanchor) > 1:
