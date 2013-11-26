@@ -1,4 +1,6 @@
+IPATTERN ?= 'Set IPATTERN variable in call'
 FEATURES_INDICES := $(shell find /var/lib/sphinxsearch/data/index/ -type f -name 'ch_*spa' | sed 's:/var/lib/sphinxsearch/data/index/::' |  sed 's:.spa::')
+GREP_INDICES := $(shell grep "^index .*$(IPATTERN).* : " conf/sphinx.conf | sed 's:index ::' | sed 's: \: .*::')
 
 .PHONY: help
 help:
@@ -8,6 +10,7 @@ help:
 	@echo
 	@echo "Indexing only for updates (sudo su sphinxsearch):"
 	@echo "- index-all	Update all indices (does NOT re-create config file)"
+	@echo "- index-grep	Update indices that match a given pattern. Pass the pattern as IPATTERN=mypattern directly on the commandline"
 	@echo "- index-search	Update swisssearch indices (does NOT re-create config file)"
 	@echo "- index-layer	Update all the layers indices (does NOT re-create config file)"
 	@echo "- index-feature	Update all the features indices (does NOT re-create config file)"
@@ -23,6 +26,10 @@ help:
 .PHONY: index-all
 index-all: move-template
 	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each --all
+
+.PHONY: index-grep
+index-grep: move-template
+	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each $(GREP_INDICES)
 
 .PHONY: index-search
 index-search: move-template
