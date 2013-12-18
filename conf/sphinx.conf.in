@@ -938,7 +938,7 @@ index ch_swisstopo_fixpunkte-lfp1 : ch_astra_ivs-nat
 index ch_swisstopo_fixpunkte-lfp2 : ch_astra_ivs-nat
 {
     source =  src_ch_swisstopo_fixpunkte-lfp2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-lfp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-lfp2
 }
 
 index ch_swisstopo_fixpunkte-hfp1 : ch_astra_ivs-nat
