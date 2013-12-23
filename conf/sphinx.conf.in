@@ -783,7 +783,6 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-firmen : def_searchable_features
 #
 
 # QUERYABLE FEATURES SOURCES
-# BAFU
 
 source def_queryable_features : def_pqsql
 {
@@ -796,22 +795,179 @@ source def_queryable_features : def_pqsql
     sql_field_string = geom_quadindex
 }
 
-#source src_ch_are_landschaftstypen : def_queryable_features
-#{
-#    sql_db = are
-#    sql_query = \
-#        SELECT object as id \
-#            , 'feature' as origin \
-#            , 'ch.are.landschaftstypen' as layer \
-#            , quadindex(the_geom) as geom_quadindex \
-#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-#            , st_box2d(the_geom) as geom_st_box2d \
-#            , type_nr::text as label \
-#            , object as id \
-#         FROM siedlung_landschaft.landschaftstypen
-#}
+# ARE
 
+source src_ch_are_landschaftstypen : def_queryable_features
+{
+    sql_db = are
+    sql_attr_string = feature_id
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.are.landschaftstypen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , type_nr::text as label \
+            , object as id \
+         FROM siedlung_landschaft.landschaftstypen
+}
+
+source src_ch_are_alpenkonvention : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT row_id as id \
+            , 'feature' as origin \
+            , 'ch.are.alpenkonvention' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , alpenkonvention::text || [ha] as label \
+            , row_id as id \
+         FROM siedlung_landschaft.alpenkonvention
+}
+
+source src_ch_are_agglomerationen_isolierte_staedte-2000 : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT row_id as id \
+            , 'feature' as origin \
+            , 'ch.are.agglomerationen_isolierte_staedte-2000' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , row_id as id \
+         FROM siedlung_landschaft.agglomerationen_isolierte_staedte_2000
+}
+
+source src_ch_are_gueteklassen_oev : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.are.gueteklassen_oev' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , klasse_fr::text as label \
+            , id as id \
+         FROM oeffentlicher_verkehr.gueteklassen
+}
+
+source src_ch_are_bevoelkerungsdichte-vz00 : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT row_id as id \
+            , 'feature' as origin \
+            , 'ch.are.bevoelkerungsdichte-vz00' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , popt_ha::text || [ha] as label \
+            , row_id as id \
+         FROM siedlung_landschaft.bevoelkerungsdichte_vz00
+}
+
+source src_ch_are_beschaeftigtendichte-bz9 : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT row_id as id \
+            , 'feature' as origin \
+            , 'ch.are.beschaeftigtendichte-bz9' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , empt_ha::text as label \
+            , row_id as id \
+         FROM siedlung_landschaft.beschaeftigtendichte_bz08
+}
+
+source src_ch_are_bauzonen-2007 : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT row_id as id \
+            , 'feature' as origin \
+            , 'ch.are.bauzonen-2007' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , row_id as id \
+         FROM siedlung_landschaft.bauzonen_2007
+}
+
+source src_ch_are_bauzonen : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.are.bauzonen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , bgdi_id as id \
+         FROM siedlung_landschaft.bauzonen_2012
+}
+
+source src_ch_are_gemeindetyp-1990-9klassen : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT gde_no as id \
+            , 'feature' as origin \
+            , 'ch.are.gemeindetyp-1990-9klassen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , gde_no as id \
+         FROM siedlung_landschaft.gemeindetyp_1990_9klassen
+}
+
+source src_ch_are_gemeindetypen : def_queryable_features
+{
+    sql_db = are
+    sql_attr_bigint = feature_id
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.are.gemeindetypen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name_::text as label \
+            , bgdi_id as id \
+         FROM siedlung_landschaft.gemeindetypologie_2012
+}
+
+# BAFU
 source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_queryable_features
 {
     sql_db = bafu
@@ -1931,7 +2087,74 @@ index ch_swisstopo_lubis-luftbilder-dritte-firmen : ch_astra_ivs-nat
 }
 
 # QUERYABLE FEATURES INDICES
+# ARE
+index ch_are_landschaftstypen
+{
+    type = plain
+    source = src_ch_are_landschaftstypen
+    path = /var/lib/sphinxsearch/data/index/ch_are_landschaftstypen
+    docinfo = extern
+    charset_type = utf-8
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
 
+index ch_are_alpenkonvention : ch_are_landschaftstypen
+{
+    source = src_ch_are_alpenkonvention
+    path = /var/lib/sphinxsearch/data/index/ch_are_alpenkonvention
+}
+
+index ch_are_agglomerationen_isolierte_staedte-2000 : ch_are_landschaftstypen
+{
+    source = src_ch_are_agglomerationen_isolierte_staedte-2000
+    path = /var/lib/sphinxsearch/data/index/ch_are_agglomerationen_isolierte_staedte-2000
+}
+
+index ch_are_gueteklassen_oev : ch_are_landschaftstypen
+{
+    source = src_ch_are_gueteklassen_oev
+    path = /var/lib/sphinxsearch/data/index/ch_are_gueteklassen_oev
+}
+
+index ch_are_bevoelkerungsdichte-vz00 : ch_are_landschaftstypen
+{
+    source = src_ch_are_bevoelkerungsdichte-vz00
+    path = /var/lib/sphinxsearch/data/index/ch_are_bevoelkerungsdichte-vz00
+}
+
+index ch_are_beschaeftigtendichte-bz9 : ch_are_landschaftstypen
+{
+    source = src_ch_are_beschaeftigtendichte-bz9
+    path = /var/lib/sphinxsearch/data/index/ch_are_beschaeftigtendichte-bz9
+}
+
+index ch_are_bauzonen-2007 : ch_are_landschaftstypen
+{
+    source = src_ch_are_bauzonen-2007
+    path = /var/lib/sphinxsearch/data/index/ch_are_bauzonen-2007
+}
+
+index ch_are_bauzonen : ch_are_landschaftstypen
+{
+    source = src_ch_are_bauzonen
+    path = /var/lib/sphinxsearch/data/index/ch_are_bauzonen
+}
+
+index ch_are_gemeindetyp-1990-9klassen : ch_are_landschaftstypen
+{
+    source = src_ch_are_gemeindetyp-1990-9klassen
+    path = /var/lib/sphinxsearch/data/index/ch_are_gemeindetyp-1990-9klassen
+}
+
+index ch_are_gemeindetypen : ch_are_landschaftstypen
+{
+    source = src_ch_are_gemeindetypen
+    path = /var/lib/sphinxsearch/data/index/ch_are_gemeindetypen
+}
+
+# BAFU
 index ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
     type = plain
