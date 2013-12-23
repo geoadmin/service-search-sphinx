@@ -809,7 +809,7 @@ source src_ch_are_landschaftstypen : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , type_nr::text as label \
+            , typ_nr::text as label \
             , object::text as feature_id \
          FROM siedlung_landschaft.landschaftstypen
 }
@@ -825,8 +825,8 @@ source src_ch_are_alpenkonvention : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , alpenkonvention::text || [ha] as label \
-            , row_id:text as feature_id \
+            , stand::text as label \
+            , row_id::text as feature_id \
          FROM siedlung_landschaft.alpenkonvention
 }
 
@@ -873,7 +873,7 @@ source src_ch_are_bevoelkerungsdichte-vz00 : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , popt_ha::text || [ha] as label \
+            , popt_ha::text || '[ha]' as label \
             , row_id::text as feature_id \
          FROM siedlung_landschaft.bevoelkerungsdichte_vz00
 }
@@ -889,7 +889,7 @@ source src_ch_are_beschaeftigtendichte-bz9 : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , empt_ha::text as label \
+            , empt_ha::text || '[ha]' as label \
             , row_id::text as feature_id \
          FROM siedlung_landschaft.beschaeftigtendichte_bz08
 }
@@ -921,7 +921,7 @@ source src_ch_are_bauzonen : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , name::text as label \
+            , name_::text as label \
             , bgdi_id::text as feature_id \
          FROM siedlung_landschaft.bauzonen_2012
 }
