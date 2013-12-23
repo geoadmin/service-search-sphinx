@@ -1809,6 +1809,105 @@ source src_ch_ensi_zonenplan-notfallschutz-kernanlagen : def_queryable_features
          FROM ensi.zonenplan_kernanlagen
 }
 
+# EDI
+source src_ch_bfs_arealstatistik : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+         SELECT bgdi_id as id \
+             , 'feature' as origin \
+             , 'ch.bfs.arealstatistik' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , st_box2d(the_geom) as geom_st_box2d \
+             , 'object' as label \
+             , bgdi_id::text as feature_id \
+         FROM bfs.arealstatistik_std_2009
+}
+
+source src_ch_bfs_arealstatistik-1985 : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+         SELECT bgdi_id as id \
+             , 'feature' as origin \
+             , 'ch.bfs.arealstatistik-1985' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , st_box2d(the_geom) as geom_st_box2d \
+             , 'object' as label \
+             , bgdi_id::text as feature_id \
+         FROM bfs.arealstatistik_std_1985
+}
+
+source src_ch_bfs_arealstatistik-1997 : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+         SELECT bgdi_id as id \
+             , 'feature' as origin \
+             , 'ch.bfs.arealstatistik-1997' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , st_box2d(the_geom) as geom_st_box2d \
+             , 'object' as label \
+             , bgdi_id::text as feature_id \
+         FROM bfs.arealstatistik_std_1997
+}
+
+source src_ch_bag_zecken-fsme-faelle : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+         SELECT bgdi_id as id \
+             , 'feature' as origin \
+             , 'ch.bag.zecken-fsme-faelle' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , st_box2d(the_geom) as geom_st_box2d \
+             , gemname::text as label \
+             , bgdi_id::text as feature_id \
+         FROM bag.fsme_faelle
+}
+
+source src_ch_bag_zecken-fsme-impfung : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+         SELECT bgdi_id as id \
+             , 'feature' as origin \
+             , 'ch.bag.zecken-fsme-impfung' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , st_box2d(the_geom) as geom_st_box2d \
+             , gemname::text as label \
+             , bgdi_id::text as feature_id \
+         FROM bag.fsme_impfung
+}
+
+# EVD
+source src_ch_blw_bodeneignung-kulturtyp : def_queryable_features
+{
+    sql_db = evd
+    sql_query = \
+         SELECT bgdi_id as id \
+             , 'feature' as origin \
+             , 'ch.blw.bodeneignung-kulturtyp' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , st_box2d(the_geom) as geom_st_box2d \
+             , symb_color::text as label \
+             , bgdi_id::text as feature_id \
+         FROM blw.bodeneignung
+}
+
+
 # SWISSSEARCH INDICES
 
 index zipcode
@@ -2491,12 +2590,50 @@ index ch_tamedia_schweizerfamilie-feuerstellen : ch_bafu_bundesinventare-amphibi
     source = src_ch_tamedia_schweizerfamilie-feuerstellen
     path = /var/lib/sphinxsearch/data/index/ch_tamedia_schweizerfamilie-feuerstellen
 }
+
 index ch_ensi_zonenplan-notfallschutz-kernanlagen : ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
     source = src_ch_ensi_zonenplan-notfallschutz-kernanlagen
     path = /var/lib/sphinxsearch/data/index/ch_ensi_zonenplan-notfallschutz-kernanlagen
 }
 
+# EDI
+index ch_bfs_arealstatistik : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bfs_arealstatistik 
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik
+}
+
+index ch_bfs_arealstatistik-1985 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bfs_arealstatistik-1985
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-1985
+}
+
+index ch_bfs_arealstatistik-1997 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bfs_arealstatistik-1997
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-1997
+}
+
+index ch_bag_zecken-fsme-faelle : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bag_zecken-fsme-faelle
+    path = /var/lib/sphinxsearch/data/index/ch_bag_zecken-fsme-faelle
+}
+
+index ch_bag_zecken-fsme-impfung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bag_zecken-fsme-impfung
+    path = /var/lib/sphinxsearch/data/index/ch_bag_zecken-fsme-impfung
+}
+
+# EVD
+index ch_blw_bodeneignung-kulturtyp : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_blw_bodeneignung-kulturtyp
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-kulturtyp
+}
 
 #
 #
