@@ -2407,7 +2407,7 @@ source src_ch_swisstopo_vec25-primaerflaechen : def_queryable_features
 }
 
 source src_ch_swisstopo_vec25-einzelobjekte : def_queryable_features
-{            
+{ 
     sql_db = stopo
     sql_query = \
         SELECT objectid as id \
@@ -2423,7 +2423,7 @@ source src_ch_swisstopo_vec25-einzelobjekte : def_queryable_features
 }
 
 source src_ch_swisstopo_vec25-heckenbaeume : def_queryable_features
-{             
+{
     sql_db = stopo
     sql_query = \
         SELECT objectid as id \
@@ -2439,7 +2439,7 @@ source src_ch_swisstopo_vec25-heckenbaeume : def_queryable_features
 }
 
 source src_ch_swisstopo_dreiecksvermaschung : def_queryable_features
-{             
+{
     sql_db = stopo
     sql_query = \
         SELECT bgdi_id as id \
@@ -2487,7 +2487,7 @@ source src_ch_swisstopo_hiks-siegfried : def_queryable_features
 }
 
 source src_ch_swisstopo_pixelkarte-farbe-pk25_noscale : def_queryable_features
-{        
+{
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
@@ -2504,19 +2504,19 @@ source src_ch_swisstopo_pixelkarte-farbe-pk25_noscale : def_queryable_features
 ## Identical source for ch.swisstopo.pixelkarte-pk25.metadata
 
 source src_ch_swisstopo_pixelkarte-farbe-pk50_noscale : def_queryable_features
-{        
+{
     sql_db = stopo
     sql_query = \
-         SELECT kbnum as id \
-             , 'feature' as origin \
-             , 'ch.swisstopo.pixelkarte-farbe-pk50.noscale' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , st_box2d(the_geom) as geom_st_box2d \
-             , lk_name::text as label \
-             , kbnum::text as feature_id \
-         FROM datenstand.view_gridstand_datenhaltung_pk50_tilecache
+        SELECT kbnum as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.pixelkarte-farbe-pk50.noscale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , lk_name::text as label \
+            , kbnum::text as feature_id \
+        FROM datenstand.view_gridstand_datenhaltung_pk50_tilecache
 }
 ## Identical source for ch.swisstopo.pixelkarte-pk50.metadata
 
@@ -2591,128 +2591,128 @@ source src_ch_swisstopo_geologie-geolkarten500_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-       SELECT bgdi_id as id \
-           , 'feature' as origin \
-           , 'ch.swisstopo.geologie-geolkarten500.metadata' as layer \
-           , quadindex(the_geom) as geom_quadindex \
-           , y(st_transform(st_centroid(the_geom),4326)) as lat \
-           , x(st_transform(st_centroid(the_geom),4326)) as lon \
-           , st_box2d(the_geom) as geom_st_box2d \
-           , bgdi_id::text as label \
-           , bgdi_id::text as feature_id \
-       FROM public.gk500
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geolkarten500.metadata' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as label \
+            , bgdi_id::text as feature_id \
+        FROM public.gk500
 }
 
 source src_ch_swisstopo_geologie-geologischer_atlas : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-         SELECT nr as id \
-             , 'feature' as origin \
-             , 'ch.swisstopo.geologie-geologischer_atlas' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , st_box2d(the_geom) as geom_st_box2d \
-             , titel::text as label \
-             , nr::text as feature_id \
-         FROM geol.kv_ga25_pk
+        SELECT nr as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geologischer_atlas' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , titel::text as label \
+            , nr::text as feature_id \
+        FROM geol.kv_ga25_pk
 }
 
 source src_ch_swisstopo_geologie-geologische_karte_1 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-       SELECT fid as id \
-           , 'feature' as origin \
-           , 'ch.swisstopo.geologie-geologische_karte' as layer \
-           , quadindex(the_geom) as geom_quadindex \
-           , y(st_transform(st_centroid(the_geom),4326)) as lat \
-           , x(st_transform(st_centroid(the_geom),4326)) as lon \
-           , st_box2d(the_geom) as geom_st_box2d \
-           , type_de::text as label \
-           , fid::text as feature_id \
-       FROM geol.geologische_karte_line
+        SELECT fid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geologische_karte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , type_de::text as label \
+            , fid::text as feature_id \
+        FROM geol.geologische_karte_line
 }
 
 source src_ch_swisstopo_geologie-geologische_karte_2 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-       SELECT id as id \
-           , 'feature' as origin \
-           , 'ch.swisstopo.geologie-geologische_karte' as layer \
-           , quadindex(the_geom) as geom_quadindex \
-           , y(st_transform(st_centroid(the_geom),4326)) as lat \
-           , x(st_transform(st_centroid(the_geom),4326)) as lon \
-           , st_box2d(the_geom) as geom_st_box2d \
-           , leg_geol_d::text as label \
-           , id::text as feature_id \
-       FROM geol.geologische_karte_plg
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geologische_karte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , leg_geol_d::text as label \
+            , id::text as feature_id \
+        FROM geol.geologische_karte_plg
 }
 
 source src_ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-       SELECT bgdi_id as id \
-           , 'feature' as origin \
-           , 'ch.swisstopo.geologie-geotechnik-mineralische_rohstoffe200' as layer \
-           , quadindex(the_geom) as geom_quadindex \
-           , y(st_transform(st_centroid(the_geom),4326)) as lat \
-           , x(st_transform(st_centroid(the_geom),4326)) as lon \
-           , st_box2d(the_geom) as geom_st_box2d \
-           , area_name::text as label \
-           , bgdi_id::text as feature_id \
-       FROM geol.geotechnik_mineralische_rohstoffe200
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-mineralische_rohstoffe200' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , area_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geotechnik_mineralische_rohstoffe200
 }
 
 source src_ch_swisstopo_geologie-geotechnik-gk200 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-       SELECT bgdi_id as id \
-           , 'feature' as origin \
-           , 'ch.swisstopo.geologie-geotechnik-gk200' as layer \
-           , quadindex(the_geom) as geom_quadindex \
-           , y(st_transform(st_centroid(the_geom),4326)) as lat \
-           , x(st_transform(st_centroid(the_geom),4326)) as lon \
-           , st_box2d(the_geom) as geom_st_box2d \
-           , file_name::text as label \
-           , bgdi_id::text as feature_id \
-       FROM geol.geotechnik_gk200_lgd
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-gk200' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , file_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geotechnik_gk200_lgd
 }
 
 source src_ch_swisstopo_geologie-geotechnik-gk500-genese : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-       SELECT bgdi_id as id \
-           , 'feature' as origin \
-           , 'ch.swisstopo.geologie-geotechnik-gk500-genese' as layer \
-           , quadindex(the_geom) as geom_quadindex \
-           , y(st_transform(st_centroid(the_geom),4326)) as lat \
-           , x(st_transform(st_centroid(the_geom),4326)) as lon \
-           , st_box2d(the_geom) as geom_st_box2d \
-           , genese_de::text as label \
-           , bgdi_id::text as feature_id \
-       FROM geol.gk500_genese
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-gk500-genese' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , genese_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.gk500_genese
 }
 
 source src_ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-       SELECT bgdi_id as id \
-           , 'feature' as origin \
-           , 'ch.swisstopo.geologie-geotechnik-gk500-gesteinsklassierung' as layer \
-           , quadindex(the_geom) as geom_quadindex \
-           , y(st_transform(st_centroid(the_geom),4326)) as lat \
-           , x(st_transform(st_centroid(the_geom),4326)) as lon \
-           , st_box2d(the_geom) as geom_st_box2d \
-           , gestkl_de::text as label \
-           , bgdi_id::text as feature_id \
-       FROM geol.gk500_gesteinsklassierung
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-gk500-gesteinsklassierung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gestkl_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.gk500_gesteinsklassierung
 }
 
 source src_ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen : def_queryable_features
@@ -2767,96 +2767,48 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1965 : def_queryable
 {        
     sql_db = stopo
     sql_query = \
-         SELECT id as id \
-             , 'feature' as origin \
-             , 'ch.swisstopo.geologie-geotechnik-zementindustrie_1965' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , st_box2d(the_geom) as geom_st_box2d \
-             , stoff::text as label \
-             , id::text as feature_id \
-         FROM geol.geotechnik_zementindustrie
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-zementindustrie_1965' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , stoff::text as label \
+            , id::text as feature_id \
+        FROM geol.geotechnik_zementindustrie
 }
 
 source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : def_queryable_features
 {        
     sql_db = stopo
     sql_query = \
-         SELECT id as id \
-             , 'feature' as origin \
-             , 'ch.swisstopo.geologie-geotechnik-zementindustrie_1995' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , st_box2d(the_geom) as geom_st_box2d \
-             , stoff::text as label \
-             , id::text as feature_id \
-         FROM geol.geotechnik_zementindustrie
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-zementindustrie_1995' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , stoff::text as label \
+            , id::text as feature_id \
+        FROM geol.geotechnik_zementindustrie
 }
 
-source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_queryable_features
-{
-    sql_db = stopo
-    sql_query = \
-         SELECT id as id \
-             , 'feature' as origin \
-             , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1907' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , st_box2d(the_geom) as geom_st_box2d \
-             , ziegelei_2::text as label \
-             , id::text as feature_id \
-         FROM geol.geotechnik_ziegeleien_1907
-}
-             
-source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_queryable_features
-{            
-    sql_db = stopo
-    sql_query = \
-         SELECT id as id \
-             , 'feature' as origin \
-             , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1965' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , st_box2d(the_geom) as geom_st_box2d \
-             , ziegelei_2::text as label \
-             , id::text as feature_id \
-         FROM geol.geotechnik_ziegeleien_1965
-}
-
-source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_queryable_features
-{            
-    sql_db = stopo
-    sql_query = \
-         SELECT id as id \
-             , 'feature' as origin \
-             , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1995' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , st_box2d(the_geom) as geom_st_box2d \
-             , ziegeleien::text as label \
-             , id::text as feature_id \
-         FROM geol.geotechnik_ziegeleien_1995
-}
-    
 source src_ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen : def_queryable_features
 {            
     sql_db = stopo
     sql_query = \
-         SELECT bgdi_id as id \
-             , 'feature' as origin \
-             , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , st_box2d(the_geom) as geom_st_box2d \
-             , type_de::text as label \
-             , bgdi_id::text as feature_id \
-         FROM geol.grundwasservorkommen
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , type_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.grundwasservorkommen
 }
     
 source src_ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet : def_queryable_features
@@ -4292,24 +4244,6 @@ index ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : ch_bafu_bundesinve
 {
     source = src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1995
-}
-
-index ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1907
-}
-
-index ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1965
-}
-
-index ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1995
 }
 
 index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen : ch_bafu_bundesinventare-amphibien_wanderobjekte
