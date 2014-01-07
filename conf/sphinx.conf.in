@@ -2337,7 +2337,7 @@ source src_ch_swisstopo_vec25-anlagen : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , coalesce(area::text,'')||' '[m2]' as label \
+            , coalesce(area::text,'')||' [m2]' as label \
             , objectid::text as feature_id \
         FROM public.v25_anl_25_a
 }
@@ -2715,7 +2715,7 @@ source src_ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : def_quer
         FROM geol.gk500_gesteinsklassierung
 }
 
-source src_ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen : def_queryable_features
+source src_ch_swisstopo_geo-geotechnik-gk500-lith_haupt : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
@@ -2795,37 +2795,37 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : def_queryable
         FROM geol.geotechnik_zementindustrie
 }
 
-source src_ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen : def_queryable_features
-{            
-    sql_db = stopo
-    sql_query = \
-        SELECT bgdi_id as id \
-            , 'feature' as origin \
-            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , type_de::text as label \
-            , bgdi_id::text as feature_id \
-        FROM geol.grundwasservorkommen
-}
+#source src_ch_swisstopo_geologie-hydro_karte-grundwasser : def_queryable_features
+#{            
+#    sql_db = stopo
+#    sql_query = \
+#        SELECT bgdi_id as id \
+#            , 'feature' as origin \
+#            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
+#            , quadindex(the_geom) as geom_quadindex \
+#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+#            , st_box2d(the_geom) as geom_st_box2d \
+#            , type_de::text as label \
+#            , bgdi_id::text as feature_id \
+#        FROM geol.grundwasservorkommen
+#}
     
-source src_ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet : def_queryable_features
-{            
-    sql_db = stopo
-    sql_query = \
-        SELECT bgdi_id as id \
-            , 'feature' as origin \
-            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservulnerabilitaet' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , type_de::text as label \
-            , bgdi_id::text as feature_id \
-        FROM geol.grundwasservorkommen_plg
-}
+#source src_ch_swisstopo_geologie-hydro_karte-grundvul : def_queryable_features
+#{            
+#    sql_db = stopo
+#    sql_query = \
+#        SELECT bgdi_id as id \
+#            , 'feature' as origin \
+#            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservulnerabilitaet' as layer \
+#            , quadindex(the_geom) as geom_quadindex \
+#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+#            , st_box2d(the_geom) as geom_st_box2d \
+#            , type_de::text as label \
+#            , bgdi_id::text as feature_id \
+#        FROM geol.grundwasservorkommen_plg
+#}
     
 source src_ch_swisstopo_geologie-geophysik-geothermie : def_queryable_features
 {            
@@ -2870,7 +2870,7 @@ source src_ch_swisstopo_geologie-geophysik-inklination : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , magne::text as label \
+            , contour::text as label \
             , gid::text as feature_id \
         FROM geol.geophysik_inklination
 }
@@ -2923,21 +2923,21 @@ source src_ch_swisstopo_geologie-geodaesie-bouguer_anomalien : def_queryable_fea
         FROM geol.geodaesie_bouguer_anomalien
 }
 
-source src_ch_swisstopo_geologie-geophysik-totalintensitaet : def_queryable_features
-{            
-    sql_db = stopo
-    sql_query = \
-        SELECT gid as id \
-            , 'feature' as origin \
-            , 'ch.swisstopo.geologie-geophysik-totalintensitaet' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , contour::text as label \
-            , gid::text as feature_id \ 
-        FROM geol.geophysik_totalintensitaet
-}
+#source src_ch_swisstopo_geologie-geophysik-totalintensitaet : def_queryable_features
+#{            
+#    sql_db = stopo
+#    sql_query = \
+#        SELECT gid as id \
+#            , 'feature' as origin \
+#            , 'ch.swisstopo.geologie-geophysik-totalintensitaet' as layer \
+#            , quadindex(the_geom) as geom_quadindex \
+#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+#            , st_box2d(the_geom) as geom_st_box2d \
+#            , contour::text as label \
+#            , gid::text as feature_id \ 
+#        FROM geol.geophysik_totalintensitaet
+#}
 
 source src_ch_swisstopo_geologie-tektonische_karte_1 : def_queryable_features
 {
@@ -2992,7 +2992,7 @@ source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_queryable_features
 {             
     sql_db = stopo
     sql_query = \
-        SELECT os_uuid::int as id \
+        SELECT bgdi_id::int as id \
             , 'feature' as origin \
             , 'ch.swisstopo-vd.ortschaftenverzeichnis_plz' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -3004,37 +3004,37 @@ source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_queryable_features
         FROM vd.gabmo_plz
 }
 
-source src_ch_swisstopo-vd_geometa-standav : def_queryable_features
-{             
-    sql_db = stopo
-    sql_query = \
-        SELECT gid as id \
-            , 'feature' as origin \
-            , 'ch.swisstopo-vd.geometa-standav' as layer \
-            , quadindex(the_geom) as geom_quadindex \ 
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , frame::text as label \
-            , gid::text as feature_id \
-        FROM vd.amogr_standav
-}
+#source src_ch_swisstopo-vd_geometa-standav : def_queryable_features
+#{             
+#    sql_db = stopo
+#    sql_query = \
+#        SELECT gid as id \
+#            , 'feature' as origin \
+#            , 'ch.swisstopo-vd.geometa-standav' as layer \
+#            , quadindex(the_geom) as geom_quadindex \ 
+#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+#            , st_box2d(the_geom) as geom_st_box2d \
+#            , frame::text as label \
+#            , gid::text as feature_id \
+#        FROM vd.amogr_standav
+#}
 
-source src_ch_swisstopo-vd_geometa-los : def_queryable_features
-{             
-    sql_db = stopo
-    sql_query = \
-        SELECT gid as id \
-            , 'feature' as origin \
-            , 'ch.swisstopo-vd.geometa-los' as layer \
-            , quadindex(the_geom) as geom_quadindex \ 
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , operatsname::text as label \
-            , gid::text as feature_id \
-        FROM vd.amogr_los
-}
+#source src_ch_swisstopo-vd_geometa-los : def_queryable_features
+#{             
+#    sql_db = stopo
+#    sql_query = \
+#        SELECT gid as id \
+#            , 'feature' as origin \
+#            , 'ch.swisstopo-vd.geometa-los' as layer \
+#            , quadindex(the_geom) as geom_quadindex \ 
+#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+#            , st_box2d(the_geom) as geom_st_box2d \
+#            , operatsname::text as label \
+#            , gid::text as feature_id \
+#        FROM vd.amogr_los
+#}
     
 source src_ch_swisstopo-vd_geometa-gemeinde : def_queryable_features
 {              
@@ -3088,7 +3088,7 @@ source src_ch_swisstopo_transformationsgenauigkeit : def_queryable_features
 {               
     sql_db = stopo
     sql_query = \
-        SELECT identifier as id \
+        SELECT bgdi_id as id \
             , 'feature' as origin \
             , 'ch.swisstopo.transformationsgenauigkeit' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -3104,7 +3104,7 @@ source src_ch_swisstopo-vd_spannungsarme-gebiete : def_queryable_features
 {               
     sql_db = stopo
     sql_query = \
-        SELECT identifier as id \
+        SELECT bgdi_id as id \
             , 'feature' as origin \
             , 'ch.swisstopo-vd.spannungsarme-gebiete' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -3116,37 +3116,37 @@ source src_ch_swisstopo-vd_spannungsarme-gebiete : def_queryable_features
         FROM vd.spannungsarme_gebiete
 }
  
-source src_ch_swisstopo_geologie-geotope_1 : def_queryable_features
-{               
-    sql_db = stopo
-    sql_query = \
-        SELECT objectid as id \
-            , 'feature' as origin \
-            , 'ch.swisstop.geologie-geotope' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , nom::text as label \
-            , objectid::text as feature_id \
-        FROM geol.geotope_pkt
-}
-         
-source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
-{               
-    sql_db = stopo
-    sql_query = \
-        SELECT objectid as id \
-            , 'feature' as origin \
-            , 'ch.swisstop.geologie-geotope' as layer \
-            , quadindex(the_geom) as geom_quadindex \ 
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , nom::text as label \
-            , objectid::text as feature_id \
-        FROM geol.geotope_plg
-}
+#source src_ch_swisstopo_geologie-geotope_1 : def_queryable_features
+#{ 
+#    sql_db = stopo
+#    sql_query = \
+#        SELECT objectid as id \
+#            , 'feature' as origin \
+#            , 'ch.swisstop.geologie-geotope' as layer \
+#            , quadindex(the_geom) as geom_quadindex \
+#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+#            , st_box2d(the_geom) as geom_st_box2d \
+#            , nom::text as label \
+#            , objectid::text as feature_id \
+#        FROM geol.geotope_pkt
+#}
+#         
+#source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
+#{
+#    sql_db = stopo
+#    sql_query = \
+#        SELECT objectid as id \
+#            , 'feature' as origin \
+#            , 'ch.swisstop.geologie-geotope' as layer \
+#            , quadindex(the_geom) as geom_quadindex \ 
+#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+#            , st_box2d(the_geom) as geom_st_box2d \
+#            , nom::text as label \
+#            , objectid::text as feature_id \
+#        FROM geol.geotope_plg
+#}
 
 # SWISSSEARCH INDICES
 index zipcode
@@ -4218,7 +4218,7 @@ index ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : ch_bafu_bunde
 
 index ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen : ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
-    source = src_ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen
+    source = src_ch_swisstopo_geo-geotechnik-gk500-lith_haupt
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen
 }
 
@@ -4246,17 +4246,17 @@ index ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : ch_bafu_bundesinve
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1995
 }
 
-index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen
-}
+#index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen : ch_bafu_bundesinventare-amphibien_wanderobjekte
+#{
+#    source = src_ch_swisstopo_geologie-hydro_karte-grundwasser
+#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen
+#}
 
-index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet
-}
+#index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet : ch_bafu_bundesinventare-amphibien_wanderobjekte
+#{
+#    source = src_ch_swisstopo_geologie-hydro_karte-grundvul
+#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet
+#}
 
 index ch_swisstopo_geologie-geophysik-geothermie : ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
@@ -4294,11 +4294,11 @@ index ch_swisstopo_geologie-geodaesie-bouguer_anomalien : ch_bafu_bundesinventar
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geodaesie-bouguer_anomalien
 }
    
-index ch_swisstopo_geologie-geophysik-totalintensitaet : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo_geologie-geophysik-totalintensitaet
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-totalintensitaet
-}
+#index ch_swisstopo_geologie-geophysik-totalintensitaet : ch_bafu_bundesinventare-amphibien_wanderobjekte
+#{
+#    source = src_ch_swisstopo_geologie-geophysik-totalintensitaet
+#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-totalintensitaet
+#}
 
 index ch_swisstopo_geologie-tektonische_karte_1 : ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
@@ -4312,7 +4312,7 @@ index ch_swisstopo_geologie-tektonische_karte_2 : ch_bafu_bundesinventare-amphib
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-tektonische_karte_2
 }
 
-indec ch_swisstopo_geologie-tektonische_karte
+index ch_swisstopo_geologie-tektonische_karte
 {
     type = distributed
     local = ch_swisstopo_geologie-tektonische_karte_1
@@ -4331,17 +4331,17 @@ index ch_swisstopo-vd_ortschaftenverzeichnis_plz : ch_bafu_bundesinventare-amphi
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_ortschaftenverzeichnis_plz
 }
 
-index ch_swisstopo-vd_geometa-standav : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo-vd_geometa-standav
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-standav
-}
+#index ch_swisstopo-vd_geometa-standav : ch_bafu_bundesinventare-amphibien_wanderobjekte
+#{
+#    source = src_ch_swisstopo-vd_geometa-standav
+#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-standav
+#}
 
-index ch_swisstopo-vd_geometa-los : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo-vd_geometa-los
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-los
-}
+#index ch_swisstopo-vd_geometa-los : ch_bafu_bundesinventare-amphibien_wanderobjekte
+#{
+#    source = src_ch_swisstopo-vd_geometa-los
+#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-los
+#}
 
 index ch_swisstopo-vd_geometa-gemeinde : ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
@@ -4373,24 +4373,24 @@ index ch_swisstopo-vd_spannungsarme-gebiete : ch_bafu_bundesinventare-amphibien_
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_spannungsarme-gebiete
 }
 
-index ch_swisstopo_geologie-geotope_1 : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{   
-    source = src_ch_swisstopo_geologie-geotope_1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_1
-}
-
-index ch_swisstopo_geologie-geotope_2 : ch_bafu_bundesinventare-amphibien_wanderobjekte
-{
-    source = src_ch_swisstopo_geologie-geotope_2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_2
-}
-
-index ch_swisstopo_geologie-geotope
-{
-    type = distributed
-    local = ch_swisstopo_geologie-geotope_1
-    local = ch_swisstopo_geologie-geotope_2
-}
+#index ch_swisstopo_geologie-geotope_1 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+#{   
+#    source = src_ch_swisstopo_geologie-geotope_1
+#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_1
+#}
+#
+#index ch_swisstopo_geologie-geotope_2 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+#{
+#    source = src_ch_swisstopo_geologie-geotope_2
+#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_2
+#}
+#
+#index ch_swisstopo_geologie-geotope
+#{
+#    type = distributed
+#    local = ch_swisstopo_geologie-geotope_1
+#    local = ch_swisstopo_geologie-geotope_2
+#}
 
 #
 #
