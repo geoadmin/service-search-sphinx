@@ -3116,37 +3116,37 @@ source src_ch_swisstopo-vd_spannungsarme-gebiete : def_queryable_features
         FROM vd.spannungsarme_gebiete
 }
  
-#source src_ch_swisstopo_geologie-geotope_1 : def_queryable_features
-#{ 
-#    sql_db = stopo
-#    sql_query = \
-#        SELECT objectid as id \
-#            , 'feature' as origin \
-#            , 'ch.swisstop.geologie-geotope' as layer \
-#            , quadindex(the_geom) as geom_quadindex \
-#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-#            , st_box2d(the_geom) as geom_st_box2d \
-#            , nom::text as label \
-#            , objectid::text as feature_id \
-#        FROM geol.geotope_pkt
-#}
-#         
-#source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
-#{
-#    sql_db = stopo
-#    sql_query = \
-#        SELECT objectid as id \
-#            , 'feature' as origin \
-#            , 'ch.swisstop.geologie-geotope' as layer \
-#            , quadindex(the_geom) as geom_quadindex \ 
-#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-#            , st_box2d(the_geom) as geom_st_box2d \
-#            , nom::text as label \
-#            , objectid::text as feature_id \
-#        FROM geol.geotope_plg
-#}
+source src_ch_swisstopo_geologie-geotope_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstop.geologie-geotope' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nom::text as label \
+            , objectid::text as feature_id \
+        FROM geol.geotope_pkt
+}
+
+source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstop.geologie-geotope' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nom::text as label \
+            , objectid::text as feature_id \
+        FROM geol.geotope_plg
+}
 
 # SWISSSEARCH INDICES
 index zipcode
@@ -4373,24 +4373,24 @@ index ch_swisstopo-vd_spannungsarme-gebiete : ch_bafu_bundesinventare-amphibien_
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_spannungsarme-gebiete
 }
 
-#index ch_swisstopo_geologie-geotope_1 : ch_bafu_bundesinventare-amphibien_wanderobjekte
-#{   
-#    source = src_ch_swisstopo_geologie-geotope_1
-#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_1
-#}
-#
-#index ch_swisstopo_geologie-geotope_2 : ch_bafu_bundesinventare-amphibien_wanderobjekte
-#{
-#    source = src_ch_swisstopo_geologie-geotope_2
-#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_2
-#}
-#
-#index ch_swisstopo_geologie-geotope
-#{
-#    type = distributed
-#    local = ch_swisstopo_geologie-geotope_1
-#    local = ch_swisstopo_geologie-geotope_2
-#}
+index ch_swisstopo_geologie-geotope_1 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{ 
+    source = src_ch_swisstopo_geologie-geotope_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_1
+}
+
+index ch_swisstopo_geologie-geotope_2 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_swisstopo_geologie-geotope_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_2
+}
+
+index ch_swisstopo_geologie-geotope
+{
+    type = distributed
+    local = ch_swisstopo_geologie-geotope_1
+    local = ch_swisstopo_geologie-geotope_2
+}
 
 #
 #
