@@ -1,0 +1,1182 @@
+## SOURCES
+
+## QUERYABLE
+
+source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-amphibien_wanderobjekte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , am_g_name::text as label \
+            , am_g_obj::text as feature_id \
+        FROM bundinv.am_g
+}
+
+source src_ch_bafu_bundesinventare-amphibien : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-amphibien' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , am_l_name::text as label \
+            , am_l_obj as feature_id \
+        FROM bundinv.am_l
+}
+
+source src_ch_bafu_hydrologie-hydromessstationen : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT edv_nr4 as id \
+            , 'feature' as origin \
+            , 'ch.bafu.hydrologie-hydromessstationen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , lhg_name::text as label \
+            , edv_nr4::text as feature_id \
+        FROM hydrologie.lhg
+}
+
+source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-teileinzugsgebiete_2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , teilezgnr::text as label \
+            , bgdi_id::text as feature_id \
+        FROM wasser.ebene_2km
+}
+
+source src_ch_bafu_wasser-teileinzugsgebiete_40 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-teileinzugsgebiete_2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , tezgnr40::text as label \
+            , bgdi_id::text as feature_id \
+        FROM wasser.ebene_40km
+}
+
+source src_ch_bafu_wasser-vorfluter : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-vorfluter' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , teilezgnr::text as label \
+            , bgdi_id::text as feature_id \
+        FROM wasser.vorfluter
+}
+
+source src_ch_bafu_wasser-gebietsauslaesse : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-gebietsauslaesse' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , ezgnr::text as label \
+            , bgdi_id::text as feature_id \
+        FROM wasser.outlets
+}
+
+source src_ch_bafu_bundesinventare-bln : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-bln' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , bln_name::text as label \
+            , gid::text as feature_id \
+        FROM bundinv.bln
+}
+
+source src_ch_bafu_bundesinventare-hochmoore : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-hochmoore' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , hm_name::text as label \
+            , gid::text as feature_id \
+        FROM bundinv.hm
+}
+
+source src_ch_bafu_bundesinventare-jagdbanngebiete : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-jagdbanngebiete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , jb_name::text as label \
+            , gid::text as feature_id \
+        FROM bundinv.jb
+}
+
+source src_ch_bafu_bundesinventare-moorlandschaften : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-moorlandschaften' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , ml_name::text as label \
+            , gid::text as feature_id \
+        FROM bundinv.ml
+}
+
+source src_ch_bafu_bundesinventare-vogelreservate : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-vogelreservate' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wv_name::text as label \
+            , gid::text as feature_id \
+        FROM bundinv.wv
+}
+
+source src_ch_bafu_wasser-entnahme_1 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-entnahme' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , rwknr::text as label \
+            , gid::text as feature_id \
+        FROM wasser.invent_ent_wknutz_bedeutend
+}
+
+source src_ch_bafu_wasser-entnahme_2 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-entnahme' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , rwknr::text as label \
+            , gid::text as feature_id \
+        FROM wasser.invent_ent_wknutz_weitere
+}
+
+source src_ch_bafu_wasser-entnahme_3 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-entnahme' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , rwknr::text as label \
+            , gid::text as feature_id \
+        FROM wasser.invent_ent_andere_bedeutend
+}
+
+source src_ch_bafu_wasser-entnahme_4 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-entnahme' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , rwknr::text as label \
+            , gid::text as feature_id \
+        FROM wasser.invent_ent_andere_weitere
+}
+
+source src_ch_bafu_wasser-leitungen : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-leitungen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , rwknr::text as label \
+            , gid::text as feature_id \
+        FROM wasser.leitungen
+}
+
+source src_ch_bafu_wasser-rueckgabe : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wasser-rueckgabe' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , rwknr::text as label \
+            , gid::text as feature_id \
+        FROM wasser.rueckgabe
+}
+
+source src_ch_bafu_bundesinventare-flachmoore : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-flachmoore' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , fm_name::text as label \
+            , gid::text as feature_id \
+        FROM bundinv.fm
+}
+
+source src_ch_bafu_bundesinventare-flachmoore_regional : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-flachmoore_regional' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , fmreg_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bundinv.flachmoore_regional
+}
+
+source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , park_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM schutzge.paerke_nationaler_bedeutung
+}
+
+source src_ch_bafu_schutzgebiete-ramsar : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.schutzgebiete-ramsar' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , ra_name::text as label \
+            , gid::text as feature_id \
+        FROM schutzge.ramsar
+}
+
+source src_ch_bafu_wildruhezonen-jagdbanngebiete : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wildruhezonen-jagdbanngebiete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wrz_name::text as label \
+            , wrz_jb_obj::text as feature_id \
+        FROM schutzge.wildruhezonen_jagdbanngebiete
+}
+
+source src_ch_bafu_wege-wildruhezonen-jagdbanngebiete : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT weg_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wege-wildruhezonen-jagdbanngebiete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wrz_obj::text as label \
+            , weg_id::text as feature_id \
+        FROM schutzge.wege_wildruhezonen_jagdbanngebiete
+}
+
+source src_ch_bafu_fauna-steinbockkolonien : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.fauna-steinbockkolonien' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , sb_name::text as label \
+            , gid::text as feature_id \
+        FROM fauna.sb
+}
+
+source src_ch_bafu_swissprtr : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT prtrnr as id \
+            , 'feature' as origin \
+            , 'ch.bafu.fauna-steinbockkolonien' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , betrieb::text as label \
+            , prtrnr::text as feature_id \
+        FROM prtr.swissprtr
+}
+
+source src_ch_bafu_holzvorrat : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.holzvorrat' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wireg_::text as label \
+            , gid::text as feature_id \
+        FROM wald.holzvorrat
+}
+
+source src_ch_bafu_holzzuwachs : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.holzzuwachs' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wirtschaftsregion::text as label \
+            , gid::text as feature_id \
+        FROM wald.holzzuwachs
+}
+
+source src_ch_bafu_holznutzung : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.holznutzung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wireg_::text as label \
+            , gid::text as feature_id \
+        FROM wald.holznutzung
+}
+
+source src_ch_bafu_nabelstationen : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.nabelstationen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , id_stat::text as feature_id \
+        FROM luft.nabel
+}
+
+source src_ch_bafu_fischerei-krebspest : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT _count as id \
+            , 'feature' as origin \
+            , 'ch.bafu.fischerei-krebspest' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , kennummer::text as label \
+            , _count::text as feature_id \
+        FROM fischerei.krebspest
+}
+
+source src_ch_bafu_biogeographische_regionen : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.biogeographische_regionen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , biogreg_ve::text as label \
+            , bgdi_id::text as feature_id \
+        FROM diverse.biogeoreg
+}
+
+source src_ch_bafu_schutzgebiete-smaragd : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.schutzgebiete-smaragd' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , em_name::text as label \
+            , id::text as feature_id \
+        FROM schutzge.smaragd
+}
+
+source src_ch_bafu_schutzgebiete-biosphaerenreservate : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.schutzgebiete-biosphaerenreservate' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , biores_nam::text as label \
+            , bgdi_id::text as feature_id \
+        FROM schutzge.biores
+}
+
+source src_ch_bafu_moose : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.moose' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , rl_text::text as label \
+            , bgdi_id::text as feature_id \
+        FROM flora.mooseflora
+}
+
+source src_ch_bafu_flora-weltensutter_atlas : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.flora-weltensutter_atlas' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , ty_surface::text as label \
+            , gid::text as feature_id \
+        FROM flora.ws
+}
+
+source src_ch_bafu_landesforstinventar-baumarten : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.landesforstinventar-baumarten' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wirtschaft::text as label \
+            , bgdi_id::text as feature_id \
+        FROM wald.baumartenmischung
+}
+
+source src_ch_bafu_landesforstinventar-waldanteil : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.landesforstinventar-waldanteil' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wirtschaft::text as label \
+            , bgdi_id::text as feature_id \
+        FROM wald.waldanteil
+}
+
+source src_ch_bafu_landesforstinventar-totholz : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.landesforstinventar-totholz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wirtschaft::text as label \
+            , bgdi_id::text as feature_id \
+        FROM wald.totholzvolumen
+}
+
+source src_ch_bafu_gefahren-historische_erdbeben : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.gefahren-historische_erdbeben' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , date_time::text as label \
+            , bgdi_id::text as feature_id \
+        FROM gefahren.historische_erdbeben
+}
+
+source src_ch_bafu_gefahren-spektral : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT _count as id \
+            , 'feature' as origin \
+            , 'ch.bafu.gefahren-spektral' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , id::text as label \
+            , _count::text as feature_id \
+        FROM gefahren.baugrundkl_spectral
+}
+
+source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , tww_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bundinv.tww
+}
+
+source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden_anhang2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , tww_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bundinv.trockenwiesen_weiden_anhang2
+}
+
+source src_ch_bafu_bundesinventare-amphibien_anhang4 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-amphibien_anhang4' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bundinv.amphibien_anhang4
+}
+
+source src_ch_bafu_gefahren-baugrundklassen : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT _count as id \
+            , 'feature' as origin \
+            , 'ch.bafu.gefahren-baugrundklassen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , bgk::text as label \
+            , _count::text as feature_id \
+        FROM gefahren.baugrundklassen
+}
+
+source src_ch_bav_laerm-emissionplan_eisenbahn_2015 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.bav.laerm-emissionplan_eisenbahn_2015' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , id::text as label \
+            , id::text as feature_id \
+        FROM diverse.laerm_emplan_bahn_2015
+}
+
+source src_ch_bafu_wrz-jagdbanngebiete_select : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wrz-jagdbanngebiete_select' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , jb_name::text as label \
+            , objectid::text as feature_id \
+        FROM wrzportal.jgd_select
+}
+
+source src_ch_bafu_wrz-wildruhezonen_portal : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.wrz-wildruhezonen_portal' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , wrz_name::text as label \
+            , objectid::text as feature_id \
+        FROM wrzportal.wrz_portal
+}
+
+source src_ch_bafu_fauna-wildtierkorridor_national : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.fauna-wildtierkorridor_national' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::text as label \
+            , bgdi_id::text as feature_id \
+        FROM fauna.wildtierkorridore
+}
+
+## SEARCHABLE
+
+source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT nr::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , nr::text||' '||remove_accents(name) as detail \
+            , 'ch.bafu.hydrologie-wassertemperaturmessstationen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::text as feature_id \
+        from hydrologie.temperaturmessnetz
+}
+
+source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT nr::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , nr::text||' '||remove_accents(name)||' '||remove_accents(gewaesser) as detail \
+            , 'ch.bafu.hydrologie-gewaesserzustandsmessstationen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::bigint as feature_id \
+        from hydrologie.dbgz
+}
+
+source src_ch_bafu_bundesinventare-auen : def_searchable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT gid::bigint as id \
+            , au_name as label \
+            , 'feature' as origin \
+            , au_obj::text||' '||remove_accents(au_name) as detail \
+            , 'ch.bafu.bundesinventare-auen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::text as feature_id \
+        from bundinv.au
+}
+
+## INDICES
+
+## QUERYBALE
+
+index ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    type = plain
+    source = src_ch_bafu_bundesinventare-amphibien_wanderobjekte
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien_wanderobjekte
+    docinfo = extern
+    charset_type = utf-8
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
+index ch_bafu_bundesinventare-amphibien : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-amphibien
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien
+}
+
+index ch_bafu_hydrologie-hydromessstationen : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_hydrologie-hydromessstationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-hydromessstationen
+}
+
+index ch_bafu_wasser-teileinzugsgebiete_2 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-teileinzugsgebiete_2
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-teileinzugsgebiete_2
+}
+
+index ch_bafu_wasser-teileinzugsgebiete_40 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-teileinzugsgebiete_40
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-teileinzugsgebiete_40
+}
+
+index ch_bafu_wasser-vorfluter : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-vorfluter
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-vorfluter
+}
+
+index ch_bafu_wasser-gebietsauslaesse : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-gebietsauslaesse
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-gebietsauslaesse
+}
+
+index ch_bafu_bundesinventare-bln : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-bln
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-bln
+}
+
+index ch_bafu_bundesinventare-hochmoore : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-hochmoore
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-hochmoore
+}
+
+index ch_bafu_bundesinventare-jagdbanngebiete : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-jagdbanngebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-jagdbanngebiete
+}
+
+index ch_bafu_bundesinventare-moorlandschaften : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-moorlandschaften
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-moorlandschaften
+}
+
+index ch_bafu_bundesinventare-vogelreservate : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-vogelreservate
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-vogelreservate
+}
+
+index ch_bafu_wasser-entnahme_1 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-entnahme_1
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-entnahme_1
+}
+
+index ch_bafu_wasser-entnahme_2 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-entnahme_2
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-entnahme_2
+}
+
+index ch_bafu_wasser-entnahme_3 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-entnahme_3
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-entnahme_3
+}
+
+index ch_bafu_wasser-entnahme_4 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-entnahme_4
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-entnahme_4
+}
+
+index ch_bafu_wasser-entnahme
+{
+    type = distributed
+    local = ch_bafu_wasser-entnahme_1
+    local = ch_bafu_wasser-entnahme_2
+    local = ch_bafu_wasser-entnahme_3
+    local = ch_bafu_wasser-entnahme_4
+}
+
+index ch_bafu_wasser-leitungen : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-leitungen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-leitungen
+}
+
+index ch_bafu_wasser-rueckgabe : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wasser-rueckgabe
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-rueckgabe
+}
+
+index ch_bafu_bundesinventare-flachmoore : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-flachmoore
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-flachmoore
+}
+
+index ch_bafu_bundesinventare-flachmoore_regional : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-flachmoore_regional
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-flachmoore_regional
+}
+
+index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-paerke_nationaler_bedeutung
+}
+
+index ch_bafu_schutzgebiete-ramsar : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_schutzgebiete-ramsar
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-ramsar
+}
+
+index ch_bafu_wildruhezonen-jagdbanngebiete : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wildruhezonen-jagdbanngebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wildruhezonen-jagdbanngebiete
+}
+
+index ch_bafu_wege-wildruhezonen-jagdbanngebiete : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wege-wildruhezonen-jagdbanngebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wege-wildruhezonen-jagdbanngebiete
+}
+
+index ch_bafu_fauna-steinbockkolonien : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_fauna-steinbockkolonien
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_fauna-steinbockkolonien
+}
+
+index ch_bafu_swissprtr : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_swissprtr
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_swissprtr
+}
+
+index ch_bafu_holzvorrat : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_holzvorrat
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_holzvorrat
+}
+
+index ch_bafu_holzzuwachs : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_holzzuwachs
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_holzzuwachs
+}
+
+index ch_bafu_holznutzung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_holznutzung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_holznutzung
+}
+
+index ch_bafu_nabelstationen : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_nabelstationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_nabelstationen
+}
+
+index ch_bafu_fischerei-krebspest : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_fischerei-krebspest
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_fischerei-krebspest
+}
+
+index ch_bafu_biogeographische_regionen : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_biogeographische_regionen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_biogeographische_regionen
+}
+
+index ch_bafu_schutzgebiete-smaragd : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_schutzgebiete-smaragd
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-smaragd
+}
+
+index ch_bafu_schutzgebiete-biosphaerenreservate : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_schutzgebiete-biosphaerenreservate
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-biosphaerenreservate
+}
+
+index ch_bafu_moose : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_moose
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_moose
+}
+
+index ch_bafu_flora-weltensutter_atlas : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_flora-weltensutter_atlas
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_flora-weltensutter_atlas
+}
+
+index ch_bafu_landesforstinventar-baumarten : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_landesforstinventar-baumarten
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_landesforstinventar-baumarten
+}
+
+index ch_bafu_landesforstinventar-waldanteil : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_landesforstinventar-waldanteil
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_landesforstinventar-waldanteil
+}
+
+index ch_bafu_landesforstinventar-totholz : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_landesforstinventar-totholz
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_landesforstinventar-totholz
+}
+
+index ch_bafu_gefahren-historische_erdbeben : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_gefahren-historische_erdbeben
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gefahren-historische_erdbeben
+}
+
+index ch_bafu_gefahren-spektral : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_gefahren-spektral
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gefahren-spektral
+}
+
+index ch_bafu_bundesinventare-trockenwiesen_trockenweiden : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-trockenwiesen_trockenweiden
+}
+
+index ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2
+}
+
+index ch_bafu_bundesinventare-amphibien_anhang4 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-amphibien_anhang4
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien_anhang4
+}
+
+index ch_bafu_gefahren-baugrundklassen : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_gefahren-baugrundklassen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gefahren-baugrundklassen
+}
+
+index ch_bav_laerm-emissionplan_eisenbahn_2015 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bav_laerm-emissionplan_eisenbahn_2015
+    path = /var/lib/sphinxsearch/data/index/ch_bav_laerm-emissionplan_eisenbahn_2015
+}
+
+index ch_bafu_wrz-jagdbanngebiete_select : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wrz-jagdbanngebiete_select
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz-jagdbanngebiete_select
+}
+
+index ch_bafu_wrz-wildruhezonen_portal : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_wrz-wildruhezonen_portal
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz-wildruhezonen_portal
+}
+
+index ch_bafu_fauna-wildtierkorridor_national : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_fauna-wildtierkorridor_national
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_fauna-wildtierkorridor_national
+}
+
+## SEARCHABLE
+
+index ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    type = plain
+    source = src_ch_bafu_hydrologie-wassertemperaturmessstationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-wassertemperaturmessstationen
+    docinfo = extern
+    charset_type = utf-8
+    min_infix_len = 2
+    infix_fields = detail
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
+index ch_bafu_hydrologie-gewaesserzustandsmessstationen : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_hydrologie-gewaesserzustandsmessstationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-gewaesserzustandsmessstationen
+}
+
+index ch_bafu_bundesinventare-auen : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-auen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen
+}
+

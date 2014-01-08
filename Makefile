@@ -44,8 +44,9 @@ index-feature: move-template
 	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each $(FEATURES_INDICES)
 
 .PHONY: template
-template: conf/sphinx.conf.in
-	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/'  conf/sphinx.conf.in  > conf/sphinx.conf
+template:
+	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/'  conf/db.conf.in  > conf/db.conf
+	cat conf/db.conf conf/*.part > conf/sphinx.conf
 
 .PHONY: deploy-ab
 deploy-ab:

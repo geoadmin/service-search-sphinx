@@ -1,0 +1,1921 @@
+## SOURCES
+
+## QUERYABLE
+
+source src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT nr as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-gravimetrischer_atlas.metadata' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , titel::text as label \
+            , nr::text as feature_id \
+        FROM geol.gravimetrie_atlas_metadata
+}
+
+source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.swissboundaries3d-bezirk-flaeche.fill' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , id::text as feature_id \
+        FROM tlm.swissboundaries_bezirke
+}
+
+source src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gemname::text as label \
+            , id::text as feature_id \
+        FROM tlm.swissboundaries_gemeinden
+}
+
+source src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT kantonsnr as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.swissboundaries3d-kanton-flaeche.fill' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , kantonsnr::text as feature_id \
+        FROM tlm.swissboundaries_kantone
+}
+
+source src_ch_swisstopo_cadastralwebmap-farbe : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.cadastralwebmap-farbe' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , ak::text as label \
+            , gid::text as feature_id \
+        FROM public.kantone25plus
+}
+
+source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-transportation-oeffentliche-verkehr' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objval::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_terminal_tiles
+}
+
+source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-transportation-oeffentliche-verkehr' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objval::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.v200_ship_kursschiff_linie_tooltip
+}
+
+source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-transportation-oeffentliche-verkehr' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objval::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_railway_tiles
+}
+
+source src_ch_swisstopo_treasurehunt : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.treasurehunt' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , title_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM public.treasurehunt
+}
+
+source src_ch_swisstopo_vec200-transportation-strassennetz_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objname::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_trafficinfo_tiles
+}
+
+source src_ch_swisstopo_vec200-transportation-strassennetz_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , detn::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.v200_ship_autofaehre_tooltip
+}
+
+source src_ch_swisstopo_vec200-transportation-strassennetz_3 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objval::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_road_tiles
+}
+
+source src_ch_swisstopo_vec200-transportation-strassennetz_4 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+         SELECT gtdboid as id \
+             , 'feature' as origin \
+             , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , st_box2d(the_geom) as geom_st_box2d \
+             , objval::text as label \
+             , gtdboid::text as feature_id \
+         FROM public.vec200_ramp_tiles
+}
+
+source src_ch_swisstopo_vec200-transportation-strassennetz_5 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objname::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_customsoffice_tiles
+}
+
+source src_ch_swisstopo_vec200-adminboundaries-protectedarea : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-adminboundaries-protectedarea' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_protectedarea
+}
+
+source src_ch_swisstopo_vec200-hydrography_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-hydrography' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_flowingwater
+}
+
+source src_ch_swisstopo_vec200-hydrography_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-hydrography' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_stagnantwater
+}
+
+source src_ch_swisstopo_vec200-landcover : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-landcover' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objname1::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_landcover
+}
+
+source src_ch_swisstopo_vec200-miscellaneous_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+         SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-miscellaneous' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objname::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_builtupp
+}
+
+source src_ch_swisstopo_vec200-miscellaneous_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-miscellaneous' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objname::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.v200_poi_tooltip
+}
+
+source src_ch_swisstopo_vec200-miscellaneous_3 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-miscellaneous' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , fco::text as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_supply
+}
+
+source src_ch_swisstopo_vec200-names-namedlocation : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gtdboid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec200-names-namedlocation' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(objname1,'')||' '||coalesce(objname2,'') as label \
+            , gtdboid::text as feature_id \
+        FROM public.vec200_namedlocation
+}
+
+source src_ch_swisstopo_vec25-strassennetz : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-strassennetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(length::text,'')||' [m]' as label \
+            , objectid::text as feature_id \
+        FROM public.v25_str_25_l_tooltip
+}
+
+source src_ch_swisstopo_vec25-uebrigerverkehr : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-uebrigerverkehr' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(length::text,'')||' [m]' as label \
+            , objectid::text as feature_id \
+        FROM public.v25_uvk_25_l
+}
+
+source src_ch_swisstopo_vec25-anlagen : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-anlagen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(area::text,'')||' [m2]' as label \
+            , objectid::text as feature_id \
+        FROM public.v25_anl_25_a
+}
+
+source src_ch_swisstopo_vec25-eisenbahnnetz : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-eisenbahnnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(length::text,'')||' [m]' as label \
+            , objectid::text as feature_id \
+        FROM public.v25_eis_25_l
+}
+
+source src_ch_swisstopo_vec25-gebaeude : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-gebaeude' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(area::text,'')||' [m2]' as label \
+            , objectid::text as feature_id \
+        FROM public.v25_geb_25_a
+}
+
+source src_ch_swisstopo_vec25-gewaessernetz : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-gewaessernetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , objectid::text as feature_id \
+        FROM public.v25_gwn_25_l
+}
+
+source src_ch_swisstopo_vec25-primaerflaechen : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-primaerflaechen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(length::text,'')||' [m]' as label \
+            , objectid::text as feature_id \
+        FROM public.v25_pri25_a
+}
+
+source src_ch_swisstopo_vec25-einzelobjekte : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-einzelobjekte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(length::text,'')||' [m]' as label \
+            , objectid::text as feature_id \
+        FROM public.v25_eob_25_l
+}
+
+source src_ch_swisstopo_vec25-heckenbaeume : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.vec25-heckenbaeume' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , coalesce(length::text,'')||' [m]' as label \
+            , objectid::text as feature_id \
+        FROM public.v25_heb_25_l
+}
+
+source src_ch_swisstopo_dreiecksvermaschung : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.dreiecksvermaschung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nom::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geodaesie.dreiecksvermaschung
+}
+
+source src_ch_swisstopo_hiks-dufour : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT tilenumber as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.hiks-dufour' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , datenstand::text as label \
+            , tilenumber::text as feature_id \
+        FROM datenstand.view_gridstand_datenhaltung_dufour_erst
+}
+
+source src_ch_swisstopo_hiks-siegfried : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT tilenumber as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.hiks-siegfried' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , datenstand::text as label \
+            , tilenumber::text as feature_id \
+        FROM datenstand.view_gridstand_datenhaltung_siegfried_erst
+}
+
+source src_ch_swisstopo_pixelkarte-farbe-pk25_noscale : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT kbnum as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.pixelkarte-farbe-pk25.noscale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , lk_name::text as label \
+            , kbnum::text as feature_id \
+        FROM datenstand.view_gridstand_datenhaltung_pk25_tilecache
+}
+## Identical source for ch.swisstopo.pixelkarte-pk25.metadata
+
+source src_ch_swisstopo_pixelkarte-farbe-pk50_noscale : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT kbnum as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.pixelkarte-farbe-pk50.noscale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , lk_name::text as label \
+            , kbnum::text as feature_id \
+        FROM datenstand.view_gridstand_datenhaltung_pk50_tilecache
+}
+## Identical source for ch.swisstopo.pixelkarte-pk50.metadata
+
+source src_ch_swisstopo_pixelkarte-farbe-pk100_noscale : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT kbnum as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.pixelkarte-farbe-pk100.noscale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , lk_name::text as label \
+            , kbnum::text as feature_id \
+        FROM datenstand.view_gridstand_datenhaltung_pk100_tilecache
+}
+## Identical source for ch.swisstopo.pixelkarte-pk100.metadata
+
+source src_ch_swisstopo_pixelkarte-farbe-pk200_noscale : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT kbnum as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.pixelkarte-farbe-pk200.noscale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , lk_name::text as label \
+            , kbnum::text as feature_id \
+         FROM datenstand.view_gridstand_datenhaltung_pk200_tilecache
+}
+## Identical source for ch.swisstopo.pixelkarte-pk200.metadata
+
+source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT kbnum as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.pixelkarte-farbe-pk500.noscale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , lk_name::text as label \
+            , kbnum::text as feature_id \
+        FROM datenstand.view_gridstand_datenhaltung_pk500_tilecache
+}
+## Identical source for ch.swisstopo.pixelkarte-pk500.metadata
+
+source src_ch_swisstopo_images-swissimage_metadata : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT tilenumber as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.images-swissimage.metadata' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , lk25_name::text as label \
+            , tilenumber::text as feature_id \
+        FROM datenstand.view_gridstand_datenhaltung_swissimage_tilecache
+}
+
+source src_ch_swisstopo_geologie-geolkarten500_metadata : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geolkarten500.metadata' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as label \
+            , bgdi_id::text as feature_id \
+        FROM public.gk500
+}
+
+source src_ch_swisstopo_geologie-geologischer_atlas : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT nr as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geologischer_atlas' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , titel::text as label \
+            , nr::text as feature_id \
+        FROM geol.kv_ga25_pk
+}
+
+source src_ch_swisstopo_geologie-geologische_karte_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT fid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geologische_karte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , type_de::text as label \
+            , fid::text as feature_id \
+        FROM geol.geologische_karte_line
+}
+
+source src_ch_swisstopo_geologie-geologische_karte_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geologische_karte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , leg_geol_d::text as label \
+            , id::text as feature_id \
+        FROM geol.geologische_karte_plg
+}
+
+source src_ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-mineralische_rohstoffe200' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , area_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geotechnik_mineralische_rohstoffe200
+}
+
+source src_ch_swisstopo_geologie-geotechnik-gk200 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-gk200' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , file_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geotechnik_gk200_lgd
+}
+
+source src_ch_swisstopo_geologie-geotechnik-gk500-genese : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-gk500-genese' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , genese_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.gk500_genese
+}
+
+source src_ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-gk500-gesteinsklassierung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gestkl_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.gk500_gesteinsklassierung
+}
+
+source src_ch_swisstopo_geo-geotechnik-gk500-lith_haupt : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-gk500-lithologie_hauptgruppen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , bgdi_tooltip_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.gk500_lithologie_hauptgruppen
+}
+
+source src_ch_swisstopo_geologie-geotechnik-steinbrueche_1980 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-steinbrueche_1980' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gesteinsgr::text as label \
+            , id::text as feature_id \
+        FROM geol.geotechnik_steinbrueche_1980
+}
+    
+source src_ch_swisstopo_geologie-geotechnik-steinbrueche_1995 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-steinbrueche_1995' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gesteinsgr::text as label \
+            , id::text as feature_id \
+        FROM geol.geotechnik_steinbrueche_1995
+}
+
+source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1965 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-zementindustrie_1965' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , stoff::text as label \
+            , id::text as feature_id \
+        FROM geol.geotechnik_zementindustrie
+}
+
+source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-zementindustrie_1995' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , stoff::text as label \
+            , id::text as feature_id \
+        FROM geol.geotechnik_zementindustrie
+}
+
+#source src_ch_swisstopo_geologie-hydro_karte-grundwasser : def_queryable_features
+#{
+# sql_db = stopo
+# sql_query = \
+# SELECT bgdi_id as id \
+# , 'feature' as origin \
+# , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
+# , quadindex(the_geom) as geom_quadindex \
+# , y(st_transform(st_centroid(the_geom),4326)) as lat \
+# , x(st_transform(st_centroid(the_geom),4326)) as lon \
+# , st_box2d(the_geom) as geom_st_box2d \
+# , type_de::text as label \
+# , bgdi_id::text as feature_id \
+# FROM geol.grundwasservorkommen
+#}
+#
+#source src_ch_swisstopo_geologie-hydro_karte-grundvul : def_queryable_features
+#{
+# sql_db = stopo
+# sql_query = \
+# SELECT bgdi_id as id \
+# , 'feature' as origin \
+# , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservulnerabilitaet' as layer \
+# , quadindex(the_geom) as geom_quadindex \
+# , y(st_transform(st_centroid(the_geom),4326)) as lat \
+# , x(st_transform(st_centroid(the_geom),4326)) as lon \
+# , st_box2d(the_geom) as geom_st_box2d \
+# , type_de::text as label \
+# , bgdi_id::text as feature_id \
+# FROM geol.grundwasservorkommen_plg
+#}
+    
+source src_ch_swisstopo_geologie-geophysik-geothermie : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geophysik-geothermie' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , contour::text as label \
+            , gid::text as feature_id \
+        FROM geol.geophysik_geothermie
+}
+
+source src_ch_swisstopo_geologie-geophysik-deklination : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geophysik-deklination' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , magne::text as label \
+            , gid::text as feature_id \
+        FROM geol.geophysik_deklination
+}
+    
+source src_ch_swisstopo_geologie-geophysik-inklination : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geophysik-inklination' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , contour::text as label \
+            , gid::text as feature_id \
+        FROM geol.geophysik_inklination
+}
+    
+source src_ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geophysik-inklination' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , et_fromatt::text as label \
+            , gid::text as feature_id \
+        FROM geol.gravimetrie_aeromagnetik_jura
+}
+
+source src_ch_swisstopo_geologie-geodaesie-isostatische_anomalien : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geodaesie-isostatische_anomalien' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , et_fromatt::text as label \
+            , gid::text as feature_id \
+        FROM geol.schwerekarte_isostatische_anomalien
+}
+
+source src_ch_swisstopo_geologie-geodaesie-bouguer_anomalien : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geodaesie-bouguer_anomalien' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , et_fromatt::text as label \
+            , gid::text as feature_id \
+        FROM geol.geodaesie_bouguer_anomalien
+}
+
+source src_ch_swisstopo_geologie-geophysik-totalintensitaet : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geophysik-totalintensitaet' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , contour::text as label \
+            , gid::text as feature_id \
+        FROM geol.geophysik_totalintensitaet
+}
+
+source src_ch_swisstopo_geologie-tektonische_karte_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT fid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-tektonische_karte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , fid::text as label \
+            , type_de::text as feature_id \
+        FROM geol.tektonische_karte_line
+}
+
+source src_ch_swisstopo_geologie-tektonische_karte_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT fid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-tektonische_karte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , fid::text as label \
+            , type_de::text as feature_id \
+        FROM geol.tektonische_karte_flaechen
+}
+    
+source src_ch_swisstopo_swisstlm3d-wanderwege : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT nr as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.swisstlm3d-wanderwege' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::text as label \
+            , coalesce(hikingtype,'')||coalesce(bridgetype,'')||coalesce(tunneltype,'') as feature_id \
+        FROM karto.wanderwege_swissmap
+}
+# Identical source for ch.swisstopo-karto.wanderwege same src
+
+source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id::int as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo-vd.ortschaftenverzeichnis_plz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , plz::text as label \
+            , os_uuid::text as feature_id \
+        FROM vd.gabmo_plz
+}
+
+source src_ch_swisstopo-vd_geometa-standav : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo-vd.geometa-standav' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , frame::text as label \
+            , gid::text as feature_id \
+        FROM vd.amogr_standav
+}
+
+source src_ch_swisstopo-vd_geometa-los : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo-vd.geometa-los' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , operatsname::text as label \
+            , gid::text as feature_id \
+        FROM vd.amogr_los
+}
+    
+source src_ch_swisstopo-vd_geometa-gemeinde : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo-vd.geometa-gemeinde' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gemeindename::text as label \
+            , gid::text as feature_id \
+        FROM vd.amogr_gemeinde
+}
+               
+source src_ch_swisstopo-vd_geometa-grundbuch : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo-vd.geometa-grundbuch' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , ortsteil_grundbuch::text as label \
+            , gid::text as feature_id \
+        FROM vd.amogr_grundbuch
+}
+               
+source src_ch_swisstopo-vd_geometa-nfgeom : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo-vd.geometa-nfgeom' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , gid::text as feature_id \
+        FROM vd.amogr_nfgeom
+}
+               
+source src_ch_swisstopo_transformationsgenauigkeit : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.transformationsgenauigkeit' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , sg_name::text as label \
+            , identifier::text as feature_id \
+        FROM vd.spannungsarme_gebiete
+}
+               
+source src_ch_swisstopo-vd_spannungsarme-gebiete : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo-vd.spannungsarme-gebiete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , sg_name::text as label \
+            , identifier::text as feature_id \
+        FROM vd.spannungsarme_gebiete
+}
+ 
+source src_ch_swisstopo_geologie-geotope_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstop.geologie-geotope' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nom::text as label \
+            , objectid::text as feature_id \
+        FROM geol.geotope_pkt
+}
+
+source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstop.geologie-geotope' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nom::text as label \
+            , objectid::text as feature_id \
+        FROM geol.geotope_plg
+}
+
+## SEARCHABLE
+
+source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id::bigint as id \
+            , name_ads as label \
+            , 'feature' as origin \
+            , remove_accents(name_ads) as detail \
+            , 'ch.swisstopo.geologie-rohstoffe-industrieminerale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , id::text as feature_id \
+        from geol.rohstoffe_industrieminerale
+}
+
+source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT id::bigint as id \
+            , name_ads as label \
+            , 'feature' as origin \
+            , remove_accents(name_ads) as detail \
+            , 'ch.swisstopo.geologie-rohstoffe-kohlen_bitumen_erdgas' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , id::text as feature_id \
+        from geol.rohstoffe_kohlen_bitumen_erdgas
+}
+
+source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT id::bigint as id \
+          , name as label \
+          , 'feature' as origin \
+          , remove_accents(name) as detail \
+          , 'ch.swisstopo.verschiebungsvektoren-tsp1' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::text as feature_id \
+      from geodaesie.verschiebungsvektoren_tsp1
+}
+
+source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT id::bigint as id \
+          , name as label \
+          , 'feature' as origin \
+          , remove_accents(name) as detail \
+          , 'ch.swisstopo.verschiebungsvektoren-tsp2' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::text as feature_id \
+      from geodaesie.verschiebungsvektoren_tsp2
+}
+
+source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT id::bigint as id \
+          , name_ads as label \
+          , 'feature' as origin \
+          , remove_accents(name_ads) as detail \
+          , 'ch.swisstopo.geologie-rohstoffe-vererzungen' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::text as feature_id \
+      from geol.rohstoffe_vererzungen
+}
+
+source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT id::bigint as id \
+          , ziegelei_2 as label \
+          , 'feature' as origin \
+          , remove_accents(ziegelei_2) as detail \
+          , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1907' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::text as feature_id \
+      from geol.geotechnik_ziegeleien_1907
+}
+
+source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT id::bigint as id \
+          , ziegelei as label \
+          , 'feature' as origin \
+          , remove_accents(ziegelei) as detail \
+          , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1965' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::text as feature_id \
+      from geol.geotechnik_ziegeleien_1965
+}
+
+source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT id::bigint as id \
+          , ziegeleien as label \
+          , 'feature' as origin \
+          , remove_accents(ziegeleien) as detail \
+          , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1995' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , id::text as feature_id \
+      from geol.geotechnik_ziegeleien_1995
+}
+
+## INDICES
+
+## QUERYABLE
+
+index ch_swisstopo_cadastralwebmap-farbe
+{
+    type = plain
+    source = src_ch_swisstopo_cadastralwebmap-farbe
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_cadastralwebmap-farbe
+    docinfo = extern
+    charset_type = utf-8
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
+index ch_swisstopo_geologie-gravimetrischer_atlas_metadata : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gravimetrischer_atlas_metadata
+}
+
+index ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill
+}
+
+index ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill
+}
+
+index ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-kanton-flaeche_fill
+}
+
+index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1
+}
+
+index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2
+}
+
+index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3
+}
+
+index ch_swisstopo_vec200-transportation-oeffentliche-verkehr
+{
+    type = distributed
+    local = ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1
+    local = ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2
+    local = ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3
+}
+
+index ch_swisstopo_treasurehunt : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_treasurehunt
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_treasurehunt
+}
+
+index ch_swisstopo_vec200-transportation-strassennetz_1 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-transportation-strassennetz_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_1
+}
+
+index ch_swisstopo_vec200-transportation-strassennetz_2 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-transportation-strassennetz_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_2
+}
+
+index ch_swisstopo_vec200-transportation-strassennetz_3 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-transportation-strassennetz_3
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_3
+}
+
+index ch_swisstopo_vec200-transportation-strassennetz_4 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-transportation-strassennetz_4
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_4
+}
+
+index ch_swisstopo_vec200-transportation-strassennetz_5 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-transportation-strassennetz_5
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_5
+}
+
+index ch_swisstopo_vec200-transportation-strassennetz
+{
+    type = distributed
+    local = ch_swisstopo_vec200-transportation-strassennetz_1
+    local = ch_swisstopo_vec200-transportation-strassennetz_2
+    local = ch_swisstopo_vec200-transportation-strassennetz_3
+    local = ch_swisstopo_vec200-transportation-strassennetz_4
+    local = ch_swisstopo_vec200-transportation-strassennetz_5
+}
+
+index ch_swisstopo_vec200-adminboundaries-protectedarea : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-adminboundaries-protectedarea
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-adminboundaries-protectedarea
+}
+
+index ch_swisstopo_vec200-hydrography_1 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-hydrography_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-hydrography_1
+}
+
+index ch_swisstopo_vec200-hydrography_2 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-hydrography_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-hydrography_2
+}
+
+index ch_swisstopo_vec200-hydrography
+{
+    type = distributed
+    local = ch_swisstopo_vec200-hydrography_1
+    local = ch_swisstopo_vec200-hydrography_2
+}
+
+index ch_swisstopo_vec200-landcover : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-landcover
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-landcover
+}
+
+index ch_swisstopo_vec200-miscellaneous_1 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-miscellaneous_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-miscellaneous_1
+}
+
+index ch_swisstopo_vec200-miscellaneous_2 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-miscellaneous_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-miscellaneous_2
+}
+
+index ch_swisstopo_vec200-miscellaneous_3 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-miscellaneous_3
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-miscellaneous_3
+}
+
+index ch_swisstopo_vec200-miscellaneous
+{
+    type = distributed
+    local = ch_swisstopo_vec200-miscellaneous_1
+    local = ch_swisstopo_vec200-miscellaneous_2
+    local = ch_swisstopo_vec200-miscellaneous_3
+}
+
+index ch_swisstopo_vec200-names-namedlocation : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec200-names-namedlocation
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-names-namedlocation
+}
+
+index ch_swisstopo_vec25-strassennetz : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-strassennetz
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-strassennetz
+}
+
+index ch_swisstopo_vec25-uebrigerverkehr : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-uebrigerverkehr
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-uebrigerverkehr
+}
+
+index ch_swisstopo_vec25-anlagen : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-anlagen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-anlagen
+}
+
+index ch_swisstopo_vec25-eisenbahnnetz : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-eisenbahnnetz
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-eisenbahnnetz
+}
+
+index ch_swisstopo_vec25-gebaeude : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-gebaeude
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-gebaeude
+}
+
+index ch_swisstopo_vec25-gewaessernetz : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-gewaessernetz
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-gewaessernetz
+}
+
+index ch_swisstopo_vec25-primaerflaechen : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-primaerflaechen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-primaerflaechen
+}
+
+index ch_swisstopo_vec25-einzelobjekte : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-einzelobjekte
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-einzelobjekte
+}
+
+index ch_swisstopo_vec25-heckenbaeume : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_vec25-heckenbaeume
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-heckenbaeume
+}
+
+index ch_swisstopo_dreiecksvermaschung : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_dreiecksvermaschung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_dreiecksvermaschung
+}
+
+index ch_swisstopo_hiks-dufour : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_hiks-dufour
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-dufour
+}
+
+index ch_swisstopo_hiks-siegfried : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_hiks-siegfried
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-siegfried
+}
+
+index ch_swisstopo_pixelkarte-farbe-pk25_noscale : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_pixelkarte-farbe-pk25_noscale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk25_noscale
+}
+
+index ch_swisstopo_pixelkarte-farbe-pk50_noscale : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_pixelkarte-farbe-pk50_noscale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk50_noscale
+}
+
+index ch_swisstopo_pixelkarte-farbe-pk100_noscale : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_pixelkarte-farbe-pk100_noscale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk100_noscale
+}
+
+index ch_swisstopo_pixelkarte-farbe-pk200_noscale : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_pixelkarte-farbe-pk200_noscale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk200_noscale
+}
+
+index ch_swisstopo_pixelkarte-farbe-pk500_noscale : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_pixelkarte-farbe-pk500_noscale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk500_noscale
+}
+
+index ch_swisstopo_images-swissimage_metadata : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_images-swissimage_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_images-swissimage_metadata
+}
+
+index ch_swisstopo_geologie-geolkarten500_metadata : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geolkarten500_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geolkarten500_metadata
+}
+
+index ch_swisstopo_geologie-geologischer_atlas : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geologischer_atlas
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas
+}
+
+index ch_swisstopo_geologie-geologische_karte_1 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geologische_karte_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologische_karte_1
+}
+
+index ch_swisstopo_geologie-geologische_karte_2 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geologische_karte_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologische_karte_2
+}
+
+index ch_swisstopo_geologie-geologische_karte
+{
+    type = distributed
+    local = ch_swisstopo_geologie-geologische_karte_1
+    local = ch_swisstopo_geologie-geologische_karte_2
+}
+
+index ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200
+}
+
+index ch_swisstopo_geologie-geotechnik-gk200 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotechnik-gk200
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk200
+}
+
+index ch_swisstopo_geologie-geotechnik-gk500-genese : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotechnik-gk500-genese
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk500-genese
+}
+
+index ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung
+}
+
+index ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geo-geotechnik-gk500-lith_haupt
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen
+}
+
+index ch_swisstopo_geologie-geotechnik-steinbrueche_1980 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotechnik-steinbrueche_1980
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-steinbrueche_1980
+}
+
+index ch_swisstopo_geologie-geotechnik-steinbrueche_1995 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotechnik-steinbrueche_1995
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-steinbrueche_1995
+}
+
+index ch_swisstopo_geologie-geotechnik-zementindustrie_1965 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotechnik-zementindustrie_1965
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1965
+}
+
+index ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1995
+}
+
+#index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen : ch_swisstopo_cadastralwebmap-farbe
+#{
+# source = src_ch_swisstopo_geologie-hydro_karte-grundwasser
+# path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen
+#}
+#
+#index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet : ch_swisstopo_cadastralwebmap-farbe
+#{
+# source = src_ch_swisstopo_geologie-hydro_karte-grundvul
+# path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet
+#}
+
+index ch_swisstopo_geologie-geophysik-geothermie : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geophysik-geothermie
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-geothermie
+}
+
+index ch_swisstopo_geologie-geophysik-deklination : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geophysik-deklination
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-deklination
+}
+
+index ch_swisstopo_geologie-geophysik-inklination : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geophysik-inklination
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-inklination
+}
+
+index ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura
+}
+
+index ch_swisstopo_geologie-geodaesie-isostatische_anomalien : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geodaesie-isostatische_anomalien
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geodaesie-isostatische_anomalien
+}
+
+index ch_swisstopo_geologie-geodaesie-bouguer_anomalien : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geodaesie-bouguer_anomalien
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geodaesie-bouguer_anomalien
+}
+   
+index ch_swisstopo_geologie-geophysik-totalintensitaet : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geophysik-totalintensitaet
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-totalintensitaet
+}
+
+index ch_swisstopo_geologie-tektonische_karte_1 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-tektonische_karte_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-tektonische_karte_1
+}
+
+index ch_swisstopo_geologie-tektonische_karte_2 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-tektonische_karte_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-tektonische_karte_2
+}
+
+index ch_swisstopo_geologie-tektonische_karte
+{
+    type = distributed
+    local = ch_swisstopo_geologie-tektonische_karte_1
+    local = ch_swisstopo_geologie-tektonische_karte_2
+}
+   
+index ch_swisstopo_swisstlm3d-wanderwege : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_swisstlm3d-wanderwege
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swisstlm3d-wanderwege
+}
+
+index ch_swisstopo-vd_ortschaftenverzeichnis_plz : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo-vd_ortschaftenverzeichnis_plz
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_ortschaftenverzeichnis_plz
+}
+
+index ch_swisstopo-vd_geometa-standav : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo-vd_geometa-standav
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-standav
+}
+
+index ch_swisstopo-vd_geometa-los : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo-vd_geometa-los
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-los
+}
+
+index ch_swisstopo-vd_geometa-gemeinde : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo-vd_geometa-gemeinde
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-gemeinde
+}
+
+index ch_swisstopo-vd_geometa-grundbuch : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo-vd_geometa-grundbuch
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-grundbuch
+}
+
+index ch_swisstopo-vd_geometa-nfgeom : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo-vd_geometa-nfgeom
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-nfgeom
+}
+
+index ch_swisstopo_transformationsgenauigkeit : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_transformationsgenauigkeit
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_transformationsgenauigkeit
+}
+
+index ch_swisstopo-vd_spannungsarme-gebiete : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo-vd_spannungsarme-gebiete
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_spannungsarme-gebiete
+}
+
+index ch_swisstopo_geologie-geotope_1 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotope_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_1
+}
+
+index ch_swisstopo_geologie-geotope_2 : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geotope_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_2
+}
+
+index ch_swisstopo_geologie-geotope
+{
+    type = distributed
+    local = ch_swisstopo_geologie-geotope_1
+    local = ch_swisstopo_geologie-geotope_2
+}
+
+## SEARCHABLE
+
+index ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    type = plain
+    source = src_ch_swisstopo_verschiebungsvektoren-tsp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren-tsp1
+    docinfo = extern
+    charset_type = utf-8
+    min_infix_len = 2
+    infix_fields = detail
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
+index ch_swisstopo_verschiebungsvektoren-tsp2 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_verschiebungsvektoren-tsp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren-tsp2
+}
+
+index ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1907
+}
+
+index ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1965
+}
+
+index ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1995
+}
+
+index ch_swisstopo_geologie-rohstoffe-vererzungen : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-rohstoffe-vererzungen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-vererzungen
+}
+
+index ch_swisstopo_geologie-rohstoffe-industrieminerale : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-rohstoffe-industrieminerale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-industrieminerale
+}
+
+
+index ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas
+}
+

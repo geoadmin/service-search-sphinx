@@ -1,0 +1,183 @@
+## SOURCES
+
+## SEARCHABLE
+
+source src_ch_astra_ivs-nat : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT nat_id::bigint as id \
+            , ivs_nummer as label \
+            , 'feature' as origin \
+            , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
+            , 'ch.astra.ivs-nat' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d   \
+            , nat_id::text as feature_id \
+        from astra.ivs_nat
+}
+
+source src_ch_astra_ivs-reg_loc : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT reg_loc_id::bigint as id \
+            , ivs_nummer as label \
+            , 'feature' as origin \
+            , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
+            , 'ch.astra.ivs-reg_loc' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , reg_loc_id::text as feature_id \
+        from astra.ivs_reg_loc
+}
+
+source src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT nr::bigint as id \
+            , zaehlstellen_bezeichnung as label \
+            , 'feature' as origin \
+            , nr||' '||remove_accents(zaehlstellen_bezeichnung) as detail \
+            , 'ch.astra.strassenverkehrszaehlung_messstellen-uebergeordnet' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::text as feature_id \
+        from astra.verkehr_ueber
+}
+
+source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT nr::bigint as id \
+            , zaehlstellen_bezeichnung as label \
+            , 'feature' as origin \
+            , nr||' '||remove_accents(zaehlstellen_bezeichnung) as detail \
+            , 'ch.astra.strassenverkehrszaehlung_messstellen-regional_lokal' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::text as feature_id \
+        from astra.verkehr_reg_loc
+}
+
+source src_ch_bakom_radio-fernsehsender : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(name)||' '||remove_accents(code) as detail \
+            , 'ch.bakom.radio-fernsehsender' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , id::text as feature_id \
+        from bakom.nisdb_bro_tooltip
+}
+
+source src_ch_bakom_versorgungsgebiet-tv : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT gid::bigint as id \
+            , prog as label \
+            , 'feature' as origin \
+            , remove_accents(prog) as detail \
+            , 'ch.bakom.versorgungsgebiet-tv' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::text as feature_id \
+        from bakom.tv_gebiet
+}
+
+
+source src_ch_bakom_versorgungsgebiet-ukw : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT gid::bigint as id \
+            , prog as label \
+            , 'feature' as origin \
+            , remove_accents(prog) as detail \
+            , 'ch.bakom.versorgungsgebiet-ukw' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gid::text as feature_id \
+        from bakom.ukw_gebiet
+}
+
+## INDICES
+
+## SEARCHABLE
+
+index ch_astra_ivs-nat
+{
+    type = plain
+    source = src_ch_astra_ivs-nat
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-nat
+    docinfo = extern
+    charset_type = utf-8
+    min_infix_len = 2
+    infix_fields = detail
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
+index ch_astra_ivs-nat-verlaeufe : ch_astra_ivs-nat
+{
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-nat-verlaeufe
+}
+
+index ch_astra_ivs-reg_loc : ch_astra_ivs-nat
+{
+    source = src_ch_astra_ivs-reg_loc
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-reg_loc
+}
+
+index ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : ch_astra_ivs-nat
+{
+    source = src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet
+    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet
+}
+
+index ch_astra_strassenverkehrszaehlung_messstellen-regional_lokal : ch_astra_ivs-nat
+{
+    source = src_ch_astra_strassenverkehrszaehlung_lokal
+    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen-regional_lokal
+}
+
+index ch_bakom_radio-fernsehsender : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_radio-fernsehsender
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_radio-fernsehsender
+}
+
+index ch_bakom_versorgungsgebiet-tv : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_versorgungsgebiet-tv
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet-tv
+}
+
+index ch_bakom_versorgungsgebiet-ukw : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_versorgungsgebiet-ukw
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet-ukw
+}
+
