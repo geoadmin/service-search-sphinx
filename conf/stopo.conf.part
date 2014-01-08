@@ -461,7 +461,7 @@ source src_ch_swisstopo_vec25-primaerflaechen : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , coalesce(length::text,'')||' [m]' as label \
+            , coalesce(area::text,'')||' [m2]' as label \
             , objectid::text as feature_id \
         FROM public.v25_pri25_a
 }
