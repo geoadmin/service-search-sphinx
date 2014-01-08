@@ -3020,21 +3020,21 @@ source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_queryable_features
 #        FROM vd.amogr_standav
 #}
 
-#source src_ch_swisstopo-vd_geometa-los : def_queryable_features
-#{             
-#    sql_db = stopo
-#    sql_query = \
-#        SELECT gid as id \
-#            , 'feature' as origin \
-#            , 'ch.swisstopo-vd.geometa-los' as layer \
-#            , quadindex(the_geom) as geom_quadindex \ 
-#            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-#            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-#            , st_box2d(the_geom) as geom_st_box2d \
-#            , operatsname::text as label \
-#            , gid::text as feature_id \
-#        FROM vd.amogr_los
-#}
+source src_ch_swisstopo-vd_geometa-los : def_queryable_features
+{   
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo-vd.geometa-los' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , operatsname::text as label \
+            , gid::text as feature_id \
+        FROM vd.amogr_los
+}
     
 source src_ch_swisstopo-vd_geometa-gemeinde : def_queryable_features
 {              
@@ -4337,11 +4337,11 @@ index ch_swisstopo-vd_ortschaftenverzeichnis_plz : ch_bafu_bundesinventare-amphi
 #    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-standav
 #}
 
-#index ch_swisstopo-vd_geometa-los : ch_bafu_bundesinventare-amphibien_wanderobjekte
-#{
-#    source = src_ch_swisstopo-vd_geometa-los
-#    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-los
-#}
+index ch_swisstopo-vd_geometa-los : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_swisstopo-vd_geometa-los
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-los
+}
 
 index ch_swisstopo-vd_geometa-gemeinde : ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
