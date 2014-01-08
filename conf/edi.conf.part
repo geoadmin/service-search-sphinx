@@ -1,0 +1,125 @@
+## SOURCES
+
+## QUERYABLE
+
+source src_ch_bfs_arealstatistik : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bfs.arealstatistik' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , 'object' as label \
+            , bgdi_id::text as feature_id \
+        FROM bfs.arealstatistik_std_2009
+}
+
+source src_ch_bfs_arealstatistik-1985 : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bfs.arealstatistik-1985' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , 'object' as label \
+            , bgdi_id::text as feature_id \
+        FROM bfs.arealstatistik_std_1985
+}
+
+source src_ch_bfs_arealstatistik-1997 : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bfs.arealstatistik-1997' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , 'object' as label \
+            , bgdi_id::text as feature_id \
+        FROM bfs.arealstatistik_std_1997
+}
+
+source src_ch_bag_zecken-fsme-faelle : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bag.zecken-fsme-faelle' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gemname::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bag.fsme_faelle
+}
+
+source src_ch_bag_zecken-fsme-impfung : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bag.zecken-fsme-impfung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gemname::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bag.fsme_impfung
+}
+
+## INDICES
+
+## QUERYBALE
+
+index ch_bfs_arealstatistik
+{
+    type = plain
+    source = src_ch_bfs_arealstatistik
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik
+    docinfo = extern
+    charset_type = utf-8
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
+index ch_bfs_arealstatistik-1985 : ch_bfs_arealstatistik
+{
+    source = src_ch_bfs_arealstatistik-1985
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-1985
+}
+
+index ch_bfs_arealstatistik-1997 : ch_bfs_arealstatistik
+{
+    source = src_ch_bfs_arealstatistik-1997
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-1997
+}
+
+index ch_bag_zecken-fsme-faelle : ch_bfs_arealstatistik
+{
+    source = src_ch_bag_zecken-fsme-faelle
+    path = /var/lib/sphinxsearch/data/index/ch_bag_zecken-fsme-faelle
+}
+
+
+index ch_bag_zecken-fsme-impfung : ch_bfs_arealstatistik
+{
+    source = src_ch_bag_zecken-fsme-impfung
+    path = /var/lib/sphinxsearch/data/index/ch_bag_zecken-fsme-impfung
+}
+

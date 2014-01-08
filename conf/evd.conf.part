@@ -1,0 +1,36 @@
+## SOURCES
+
+## QUERYABLE
+
+source src_ch_blw_bodeneignung-kulturtyp : def_queryable_features
+{
+    sql_db = evd
+    sql_query = \
+         SELECT bgdi_id as id \
+             , 'feature' as origin \
+             , 'ch.blw.bodeneignung-kulturtyp' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , st_box2d(the_geom) as geom_st_box2d \
+             , symb_color::text as label \
+             , bgdi_id::text as feature_id \
+         FROM blw.bodeneignung
+}
+
+## INDICES
+
+## QUERYABLE
+
+index ch_blw_bodeneignung-kulturtyp
+{
+    type = plain
+    source = src_ch_blw_bodeneignung-kulturtyp
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-kulturtyp
+    docinfo = extern
+    charset_type = utf-8
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+

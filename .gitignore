@@ -1,4 +1,4 @@
-sphinx.conf
+*.conf
 *.pyc
 *.swp
 *~
