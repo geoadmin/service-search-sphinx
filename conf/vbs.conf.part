@@ -1,5 +1,23 @@
 ## SOURCES
 
+## QUERYABLE
+
+source src_ch_vbs_territorialregionen : def_queryable_features
+{
+    sql_db = vbs
+    sql_query = \
+        SELECT terreg_nr::bigint as id \
+            , 'feature' as origin \
+            , 'ch.vbs.territorialregionen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , terreg_nr::text as feature_id \
+        from public.territorialregionen
+}
+
 ## SEARCHABLE
 
 source src_ch_babs_kulturgueter : def_searchable_features
@@ -21,9 +39,23 @@ source src_ch_babs_kulturgueter : def_searchable_features
 
 ## INDICES
 
+## QUERYABLE
+
+index ch_vbs_territorialregionen
+{
+    type = plain
+    source = src_ch_vbs_territorialregionen
+    path = /var/lib/sphinxsearch/data/index/ch_vbs_territorialregionen
+    docinfo = extern
+    charset_type = utf-8
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
 ## SEARCHABLE
 
-index ch_babs_kulturgueter : ch_astra_ivs-nat
+index ch_babs_kulturgueter
 {
     type = plain
     source = src_ch_babs_kulturgueter
