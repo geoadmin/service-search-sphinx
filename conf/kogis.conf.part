@@ -6,7 +6,7 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_queryable_features
 {
     sql_db = kogis
     sql_query = \
-        SELECT egid_edid as id \
+        SELECT bgdi_id as id \
             , 'feature' as origin \
             , 'ch.bfs.gebaeude_wohnungs_register' as layer \
             , quadindex(the_geom) as geom_quadindex \
