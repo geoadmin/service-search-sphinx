@@ -1,5 +1,360 @@
 ## SOURCES
 
+## QUERYABLE
+
+source src_ch_astra_ausnahmetransportrouten : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.astra.ausnahmetransportrouten' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , ri_getrenn::text as label \
+            , id::text as feature_id \
+        FROM astra.ausnahmetransportrouten
+}
+
+source src_ch_bav_kataster-belasteter-standorte-oev : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT vflz_id as id \
+            , 'feature' as origin \
+            , 'ch.bav.kataster-belasteter-standorte-oev' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , typ_bez::text as label \
+            , vflz_id::text as feature_id \
+        FROM bav.kataster_belasteter_standorte_oev
+}
+
+source src_ch_bfe_abgeltung-wasserkraftnutzung : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT objectnumber as id \
+            , 'feature' as origin \
+            , 'ch.bfe.abgeltung-wasserkraftnutzung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , objectnumber::text as feature_id \
+        FROM bfe.abgeltung_wasserkraftnutzung
+}
+
+source src_ch_bfe_energieforschung : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT tid as id \
+            , 'feature' as origin \
+            , 'ch.bfe.energieforschung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , titel_de::text as label \
+            , tid::text as feature_id \
+        FROM bfe.energieforschung
+}
+
+source src_ch_bfe_statistik-wasserkraftanlagen : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT wastanumber as id \
+            , 'feature' as origin \
+            , 'ch.bfe.statistik-wasserkraftanlagen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , wastanumber::text as feature_id \
+        FROM bfe.statistik_wasserkraftanlagen_powerplant
+}
+
+source src_ch_bfe_stauanlagen-bundesaufsicht : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT dam_stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bfe.stauanlagen-bundesaufsicht' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , damname::text as label \
+            , dam_stabil_id::text as feature_id \
+        FROM bfe.stauanlagen_bundesaufsicht
+}
+
+source src_ch_bfe_kleinwasserkraftpotentiale : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bfe.kleinwasserkraftpotentiale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , gwlnr::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bfe.kleinwasserkraftpotentiale
+}
+
+source src_ch_bakom_mobil-antennenstandorte-gsm : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.bakom.mobil-antennenstandorte-gsm' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , powercode::text as label \
+            , id::text as feature_id \
+        FROM bakom.nisdb_gsm
+}
+
+source src_ch_bakom_mobil-antennenstandorte-umts : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.bakom.mobil-antennenstandorte-umts' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , powercode::text as label \
+            , id::text as feature_id \
+        FROM bakom.nisdb_umts
+}
+
+source src_ch_bakom_mobil-antennenstandorte-lte : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT id as id \
+            , 'feature' as origin \
+            , 'ch.bakom.mobil-antennenstandorte-lte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , powercode::text as label \
+            , id::text as feature_id \
+        FROM bakom.nisdb_lte
+}
+
+source src_ch_bazl_projektierungszonen-flughafenanlagen : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bazl.projektierungszonen-flughafenanlagen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , municipality ::text as label \
+            , stabil_id::text as feature_id \
+        FROM bazl.projektierungszonen
+}
+
+source src_ch_bazl_luftfahrthindernis : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bazl.luftfahrthindernis' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , obstacletype::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bazl.luftfahrthindernis
+}
+
+source src_ch_bfe_sachplan-geologie-tiefenlager_1 : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bfe.sachplan-geologie-tiefenlager' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , facname_de::text as label \
+            , stabil_id::text as feature_id \
+        FROM bfe.geologische_tiefenlager_fac
+}
+
+source src_ch_bfe_sachplan-geologie-tiefenlager_2 : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bfe.sachplan-geologie-tiefenlager' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , facname_de::text as label \
+            , stabil_id::text as feature_id \
+        FROM bfe.geologische_tiefenlager
+}
+
+source src_ch_bfe_sachplan-geologie-tiefenlager_3 : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bfe.sachplan-geologie-tiefenlager' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , facname_de::text as label \
+            , stabil_id::text as feature_id \
+        FROM bfe.geologische_tiefenlager_raster
+}
+# Layer ch.bfe.sachplan-geologie-tiefenlager-thematische-darstellung is composed of the same 3 layers
+
+source src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_1 : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bazl.sachplan-infrastruktur-luftfahrt_anhorung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objectname_de::text as label \
+            , stabil_id::text as feature_id \
+        FROM bazl.sachplan_inf_luft_facilities_anhorung
+}
+
+source src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_2 : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bazl.sachplan-infrastruktur-luftfahrt_anhorung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objectname_de::text as label \
+            , stabil_id::text as feature_id \
+        FROM bazl.sachplan_inf_luft_plmeasures_anhorung
+}
+
+source src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_3 : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bazl.sachplan-infrastruktur-luftfahrt_anhorung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objectname_de::text as label \
+            , stabil_id::text as feature_id \
+        FROM bazl.sachplan_inf_luft_plmeasures_r_anhorung
+}
+
+source src_ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_1 : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bazl.sachplan-infrastruktur-luftfahrt_kraft' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objectname_de::text as label \
+            , stabil_id::text as feature_id \
+        FROM bazl.sachplan_inf_luft_facilities_kraft
+}
+
+source src_ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_2 : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT stabil_id as id \
+            , 'feature' as origin \
+            , 'ch.bazl.sachplan-infrastruktur-luftfahrt_kraft' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objectname_de::text as label \
+            , stabil_id::text as feature_id \
+        FROM bazl.sachplan_inf_luft_plmeasures_r_kraft
+}
+
+source src_ch_bakom_anbieter-eigenes_festnetz : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT cellid as id \
+            , 'feature' as origin \
+            , 'ch.bakom.anbieter-eigenes_festnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , alias::text as label \
+            , cellid::text as feature_id \
+        FROM bakom.nga_anbieter
+}
+
+source src_ch_bfe_kernkraftwerke : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT plant_id as id \
+            , 'feature' as origin \
+            , 'ch.bfe.kernkraftwerke' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , name::text as label \
+            , plant_id::text as feature_id \
+        FROM bfe.kernkraftwerke
+}
+
 ## SEARCHABLE
 
 source src_ch_astra_ivs-nat : def_searchable_features
@@ -123,6 +478,177 @@ source src_ch_bakom_versorgungsgebiet-ukw : def_searchable_features
 }
 
 ## INDICES
+
+## QUERYABLE
+
+index ch_astra_ausnahmetransportrouten
+{
+    type = plain
+    source = src_ch_astra_ausnahmetransportrouten
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ausnahmetransportrouten
+    docinfo = extern
+    charset_type = utf-8
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
+index ch_bav_kataster-belasteter-standorte-oev : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_astra_ausnahmetransportrouten
+    path = /var/lib/sphinxsearch/data/index/ch_bav_kataster-belasteter-standorte-oev
+}
+
+index ch_bfe_abgeltung-wasserkraftnutzung : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_abgeltung-wasserkraftnutzung
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_abgeltung-wasserkraftnutzung
+}
+
+index ch_bfe_energieforschung : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_energieforschung
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_energieforschung
+}
+
+index ch_bfe_statistik-wasserkraftanlagen : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_statistik-wasserkraftanlagen
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_statistik-wasserkraftanlagen
+}
+
+index ch_bfe_stauanlagen-bundesaufsicht : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_stauanlagen-bundesaufsicht
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_stauanlagen-bundesaufsicht
+}
+
+index ch_bfe_kleinwasserkraftpotentiale : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_kleinwasserkraftpotentiale
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_kleinwasserkraftpotentiale
+}
+
+index ch_bakom_mobil-antennenstandorte-gsm : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bakom_mobil-antennenstandorte-gsm
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_mobil-antennenstandorte-gsm
+}
+
+index ch_bakom_mobil-antennenstandorte-umts : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bakom_mobil-antennenstandorte-umts
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_mobil-antennenstandorte-umts
+}
+
+index ch_bakom_mobil-antennenstandorte-lte : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bakom_mobil-antennenstandorte-lte
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_mobil-antennenstandorte-lte
+}
+
+index ch_bazl_projektierungszonen-flughafenanlagen : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bazl_projektierungszonen-flughafenanlagen
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_projektierungszonen-flughafenanlagen
+}
+
+index ch_bazl_luftfahrthindernis : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bazl_luftfahrthindernis
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis
+}
+
+index ch_bfe_sachplan-geologie-tiefenlager_1 : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_sachplan-geologie-tiefenlager_1
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_1
+}
+
+index ch_bfe_sachplan-geologie-tiefenlager_2 : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_sachplan-geologie-tiefenlager_2
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_2
+}
+
+index ch_bfe_sachplan-geologie-tiefenlager_3 : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_sachplan-geologie-tiefenlager_3
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_3
+}
+
+index ch_bfe_sachplan-geologie-tiefenlager
+{
+    type = distributed
+    local = ch_bfe_sachplan-geologie-tiefenlager_1
+    local = ch_bfe_sachplan-geologie-tiefenlager_2
+    local = ch_bfe_sachplan-geologie-tiefenlager_3
+}
+
+index ch_bfe_sachplan-geologie-tiefenlager-thematische-darstellung
+{
+    type = distributed
+    local = ch_bfe_sachplan-geologie-tiefenlager_1
+    local = ch_bfe_sachplan-geologie-tiefenlager_2
+    local = ch_bfe_sachplan-geologie-tiefenlager_3
+}
+
+index ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_1 : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_1
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_1
+}
+
+index ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_2 : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_2
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_2
+}
+
+index ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_3 : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_3
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_3
+}
+
+index ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung
+{
+    type = distributed
+    local = ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_1
+    local = ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_2
+    local = ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_3
+}
+
+index ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_1 : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_1
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_1
+}
+
+index ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_2 : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_2
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_2
+}
+
+index ch_bazl_sachplan-infrastruktur-luftfahrt_kraft
+{
+    type = distributed
+    local = ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_1
+    local = ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_2
+}
+
+index ch_bakom_anbieter-eigenes_festnetz : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bakom_anbieter-eigenes_festnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_anbieter-eigenes_festnetz
+}
+
+index ch_bfe_kernkraftwerke : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bfe_kernkraftwerke
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_kernkraftwerke
+}
 
 ## SEARCHABLE
 
