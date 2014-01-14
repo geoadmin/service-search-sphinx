@@ -5,7 +5,7 @@
 #            section in config file)
 
 PROJECT_NAME=$1
-CODE_DIR=$2 # = dest = /tmp/sphinxsearch/data.tmp/
+CODE_DIR=$2 # = dest = /var/cache/deploy/sphinxsearch.data.tmp/
 
 BASEDIR=/var/lib/sphinxsearch/data
 PID=/var/run/sphinxsearch/searchd.pid
@@ -21,6 +21,9 @@ sudo -u sphinxsearch mkdir -p $BASEDIR/index.tmp
 
 echo "rsync data from temporary deploy folder $CODE_DIR to temporary sphinxsearch folder $BASEDIR/index.tmp/"
 sudo -u sphinxsearch rsync -q --update -avz $CODE_DIR $BASEDIR/index.tmp/
+
+echo "removing temporary deploy folder on deploy target /var/cache/deploy/sphinxsearch.data.tmp/ ..."
+rm -rf $CODE_DIR
 
 if [ -d "$BASEDIR/index.old/" ] 
 then
@@ -40,7 +43,7 @@ fi
 echo "backup index files to directory $BASEDIR/index.old ..."
 sudo -u sphinxsearch mv $BASEDIR/index $BASEDIR/index.old
 
-echo "move new index files from $BASEDIR/data.tmp to $BASEDIR/data ..."
+echo "move new index files from $BASEDIR/index.tmp to $BASEDIR/data ..."
 sudo -u sphinxsearch mv $BASEDIR/index.tmp $BASEDIR/index
 
 echo "replace sphinx config file ..."
@@ -69,9 +72,6 @@ sudo -u sphinxsearch /etc/init.d/sphinxsearch start
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "service offline time: $DIFF"
-
-echo "removing temporary deploy folder on deploy target /tmp/sphinxsearch ..."
-rm -rf /tmp/sphinxsearch
 
 sudo -u sphinxsearch /etc/init.d/sphinxsearch status
 
