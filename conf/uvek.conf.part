@@ -247,7 +247,7 @@ source src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_1 : def_queryable_f
 {
     sql_db = uvek
     sql_query = \
-        SELECT stabil_id as id \
+        SELECT bgdi_id as id \
             , 'feature' as origin \
             , 'ch.bazl.sachplan-infrastruktur-luftfahrt_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -263,7 +263,7 @@ source src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_2 : def_queryable_f
 {
     sql_db = uvek
     sql_query = \
-        SELECT stabil_id as id \
+        SELECT bgdi_id as id \
             , 'feature' as origin \
             , 'ch.bazl.sachplan-infrastruktur-luftfahrt_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -279,7 +279,7 @@ source src_ch_bazl_sachplan-infrastruktur-luftfahrt_anhorung_3 : def_queryable_f
 {
     sql_db = uvek
     sql_query = \
-        SELECT stabil_id as id \
+        SELECT bgdi_id as id \
             , 'feature' as origin \
             , 'ch.bazl.sachplan-infrastruktur-luftfahrt_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -295,7 +295,7 @@ source src_ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_1 : def_queryable_feat
 {
     sql_db = uvek
     sql_query = \
-        SELECT stabil_id as id \
+        SELECT bgdi_id as id \
             , 'feature' as origin \
             , 'ch.bazl.sachplan-infrastruktur-luftfahrt_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -311,7 +311,7 @@ source src_ch_bazl_sachplan-infrastruktur-luftfahrt_kraft_2 : def_queryable_feat
 {
     sql_db = uvek
     sql_query = \
-        SELECT stabil_id as id \
+        SELECT bgdi_id as id \
             , 'feature' as origin \
             , 'ch.bazl.sachplan-infrastruktur-luftfahrt_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \

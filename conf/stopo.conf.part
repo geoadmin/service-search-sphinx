@@ -1,5 +1,7 @@
 ## SOURCES
 
+
+
 ## QUERYABLE
 
 source src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata : def_queryable_features
@@ -518,7 +520,7 @@ source src_ch_swisstopo_hiks-dufour : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT tilenumber as id \
+        SELECT gid as id \
             , 'feature' as origin \
             , 'ch.swisstopo.hiks-dufour' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -601,7 +603,7 @@ source src_ch_swisstopo_pixelkarte-farbe-pk200_noscale : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT kbnum as id \
+        SELECT gid as id \
             , 'feature' as origin \
             , 'ch.swisstopo.pixelkarte-farbe-pk200.noscale' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -635,7 +637,7 @@ source src_ch_swisstopo_images-swissimage_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT tilenumber as id \
+        SELECT oid as id \
             , 'feature' as origin \
             , 'ch.swisstopo.images-swissimage.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
