@@ -355,6 +355,22 @@ source src_ch_bfe_kernkraftwerke : def_queryable_features
         FROM bfe.kernkraftwerke
 }
 
+source src_ch_bazl_sicherheitszonenplan : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bazl.sicherheitszonenplan' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , title::text as label \
+            , stabil_id::text as feature_id \
+        FROM bazl.sichereitszonen
+}
+
 ## SEARCHABLE
 
 source src_ch_astra_ivs-nat : def_searchable_features
@@ -648,6 +664,12 @@ index ch_bfe_kernkraftwerke : ch_astra_ausnahmetransportrouten
 {
     source = src_ch_bfe_kernkraftwerke
     path = /var/lib/sphinxsearch/data/index/ch_bfe_kernkraftwerke
+}
+
+index ch_bazl_sicherheitszonenplan : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_bazl_sicherheitszonenplan
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_sicherheitszonenplan
 }
 
 ## SEARCHABLE
