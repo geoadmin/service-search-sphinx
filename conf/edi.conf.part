@@ -104,7 +104,7 @@ source src_ch_bfs_arealstatistik-bodenbedeckung-1985 : def_queryable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , 'ch.bfs.arealstatistik-bodennutzung-1985' as layer \
+            , 'ch.bfs.arealstatistik-bodenbedeckung-1985' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -120,7 +120,7 @@ source src_ch_bfs_arealstatistik-bodenbedeckung : def_queryable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , 'ch.bfs.arealstatistik-bodennutzung' as layer \
+            , 'ch.bfs.arealstatistik-bodenbedeckung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
