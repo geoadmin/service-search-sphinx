@@ -1,4 +1,5 @@
 IPATTERN ?= 'Set IPATTERN variable in call'
+INDEX ?= 'Set INDEX variable to specify the index to create'
 FEATURES_INDICES := $(shell find /var/lib/sphinxsearch/data/index/ -type f -name 'ch_*spa' | sed 's:/var/lib/sphinxsearch/data/index/::' |  sed 's:.spa::')
 GREP_INDICES := $(shell grep "^index .*$(IPATTERN).* : " conf/sphinx.conf | sed 's:index ::' | sed 's: \: .*::')
 
@@ -22,6 +23,10 @@ help:
 	@echo "Deploy:"
 	@echo "- deploy-ab	Deploy all the indices in integration"
 	@echo "- deploy-prod	Deploy all the indices in production"
+
+.PHONY: index
+index: move-template
+	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each $(INDEX)
 
 .PHONY: index-all
 index-all: move-template
