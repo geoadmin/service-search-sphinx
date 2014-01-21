@@ -60,5 +60,5 @@ searchd
     dist_threads = 4
     read_timeout = 5
     max_children = 50
-    max_matches = 200
+    max_matches = 10000
 }
