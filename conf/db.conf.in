@@ -57,6 +57,7 @@ searchd
     query_log = /var/run/sphinxsearch/query.log
     pid_file = /var/run/sphinxsearch/searchd.pid
     ondisk_dict_default = 1
+    preopen_indexes = 0
     dist_threads = 4
     read_timeout = 5
     max_children = 50

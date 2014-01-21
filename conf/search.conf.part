@@ -160,6 +160,7 @@ index zipcode
     infix_fields = detail
     enable_star = 1
     ondisk_dict = 0
+    preopen = 1
 }
 
 index district : zipcode
