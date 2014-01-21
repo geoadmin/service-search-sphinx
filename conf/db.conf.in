@@ -58,6 +58,6 @@ searchd
     pid_file = /var/run/sphinxsearch/searchd.pid
     dist_threads = 4
     read_timeout = 5
-    max_children = 90
-    max_matches = 10000
+    max_children = 50
+    max_matches = 200
 }
