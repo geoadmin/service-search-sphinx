@@ -18,6 +18,15 @@ Staging    | URL
 **Prod:**  | http://service-sphinxsearch.prod.bgdi.ch  | 
 **Prod public:** |  http://search.geo.admin.ch |
 
+###Service Setup (update cycle)
+```bash
+$ make template
+$ sudo su sphinxsearch
+$ make move-template
+$ searchd --stop
+$ searchd
+```
+
 ###Service Details:
 **Port:**           9312
 
