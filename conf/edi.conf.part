@@ -6,10 +6,10 @@ source src_ch_bfs_arealstatistik : def_queryable_features
 {
     sql_db = edi
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bfs.arealstatistik' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
@@ -22,10 +22,10 @@ source src_ch_bfs_arealstatistik-1985 : def_queryable_features
 {
     sql_db = edi
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bfs.arealstatistik-1985' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
@@ -38,10 +38,10 @@ source src_ch_bfs_arealstatistik-1997 : def_queryable_features
 {
     sql_db = edi
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bfs.arealstatistik-1997' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
@@ -86,10 +86,10 @@ source src_ch_bfs_arealstatistik-bodenbedeckung-1997 : def_queryable_features
 {
     sql_db = edi
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bfs.arealstatistik-bodenbedeckung-1997' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
@@ -102,10 +102,10 @@ source src_ch_bfs_arealstatistik-bodenbedeckung-1985 : def_queryable_features
 {
     sql_db = edi
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bfs.arealstatistik-bodenbedeckung-1985' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
@@ -118,10 +118,10 @@ source src_ch_bfs_arealstatistik-bodenbedeckung : def_queryable_features
 {
     sql_db = edi
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bfs.arealstatistik-bodenbedeckung' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
