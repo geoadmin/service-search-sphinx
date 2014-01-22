@@ -144,6 +144,8 @@ index layers_de
     infix_fields = detail, layer, topics, staging
     source = src_layers_de
     path = /var/lib/sphinxsearch/data/index/layers_de
+    ondisk_dict = 0
+    preopen = 1
 }
 
 index layers_fr : layers_de

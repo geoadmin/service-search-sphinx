@@ -46,7 +46,7 @@ source def_queryable_features : def_pqsql
 
 indexer
 {
-    mem_limit = 512M
+    mem_limit = 1024M
     max_iosize = 1048576
 }
 
@@ -56,8 +56,10 @@ searchd
     log = /var/run/sphinxsearch/searchd.log
     query_log = /var/run/sphinxsearch/query.log
     pid_file = /var/run/sphinxsearch/searchd.pid
+    ondisk_dict_default = 1
+    preopen_indexes = 0
     dist_threads = 4
     read_timeout = 5
-    max_children = 90
+    max_children = 50
     max_matches = 10000
 }
