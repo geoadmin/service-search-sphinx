@@ -46,8 +46,7 @@ source def_queryable_features : def_pqsql
 
 indexer
 {
-    mem_limit = 1024M
-    max_iosize = 1048576
+
 }
 
 searchd
