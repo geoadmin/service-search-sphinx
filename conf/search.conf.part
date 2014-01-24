@@ -156,7 +156,7 @@ index zipcode
     type = plain
     docinfo = extern
     charset_type = utf-8
-    min_infix_len = 2
+    min_infix_len = 1
     infix_fields = detail
     enable_star = 1
     ondisk_dict = 0
