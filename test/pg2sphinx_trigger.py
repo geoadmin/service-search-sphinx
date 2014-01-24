@@ -167,7 +167,6 @@ if __name__ == '__main__':
         tmp_index = i.groupdict()['index'].split(':')
         index_parent = tmp_index[1] if len(tmp_index)>1 else None
         index = tmp_index[0]
-        #print "debug %s -> %s" % (index,str(index_parent))
         # step 2 extract sql_db and sql_query from curly braced content
         source = re.search('source\s=\s(.*)', i.groupdict()['content'])
         source = source.group(1) if source else None
@@ -219,7 +218,6 @@ if __name__ == '__main__':
         if resultat:
             sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (options.config,' '.join(resultat))
             print sphinx_command
-            sys.exit()
             #uncomment following lines for real update
             p = subprocess.Popen(sphinx_command,stdout=subprocess.PIPE,shell=True, env=myenv)
             for line in iter(p.stdout.readline, ''):
