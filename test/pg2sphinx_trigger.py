@@ -111,7 +111,7 @@ if __name__ == '__main__':
     conn = sqlite3.connect(":memory:")
     c = conn.cursor()
     c.execute("create table sources (id INTEGER PRIMARY KEY, source text, source_parent text, sql_db text, sql_query text, indexes text);")
-    c.execute("create table indexes (id INTEGER PRIMARY KEY, sphinx_index text, source text);")
+    c.execute("create table indexes (id INTEGER PRIMARY KEY, sphinx_index text, index_parent, source text);")
     # switch to sqlite3 dictionary mode
     c.row_factory = sqlite3.Row
 
@@ -165,27 +165,28 @@ if __name__ == '__main__':
 
     for i in reg_index.finditer(data):
         tmp_index = i.groupdict()['index'].split(':')
+        index_parent = tmp_index[1] if len(tmp_index)>1 else None
         index = tmp_index[0]
+        #print "debug %s -> %s" % (index,str(index_parent))
         # step 2 extract sql_db and sql_query from curly braced content
         source = re.search('source\s=\s(.*)', i.groupdict()['content'])
         source = source.group(1) if source else None
-        if source:
-            c.execute("INSERT INTO indexes (sphinx_index,source) VALUES(?, ?);" ,(unicode(index.strip(),'UTF-8'), source.strip()))
+        if not ( source is None and index_parent is None ):
+            c.execute("INSERT INTO indexes (sphinx_index, index_parent,source) VALUES(?, ?, ?);" ,(unicode(index.strip(),'UTF-8'), unicode(str(index_parent).strip()), source))
 
     # output
+
     sql = """
-    SELECT 
+    select
         a.source as source
         , coalesce(a.sql_db,b.sql_db) as database
         , a.sql_query as sql
         , group_concat(i.sphinx_index,' ') as sphinx_index
-    from sources a 
-    left join sources b on a.source_parent = b.source
-    left join indexes i on a.source = i.source
-    where length(a.sql_query) 
-    group by a.source,coalesce(a.sql_db,b.sql_db)
-    having  group_concat(i.sphinx_index,' ') > ''  
-    ;
+        FROM 
+        indexes i left join indexes p on trim(i.index_parent)=trim(p.sphinx_index)
+        left join sources a on coalesce(i.source,p.source) = a.source
+        left join sources b on a.source_parent = b.source
+        group by a.source,  coalesce(a.sql_db,b.sql_db)
     """
 
     resultat=[]
@@ -195,13 +196,15 @@ if __name__ == '__main__':
             # db only filter can be applied to sphinx config, no need to query postgres db
             if (options.filter==row['database']) or (options.filter == None):
                 if options.command=='list':
-                    resultat.append("%s -> %s" % (row['sphinx_index'],row['database'] ))
+                    for test in row['sphinx_index'].split(' '):
+                        resultat.append("%s -> %s" % (test,row['database'] ))
                 else:
                     resultat.append("%s" % (row['sphinx_index']))
         elif options.filter.split(".")[0]==row['database']:
             if options.filter in pg_get_tables(row['sql'],row['database']):
                 if options.command=='list':
-                    resultat.append("%s -> %s" % (row['sphinx_index'],pg_get_tables(row['sql'],row['database'] ) ))
+                    for test in row['sphinx_index'].split(' '):
+                        resultat.append("%s -> %s" % (test,pg_get_tables(row['sql'],row['database'] ) ))
                 else:
                     resultat.append("%s" % (row['sphinx_index']))
 
@@ -216,6 +219,7 @@ if __name__ == '__main__':
         if resultat:
             sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (options.config,' '.join(resultat))
             print sphinx_command
+            sys.exit()
             #uncomment following lines for real update
             p = subprocess.Popen(sphinx_command,stdout=subprocess.PIPE,shell=True, env=myenv)
             for line in iter(p.stdout.readline, ''):
