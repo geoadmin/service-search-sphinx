@@ -72,7 +72,7 @@ source src_ch_bafu_wasser-teileinzugsgebiete_40 : def_queryable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , 'ch.bafu.wasser-teileinzugsgebiete_2' as layer \
+            , 'ch.bafu.wasser-teileinzugsgebiete_40' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -408,7 +408,7 @@ source src_ch_bafu_swissprtr : def_queryable_features
     sql_query = \
         SELECT prtrnr as id \
             , 'feature' as origin \
-            , 'ch.bafu.fauna-steinbockkolonien' as layer \
+            , 'ch.bafu.swissprtr' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -818,7 +818,7 @@ source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_fe
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , nr::bigint as feature_id \
+            , bgdi_id::bigint as feature_id \
         from hydrologie.dbgz
 }
 
