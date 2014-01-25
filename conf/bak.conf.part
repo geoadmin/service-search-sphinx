@@ -22,7 +22,7 @@ source src_ch_bak_schutzgebiete-unesco_weltkulturerbe : def_queryable_features
 {
     sql_db = bak
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bak.schutzgebiete-unesco_weltkulturerbe' as layer \
             , quadindex(the_geom) as geom_quadindex \

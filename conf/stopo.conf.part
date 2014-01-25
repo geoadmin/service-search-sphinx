@@ -852,37 +852,37 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : def_queryable
         FROM geol.geotechnik_zementindustrie
 }
 
-#source src_ch_swisstopo_geologie-hydro_karte-grundwasser : def_queryable_features
-#{
-# sql_db = stopo
-# sql_query = \
-# SELECT bgdi_id as id \
-# , 'feature' as origin \
-# , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
-# , quadindex(the_geom) as geom_quadindex \
-# , y(st_transform(st_centroid(the_geom),4326)) as lat \
-# , x(st_transform(st_centroid(the_geom),4326)) as lon \
-# , st_box2d(the_geom) as geom_st_box2d \
-# , type_de::text as label \
-# , bgdi_id::text as feature_id \
-# FROM geol.grundwasservorkommen
-#}
-#
-#source src_ch_swisstopo_geologie-hydro_karte-grundvul : def_queryable_features
-#{
-# sql_db = stopo
-# sql_query = \
-# SELECT bgdi_id as id \
-# , 'feature' as origin \
-# , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservulnerabilitaet' as layer \
-# , quadindex(the_geom) as geom_quadindex \
-# , y(st_transform(st_centroid(the_geom),4326)) as lat \
-# , x(st_transform(st_centroid(the_geom),4326)) as lon \
-# , st_box2d(the_geom) as geom_st_box2d \
-# , type_de::text as label \
-# , bgdi_id::text as feature_id \
-# FROM geol.grundwasservorkommen_plg
-#}
+source src_ch_swisstopo_geologie-hydro_karte-grundwasservor : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , type_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.grundwasservorkommen
+}
+
+source src_ch_swisstopo_geologie-hydro_karte-grundwasservul : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservulnerabilitaet' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , type_de::text as label \
+            , bgdi_id::text as feature_id \
+    FROM geol.grundwasservorkommen_plg
+}
     
 source src_ch_swisstopo_geologie-geophysik-geothermie : def_queryable_features
 {
@@ -938,7 +938,7 @@ source src_ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura : def_quer
     sql_query = \
         SELECT gid as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.geologie-geophysik-inklination' as layer \
+            , 'ch.swisstopo.geologie-geophysik-aeromagnetische_karte_jura' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -1711,17 +1711,17 @@ index ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : ch_swisstopo_cadas
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1995
 }
 
-#index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen : ch_swisstopo_cadastralwebmap-farbe
-#{
-# source = src_ch_swisstopo_geologie-hydro_karte-grundwasser
-# path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen
-#}
-#
-#index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet : ch_swisstopo_cadastralwebmap-farbe
-#{
-# source = src_ch_swisstopo_geologie-hydro_karte-grundvul
-# path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet
-#}
+index ch_swisstopo_geologie-hydro_karte-grundwasservor : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-hydro_karte-grundwasservor
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydro_karte-grundwasservor
+}
+
+index ch_swisstopo_geologie-hydro_karte-grundwasservul : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-hydro_karte-grundwasservul
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydro_karte-grundwasservul
+}
 
 index ch_swisstopo_geologie-geophysik-geothermie : ch_swisstopo_cadastralwebmap-farbe
 {
