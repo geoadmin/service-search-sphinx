@@ -511,7 +511,7 @@ index ch_astra_ausnahmetransportrouten
 
 index ch_bav_kataster-belasteter-standorte-oev : ch_astra_ausnahmetransportrouten
 {
-    source = src_ch_astra_ausnahmetransportrouten
+    source = src_ch_bav_kataster-belasteter-standorte-oev
     path = /var/lib/sphinxsearch/data/index/ch_bav_kataster-belasteter-standorte-oev
 }
 
