@@ -22,7 +22,7 @@ source src_ch_ensi_zonenplan-notfallschutz-kernanlagen : def_queryable_features
 {
     sql_db = dritte
     sql_query = \
-        SELECT nr as id \
+        SELECT row_number() OVER(ORDER BY nr asc) as id \
             , 'feature' as origin \
             , 'ch.ensi.zonenplan-notfallschutz-kernanlagen' as layer \
             , quadindex(the_geom) as geom_quadindex \

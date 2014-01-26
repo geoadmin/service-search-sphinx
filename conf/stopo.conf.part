@@ -72,7 +72,7 @@ source src_ch_swisstopo_cadastralwebmap-farbe : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT gid as id \
+        SELECT row_number() OVER(ORDER BY gid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.cadastralwebmap-farbe' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -88,7 +88,7 @@ source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1 : def_query
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-transportation-oeffentliche-verkehr' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -104,7 +104,7 @@ source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2 : def_query
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-transportation-oeffentliche-verkehr' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -120,7 +120,7 @@ source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3 : def_query
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-transportation-oeffentliche-verkehr' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -152,7 +152,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_1 : def_queryable_fea
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -168,7 +168,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_2 : def_queryable_fea
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -184,7 +184,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_3 : def_queryable_fea
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -200,7 +200,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_4 : def_queryable_fea
 {
     sql_db = stopo
     sql_query = \
-         SELECT gtdboid as id \
+         SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
              , 'feature' as origin \
              , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
              , quadindex(the_geom) as geom_quadindex \
@@ -216,7 +216,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_5 : def_queryable_fea
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-transportation-strassennetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -232,7 +232,7 @@ source src_ch_swisstopo_vec200-adminboundaries-protectedarea : def_queryable_fea
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-adminboundaries-protectedarea' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -248,7 +248,7 @@ source src_ch_swisstopo_vec200-hydrography_1 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-hydrography' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -264,7 +264,7 @@ source src_ch_swisstopo_vec200-hydrography_2 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-hydrography' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -280,7 +280,7 @@ source src_ch_swisstopo_vec200-landcover : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-landcover' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -296,7 +296,7 @@ source src_ch_swisstopo_vec200-miscellaneous_1 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-         SELECT gtdboid as id \
+         SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-miscellaneous' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -312,7 +312,7 @@ source src_ch_swisstopo_vec200-miscellaneous_2 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-miscellaneous' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -328,7 +328,7 @@ source src_ch_swisstopo_vec200-miscellaneous_3 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-miscellaneous' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -344,7 +344,7 @@ source src_ch_swisstopo_vec200-names-namedlocation : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT gtdboid as id \
+        SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.vec200-names-namedlocation' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -520,7 +520,7 @@ source src_ch_swisstopo_hiks-dufour : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT gid as id \
+        SELECT row_number() OVER(ORDER BY tilenumber asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.hiks-dufour' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -536,7 +536,7 @@ source src_ch_swisstopo_hiks-siegfried : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT tilenumber as id \
+        SELECT row_number() OVER(ORDER BY tilenumber asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.hiks-siegfried' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -548,13 +548,13 @@ source src_ch_swisstopo_hiks-siegfried : def_queryable_features
         FROM datenstand.view_gridstand_datenhaltung_siegfried_erst
 }
 
-source src_ch_swisstopo_pixelkarte-farbe-pk25_noscale : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk25_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk25.noscale' as layer \
+            , 'ch.swisstopo.pixelkarte-pk25.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -563,15 +563,14 @@ source src_ch_swisstopo_pixelkarte-farbe-pk25_noscale : def_queryable_features
             , kbnum::text as feature_id \
         FROM datenstand.view_gridstand_datenhaltung_pk25_tilecache
 }
-## Identical source for ch.swisstopo.pixelkarte-pk25.metadata
 
-source src_ch_swisstopo_pixelkarte-farbe-pk50_noscale : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk50_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk50.noscale' as layer \
+            , 'ch.swisstopo.pixelkarte-pk50.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -580,15 +579,14 @@ source src_ch_swisstopo_pixelkarte-farbe-pk50_noscale : def_queryable_features
             , kbnum::text as feature_id \
         FROM datenstand.view_gridstand_datenhaltung_pk50_tilecache
 }
-## Identical source for ch.swisstopo.pixelkarte-pk50.metadata
 
-source src_ch_swisstopo_pixelkarte-farbe-pk100_noscale : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk100_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk100.noscale' as layer \
+            , 'ch.swisstopo.pixelkarte-pk100.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -597,15 +595,14 @@ source src_ch_swisstopo_pixelkarte-farbe-pk100_noscale : def_queryable_features
             , kbnum::text as feature_id \
         FROM datenstand.view_gridstand_datenhaltung_pk100_tilecache
 }
-## Identical source for ch.swisstopo.pixelkarte-pk100.metadata
 
-source src_ch_swisstopo_pixelkarte-farbe-pk200_noscale : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk200_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT gid as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk200.noscale' as layer \
+            , 'ch.swisstopo.pixelkarte-pk200.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -614,15 +611,14 @@ source src_ch_swisstopo_pixelkarte-farbe-pk200_noscale : def_queryable_features
             , kbnum::text as feature_id \
          FROM datenstand.view_gridstand_datenhaltung_pk200_tilecache
 }
-## Identical source for ch.swisstopo.pixelkarte-pk200.metadata
 
-source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk500_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk500.noscale' as layer \
+            , 'ch.swisstopo.pixelkarte-pk500.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -631,7 +627,6 @@ source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_queryable_features
             , kbnum::text as feature_id \
         FROM datenstand.view_gridstand_datenhaltung_pk500_tilecache
 }
-## Identical source for ch.swisstopo.pixelkarte-pk500.metadata
 
 source src_ch_swisstopo_images-swissimage_metadata : def_queryable_features
 {
@@ -685,7 +680,7 @@ source src_ch_swisstopo_geologie-geologische_karte_1 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT fid as id \
+        SELECT row_number() OVER(ORDER BY fid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-geologische_karte' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -701,7 +696,7 @@ source src_ch_swisstopo_geologie-geologische_karte_2 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT id as id \
+        SELECT row_number() OVER(ORDER BY id asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-geologische_karte' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -765,7 +760,7 @@ source src_ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : def_quer
 {
     sql_db = stopo
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-geotechnik-gk500-gesteinsklassierung' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -797,7 +792,7 @@ source src_ch_swisstopo_geologie-geotechnik-steinbrueche_1980 : def_queryable_fe
 {
     sql_db = stopo
     sql_query = \
-        SELECT id as id \
+        SELECT row_number() OVER(ORDER BY id asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-geotechnik-steinbrueche_1980' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -813,7 +808,7 @@ source src_ch_swisstopo_geologie-geotechnik-steinbrueche_1995 : def_queryable_fe
 {
     sql_db = stopo
     sql_query = \
-        SELECT id as id \
+        SELECT row_number() OVER(ORDER BY id asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-geotechnik-steinbrueche_1995' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -829,7 +824,7 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1965 : def_queryable
 {
     sql_db = stopo
     sql_query = \
-        SELECT id as id \
+        SELECT row_number() OVER(ORDER BY id asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-geotechnik-zementindustrie_1965' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -845,7 +840,7 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : def_queryable
 {
     sql_db = stopo
     sql_query = \
-        SELECT id as id \
+        SELECT row_number() OVER(ORDER BY id asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-geotechnik-zementindustrie_1995' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -857,37 +852,37 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : def_queryable
         FROM geol.geotechnik_zementindustrie
 }
 
-#source src_ch_swisstopo_geologie-hydro_karte-grundwasser : def_queryable_features
-#{
-# sql_db = stopo
-# sql_query = \
-# SELECT bgdi_id as id \
-# , 'feature' as origin \
-# , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
-# , quadindex(the_geom) as geom_quadindex \
-# , y(st_transform(st_centroid(the_geom),4326)) as lat \
-# , x(st_transform(st_centroid(the_geom),4326)) as lon \
-# , st_box2d(the_geom) as geom_st_box2d \
-# , type_de::text as label \
-# , bgdi_id::text as feature_id \
-# FROM geol.grundwasservorkommen
-#}
-#
-#source src_ch_swisstopo_geologie-hydro_karte-grundvul : def_queryable_features
-#{
-# sql_db = stopo
-# sql_query = \
-# SELECT bgdi_id as id \
-# , 'feature' as origin \
-# , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservulnerabilitaet' as layer \
-# , quadindex(the_geom) as geom_quadindex \
-# , y(st_transform(st_centroid(the_geom),4326)) as lat \
-# , x(st_transform(st_centroid(the_geom),4326)) as lon \
-# , st_box2d(the_geom) as geom_st_box2d \
-# , type_de::text as label \
-# , bgdi_id::text as feature_id \
-# FROM geol.grundwasservorkommen_plg
-#}
+source src_ch_swisstopo_geologie-hydro_karte-grundwasservor : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservorkommen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , type_de::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.grundwasservorkommen
+}
+
+source src_ch_swisstopo_geologie-hydro_karte-grundwasservul : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-hydrogeologische_karte-grundwasservulnerabilitaet' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , type_de::text as label \
+            , bgdi_id::text as feature_id \
+    FROM geol.grundwasservorkommen_plg
+}
     
 source src_ch_swisstopo_geologie-geophysik-geothermie : def_queryable_features
 {
@@ -943,7 +938,7 @@ source src_ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura : def_quer
     sql_query = \
         SELECT gid as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.geologie-geophysik-inklination' as layer \
+            , 'ch.swisstopo.geologie-geophysik-aeromagnetische_karte_jura' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -1005,15 +1000,15 @@ source src_ch_swisstopo_geologie-tektonische_karte_1 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT fid as id \
+        SELECT row_number() OVER(ORDER BY fid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-tektonische_karte' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , fid::text as label \
-            , type_de::text as feature_id \
+            , type_de::text as label \
+            , fid::text as feature_id \
         FROM geol.tektonische_karte_line
 }
 
@@ -1021,15 +1016,15 @@ source src_ch_swisstopo_geologie-tektonische_karte_2 : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT fid as id \
+        SELECT row_number() OVER(ORDER BY fid asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.geologie-tektonische_karte' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , fid::text as label \
-            , type_de::text as feature_id \
+            , type_de::text as label \
+            , fid::text as feature_id \
         FROM geol.tektonische_karte_flaechen
 }
     
@@ -1037,7 +1032,7 @@ source src_ch_swisstopo_swisstlm3d-wanderwege : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
-        SELECT nr as id \
+        SELECT row_number() OVER(ORDER BY nr asc) as id \
             , 'feature' as origin \
             , 'ch.swisstopo.swisstlm3d-wanderwege' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -1184,7 +1179,7 @@ source src_ch_swisstopo_geologie-geotope_1 : def_queryable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , 'ch.swisstop.geologie-geotope' as layer \
+            , 'ch.swisstopo.geologie-geotope' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -1200,7 +1195,7 @@ source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , 'ch.swisstop.geologie-geotope' as layer \
+            , 'ch.swisstopo.geologie-geotope' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -1216,7 +1211,7 @@ source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_fe
 {
     sql_db = stopo
     sql_query = \
-        SELECT id::bigint as id \
+        SELECT row_number() OVER(ORDER BY id asc) as id \
             , name_ads as label \
             , 'feature' as origin \
             , remove_accents(name_ads) as detail \
@@ -1233,7 +1228,7 @@ source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchabl
 {
     sql_db = stopo
     sql_query = \
-        SELECT id::bigint as id \
+        SELECT row_number() OVER(ORDER BY id asc) as id \
             , name_ads as label \
             , 'feature' as origin \
             , remove_accents(name_ads) as detail \
@@ -1250,7 +1245,7 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
 {
    sql_db = stopo
    sql_query = \
-      SELECT id::bigint as id \
+      SELECT row_number() OVER(ORDER BY id asc) as id \
           , name as label \
           , 'feature' as origin \
           , remove_accents(name) as detail \
@@ -1267,7 +1262,7 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
 {
    sql_db = stopo
    sql_query = \
-      SELECT id::bigint as id \
+      SELECT row_number() OVER(ORDER BY id asc) as id \
           , name as label \
           , 'feature' as origin \
           , remove_accents(name) as detail \
@@ -1284,7 +1279,7 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
 {
    sql_db = stopo
    sql_query = \
-      SELECT id::bigint as id \
+      SELECT row_number() OVER(ORDER BY id asc) as id \
           , name_ads as label \
           , 'feature' as origin \
           , remove_accents(name_ads) as detail \
@@ -1301,7 +1296,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_fea
 {
    sql_db = stopo
    sql_query = \
-      SELECT id::bigint as id \
+      SELECT row_number() OVER(ORDER BY id asc) as id \
           , ziegelei_2 as label \
           , 'feature' as origin \
           , remove_accents(ziegelei_2) as detail \
@@ -1318,7 +1313,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_fea
 {
    sql_db = stopo
    sql_query = \
-      SELECT id::bigint as id \
+      SELECT row_number() OVER(ORDER BY id asc) as id \
           , ziegelei as label \
           , 'feature' as origin \
           , remove_accents(ziegelei) as detail \
@@ -1335,7 +1330,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_fea
 {
    sql_db = stopo
    sql_query = \
-      SELECT id::bigint as id \
+      SELECT row_number() OVER(ORDER BY id asc) as id \
           , ziegeleien as label \
           , 'feature' as origin \
           , remove_accents(ziegeleien) as detail \
@@ -1595,34 +1590,34 @@ index ch_swisstopo_hiks-siegfried : ch_swisstopo_cadastralwebmap-farbe
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-siegfried
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk25_noscale : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk25_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk25_noscale
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk25_noscale
+    source = src_ch_swisstopo_pixelkarte-pk25_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk25_metadata
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk50_noscale : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk50_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk50_noscale
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk50_noscale
+    source = src_ch_swisstopo_pixelkarte-pk50_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk50_metadata
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk100_noscale : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk100_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk100_noscale
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk100_noscale
+    source = src_ch_swisstopo_pixelkarte-pk100_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk100_metadata
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk200_noscale : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk200_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk200_noscale
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk200_noscale
+    source = src_ch_swisstopo_pixelkarte-pk200_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk200_metadata
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk500_noscale : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk500_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk500_noscale
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk500_noscale
+    source = src_ch_swisstopo_pixelkarte-pk500_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk500_metadata
 }
 
 index ch_swisstopo_images-swissimage_metadata : ch_swisstopo_cadastralwebmap-farbe
@@ -1716,17 +1711,17 @@ index ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : ch_swisstopo_cadas
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1995
 }
 
-#index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen : ch_swisstopo_cadastralwebmap-farbe
-#{
-# source = src_ch_swisstopo_geologie-hydro_karte-grundwasser
-# path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkommen
-#}
-#
-#index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet : ch_swisstopo_cadastralwebmap-farbe
-#{
-# source = src_ch_swisstopo_geologie-hydro_karte-grundvul
-# path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnerabilitaet
-#}
+index ch_swisstopo_geologie-hydro_karte-grundwasservor : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-hydro_karte-grundwasservor
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydro_karte-grundwasservor
+}
+
+index ch_swisstopo_geologie-hydro_karte-grundwasservul : ch_swisstopo_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-hydro_karte-grundwasservul
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydro_karte-grundwasservul
+}
 
 index ch_swisstopo_geologie-geophysik-geothermie : ch_swisstopo_cadastralwebmap-farbe
 {

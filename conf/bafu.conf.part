@@ -54,7 +54,7 @@ source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.wasser-teileinzugsgebiete_2' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -70,9 +70,9 @@ source src_ch_bafu_wasser-teileinzugsgebiete_40 : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
-            , 'ch.bafu.wasser-teileinzugsgebiete_2' as layer \
+            , 'ch.bafu.wasser-teileinzugsgebiete_40' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -102,7 +102,7 @@ source src_ch_bafu_wasser-gebietsauslaesse : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.wasser-gebietsauslaesse' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -246,7 +246,7 @@ source src_ch_bafu_wasser-entnahme_4 : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT gid as id \
+        SELECT row_number() OVER(ORDER BY gid asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.wasser-entnahme' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -262,7 +262,7 @@ source src_ch_bafu_wasser-leitungen : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT gid as id \
+        SELECT row_number() OVER(ORDER BY gid asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.wasser-leitungen' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -278,7 +278,7 @@ source src_ch_bafu_wasser-rueckgabe : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT gid as id \
+        SELECT row_number() OVER(ORDER BY gid asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.wasser-rueckgabe' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -342,7 +342,7 @@ source src_ch_bafu_schutzgebiete-ramsar : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT gid as id \
+        SELECT row_number() OVER(ORDER BY gid asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.schutzgebiete-ramsar' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -390,7 +390,7 @@ source src_ch_bafu_fauna-steinbockkolonien : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT gid as id \
+        SELECT row_number() OVER(ORDER BY gid asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.fauna-steinbockkolonien' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -408,7 +408,7 @@ source src_ch_bafu_swissprtr : def_queryable_features
     sql_query = \
         SELECT prtrnr as id \
             , 'feature' as origin \
-            , 'ch.bafu.fauna-steinbockkolonien' as layer \
+            , 'ch.bafu.swissprtr' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -486,7 +486,7 @@ source src_ch_bafu_fischerei-krebspest : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT _count as id \
+        SELECT row_number() OVER(ORDER BY _count asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.fischerei-krebspest' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -518,7 +518,7 @@ source src_ch_bafu_schutzgebiete-smaragd : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT id as id \
+        SELECT row_number() OVER(ORDER BY id asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.schutzgebiete-smaragd' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -646,7 +646,7 @@ source src_ch_bafu_gefahren-spektral : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT _count as id \
+        SELECT row_number() OVER(ORDER BY _count asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.gefahren-spektral' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -662,7 +662,7 @@ source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden : def_queryable_f
 {
     sql_db = bafu
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -710,7 +710,7 @@ source src_ch_bafu_gefahren-baugrundklassen : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT _count as id \
+        SELECT row_number() OVER(ORDER BY _count asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.gefahren-baugrundklassen' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -774,7 +774,7 @@ source src_ch_bafu_fauna-wildtierkorridor_national : def_queryable_features
 {
     sql_db = bafu
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , 'feature' as origin \
             , 'ch.bafu.fauna-wildtierkorridor_national' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -818,7 +818,7 @@ source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_fe
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , nr::bigint as feature_id \
+            , bgdi_id::bigint as feature_id \
         from hydrologie.dbgz
 }
 
