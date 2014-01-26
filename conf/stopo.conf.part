@@ -1179,7 +1179,7 @@ source src_ch_swisstopo_geologie-geotope_1 : def_queryable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , 'ch.swisstop.geologie-geotope' as layer \
+            , 'ch.swisstopo.geologie-geotope' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -1195,7 +1195,7 @@ source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , 'ch.swisstop.geologie-geotope' as layer \
+            , 'ch.swisstopo.geologie-geotope' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
