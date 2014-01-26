@@ -6,7 +6,7 @@ source src_ch_swisstopo_lubis-luftbilder : def_searchable_features_with_year
 {
     sql_db = lubis
     sql_query = \
-        SELECT oid as id \
+        SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
             , 'feature' as origin \
             , ebkey as detail \
@@ -24,7 +24,7 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-kantone : def_searchable_feature
 {
     sql_db = lubis
     sql_query = \
-        SELECT oid as id \
+        SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
             , 'feature' as origin \
             , ebkey as detail \
@@ -42,7 +42,7 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-firmen : def_searchable_features
 {
     sql_db = lubis
     sql_query = \
-        SELECT oid as id \
+        SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
             , 'feature' as origin \
             , ebkey as detail \
