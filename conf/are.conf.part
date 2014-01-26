@@ -82,13 +82,13 @@ source src_ch_are_bevoelkerungsdichte-vz00 : def_queryable_features
         FROM siedlung_landschaft.bevoelkerungsdichte_vz00
 }
 
-source src_ch_are_beschaeftigtendichte-bz9 : def_queryable_features
+source src_ch_are_beschaeftigtendichte-bz08 : def_queryable_features
 {
     sql_db = are
     sql_query = \
         SELECT row_id as id \
             , 'feature' as origin \
-            , 'ch.are.beschaeftigtendichte-bz9' as layer \
+            , 'ch.are.beschaeftigtendichte-bz08' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -202,10 +202,10 @@ index ch_are_bevoelkerungsdichte-vz00 : ch_are_landschaftstypen
     path = /var/lib/sphinxsearch/data/index/ch_are_bevoelkerungsdichte-vz00
 }
 
-index ch_are_beschaeftigtendichte-bz9 : ch_are_landschaftstypen
+index ch_are_beschaeftigtendichte-bz08 : ch_are_landschaftstypen
 {
-    source = src_ch_are_beschaeftigtendichte-bz9
-    path = /var/lib/sphinxsearch/data/index/ch_are_beschaeftigtendichte-bz9
+    source = src_ch_are_beschaeftigtendichte-bz08
+    path = /var/lib/sphinxsearch/data/index/ch_are_beschaeftigtendichte-bz08
 }
 
 index ch_are_bauzonen-2007 : ch_are_landschaftstypen
