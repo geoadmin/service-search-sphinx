@@ -548,13 +548,13 @@ source src_ch_swisstopo_hiks-siegfried : def_queryable_features
         FROM datenstand.view_gridstand_datenhaltung_siegfried_erst
 }
 
-source src_ch_swisstopo_pixelkarte-farbe-pk25_metadata : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk25_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk25.metadata' as layer \
+            , 'ch.swisstopo.pixelkarte-pk25.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -564,13 +564,13 @@ source src_ch_swisstopo_pixelkarte-farbe-pk25_metadata : def_queryable_features
         FROM datenstand.view_gridstand_datenhaltung_pk25_tilecache
 }
 
-source src_ch_swisstopo_pixelkarte-farbe-pk50_metadata : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk50_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk50.metadata' as layer \
+            , 'ch.swisstopo.pixelkarte-pk50.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -580,13 +580,13 @@ source src_ch_swisstopo_pixelkarte-farbe-pk50_metadata : def_queryable_features
         FROM datenstand.view_gridstand_datenhaltung_pk50_tilecache
 }
 
-source src_ch_swisstopo_pixelkarte-farbe-pk100_metadata : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk100_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk100.metadata' as layer \
+            , 'ch.swisstopo.pixelkarte-pk100.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -596,13 +596,13 @@ source src_ch_swisstopo_pixelkarte-farbe-pk100_metadata : def_queryable_features
         FROM datenstand.view_gridstand_datenhaltung_pk100_tilecache
 }
 
-source src_ch_swisstopo_pixelkarte-farbe-pk200_metadata : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk200_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT gid as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk200.metadata' as layer \
+            , 'ch.swisstopo.pixelkarte-pk200.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -612,13 +612,13 @@ source src_ch_swisstopo_pixelkarte-farbe-pk200_metadata : def_queryable_features
          FROM datenstand.view_gridstand_datenhaltung_pk200_tilecache
 }
 
-source src_ch_swisstopo_pixelkarte-farbe-pk500_metadata : def_queryable_features
+source src_ch_swisstopo_pixelkarte-pk500_metadata : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT kbnum as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.pixelkarte-farbe-pk500.metadata' as layer \
+            , 'ch.swisstopo.pixelkarte-pk500.metadata' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -1590,34 +1590,34 @@ index ch_swisstopo_hiks-siegfried : ch_swisstopo_cadastralwebmap-farbe
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-siegfried
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk25_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk25_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk25_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk25_metadata
+    source = src_ch_swisstopo_pixelkarte-pk25_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk25_metadata
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk50_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk50_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk50_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk50_metadata
+    source = src_ch_swisstopo_pixelkarte-pk50_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk50_metadata
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk100_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk100_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk100_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk100_metadata
+    source = src_ch_swisstopo_pixelkarte-pk100_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk100_metadata
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk200_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk200_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk200_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk200_metadata
+    source = src_ch_swisstopo_pixelkarte-pk200_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk200_metadata
 }
 
-index ch_swisstopo_pixelkarte-farbe-pk500_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk500_metadata : ch_swisstopo_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_pixelkarte-farbe-pk500_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk500_metadata
+    source = src_ch_swisstopo_pixelkarte-pk500_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk500_metadata
 }
 
 index ch_swisstopo_images-swissimage_metadata : ch_swisstopo_cadastralwebmap-farbe
