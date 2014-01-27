@@ -89,6 +89,9 @@ END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "service offline time: $DIFF"
 
+echo "removing temporary deploy folder on deploy target /var/cache/deploy/sphinxsearch.data.tmp/ ..."
+rm -rf $CODE_DIR
+
 sudo -u sphinxsearch /etc/init.d/sphinxsearch status
 
 exit 0

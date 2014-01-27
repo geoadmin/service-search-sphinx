@@ -22,8 +22,10 @@ help:
 	@echo "- template	Create sphinx config file from template"
 	@echo
 	@echo "Deploy:"
-	@echo "- deploy-ab	Deploy all the indices in integration"
-	@echo "- deploy-prod	Deploy all the indices in production"
+	@echo "- deploy-ab				Deploy all the indices in integration"
+	@echo "- deploy-prod			Deploy all the indices in production"
+	@echo "- deploy-ab-config		Deploy the sphinx config only in integration, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated "
+	@echo "- deploy-prod-config		Deploy the sphinx config only in production, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated "
 
 .PHONY: test-grep
 test-grep:
@@ -66,8 +68,25 @@ deploy-ab:
 deploy-prod:
 	sudo -u deploy deploy  -r deploy/deploy.cfg prod
 
+.PHONY: deploy-ab-config
+deploy-ab-config:
+ifeq ($(db),)
+		cd deploy && bash deploy-conf-only.sh -t ab
+else
+		cd deploy && bash deploy-conf-only.sh -t ab -d $(db)
+endif
+
+.PHONY: deploy-prod-config
+deploy-prod-config:
+ifeq ($(db),"")
+		cd deploy && bash deploy-conf-only.sh -t prod
+else
+		cd deploy && bash deploy-conf-only.sh -t prod -d $(db)
+endif
+
 .PHONY: move-template
 move-template:
 	cp conf/sphinx.conf /var/lib/sphinxsearch/data/index/sphinx.conf
-	cp test/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
 	cp conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
+	cp test/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
+	cp test/pg2sphinx_trigger.py /etc/sphinxsearch/pg2phinx_trigger.py

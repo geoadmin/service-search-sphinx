@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# variables set here:
+#   $TARGET: name of the symbolic remote host key (see remote_hosts 
+#            section in config file)
+
+PROJECT_NAME=$1
+CODE_DIR=$2 # = dest = /var/cache/deploy/sphinxsearch.data.tmp/
+SPHINXINDEX=/var/lib/sphinxsearch/data/index/
+PID=/var/run/sphinxsearch/searchd.pid
+
+echo "create index directory $SPHINXINDEX if it does not yet exists..."
+sudo -u sphinxsearch mkdir -p $SPHINXINDEX
+
+echo "copy files ..."
+cp $CODE_DIR/sphinx.conf /etc/sphinxsearch/
+cp $CODE_DIR/*.py /etc/sphinxsearch/
+sudo -u sphinxsearch rsync --update -qavz $CODE_DIR $SPHINXINDEX
+
+DBHOST=$DBHOST_DEFAULT
+# TARGET -> integration
+if [[ $TARGET == *ab* ]]
+then
+  DBHOST=$DBHOST_INT;
+fi
+
+# TARGET -> production
+if [[ $TARGET == *prod* ]]
+then
+  DBHOST=$DBHOST_PROD
+fi
+
+echo "replace db host with $DBHOST ..."
+sed -i "s/pgcluster0t.bgdi.admin.ch/$DBHOST/g" /etc/sphinxsearch/sphinx.conf
+
+if [ ! -z "$DBPATTERN" ]
+then
+    echo "updating sphinx indexes, using database pattern: $DBPATTERN"
+    if [ "$DBPATTERN" == "all" ]
+    then
+        sudo -u sphinxsearch python -u $PGTRIGGER -c update 
+    else
+        sudo -u sphinxsearch python -u $PGTRIGGER -d $DBPATTERN -c update    
+    fi
+else
+    echo "no sphinx indexes will be updated ..."
+fi
+
+echo "restarting sphinx service, precaching indexes ..."
+sudo -u sphinxsearch /etc/init.d/sphinxsearch restart | grep -i "WARNING"
+
+echo "removing temporary deploy folder on deploy target /var/cache/deploy/sphinxsearch.data.tmp/ ..."
+rm -rf $CODE_DIR
+
+sudo -u sphinxsearch /etc/init.d/sphinxsearch status
+
+exit 0
