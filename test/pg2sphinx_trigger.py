@@ -1,29 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# read sphinx config file and update all indexes related to input database or input table
-
-# parameter
-# -db:      (optional)      database filter:
-#                           p.e. 
-#                           -db are all sphinx indexes from database x
-#                           -db are.siedlung_landschaft all sphinx indexes from schema x in database y
-#                           -db are.siedlung_landschaft.landschaftstypen all indexes from table x
-#                           if parameter is missing, all the sphinx indexes are listed or updated!!
-#
-# -list:    (default)       list sphinx indexes, nothing happens with the existing indexes
-# -update:                  update sphinx indexes
-#                           the indexes are updated with the sphinx indexer using the following command:
-#                           indexer --verbose --sighup-each --rotate <<index>>
-#
-# Examples:
-#   1) list all indexes which are based on database stopo
-#   $ python pg2sphinx_trigger.py -db stopo -list
-#
-#   2) update all indexes which are based on database search
-#   $ python pg2sphinx_trigger.py -db search -update
-#
-#
+# read sphinx config file and update all indexes related to input database or input table or index pattern
 
 import os
 import sys
@@ -72,6 +50,8 @@ if __name__ == '__main__':
     ################################
 
     epilog = """Examples:
+    Indexes can be filtered by database pattern (-d) or by index pattern (-i)
+
     1) list all indexes which are based on database stopo:
     python pg2sphinx_trigger.py -d stopo -c list
 
@@ -86,11 +66,15 @@ if __name__ == '__main__':
 
     5) update all the indexes using a custom config file:
     python pg2sphinx_trigger.py -c update -s /path/to/my/sphinx.conf
+
+    6) list all indexes with the prefix pattern ch_swisstopo_vec25
+    python pg2sphinx_trigger.py -c list -i ch_swisstopo_vec25
     \n"""
 
     OptionParser.format_epilog = lambda self, formatter: self.epilog
     parser = OptionParser(epilog=epilog)
-    parser.add_option("-d","--database_filter", dest="filter", default=None, action="store", help="Database Filter: optional database praefix")
+    parser.add_option("-d","--database_filter", dest="database_filter", default=None, action="store", help="Database Filter: optional database praefix")
+    parser.add_option("-i","--index_filter", dest="index_filter", default=None, action="store", help="Index Filter: optional index praefix")
     parser.add_option("-c","--command", dest="command", default=str('list'), action="store", help="-c list: will list all the indexes touched by the database filter\n-c update will update all the indexes touched by the database filter.")
     parser.add_option("-s","--sphinxconf", dest="config", default=SPHINXCONFIG, action="store", help="-s /path/to/sphinx/sphinx.conf")
     (options, args) = parser.parse_args()
@@ -106,6 +90,17 @@ if __name__ == '__main__':
     if options.command not in ['list','update']:
         parser.print_help()
         sys.exit( 1 )
+
+    # choose -d or -i
+    if options.database_filter and options.index_filter:
+        parser.print_help()
+        sys.exit( 1 )
+
+    if options.database_filter:
+        filter_option='database'
+        
+    if options.index_filter:
+        filter_option='index'
 
     # SQLITE Initialize and create tables in memory    
     conn = sqlite3.connect(":memory:")
@@ -191,29 +186,34 @@ if __name__ == '__main__':
     resultat=[]
     for row in c.execute(sql):
         # db only filter can be applied to sphinx config, no need to query postgres db
-        if (options.filter and options.filter.count('.')==0) or (options.filter == None):
-            # db only filter can be applied to sphinx config, no need to query postgres db
-            if (options.filter==row['database']) or (options.filter == None):
-                if options.command=='list':
-                    for test in row['sphinx_index'].split(' '):
-                        resultat.append("%s -> %s" % (test,row['database'] ))
-                else:
-                    resultat.append("%s" % (row['sphinx_index']))
-        elif options.filter.split(".")[0]==row['database']:
-            if options.filter in pg_get_tables(row['sql'],row['database']):
-                if options.command=='list':
-                    for test in row['sphinx_index'].split(' '):
-                        resultat.append("%s -> %s" % (test,pg_get_tables(row['sql'],row['database'] ) ))
-                else:
-                    resultat.append("%s" % (row['sphinx_index']))
+        # database filter
+        if (options.index_filter == None):
+            if (options.database_filter and options.database_filter.count('.')==0) or (options.database_filter == None):
+                # db only filter can be applied to sphinx config, no need to query postgres db
+                if (options.database_filter==row['database']) or (options.database_filter == None):
+                    if options.command=='list':
+                        for test in row['sphinx_index'].split(' '):
+                            resultat.append("%s -> %s" % (test,row['database'] ))
+                    else:
+                        resultat.append("%s" % (row['sphinx_index']))
+            elif options.database_filter.split(".")[0]==row['database']:
+                if options.database_filter in pg_get_tables(row['sql'],row['database']):
+                    if options.command=='list':
+                        for test in row['sphinx_index'].split(' '):
+                            resultat.append("%s -> %s" % (test,pg_get_tables(row['sql'],row['database'] ) ))
+                    else:
+                        resultat.append("%s" % (row['sphinx_index']))
+        else:            
+            if (row['sphinx_index'].startswith(options.index_filter)):
+                resultat.append("%s" % (row['sphinx_index']))
 
     resultat = sorted(list(set(resultat))) # get rid of duplicate entries in the list and sorting   
     indent="\n      "     
     if options.command == 'list':
         if resultat:
-            print "%s indexes are using the database pattern: %s%s%s" % (len(resultat), options.filter,indent,indent.join(resultat))
+            print "%s indexes are using the %s pattern: %s%s%s" % (len(resultat), filter_option, options.database_filter or options.index_filter,indent,indent.join(resultat))
         else:
-            print "no indexes are using the database pattern: %s" % (options.filter)
+            print "no indexes are using the %s pattern: %s" % (filter_option, options.database_filter or options.index_filter)
     elif options.command == 'update':
         if resultat:
             sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (options.config,' '.join(resultat))
@@ -225,7 +225,7 @@ if __name__ == '__main__':
             p.stdout.close()
             
         else:
-            print 'no sphinx indexes are using the database pattern %s.' % (options.filter)
+            print 'no sphinx indexes are using the %s pattern %s.' % (filter_option, options.database_filter or options.index_filter)
 
 #
 # $Id$
