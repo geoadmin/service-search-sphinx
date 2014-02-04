@@ -130,6 +130,54 @@ source src_ch_bfs_arealstatistik-bodenbedeckung : def_queryable_features
         FROM bfs.arealstatistik_nolc_2009
 }
 
+source src_ch_bfs_arealstatistik-bodennutzung : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bfs.arealstatistik-bodennutzung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , fj09::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bfs.arealstatistik_nolu_2009
+}
+
+source src_ch_bfs_arealstatistik-bodennutzung-1997 : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bfs.arealstatistik-bodennutzung-1997' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , fj97::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bfs.arealstatistik_nolu_1997
+}
+
+source src_ch_bfs_arealstatistik-bodennutzung-1985 : def_queryable_features
+{
+    sql_db = edi
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bfs.arealstatistik-bodennutzung-1985' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , fj85::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bfs.arealstatistik_nolu_1985
+}
+
 ## INDICES
 
 ## QUERYBALE
@@ -188,3 +236,22 @@ index ch_bfs_arealstatistik-bodenbedeckung : ch_bfs_arealstatistik
     source = src_ch_bfs_arealstatistik-bodenbedeckung
     path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodenbedeckung
 }
+
+index ch_bfs_arealstatistik-bodennutzung : ch_bfs_arealstatistik
+{
+    source = src_ch_bfs_arealstatistik-bodennutzung
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung
+}
+
+index ch_bfs_arealstatistik-bodennutzung-1997 : ch_bfs_arealstatistik
+{
+    source = src_ch_bfs_arealstatistik-bodennutzung-1997
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung-1997
+}
+
+index ch_bfs_arealstatistik-bodennutzung-1985 : ch_bfs_arealstatistik
+{
+    source = src_ch_bfs_arealstatistik-bodennutzung-1985
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung-1985
+}
+
