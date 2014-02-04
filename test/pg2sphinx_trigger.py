@@ -73,9 +73,9 @@ if __name__ == '__main__':
 
     OptionParser.format_epilog = lambda self, formatter: self.epilog
     parser = OptionParser(epilog=epilog)
-    parser.add_option("-d","--database_filter", dest="database_filter", default=None, action="store", help="Database Filter: optional database praefix")
-    parser.add_option("-i","--index_filter", dest="index_filter", default=None, action="store", help="Index Filter: optional index praefix")
-    parser.add_option("-c","--command", dest="command", default=str('list'), action="store", help="-c list: will list all the indexes touched by the database filter\n-c update will update all the indexes touched by the database filter.")
+    parser.add_option("-d","--database_filter", dest="database_filter", default=None, action="store", help="Database Filter: optional database prefix")
+    parser.add_option("-i","--index_filter", dest="index_filter", default=None, action="store", help="Index Filter: optional index prefix")
+    parser.add_option("-c","--command", dest="command", default="list", action="store", help="-c list: will list all the indexes touched by the database filter\n-c update: will update all the indexes touched by the database filter.")
     parser.add_option("-s","--sphinxconf", dest="config", default=SPHINXCONFIG, action="store", help="-s /path/to/sphinx/sphinx.conf")
     (options, args) = parser.parse_args()
 
@@ -84,7 +84,7 @@ if __name__ == '__main__':
         sys.exit("ERROR: Script has to be executed with user %s, you are executing the script with %s"  % (USER,getpass.getuser()) )
 
     if not os.path.isfile(options.config):
-        sys.exit("ERROR: Sphinx Config could not be opened: %s" % options.config)
+        sys.exit("ERROR: Sphinx config file doesn't exist: %s" % options.config)
 
     # -c --command
     if options.command not in ['list','update']:
@@ -96,6 +96,7 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit( 1 )
 
+    filter_option = ""
     if options.database_filter:
         filter_option='database'
         
@@ -105,8 +106,26 @@ if __name__ == '__main__':
     # SQLITE Initialize and create tables in memory    
     conn = sqlite3.connect(":memory:")
     c = conn.cursor()
-    c.execute("create table sources (id INTEGER PRIMARY KEY, source text, source_parent text, sql_db text, sql_query text, indexes text);")
-    c.execute("create table indexes (id INTEGER PRIMARY KEY, sphinx_index text, index_parent, source text);")
+    c.execute("""
+                create table sources (
+                    id INTEGER PRIMARY KEY
+                    , source text
+                    , source_parent text
+                    , sql_db text
+                    , sql_query text
+                    , indexes 
+                    text
+                    );
+                    """)
+
+    c.execute("""
+                create table indexes (
+                    id INTEGER PRIMARY KEY
+                    , sphinx_index text
+                    , index_parent
+                    , source text
+                    );
+                    """)
     # switch to sqlite3 dictionary mode
     c.row_factory = sqlite3.Row
 
@@ -120,7 +139,6 @@ if __name__ == '__main__':
     CONN_PWD=re.findall('sql_pass\s=\s(.*)', data)[0]
     CONN_PORT=re.findall('sql_port\s=\s(.*)', data)[0]
 
-
     # parse sphinx config sources and write them to sqlite sources table ...
     # TODO: 
     # regex which can extract source, sql_db and sql_query in one step
@@ -131,20 +149,29 @@ if __name__ == '__main__':
             (?P<source>[^\n]+)                  # catch source group
             .*?                                 # Next part:
             (?P<content> (?<={)[^}]*(?=}))      # catch everything but curly braces
-        ''', re.MULTILINE | re.DOTALL | re.VERBOSE)
+        ''', re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE )
 
+    # Parent : Child1  -> ('Parent', 'Child1')
+    # Parent2: Child2  -> ('Parent2', 'Child2')
+    # Parent           -> ('Parent', None)
+    parsing_func = lambda x: [p.strip() for p in x.split(':')] if ':' in x else (x.strip(), None)
     for i in reg_source.finditer(data):
-        tmp_source = i.groupdict()['source'].split(':')
-        source_parent = tmp_source[1] if len(tmp_source)>1 else None
-        source = tmp_source[0]
+        source, source_parent = parsing_func(i.groupdict()['source'])
         # step 2 extract sql_db and sql_query from curly braced content
         sql_db = re.search('sql_db\s=\s([\w]+)', i.groupdict()['content'])
         sql_db = sql_db.group(1) if sql_db else None
 
-        sql_query = re.findall('^\s+sql_query\s=(.*)$', i.groupdict()['content'], re.MULTILINE | re.DOTALL | re.VERBOSE)
+        sql_query = re.findall('^\s+sql_query\s=(.*)$', i.groupdict()['content'], re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
         sql_query = sql_query[0].replace('\\','').replace('\n', '').strip() if sql_query else None
 
-        c.execute("INSERT INTO sources (source,source_parent,sql_db,sql_query) VALUES(? ,?, ?, ?);" ,(unicode(source.strip(),'UTF-8'), unicode(str(source_parent).strip(),'UTF-8'), sql_db, sql_query))
+        c.execute("""
+                    INSERT INTO sources (
+                        source
+                        , source_parent
+                        , sql_db
+                        , sql_query
+                        ) 
+                        VALUES  (? ,?, ?, ?);""" ,(source.strip(), str(source_parent).strip(), sql_db, sql_query))
 
     # parse sphinx config indexes and write them to sqlite indexes table ...
     # TODO: 
@@ -156,32 +183,49 @@ if __name__ == '__main__':
             (?P<index>[^\n]+)                   # catch indexgroup
             .*?                                 # Next part:
             (?P<content> (?<={)[^}]*(?=}))      # catch everything but curly braces
-        ''', re.MULTILINE | re.DOTALL | re.VERBOSE)
+        ''', re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
 
     for i in reg_index.finditer(data):
-        tmp_index = i.groupdict()['index'].split(':')
-        index_parent = tmp_index[1] if len(tmp_index)>1 else None
-        index = tmp_index[0]
+        index, index_parent = parsing_func(i.groupdict()['index'])
         # step 2 extract sql_db and sql_query from curly braced content
         source = re.search('source\s=\s(.*)', i.groupdict()['content'])
         source = source.group(1) if source else None
+
+        # import only real indexes, no distributed indexes
         if not ( source is None and index_parent is None ):
-            c.execute("INSERT INTO indexes (sphinx_index, index_parent,source) VALUES(?, ?, ?);" ,(unicode(index.strip(),'UTF-8'), unicode(str(index_parent).strip()), source))
+            c.execute("""
+                        INSERT INTO indexes (
+                            sphinx_index
+                            , index_parent
+                            ,source
+                            ) VALUES(?, ?, ?);""" ,(index.strip(), str(index_parent).strip(), source))
 
     # output
+    if (options.index_filter == None):
+        # query based on source
+        sql = """
+        select
+            a.source as source
+            , coalesce(a.sql_db,b.sql_db) as database
+            , a.sql_query as sql
+            , group_concat(i.sphinx_index,'---') as sphinx_index
+            , group_concat(i.index_parent,'---') as index_parent
+            FROM 
+            indexes i left join indexes p on trim(i.index_parent)=trim(p.sphinx_index)
+            left join sources a on coalesce(i.source,p.source) = a.source
+            left join sources b on a.source_parent = b.source
+            group by a.source,  coalesce(a.sql_db,b.sql_db)
+        """
+    else:
+        # query based on index
+        sql = """
+        select
+            sphinx_index
+            , index_parent
+            FROM 
+            indexes
+        """
 
-    sql = """
-    select
-        a.source as source
-        , coalesce(a.sql_db,b.sql_db) as database
-        , a.sql_query as sql
-        , group_concat(i.sphinx_index,' ') as sphinx_index
-        FROM 
-        indexes i left join indexes p on trim(i.index_parent)=trim(p.sphinx_index)
-        left join sources a on coalesce(i.source,p.source) = a.source
-        left join sources b on a.source_parent = b.source
-        group by a.source,  coalesce(a.sql_db,b.sql_db)
-    """
 
     resultat=[]
     for row in c.execute(sql):
@@ -204,7 +248,7 @@ if __name__ == '__main__':
                     else:
                         resultat.append("%s" % (row['sphinx_index']))
         else:            
-            if (row['sphinx_index'].startswith(options.index_filter)):
+            if (row['sphinx_index'].startswith(options.index_filter) or options.index_filter == 'all'):
                 resultat.append("%s" % (row['sphinx_index']))
 
     resultat = sorted(list(set(resultat))) # get rid of duplicate entries in the list and sorting   

@@ -22,7 +22,7 @@ arguments:
 if [ ! -f $SPHINXCONFIG ]
 then
     echo "no sphinx configuration found in $SPHINXCONFIG -> no deploy"
-    exit 0
+    exit 1
 fi
 
 while getopts "t:d:h" flag
@@ -33,14 +33,14 @@ do
             if [ -z "$OPTARG" ] || [[ $OPTARG == *"-"* ]]
             then
                 echo "$usage"
-                exit 0
+                exit 1
             fi
             ;;
     d)      database=$OPTARG;;
     h)      echo "$usage"
             exit 0;;
     \? )    echo "$usage"
-            exit 1;;
+            exit 0;;
   esac
 done
 shift $((OPTIND-1))
