@@ -22,10 +22,10 @@ help:
 	@echo "- template	Create sphinx config file from template"
 	@echo
 	@echo "Deploy:"
-	@echo "- deploy-ab				Deploy all the indices in integration"
-	@echo "- deploy-prod			Deploy all the indices in production"
-	@echo "- deploy-ab-config		Deploy the sphinx config only in integration, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated "
-	@echo "- deploy-prod-config		Deploy the sphinx config only in production, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated "
+	@echo "- deploy-ab    Deploy all the indices in integration"
+	@echo "- deploy-prod  Deploy all the indices in production"
+	@echo "- deploy-ab-config    Deploy the sphinx config only in integration, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated "
+	@echo "- deploy-prod-config  Deploy the sphinx config only in production, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated "
 
 .PHONY: test-grep
 test-grep:
@@ -70,7 +70,7 @@ deploy-prod:
 
 .PHONY: deploy-ab-config
 deploy-ab-config:
-ifeq ($(db),)
+ifeq ($(db),"")
 		cd deploy && bash deploy-conf-only.sh -t ab
 else
 		cd deploy && bash deploy-conf-only.sh -t ab -d $(db)
