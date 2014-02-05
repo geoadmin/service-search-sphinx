@@ -201,9 +201,7 @@ if __name__ == '__main__':
                             ) VALUES(?, ?, ?);""" ,(index.strip(), str(index_parent).strip(), source))
 
     # output
-    if (options.index_filter == None):
-        # query based on source
-        sql = """
+    sql = """
         select
             a.source as source
             , coalesce(a.sql_db,b.sql_db) as database
@@ -215,41 +213,37 @@ if __name__ == '__main__':
             left join sources a on coalesce(i.source,p.source) = a.source
             left join sources b on a.source_parent = b.source
             group by a.source,  coalesce(a.sql_db,b.sql_db)
-        """
-    else:
-        # query based on index
-        sql = """
-        select
-            sphinx_index
-            , index_parent
-            FROM 
-            indexes
-        """
-
-
+    """
+    
     resultat=[]
     for row in c.execute(sql):
-        # db only filter can be applied to sphinx config, no need to query postgres db
+        db = None
+        indices = row['sphinx_index']
+
         # database filter
-        if (options.index_filter == None):
+        # -d pattern
+        if options.index_filter is None:
             if (options.database_filter and options.database_filter.count('.')==0) or (options.database_filter == None):
                 # db only filter can be applied to sphinx config, no need to query postgres db
-                if (options.database_filter==row['database']) or (options.database_filter == None):
-                    if options.command=='list':
-                        for test in row['sphinx_index'].split(' '):
-                            resultat.append("%s -> %s" % (test,row['database'] ))
-                    else:
-                        resultat.append("%s" % (row['sphinx_index']))
-            elif options.database_filter.split(".")[0]==row['database']:
-                if options.database_filter in pg_get_tables(row['sql'],row['database']):
-                    if options.command=='list':
-                        for test in row['sphinx_index'].split(' '):
-                            resultat.append("%s -> %s" % (test,pg_get_tables(row['sql'],row['database'] ) ))
-                    else:
-                        resultat.append("%s" % (row['sphinx_index']))
-        else:            
-            if (row['sphinx_index'].startswith(options.index_filter) or options.index_filter == 'all'):
-                resultat.append("%s" % (row['sphinx_index']))
+                if options.database_filter is None or options.database_filter == row['database']:
+                    db = row['database']
+                # if db filter is more detailed, we have to analyze the sql queries with postgres ANALZYE VERBOSE
+                elif options.database_filter.split(".")[0] == row['database']:
+                    table =  pg_get_tables(row['sql'], row['database'])
+                    db = row['database'] if options.database_filter in table else None
+        # indice filter
+        # -i pattern
+        else:                        
+            if indices.startswith(options.index_filter) or options.index_filter == 'all':
+                db = row['database']
+
+        # output                    
+        if options.command == 'list' and db is not None:
+            for indice in indices.split(' '):
+                resultat.append("%s -> %s" % (indice, db))
+
+        if options.command == 'update' and db is not None:
+            resultat.append("%s" % (indices))
 
     resultat = sorted(list(set(resultat))) # get rid of duplicate entries in the list and sorting   
     indent="\n      "     
@@ -269,7 +263,7 @@ if __name__ == '__main__':
             p.stdout.close()
             
         else:
-            print 'no sphinx indexes are using the %s pattern %s.' % (filter_option, options.database_filter or options.index_filter)
+            print 'no sphinx indexes are using the %s pattern %s' % (filter_option, options.database_filter or options.index_filter)
 
 #
 # $Id$
