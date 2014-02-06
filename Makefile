@@ -88,5 +88,5 @@ endif
 move-template:
 	cp conf/sphinx.conf /var/lib/sphinxsearch/data/index/sphinx.conf
 	cp conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
-	cp test/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
-	cp test/pg2sphinx_trigger.py /etc/sphinxsearch/pg2phinx_trigger.py
+	cp deploy/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
+	cp deploy/pg2sphinx_trigger.py /etc/sphinxsearch/pg2phinx_trigger.py

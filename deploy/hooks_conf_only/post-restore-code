@@ -19,13 +19,13 @@ sudo -u sphinxsearch rsync --update -qavz $CODE_DIR $SPHINXINDEX
 
 DBHOST=$DBHOST_DEFAULT
 # TARGET -> integration
-if [[ $TARGET == *ab* ]]
+if [[ $TARGET == ab ]]
 then
   DBHOST=$DBHOST_INT;
 fi
 
 # TARGET -> production
-if [[ $TARGET == *prod* ]]
+if [[ $TARGET == prod ]]
 then
   DBHOST=$DBHOST_PROD
 fi
