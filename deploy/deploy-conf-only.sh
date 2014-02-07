@@ -20,7 +20,7 @@ arguments:
         DEFAULT: none
     -i <<INDEX PATTERN>> optional 
         p.e. 
-        -i ch_swisstopo -> all indexes with praefix ch_swisstopo*** will be built
+        -i ch_swisstopo -> all indexes with prefix ch_swisstopo*** will be built
         -i all -> all the indexes will be built
         DEFAULT: none        "
 
