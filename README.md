@@ -82,3 +82,33 @@ make index-all
 $ cd lib/sphinxapi
 $ python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
 ```
+
+###Make Deploy
+Before the deploy make sure that the following steps have been done
+* ```make template```
+* ```make move-template``` with user sphinxsearch
+
+####Deploy config to Integration, no indexes will be built
+```bash
+$ make deploy-conf-ab
+```
+
+####Deploy config to Integration, build all the indexes which are using the database lubis
+```bash
+$ make deploy-conf-ab db=lubis
+```
+
+####Deploy config to Integration, build all the indexes with the given prefix
+```bash
+$ make deploy-conf-ab index=ch_tamedia_schweizerfamilie-feuerstellen
+```
+####Deploy config to Integration, build all the indexes from config
+You can use one of the following commands to recreate all the indexes on the deploy target from the config file. This may take a while.
+```bash
+$ make deploy-conf-ab index=all
+```
+```bash
+$ make deploy-conf-ab db=all
+```
+
+The same commands can be used with ```make deploy-conf-prod```.
