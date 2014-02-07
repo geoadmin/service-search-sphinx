@@ -10,28 +10,7 @@ source def_pqsql
     sql_query_pre = SET NAMES 'UTF8'
 }
 
-## SEARCHABLE FEATURES SOURCE
-
-source def_searchable_features : def_pqsql
-{
-    sql_attr_string = feature_id
-    sql_attr_string = origin
-    sql_attr_string = layer
-    sql_attr_string = geom_st_box2d
-    sql_attr_string = label
-    sql_attr_float = lat
-    sql_attr_float = lon
-    sql_field_string = geom_quadindex
-    sql_field_string = detail
-}
-
-source def_searchable_features_with_year : def_searchable_features
-{
-    sql_attr_uint = year
-}
-
 ## QUERYABLE FEATURES SOURCE
-
 source def_queryable_features : def_pqsql
 {
     sql_attr_string = feature_id
@@ -42,6 +21,22 @@ source def_queryable_features : def_pqsql
     sql_attr_float = lat
     sql_attr_float = lon
     sql_field_string = geom_quadindex
+}
+
+source def_queryable_features_with_year : def_queryable_features
+{
+    sql_attr_uint = year
+}
+
+## SEARCHABLE FEATURES SOURCE
+source def_searchable_features : def_queryable_features
+{
+    sql_field_string = detail
+}
+
+source def_searchable_features_with_year : def_searchable_features
+{
+    sql_attr_uint = year
 }
 
 indexer
