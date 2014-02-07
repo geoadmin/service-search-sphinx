@@ -24,8 +24,8 @@ help:
 	@echo "Deploy:"
 	@echo "- deploy-ab    Deploy all the indices in integration"
 	@echo "- deploy-prod  Deploy all the indices in production"
-	@echo "- deploy-ab-config    Deploy the sphinx config only in integration, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated "
-	@echo "- deploy-prod-config  Deploy the sphinx config only in production, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated "
+	@echo "- deploy-ab-config    Deploy the sphinx config only in integration, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated, an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
+	@echo "- deploy-prod-config  Deploy the sphinx config only in production, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated, an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
 
 .PHONY: test-grep
 test-grep:
@@ -70,19 +70,24 @@ deploy-prod:
 
 .PHONY: deploy-ab-config
 deploy-ab-config:
-ifeq ($(db),"")
-		cd deploy && bash deploy-conf-only.sh -t ab
-else
+ifneq ($(db),"")
 		cd deploy && bash deploy-conf-only.sh -t ab -d $(db)
+else ifneq ($(index),"")
+		cd deploy && bash deploy-conf-only.sh -t ab -i $(index)
+else
+		cd deploy && bash deploy-conf-only.sh -t ab
 endif
 
 .PHONY: deploy-prod-config
 deploy-prod-config:
-ifeq ($(db),"")
-		cd deploy && bash deploy-conf-only.sh -t prod
-else
+ifneq ($(db),"")
 		cd deploy && bash deploy-conf-only.sh -t prod -d $(db)
+else ifneq ($(index),"")
+		cd deploy && bash deploy-conf-only.sh -t prod -i $(index)
+else
+		cd deploy && bash deploy-conf-only.sh -t prod
 endif
+
 
 .PHONY: move-template
 move-template:

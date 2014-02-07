@@ -42,6 +42,10 @@ then
     else
         sudo -u sphinxsearch python -u $PGTRIGGER -d $DBPATTERN -c update    
     fi
+elif [ ! -z "$INDEXPATTERN" ]
+then
+    echo "updating sphinx indexes, using index pattern: $INDEXPATTERN"
+    sudo -u sphinxsearch python -u $PGTRIGGER -i $INDEXPATTERN -c update    
 else
     echo "no sphinx indexes will be updated ..."
 fi
