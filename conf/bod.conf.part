@@ -135,7 +135,7 @@ source src_layers_rm : layers
 
 ## INDICES
 
-index layer
+index layers
 {
     type = plain
     docinfo = extern

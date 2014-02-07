@@ -16,6 +16,7 @@ help:
 	@echo "- index-layer	Update all the layers indices (does NOT re-create config file)"
 	@echo "- index-feature	Update all the features indices (does NOT re-create config file)"
 	@echo "- move-template	Move template to the apropriate locations"
+	@echo "- test-grep     To check which indices will be created with a grep pattern"
 	@echo
 	@echo "Generate configuration template:"
 	@echo "- template	Create sphinx config file from template"
@@ -23,6 +24,10 @@ help:
 	@echo "Deploy:"
 	@echo "- deploy-ab	Deploy all the indices in integration"
 	@echo "- deploy-prod	Deploy all the indices in production"
+
+.PHONY: test-grep
+test-grep:
+	echo $(GREP_INDICES)
 
 .PHONY: index
 index: move-template
