@@ -43,7 +43,6 @@ def pg_get_tables(sql_query,sql_db):
 if __name__ == '__main__':
     SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
     USER="sphinxsearch"
-    USER="ltclm"
     myenv = dict(os.environ)
 
     ################################
