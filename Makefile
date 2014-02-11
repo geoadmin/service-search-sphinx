@@ -16,18 +16,15 @@ help:
 	@echo "- index-layer	Update all the layers indices (does NOT re-create config file)"
 	@echo "- index-feature	Update all the features indices (does NOT re-create config file)"
 	@echo "- move-template	Move template to the apropriate locations"
-	@echo "- test-grep     To check which indices will be created with a grep pattern"
 	@echo
 	@echo "Generate configuration template:"
 	@echo "- template	Create sphinx config file from template"
 	@echo
 	@echo "Deploy:"
-	@echo "- deploy-ab	Deploy all the indices in integration"
-	@echo "- deploy-prod	Deploy all the indices in production"
-
-.PHONY: test-grep
-test-grep:
-	echo $(GREP_INDICES)
+	@echo "- deploy-ab    Deploy all the indices in integration"
+	@echo "- deploy-prod  Deploy all the indices in production"
+	@echo "- deploy-ab-config    Deploy the sphinx config only in integration, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated, an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
+	@echo "- deploy-prod-config  Deploy the sphinx config only in production, an optional database pattern can be indicated db=database.schema.table, all indexes using this database source will be updated, an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
 
 .PHONY: index
 index: move-template
@@ -66,7 +63,29 @@ deploy-ab:
 deploy-prod:
 	sudo -u deploy deploy  -r deploy/deploy.cfg prod
 
+.PHONY: deploy-ab-config
+deploy-ab-config:
+ifneq ($(db),)
+		cd deploy && bash deploy-conf-only.sh -t ab -d $(db)
+else ifneq ($(index),)
+		cd deploy && bash deploy-conf-only.sh -t ab -i $(index)
+else
+		cd deploy && bash deploy-conf-only.sh -t ab 2> /dev/null
+endif
+
+.PHONY: deploy-prod-config
+deploy-prod-config:
+ifneq ($(db),)
+		cd deploy && bash deploy-conf-only.sh -t prod -d $(db)
+else ifneq ($(index),)
+		cd deploy && bash deploy-conf-only.sh -t prod -i $(index)
+else
+		cd deploy && bash deploy-conf-only.sh -t prod
+endif
+
 .PHONY: move-template
 move-template:
 	cp conf/sphinx.conf /var/lib/sphinxsearch/data/index/sphinx.conf
 	cp conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
+	cp deploy/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
+	cp deploy/pg2sphinx_trigger.py /etc/sphinxsearch/pg2phinx_trigger.py

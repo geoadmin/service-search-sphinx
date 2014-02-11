@@ -49,6 +49,22 @@ sudo -u sphinxsearch mv $BASEDIR/index.tmp $BASEDIR/index
 echo "replace sphinx config file ..."
 cp $BASEDIR/index/sphinx.conf /etc/sphinxsearch
 
+DBHOST=$DBHOST_DEFAULT
+# TARGET -> integration
+if [[ $TARGET == ab ]]
+then
+  DBHOST=$DBHOST_INT;
+fi
+
+# TARGET -> production
+if [[ $TARGET == prod ]]
+then
+  DBHOST=$DBHOST_PROD
+fi
+
+echo "replace db host with $DBHOST ..."
+perl -p -i -e 's/pgcluster0t.bgdi.admin.ch/$DBHOST/' /etc/sphinxsearch/sphinx.conf
+
 WAITFORSPHINX=20
 COUNTER=1
 while [ -f $PID ]
@@ -72,6 +88,9 @@ sudo -u sphinxsearch /etc/init.d/sphinxsearch start
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "service offline time: $DIFF"
+
+echo "removing temporary deploy folder on deploy target /var/cache/deploy/sphinxsearch.data.tmp/ ..."
+rm -rf $CODE_DIR
 
 sudo -u sphinxsearch /etc/init.d/sphinxsearch status
 
