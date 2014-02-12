@@ -228,16 +228,16 @@ if __name__ == '__main__':
                 if options.database_filter is None or options.database_filter == row['database']:
                     db = row['database']
                 # if db filter is more detailed, we have to analyze the sql queries with postgres ANALZYE VERBOSE
-                elif options.database_filter.split(".")[0] == row['database']:
-                    table =  pg_get_tables(row['sql'], row['database'])
-                    db = row['database'] if options.database_filter in table else None
+            elif options.database_filter.split(".")[0] == row['database']:
+                table =  pg_get_tables(row['sql'], row['database'])
+                db = row['database'] if options.database_filter in table else None
         # indice filter
         # -i pattern
         else:                        
             if indices.startswith(options.index_filter) or options.index_filter == 'all':
                 db = row['database']
 
-        # output                    
+        # output  
         if options.command == 'list' and db is not None:
             for indice in indices.split(' '):
                 resultat.append("%s -> %s" % (indice, db))
