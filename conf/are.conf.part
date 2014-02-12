@@ -82,22 +82,6 @@ source src_ch_are_bevoelkerungsdichte-vz00 : def_queryable_features
         FROM siedlung_landschaft.bevoelkerungsdichte_vz00
 }
 
-source src_ch_are_beschaeftigtendichte-bz08 : def_queryable_features
-{
-    sql_db = are
-    sql_query = \
-        SELECT row_id as id \
-            , 'feature' as origin \
-            , 'ch.are.beschaeftigtendichte-bz08' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , empt_ha::text || '[ha]' as label \
-            , row_id::text as feature_id \
-        FROM siedlung_landschaft.beschaeftigtendichte_bz08
-}
-
 source src_ch_are_bauzonen-2007 : def_queryable_features
 {
     sql_db = are
@@ -162,6 +146,22 @@ source src_ch_are_gemeindetypen : def_queryable_features
         FROM siedlung_landschaft.gemeindetypologie_2012
 }
 
+source src_ch_are_beschaeftigtendichte-bz08 : def_queryable_features 
+{
+    sql_db = are
+    sql_query = \
+        SELECT row_id as id \
+            , 'feature' as origin \
+            , 'ch.are.beschaeftigtendichte-bz08' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , empt_ha::text || '[ha]' as label \
+            , row_id::text as feature_id \
+        FROM siedlung_landschaft.beschaeftigtendichte_bz08
+}
+
 ## INDICES
 
 ## QUERYABLE
@@ -202,12 +202,6 @@ index ch_are_bevoelkerungsdichte-vz00 : ch_are_landschaftstypen
     path = /var/lib/sphinxsearch/data/index/ch_are_bevoelkerungsdichte-vz00
 }
 
-index ch_are_beschaeftigtendichte-bz08 : ch_are_landschaftstypen
-{
-    source = src_ch_are_beschaeftigtendichte-bz08
-    path = /var/lib/sphinxsearch/data/index/ch_are_beschaeftigtendichte-bz08
-}
-
 index ch_are_bauzonen-2007 : ch_are_landschaftstypen
 {
     source = src_ch_are_bauzonen-2007
@@ -230,4 +224,10 @@ index ch_are_gemeindetypen : ch_are_landschaftstypen
 {
     source = src_ch_are_gemeindetypen
     path = /var/lib/sphinxsearch/data/index/ch_are_gemeindetypen
+}
+
+index ch_are_beschaeftigtendichte-bz08 : ch_are_landschaftstypen
+{
+    source = src_ch_are_beschaeftigtendichte-bz08
+    path = /var/lib/sphinxsearch/data/index/ch_are_beschaeftigtendichte-bz08
 }
