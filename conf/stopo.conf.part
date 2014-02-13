@@ -68,13 +68,13 @@ source src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : def_queryable_fe
         FROM tlm.swissboundaries_kantone
 }
 
-source src_ch_swisstopo_cadastralwebmap-farbe : def_queryable_features
+source src_ch_kantone_cadastralwebmap-farbe : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
         SELECT row_number() OVER(ORDER BY gid asc) as id \
             , 'feature' as origin \
-            , 'ch.swisstopo.cadastralwebmap-farbe' as layer \
+            , 'ch.kantone.cadastralwebmap-farbe' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -1346,12 +1346,11 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_fea
 ## INDICES
 
 ## QUERYABLE
-
-index ch_swisstopo_cadastralwebmap-farbe
+index ch_kantone_cadastralwebmap-farbe
 {
     type = plain
-    source = src_ch_swisstopo_cadastralwebmap-farbe
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_cadastralwebmap-farbe
+    source = src_ch_kantone_cadastralwebmap-farbe
+    path = /var/lib/sphinxsearch/data/index/ch_kantone_cadastralwebmap-farbe
     docinfo = extern
     charset_type = utf-8
     min_prefix_len = 1
@@ -1359,43 +1358,43 @@ index ch_swisstopo_cadastralwebmap-farbe
     enable_star = 1
 }
 
-index ch_swisstopo_geologie-gravimetrischer_atlas_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-gravimetrischer_atlas_metadata : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gravimetrischer_atlas_metadata
 }
 
-index ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill
 }
 
-index ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill
 }
 
-index ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-kanton-flaeche_fill
 }
 
-index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1
 }
 
-index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2
 }
 
-index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3
@@ -1409,37 +1408,37 @@ index ch_swisstopo_vec200-transportation-oeffentliche-verkehr
     local = ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3
 }
 
-index ch_swisstopo_treasurehunt : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_treasurehunt : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_treasurehunt
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_treasurehunt
 }
 
-index ch_swisstopo_vec200-transportation-strassennetz_1 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-transportation-strassennetz_1 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-transportation-strassennetz_1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_1
 }
 
-index ch_swisstopo_vec200-transportation-strassennetz_2 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-transportation-strassennetz_2 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-transportation-strassennetz_2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_2
 }
 
-index ch_swisstopo_vec200-transportation-strassennetz_3 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-transportation-strassennetz_3 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-transportation-strassennetz_3
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_3
 }
 
-index ch_swisstopo_vec200-transportation-strassennetz_4 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-transportation-strassennetz_4 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-transportation-strassennetz_4
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_4
 }
 
-index ch_swisstopo_vec200-transportation-strassennetz_5 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-transportation-strassennetz_5 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-transportation-strassennetz_5
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-transportation-strassennetz_5
@@ -1455,19 +1454,19 @@ index ch_swisstopo_vec200-transportation-strassennetz
     local = ch_swisstopo_vec200-transportation-strassennetz_5
 }
 
-index ch_swisstopo_vec200-adminboundaries-protectedarea : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-adminboundaries-protectedarea : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-adminboundaries-protectedarea
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-adminboundaries-protectedarea
 }
 
-index ch_swisstopo_vec200-hydrography_1 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-hydrography_1 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-hydrography_1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-hydrography_1
 }
 
-index ch_swisstopo_vec200-hydrography_2 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-hydrography_2 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-hydrography_2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-hydrography_2
@@ -1480,25 +1479,25 @@ index ch_swisstopo_vec200-hydrography
     local = ch_swisstopo_vec200-hydrography_2
 }
 
-index ch_swisstopo_vec200-landcover : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-landcover : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-landcover
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-landcover
 }
 
-index ch_swisstopo_vec200-miscellaneous_1 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-miscellaneous_1 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-miscellaneous_1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-miscellaneous_1
 }
 
-index ch_swisstopo_vec200-miscellaneous_2 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-miscellaneous_2 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-miscellaneous_2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-miscellaneous_2
 }
 
-index ch_swisstopo_vec200-miscellaneous_3 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-miscellaneous_3 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-miscellaneous_3
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-miscellaneous_3
@@ -1512,139 +1511,139 @@ index ch_swisstopo_vec200-miscellaneous
     local = ch_swisstopo_vec200-miscellaneous_3
 }
 
-index ch_swisstopo_vec200-names-namedlocation : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec200-names-namedlocation : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec200-names-namedlocation
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-names-namedlocation
 }
 
-index ch_swisstopo_vec25-strassennetz : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-strassennetz : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-strassennetz
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-strassennetz
 }
 
-index ch_swisstopo_vec25-uebrigerverkehr : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-uebrigerverkehr : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-uebrigerverkehr
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-uebrigerverkehr
 }
 
-index ch_swisstopo_vec25-anlagen : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-anlagen : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-anlagen
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-anlagen
 }
 
-index ch_swisstopo_vec25-eisenbahnnetz : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-eisenbahnnetz : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-eisenbahnnetz
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-eisenbahnnetz
 }
 
-index ch_swisstopo_vec25-gebaeude : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-gebaeude : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-gebaeude
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-gebaeude
 }
 
-index ch_swisstopo_vec25-gewaessernetz : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-gewaessernetz : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-gewaessernetz
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-gewaessernetz
 }
 
-index ch_swisstopo_vec25-primaerflaechen : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-primaerflaechen : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-primaerflaechen
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-primaerflaechen
 }
 
-index ch_swisstopo_vec25-einzelobjekte : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-einzelobjekte : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-einzelobjekte
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-einzelobjekte
 }
 
-index ch_swisstopo_vec25-heckenbaeume : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_vec25-heckenbaeume : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_vec25-heckenbaeume
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25-heckenbaeume
 }
 
-index ch_swisstopo_dreiecksvermaschung : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_dreiecksvermaschung : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_dreiecksvermaschung
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_dreiecksvermaschung
 }
 
-index ch_swisstopo_hiks-dufour : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_hiks-dufour : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_hiks-dufour
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-dufour
 }
 
-index ch_swisstopo_hiks-siegfried : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_hiks-siegfried : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_hiks-siegfried
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-siegfried
 }
 
-index ch_swisstopo_pixelkarte-pk25_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk25_metadata : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_pixelkarte-pk25_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk25_metadata
 }
 
-index ch_swisstopo_pixelkarte-pk50_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk50_metadata : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_pixelkarte-pk50_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk50_metadata
 }
 
-index ch_swisstopo_pixelkarte-pk100_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk100_metadata : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_pixelkarte-pk100_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk100_metadata
 }
 
-index ch_swisstopo_pixelkarte-pk200_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk200_metadata : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_pixelkarte-pk200_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk200_metadata
 }
 
-index ch_swisstopo_pixelkarte-pk500_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_pixelkarte-pk500_metadata : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_pixelkarte-pk500_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-pk500_metadata
 }
 
-index ch_swisstopo_images-swissimage_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_images-swissimage_metadata : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_images-swissimage_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_images-swissimage_metadata
 }
 
-index ch_swisstopo_geologie-geolkarten500_metadata : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geolkarten500_metadata : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geolkarten500_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geolkarten500_metadata
 }
 
-index ch_swisstopo_geologie-geologischer_atlas : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geologischer_atlas : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geologischer_atlas
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas
 }
 
-index ch_swisstopo_geologie-geologische_karte_1 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geologische_karte_1 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geologische_karte_1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologische_karte_1
 }
 
-index ch_swisstopo_geologie-geologische_karte_2 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geologische_karte_2 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geologische_karte_2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologische_karte_2
@@ -1657,121 +1656,121 @@ index ch_swisstopo_geologie-geologische_karte
     local = ch_swisstopo_geologie-geologische_karte_2
 }
 
-index ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200
 }
 
-index ch_swisstopo_geologie-geotechnik-gk200 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-gk200 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotechnik-gk200
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk200
 }
 
-index ch_swisstopo_geologie-geotechnik-gk500-genese : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-gk500-genese : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotechnik-gk500-genese
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk500-genese
 }
 
-index ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung
 }
 
-index ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geo-geotechnik-gk500-lith_haupt
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-gk500-lithologie_hauptgruppen
 }
 
-index ch_swisstopo_geologie-geotechnik-steinbrueche_1980 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-steinbrueche_1980 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotechnik-steinbrueche_1980
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-steinbrueche_1980
 }
 
-index ch_swisstopo_geologie-geotechnik-steinbrueche_1995 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-steinbrueche_1995 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotechnik-steinbrueche_1995
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-steinbrueche_1995
 }
 
-index ch_swisstopo_geologie-geotechnik-zementindustrie_1965 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-zementindustrie_1965 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotechnik-zementindustrie_1965
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1965
 }
 
-index ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1995
 }
 
-index ch_swisstopo_geologie-hydro_karte-grundwasservor : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-hydro_karte-grundwasservor : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-hydro_karte-grundwasservor
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydro_karte-grundwasservor
 }
 
-index ch_swisstopo_geologie-hydro_karte-grundwasservul : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-hydro_karte-grundwasservul : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-hydro_karte-grundwasservul
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydro_karte-grundwasservul
 }
 
-index ch_swisstopo_geologie-geophysik-geothermie : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geophysik-geothermie : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geophysik-geothermie
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-geothermie
 }
 
-index ch_swisstopo_geologie-geophysik-deklination : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geophysik-deklination : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geophysik-deklination
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-deklination
 }
 
-index ch_swisstopo_geologie-geophysik-inklination : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geophysik-inklination : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geophysik-inklination
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-inklination
 }
 
-index ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura
 }
 
-index ch_swisstopo_geologie-geodaesie-isostatische_anomalien : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geodaesie-isostatische_anomalien : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geodaesie-isostatische_anomalien
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geodaesie-isostatische_anomalien
 }
 
-index ch_swisstopo_geologie-geodaesie-bouguer_anomalien : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geodaesie-bouguer_anomalien : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geodaesie-bouguer_anomalien
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geodaesie-bouguer_anomalien
 }
    
-index ch_swisstopo_geologie-geophysik-totalintensitaet : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geophysik-totalintensitaet : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geophysik-totalintensitaet
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geophysik-totalintensitaet
 }
 
-index ch_swisstopo_geologie-tektonische_karte_1 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-tektonische_karte_1 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-tektonische_karte_1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-tektonische_karte_1
 }
 
-index ch_swisstopo_geologie-tektonische_karte_2 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-tektonische_karte_2 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-tektonische_karte_2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-tektonische_karte_2
@@ -1784,67 +1783,67 @@ index ch_swisstopo_geologie-tektonische_karte
     local = ch_swisstopo_geologie-tektonische_karte_2
 }
    
-index ch_swisstopo_swisstlm3d-wanderwege : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_swisstlm3d-wanderwege : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_swisstlm3d-wanderwege
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swisstlm3d-wanderwege
 }
 
-index ch_swisstopo-vd_ortschaftenverzeichnis_plz : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo-vd_ortschaftenverzeichnis_plz : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo-vd_ortschaftenverzeichnis_plz
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_ortschaftenverzeichnis_plz
 }
 
-index ch_swisstopo-vd_geometa-standav : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo-vd_geometa-standav : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo-vd_geometa-standav
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-standav
 }
 
-index ch_swisstopo-vd_geometa-los : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo-vd_geometa-los : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo-vd_geometa-los
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-los
 }
 
-index ch_swisstopo-vd_geometa-gemeinde : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo-vd_geometa-gemeinde : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo-vd_geometa-gemeinde
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-gemeinde
 }
 
-index ch_swisstopo-vd_geometa-grundbuch : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo-vd_geometa-grundbuch : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo-vd_geometa-grundbuch
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-grundbuch
 }
 
-index ch_swisstopo-vd_geometa-nfgeom : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo-vd_geometa-nfgeom : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo-vd_geometa-nfgeom
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-nfgeom
 }
 
-index ch_swisstopo_transformationsgenauigkeit : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_transformationsgenauigkeit : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_transformationsgenauigkeit
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_transformationsgenauigkeit
 }
 
-index ch_swisstopo-vd_spannungsarme-gebiete : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo-vd_spannungsarme-gebiete : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo-vd_spannungsarme-gebiete
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_spannungsarme-gebiete
 }
 
-index ch_swisstopo_geologie-geotope_1 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotope_1 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotope_1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_1
 }
 
-index ch_swisstopo_geologie-geotope_2 : ch_swisstopo_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotope_2 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotope_2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_2
