@@ -182,76 +182,75 @@ source src_ch_bfs_arealstatistik-bodennutzung-1985 : def_queryable_features
 
 ## QUERYBALE
 
-index ch_bfs_arealstatistik
+index ch_bag_zecken-fsme-faelle : ch_bag_zecken-fsme-faelle
 {
     type = plain
-    source = src_ch_bfs_arealstatistik
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik
     docinfo = extern
     charset_type = utf-8
     min_prefix_len = 1
     prefix_fields = geom_quadindex
     enable_star = 1
-}
-
-index ch_bfs_arealstatistik-1985 : ch_bfs_arealstatistik
-{
-    source = src_ch_bfs_arealstatistik-1985
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-1985
-}
-
-index ch_bfs_arealstatistik-1997 : ch_bfs_arealstatistik
-{
-    source = src_ch_bfs_arealstatistik-1997
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-1997
-}
-
-index ch_bag_zecken-fsme-faelle : ch_bfs_arealstatistik
-{
     source = src_ch_bag_zecken-fsme-faelle
     path = /var/lib/sphinxsearch/data/index/ch_bag_zecken-fsme-faelle
 }
 
-
-index ch_bag_zecken-fsme-impfung : ch_bfs_arealstatistik
+index ch_bag_zecken-fsme-impfung : ch_bag_zecken-fsme-faelle
 {
     source = src_ch_bag_zecken-fsme-impfung
     path = /var/lib/sphinxsearch/data/index/ch_bag_zecken-fsme-impfung
 }
 
-index ch_bfs_arealstatistik-bodenbedeckung-1997 : ch_bfs_arealstatistik
-{
-    source = src_ch_bfs_arealstatistik-bodenbedeckung-1997
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodenbedeckung-1997
-}
+#index ch_bfs_arealstatistik : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik
+#}
 
-index ch_bfs_arealstatistik-bodenbedeckung-1985 : ch_bfs_arealstatistik
-{
-    source = src_ch_bfs_arealstatistik-bodenbedeckung-1985
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodenbedeckung-1985
-}
+#index ch_bfs_arealstatistik-1985 : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik-1985
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-1985
+#}
 
-index ch_bfs_arealstatistik-bodenbedeckung : ch_bfs_arealstatistik
-{
-    source = src_ch_bfs_arealstatistik-bodenbedeckung
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodenbedeckung
-}
+#index ch_bfs_arealstatistik-1997 : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik-1997
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-1997
+#}
 
-index ch_bfs_arealstatistik-bodennutzung : ch_bfs_arealstatistik
-{
-    source = src_ch_bfs_arealstatistik-bodennutzung
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung
-}
+#index ch_bfs_arealstatistik-bodenbedeckung-1997 : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik-bodenbedeckung-1997
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodenbedeckung-1997
+#}
 
-index ch_bfs_arealstatistik-bodennutzung-1997 : ch_bfs_arealstatistik
-{
-    source = src_ch_bfs_arealstatistik-bodennutzung-1997
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung-1997
-}
+#index ch_bfs_arealstatistik-bodenbedeckung-1985 : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik-bodenbedeckung-1985
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodenbedeckung-1985
+#}
 
-index ch_bfs_arealstatistik-bodennutzung-1985 : ch_bfs_arealstatistik
-{
-    source = src_ch_bfs_arealstatistik-bodennutzung-1985
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung-1985
-}
+#index ch_bfs_arealstatistik-bodenbedeckung : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik-bodenbedeckung
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodenbedeckung
+#}
+
+#index ch_bfs_arealstatistik-bodennutzung : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik-bodennutzung
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung
+#}
+
+#index ch_bfs_arealstatistik-bodennutzung-1997 : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik-bodennutzung-1997
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung-1997
+#}
+
+#index ch_bfs_arealstatistik-bodennutzung-1985 : ch_bag_zecken-fsme-faelle
+#{
+#    source = src_ch_bfs_arealstatistik-bodennutzung-1985
+#    path = /var/lib/sphinxsearch/data/index/ch_bfs_arealstatistik-bodennutzung-1985
+#}
 
