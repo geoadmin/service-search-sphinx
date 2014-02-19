@@ -157,7 +157,7 @@ source src_ch_bafu_bundesinventare-jagdbanngebiete : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , jb_name::text as label \
+            , jb_name::text || ' (' || jb_kat::text ||')' as label \
             , gid::text as feature_id \
         FROM bundinv.jb
 }
@@ -509,7 +509,7 @@ source src_ch_bafu_biogeographische_regionen : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , biogreg_ve::text as label \
+            , biogreg_r1::text as label \
             , bgdi_id::text as feature_id \
         FROM diverse.biogeoreg
 }
@@ -557,7 +557,7 @@ source src_ch_bafu_moose : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , rl_text::text as label \
+            , genus::text as label \
             , bgdi_id::text as feature_id \
         FROM flora.mooseflora
 }
@@ -573,7 +573,7 @@ source src_ch_bafu_flora-weltensutter_atlas : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , ty_surface::text as label \
+            , nom::text as label \
             , gid::text as feature_id \
         FROM flora.ws
 }
