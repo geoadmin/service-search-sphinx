@@ -498,9 +498,9 @@ source src_ch_bav_sachplan-infrastruktur-schiene_ausgangslage : def_searchable_f
     sql_db = uvek
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
-            , anlage_id as label \
+            , name as label \
             , 'feature' as origin \
-            , remove_accents(name)||' '||remove_accents(description_de)||' '||remove_accents(description_fr)||' '||remove_accents(description_it)||' '||remove_accents(description_en)||' '||remove_accents(anlage_id)  as detail \
+            , remove_accents(name)||' '||remove_accents(description_de)||' '||remove_accents(description_fr)||' '||remove_accents(description_it)||' '||remove_accents(anlage_id)  as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_ausgangslage' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -515,7 +515,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_1 : def_searchable_fea
     sql_db = uvek
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
-            , stabil_id as label \
+            , facname_de as label \
             , 'feature' as origin \
             , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_anhorung' as layer \
@@ -532,7 +532,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_2 : def_searchable_fea
     sql_db = uvek
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
-            , stabil_id as label \
+            , plname_de as label \
             , 'feature' as origin \
             , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_anhorung' as layer \
@@ -549,7 +549,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_1 : def_searchable_featur
     sql_db = uvek
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
-            , stabil_id as label \
+            , facname_de as label \
             , 'feature' as origin \
             , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_kraft' as layer \
@@ -566,7 +566,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_2 : def_searchable_featur
     sql_db = uvek
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
-            , stabil_id as label \
+            , plname_de as label \
             , 'feature' as origin \
             , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_kraft' as layer \
