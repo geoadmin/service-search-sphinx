@@ -36,7 +36,7 @@ Object    | Path
 **PID:**    | /var/run/sphinxsearch  | 
 **Log:**|/var/www/vhosts/service-sphinxsearch/logs/sphinxsearch/|
 **Indexes:**|/var/lib/sphinxsearch/data/index/|
-**Configuration:**|/var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/conf/sphinx.conf|
+**Configuration:**|/etc/sphinxsearch/sphinx.conf|
 
 ###Search Daemon:
 ```bash
@@ -49,17 +49,17 @@ $ searchd --stop
 ```
 ####start
 ```bash
-$ searchd --config /var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/conf/sphinx.conf
+$ searchd
 ```
 ###Rebuild / update Indexes:
 ####rebuild / build some indexes index1 index2 index3
 There will be a service restart after every index
 ```bash
-$ indexer --verbose --rotate --sighup-each --config /var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/conf/sphinx.conf index1 index2 index3 
+$ indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf index1 index2 index3 
 ```
 ####rebuild / build all indexes
 ```bash
-$ indexer --verbose --rotate --sighup-each --config /var/www/vhosts/service-sphinxsearch/private/service-sphinxsearch/conf/sphinx.conf --all
+$ indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf --all
 ```
 multithread indexer is not possible: http://sphinxsearch.com/forum/view.html?id=3936a
 
@@ -75,6 +75,7 @@ To create all indices
 ```
 make template
 sudo su sphinxsearch
+make move-template
 make index-all
 ```
 ###Command line debugging with python sphinx api
