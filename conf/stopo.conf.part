@@ -4,22 +4,6 @@
 
 ## QUERYABLE
 
-source src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata : def_queryable_features
-{
-    sql_db = stopo
-    sql_query = \
-        SELECT nr as id \
-            , 'feature' as origin \
-            , 'ch.swisstopo.geologie-gravimetrischer_atlas.metadata' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , titel::text as label \
-            , nr::text as feature_id \
-        FROM geol.gravimetrie_atlas_metadata
-}
-
 source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_queryable_features
 {
     sql_db = stopo
@@ -1206,6 +1190,23 @@ source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
 }
 
 ## SEARCHABLE
+
+source src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata : def_searchable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT nr as id \
+            , titel as label \
+            , 'feature' as origin \
+            , remove_accents(nr ||' '||titel) as detail \
+            , 'ch.swisstopo.geologie-gravimetrischer_atlas.metadata' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr as feature_id \
+        FROM geol.gravimetrie_atlas_metadata
+}
 
 source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_features
 {
