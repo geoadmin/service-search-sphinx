@@ -60,10 +60,12 @@ template:
 .PHONY: deploy-ab
 deploy-ab:
 	sudo -u deploy deploy  -r deploy/deploy.cfg ab
+	cd deploy && bash deploy-conf-only.sh -t ab 2> /dev/null
 
 .PHONY: deploy-prod
 deploy-prod:
 	sudo -u deploy deploy  -r deploy/deploy.cfg prod
+	cd deploy && bash deploy-conf-only.sh -t prod
 
 .PHONY: deploy-ab-config
 deploy-ab-config:
