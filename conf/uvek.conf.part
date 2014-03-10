@@ -832,7 +832,7 @@ index ch_bav_sachplan-infrastruktur-schiene_anhorung_2 : ch_astra_ivs-nat
     path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schiene_anhorung_2
 }
 
-index ch_bav_sachplan-infrastruktur-schiene_anhorung
+index ch_bav_sachplan-infrastruktur-schiene_anhorung 
 {
     type = distributed
     local = ch_bav_sachplan-infrastruktur-schiene_anhorung_1
@@ -851,7 +851,7 @@ index ch_bav_sachplan-infrastruktur-schiene_kraft_2 : ch_astra_ivs-nat
     path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schiene_kraft_2
 }
 
-index ch_bav_sachplan-infrastruktur-schiene_kraft
+index ch_bav_sachplan-infrastruktur-schiene_kraft 
 {
     type = distributed
     local = ch_bav_sachplan-infrastruktur-schiene_kraft_1
