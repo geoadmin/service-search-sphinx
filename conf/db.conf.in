@@ -46,9 +46,11 @@ indexer
 
 searchd
 {
-    port = 9312
-    log = /var/run/sphinxsearch/searchd.log
-    query_log = /var/run/sphinxsearch/query.log
+    listen = 9312
+    # syslog -> logstash -> kibana
+    log = /var/log/sphinxsearch/searchd.log
+    # syslog -> logstash -> kibana
+    query_log = /var/log/sphinxsearch/query.log
     pid_file = /var/run/sphinxsearch/searchd.pid
     ondisk_dict_default = 1
     preopen_indexes = 0
