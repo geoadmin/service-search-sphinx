@@ -94,7 +94,7 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , remove_accents(coalesce(egid::text,''))||' '||remove_accents(coalesce(strname1::text,''))||' '||remove_accents(coalesce(deinr::text,''))||' '||remove_accents(coalesce(plz4::text,''))||' '||remove_accents(coalesce(plzname::text,''))||' '||remove_accents(coalesce(gdename::text,'')) as detail \
+            , remove_accents(coalesce(egid::text,''))||' '||remove_accents(coalesce(strname1::text,''))||' '||remove_accents(coalesce(deinr::text,''))||' '||remove_accents(coalesce(plz4::text,''))||' '||remove_accents(coalesce(plzname::text,''))||' '||remove_accents(coalesce(gdename::text,''))||' _'||remove_accents(coalesce(gdekt::text, ''))||'_' as detail \
             , 'ch.bfs.gebaeude_wohnungs_register' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , bgdi_quadindex as geom_quadindex \
