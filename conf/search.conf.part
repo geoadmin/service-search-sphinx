@@ -31,7 +31,7 @@ source src_parcel : src_swisssearch
     sql_query = \
         SELECT \
         gid as id \
-        , search_name as detail \
+        , 'parzelle parcelle parcella parcel' || search_name as detail \
         , coalesce(gemname,'')||' '||coalesce(name,'') as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
