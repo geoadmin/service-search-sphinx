@@ -32,7 +32,7 @@ source src_parcel : src_swisssearch
         SELECT \
         gid as id \
         , 'parzelle parcelle parcella parcel' || search_name as detail \
-        , coalesce(gemname,'')||' '||coalesce(name ,'') as label \
+        , coalesce(gemname,'')||' '||coalesce(name,'') as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
