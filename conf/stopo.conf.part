@@ -1109,6 +1109,22 @@ source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
         FROM geol.geotope_plg
 }
 
+source src_ch_swiss_geologie-geotechnik-steine_historische_bauwerke : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geotechnik-steine_historische_bauwerke' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objekt::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geotechnik_steine_historische_bauwerke
+}
+
 ## SEARCHABLE
 
 source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_features
@@ -1823,6 +1839,12 @@ index ch_swisstopo_geologie-geotope_2 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geotope_2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_2
+}
+
+index ch_swiss_geologie-geotechnik-steine_historische_bauwerke : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swiss_geologie-geotechnik-steine_historische_bauwerke
+    path = /var/lib/sphinxsearch/data/index/ch_swiss_geologie-geotechnik-steine_historische_bauwerke
 }
 
 index ch_swisstopo_geologie-geotope
