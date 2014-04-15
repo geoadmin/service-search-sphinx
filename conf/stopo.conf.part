@@ -1841,7 +1841,7 @@ index ch_swisstopo_geologie-geotope_2 : ch_kantone_cadastralwebmap-farbe
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotope_2
 }
 
-index ch_swiss_geologie-geotechnik-steine_historische_bauwerke : ch_kantone_cadastralwebmap-farbe
+index ch_swisstopo_geologie-geotechnik-steine_historische_bauwerke : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swiss_geologie-geotechnik-steine_historische_bauwerke
     path = /var/lib/sphinxsearch/data/index/ch_swiss_geologie-geotechnik-steine_historische_bauwerke
