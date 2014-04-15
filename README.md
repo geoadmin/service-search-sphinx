@@ -43,11 +43,16 @@ $ sudo su - sphinxsearch
 
 ####stop
 ```bash
-$ searchd --stop
+$ /etc/init.d/sphinxsearch stop
 ```
 ####start
 ```bash
-$ searchd
+$ /etc/init.d/sphinxsearch start
+```
+
+####validate config
+```
+$ indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
 ```
 ###Rebuild / update Indexes:
 ####rebuild / build some indexes index1 index2 index3
