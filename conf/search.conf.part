@@ -107,7 +107,7 @@ source src_zipcode : src_swisssearch
     sql_query = \
         SELECT \
         gid as id \
-        , coalesce(plz,'')||' '||coalesce(ort_27,'') as detail \
+        , search_name as detail \
         , '<b>'||coalesce(plz,'')||' - '||coalesce(ort_27,'')||' ('||coalesce(kanton,'')||')</b>' as label \
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
