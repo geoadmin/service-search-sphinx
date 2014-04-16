@@ -103,6 +103,10 @@ if __name__ == '__main__':
     if options.index_filter:
         filter_option='index'
 
+    if options.config:
+         SPHINXCONFIG=options.config
+
+
     # SQLITE Initialize and create tables in memory    
     conn = sqlite3.connect(":memory:")
     c = conn.cursor()
@@ -134,10 +138,10 @@ if __name__ == '__main__':
         data=myfile.read()
 
     # Parse PG Connection from Sphinx Config
-    CONN_HOST=re.findall('sql_host\s=\s(.*)', data)[0]
-    CONN_USER=re.findall('sql_user\s=\s(.*)', data)[0]
-    CONN_PWD=re.findall('sql_pass\s=\s(.*)', data)[0]
-    CONN_PORT=re.findall('sql_port\s=\s(.*)', data)[0]
+    CONN_HOST=re.findall('sql_host\s*=\s*(.*)', data)[0]
+    CONN_USER=re.findall('sql_user\s*=\s*(.*)', data)[0]
+    CONN_PWD=re.findall('sql_pass\s*=\s*(.*)', data)[0]
+    CONN_PORT=re.findall('sql_port\s*=\s*(.*)', data)[0]
 
     # parse sphinx config sources and write them to sqlite sources table ...
     # TODO: 
@@ -158,12 +162,11 @@ if __name__ == '__main__':
     for i in reg_source.finditer(data):
         source, source_parent = parsing_func(i.groupdict()['source'])
         # step 2 extract sql_db and sql_query from curly braced content
-        sql_db = re.search('sql_db\s=\s([\w]+)', i.groupdict()['content'])
+        sql_db = re.search('sql_db\s*=\s*([\w]+)', i.groupdict()['content'])
         sql_db = sql_db.group(1) if sql_db else None
 
-        sql_query = re.findall('^\s+sql_query\s=(.*)$', i.groupdict()['content'], re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
+        sql_query = re.findall('^\s+sql_query\s*=(.*)$', i.groupdict()['content'], re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
         sql_query = sql_query[0].replace('\\','').replace('\n', '').strip() if sql_query else None
-
         c.execute("""
                     INSERT INTO sources (
                         source
@@ -188,7 +191,7 @@ if __name__ == '__main__':
     for i in reg_index.finditer(data):
         index, index_parent = parsing_func(i.groupdict()['index'])
         # step 2 extract sql_db and sql_query from curly braced content
-        source = re.search('source\s=\s(.*)', i.groupdict()['content'])
+        source = re.search('source\s=\s*(.*)', i.groupdict()['content'])
         source = source.group(1) if source else None
 
         # import only real indexes, no distributed indexes
