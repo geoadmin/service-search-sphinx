@@ -13,32 +13,30 @@ source src_swisssearch : def_pqsql
 
 source src_address : src_swisssearch
 {
+    sql_db=kogis
     sql_query = \
-        SELECT \
-        gid as id \
-        , regexp_replace(search_name, '[0-9]*([0-9]) ', '') as detail \
-        , coalesce(strname1,'')||' '||coalesce(deinr,'')||' <b>'||coalesce(plz,'')||' '||coalesce(ort_27,'')||'</b>' as label \
-        , origin as origin \
-        , st_box2d(the_geom) as geom_st_box2d \
-        , rank as rank \
-        , NULLIF(regexp_replace(deinr::text, '[^0-9]'::text, ''::text, 'g'::text), ''::text)::integer as num \
-        from swiss_search \
-        where origin = 'address'
+        SELECT id \
+        , detail \
+        , label \
+        , origin \
+        , geom_st_box2d \
+        , 6::integer as rank \
+        , num \
+        FROM bfs.adressen_sphinx
 }
 
 source src_parcel : src_swisssearch
 {
+    sql_db=dritte
     sql_query = \
-        SELECT \
-        gid as id \
-        , 'parzelle parcelle parcella parcel ' || search_name as detail \
-        , coalesce(gemname,'')||' '||coalesce(name,'') as label \
-        , origin as origin \
-        , st_box2d(the_geom) as geom_st_box2d \
-        , rank as rank \
-        , SUBSTRING(name FROM '([0-9]+)')::int as num \
-        from swiss_search \
-        where origin = 'parcel'
+        SELECT id \
+        , detail \
+        , label \
+        , origin \
+        , geom_st_box2d \
+        , 10::integer as rank \
+        , num \
+        from kantone.parzellen_sphinx
 }
 
 source src_sn25 : src_swisssearch
