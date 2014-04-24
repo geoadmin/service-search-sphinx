@@ -1365,6 +1365,124 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_fea
       from geol.geotechnik_ziegeleien_1995
 }
 
+source src_ch_swisstopo_geologie-gisgeol-punkte : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT gid as id \
+          , sgd_nr::text as label \
+          , 'feature' as origin \
+          , remove_accents(sgd_nr::text) as detail \
+          , 'ch.swisstopo.geologie-gisgeol-punkte' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , gid::text as feature_id \
+      from geol.view_gisgeol_points
+}
+
+source src_ch_swisstopo_geologie-gisgeol-linien : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT gid as id \
+          , sgd_nr::text as label \
+          , 'feature' as origin \
+          , remove_accents(sgd_nr::text) as detail \
+          , 'ch.swisstopo.geologie-gisgeol-linien' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , gid::text as feature_id \
+      from geol.view_gisgeol_lines
+}
+
+source src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT gid as id \
+          , sgd_nr::text as label \
+          , 'feature' as origin \
+          , remove_accents(sgd_nr::text) as detail \
+          , 'ch.swisstopo.geologie-gisgeol-flaechen-1x1km' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , gid::text as feature_id \
+      from geol.view_gisgeol_surfaces_1x1km
+}
+
+source src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT gid as id \
+          , sgd_nr::text as label \
+          , 'feature' as origin \
+          , remove_accents(sgd_nr::text) as detail \
+          , 'ch.swisstopo.geologie-gisgeol-flaechen-10x10km' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , gid::text as feature_id \
+      from geol.view_gisgeol_surfaces_10x10km
+}
+
+source src_ch_swisstopo_geologie-gisgeol-flaechen-10to21000km2 : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT gid as id \
+          , sgd_nr::text as label \
+          , 'feature' as origin \
+          , remove_accents(sgd_nr::text) as detail \
+          , 'ch.swisstopo.geologie-gisgeol-flaechen-10to21000km2' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , gid::text as feature_id \
+      from geol.view_gisgeol_surfaces_10to21000km2
+}
+
+source src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT gid as id \
+          , sgd_nr::text as label \
+          , 'feature' as origin \
+          , remove_accents(sgd_nr::text) as detail \
+          , 'ch.swisstopo.geologie-gisgeol-flaechen-gt21000km2' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , gid::text as feature_id \
+      from geol.view_gisgeol_surfaces_gt21000km2
+}
+
+source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_features
+{
+   sql_db = stopo
+   sql_query = \
+      SELECT gid as id \
+          , sgd_nr::text as label \
+          , 'feature' as origin \
+          , remove_accents(sgd_nr::text) as detail \
+          , 'ch.swisstopo.geologie-gisgeol-flaechen-lt10km2' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , st_box2d(the_geom) as geom_st_box2d \
+          , gid::text as feature_id \
+      from geol.view_gisgeol_surfaces_lt10km2
+}
 ## INDICES
 
 ## QUERYABLE
@@ -1936,10 +2054,64 @@ index ch_swisstopo_geologie-rohstoffe-industrieminerale : ch_swisstopo_verschieb
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-industrieminerale
 }
 
-
 index ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : ch_swisstopo_verschiebungsvektoren-tsp1
 {
     source = src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas
 }
+
+index ch_swisstopo_geologie-gisgeol-punkte : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-gisgeol-punkte
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-punkte
+}
+
+index ch_swisstopo_geologie-gisgeol-linien : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-gisgeol-linien
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-linien
+}
+
+index ch_swisstopo_geologie-gisgeol-flaechen-1x1km : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-1x1km
+}
+
+index ch_swisstopo_geologie-gisgeol-flaechen-10x10km : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-10x10km
+}
+
+index ch_swisstopo_geologie-gisgeol-flaechen-10to21000km2 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-gisgeol-flaechen-10to21000km2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-10to21000km2
+}
+
+index ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2
+}
+
+index ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-lt10km2
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
