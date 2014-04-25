@@ -960,7 +960,7 @@ source src_ch_swisstopo_swisstlm3d-wanderwege : def_queryable_features
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , nr::text as label \
-            , coalesce(hikingtype,'')||coalesce(bridgetype,'')||coalesce(tunneltype,'') as feature_id \
+            , nr as feature_id \
         FROM karto.wanderwege_swissmap
 }
 # Identical source for ch.swisstopo-karto.wanderwege same src
