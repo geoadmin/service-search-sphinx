@@ -156,6 +156,7 @@ index ch_swisstopo_fixpunkte-lfp2 : ch_swisstopo_fixpunkte-hfp1
 
 index ch_bfs_gebaeude_wohnungs_register : ch_swisstopo_fixpunkte-hfp1
 {
+    min_infix_len = 1
     source = src_ch_bfs_gebaeude_wohnungs_register
     path = /var/lib/sphinxsearch/data/index/ch_bfs_gebaeude_wohnungs_register
 }
