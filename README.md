@@ -21,8 +21,8 @@ Staging    | URL
 $ make template
 $ sudo su sphinxsearch
 $ make move-template
-$ searchd --stop
-$ searchd
+$ /etc/init.d/sphinxsearch stop
+$ /etc/init.d/sphinxsearch start
 ```
 
 ###Service Details:
