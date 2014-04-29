@@ -1125,6 +1125,23 @@ source src_ch_swiss_geologie-geotechnik-steine_historische_bauwerke : def_querya
         FROM geol.geotechnik_steine_historische_bauwerke
 }
 
+source src_ch_swisstopo_geologie-generalkarte-ggk200 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT gid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-generalkarte-ggk200' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , titel::text as label \
+            , gid::text as feature_id \
+        FROM geol.kv_ggk_pk
+}
+
+
 ## SEARCHABLE
 
 source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_features
@@ -1970,6 +1987,12 @@ index ch_swisstopo_geologie-geotope
     type = distributed
     local = ch_swisstopo_geologie-geotope_1
     local = ch_swisstopo_geologie-geotope_2
+}
+
+index ch_swisstopo_geologie-generalkarte-ggk200 : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-generalkarte-ggk200 
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_generalkarte-ggk200
 }
 
 ## SEARCHABLE
