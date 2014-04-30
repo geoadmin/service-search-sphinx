@@ -814,7 +814,7 @@ source src_ch_bafu_oekomorphologie-f_abschnitte : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , abschnr::text as label \
+            , anfangsmass::text as label \
             , bgdi_id::text as feature_id \
         FROM wasser.oekom_abschnitte
 }
