@@ -8,6 +8,8 @@ source src_swisssearch : def_pqsql
     sql_attr_string = label
     sql_attr_string = origin
     sql_attr_string = geom_st_box2d
+    sql_attr_float = x
+    sql_attr_float = y
     sql_field_string = detail
 }
 
@@ -21,6 +23,8 @@ source src_address : src_swisssearch
         , origin \
         , geom_st_box2d \
         , 6::integer as rank \
+        , x \
+        , y \
         , num \
         FROM bfs.adressen_sphinx
 }
@@ -35,6 +39,8 @@ source src_parcel : src_swisssearch
         , origin \
         , geom_st_box2d \
         , 10::integer as rank \
+        , x \
+        , y \
         , num \
         from kantone.parzellen_sphinx
 }
@@ -49,6 +55,8 @@ source src_sn25 : src_swisssearch
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
+        , y((the_geom)) as x \
+        , x((the_geom)) as y \
         , 1 as num \
         from swiss_search \
         where origin = 'sn25'
@@ -64,6 +72,8 @@ source src_gg25 : src_swisssearch
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
+        , y(ST_PointOnSurface(swiss_search.the_geom)) AS x \
+        , x(ST_PointOnSurface(swiss_search.the_geom)) AS y \
         , 1 as num \
         from swiss_search \
         where origin = 'gg25'
@@ -79,6 +89,8 @@ source src_kantone : src_swisssearch
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
+        , y(ST_PointOnSurface(swiss_search.the_geom)) AS x \
+        , x(ST_PointOnSurface(swiss_search.the_geom)) AS y \
         , 1 as num \
         from swiss_search \
         where origin = 'kantone'
@@ -95,6 +107,8 @@ source src_district : src_swisssearch
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
+        , y(ST_PointOnSurface(swiss_search.the_geom)) AS x \
+        , x(ST_PointOnSurface(swiss_search.the_geom)) AS y \
         , 1 as num \
         from swiss_search \
         where origin = 'district'
@@ -110,6 +124,8 @@ source src_zipcode : src_swisssearch
         , origin as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , rank as rank \
+        , y(ST_PointOnSurface(swiss_search.the_geom)) AS x \
+        , x(ST_PointOnSurface(swiss_search.the_geom)) AS y \
         , 1 as num \
         from swiss_search \
         where origin = 'zipcode'
