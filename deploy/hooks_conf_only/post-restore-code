@@ -10,8 +10,16 @@ CODE_DIR=$2 # = dest = /var/cache/deploy/sphinxsearch.data.tmp/
 SPHINXINDEX=/var/lib/sphinxsearch/data/index/
 PID=/var/run/sphinxsearch/searchd.pid
 
+# fancy output
+green='\e[0;32m'
+red='\e[0;31m'
+NC='\e[0m' # No Color
+
 echo "create index directory $SPHINXINDEX if it does not yet exists..."
 sudo -u sphinxsearch mkdir -p $SPHINXINDEX
+
+echo "make backup of current sphinx config..."
+sudo -u sphinxsearch cp /etc/sphinxsearch/sphinx.conf /etc/sphinxsearch/sphinx.conf.backup
 
 echo "copy files preserving timestamp ..."
 sudo -u sphinxsearch cp  $CODE_DIR""sphinx.conf /etc/sphinxsearch/
@@ -51,12 +59,62 @@ else
     echo "no sphinx indexes will be updated ..."
 fi
 
-echo "restarting sphinx service, precaching indexes ..."
-sudo -u sphinxsearch /etc/init.d/sphinxsearch restart | grep -i "WARNING"
+# Check service status
+if [ -f $PID ]; then
+    status=$(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)
+    if [ $? -eq 0 ]; then
+        echo "  service has been started with $ /etc/init.d/sphinxsearch start"
+        echo -e "  ${red}stopping service ...${NC}"
+        sudo -u sphinxsearch /etc/init.d/sphinxsearch stop
+    else
+        echo "  service has been started with $ searchd"
+        echo -e "  ${red}stopping service ...${NC}"
+        sudo -u sphinxsearch searchd --stop
+    fi
+else
+    echo -e "    ${red}WARNING: service was not running${NC}"
+fi
+
+# wait 5 seconds for sphinxsearch to stop completely
+sleep 5
+
+# Check if service is running, if not try to restart the service
+WAITFORSPHINX=3
+COUNTER=0
+while [ ! -f "$PID" ]
+do
+    if [ $COUNTER -ne 0 ]; then
+        # Show this message after the first try only
+        echo -e "${red}service not running, try $COUNTER of $WAITFORSPHINX to start service ...${NC}"
+    fi
+    echo "    starting sphinx service with new config ..."
+    sudo -u sphinxsearch /etc/init.d/sphinxsearch start | grep -i "WARNING\|ERROR"
+    sleep 5
+    COUNTER=$(($COUNTER +1))
+    if test $COUNTER -gt $WAITFORSPHINX
+    then
+        # if service cannot be started with new config, use old config instead
+        echo -e "${red}service could not be started, using old config${NC}"
+        if [ -f "/etc/sphinxsearch/sphinx.conf.backup" ]; then
+            sudo -u sphinxsearch mv /etc/sphinxsearch/sphinx.conf.backup /etc/sphinxsearch/sphinx.conf
+            echo "    starting sphinx service with old config ..."
+            sudo -u sphinxsearch /etc/init.d/sphinxsearch start | grep -i "WARNING\|ERROR"
+        else
+            echo -e "${red}WARNING: no valid sphinx configuration available. SERVICE NOT RUNNING${NC}"
+            exit 1
+        fi
+        sleep 5
+        break
+    fi
+done
+
+if [ -f $PID ]; then
+    echo -e "${green}service is running with process id: $(pgrep searchd), PID: $PID ${NC}"
+else
+    echo -e "${red}WARNING: $(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)${NC}"
+fi
 
 echo "removing temporary deploy folder on deploy target /var/cache/deploy/sphinxsearch.data.tmp/ ..."
 rm -rf $CODE_DIR
-
-sudo -u sphinxsearch /etc/init.d/sphinxsearch status
 
 exit 0
