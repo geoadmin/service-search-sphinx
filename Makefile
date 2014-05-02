@@ -2,8 +2,6 @@ IPATTERN ?= 'Set IPATTERN variable in call'
 INDEX ?= 'Set INDEX variable to specify the index to create'
 FEATURES_INDICES := $(shell find /var/lib/sphinxsearch/data/index/ -type f -name 'ch_*spa' | sed 's:/var/lib/sphinxsearch/data/index/::' |  sed 's:.spa::')
 GREP_INDICES := $(shell if [ -f conf/sphinx.conf ]; then grep "^index .*$(IPATTERN).*" conf/sphinx.conf | sed 's: \: .*::' | grep ".*$(IPATTERN).*" | sed 's:index ::'; fi)
-SHELL = /bin/bash
-
 
 .PHONY: help
 help:
