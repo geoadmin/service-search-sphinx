@@ -28,7 +28,7 @@ source src_ch_swisstopo_lubis-luftbilder_farbe : def_searchable_features_with_ye
             , 'feature' as origin \
             , ebkey as detail \
             , 'ch.swisstopo.lubis-luftbilder_farbe' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
@@ -46,7 +46,7 @@ source src_ch_swisstopo_lubis-luftbilder_schwarzweiss: def_searchable_features_w
             , 'feature' as origin \
             , ebkey as detail \
             , 'ch.swisstopo.lubis-luftbilder_schwarzweiss' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
@@ -64,7 +64,7 @@ source src_ch_swisstopo_lubis-luftbilder_infrarot: def_searchable_features_with_
             , 'feature' as origin \
             , ebkey as detail \
             , 'ch.swisstopo.lubis-luftbilder_infrarot' as layer \
-            , quadindex(the_geom) as geom_quadindex \
+            , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
