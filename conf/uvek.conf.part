@@ -383,8 +383,8 @@ source src_ch_astra_ivs-nat : def_searchable_features
             , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
             , 'ch.astra.ivs-nat' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d   \
             , nat_id::text as feature_id \
         from astra.ivs_nat
@@ -400,8 +400,8 @@ source src_ch_astra_ivs-reg_loc : def_searchable_features
             , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
             , 'ch.astra.ivs-reg_loc' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , reg_loc_id::text as feature_id \
         from astra.ivs_reg_loc
@@ -468,8 +468,8 @@ source src_ch_bakom_versorgungsgebiet-tv : def_searchable_features
             , remove_accents(prog) as detail \
             , 'ch.bakom.versorgungsgebiet-tv' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+            , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , gid::text as feature_id \
         from bakom.tv_gebiet
@@ -486,8 +486,8 @@ source src_ch_bakom_versorgungsgebiet-ukw : def_searchable_features
             , remove_accents(prog) as detail \
             , 'ch.bakom.versorgungsgebiet-ukw' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+            , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , gid::text as feature_id \
         from bakom.ukw_gebiet
@@ -503,13 +503,14 @@ source src_ch_bav_sachplan-infrastruktur-schiene_ausgangslage : def_searchable_f
             , remove_accents(name)||' '||remove_accents(description_de)||' '||remove_accents(description_fr)||' '||remove_accents(description_it)||' '||remove_accents(anlage_id)  as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_ausgangslage' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , bgdi_id::text as feature_id \
         from bav.sis_angaben
 }
 
+## This table is empyt in test..
 source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_1 : def_searchable_features
 {
     sql_db = uvek
@@ -554,8 +555,8 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_1 : def_searchable_featur
             , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , stabil_id::text as feature_id \
         from bav.sis_fac_kraft
