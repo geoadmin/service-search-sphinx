@@ -883,8 +883,8 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
             , au_obj::text||' '||remove_accents(au_name) as detail \
             , 'ch.bafu.bundesinventare-auen' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , gid::text as feature_id \
         from bundinv.au
