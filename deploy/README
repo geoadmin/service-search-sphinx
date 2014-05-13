@@ -11,7 +11,7 @@ Use make command to assure the above (note: creating indices might take a while)
 
 usage:
 deploy to integration:
-$ sudo -u deploy deploy  -r deploy.cfg ab
+$ sudo -u deploy deploy  -r deploy.cfg int
 
 deploy to production:
 $ sudo -u deploy deploy  -r deploy.cfg prod

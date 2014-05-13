@@ -21,12 +21,12 @@ help:
 	@echo "- template	     Create sphinx config file from template"
 	@echo
 	@echo "Deploy:"
-	@echo "- deploy-ab           Deploy all the indices in integration"
-	@echo "- deploy-prod         Deploy all the indices in production"
-	@echo "- deploy-ab-config    Deploy the sphinx config only in integration, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
-	@echo "                      an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated.,"
-	@echo "- deploy-prod-config  Deploy the sphinx config only in production, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
-	@echo "                      an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
+	@echo "- deploy-int           Deploy all the indices in integration"
+	@echo "- deploy-prod          Deploy all the indices in production"
+	@echo "- deploy-int-config    Deploy the sphinx config only in integration, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
+	@echo "                       an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated.,"
+	@echo "- deploy-prod-config   Deploy the sphinx config only in production, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
+	@echo "                       an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
 
 .PHONY: index
 index: move-template
@@ -57,24 +57,24 @@ template:
 	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/'  conf/db.conf.in  > conf/db.conf
 	cat conf/db.conf conf/*.part > conf/sphinx.conf
 
-.PHONY: deploy-ab
-deploy-ab:
-	sudo -u deploy deploy  -r deploy/deploy.cfg ab
-	cd deploy && bash deploy-conf-only.sh -t ab 2> /dev/null
+.PHONY: deploy-int
+deploy-int:
+	sudo -u deploy deploy  -r deploy/deploy.cfg int
+	cd deploy && bash deploy-conf-only.sh -t int 2> /dev/null
 
 .PHONY: deploy-prod
 deploy-prod:
 	sudo -u deploy deploy  -r deploy/deploy.cfg prod
 	cd deploy && bash deploy-conf-only.sh -t prod
 
-.PHONY: deploy-ab-config
-deploy-ab-config:
+.PHONY: deploy-int-config
+deploy-int-config:
 ifneq ($(db),)
-		cd deploy && bash deploy-conf-only.sh -t ab -d $(db)
+		cd deploy && bash deploy-conf-only.sh -t int -d $(db)
 else ifneq ($(index),)
-		cd deploy && bash deploy-conf-only.sh -t ab -i $(index)
+		cd deploy && bash deploy-conf-only.sh -t int -i $(index)
 else
-		cd deploy && bash deploy-conf-only.sh -t ab 2> /dev/null
+		cd deploy && bash deploy-conf-only.sh -t int 2> /dev/null
 endif
 
 .PHONY: deploy-prod-config

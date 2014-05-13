@@ -9,7 +9,7 @@ Deploys the sphinx config to the target, if the optional parameter -d is set, al
 arguments:
     -t <<DEPLOY TARGET>> mandatory 
         p.e.
-        -t ab
+        -t int
         -t prod
     -d <<DATABASE PATTERN>> optional 
         p.e. 
