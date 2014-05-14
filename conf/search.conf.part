@@ -6,6 +6,7 @@ source src_swisssearch : def_pqsql
     sql_attr_uint = num
     sql_attr_uint = rank
     sql_attr_string = label
+    sql_attr_string = feature_id
     sql_attr_string = origin
     sql_attr_string = geom_st_box2d
     sql_attr_float = x
@@ -18,6 +19,7 @@ source src_address : src_swisssearch
     sql_db=kogis
     sql_query = \
         SELECT id \
+        , feature_id \
         , detail \
         , label \
         , origin \
@@ -34,6 +36,7 @@ source src_parcel : src_swisssearch
     sql_db=dritte
     sql_query = \
         SELECT id \
+        , NULL::text as feature_id \
         , detail \
         , label \
         , origin \
@@ -50,6 +53,7 @@ source src_sn25 : src_swisssearch
     sql_query = \
         SELECT \
         gid as id \
+        , NULL::text as feature_id \
         , search_name as detail \
         , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label \
         , origin as origin \
@@ -67,6 +71,7 @@ source src_gg25 : src_swisssearch
     sql_query = \
         SELECT \
         gid as id \
+        , bfsnr as feature_id \
         , search_name as detail \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(kanton,'')||')</b>' as label \
         , origin as origin \
@@ -84,6 +89,7 @@ source src_kantone : src_swisssearch
     sql_query = \
         SELECT \
         gid as id \
+        , bfsnr as feature_id \
         , remove_accents(search_name) as detail \
         , '<b>'||name||'</b>' as label \
         , origin as origin \
@@ -102,6 +108,7 @@ source src_district : src_swisssearch
     sql_query = \
         SELECT \
         gid as id \
+        , bfsnr as feature_id \
         , search_name as detail \
         , '<b>'||name||'</b>' as label \
         , origin as origin \
@@ -116,19 +123,20 @@ source src_district : src_swisssearch
 
 source src_zipcode : src_swisssearch
 {
+    sql_db=stopo
     sql_query = \
         SELECT \
         gid as id \
-        , search_name as detail \
-        , '<b>'||coalesce(plz,'')||' - '||coalesce(ort_27,'')||' ('||coalesce(kanton,'')||')</b>' as label \
-        , origin as origin \
-        , st_box2d(the_geom) as geom_st_box2d \
-        , rank as rank \
-        , y(ST_PointOnSurface(swiss_search.the_geom)) AS x \
-        , x(ST_PointOnSurface(swiss_search.the_geom)) AS y \
+        , os_uuid::text as feature_id \
+        , plz::text as detail \
+        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((SELECT ak from tlm.swissboundaries_kantone k where st_intersects(ST_PointOnSurface(p.the_geom),k.the_geom)),'')||')</b>' as label \
+        , 'zipcode' as origin \
+        , st_box2d(the_geom) as geom_st_box2d\
+        , 1 as rank \
+        , y(ST_PointOnSurface(the_geom)) AS x \
+        , x(ST_PointOnSurface(the_geom)) AS y \
         , 1 as num \
-        from swiss_search \
-        where origin = 'zipcode'
+        FROM vd.gabmo_plz p
 }
 
 #source src_address_geocoding : src_address
