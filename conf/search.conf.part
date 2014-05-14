@@ -36,7 +36,6 @@ source src_parcel : src_swisssearch
     sql_db=dritte
     sql_query = \
         SELECT id \
-        , NULL::text as feature_id \
         , detail \
         , label \
         , origin \
@@ -53,7 +52,6 @@ source src_sn25 : src_swisssearch
     sql_query = \
         SELECT \
         gid as id \
-        , NULL::text as feature_id \
         , search_name as detail \
         , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label \
         , origin as origin \
