@@ -98,3 +98,4 @@ move-template:
 	cp conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
 	cp deploy/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
 	cp deploy/pg2sphinx_trigger.py /etc/sphinxsearch/pg2sphinx_trigger.py
+	bash deploy/hooks_conf_only/post-restore-code clean_index

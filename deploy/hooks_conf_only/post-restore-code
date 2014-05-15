@@ -8,12 +8,37 @@ PROJECT_NAME=$1
 CODE_DIR=$2 # = dest = /var/cache/deploy/sphinxsearch.data.tmp/
 
 SPHINXINDEX=/var/lib/sphinxsearch/data/index/
-PID=/var/run/sphinxsearch/searchd.pid
 
 # fancy output
 green='\e[0;32m'
 red='\e[0;31m'
 NC='\e[0m' # No Color
+
+if [ "$*" = "clean_index" ]; then
+    echo "checking for orphaned indexes on file system"
+    echo "executing $0 $*"
+    sphinxconfig="/etc/sphinxsearch/sphinx.conf"
+    indexdir="/var/lib/sphinxsearch/data/index/"
+
+    if [[ -f $sphinxconfig && -d $indexdir ]];then
+        array_config=($(grep path $sphinxconfig | awk -F"=" '{print $2}'))
+        array_file=($(ls $indexdir""*.spd | sed 's|.spd$||g' ))
+        array_diff=($(comm -13 --nocheck-order <(printf '%s\n' "${array_config[@]}" | LC_ALL=C sort) <(printf '%s\n' "${array_file[@]}" | LC_ALL=C sort)))
+
+        for a in "${array_diff[@]}"; do
+            echo -e "   ${red}deleting orphaned index $a from filesystem ...${NC}"
+            if [ "$(whoami)" = sphinxsearch ]; then
+                rm -rf $a*
+            else
+                sudo -u sphinxsearch rm -rf $a*
+            fi
+        done
+        exit 0;
+    else
+        echo -e "   ${red}error - please check if $sphinxconfig and $indexdir are there...${NC}"
+        exit 1;
+    fi
+fi
 
 echo "create index directory $SPHINXINDEX if it does not yet exists..."
 sudo -u sphinxsearch mkdir -p $SPHINXINDEX
@@ -60,7 +85,7 @@ else
 fi
 
 # Check service status
-if [ -f $PID ]; then
+if [ $(pgrep searchd) ]; then
     status=$(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)
     if [ $? -eq 0 ]; then
         echo "  service has been started with $ /etc/init.d/sphinxsearch start"
@@ -81,7 +106,7 @@ sleep 5
 # Check if service is running, if not try to restart the service
 WAITFORSPHINX=3
 COUNTER=0
-while [ ! -f "$PID" ]
+while [ ! $(pgrep searchd) ]
 do
     if [ $COUNTER -ne 0 ]; then
         # Show this message after the first try only
@@ -108,13 +133,12 @@ do
     fi
 done
 
-if [ -f $PID ]; then
-    echo -e "${green}service is running with process id: $(pgrep searchd), PID: $PID ${NC}"
+if [ $(pgrep searchd) ]; then
+    echo -e "${green}service is running with process id: $(pgrep searchd)${NC}"
 else
     echo -e "${red}WARNING: $(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)${NC}"
 fi
 
 echo "removing temporary deploy folder on deploy target /var/cache/deploy/sphinxsearch.data.tmp/ ..."
-rm -rf $CODE_DIR
-
+bash $0 clean_index
 exit 0
