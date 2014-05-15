@@ -2,7 +2,6 @@
 
 source src_swisssearch : def_pqsql
 {
-    sql_db = search
     sql_attr_uint = num
     sql_attr_uint = rank
     sql_attr_string = label
