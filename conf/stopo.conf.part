@@ -33,7 +33,7 @@ source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1 : def_query
             , st_box2d(the_geom) as geom_st_box2d \
             , objval::text as label \
             , gtdboid::text as feature_id \
-        FROM public.vec200_terminal_tiles
+        FROM public.vec200_terminal
 }
 
 source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2 : def_queryable_features
@@ -65,7 +65,7 @@ source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3 : def_query
             , st_box2d(the_geom) as geom_st_box2d \
             , objval::text as label \
             , gtdboid::text as feature_id \
-        FROM public.vec200_railway_tiles
+        FROM public.vec200_railway
 }
 
 source src_ch_swisstopo_treasurehunt : def_queryable_features
@@ -97,7 +97,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_1 : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , objname::text as label \
             , gtdboid::text as feature_id \
-        FROM public.vec200_trafficinfo_tiles
+        FROM public.vec200_trafficinfo
 }
 
 source src_ch_swisstopo_vec200-transportation-strassennetz_2 : def_queryable_features
@@ -129,7 +129,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_3 : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , objval::text as label \
             , gtdboid::text as feature_id \
-        FROM public.vec200_road_tiles
+        FROM public.vec200_road
 }
 
 source src_ch_swisstopo_vec200-transportation-strassennetz_4 : def_queryable_features
@@ -145,7 +145,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_4 : def_queryable_fea
              , st_box2d(the_geom) as geom_st_box2d \
              , objval::text as label \
              , gtdboid::text as feature_id \
-         FROM public.vec200_ramp_tiles
+         FROM public.vec200_ramp
 }
 
 source src_ch_swisstopo_vec200-transportation-strassennetz_5 : def_queryable_features
@@ -161,7 +161,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_5 : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , objname::text as label \
             , gtdboid::text as feature_id \
-        FROM public.vec200_customsoffice_tiles
+        FROM public.vec200_customsoffice
 }
 
 source src_ch_swisstopo_vec200-adminboundaries-protectedarea : def_queryable_features
