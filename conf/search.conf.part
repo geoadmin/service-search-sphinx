@@ -50,38 +50,38 @@ source src_parcel : src_swisssearch
 
 source src_sn25 : src_swisssearch
 {
+    sql_db=stopo
     sql_query = \
         SELECT \
-        gid as id \
+        objectid as id \
         , NULL::text as feature_id \
-        , search_name as detail \
-        , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label \
-        , origin as origin \
+        , remove_accents(coalesce(name,'')||' '||coalesce(kanton,''))::text as detail \
+        , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label  \
+        , 'sn25'::text as origin \
         , st_box2d(the_geom) as geom_st_box2d \
-        , rank as rank \
+        , 5::integer as rank \
         , y((the_geom)) as x \
         , x((the_geom)) as y \
         , 1 as num \
-        from swiss_search \
-        where origin = 'sn25'
+        FROM tlm.swissnames_sn25_und_tlm
 }
 
 source src_gg25 : src_swisssearch
 {
+    sql_db=stopo
     sql_query = \
         SELECT \
-        gid as id \
-        , bfsnr as feature_id \
-        , search_name as detail \
-        , '<b>'||coalesce(gemname,'')||' ('||coalesce(kanton,'')||')</b>' as label \
-        , origin as origin \
-        , st_box2d(the_geom) as geom_st_box2d \
-        , rank as rank \
-        , y(ST_PointOnSurface(swiss_search.the_geom)) AS x \
-        , x(ST_PointOnSurface(swiss_search.the_geom)) AS y \
+        row_number() OVER(ORDER BY id asc) as id \
+        , id::text as feature_id \
+        , remove_accents(gemname||' '||k.ak)::text as detail \
+        , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label \
+        , 'gg25'::text as origin \
+        , st_box2d(g.the_geom) as geom_st_box2d \
+        , 2::integer as rank \
+        , y(ST_PointOnSurface(g.the_geom)) AS x \
+        , x(ST_PointOnSurface(g.the_geom)) AS y \
         , 1 as num \
-        from swiss_search \
-        where origin = 'gg25'
+        FROM tlm.swissboundaries_gemeinden_uebersetzt g left join tlm.swissboundaries_kantone k on k.kantonsnr = g.kantonsnr 
 }
 
 source src_kantone : src_swisssearch
@@ -92,7 +92,7 @@ source src_kantone : src_swisssearch
         kantonsnr::integer as id \
         , kantonsnr::text as feature_id \
         , remove_accents(name ||' '||ak) as detail \
-        , '<b>'||name||'</b>' as label \ 
+        , '<b>'||name||'</b>' as label \
         , 'kantone'::text as origin \
         , st_box2d(the_geom) as geom_st_box2d \
         , 4 as rank \
