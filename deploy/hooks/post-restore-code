@@ -44,7 +44,7 @@ fi
 echo "backup index files to directory $BASEDIR/index.old ..."
 sudo -u sphinxsearch mv $BASEDIR/index $BASEDIR/index.old
 
-echo "move new index files from $BASEDIR/index.tmp to $BASEDIR/data ..."
+echo "move new index files from $BASEDIR/index.tmp to $BASEDIR/index ..."
 sudo -u sphinxsearch mv $BASEDIR/index.tmp $BASEDIR/index
 
 
@@ -73,7 +73,7 @@ do
 	COUNTER=$(($COUNTER +1))
 	if test $COUNTER -gt $WAITFORSPHINX
 	then
-		"service is not stopping, force stop"
+		echo "service is not stopping, force stop"
    		START=$(date +%s)
 		sudo -u sphinxsearch /etc/init.d/sphinxsearch force-stop
 		sleep 1
