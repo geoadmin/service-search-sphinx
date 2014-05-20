@@ -18,11 +18,10 @@ if [ "$*" = "clean_index" ]; then
     echo "checking for orphaned indexes on file system"
     echo "executing $0 $*"
     sphinxconfig="/etc/sphinxsearch/sphinx.conf"
-    indexdir="/var/lib/sphinxsearch/data/index/"
 
-    if [[ -f $sphinxconfig && -d $indexdir ]];then
+    if [[ -f $sphinxconfig && -d $SPHINXINDEX ]];then
         array_config=($(grep path $sphinxconfig | awk -F"=" '{print $2}'))
-        array_file=($(ls $indexdir""*.spd | sed 's|.spd$||g' ))
+        array_file=($(ls $SPHINXINDEX""*.spd | sed 's|.spd$||g' ))
         array_diff=($(comm -13 --nocheck-order <(printf '%s\n' "${array_config[@]}" | LC_ALL=C sort) <(printf '%s\n' "${array_file[@]}" | LC_ALL=C sort)))
 
         for a in "${array_diff[@]}"; do
@@ -35,7 +34,7 @@ if [ "$*" = "clean_index" ]; then
         done
         exit 0;
     else
-        echo -e "   ${red}error - please check if $sphinxconfig and $indexdir are there...${NC}"
+        echo -e "   ${red}error - please check if $sphinxconfig and $SPHINXINDEX are there...${NC}"
         exit 1;
     fi
 fi
