@@ -85,6 +85,7 @@ else
 fi
 
 # Check service status
+echo "Sphinx is running with pid $(pgrep searchd) ..."
 if [ $(pgrep searchd) ]; then
     status=$(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)
     if [ $? -eq 0 ]; then
