@@ -104,7 +104,7 @@ $ make deploy-int-config db=lubis
 
 ####Deploy config to Integration, build all the indexes with the given prefix
 ```bash
-$ make deploy-conf-int index=ch_tamedia_schweizerfamilie-feuerstellen
+$ make deploy-int-config index=ch_tamedia_schweizerfamilie-feuerstellen
 ```
 ####Deploy config to Integration, build all the indexes from config
 You can use one of the following commands to recreate all the indexes on the deploy target from the config file. This may take a while.
