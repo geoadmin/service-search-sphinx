@@ -26,7 +26,7 @@ source src_ch_swisstopo_lubis-luftbilder_farbe : def_searchable_features_with_ye
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
             , 'feature' as origin \
-            , ebkey as detail \
+            , ebkey || ' ' || coalesce(ort,'')  as detail \
             , 'ch.swisstopo.lubis-luftbilder_farbe' as layer \
             , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -44,7 +44,7 @@ source src_ch_swisstopo_lubis-luftbilder_schwarzweiss: def_searchable_features_w
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
             , 'feature' as origin \
-            , ebkey as detail \
+            , ebkey || ' ' || coalesce(ort,'')  as detail \
             , 'ch.swisstopo.lubis-luftbilder_schwarzweiss' as layer \
             , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -62,7 +62,7 @@ source src_ch_swisstopo_lubis-luftbilder_infrarot: def_searchable_features_with_
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
             , 'feature' as origin \
-            , ebkey as detail \
+            , ebkey || ' ' || coalesce(ort,'')  as detail \
             , 'ch.swisstopo.lubis-luftbilder_infrarot' as layer \
             , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -80,7 +80,7 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-kantone : def_searchable_feature
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
             , 'feature' as origin \
-            , ebkey as detail \
+            , ebkey || ' ' || coalesce(ort,'')  as detail \
             , 'ch.swisstopo.lubis-luftbilder-dritte-kantone' as layer \
             , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -98,7 +98,7 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-firmen : def_searchable_features
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
             , 'feature' as origin \
-            , ebkey as detail \
+            , ebkey || ' ' || coalesce(ort,'')  as detail \
             , 'ch.swisstopo.lubis-luftbilder-dritte-firmen' as layer \
             , bgdi_quadindex as geom_quadindex \
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
