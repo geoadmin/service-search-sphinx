@@ -94,25 +94,25 @@ Before the deploy make sure that the following steps have been done
 
 ####Deploy config to Integration, no indexes will be built
 ```bash
-$ make deploy-conf-ab
+$ make deploy-int-config
 ```
 
 ####Deploy config to Integration, build all the indexes which are using the database lubis
 ```bash
-$ make deploy-conf-ab db=lubis
+$ make deploy-int-config db=lubis
 ```
 
 ####Deploy config to Integration, build all the indexes with the given prefix
 ```bash
-$ make deploy-conf-ab index=ch_tamedia_schweizerfamilie-feuerstellen
+$ make deploy-int-config index=ch_tamedia_schweizerfamilie-feuerstellen
 ```
 ####Deploy config to Integration, build all the indexes from config
 You can use one of the following commands to recreate all the indexes on the deploy target from the config file. This may take a while.
 ```bash
-$ make deploy-conf-ab index=all
+$ make deploy-int-config index=all
 ```
 ```bash
-$ make deploy-conf-ab db=all
+$ make deploy-int-config db=all
 ```
 
-The same commands can be used with ```make deploy-conf-prod```.
+The same commands can be used with ```make deploy-prod-config```.

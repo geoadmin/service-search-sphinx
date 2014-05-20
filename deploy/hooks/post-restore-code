@@ -50,7 +50,7 @@ sudo -u sphinxsearch mv $BASEDIR/index.tmp $BASEDIR/index
 
 DBHOST=$DBHOST_DEFAULT
 # TARGET -> integration
-if [[ $TARGET == ab ]]
+if [[ $TARGET == int ]]
 then
   DBHOST=$DBHOST_INT;
 fi
