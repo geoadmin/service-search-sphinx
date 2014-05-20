@@ -53,7 +53,7 @@ sudo -u sphinxsearch rsync --update -qavz $CODE_DIR $SPHINXINDEX
 
 DBHOST=$DBHOST_DEFAULT
 # TARGET -> integration
-if [[ $TARGET == ab ]]
+if [[ $TARGET == int ]]
 then
   DBHOST=$DBHOST_INT;
 fi
