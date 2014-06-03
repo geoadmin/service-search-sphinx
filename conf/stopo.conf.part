@@ -17,6 +17,7 @@ source src_ch_kantone_cadastralwebmap-farbe : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , ak::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM public.kantone25plus
 }
 
@@ -33,6 +34,7 @@ source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_1 : def_query
             , st_box2d(the_geom) as geom_st_box2d \
             , objval::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_terminal
 }
 
@@ -49,6 +51,7 @@ source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_2 : def_query
             , st_box2d(the_geom) as geom_st_box2d \
             , objval::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.v200_ship_kursschiff_linie_tooltip
 }
 
@@ -65,6 +68,7 @@ source src_ch_swisstopo_vec200-transportation-oeffentliche-verkehr_3 : def_query
             , st_box2d(the_geom) as geom_st_box2d \
             , objval::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_railway
 }
 
@@ -81,6 +85,7 @@ source src_ch_swisstopo_treasurehunt : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , title_de::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM public.treasurehunt
 }
 
@@ -97,6 +102,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_1 : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , objname::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_trafficinfo
 }
 
@@ -113,6 +119,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_2 : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , detn::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.v200_ship_autofaehre_tooltip
 }
 
@@ -129,6 +136,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_3 : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , objval::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_road
 }
 
@@ -145,6 +153,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_4 : def_queryable_fea
              , st_box2d(the_geom) as geom_st_box2d \
              , objval::text as label \
              , gtdboid::text as feature_id \
+             , gtdboid::text as featureId \
          FROM public.vec200_ramp
 }
 
@@ -161,6 +170,7 @@ source src_ch_swisstopo_vec200-transportation-strassennetz_5 : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , objname::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_customsoffice
 }
 
@@ -177,6 +187,7 @@ source src_ch_swisstopo_vec200-adminboundaries-protectedarea : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_protectedarea
 }
 
@@ -193,6 +204,7 @@ source src_ch_swisstopo_vec200-hydrography_1 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_flowingwater
 }
 
@@ -209,6 +221,7 @@ source src_ch_swisstopo_vec200-hydrography_2 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_stagnantwater
 }
 
@@ -225,6 +238,7 @@ source src_ch_swisstopo_vec200-landcover : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , objname1::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_landcover
 }
 
@@ -241,6 +255,7 @@ source src_ch_swisstopo_vec200-miscellaneous_1 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , objname::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_builtupp
 }
 
@@ -257,6 +272,7 @@ source src_ch_swisstopo_vec200-miscellaneous_2 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , objname::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.v200_poi_tooltip
 }
 
@@ -273,6 +289,7 @@ source src_ch_swisstopo_vec200-miscellaneous_3 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , fco::text as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_supply
 }
 
@@ -289,6 +306,7 @@ source src_ch_swisstopo_vec25-strassennetz : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , objectid::text as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_str_25_l_tooltip
 }
 
@@ -305,6 +323,7 @@ source src_ch_swisstopo_vec25-uebrigerverkehr : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , coalesce(length::text,'')||' [m]' as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_uvk_25_l
 }
 
@@ -321,6 +340,7 @@ source src_ch_swisstopo_vec25-anlagen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , coalesce(area::text,'')||' [m2]' as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_anl_25_a
 }
 
@@ -337,6 +357,7 @@ source src_ch_swisstopo_vec25-eisenbahnnetz : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , coalesce(length::text,'')||' [m]' as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_eis_25_l
 }
 
@@ -353,6 +374,7 @@ source src_ch_swisstopo_vec25-gebaeude : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , coalesce(area::text,'')||' [m2]' as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_geb_25_a
 }
 
@@ -369,6 +391,7 @@ source src_ch_swisstopo_vec25-gewaessernetz : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_gwn_25_l
 }
 
@@ -385,6 +408,7 @@ source src_ch_swisstopo_vec25-primaerflaechen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , coalesce(area::text,'')||' [m2]' as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_pri25_a
 }
 
@@ -401,6 +425,7 @@ source src_ch_swisstopo_vec25-einzelobjekte : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , coalesce(length::text,'')||' [m]' as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_eob_25_l
 }
 
@@ -417,6 +442,7 @@ source src_ch_swisstopo_vec25-heckenbaeume : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , coalesce(length::text,'')||' [m]' as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM public.v25_heb_25_l
 }
 
@@ -433,6 +459,7 @@ source src_ch_swisstopo_dreiecksvermaschung : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , nom::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM geodaesie.dreiecksvermaschung
 }
 
@@ -449,6 +476,7 @@ source src_ch_swisstopo_hiks-dufour : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , datenstand::text as label \
             , tilenumber::text as feature_id \
+            , tilenumber::text as featureId \
         FROM datenstand.view_gridstand_datenhaltung_dufour_erst
 }
 
@@ -465,6 +493,7 @@ source src_ch_swisstopo_hiks-siegfried : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , datenstand::text as label \
             , tilenumber::text as feature_id \
+            , tilenumber::text as featureId \
         FROM datenstand.view_gridstand_datenhaltung_siegfried_erst
 }
 
@@ -481,6 +510,7 @@ source src_ch_swisstopo_pixelkarte-pk25_metadata : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , lk_name::text as label \
             , kbnum::text as feature_id \
+            , kbnum::text as featureId \
         FROM datenstand.view_gridstand_datenhaltung_pk25_tilecache
 }
 
@@ -497,6 +527,7 @@ source src_ch_swisstopo_pixelkarte-pk50_metadata : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , lk_name::text as label \
             , kbnum::text as feature_id \
+            , kbnum::text as featureId \
         FROM datenstand.view_gridstand_datenhaltung_pk50_tilecache
 }
 
@@ -513,6 +544,7 @@ source src_ch_swisstopo_pixelkarte-pk100_metadata : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , lk_name::text as label \
             , kbnum::text as feature_id \
+            , kbnum::text as featureId \
         FROM datenstand.view_gridstand_datenhaltung_pk100_tilecache
 }
 
@@ -529,6 +561,7 @@ source src_ch_swisstopo_pixelkarte-pk200_metadata : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , lk_name::text as label \
             , kbnum::text as feature_id \
+            , kbnum::text as featureId \
          FROM datenstand.view_gridstand_datenhaltung_pk200_tilecache
 }
 
@@ -545,6 +578,7 @@ source src_ch_swisstopo_pixelkarte-pk500_metadata : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , lk_name::text as label \
             , kbnum::text as feature_id \
+            , kbnum::text as featureId \
         FROM datenstand.view_gridstand_datenhaltung_pk500_tilecache
 }
 
@@ -561,6 +595,7 @@ source src_ch_swisstopo_images-swissimage_metadata : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , lk25_name::text as label \
             , tilenumber::text as feature_id \
+            , tilenumber::text as featureId \
         FROM datenstand.view_gridstand_datenhaltung_swissimage_tilecache
 }
 
@@ -577,6 +612,7 @@ source src_ch_swisstopo_geologie-geolkarten500_metadata : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , bgdi_id::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM public.gk500
 }
 
@@ -593,6 +629,7 @@ source src_ch_swisstopo_geologie-geologischer_atlas : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , titel::text as label \
             , nr::text as feature_id \
+            , nr::text as featureId \
         FROM geol.kv_ga25_pk
 }
 
@@ -609,6 +646,7 @@ source src_ch_swisstopo_geologie-geologische_karte_1 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , type_de::text as label \
             , fid::text as feature_id \
+            , fid::text as featureId \
         FROM geol.geologische_karte_line
 }
 
@@ -625,6 +663,7 @@ source src_ch_swisstopo_geologie-geologische_karte_2 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , leg_geol_d::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM geol.geologische_karte_plg
 }
 
@@ -641,6 +680,7 @@ source src_ch_swisstopo_geologie-geotechnik-mineralische_rohstoffe200 : def_quer
             , st_box2d(the_geom) as geom_st_box2d \
             , area_name::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM geol.geotechnik_mineralische_rohstoffe200
 }
 
@@ -657,6 +697,7 @@ source src_ch_swisstopo_geologie-geotechnik-gk200 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , file_name::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM geol.geotechnik_gk200_lgd
 }
 
@@ -673,6 +714,7 @@ source src_ch_swisstopo_geologie-geotechnik-gk500-genese : def_queryable_feature
             , st_box2d(the_geom) as geom_st_box2d \
             , genese_de::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM geol.gk500_genese
 }
 
@@ -689,6 +731,7 @@ source src_ch_swisstopo_geologie-geotechnik-gk500-gesteinsklassierung : def_quer
             , st_box2d(the_geom) as geom_st_box2d \
             , gestkl_de::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM geol.gk500_gesteinsklassierung
 }
 
@@ -705,6 +748,7 @@ source src_ch_swisstopo_geo-geotechnik-gk500-lith_haupt : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , bgdi_tooltip_de::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM geol.gk500_lithologie_hauptgruppen
 }
 
@@ -721,6 +765,7 @@ source src_ch_swisstopo_geologie-geotechnik-steinbrueche_1980 : def_queryable_fe
             , st_box2d(the_geom) as geom_st_box2d \
             , gesteinsgr::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM geol.geotechnik_steinbrueche_1980
 }
     
@@ -737,6 +782,7 @@ source src_ch_swisstopo_geologie-geotechnik-steinbrueche_1995 : def_queryable_fe
             , st_box2d(the_geom) as geom_st_box2d \
             , gesteinsgr::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM geol.geotechnik_steinbrueche_1995
 }
 
@@ -753,6 +799,7 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1965 : def_queryable
             , st_box2d(the_geom) as geom_st_box2d \
             , stoff::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM geol.geotechnik_zementindustrie
 }
 
@@ -769,6 +816,7 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : def_queryable
             , st_box2d(the_geom) as geom_st_box2d \
             , stoff::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM geol.geotechnik_zementindustrie
 }
 
@@ -785,6 +833,7 @@ source src_ch_swisstopo_geologie-hydro_karte-grundwasservor : def_queryable_feat
             , st_box2d(the_geom) as geom_st_box2d \
             , type_de::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM geol.grundwasservorkommen
 }
 
@@ -801,6 +850,7 @@ source src_ch_swisstopo_geologie-hydro_karte-grundwasservul : def_queryable_feat
             , st_box2d(the_geom) as geom_st_box2d \
             , type_de::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
     FROM geol.grundwasservorkommen_plg
 }
     
@@ -817,6 +867,7 @@ source src_ch_swisstopo_geologie-geophysik-geothermie : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , contour::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM geol.geophysik_geothermie
 }
 
@@ -833,6 +884,7 @@ source src_ch_swisstopo_geologie-geophysik-deklination : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , magne::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM geol.geophysik_deklination
 }
     
@@ -849,6 +901,7 @@ source src_ch_swisstopo_geologie-geophysik-inklination : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , contour::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM geol.geophysik_inklination
 }
     
@@ -865,6 +918,7 @@ source src_ch_swisstopo_geologie-geophysik-aeromagnetische_karte_jura : def_quer
             , st_box2d(the_geom) as geom_st_box2d \
             , et_fromatt::text as label \
             , gid::text as feature_id \
+            , gid::::text as featureId \
         FROM geol.gravimetrie_aeromagnetik_jura
 }
 
@@ -881,6 +935,7 @@ source src_ch_swisstopo_geologie-geodaesie-isostatische_anomalien : def_queryabl
             , st_box2d(the_geom) as geom_st_box2d \
             , et_fromatt::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM geol.schwerekarte_isostatische_anomalien
 }
 
@@ -897,6 +952,7 @@ source src_ch_swisstopo_geologie-geodaesie-bouguer_anomalien : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , et_fromatt::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM geol.geodaesie_bouguer_anomalien
 }
 
@@ -913,6 +969,7 @@ source src_ch_swisstopo_geologie-geophysik-totalintensitaet : def_queryable_feat
             , st_box2d(the_geom) as geom_st_box2d \
             , contour::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM geol.geophysik_totalintensitaet
 }
 
@@ -929,6 +986,7 @@ source src_ch_swisstopo_geologie-tektonische_karte_1 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , type_de::text as label \
             , fid::text as feature_id \
+            , fid::text as featureId \
         FROM geol.tektonische_karte_line
 }
 
@@ -945,6 +1003,7 @@ source src_ch_swisstopo_geologie-tektonische_karte_2 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , type_de::text as label \
             , fid::text as feature_id \
+            , fid::text as featureId \
         FROM geol.tektonische_karte_flaechen
 }
     
@@ -961,6 +1020,7 @@ source src_ch_swisstopo_swisstlm3d-wanderwege : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , nr::text as label \
             , nr as feature_id \
+            , nr::text as featureId \
         FROM karto.wanderwege_swissmap
 }
 # Identical source for ch.swisstopo-karto.wanderwege same src
@@ -978,6 +1038,7 @@ source src_ch_swisstopo-vd_geometa-standav : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , frame::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM vd.amogr_standav
 }
 
@@ -994,6 +1055,7 @@ source src_ch_swisstopo-vd_geometa-los : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , operatsname::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM vd.amogr_los
 }
     
@@ -1010,6 +1072,7 @@ source src_ch_swisstopo-vd_geometa-gemeinde : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , gemeindename::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM vd.amogr_gemeinde
 }
                
@@ -1026,6 +1089,7 @@ source src_ch_swisstopo-vd_geometa-grundbuch : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , ortsteil_grundbuch::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM vd.amogr_grundbuch
 }
                
@@ -1042,6 +1106,7 @@ source src_ch_swisstopo-vd_geometa-nfgeom : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM vd.amogr_nfgeom
 }
                
@@ -1058,6 +1123,7 @@ source src_ch_swisstopo_transformationsgenauigkeit : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , sg_name::text as label \
             , identifier::text as feature_id \
+            , identifier::text as featureId \
         FROM vd.spannungsarme_gebiete
 }
                
@@ -1074,6 +1140,7 @@ source src_ch_swisstopo-vd_spannungsarme-gebiete : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , sg_name::text as label \
             , identifier::text as feature_id \
+            , identifier::text as featureId \
         FROM vd.spannungsarme_gebiete
 }
  
@@ -1090,6 +1157,7 @@ source src_ch_swisstopo_geologie-geotope_1 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , nom::text as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM geol.geotope_pkt
 }
 
@@ -1106,6 +1174,7 @@ source src_ch_swisstopo_geologie-geotope_2 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , nom::text as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM geol.geotope_plg
 }
 
@@ -1122,6 +1191,7 @@ source src_ch_swiss_geologie-geotechnik-steine_historische_bauwerke : def_querya
             , st_box2d(the_geom) as geom_st_box2d \
             , objekt::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM geol.geotechnik_steine_historische_bauwerke
 }
 
@@ -1138,6 +1208,7 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , titel::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM geol.kv_ggk_pk
 }
 
@@ -1158,6 +1229,7 @@ source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_f
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM tlm.swissboundaries_bezirke
 }
 
@@ -1175,6 +1247,7 @@ source src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : def_searchable
             , st_box2d(the_geom) as geom_st_box2d \
             , gemname::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM tlm.swissboundaries_gemeinden
 }
 
@@ -1192,6 +1265,7 @@ source src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : def_searchable_f
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , kantonsnr::text as feature_id \
+            , kantonsnr::text as featureId \
         FROM tlm.swissboundaries_kantone
 }
 
@@ -1209,6 +1283,7 @@ source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_searchable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , plz::text as label \
             , os_uuid::text as feature_id \
+            , os_uuid::text as featureId \
         FROM vd.gabmo_plz
 }
 
@@ -1226,6 +1301,7 @@ source src_ch_swisstopo_vec200-names-namedlocation : def_searchable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , coalesce(objname1,'')||' '||coalesce(objname2,'') as label \
             , gtdboid::text as feature_id \
+            , gtdboid::text as featureId \
         FROM public.vec200_namedlocation
 }
 
@@ -1242,7 +1318,8 @@ source src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata : def_searchable
             , y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , nr as feature_id \
+            , nr::text as feature_id \
+            , nr::text as featureId \
         FROM geol.gravimetrie_atlas_metadata
 }
 
@@ -1260,6 +1337,7 @@ source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_fe
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , id::text as feature_id \
+            , id::text as featureId \
         from geol.rohstoffe_industrieminerale
 }
 
@@ -1277,6 +1355,7 @@ source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchabl
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , id::text as feature_id \
+            , id::text as featureId \
         from geol.rohstoffe_kohlen_bitumen_erdgas
 }
 
@@ -1294,6 +1373,7 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
           , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , id::text as feature_id \
+          , id::text as featureId \
       from geodaesie.verschiebungsvektoren_tsp1
 }
 
@@ -1311,6 +1391,7 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
           , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , id::text as feature_id \
+          , id::text as featureId \
       from geodaesie.verschiebungsvektoren_tsp2
 }
 
@@ -1328,6 +1409,7 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
           , x(st_transform(st_centroid(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , id::text as feature_id \
+          , id::text as featureId \
       from geol.rohstoffe_vererzungen
 }
 
@@ -1345,6 +1427,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_fea
           , x(st_transform(st_centroid(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , id::text as feature_id \
+          , id::text as featureId \
       from geol.geotechnik_ziegeleien_1907
 }
 
@@ -1362,6 +1445,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_fea
           , x(st_transform(st_centroid(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , id::text as feature_id \
+          , id::text as featureId \
       from geol.geotechnik_ziegeleien_1965
 }
 
@@ -1379,6 +1463,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_fea
           , x(st_transform(st_centroid(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , id::text as feature_id \
+          , id::text as featureId \
       from geol.geotechnik_ziegeleien_1995
 }
 
@@ -1396,6 +1481,7 @@ source src_ch_swisstopo_geologie-gisgeol-punkte : def_searchable_features
           , x(st_transform(st_centroid(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , gid::text as feature_id \
+          , gid::text as featureId \
       from geol.view_gisgeol_points
 }
 
@@ -1413,6 +1499,7 @@ source src_ch_swisstopo_geologie-gisgeol-linien : def_searchable_features
           , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , gid::text as feature_id \
+          , gid::text as featureId \
       from geol.view_gisgeol_lines
 }
 
@@ -1430,6 +1517,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km : def_searchable_feature
           , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , gid::text as feature_id \
+          , gid::text as featureId \
       from geol.view_gisgeol_surfaces_1x1km
 }
 
@@ -1447,6 +1535,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km : def_searchable_featu
           , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , gid::text as feature_id \
+          , gid::text as featureId \
       from geol.view_gisgeol_surfaces_10x10km
 }
 
@@ -1464,6 +1553,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10to21000km2 : def_searchable_
           , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , gid::text as feature_id \
+          , gid::text as featureId \
       from geol.view_gisgeol_surfaces_10to21000km2
 }
 
@@ -1481,6 +1571,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : def_searchable_fe
           , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , gid::text as feature_id \
+          , gid::text as featureId \
       from geol.view_gisgeol_surfaces_gt21000km2
 }
 
@@ -1498,6 +1589,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_featu
           , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
           , st_box2d(the_geom) as geom_st_box2d \
           , gid::text as feature_id \
+          , gid::text as featureId \
       from geol.view_gisgeol_surfaces_lt10km2
 }
 ## INDICES

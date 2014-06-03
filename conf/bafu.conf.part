@@ -15,6 +15,7 @@ source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_queryable_featu
             , st_box2d(the_geom) as geom_st_box2d \
             , am_g_name::text as label \
             , am_g_obj::text as feature_id \
+            , am_g_obj::text as featureId \
         FROM bundinv.am_g
 }
 
@@ -30,7 +31,8 @@ source src_ch_bafu_bundesinventare-amphibien : def_queryable_features
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , am_l_name::text as label \
-            , am_l_obj as feature_id \
+            , am_l_obj::text as feature_id \
+            , am_l_obj::text as featureId \
         FROM bundinv.am_l
 }
 
@@ -47,6 +49,7 @@ source src_ch_bafu_hydrologie-hydromessstationen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , lhg_name::text as label \
             , edv_nr4::text as feature_id \
+            , edv_nr4::text as featureId \
         FROM hydrologie.lhg
 }
 
@@ -63,6 +66,7 @@ source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , teilezgnr::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wasser.ebene_2km
 }
 
@@ -79,6 +83,7 @@ source src_ch_bafu_wasser-teileinzugsgebiete_40 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , tezgnr40::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wasser.ebene_40km
 }
 
@@ -95,6 +100,7 @@ source src_ch_bafu_wasser-vorfluter : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , teilezgnr::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wasser.vorfluter
 }
 
@@ -111,6 +117,7 @@ source src_ch_bafu_wasser-gebietsauslaesse : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , ezgnr::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wasser.outlets
 }
 
@@ -127,6 +134,7 @@ source src_ch_bafu_bundesinventare-bln : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , bln_name::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM bundinv.bln
 }
 
@@ -143,6 +151,7 @@ source src_ch_bafu_bundesinventare-hochmoore : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , hm_name::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM bundinv.hm
 }
 
@@ -159,6 +168,7 @@ source src_ch_bafu_bundesinventare-jagdbanngebiete : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , jb_name::text || ' (' || jb_kat::text ||')' as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM bundinv.jb
 }
 
@@ -175,6 +185,7 @@ source src_ch_bafu_bundesinventare-moorlandschaften : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , ml_name::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM bundinv.ml
 }
 
@@ -191,6 +202,7 @@ source src_ch_bafu_bundesinventare-vogelreservate : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wv_name::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM bundinv.wv
 }
 
@@ -207,6 +219,7 @@ source src_ch_bafu_wasser-entnahme_1 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , rwknr::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wasser.invent_ent_wknutz_bedeutend
 }
 
@@ -223,6 +236,7 @@ source src_ch_bafu_wasser-entnahme_2 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , rwknr::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wasser.invent_ent_wknutz_weitere
 }
 
@@ -239,6 +253,7 @@ source src_ch_bafu_wasser-entnahme_3 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , rwknr::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wasser.invent_ent_andere_bedeutend
 }
 
@@ -255,6 +270,7 @@ source src_ch_bafu_wasser-entnahme_4 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , rwknr::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wasser.invent_ent_andere_weitere
 }
 
@@ -271,6 +287,7 @@ source src_ch_bafu_wasser-leitungen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , rwknr::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wasser.leitungen
 }
 
@@ -287,6 +304,7 @@ source src_ch_bafu_wasser-rueckgabe : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , rwknr::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wasser.rueckgabe
 }
 
@@ -303,6 +321,7 @@ source src_ch_bafu_bundesinventare-flachmoore : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , fm_name::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM bundinv.fm
 }
 
@@ -319,6 +338,7 @@ source src_ch_bafu_bundesinventare-flachmoore_regional : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , fmreg_name::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM bundinv.flachmoore_regional
 }
 
@@ -335,6 +355,7 @@ source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_queryable_fea
             , st_box2d(the_geom) as geom_st_box2d \
             , park_name::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM schutzge.paerke_nationaler_bedeutung
 }
 
@@ -351,6 +372,7 @@ source src_ch_bafu_schutzgebiete-ramsar : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , ra_name::text as label \
             , ra_id::text as feature_id \
+            , ra_id::text as featureId \
         FROM schutzge.ramsar
 }
 
@@ -367,6 +389,7 @@ source src_ch_bafu_wildruhezonen-jagdbanngebiete : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wrz_name::text as label \
             , wrz_jb_obj::text as feature_id \
+            , wrz_jb_obj::text as featureId \
         FROM schutzge.wildruhezonen_jagdbanngebiete
 }
 
@@ -383,6 +406,7 @@ source src_ch_bafu_wege-wildruhezonen-jagdbanngebiete : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wrz_obj::text as label \
             , weg_id::text as feature_id \
+            , weg_id::text as featureId \
         FROM schutzge.wege_wildruhezonen_jagdbanngebiete
 }
 
@@ -399,6 +423,7 @@ source src_ch_bafu_fauna-steinbockkolonien : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , sb_name::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM fauna.sb
 }
 
@@ -415,6 +440,7 @@ source src_ch_bafu_swissprtr : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , betrieb::text as label \
             , prtrnr::text as feature_id \
+            , prtrnr::text as featureId \
         FROM prtr.swissprtr
 }
 
@@ -431,6 +457,7 @@ source src_ch_bafu_holzvorrat : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wireg_::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wald.holzvorrat
 }
 
@@ -447,6 +474,7 @@ source src_ch_bafu_holzzuwachs : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wirtschaftsregion::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wald.holzzuwachs
 }
 
@@ -463,6 +491,7 @@ source src_ch_bafu_holznutzung : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wireg_::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM wald.holznutzung
 }
 
@@ -479,6 +508,7 @@ source src_ch_bafu_nabelstationen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , id_stat::text as feature_id \
+            , id_stat::text as featureId \
         FROM luft.nabel
 }
 
@@ -495,6 +525,7 @@ source src_ch_bafu_fischerei-krebspest : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , kennummer::text as label \
             , _count::text as feature_id \
+            , _count::text as featureId \
         FROM fischerei.krebspest
 }
 
@@ -511,6 +542,7 @@ source src_ch_bafu_biogeographische_regionen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , biogreg_r1::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM diverse.biogeoreg
 }
 
@@ -527,6 +559,7 @@ source src_ch_bafu_schutzgebiete-smaragd : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , em_name::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM schutzge.smaragd
 }
 
@@ -543,6 +576,7 @@ source src_ch_bafu_schutzgebiete-biosphaerenreservate : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , biores_nam::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM schutzge.biores
 }
 
@@ -559,6 +593,7 @@ source src_ch_bafu_moose : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , genus::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM flora.mooseflora
 }
 
@@ -575,6 +610,7 @@ source src_ch_bafu_flora-weltensutter_atlas : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , nom::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM flora.ws
 }
 
@@ -591,6 +627,7 @@ source src_ch_bafu_landesforstinventar-baumarten : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wirtschaft::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wald.baumartenmischung
 }
 
@@ -607,6 +644,7 @@ source src_ch_bafu_landesforstinventar-waldanteil : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wirtschaft::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wald.waldanteil
 }
 
@@ -623,6 +661,7 @@ source src_ch_bafu_landesforstinventar-totholz : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wirtschaft::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wald.totholzvolumen
 }
 
@@ -639,6 +678,7 @@ source src_ch_bafu_gefahren-historische_erdbeben : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , date_time::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM gefahren.historische_erdbeben
 }
 
@@ -655,6 +695,7 @@ source src_ch_bafu_gefahren-spektral : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , id::text as label \
             , _count::text as feature_id \
+            , _count::text as featureId \
         FROM gefahren.baugrundkl_spectral
 }
 
@@ -671,6 +712,7 @@ source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden : def_queryable_f
             , st_box2d(the_geom) as geom_st_box2d \
             , tww_name::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM bundinv.tww
 }
 
@@ -687,6 +729,7 @@ source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2 : def_que
             , st_box2d(the_geom) as geom_st_box2d \
             , tww_name::text as label \
             , bgdi_id::text as feature_id \
+            , bdgi_id::text as featureId \
         FROM bundinv.trockenwiesen_weiden_anhang2
 }
 
@@ -703,6 +746,7 @@ source src_ch_bafu_bundesinventare-amphibien_anhang4 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM bundinv.amphibien_anhang4
 }
 
@@ -719,6 +763,7 @@ source src_ch_bafu_gefahren-baugrundklassen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , bgk::text as label \
             , _count::text as feature_id \
+            , _count::text as featureId \
         FROM gefahren.baugrundklassen
 }
 
@@ -735,6 +780,7 @@ source src_ch_bav_laerm-emissionplan_eisenbahn_2015 : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , id::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM diverse.laerm_emplan_bahn_2015
 }
 
@@ -751,6 +797,7 @@ source src_ch_bafu_wrz-jagdbanngebiete_select : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , jb_name::text as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM wrzportal.jgd_select
 }
 
@@ -767,6 +814,7 @@ source src_ch_bafu_wrz-wildruhezonen_portal : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , wrz_name::text as label \
             , objectid::text as feature_id \
+            , objectid::text as featureId \
         FROM wrzportal.wrz_portal
 }
 
@@ -783,6 +831,7 @@ source src_ch_bafu_fauna-wildtierkorridor_national : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , nr::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM fauna.wildtierkorridore
 }
 
@@ -799,6 +848,7 @@ source src_ch_bafu_oekomorphologie-f_bauwerke : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , bauwnr::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wasser.oekom_bauwerke
 }
 
@@ -816,6 +866,7 @@ source src_ch_bafu_oekomorphologie-f_abschnitte : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , anfangsmass::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wasser.oekom_abschnitte
 }
 
@@ -833,6 +884,7 @@ source src_ch_bafu_oekomorphologie-f_abstuerze : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , abstnr::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM wasser.oekom_abstuerze
 }
 
@@ -853,6 +905,7 @@ source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_fea
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , nr::text as feature_id \
+            , nr::text as featureId \
         from hydrologie.temperaturmessnetz
 }
 
@@ -870,6 +923,7 @@ source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_fe
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , bgdi_id::bigint as feature_id \
+            , bgdi_id::text as featureId \
         from hydrologie.dbgz
 }
 
@@ -887,6 +941,7 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
             , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , gid::text as feature_id \
+            , gid::text as featureId \
         from bundinv.au
 }
 

@@ -14,6 +14,7 @@ source def_pqsql
 source def_queryable_features : def_pqsql
 {
     sql_attr_string = feature_id
+    sql_attr_string = featureId
     sql_attr_string = origin
     sql_attr_string = layer
     sql_attr_string = geom_st_box2d
