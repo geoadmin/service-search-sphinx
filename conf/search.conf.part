@@ -6,6 +6,7 @@ source src_swisssearch : def_pqsql
     sql_attr_uint = rank
     sql_attr_string = label
     sql_attr_string = feature_id
+    sql_attr_string = featureId
     sql_attr_string = origin
     sql_attr_string = geom_st_box2d
     sql_attr_float = x
@@ -19,6 +20,7 @@ source src_address : src_swisssearch
     sql_query = \
         SELECT id \
         , feature_id \
+        , feature_id as featureId \
         , detail \
         , label \
         , origin \
@@ -36,6 +38,7 @@ source src_parcel : src_swisssearch
     sql_query = \
         SELECT id \
         , NULL::text as feature_id \
+        , NULL::text as featureId \
         , detail \
         , label \
         , origin \
@@ -54,6 +57,7 @@ source src_sn25 : src_swisssearch
         SELECT \
         objectid as id \
         , NULL::text as feature_id \
+        , NULL::text as featureId \
         , remove_accents(coalesce(name,'')||' '||coalesce(kanton,''))::text as detail \
         , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label  \
         , 'sn25'::text as origin \
@@ -72,6 +76,7 @@ source src_gg25 : src_swisssearch
         SELECT \
         row_number() OVER(ORDER BY id asc) as id \
         , id::text as feature_id \
+        , id::text as featureId \
         , remove_accents(gemname||' '||k.ak)::text as detail \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label \
         , 'gg25'::text as origin \
@@ -90,6 +95,7 @@ source src_kantone : src_swisssearch
         SELECT \
         kantonsnr::integer as id \
         , kantonsnr::text as feature_id \
+        , kantonsnr::text as featureId \
         , remove_accents(name ||' '||ak) as detail \
         , '<b>'||name||'</b>' as label \
         , 'kantone'::text as origin \
@@ -109,6 +115,7 @@ source src_district : src_swisssearch
         SELECT \
         id::integer as id \
         , id::text as feature_id \
+        , id::text as featureId \
         , name::text as detail \
         , '<b>'||name||'</b>' as label \
         , 'district'::text as origin \
@@ -127,6 +134,7 @@ source src_zipcode : src_swisssearch
         SELECT \
         gid as id \
         , os_uuid::text as feature_id \
+        , os_uuid::text as featureId \
         , plz::text as detail \
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((SELECT ak from tlm.swissboundaries_kantone k where st_intersects(ST_PointOnSurface(p.the_geom),k.the_geom)),'')||')</b>' as label \
         , 'zipcode' as origin \

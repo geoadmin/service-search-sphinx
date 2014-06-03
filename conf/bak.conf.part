@@ -15,6 +15,7 @@ source src_ch_bak_bundesinventar-schuetzenswerte-ortsbilder : def_queryable_feat
             , st_box2d(the_geom) as geom_st_box2d \
             , ortsbildname ::text as label \
             , gid::text as feature_id \
+            , gid::text as featureId \
         FROM public.isos
 }
 
@@ -31,6 +32,7 @@ source src_ch_bak_schutzgebiete-unesco_weltkulturerbe : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , bgdi_name::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM public.unesco
 }
 

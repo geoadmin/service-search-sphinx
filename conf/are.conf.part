@@ -15,6 +15,7 @@ source src_ch_are_landschaftstypen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , typ_nr::text as label \
             , object::text as feature_id \
+            , object::text as featureId \
         FROM siedlung_landschaft.landschaftstypen
 }
 
@@ -31,6 +32,7 @@ source src_ch_are_alpenkonvention : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , stand::text as label \
             , row_id::text as feature_id \
+            , row_id::text as featureId \
         FROM siedlung_landschaft.alpenkonvention
 }
 
@@ -47,6 +49,7 @@ source src_ch_are_agglomerationen_isolierte_staedte : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , row_id::text as feature_id \
+            , row_id::text as featureId \
         FROM siedlung_landschaft.agglomerationen_isolierte_staedte
 }
 
@@ -63,6 +66,7 @@ source src_ch_are_gueteklassen_oev : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , klasse_fr::text as label \
             , id::text as feature_id \
+            , id::text as featureId \
         FROM oeffentlicher_verkehr.gueteklassen
 }
 
@@ -79,6 +83,7 @@ source src_ch_are_bevoelkerungsdichte : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , popt_ha::text || '[ha]' as label \
             , row_id::text as feature_id \
+            , row_id::text as featureId \
         FROM siedlung_landschaft.bevoelkerungsdichte
 }
 
@@ -95,6 +100,7 @@ source src_ch_are_bauzonen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name_::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM siedlung_landschaft.bauzonen_2012
 }
 
@@ -111,6 +117,7 @@ source src_ch_are_gemeindetyp-1990-9klassen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , gde_no::text as feature_id \
+            , gde_no::text ::text as featureId \
         FROM siedlung_landschaft.gemeindetyp_1990_9klassen
 }
 
@@ -127,6 +134,7 @@ source src_ch_are_gemeindetypen : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , name_::text as label \
             , bgdi_id::text as feature_id \
+            , bgdi_id::text as featureId \
         FROM siedlung_landschaft.gemeindetypologie_2012
 }
 
@@ -143,6 +151,7 @@ source src_ch_are_beschaeftigtendichte : def_queryable_features
             , st_box2d(the_geom) as geom_st_box2d \
             , empt_ha::text || '[ha]' as label \
             , row_id::text as feature_id \
+            , row_id::text as featureId \
         FROM siedlung_landschaft.beschaeftigtendichte
 }
 
