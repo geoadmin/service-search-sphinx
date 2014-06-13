@@ -1141,6 +1141,150 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200 : def_queryable_features
         FROM geol.kv_ggk_pk
 }
 
+source src_ch_swisstopo_geologie-geocover_point_hydro : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_point_hydro
+}
+
+source src_ch_swisstopo_geologie-geocover_point_geol : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_point_geol
+}
+
+source src_ch_swisstopo_geologie-geocover_point_drill : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_point_drill
+}
+
+source src_ch_swisstopo_geologie-geocover_point_info : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_point_info
+}
+
+source src_ch_swisstopo_geologie-geocover_point_struct : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_point_struct
+}
+
+source src_ch_swisstopo_geologie-geocover_line_aux : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_line_aux
+}
+
+source src_ch_swisstopo_geologie-geocover_polygon_aux_1 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_polygon_aux_1
+}
+
+source src_ch_swisstopo_geologie-geocover_polygon_aux_2 : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_polygon_aux_2
+}
+
+source src_ch_swisstopo_geologie-geocover_polygon_main : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-geocover' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom)::text as geom_st_box2d \
+            , description::text as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.geocover_polygon_main
+}
+
 
 ## SEARCHABLE
 
@@ -2027,6 +2171,73 @@ index ch_swisstopo_geologie-geocover_metadata : ch_kantone_cadastralwebmap-farbe
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_metadata
 }
 
+index ch_swisstopo_geologie-geocover_point_hydro : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_point_hydro
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_point_hydro
+}
+
+index ch_swisstopo_geologie-geocover_point_geol : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_point_geol
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_point_geol
+}
+
+index ch_swisstopo_geologie-geocover_point_drill : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_point_drill
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_point_drill
+}
+
+index ch_swisstopo_geologie-geocover_point_info : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_point_info
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_point_info
+}
+
+index ch_swisstopo_geologie-geocover_point_struct : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_point_struct
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_point_struct
+}
+
+index ch_swisstopo_geologie-geocover_line_aux : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_line_aux
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_line_aux
+}
+
+index ch_swisstopo_geologie-geocover_polygon_aux_1 : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_polygon_aux_1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_polygon_aux_1
+}
+
+index ch_swisstopo_geologie-geocover_polygon_aux_2 : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_polygon_aux_2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_polygon_aux_2
+}
+
+index ch_swisstopo_geologie-geocover_polygon_main : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-geocover_polygon_main
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover_polygon_main
+}
+
+index ch_swisstopo_geologie-geocover
+{
+    type = distributed
+    local = ch_swisstopo_geologie-geocover_point_hydro
+    local = ch_swisstopo_geologie-geocover_point_geol
+    local = ch_swisstopo_geologie-geocover_point_drill
+    local = ch_swisstopo_geologie-geocover_point_info
+    local = ch_swisstopo_geologie-geocover_point_struct
+    local = ch_swisstopo_geologie-geocover_line_aux
+    local = ch_swisstopo_geologie-geocover_polygon_aux_1
+    local = ch_swisstopo_geologie-geocover_polygon_aux_2
+    local = ch_swisstopo_geologie-geocover_polygon_main
+}
 
 ## SEARCHABLE
 
