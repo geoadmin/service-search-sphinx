@@ -59,7 +59,7 @@ template:
 	else true; fi
 	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/'  conf/db.conf.in  > conf/db.conf
 	cat conf/db.conf conf/*.part > conf/sphinx.conf
-	indextool --checkconfig -c conf/sphinx.conf
+	indextool --checkconfig -c conf/sphinx.conf | grep "config valid"
 
 .PHONY: deploy-int
 deploy-int:
@@ -93,7 +93,7 @@ endif
 
 .PHONY: move-template
 move-template:
-	indextool --checkconfig -c conf/sphinx.conf
+	indextool --checkconfig -c conf/sphinx.conf | grep "config valid"
 	cp conf/sphinx.conf /var/lib/sphinxsearch/data/index/sphinx.conf
 	cp conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
 	cp deploy/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
