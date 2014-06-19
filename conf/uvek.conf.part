@@ -390,7 +390,7 @@ source src_ch_astra_ivs-nat : def_searchable_features
         from astra.ivs_nat
 }
 
-source src_ch_astra_ivs-reg_loc : def_searchable_features
+source src_ch_astra_ivs-reg_loc_sub : def_searchable_features
 {
     sql_db = uvek
     sql_query = \
@@ -404,7 +404,26 @@ source src_ch_astra_ivs-reg_loc : def_searchable_features
             , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
             , reg_loc_id::text as feature_id \
-        from astra.ivs_reg_loc
+        from astra.ivs_reg_loc \
+        where ivs_kanton != 'BE'
+}
+
+source src_ch_astra_ivs-reg_loc_be : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT reg_loc_id::bigint as id \
+            , ivs_nummer as label \
+            , 'feature' as origin \
+            , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
+            , 'ch.astra.ivs-reg_loc' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , reg_loc_id::text as feature_id \
+        from astra.ivs_reg_loc \
+        where ivs_kanton = 'BE'
 }
 
 source src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : def_searchable_features
@@ -779,10 +798,23 @@ index ch_astra_ivs-nat-verlaeufe : ch_astra_ivs-nat
     path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-nat-verlaeufe
 }
 
-index ch_astra_ivs-reg_loc : ch_astra_ivs-nat
+index ch_astra_ivs-reg_loc_sub : ch_astra_ivs-nat
 {
-    source = src_ch_astra_ivs-reg_loc
-    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-reg_loc
+    source = src_ch_astra_ivs-reg_loc_sub
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-reg_loc_sub
+}
+
+index ch_astra_ivs-reg_loc_be : ch_astra_ivs-nat
+{
+    source = src_ch_astra_ivs-reg_loc_be
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-reg_loc_be
+}
+
+index ch_astra_ivs-reg_loc
+{
+    type = distributed
+    local = ch_astra_ivs-reg_loc_sub
+    local = ch_astra_ivs-reg_loc_be
 }
 
 index ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : ch_astra_ivs-nat
