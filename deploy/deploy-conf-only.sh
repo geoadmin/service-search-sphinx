@@ -77,7 +77,7 @@ fi
 if grep indexpattern $DEPLOYCONFIG > /dev/null
 then
     echo "indexpattern found in $DEPLOYCONFIG"
-    perl -p -i -e "s/(indexpattern[\s]*=)([\w\s\.\-]*)$/\1 $index\n/g" $DEPLOYCONFIG
+    perl -p -i -e "s/(indexpattern[\s]*=)(.*)/\1 $index/g" $DEPLOYCONFIG
 else
     echo "indexpattern not found in $DEPLOYCONFIG"
     sed -i "s/.*\[env\].*/&\nindexpattern = $index/" $DEPLOYCONFIG
