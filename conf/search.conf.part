@@ -11,6 +11,7 @@ source src_swisssearch : def_pqsql
     sql_attr_float = x
     sql_attr_float = y
     sql_field_string = detail
+    sql_field_string = geom_quadindex
 }
 
 source src_address : src_swisssearch
@@ -22,6 +23,7 @@ source src_address : src_swisssearch
         , detail \
         , label \
         , origin \
+        , quadindex(the_geom) as geom_quadindex \
         , geom_st_box2d \
         , 6::integer as rank \
         , x \
@@ -39,6 +41,7 @@ source src_parcel : src_swisssearch
         , detail \
         , label \
         , origin \
+        , quadindex(the_geom) as geom_quadindex \
         , geom_st_box2d \
         , 10::integer as rank \
         , x \
@@ -57,6 +60,7 @@ source src_sn25 : src_swisssearch
         , remove_accents(coalesce(name,'')||' '||coalesce(kanton,''))::text as detail \
         , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label  \
         , 'sn25'::text as origin \
+        , quadindex(the_geom) as geom_quadindex \
         , st_box2d(the_geom) as geom_st_box2d \
         , 5::integer as rank \
         , y((the_geom)) as x \
@@ -75,6 +79,7 @@ source src_gg25 : src_swisssearch
         , remove_accents(gemname||' '||k.ak)::text as detail \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label \
         , 'gg25'::text as origin \
+        , quadindex(the_geom) as geom_quadindex \
         , st_box2d(g.the_geom) as geom_st_box2d \
         , 2::integer as rank \
         , y(ST_PointOnSurface(g.the_geom)) AS x \
@@ -93,6 +98,7 @@ source src_kantone : src_swisssearch
         , remove_accents(name ||' '||ak) as detail \
         , '<b>'||name||'</b>' as label \
         , 'kantone'::text as origin \
+        , quadindex(the_geom) as geom_quadindex \
         , st_box2d(the_geom) as geom_st_box2d \
         , 4 as rank \
         , y(ST_PointOnSurface(the_geom)) AS x \
@@ -112,6 +118,7 @@ source src_district : src_swisssearch
         , name::text as detail \
         , '<b>'||name||'</b>' as label \
         , 'district'::text as origin \
+        , quadindex(the_geom) as geom_quadindex \
         , st_box2d(the_geom) as geom_st_box2d \
         , 3::integer as rank \
         , y(ST_PointOnSurface(the_geom)) AS x \
@@ -130,6 +137,7 @@ source src_zipcode : src_swisssearch
         , plz::text as detail \
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((SELECT ak from tlm.swissboundaries_kantone k where st_intersects(ST_PointOnSurface(p.the_geom),k.the_geom)),'')||')</b>' as label \
         , 'zipcode' as origin \
+        , quadindex(the_geom) as geom_quadindex \
         , st_box2d(the_geom) as geom_st_box2d\
         , 1 as rank \
         , y(ST_PointOnSurface(the_geom)) AS x \
