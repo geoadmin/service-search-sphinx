@@ -10,6 +10,8 @@ source src_swisssearch : def_pqsql
     sql_attr_string = geom_st_box2d
     sql_attr_float = x
     sql_attr_float = y
+    sql_attr_float = lat
+    sql_attr_float = lon
     sql_field_string = detail
     sql_field_string = geom_quadindex
 }
@@ -28,6 +30,8 @@ source src_address : src_swisssearch
         , 6::integer as rank \
         , x \
         , y \
+        , y(st_transform(the_geom,4326)) as lat \
+        , x(st_transform(the_geom,4326)) as lon \
         , num \
         FROM bfs.adressen_sphinx
 }
@@ -46,6 +50,8 @@ source src_parcel : src_swisssearch
         , 10::integer as rank \
         , x \
         , y \
+        , y(st_transform(st_centroid(the_geom),4326)) as lat \
+        , x(st_transform(st_centroid(the_geom),4326)) as lon \
         , num \
         from kantone.parzellen_sphinx
 }
@@ -65,6 +71,8 @@ source src_sn25 : src_swisssearch
         , 5::integer as rank \
         , y((the_geom)) as x \
         , x((the_geom)) as y \
+        , y(st_transform(the_geom,4326)) as lat \
+        , x(st_transform(the_geom,4326)) as lon \
         , 1 as num \
         FROM tlm.swissnames_sn25_und_tlm
 }
@@ -84,6 +92,8 @@ source src_gg25 : src_swisssearch
         , 2::integer as rank \
         , y(ST_PointOnSurface(g.the_geom)) AS x \
         , x(ST_PointOnSurface(g.the_geom)) AS y \
+        , y(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lat \
+        , x(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lon \
         , 1 as num \
         FROM tlm.swissboundaries_gemeinden_uebersetzt g left join tlm.swissboundaries_kantone k on k.kantonsnr = g.kantonsnr 
 }
@@ -103,6 +113,8 @@ source src_kantone : src_swisssearch
         , 4 as rank \
         , y(ST_PointOnSurface(the_geom)) AS x \
         , x(ST_PointOnSurface(the_geom)) AS y \
+        , y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+        , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , 1 as num \
          FROM tlm.swissboundaries_kantone
 }
@@ -123,6 +135,8 @@ source src_district : src_swisssearch
         , 3::integer as rank \
         , y(ST_PointOnSurface(the_geom)) AS x \
         , x(ST_PointOnSurface(the_geom)) AS y \
+        , y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+        , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , 1 as num \
         FROM tlm.swissboundaries_bezirke 
 }
@@ -142,6 +156,8 @@ source src_zipcode : src_swisssearch
         , 1 as rank \
         , y(ST_PointOnSurface(the_geom)) AS x \
         , x(ST_PointOnSurface(the_geom)) AS y \
+        , y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+        , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , 1 as num \
         FROM vd.gabmo_plz p
 }
