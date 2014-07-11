@@ -23,7 +23,7 @@ source src_address : src_swisssearch
         , detail \
         , label \
         , origin \
-        , quadindex(the_geom) as geom_quadindex \
+        , bgdi_quadindex as geom_quadindex \
         , geom_st_box2d \
         , 6::integer as rank \
         , x \
@@ -41,7 +41,7 @@ source src_parcel : src_swisssearch
         , detail \
         , label \
         , origin \
-        , quadindex(the_geom) as geom_quadindex \
+        , bgdi_quadindex as geom_quadindex \
         , geom_st_box2d \
         , 10::integer as rank \
         , x \
