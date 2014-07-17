@@ -140,5 +140,7 @@ else
 fi
 
 echo "removing temporary deploy folder on deploy target /var/cache/deploy/sphinxsearch.data.tmp/ ..."
+# wait 5 seconds for indexer to finish the rotation before deleting orphaned indexes, otherwise temporary .new. files are deleted and rotation will be stopped
+sleep 5
 bash $0 clean_index
 exit 0
