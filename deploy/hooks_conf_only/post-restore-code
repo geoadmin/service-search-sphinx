@@ -43,11 +43,19 @@ echo "create index directory $SPHINXINDEX if it does not yet exists..."
 sudo -u sphinxsearch mkdir -p $SPHINXINDEX
 
 echo "make backup of current sphinx config..."
-sudo -u sphinxsearch cp /etc/sphinxsearch/sphinx.conf /etc/sphinxsearch/sphinx.conf.backup
+sudo -u sphinxsearch cp -f /etc/sphinxsearch/sphinx.conf /etc/sphinxsearch/sphinx.conf.backup
+
+# start sphinxsearch if it is not running with old configuration
+if ! pgrep searchd > /dev/null
+then
+    echo -e "    ${red}WARNING: service was not running${NC}"
+    echo "starting sphinx service with old configuration ..."
+    sudo -u sphinxsearch /etc/init.d/sphinxsearch start | grep -i "WARNING\|ERROR"
+fi
 
 echo "copy files preserving timestamp ..."
-sudo -u sphinxsearch cp  $CODE_DIR""sphinx.conf /etc/sphinxsearch/
-sudo -u sphinxsearch cp  $CODE_DIR""*.py /etc/sphinxsearch/
+sudo -u sphinxsearch cp -f $CODE_DIR""sphinx.conf /etc/sphinxsearch/
+sudo -u sphinxsearch cp -f $CODE_DIR""*.py /etc/sphinxsearch/
 sudo -u sphinxsearch rsync --update -qavz $CODE_DIR $SPHINXINDEX
 
 DBHOST=$DBHOST_DEFAULT
@@ -81,27 +89,18 @@ then
     sudo -u sphinxsearch python -u $PGTRIGGER -i $INDEXPATTERN -c update    
 else
     echo "no sphinx indexes will be updated ..."
+    # reload new sphinx configuration
+    echo "trying to load new sphinx config ..."
+    sudo -u sphinxsearch /etc/init.d/sphinxsearch reload | grep -i "WARNING\|ERROR"
 fi
 
-# Check service status
-echo "Sphinx is running with pid $(pgrep searchd) ..."
-if [ $(pgrep searchd) ]; then
-    status=$(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)
-    if [ $? -eq 0 ]; then
-        echo "  service has been started with $ /etc/init.d/sphinxsearch start"
-        echo -e "  ${red}stopping service ...${NC}"
-        sudo -u sphinxsearch /etc/init.d/sphinxsearch stop
-    else
-        echo "  service has been started with $ searchd"
-        echo -e "  ${red}stopping service ...${NC}"
-        sudo -u sphinxsearch searchd --stop
-    fi
-else
-    echo -e "    ${red}WARNING: service was not running${NC}"
-fi
-
-# wait 5 seconds for sphinxsearch to stop completely
-sleep 5
+COUNTER=1
+while [ $(find $SPHINXINDEX -name "*.new.*" | wc -l) -ne 0  ]
+do
+    echo "$COUNTER waiting for index rotation to be finished before retarting service ..."
+    sleep 1
+    COUNTER=$(($COUNTER +1))
+done
 
 # Check if service is running, if not try to restart the service
 WAITFORSPHINX=3
@@ -133,14 +132,13 @@ do
     fi
 done
 
-if [ $(pgrep searchd) ]; then
+if pgrep searchd > /dev/null
+then
     echo -e "${green}service is running with process id: $(pgrep searchd)${NC}"
 else
     echo -e "${red}WARNING: $(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)${NC}"
 fi
 
-echo "removing temporary deploy folder on deploy target /var/cache/deploy/sphinxsearch.data.tmp/ ..."
-# wait 5 seconds for indexer to finish the rotation before deleting orphaned indexes, otherwise temporary .new. files are deleted and rotation will be stopped
-sleep 5
+echo "removing orphaned indexes ..."
 bash $0 clean_index
 exit 0
