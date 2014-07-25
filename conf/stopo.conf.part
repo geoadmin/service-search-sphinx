@@ -1160,6 +1160,24 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200 : def_queryable_features
 
 ## SEARCHABLE
 
+source src_ch_kantone_historische-topografische-namen : def_searchable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT objectid as id \
+            , 'feature' as origin \
+            , remove_accents(topographic_name) as detail \
+            , 'ch.kantone.historische-topografische-namen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+            , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , topographic_name::text as label \
+            , objectid::text as feature_id \
+        FROM public.historische_topo_namen
+}
+
+
 source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_features
 {
     sql_db = stopo
@@ -2033,6 +2051,13 @@ index ch_swisstopo_verschiebungsvektoren-tsp1
     prefix_fields = geom_quadindex
     enable_star = 1
 }
+
+index ch_kantone_historische-topografische-namen : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_kantone_historische-topografische-namen
+    path = /var/lib/sphinxsearch/data/index/ch_kantone_historische-topografische-namen
+}
+
 
 index ch_swisstopo_verschiebungsvektoren-tsp2 : ch_swisstopo_verschiebungsvektoren-tsp1
 {
