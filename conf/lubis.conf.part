@@ -112,7 +112,7 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-firmen : def_searchable_features
 
 ## INDICES
 #
-## QUERYABLE
+## SEARCHABLE
 index ch_swisstopo_lubis-bildstreifen
 {
     type = plain
@@ -122,19 +122,15 @@ index ch_swisstopo_lubis-bildstreifen
     charset_type = utf-8
     min_prefix_len = 1
     prefix_fields = geom_quadindex
+    min_infix_len = 2
+    infix_fields = detail
     enable_star = 1
 }
-
-
-
-## SEARCHABLE
 
 index ch_swisstopo_lubis-luftbilder_farbe : ch_swisstopo_lubis-bildstreifen
 {
     source = src_ch_swisstopo_lubis-luftbilder_farbe
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-luftbilder_farbe
-    min_infix_len = 2
-    infix_fields = detail
 }
 
 index ch_swisstopo_lubis-luftbilder_schwarzweiss : ch_swisstopo_lubis-luftbilder_farbe
