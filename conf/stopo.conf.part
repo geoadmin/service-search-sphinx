@@ -1160,12 +1160,21 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200 : def_queryable_features
 
 ## SEARCHABLE
 
-source src_ch_kantone_historische-topografische-namen : def_searchable_features
+source src_ch_kantone_historische-topografische-namen : def_pqsql
 {
     sql_db = stopo
     sql_attr_string = ids
     sql_attr_string = synonyms
     sql_attr_string = years
+    sql_attr_string = feature_id
+    sql_attr_string = origin
+    sql_attr_string = layer
+    sql_attr_string = geom_st_box2d
+    sql_attr_string = label
+    sql_attr_float = lat
+    sql_attr_float = lon
+    sql_field_string = geom_quadindex
+    sql_field_string = detail
     sql_query = \
         SELECT id as id \
             , origin as origin \
