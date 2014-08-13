@@ -2,6 +2,86 @@
 
 ## QUERYABLE
 
+source src_ch_astra_unfaelle-personenschaeden_alle : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY uuid asc) as id \
+            , 'feature' as origin \
+            , 'ch.astra.unfaelle-personenschaeden_alle' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , uuid::text as label \
+            , uuid::text as feature_id \
+        FROM astra.unf_pers_full
+}
+
+source src_ch_astra_unfaelle-personenschaeden_fahrraeder : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY uuid asc) as id \
+            , 'feature' as origin \
+            , 'ch.astra.unfaelle-personenschaeden_fahrraeder' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , uuid::text as label \
+            , uuid::text as feature_id \
+        FROM astra.unf_pers_velo
+}
+
+source src_ch_astra_unfaelle-personenschaeden_fussgaenger : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY uuid asc) as id \
+            , 'feature' as origin \
+            , 'ch.astra.unfaelle-personenschaeden_fussgaenger' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , uuid::text as label \
+            , uuid::text as feature_id \
+        FROM astra.unf_pers_fuss
+}
+
+source src_ch_astra_unfaelle-personenschaeden_getoetete : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY uuid asc) as id \
+            , 'feature' as origin \
+            , 'ch.astra.unfaelle-personenschaeden_getoetete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , uuid::text as label \
+            , uuid::text as feature_id \
+        FROM astra.unf_pers_casualties
+}
+
+source src_ch_astra_unfaelle-personenschaeden_motorraeder : def_queryable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY uuid asc) as id \
+            , 'feature' as origin \
+            , 'ch.astra.unfaelle-personenschaeden_motorraeder' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , uuid::text as label \
+            , uuid::text as feature_id \
+        FROM astra.unf_pers_moto
+}
+
 source src_ch_astra_ausnahmetransportrouten : def_queryable_features
 {
     sql_db = uvek
@@ -612,6 +692,36 @@ index ch_astra_ausnahmetransportrouten
     min_prefix_len = 1
     prefix_fields = geom_quadindex
     enable_star = 1
+}
+
+index ch_astra_unfaelle-personenschaeden_alle : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_astra_unfaelle-personenschaeden_alle
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_alle
+}
+
+index ch_astra_unfaelle-personenschaeden_fahrraeder : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_astra_unfaelle-personenschaeden_fahrraeder
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_fahrraeder
+}
+
+index ch_astra_unfaelle-personenschaeden_fussgaenger : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_astra_unfaelle-personenschaeden_fussgaenger
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_fussgaenger
+}
+
+index ch_astra_unfaelle-personenschaeden_getoetete : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_astra_unfaelle-personenschaeden_getoetete
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_getoetete
+}
+
+index ch_astra_unfaelle-personenschaeden_motorraeder : ch_astra_ausnahmetransportrouten
+{
+    source = src_ch_astra_unfaelle-personenschaeden_motorraeder
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_motorraeder
 }
 
 index ch_bav_kataster-belasteter-standorte-oev : ch_astra_ausnahmetransportrouten
