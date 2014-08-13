@@ -890,6 +890,22 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
         from bundinv.au
 }
 
+source src_ch_bafu_waldreservate : def_searchable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name::text as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(name)||' '||obj_gisflaeche::text||' '||mcpfe_class as detail \
+            , 'ch.bafu.waldreservate' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , objnummer::text as feature_id \
+        from wald.waldreservate
+}
 ## INDICES
 
 ## QUERYBALE
@@ -1252,3 +1268,8 @@ index ch_bafu_bundesinventare-auen : ch_bafu_hydrologie-wassertemperaturmessstat
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen
 }
 
+index ch_bafu_waldreservate : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_waldreservate
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_waldreservate
+}
