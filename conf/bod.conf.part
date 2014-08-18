@@ -26,15 +26,8 @@ source src_layers_de : layers
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from (SELECT view_layers_js.bgdi_id, \
-            view_bod_layer_info_de.kurzbezeichnung, \
-            view_bod_layer_info_de.volltextsuche, \
-            view_bod_layer_info_de.bod_layer_id, \
-            view_layers_js.topics, \
-            view_layers_js.staging \
-        from re3.view_layers_js, \
-            re3.view_bod_layer_info_de \
-            where view_layers_js.bod_layer_id = view_bod_layer_info_de.bod_layer_id) as res
+        from \
+            re3.view_bod_layer_info_de 
 }
 
 source src_layers_fr : layers
@@ -50,15 +43,8 @@ source src_layers_fr : layers
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from (SELECT view_layers_js.bgdi_id, \
-            view_bod_layer_info_fr.kurzbezeichnung, \
-            view_bod_layer_info_fr.volltextsuche, \
-            view_bod_layer_info_fr.bod_layer_id, \
-            view_layers_js.topics, \
-            view_layers_js.staging \
-        from re3.view_layers_js, \
-            re3.view_bod_layer_info_fr \
-            where view_layers_js.bod_layer_id = view_bod_layer_info_fr.bod_layer_id) as res
+        from \
+            re3.view_bod_layer_info_fr 
 }
 
 source src_layers_en : layers
@@ -74,15 +60,8 @@ source src_layers_en : layers
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from (SELECT view_layers_js.bgdi_id, \
-            view_bod_layer_info_en.kurzbezeichnung, \
-            view_bod_layer_info_en.volltextsuche, \
-            view_bod_layer_info_en.bod_layer_id, \
-            view_layers_js.topics, \
-            view_layers_js.staging \
-        from re3.view_layers_js, \
-            re3.view_bod_layer_info_en \
-            where view_layers_js.bod_layer_id = view_bod_layer_info_en.bod_layer_id) as res
+        from \
+            re3.view_bod_layer_info_en 
 }
 
 source src_layers_it : layers
@@ -98,15 +77,8 @@ source src_layers_it : layers
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from (SELECT view_layers_js.bgdi_id, \
-            view_bod_layer_info_it.kurzbezeichnung, \
-            view_bod_layer_info_it.volltextsuche, \
-            view_bod_layer_info_it.bod_layer_id, \
-            view_layers_js.topics, \
-            view_layers_js.staging \
-        from re3.view_layers_js, \
-            re3.view_bod_layer_info_it \
-            where view_layers_js.bod_layer_id = view_bod_layer_info_it.bod_layer_id) as res
+        from \
+            re3.view_bod_layer_info_it 
 }
 
 source src_layers_rm : layers
@@ -122,15 +94,8 @@ source src_layers_rm : layers
             , topics as topics \
             , staging as staging \
             , bgdi_id::bigint as id \
-        from (SELECT view_layers_js.bgdi_id, \
-            view_bod_layer_info_rm.kurzbezeichnung, \
-            view_bod_layer_info_rm.volltextsuche, \
-            view_bod_layer_info_rm.bod_layer_id, \
-            view_layers_js.topics, \
-            view_layers_js.staging \
-        from re3.view_layers_js, \
-            re3.view_bod_layer_info_rm \
-            where view_layers_js.bod_layer_id = view_bod_layer_info_rm.bod_layer_id) as res
+        from \
+            re3.view_bod_layer_info_rm 
 }
 
 ## INDICES
