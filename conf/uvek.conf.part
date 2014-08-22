@@ -13,7 +13,10 @@ source src_ch_astra_unfaelle-personenschaeden_alle : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , uuid::text as label \
+            , accidentday_de::text as label \
+            , accidentday_de::text as label_de \
+            , accidentday_fr::text as label_fr \
+            , accidentday_it::text as label_it \
             , uuid::text as feature_id \
         FROM astra.unf_pers_full
 }
@@ -29,7 +32,10 @@ source src_ch_astra_unfaelle-personenschaeden_fahrraeder : def_queryable_feature
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , uuid::text as label \
+            , accidentday_de::text as label \
+            , accidentday_de::text as label_de \
+            , accidentday_fr::text as label_fr \
+            , accidentday_it::text as label_it \
             , uuid::text as feature_id \
         FROM astra.unf_pers_velo
 }
@@ -45,7 +51,10 @@ source src_ch_astra_unfaelle-personenschaeden_fussgaenger : def_queryable_featur
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , uuid::text as label \
+            , accidentday_de::text as label \
+            , accidentday_de::text as label_de \
+            , accidentday_fr::text as label_fr \
+            , accidentday_it::text as label_it \
             , uuid::text as feature_id \
         FROM astra.unf_pers_fuss
 }
@@ -61,7 +70,10 @@ source src_ch_astra_unfaelle-personenschaeden_getoetete : def_queryable_features
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , uuid::text as label \
+            , accidentday_de::text as label \
+            , accidentday_de::text as label_de \
+            , accidentday_fr::text as label_fr \
+            , accidentday_it::text as label_it \
             , uuid::text as feature_id \
         FROM astra.unf_pers_casualties
 }
@@ -77,7 +89,10 @@ source src_ch_astra_unfaelle-personenschaeden_motorraeder : def_queryable_featur
             , y(st_transform(st_centroid(the_geom),4326)) as lat \
             , x(st_transform(st_centroid(the_geom),4326)) as lon \
             , st_box2d(the_geom) as geom_st_box2d \
-            , uuid::text as label \
+            , accidentday_de::text as label \
+            , accidentday_de::text as label_de \
+            , accidentday_fr::text as label_fr \
+            , accidentday_it::text as label_it \
             , uuid::text as feature_id \
         FROM astra.unf_pers_moto
 }
