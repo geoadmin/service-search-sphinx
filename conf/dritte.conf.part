@@ -40,7 +40,7 @@ source src_ch_pronatura_waldreservate : def_searchable_features
 {
     sql_db = dritte
     sql_query = \
-        SELECT sg_nr::bigint as id \
+        SELECT row_number() OVER(ORDER BY sg_nr) as id \
             , name::text as label \
             , 'feature' as origin \
             , sg_nr::text||' '||remove_accents(name)||' '||obj_gisflaeche::text||' '||mcpfe as detail \
