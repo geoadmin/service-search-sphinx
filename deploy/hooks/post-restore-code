@@ -8,7 +8,6 @@ PROJECT_NAME=$1
 CODE_DIR=$2 # = dest = /var/cache/deploy/sphinxsearch.data.tmp/
 
 BASEDIR=/var/lib/sphinxsearch/data
-PID=/var/run/sphinxsearch/searchd.pid
 
 if [ -d "$BASEDIR/index.tmp/" ] 
 then
@@ -33,9 +32,9 @@ then
 fi
 
 START=$(date +%s)
-if [ -f $PID ]
+if pgrep searchd > /dev/null
 then
-   echo "$PID file exists, assuming that service is running -> stopping sphinx service"
+   echo "pgrep searchd returned result, assuming that service is running -> stopping sphinx service"
    echo "stopping sphinx service ..."
    START=$(date +%s)
    sudo -u sphinxsearch /etc/init.d/sphinxsearch stop
@@ -66,7 +65,7 @@ sudo -u sphinxsearch perl -p -i -e 's/pgcluster0t.bgdi.admin.ch/$DBHOST/' /etc/s
 
 WAITFORSPHINX=20
 COUNTER=1
-while [ -f $PID ]
+while pgrep searchd > /dev/null
 do
 	echo "service still running, waiting for sphinx service to stop, restart-force in $(($WAITFORSPHINX-$COUNTER+1))s ..."
 	sleep 1
