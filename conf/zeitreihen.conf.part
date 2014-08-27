@@ -1,0 +1,38 @@
+## SOURCES
+
+## QUERYABLE
+
+source src_ch_swisstopo_hiks-dufour : def_queryable_features
+{
+    sql_db = zeitreihen
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY tilenumber asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.hiks-dufour' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , datenstand::text as label \
+            , tilenumber::text as feature_id \
+        FROM view_dufour_erstausgabe 
+}
+
+## SEARCHABLE
+
+## INDICES
+
+## QUERYABLE
+
+index ch_swisstopo_hiks-dufour
+{
+    type = plain
+    source = src_ch_swisstopo_hiks-dufour
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-dufour
+    docinfo = extern
+    charset_type = utf-8
+    min_prefix_len = 1
+    prefix_fields = geom_quadindex
+    enable_star = 1
+}
+
