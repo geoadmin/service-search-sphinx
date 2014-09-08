@@ -1934,12 +1934,6 @@ index ch_swisstopo_geologie-geolkarten500_metadata : ch_kantone_cadastralwebmap-
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geolkarten500_metadata
 }
 
-index ch_swisstopo_geologie-geologischer_atlas : ch_kantone_cadastralwebmap-farbe
-{
-    source = src_ch_swisstopo_geologie-geologischer_atlas
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas
-}
-
 index ch_swisstopo_geologie-geologische_karte_1 : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_geologie-geologische_karte_1
@@ -2226,6 +2220,20 @@ index ch_swisstopo_geologie-geocover_polygon_main : ch_kantone_cadastralwebmap-f
 }
 
 index ch_swisstopo_geologie-geocover
+{
+    type = distributed
+    local = ch_swisstopo_geologie-geocover_point_hydro
+    local = ch_swisstopo_geologie-geocover_point_geol
+    local = ch_swisstopo_geologie-geocover_point_drill
+    local = ch_swisstopo_geologie-geocover_point_info
+    local = ch_swisstopo_geologie-geocover_point_struct
+    local = ch_swisstopo_geologie-geocover_line_aux
+    local = ch_swisstopo_geologie-geocover_polygon_aux_1
+    local = ch_swisstopo_geologie-geocover_polygon_aux_2
+    local = ch_swisstopo_geologie-geocover_polygon_main
+}
+
+index ch_swisstopo_geologie-geologischer_atlas
 {
     type = distributed
     local = ch_swisstopo_geologie-geocover_point_hydro
