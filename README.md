@@ -7,6 +7,7 @@ Sphinx Search service for RE3
 ###SPHINX doc (2.1.5):
 - http://sphinxsearch.com/docs/
 - http://sphinxsearch.com/docs/current.html
+- http://sphinxsearch.com/docs/archives/2.1.5/
 
 ###SPHINX Service Adresses:
 Staging    | URL
