@@ -61,6 +61,12 @@ then
   DBHOST=$DBHOST_PROD
 fi
 
+# TARGET -> demo
+if [[ $TARGET == demo ]]
+then
+  DBHOST=$DBHOST_DEMO
+fi
+
 echo "replace db host with $DBHOST ..."
 sudo -u sphinxsearch perl -p -i -e 's/pgcluster0t.bgdi.admin.ch/$DBHOST/' /etc/sphinxsearch/sphinx.conf
 

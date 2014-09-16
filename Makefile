@@ -71,6 +71,11 @@ deploy-prod:
 	sudo -u deploy deploy  -r deploy/deploy.cfg prod
 	cd deploy && bash deploy-conf-only.sh -t prod
 
+.PHONY: deploy-demo
+deploy-demo:
+	sudo -u deploy deploy  -r deploy/deploy.cfg demo
+	cd deploy && bash deploy-conf-only.sh -t demo
+
 .PHONY: deploy-int-config
 deploy-int-config:
 ifneq ($(db),)
@@ -90,6 +95,17 @@ else ifneq ($(index),)
 else
 		cd deploy && bash deploy-conf-only.sh -t prod
 endif
+
+.PHONY: deploy-demo-config
+deploy-demo-config:
+ifneq ($(db),)
+		cd deploy && bash deploy-conf-only.sh -t demo -d $(db)
+else ifneq ($(index),)
+		cd deploy && bash deploy-conf-only.sh -t demo -i $(index)
+else
+		cd deploy && bash deploy-conf-only.sh -t demo
+endif
+
 
 .PHONY: move-template
 move-template:
