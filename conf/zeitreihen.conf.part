@@ -18,6 +18,22 @@ source src_ch_swisstopo_hiks-dufour : def_queryable_features
         FROM view_dufour_erstausgabe 
 }
 
+source src_ch_swisstopo_hiks-siegfried : def_queryable_features
+{
+    sql_db = zeitreihen
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY tilenumber asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.hiks-siegfried' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , datenstand::text as label \
+            , tilenumber::text as feature_id \
+        FROM view_siegfried_erstausgabe 
+}
+
 ## SEARCHABLE
 
 ## INDICES
@@ -36,3 +52,8 @@ index ch_swisstopo_hiks-dufour
     enable_star = 1
 }
 
+index ch_swisstopo_hiks-siegfried : ch_swisstopo_hiks-dufour
+{
+    source = src_ch_swisstopo_hiks-siegfried
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-siegfried
+}
