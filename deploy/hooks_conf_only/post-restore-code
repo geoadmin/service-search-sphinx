@@ -111,7 +111,7 @@ done
 # Check if service is running, if not try to restart the service
 WAITFORSPHINX=3
 COUNTER=0
-while [ ! $(pgrep searchd) ]
+while ! pgrep searchd > /dev/null
 do
     if [ $COUNTER -ne 0 ]; then
         # Show this message after the first try only
