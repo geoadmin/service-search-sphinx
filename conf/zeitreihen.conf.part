@@ -52,14 +52,8 @@ index ch_swisstopo_hiks-dufour
     enable_star = 1
 }
 
-index ch_swisstopo_hiks-siegfried
+index ch_swisstopo_hiks-siegfried : ch_swisstopo_hiks-dufour
 {
-    type = plain
     source = src_ch_swisstopo_hiks-siegfried
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hiks-siegfried
-    docinfo = extern
-    charset_type = utf-8
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
-    enable_star = 1
 }
