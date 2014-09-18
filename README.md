@@ -117,3 +117,16 @@ $ make deploy-int-config db=all
 ```
 
 The same commands can be used with ```make deploy-prod-config```.
+
+####Deploy config to Integration of one DB
+```bash
+$ cd service-sphinxsearch/
+$ git checkout master
+$ git pull origin master
+$ make template
+$ sudo su sphinxsearch
+$ make move-template
+$ make deploy-int-config db=zeitreihen
+```
+
+
