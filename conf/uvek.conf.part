@@ -145,22 +145,6 @@ source src_ch_bfe_energieforschung : def_queryable_features
         FROM bfe.energieforschung
 }
 
-source src_ch_bfe_energiestaedte : def_queryable_features
-{
-    sql_db = uvek
-    sql_query = \
-        SELECT bgdi_id as id \
-            , 'feature' as origin \
-            , 'ch.bfe.energiestaedte' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
-            , name::text as label \
-            , bgdi_id::text as feature_id \
-        FROM bfe.energiestaedte
-}
-
 source src_ch_bfe_statistik-wasserkraftanlagen : def_queryable_features
 {
     sql_db = uvek
@@ -710,6 +694,23 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_2 : def_searchable_featur
         from bav.sis_pl_r_kraft
 }
 
+source src_ch_bfe_energiestaedte : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(name) as detail \
+            , 'ch.bfe.energiestaedte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+            , x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from bfe.energiestaedte
+}
+
 ## INDICES
 
 ## QUERYABLE
@@ -766,12 +767,6 @@ index ch_bfe_energieforschung : ch_astra_ausnahmetransportrouten
 {
     source = src_ch_bfe_energieforschung
     path = /var/lib/sphinxsearch/data/index/ch_bfe_energieforschung
-}
-
-index ch_bfe_energiestaedte : ch_astra_ausnahmetransportrouten
-{
-    source = src_ch_bfe_energiestaedte
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte
 }
 
 index ch_bfe_statistik-wasserkraftanlagen : ch_astra_ausnahmetransportrouten
@@ -1038,3 +1033,10 @@ index ch_bav_sachplan-infrastruktur-schiene_kraft
     local = ch_bav_sachplan-infrastruktur-schiene_kraft_1
     local = ch_bav_sachplan-infrastruktur-schiene_kraft_2
 }
+
+index ch_bfe_energiestaedte : ch_astra_ivs-nat
+{
+    source = src_ch_bfe_energiestaedte
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte
+}
+
