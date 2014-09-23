@@ -711,7 +711,7 @@ source src_ch_bfe_energiestaedte : def_searchable_features
         from bfe.energiestaedte
 }
 
-source src_ch_bfe_energiestaedte_energieregionen : def_searchable_features
+source src_ch_bfe_energiestaedte-energieregionen : def_searchable_features
 {
     sql_db = uvek
     sql_query = \
@@ -728,7 +728,7 @@ source src_ch_bfe_energiestaedte_energieregionen : def_searchable_features
         from bfe.energiestaedte_energieregionen
 }
 
-source src_ch_bfe_energiestaedte_2000watt_areale : def_searchable_features
+source src_ch_bfe_energiestaedte-2000watt-areale : def_searchable_features
 {
     sql_db = uvek
     sql_query = \
@@ -745,7 +745,7 @@ source src_ch_bfe_energiestaedte_2000watt_areale : def_searchable_features
         from bfe.energiestaedte_2000watt_areale
 }
 
-source src_ch_bfe_energiestaedte_2000watt_aufdemweg : def_searchable_features
+source src_ch_bfe_energiestaedte-2000watt-aufdemweg : def_searchable_features
 {
     sql_db = uvek
     sql_query = \
@@ -1091,21 +1091,21 @@ index ch_bfe_energiestaedte : ch_astra_ivs-nat
     path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte
 }
 
-index ch_bfe_energiestaedte_energieregionen : ch_astra_ivs-nat
+index ch_bfe_energiestaedte-energieregionen : ch_astra_ivs-nat
 {
-    source = src_ch_bfe_energiestaedte_energieregionen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_energieregionen
+    source = src_ch_bfe_energiestaedte-energieregionen
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte-energieregionen
 }
 
-index ch_bfe_energiestaedte_2000watt_areale : ch_astra_ivs-nat
+index ch_bfe_energiestaedte-2000watt-areale : ch_astra_ivs-nat
 {
-    source = src_ch_bfe_energiestaedte_2000watt_areale
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_2000watt_areale
+    source = src_ch_bfe_energiestaedte-2000watt-areale
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte-2000watt-areale
 }
 
-index ch_bfe_energiestaedte_2000watt_aufdemweg : ch_astra_ivs-nat
+index ch_bfe_energiestaedte-2000watt-aufdemweg : ch_astra_ivs-nat
 {
-    source = src_ch_bfe_energiestaedte_2000watt_aufdemweg 
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_2000watt_aufdemweg 
+    source = src_ch_bfe_energiestaedte-2000watt-aufdemweg 
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte-2000watt-aufdemweg 
 }
 
