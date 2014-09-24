@@ -436,6 +436,22 @@ source src_ch_swisstopo_dreiecksvermaschung : def_queryable_features
         FROM geodaesie.dreiecksvermaschung
 }
 
+source src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY nr asc) as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.geologie-spezialkarten_schweiz.metadata' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , nr::text as label \
+            , nr::text as feature_id \
+        FROM geol.kv_gsk_all
+}
+
 source src_ch_swisstopo_pixelkarte-pk25_metadata : def_queryable_features
 {
     sql_db = stopo
@@ -1868,6 +1884,12 @@ index ch_swisstopo_dreiecksvermaschung : ch_kantone_cadastralwebmap-farbe
 {
     source = src_ch_swisstopo_dreiecksvermaschung
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_dreiecksvermaschung
+}
+
+index ch_swisstopo_geologie-spezialkarten_schweiz_metadata : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-spezialkarten_schweiz_metadata
 }
 
 index ch_swisstopo_pixelkarte-pk25_metadata : ch_kantone_cadastralwebmap-farbe
