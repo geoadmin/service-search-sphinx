@@ -192,7 +192,7 @@ if __name__ == '__main__':
         index, index_parent = parsing_func(i.groupdict()['index'])
         # step 2 extract sql_db and sql_query from curly braced content
         source = re.search('source\s=\s*(.*)', i.groupdict()['content'])
-        source = source.group(1) if source else None
+        source = source.group(1).strip() if source else None
 
         # import only real indexes, no distributed indexes
         if not ( source is None and index_parent is None ):
