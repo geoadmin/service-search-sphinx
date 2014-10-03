@@ -1,0 +1,11 @@
+ch > chemin
+av > avenue
+boul > boulevard
+bd > boulevard
+rte > route
+faub > faubourg
+pl > place
+r > rue
+sent > sentier
+pass > passage
+

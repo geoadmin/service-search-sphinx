@@ -114,6 +114,7 @@ endif
 move-template:
 	indextool --checkconfig -c conf/sphinx.conf | grep "config valid"
 	cp conf/sphinx.conf /var/lib/sphinxsearch/data/index/sphinx.conf
+	cp conf/wordforms_*.txt /var/lib/sphinxsearch/data/index
 	cp conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
 	cp deploy/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
 	cp deploy/pg2sphinx_trigger.py /etc/sphinxsearch/pg2sphinx_trigger.py

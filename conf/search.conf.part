@@ -167,6 +167,7 @@ source src_zipcode : src_swisssearch
 index zipcode
 {
     source = src_zipcode
+    wordforms = /var/lib/sphinxsearch/data/index/wordforms_*.txt
     path = /var/lib/sphinxsearch/data/index/zipcode
     type = plain
     docinfo = extern

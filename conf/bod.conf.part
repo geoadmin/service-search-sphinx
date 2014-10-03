@@ -114,6 +114,7 @@ index layers_de : layers
 {
     source = src_layers_de
     path = /var/lib/sphinxsearch/data/index/layers_de
+    wordforms = /var/lib/sphinxsearch/data/index/wordforms_de.txt
     ondisk_dict = 0
     preopen = 1
 }
@@ -122,22 +123,26 @@ index layers_fr : layers
 {
     source = src_layers_fr
     path = /var/lib/sphinxsearch/data/index/layers_fr
+    wordforms = /var/lib/sphinxsearch/data/index/wordforms_fr.txt
 }
 
 index layers_en : layers
 {
     source = src_layers_en
     path = /var/lib/sphinxsearch/data/index/layers_en
+    wordforms = /var/lib/sphinxsearch/data/index/wordforms_en.txt
 }
 
 index layers_it : layers
 {
     source = src_layers_it
     path = /var/lib/sphinxsearch/data/index/layers_it
+    wordforms = /var/lib/sphinxsearch/data/index/wordforms_it.txt
 }
 
 index layers_rm : layers
 {
     source = src_layers_rm
     path = /var/lib/sphinxsearch/data/index/layers_rm
+    wordforms = /var/lib/sphinxsearch/data/index/wordforms_rm.txt
 }

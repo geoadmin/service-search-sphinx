@@ -1,5 +1,6 @@
 #!/bin/bash
 SPHINXCONFIG=/etc/sphinxsearch/sphinx.conf
+SPHINXWORDFORMS=/var/lib/sphinxsearch/data/index/wordforms_*.txt
 DEPLOYCONFIG=./deploy-conf-only.cfg
 
 usage="
