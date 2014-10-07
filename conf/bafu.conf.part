@@ -2,6 +2,66 @@
 
 ## QUERYABLE
 
+source src_ch_bafu_grundwasserschutzareale : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.grundwasserschutzareale' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , typ_de::text as label \
+            , typ_de::text as label_de \
+            , typ_fr::text as label_fr \
+            , typ_it::text as label_it \
+            , typ_en::text as label_en \
+            , bgdi_id::text as feature_id \
+        FROM wasser.grundwasserschutzareale
+}
+
+source src_ch_bafu_grundwasserschutzzonen : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.grundwasserschutzzonen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , typ_de::text as label \
+            , typ_de::text as label_de \
+            , typ_fr::text as label_fr \
+            , typ_it::text as label_it \
+            , typ_en::text as label_en \
+            , bgdi_id::text as feature_id \
+        FROM wasser.grundwasserschutzzonen
+}
+
+source src_ch_bafu_gewaesserschutzbereiche : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.gewaesserschutzbereiche' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , typ_de::text as label \
+            , typ_de::text as label_de \
+            , typ_fr::text as label_fr \
+            , typ_it::text as label_it \
+            , typ_en::text as label_en \
+            , bgdi_id::text as feature_id \
+        FROM wasser.gewaesserschutzbereiche
+}
+
 source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_queryable_features
 {
     sql_db = bafu
@@ -936,6 +996,24 @@ index ch_bafu_bundesinventare-amphibien_wanderobjekte
     min_prefix_len = 1
     prefix_fields = geom_quadindex
     enable_star = 1
+}
+
+index ch_bafu_grundwasserschutzareale : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_grundwasserschutzareale
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_grundwasserschutzareale
+}
+
+index ch_bafu_grundwasserschutzzonen : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_grundwasserschutzzonen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_grundwasserschutzzonen
+}
+
+index ch_bafu_gewaesserschutzbereiche : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_gewaesserschutzbereiche
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutzbereiche
 }
 
 index ch_bafu_bundesinventare-amphibien : ch_bafu_bundesinventare-amphibien_wanderobjekte
