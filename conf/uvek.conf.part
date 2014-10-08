@@ -2,7 +2,7 @@
 
 ## QUERYABLE
 
-source src_ch_astra_unfaelle-personenschaeden_alle : def_queryable_features
+source src_ch_astra_unfaelle-personenschaeden_alle : def_queryable_features 
 {
     sql_db = uvek
     sql_query = \
@@ -21,7 +21,7 @@ source src_ch_astra_unfaelle-personenschaeden_alle : def_queryable_features
         FROM astra.unf_pers_full
 }
 
-source src_ch_astra_unfaelle-personenschaeden_fahrraeder : def_queryable_features
+source src_ch_astra_unfaelle-personenschaeden_fahrraeder : def_queryable_features 
 {
     sql_db = uvek
     sql_query = \
@@ -40,7 +40,7 @@ source src_ch_astra_unfaelle-personenschaeden_fahrraeder : def_queryable_feature
         FROM astra.unf_pers_velo
 }
 
-source src_ch_astra_unfaelle-personenschaeden_fussgaenger : def_queryable_features
+source src_ch_astra_unfaelle-personenschaeden_fussgaenger : def_queryable_features 
 {
     sql_db = uvek
     sql_query = \
@@ -59,7 +59,7 @@ source src_ch_astra_unfaelle-personenschaeden_fussgaenger : def_queryable_featur
         FROM astra.unf_pers_fuss
 }
 
-source src_ch_astra_unfaelle-personenschaeden_getoetete : def_queryable_features
+source src_ch_astra_unfaelle-personenschaeden_getoetete : def_queryable_features 
 {
     sql_db = uvek
     sql_query = \
@@ -78,7 +78,7 @@ source src_ch_astra_unfaelle-personenschaeden_getoetete : def_queryable_features
         FROM astra.unf_pers_casualties
 }
 
-source src_ch_astra_unfaelle-personenschaeden_motorraeder : def_queryable_features
+source src_ch_astra_unfaelle-personenschaeden_motorraeder : def_queryable_features 
 {
     sql_db = uvek
     sql_query = \

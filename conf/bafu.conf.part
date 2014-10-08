@@ -2,7 +2,8 @@
 
 ## QUERYABLE
 
-source src_ch_bafu_grundwasserschutzareale : def_queryable_features
+
+source src_ch_bafu_grundwasserschutzareale : def_queryable_features 
 {
     sql_db = bafu
     sql_query = \
@@ -22,7 +23,7 @@ source src_ch_bafu_grundwasserschutzareale : def_queryable_features
         FROM wasser.grundwasserschutzareale
 }
 
-source src_ch_bafu_grundwasserschutzzonen : def_queryable_features
+source src_ch_bafu_grundwasserschutzzonen : def_queryable_features 
 {
     sql_db = bafu
     sql_query = \
@@ -42,7 +43,7 @@ source src_ch_bafu_grundwasserschutzzonen : def_queryable_features
         FROM wasser.grundwasserschutzzonen
 }
 
-source src_ch_bafu_gewaesserschutzbereiche : def_queryable_features
+source src_ch_bafu_gewaesserschutzbereiche : def_queryable_features 
 {
     sql_db = bafu
     sql_query = \
