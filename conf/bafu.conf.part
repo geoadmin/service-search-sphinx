@@ -63,6 +63,22 @@ source src_ch_bafu_gewaesserschutzbereiche : def_queryable_features
         FROM wasser.gewaesserschutzbereiche
 }
 
+source src_ch_bafu_bundesinventare-amphibien_wanderobjekte_anhoerung : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-amphibien_wanderobjekte_anhoerung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , obj_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bundinv.amphibien_wanderobjekte_anhoerung
+}
+
 source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_queryable_features
 {
     sql_db = bafu
@@ -93,6 +109,22 @@ source src_ch_bafu_bundesinventare-amphibien : def_queryable_features
             , am_l_name::text as label \
             , am_l_obj as feature_id \
         FROM bundinv.am_l
+}
+
+source src_ch_bafu_bundesinventare-amphibien_anhoerung : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-amphibien_anhoerung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , obj_name::text as label \
+            , bgdi_id as feature_id \
+        FROM bundinv.amphibien_anhoerung
 }
 
 source src_ch_bafu_bundesinventare-auen_anhoerung : def_queryable_features
@@ -207,6 +239,22 @@ source src_ch_bafu_bundesinventare-bln : def_queryable_features
         FROM bundinv.bln
 }
 
+source src_ch_bafu_bundesinventare-hochmoore_anhoerung : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-hochmoore_anhoerung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , obj_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bundinv.hochmoore_anhoerung
+}
+
 source src_ch_bafu_bundesinventare-hochmoore : def_queryable_features
 {
     sql_db = bafu
@@ -253,6 +301,22 @@ source src_ch_bafu_bundesinventare-moorlandschaften : def_queryable_features
             , ml_name::text as label \
             , gid::text as feature_id \
         FROM bundinv.ml
+}
+
+source src_ch_bafu_bundesinventare-moorlandschaften_anhoerung : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-moorlandschaften_anhoerung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , obj_name ::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bundinv.moorlandschaften_anhoerung
 }
 
 source src_ch_bafu_bundesinventare-vogelreservate : def_queryable_features
@@ -381,6 +445,22 @@ source src_ch_bafu_bundesinventare-flachmoore : def_queryable_features
             , fm_name::text as label \
             , gid::text as feature_id \
         FROM bundinv.fm
+}
+
+source src_ch_bafu_bundesinventare-flachmoore_anhoerung : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , 'feature' as origin \
+            , 'ch.bafu.bundesinventare-flachmoore_anhoerung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , st_box2d(the_geom) as geom_st_box2d \
+            , obj_name::text as label \
+            , bgdi_id::text as feature_id \
+        FROM bundinv.flachmoore_anhoerung
 }
 
 source src_ch_bafu_bundesinventare-flachmoore_regional : def_queryable_features
@@ -735,6 +815,22 @@ source src_ch_bafu_gefahren-spektral : def_queryable_features
         FROM gefahren.baugrundkl_spectral
 }
 
+source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anh : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id  \
+            , 'feature' as origin  \
+            , 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden_anhoerung' as layer  \
+            , quadindex(the_geom) as geom_quadindex  \
+            , y(st_transform(st_centroid(the_geom),4326)) as lat  \
+            , x(st_transform(st_centroid(the_geom),4326)) as lon  \
+            , st_box2d(the_geom) as geom_st_box2d  \
+            , obj_name::text as label  \
+            , bgdi_id::text as feature_id  \
+        FROM bundinv.trockenwiesen_trockenweiden_anhoerung
+}
+
 source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden : def_queryable_features
 {
     sql_db = bafu
@@ -999,6 +1095,12 @@ index ch_bafu_bundesinventare-amphibien_wanderobjekte
     enable_star = 1
 }
 
+index ch_bafu_bundesinventare-amphibien_wanderobjekte_anhoerung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-amphibien_wanderobjekte_anhoerung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien_wanderobjekte_anhoerung
+}
+
 index ch_bafu_grundwasserschutzareale : ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
     source = src_ch_bafu_grundwasserschutzareale
@@ -1021,6 +1123,12 @@ index ch_bafu_bundesinventare-amphibien : ch_bafu_bundesinventare-amphibien_wand
 {
     source = src_ch_bafu_bundesinventare-amphibien
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien
+}
+
+index ch_bafu_bundesinventare-amphibien_anhoerung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-amphibien_anhoerung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien_anhoerung
 }
 
 index ch_bafu_bundesinventare-auen_anhoerung : ch_bafu_bundesinventare-amphibien_wanderobjekte
@@ -1065,6 +1173,12 @@ index ch_bafu_bundesinventare-bln : ch_bafu_bundesinventare-amphibien_wanderobje
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-bln
 }
 
+index ch_bafu_bundesinventare-hochmoore_anhoerung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-hochmoore_anhoerung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-hochmoore_anhoerung
+}
+
 index ch_bafu_bundesinventare-hochmoore : ch_bafu_bundesinventare-amphibien_wanderobjekte
 {
     source = src_ch_bafu_bundesinventare-hochmoore
@@ -1081,6 +1195,12 @@ index ch_bafu_bundesinventare-moorlandschaften : ch_bafu_bundesinventare-amphibi
 {
     source = src_ch_bafu_bundesinventare-moorlandschaften
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-moorlandschaften
+}
+
+index ch_bafu_bundesinventare-moorlandschaften_anhoerung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-moorlandschaften_anhoerung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-moorlandschaften_anhoerung
 }
 
 index ch_bafu_bundesinventare-vogelreservate : ch_bafu_bundesinventare-amphibien_wanderobjekte
@@ -1144,6 +1264,12 @@ index ch_bafu_bundesinventare-flachmoore_regional : ch_bafu_bundesinventare-amph
 {
     source = src_ch_bafu_bundesinventare-flachmoore_regional
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-flachmoore_regional
+}
+
+index ch_bafu_bundesinventare-flachmoore_anhoerung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-flachmoore_anhoerung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-flachmoore_anhoerung
 }
 
 index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : ch_bafu_bundesinventare-amphibien_wanderobjekte
@@ -1270,6 +1396,12 @@ index ch_bafu_gefahren-spektral : ch_bafu_bundesinventare-amphibien_wanderobjekt
 {
     source = src_ch_bafu_gefahren-spektral
     path = /var/lib/sphinxsearch/data/index/ch_bafu_gefahren-spektral
+}
+
+index ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhoerung : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anh
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhoerung
 }
 
 index ch_bafu_bundesinventare-trockenwiesen_trockenweiden : ch_bafu_bundesinventare-amphibien_wanderobjekte
