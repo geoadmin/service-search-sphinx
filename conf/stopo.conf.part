@@ -772,7 +772,7 @@ source src_ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : def_queryable
         FROM geol.geotechnik_zementindustrie
 }
 
-source src_ch_swisstopo_geologie-hydro_karte-grundwasservor : def_queryable_features
+source src_ch_swisstopo_geologie-hydrogeol_karte-grundwasservor : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
@@ -788,7 +788,7 @@ source src_ch_swisstopo_geologie-hydro_karte-grundwasservor : def_queryable_feat
         FROM geol.grundwasservorkommen
 }
 
-source src_ch_swisstopo_geologie-hydro_karte-grundwasservul : def_queryable_features
+source src_ch_swisstopo_geologie-hydrogeol_karte-grundwasservul : def_queryable_features
 {
     sql_db = stopo
     sql_query = \
@@ -2023,16 +2023,16 @@ index ch_swisstopo_geologie-geotechnik-zementindustrie_1995 : ch_kantone_cadastr
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-zementindustrie_1995
 }
 
-index ch_swisstopo_geologie-hydro_karte-grundwasservor : ch_kantone_cadastralwebmap-farbe
+index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkomm : ch_kantone_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_geologie-hydro_karte-grundwasservor
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydro_karte-grundwasservor
+    source = src_ch_swisstopo_geologie-hydrogeol_karte-grundwasservor
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservorkomm
 }
 
-index ch_swisstopo_geologie-hydro_karte-grundwasservul : ch_kantone_cadastralwebmap-farbe
+index ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnera : ch_kantone_cadastralwebmap-farbe
 {
-    source = src_ch_swisstopo_geologie-hydro_karte-grundwasservul
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydro_karte-grundwasservul
+    source = src_ch_swisstopo_geologie-hydrogeol_karte-grundwasservul
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-hydrogeologische_karte-grundwasservulnera
 }
 
 index ch_swisstopo_geologie-geophysik-geothermie : ch_kantone_cadastralwebmap-farbe
