@@ -209,8 +209,8 @@ if __name__ == '__main__':
             a.source as source
             , coalesce(a.sql_db,b.sql_db) as database
             , a.sql_query as sql
-            , group_concat(i.sphinx_index,'---') as sphinx_index
-            , group_concat(i.index_parent,'---') as index_parent
+            , group_concat(i.sphinx_index,' ') as sphinx_index
+            , group_concat(i.index_parent,' ') as index_parent
             FROM 
             indexes i left join indexes p on trim(i.index_parent)=trim(p.sphinx_index)
             left join sources a on coalesce(i.source,p.source) = a.source
