@@ -9,7 +9,6 @@ import time
 import getpass
 import re
 import sqlite3
-import pprint
 import psycopg2
 import optparse
 import subprocess
@@ -209,13 +208,12 @@ if __name__ == '__main__':
             a.source as source
             , coalesce(a.sql_db,b.sql_db) as database
             , a.sql_query as sql
-            , group_concat(i.sphinx_index,' ') as sphinx_index
-            , group_concat(i.index_parent,' ') as index_parent
+            , i.sphinx_index
+            , i.index_parent
             FROM 
             indexes i left join indexes p on trim(i.index_parent)=trim(p.sphinx_index)
             left join sources a on coalesce(i.source,p.source) = a.source
             left join sources b on a.source_parent = b.source
-            group by a.source,  coalesce(a.sql_db,b.sql_db)
     """
     
     resultat=[]
@@ -236,14 +234,13 @@ if __name__ == '__main__':
                 db = row['database'] if options.database_filter in table else None
         # indice filter
         # -i pattern
-        else:                        
-            if indices.startswith(options.index_filter) or options.index_filter == 'all':
+        else:
+            if options.index_filter in indices or options.index_filter == 'all':
                 db = row['database']
 
         # output  
         if options.command == 'list' and db is not None:
-            for indice in indices.split(' '):
-                resultat.append("%s -> %s" % (indice, db))
+            resultat.append("%s -> %s" % (indices, db))
 
         if options.command == 'update' and db is not None:
             resultat.append("%s" % (indices))
