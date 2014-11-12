@@ -20,18 +20,28 @@ if [ "$*" = "clean_index" ]; then
     sphinxconfig="/etc/sphinxsearch/sphinx.conf"
 
     if [[ -f $sphinxconfig && -d $SPHINXINDEX ]];then
-        array_config=($(grep path $sphinxconfig | awk -F"=" '{print $2}'))
-        array_file=($(ls $SPHINXINDEX""*.spd | sed 's|.spd$||g' ))
-        array_diff=($(comm -13 --nocheck-order <(printf '%s\n' "${array_config[@]}" | LC_ALL=C sort) <(printf '%s\n' "${array_file[@]}" | LC_ALL=C sort)))
+        array_config=($(grep path $sphinxconfig | awk -F"=" '{print $2}' | sed -n -e 's|^.*/||p'))
+        array_file=($(find $SPHINXINDEX -name "*.spd" | sed 's|.spd$||g' | sed -n -e 's|^.*/||p' ))
+        array_orphaned=($(comm -13 --nocheck-order <(printf '%s\n' "${array_config[@]}" | LC_ALL=C sort) <(printf '%s\n' "${array_file[@]}" | LC_ALL=C sort)))
 
-        for a in "${array_diff[@]}"; do
-            echo -e "   ${red}deleting orphaned index $a from filesystem ...${NC}"
+        echo -e "   ${red}deleting orphaned index $a from filesystem ...${NC}"
+        for a in "${array_orphaned[@]}"; do
             if [ "$(whoami)" = sphinxsearch ]; then
-                rm -rf $a*
+                rm -rf $SPHINXINDEX""$a*
             else
-                sudo -u sphinxsearch rm -rf $a*
+                sudo -u sphinxsearch rm -rf $SPHINXINDEX""$a*
             fi
         done
+
+        echo -e "   ${green}creating new indexes from config $sphinxconfig ...${NC}"
+        result=$(indextool --checkconfig -c $sphinxconfig | grep "missed index" | sed -n -e 's/^missed index(es): //p' | sed "s/[',]//g"  | tr -s " ")
+        if [[ $result ]];then
+            if [ "$(whoami)" = sphinxsearch ]; then
+                indexer --verbose --rotate --sighup-each --config $sphinxconfig $result | grep indexing
+            else
+                sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config $sphinxconfig $result | grep indexing
+            fi
+        fi
         exit 0;
     else
         echo -e "   ${red}error - please check if $sphinxconfig and $SPHINXINDEX are there...${NC}"
@@ -100,6 +110,7 @@ else
     sudo -u sphinxsearch /etc/init.d/sphinxsearch reload | grep -i "WARNING\|ERROR"
 fi
 
+
 COUNTER=1
 while [ $(find $SPHINXINDEX -name "*.new.*" | wc -l) -ne 0  ]
 do
@@ -145,6 +156,5 @@ else
     echo -e "${red}WARNING: $(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)${NC}"
 fi
 
-echo "removing orphaned indexes ..."
 bash $0 clean_index
 exit 0

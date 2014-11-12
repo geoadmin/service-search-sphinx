@@ -129,4 +129,7 @@ $ make move-template
 $ make deploy-int-config db=zeitreihen
 ```
 
-
+:information_source:
+With each call of ``make deploy-int-config``or `make deploy-prod-config``the indexes on the deploy target will be synchronized with the new config.
+* new indexes will be generated
+* orphaned indexes will be removed
