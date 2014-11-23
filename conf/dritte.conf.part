@@ -10,9 +10,9 @@ source src_ch_tamedia_schweizerfamilie-feuerstellen : def_queryable_features
             , 'feature' as origin \
             , 'ch.tamedia.schweizerfamilie-feuerstellen' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
             , gemeinde::text as label \
             , nr::text as feature_id \
         FROM tamedia.feuerstellen
@@ -26,9 +26,9 @@ source src_ch_ensi_zonenplan-notfallschutz-kernanlagen : def_queryable_features
             , 'feature' as origin \
             , 'ch.ensi.zonenplan-notfallschutz-kernanlagen' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
             , name::text as label \
             , nr::text as feature_id \
         FROM ensi.zonenplan_kernanlagen
@@ -46,9 +46,9 @@ source src_ch_pronatura_waldreservate : def_searchable_features
             , sg_nr::text||' '||remove_accents(name)||' '||obj_gisflaeche::text||' '||mcpfe as detail \
             , 'ch.pronatura.waldreservate' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
             , sg_nr::text as feature_id \
         from pronatura.waldreservate
 }
