@@ -10,9 +10,9 @@ source src_ch_bak_bundesinventar-schuetzenswerte-ortsbilder : def_queryable_feat
             , 'feature' as origin \
             , 'ch.bak.bundesinventar-schuetzenswerte-ortsbilder' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
             , ortsbildname ::text as label \
             , gid::text as feature_id \
         FROM public.isos
@@ -26,9 +26,9 @@ source src_ch_bak_schutzgebiete-unesco_weltkulturerbe : def_queryable_features
             , 'feature' as origin \
             , 'ch.bak.schutzgebiete-unesco_weltkulturerbe' as layer \
             , quadindex(the_geom) as geom_quadindex \
-            , y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , st_box2d(the_geom) as geom_st_box2d \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
             , bgdi_name::text as label \
             , bgdi_id::text as feature_id \
         FROM public.unesco
