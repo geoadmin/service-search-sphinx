@@ -82,6 +82,10 @@ sudo su sphinxsearch
 make move-template
 make index-all
 ```
+####Wordforms
+Wordforms are part of the sphinx conf.
+The swisssearch index (zipcodes) has to be computed after a wordforms update.
+
 ###Command line debugging with python sphinx api
 ```bash
 $ cd lib/sphinxapi
