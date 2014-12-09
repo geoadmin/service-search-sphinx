@@ -21,9 +21,14 @@ arguments:
         DEFAULT: none
     -i <<INDEX PATTERN>> optional 
         p.e. 
-        -i ch_swisstopo -> all indexes with prefix ch_swisstopo*** will be built
+        -i ch_swisstopo -> all indexes with infix ***ch_swisstopo*** will be built
         -i all -> all the indexes will be built
-        DEFAULT: none        "
+        DEFAULT: none        
+    -c  <<CLEAN INDEX>> [true|false] optional
+        p.e.
+        -c true -> on the deploy target missing indexes will be created, orphaned indexes will be deleted
+        DEFAULT: false 
+        "
 
 if [ ! -f $SPHINXCONFIG ]
 then
@@ -31,7 +36,9 @@ then
     exit 1
 fi
 
-while getopts "t:d:i:h" flag
+clean_index=false
+
+while getopts "t:d:i:c:h" flag
 do
   case $flag in
     t)      t_flag=true;
@@ -44,6 +51,7 @@ do
             ;;
     d)      database=$OPTARG;;
     i)      index=$OPTARG;;
+    c)      clean_index=$OPTARG;;
     h)      echo "$usage"
             exit 0;;
     \? )    echo "$usage"
@@ -65,25 +73,48 @@ then
     exit 1
 fi
 
-
 if grep dbpattern $DEPLOYCONFIG > /dev/null
 then
-    echo "dbpattern found in $DEPLOYCONFIG"
+    # set value for dbpattern
     perl -p -i -e "s/(dbpattern[\s]*=)([\w\s\.\-]*)$/\1 $database\n/g" $DEPLOYCONFIG
 else
-    echo "dbpattern not found in $DEPLOYCONFIG"
+    # add dbpattern parameter and set value
     sed -i "s/.*\[env\].*/&\ndbpattern = $database/" $DEPLOYCONFIG
 fi
 
 if grep indexpattern $DEPLOYCONFIG > /dev/null
 then
-    echo "indexpattern found in $DEPLOYCONFIG"
+    # set value for indexpattern
     perl -p -i -e "s/(indexpattern[\s]*=)(.*)/\1 $index/g" $DEPLOYCONFIG
 else
-    echo "indexpattern not found in $DEPLOYCONFIG"
+    # add indexpattern parameter and set value
     sed -i "s/.*\[env\].*/&\nindexpattern = $index/" $DEPLOYCONFIG
 fi
 
+if grep clean_index $DEPLOYCONFIG > /dev/null
+then
+    # set value for indexpattern
+    perl -p -i -e "s/(clean_index[\s]*=)(.*)/\1 $clean_index/g" $DEPLOYCONFIG
+else
+    # add indexpattern parameter and set value
+    sed -i "s/.*\[env\].*/&\nclean_index = $clean_index/" $DEPLOYCONFIG
+fi
+
+if [[ $clean_index = "true" ]];
+then
+    # disable code section in deploy.cfg for clean index deploy
+    sed -r -i '/^\[code\]$/,/^\[/ s/^active ?= ?true/active = false/' $DEPLOYCONFIG
+fi 
 
 sudo -u deploy deploy -r deploy-conf-only.cfg $target
 
+# reset dbpattern and indexpattern to null
+perl -p -i -e "s/(dbpattern[\s]*=)([\w\s\.\-]*)$/\1 \n/g" $DEPLOYCONFIG
+perl -p -i -e "s/(indexpattern[\s]*=)(.*)/\1 /g" $DEPLOYCONFIG
+perl -p -i -e "s/(clean_index[\s]*=)(.*)/\1 /g" $DEPLOYCONFIG
+
+if [[ $clean_index = "true" ]];
+then
+    # enable code section in deploy.cfg for standard config deploy
+    sed -r -i '/^\[code\]$/,/^\[/ s/^active ?= ?false/active = true/' $DEPLOYCONFIG
+fi 

@@ -30,6 +30,9 @@ help:
 	@echo "                       an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
 	@echo "- deploy-demo-config   Deploy the sphinx config only on a demo instance, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
 	@echo "                       an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
+	@echo "- deploy-int-clean_index  	On the deploy target, new indexes will be generated and orphaned indexes will be deleted"
+	@echo "- deploy-prod-clean_index  	On the deploy target, new indexes will be generated and orphaned indexes will be deleted"
+	@echo "- deploy-demo-clean_index  	On the deploy target, new indexes will be generated and orphaned indexes will be deleted"
 
 .PHONY: index
 index: move-template
@@ -79,6 +82,18 @@ deploy-demo:
 	sudo -u deploy deploy  -r deploy/deploy.cfg demo
 	cd deploy && bash deploy-conf-only.sh -t demo
 
+.PHONY: deploy-int-clean_index
+deploy-int-clean_index:
+	cd deploy && bash deploy-conf-only.sh -t int -c true 
+
+.PHONY: deploy-prod-clean_index
+deploy-prod-clean_index:
+	cd deploy && bash deploy-conf-only.sh -t prod -c true
+
+.PHONY: deploy-demo-clean_index
+deploy-demo-clean_index:
+	cd deploy && bash deploy-conf-only.sh -t demo -c true
+
 .PHONY: deploy-int-config
 deploy-int-config:
 ifneq ($(db),)
@@ -86,7 +101,7 @@ ifneq ($(db),)
 else ifneq ($(index),)
 		cd deploy && bash deploy-conf-only.sh -t int -i $(index)
 else
-		cd deploy && bash deploy-conf-only.sh -t int 2> /dev/null
+		cd deploy && bash deploy-conf-only.sh -t int 
 endif
 
 .PHONY: deploy-prod-config
@@ -112,10 +127,4 @@ endif
 
 .PHONY: move-template
 move-template:
-	indextool --checkconfig -c conf/sphinx.conf | grep "config valid"
-	cp conf/sphinx.conf /var/lib/sphinxsearch/data/index/sphinx.conf
-	cp conf/wordforms_*.txt /var/lib/sphinxsearch/data/index
-	cp conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
-	cp deploy/pg2sphinx_trigger.py /var/lib/sphinxsearch/data/index/pg2sphinx_trigger.py
-	cp deploy/pg2sphinx_trigger.py /etc/sphinxsearch/pg2sphinx_trigger.py
-	bash deploy/hooks_conf_only/post-restore-code clean_index
+	bash deploy/move-template.sh

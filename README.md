@@ -118,7 +118,7 @@ $ make deploy-int-config db=all
 
 The same commands can be used with ```make deploy-prod-config```.
 
-####Deploy config to Integration of one DB
+####Deploy config to Integration, create all indexes related to specific database
 ```bash
 $ cd service-sphinxsearch/
 $ git checkout master
@@ -129,4 +129,16 @@ $ make move-template
 $ make deploy-int-config db=zeitreihen
 ```
 
+####Deploy **clean_index** to Integration
+You can use this command to 
+* create all the missing indexes 
+* remove orphaned indexes
+The sphinx configuration will not be deployed. The same command can be used with ```make deploy-prod-clean_index```.
+```bash
+$ make deploy-int-clean_index
+```
 
+:information_source:
+With each call of ``make deploy-int-config``or `make deploy-prod-config``the indexes on the deploy target will be synchronized with the new config.
+* new indexes will be generated
+* orphaned indexes will be removed
