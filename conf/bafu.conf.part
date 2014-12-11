@@ -3,6 +3,134 @@
 ## QUERYABLE
 
 
+source src_ch_bafu_sturm-staudruck_30 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.sturm-staudruck_30' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , oid::text as label \
+            , oid::text as feature_id \
+        FROM diverse.data_staudruck
+}
+
+source src_ch_bafu_sturm-staudruck_50 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.sturm-staudruck_50' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , oid::text as label \
+            , oid::text as feature_id \
+        FROM diverse.data_staudruck
+}
+
+source src_ch_bafu_sturm-staudruck_100 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.sturm-staudruck_100' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , oid::text as label \
+            , oid::text as feature_id \
+        FROM diverse.data_staudruck
+}
+
+source src_ch_bafu_sturm-staudruck_300 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.sturm-staudruck_300' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , oid::text as label \
+            , oid::text as feature_id \
+        FROM diverse.data_staudruck
+}
+
+source src_ch_bafu_sturm-boeenspitzen_30 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.sturm-boeenspitzen_30' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , oid::text as label \
+            , oid::text as feature_id \
+        FROM diverse.data_boeenspitzen
+}
+
+source src_ch_bafu_sturm-boeenspitzen_50 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.sturm-boeenspitzen_50' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , oid::text as label \
+            , oid::text as feature_id \
+        FROM diverse.data_boeenspitzen
+}
+
+source src_ch_bafu_sturm-boeenspitzen_100 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.sturm-boeenspitzen_100' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , oid::text as label \
+            , oid::text as feature_id \
+        FROM diverse.data_boeenspitzen
+}
+
+source src_ch_bafu_sturm-boeenspitzen_300 : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.bafu.sturm-boeenspitzen_300' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , oid::text as label \
+            , oid::text as feature_id \
+        FROM diverse.data_boeenspitzen
+}
+
 source src_ch_bafu_grundwasserschutzareale : def_queryable_features 
 {
     sql_db = bafu
@@ -1093,6 +1221,54 @@ index ch_bafu_bundesinventare-amphibien_wanderobjekte
     min_prefix_len = 1
     prefix_fields = geom_quadindex
     enable_star = 1
+}
+
+index ch_bafu_sturm-staudruck_30 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_sturm-staudruck_30
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_sturm-staudruck_30
+}
+
+index ch_bafu_sturm-staudruck_50 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_sturm-staudruck_50
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_sturm-staudruck_50
+}
+
+index ch_bafu_sturm-staudruck_100 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_sturm-staudruck_100
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_sturm-staudruck_100
+}
+
+index ch_bafu_sturm-staudruck_300 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_sturm-staudruck_300
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_sturm-staudruck_300
+}
+
+index ch_bafu_sturm-boeenspitzen_30 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_sturm-boeenspitzen_30
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_sturm-boeenspitzen_30
+}
+
+index ch_bafu_sturm-boeenspitzen_50 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_sturm-boeenspitzen_50
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_sturm-boeenspitzen_50
+}
+
+index ch_bafu_sturm-boeenspitzen_100 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_sturm-boeenspitzen_100
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_sturm-boeenspitzen_100
+}
+
+index ch_bafu_sturm-boeenspitzen_300 : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_sturm-boeenspitzen_300
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_sturm-boeenspitzen_300
 }
 
 index ch_bafu_bundesinventare-amphibien_wanderobjekte_anhoerung : ch_bafu_bundesinventare-amphibien_wanderobjekte
