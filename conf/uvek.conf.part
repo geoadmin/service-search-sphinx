@@ -779,6 +779,40 @@ source src_ch_bfe_energiestaedte-2000watt-aufdemweg : def_searchable_features
         from bfe.energiestaedte_aufdemweg_2000watt
 }
 
+source src_ch_bav_laerm-emissionsplan_eisenbahn_tag : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , bgdi_id::text ||' '||linienbeze as label \
+            , 'feature' as origin \
+            , lin_nr_dfa::text||' '||remove_accents(linienbeze)||' '||remove_accents(von_bpk_bp)||' '||remove_accents(bis_bpk_bp) as detail \
+            , 'ch.bav.laerm-emissionsplan_eisenbahn_tag' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+            , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from bav.laerm_emissionsplan_eisenbahn_tag
+}
+
+source src_ch_bav_laerm-emissionsplan_eisenbahn_nacht : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , bgdi_id::text ||' '||linienbeze as label \
+            , 'feature' as origin \
+            , lin_nr_dfa::text||' '||remove_accents(linienbeze)||' '||remove_accents(von_bpk_bp)||' '||remove_accents(bis_bpk_bp) as detail \
+            , 'ch.bav.laerm-emissionsplan_eisenbahn_nacht' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+            , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from bav.laerm_emissionsplan_eisenbahn_nacht
+}
+
 ## INDICES
 
 ## QUERYABLE
@@ -1132,3 +1166,14 @@ index ch_bfe_energiestaedte-2000watt-aufdemweg : ch_astra_ivs-nat
     path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte-2000watt-aufdemweg 
 }
 
+index ch_bav_laerm-emissionsplan_eisenbahn_tag : ch_astra_ivs-nat
+{
+    source = src_ch_bav_laerm-emissionsplan_eisenbahn_tag
+    path = /var/lib/sphinxsearch/data/index/ch_bav_laerm-emissionsplan_eisenbahn_tag
+}
+
+index ch_bav_laerm-emissionsplan_eisenbahn_nacht : ch_astra_ivs-nat
+{
+    source = src_ch_bav_laerm-emissionsplan_eisenbahn_nacht
+    path = /var/lib/sphinxsearch/data/index/ch_bav_laerm-emissionsplan_eisenbahn_nacht
+}
