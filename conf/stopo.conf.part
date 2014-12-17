@@ -4,6 +4,23 @@
 
 ## QUERYABLE
 
+
+source src_ch_swisstopo_skitourenkarte-50_metadata : def_queryable_features
+{
+    sql_db = stopo
+    sql_query = \
+        SELECT oid as id \
+            , 'feature' as origin \
+            , 'ch.swisstopo.skitourenkarte-50.metadata' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , lknr::text as label \
+            , oid::text as feature_id \
+        FROM datenstand.view_gridstand_lkski
+}
+
 source src_ch_kantone_cadastralwebmap-farbe : def_queryable_features
 {
     sql_db = stopo
@@ -1705,6 +1722,12 @@ index ch_kantone_cadastralwebmap-farbe
     min_prefix_len = 1
     prefix_fields = geom_quadindex
     enable_star = 1
+}
+
+index ch_swisstopo_skitourenkarte-50_metadata : ch_kantone_cadastralwebmap-farbe
+{
+    source = src_ch_swisstopo_skitourenkarte-50_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_skitourenkarte-50_metadata
 }
 
 index ch_swisstopo_geologie-gravimetrischer_atlas_metadata : ch_kantone_cadastralwebmap-farbe
