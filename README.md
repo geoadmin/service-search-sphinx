@@ -119,7 +119,16 @@ $ make deploy-int-config index=all
 ```bash
 $ make deploy-int-config db=all
 ```
+The same commands can be used with ```make deploy-prod-config```.
 
+####Deploy config and wordforms to Integration, build all the indexes which are using wordforms
+You can use the following commands to deploy the config and the wordform files and recreate all the indexes which are using wordforms. You can find the indexes with wordforms in the config files. Actually the distributed index ``swisssearch``and the indexes ``layers_**`` are using wordforms.
+```bash
+$ make deploy-int-config index=swisssearch
+```
+```bash
+$ make deploy-int-config index=layers
+```
 The same commands can be used with ```make deploy-prod-config```.
 
 ####Deploy config to Integration, create all indexes related to specific database
