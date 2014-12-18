@@ -106,7 +106,7 @@ then
 fi
 
 echo "replace db host with $DBHOST ..."
-sudo -u sphinxsearch sed -i "s/pgcluster0t.bgdi.admin.ch/$DBHOST/g" /etc/sphinxsearch/sphinx.conf
+sudo -u sphinxsearch sed -i "s/pgcluster.dev.bgdi.ch/$DBHOST/g" /etc/sphinxsearch/sphinx.conf
 
 if [ ! -z "$DBPATTERN" ]
 then
