@@ -3,7 +3,7 @@
 source def_pqsql
 {
     type = pgsql
-    sql_host = pgcluster0t.bgdi.admin.ch
+    sql_host = pgcluster.dev.bgdi.ch
     sql_user = $PGUSER
     sql_pass = $PGPASS
     sql_port = 5432
