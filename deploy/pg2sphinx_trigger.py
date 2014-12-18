@@ -186,13 +186,29 @@ if __name__ == '__main__':
             .*?                                 # Next part:
             (?P<content> (?<={)[^}]*(?=}))      # catch everything but curly braces
         ''', re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
+    
+    # get distributed indices first
+    distributed_index = {}
+    for i in reg_index.finditer(data):
+        index, index_parent = parsing_func(i.groupdict()['index'])
+        # distributed indexes
+        index_type = re.search('type\s=\s*(.*)', i.groupdict()['content'])
+        index_type = index_type.group(1).strip() if index_type else None
+        index_local = re.findall('local\s=\s*(.*)', i.groupdict()['content'])
+        index_local = index_local if index_local else None
+        if index_local:    
+            distributed_index[index]=index_local
 
     for i in reg_index.finditer(data):
         index, index_parent = parsing_func(i.groupdict()['index'])
         # step 2 extract sql_db and sql_query from curly braced content
         source = re.search('source\s=\s*(.*)', i.groupdict()['content'])
         source = source.group(1).strip() if source else None
-
+        # set index_parent to distributed_index if one exists otherwise index_parent is None
+        index_parent = None
+        for k,v in distributed_index.iteritems():
+            if index in v:
+                index_parent = k
         # import only real indexes, no distributed indexes
         if not ( source is None and index_parent is None ):
             c.execute("""
@@ -220,7 +236,7 @@ if __name__ == '__main__':
     for row in c.execute(sql):
         db = None
         indices = row['sphinx_index']
-
+        indices_distributed = row['index_parent']
         # database filter
         # -d pattern
         if options.index_filter is None:
@@ -235,7 +251,7 @@ if __name__ == '__main__':
         # indice filter
         # -i pattern
         else:
-            if options.index_filter in indices or options.index_filter == 'all':
+            if options.index_filter in indices or options.index_filter == 'all' or options.index_filter in indices_distributed :
                 db = row['database']
 
         # output  
