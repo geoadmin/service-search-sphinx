@@ -607,6 +607,70 @@ source src_ch_bafu_bundesinventare-flachmoore_regional : def_queryable_features
         FROM bundinv.flachmoore_regional
 }
 
+source src_ch_bafu_schutzgebiete_schutzgebiete-aulav_auen : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.schutzgebiete-aulav_auen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , coalesce(au_name::text,'') as label \
+            , bgdi_id::text as feature_id \
+        FROM schutzge.auengebiete
+}
+
+source src_ch_bafu_schutzgebiete_schutzgebiete-aulav_jagdbanngebiete : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.schutzgebiete-aulav_jagdbanngebiete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , coalesce(jb_name::text,'') as label \
+            , bgdi_id::text as feature_id \
+        FROM schutzge.jagdbanngebiete
+}
+
+source src_ch_bafu_schutzgebiete_schutzgebiete-aulav_moorlandschaften : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.schutzgebiete-aulav_moorlandschaften' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , coalesce(ml_name::text,'') as label \
+            , bgdi_id::text as feature_id \
+        FROM schutzge.moorlandschaften
+}
+
+source src_ch_bafu_schutzgebiete_schutzgebiete-aulav_uebrige : def_queryable_features
+{
+    sql_db = bafu
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , 'ch.bafu.schutzgebiete-aulav_uebrige' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , coalesce(fm_name,'')||' '||coalesce(hm_name::text,'')||' '||coalesce(wv_name,'') ||' '||coalesce(np_name,'') as label \
+            , bgdi_id::text as feature_id \
+        FROM schutzge.uebrige_gebiete
+}
+
 source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_queryable_features
 {
     sql_db = bafu
@@ -1446,6 +1510,30 @@ index ch_bafu_bundesinventare-flachmoore_anhoerung : ch_bafu_bundesinventare-amp
 {
     source = src_ch_bafu_bundesinventare-flachmoore_anhoerung
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-flachmoore_anhoerung
+}
+
+index ch_bafu_schutzgebiete_schutzgebiete-aulav_auen : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_schutzgebiete_schutzgebiete-aulav_auen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete_schutzgebiete-aulav_auen
+}
+
+index ch_bafu_schutzgebiete_schutzgebiete-aulav_jagdbanngebiete : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_schutzgebiete_schutzgebiete-aulav_jagdbanngebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete_schutzgebiete-aulav_jagdbanngebiete
+}
+
+index ch_bafu_schutzgebiete_schutzgebiete-aulav_moorlandschaften : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_schutzgebiete_schutzgebiete-aulav_moorlandschaften
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete_schutzgebiete-aulav_moorlandschaften
+}
+
+index ch_bafu_schutzgebiete_schutzgebiete-aulav_uebrige : ch_bafu_bundesinventare-amphibien_wanderobjekte
+{
+    source = src_ch_bafu_schutzgebiete_schutzgebiete-aulav_uebrige
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete_schutzgebiete-aulav_uebrige
 }
 
 index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : ch_bafu_bundesinventare-amphibien_wanderobjekte
