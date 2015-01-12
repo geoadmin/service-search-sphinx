@@ -1,11 +1,20 @@
+W > Weg
+Al > Allee
+Str > Strasse
+Pl > Platz
+
 ch > chemin
 av > avenue
 boul > boulevard
 bd > boulevard
 rte > route
 faub > faubourg
-pl > place
+Platz > place
 r > rue
 sent > sentier
 pass > passage
 
+sentier > sentiero
+v > viale
+Strasse > strada
+p > piazza
