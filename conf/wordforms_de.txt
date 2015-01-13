@@ -1,5 +1,0 @@
-W > Weg
-Al > Allee
-Str > Strasse
-Pl > Platz
-
