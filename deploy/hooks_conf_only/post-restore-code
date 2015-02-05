@@ -84,7 +84,7 @@ fi
 echo "copy files preserving timestamp ..."
 sudo -u sphinxsearch cp -f $CODE_DIR""sphinx.conf /etc/sphinxsearch/
 sudo -u sphinxsearch cp -f $CODE_DIR""*.py /etc/sphinxsearch/
-sudo -u sphinxsearch rsync --update -qavz $CODE_DIR $SPHINXINDEX
+sudo -u sphinxsearch rsync --update --delete --include="*/" --include="*txt" --include="*py" --exclude="*" -qavz $CODE_DIR $SPHINXINDEX
 
 DBHOST=$DBHOST_DEFAULT
 # TARGET -> integration
