@@ -1,20 +1,38 @@
+# Deutsch
 W > Weg
 Al > Allee
 Str > Strasse
 Pl > Platz
+GI > Industriegebiet
+Strasse > Gasse
+Gasse > Strasse
+Weg > Gasse
+Platz > Strasse
 
+# francais
 ch > chemin
 av > avenue
 boul > boulevard
 bd > boulevard
 rte > route
 faub > faubourg
-Platz > place
+fbg > faubourg
 r > rue
 sent > sentier
 pass > passage
+# zi > zone industrielle (need 2.2.4 update)
+route > rue
+rue > route
+avenue > boulevard
+boulevard > avenue
+chemin > sentier
+sentier > chemin
+passage > vy
+vy > passage
 
-sentier > sentiero
+# italiano
 v > viale
-Strasse > strada
 p > piazza
+viale > sentiero
+sentiero > viale
+piazza > viale
