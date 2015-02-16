@@ -77,6 +77,59 @@ source src_sn25 : src_swisssearch
         FROM tlm.swissnames_sn25_und_tlm
 }
 
+source src_swissnames3d : src_swisssearch
+{
+    sql_db=stopo
+    sql_query = \
+        select row_number() OVER(ORDER BY 1 asc) as id , * FROM \
+        ( \
+        SELECT \
+        uuid::text as feature_id \
+        , remove_accents(name)::text as detail \
+        , '<b>'||coalesce(name,'')||'</b>' as label \
+        , 'swissnames3d'::text as origin \
+        , bgdi_quadindex as geom_quadindex \
+        , box2d(the_geom) as geom_st_box2d \
+        , 5::integer as rank \
+        , st_y((st_geometryn(the_geom,1))) as x \
+        , st_x((st_geometryn(the_geom,1))) as y \
+        , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
+        , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
+        , 1 as num \
+        FROM tlm.swissnames3d_point \
+        UNION ALL \
+        SELECT \
+        uuid::text as feature_id \
+        , remove_accents(name)::text as detail \
+        , '<b>'||coalesce(name,'')||'</b>' as label \
+        , 'swissnames3d'::text as origin \
+        , bgdi_quadindex as geom_quadindex \
+        , box2d(the_geom) as geom_st_box2d \
+        , 5::integer as rank \
+        , st_y(st_ClosestPoint(the_geom,st_centroid(the_geom))) as x \
+        , st_x(st_ClosestPoint(the_geom,st_centroid(the_geom))) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+        , 1 as num \
+        FROM tlm.swissnames3d_line \
+        UNION ALL \
+        SELECT \
+        uuid::text as feature_id \
+        , remove_accents(name)::text as detail \
+        , '<b>'||coalesce(name,'')||'</b>' as label \
+        , 'swissnames3d'::text as origin \
+        , bgdi_quadindex as geom_quadindex \
+        , box2d(the_geom) as geom_st_box2d \
+        , 5::integer as rank \
+        , st_y(st_ClosestPoint(the_geom,st_centroid(the_geom))) as x \
+        , st_x(st_ClosestPoint(the_geom,st_centroid(the_geom))) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+        , 1 as num \
+        FROM tlm.swissnames3d_poly \
+        ) sub
+}
+
 source src_gg25 : src_swisssearch
 {
     sql_db=stopo_dev
@@ -203,6 +256,12 @@ index sn25 : zipcode
     path = /var/lib/sphinxsearch/data/index/sn25
 }
 
+index swissnames3d : zipcode
+{
+    source = src_swissnames3d
+    path = /var/lib/sphinxsearch/data/index/swissnames3d
+}
+
 index parcel : zipcode
 {
     source = src_parcel
@@ -244,6 +303,13 @@ index sn25_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/sn25_metaphone
 }
 
+index swissnames3d_metaphone : zipcode
+{
+    morphology = metaphone
+    source = src_swissnames3d
+    path = /var/lib/sphinxsearch/data/index/swissnames3d_metaphone
+}
+
 index address_metaphone: zipcode
 {
     morphology = metaphone
@@ -280,6 +346,13 @@ index sn25_soundex : zipcode
     path = /var/lib/sphinxsearch/data/index/sn25_soundex
 }
 
+index swissnames3d_soundex : zipcode
+{
+    morphology = soundex
+    source = src_swissnames3d
+    path = /var/lib/sphinxsearch/data/index/swissnames3d_soundex
+}
+
 index address_soundex: zipcode
 {
     morphology = soundex
@@ -302,6 +375,7 @@ index swisssearch
     local = kantone
     local = gg25
     local = sn25
+    local = swissnames3d
     local = parcel
     local = address
 }
@@ -313,10 +387,13 @@ index swisssearch_fuzzy
     local = kantone_metaphone
     local = gg25_metaphone
     local = sn25_metaphone
+    local = swissnames3d_metaphone
+    local = swissnames3d_metaphone
     local = address_metaphone
     local = district_soundex
     local = kantone_soundex
     local = gg25_soundex
     local = sn25_soundex
+    local = swissnames3d_soundex
     local = address_soundex
 }
