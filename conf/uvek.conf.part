@@ -814,6 +814,24 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
         FROM bazl.luftfahrthindernis
 }
 
+source src_ch_bfe_windenergieanlagen : def_searchable_features
+{
+    sql_db = uvek
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY fac_id asc) as id \
+            , fac_name as label \
+            , 'feature' as origin \
+            , remove_accents(fac_name) as detail \
+            , 'ch.bfe.windenergieanlagen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d   \
+            , fac_id::text as feature_id \
+        from bfe.view_windenergieanlagen_facility
+}
+
+
 ## INDICES
 
 ## QUERYABLE
@@ -1178,3 +1196,10 @@ index ch_bav_laerm-emissionsplan_eisenbahn_nacht : ch_astra_ivs-nat
     source = src_ch_bav_laerm-emissionsplan_eisenbahn_nacht
     path = /var/lib/sphinxsearch/data/index/ch_bav_laerm-emissionsplan_eisenbahn_nacht
 }
+
+index ch_bfe_windenergieanlagen : ch_astra_ivs-nat
+{
+    source = src_ch_bfe_windenergieanlagen
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_windenergieanlagen
+}
+
