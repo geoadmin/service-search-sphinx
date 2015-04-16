@@ -18,7 +18,7 @@ source src_swisssearch : def_pqsql
 
 source src_address : src_swisssearch
 {
-    sql_db=kogis
+    sql_db=kogis_dev
     sql_query = \
         SELECT id \
         , feature_id \
@@ -38,7 +38,7 @@ source src_address : src_swisssearch
 
 source src_parcel : src_swisssearch
 {
-    sql_db=dritte
+    sql_db=dritte_dev
     sql_query = \
         SELECT id \
         , NULL::text as feature_id \
@@ -58,7 +58,7 @@ source src_parcel : src_swisssearch
 
 source src_sn25 : src_swisssearch
 {
-    sql_db=stopo
+    sql_db=stopo_dev
     sql_query = \
         SELECT \
         objectid as id \
@@ -79,7 +79,7 @@ source src_sn25 : src_swisssearch
 
 source src_gg25 : src_swisssearch
 {
-    sql_db=stopo
+    sql_db=stopo_dev
     sql_query = \
         SELECT \
         row_number() OVER(ORDER BY id asc) as id \
@@ -100,7 +100,7 @@ source src_gg25 : src_swisssearch
 
 source src_kantone : src_swisssearch
 {
-    sql_db=stopo
+    sql_db=stopo_dev
     sql_query = \
         SELECT \
         kantonsnr::integer as id \
@@ -122,7 +122,7 @@ source src_kantone : src_swisssearch
 
 source src_district : src_swisssearch
 {
-    sql_db=stopo
+    sql_db=stopo_dev
     sql_query = \
         SELECT \
         id::integer as id \
@@ -143,7 +143,7 @@ source src_district : src_swisssearch
 
 source src_zipcode : src_swisssearch
 {
-    sql_db=stopo
+    sql_db=stopo_dev
     sql_query = \
         SELECT \
         gid as id \

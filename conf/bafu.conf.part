@@ -2,7 +2,7 @@
 
 source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_features
 {
-    sql_db = bafu
+    sql_db = bafu_dev
     sql_query = \
         SELECT nr::bigint as id \
             , name as label \
@@ -19,7 +19,7 @@ source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_fea
 
 source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_features
 {
-    sql_db = bafu
+    sql_db = bafu_dev
     sql_query = \
         SELECT nr::bigint as id \
             , name as label \
@@ -36,7 +36,7 @@ source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_fe
 
 source src_ch_bafu_bundesinventare-auen : def_searchable_features
 {
-    sql_db = bafu
+    sql_db = bafu_dev
     sql_query = \
         SELECT gid::bigint as id \
             , au_name as label \
@@ -53,7 +53,7 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
 
 source src_ch_bafu_waldreservate : def_searchable_features
 {
-    sql_db = bafu
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , name::text as label \
