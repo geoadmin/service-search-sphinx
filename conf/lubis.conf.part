@@ -1,7 +1,5 @@
 ## SOURCES
 
-## SEARCHABLE
-
 source src_ch_swisstopo_lubis-bildstreifen : def_searchable_features_with_year
 {
     sql_db = lubis
@@ -110,9 +108,9 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-firmen : def_searchable_features
         FROM public.luftbilder_dritte_firmen
 }
 
+
 ## INDICES
-#
-## SEARCHABLE
+
 index ch_swisstopo_lubis-bildstreifen
 {
     type = plain

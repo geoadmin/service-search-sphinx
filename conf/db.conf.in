@@ -10,8 +10,7 @@ source def_pqsql
     sql_query_pre = SET NAMES 'UTF8'
 }
 
-## QUERYABLE FEATURES SOURCE
-source def_queryable_features : def_pqsql
+source def_searchable_features : def_pqsql
 {
     sql_attr_string = feature_id
     sql_attr_string = origin
@@ -25,16 +24,6 @@ source def_queryable_features : def_pqsql
     sql_attr_string = label_fr
     sql_attr_string = label_it
     sql_attr_string = label_en
-}
-
-source def_queryable_features_with_year : def_queryable_features
-{
-    sql_attr_uint = year
-}
-
-## SEARCHABLE FEATURES SOURCE
-source def_searchable_features : def_queryable_features
-{
     sql_field_string = detail
 }
 
