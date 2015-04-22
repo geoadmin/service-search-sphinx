@@ -14,9 +14,9 @@ arguments:
         -t prod
     -d <<DATABASE PATTERN>> optional 
         p.e. 
-        -d lubis -> all indexes using this database will be built
-        -d stopo.public -> all indexes using a table from that schema will be built
-        -d bafu.gefahren.gfz -> all indexes using this table will be built
+        -d lubis_prod -> all indexes using this database will be built
+        -d stopo_prod.public -> all indexes using a table from that schema will be built
+        -d bafu_prod.gefahren.gfz -> all indexes using this table will be built
         -d all -> all the indexes will be built
         DEFAULT: none
     -i <<INDEX PATTERN>> optional 

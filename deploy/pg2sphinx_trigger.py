@@ -52,16 +52,16 @@ if __name__ == '__main__':
     Indexes can be filtered by database pattern (-d) or by index pattern (-i)
 
     1) list all indexes which are based on database stopo:
-    python pg2sphinx_trigger.py -d stopo -c list
+    python pg2sphinx_trigger.py -d stopo_prod -c list
 
     2) list all indexes which are based on database stopo schema vd:
-    python pg2sphinx_trigger.py -d stopo.vd -c list
+    python pg2sphinx_trigger.py -d stopo_prod.vd -c list
 
     3) update all indexes which are based on database search:
-    python pg2sphinx_trigger.py -d search -c update
+    python pg2sphinx_trigger.py -d search_int -c update
 
     4) update all indexes which are based on table search.public.swisssearch:
-    python pg2sphinx_trigger.py -d search.public.swiss_search -c update
+    python pg2sphinx_trigger.py -d search_int.public.swiss_search -c update
 
     5) update all the indexes using a custom config file:
     python pg2sphinx_trigger.py -c update -s /path/to/my/sphinx.conf

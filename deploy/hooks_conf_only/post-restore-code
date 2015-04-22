@@ -86,27 +86,28 @@ sudo -u sphinxsearch cp -f $CODE_DIR""sphinx.conf /etc/sphinxsearch/
 sudo -u sphinxsearch cp -f $CODE_DIR""*.py /etc/sphinxsearch/
 sudo -u sphinxsearch rsync --update --delete --include="*/" --include="*txt" --include="*py" --exclude="*" -qavz $CODE_DIR $SPHINXINDEX
 
-DBHOST=$DBHOST_DEFAULT
+DBSUFFIX=$DBSUFFIX_DEFAULT
 # TARGET -> integration
 if [[ $TARGET == int ]]
 then
-  DBHOST=$DBHOST_INT;
+  DBSUFFIX=$DBSUFFIX_INT;
 fi
 
 # TARGET -> production
 if [[ $TARGET == prod ]]
 then
-  DBHOST=$DBHOST_PROD
+  DBSUFFIX=$DBSUFFIX_PROD
 fi
 
 # TARGET -> demo
 if [[ $TARGET == demo ]]
 then
-  DBHOST=$DBHOST_DEMO
+  DBSUFFIX=$DBSUFFIX_DEMO
 fi
 
-echo "replace db host with $DBHOST ..."
-sudo -u sphinxsearch sed -i "s/pgcluster.dev.bgdi.ch/$DBHOST/g" /etc/sphinxsearch/sphinx.conf
+echo "replace db suffix with $DBSUFFIX (p.e. lubis_3d_dev -> lubis_3d$DBSUFFIX)..."
+#                                       (----------$1---------)(---$3---)(-------------$4--------------)   (---$5--)
+sudo -u sphinxsearch perl -X -wi -pe 's#(sql_db[ \t]*=[ \t]*\b)(([^\W"]+)(_master|_dev|_prod|_int|_demo)\b|([^\W"]+))#$1$3$5'$DBSUFFIX'#gi' /etc/sphinxsearch/sphinx.conf
 
 if [ ! -z "$DBPATTERN" ]
 then

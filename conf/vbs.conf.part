@@ -2,7 +2,7 @@
 
 source src_ch_babs_kulturgueter : def_searchable_features
 {
-    sql_db = vbs
+    sql_db = vbs_dev
     sql_query = \
         SELECT kgs_nr::bigint as id \
             , zkob as label \

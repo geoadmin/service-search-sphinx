@@ -2,7 +2,7 @@
 
 source layers : def_pqsql
 {
-    sql_db = bod
+    sql_db = bod_dev
     sql_attr_bigint = id
     sql_attr_string = lang
     sql_attr_string = origin

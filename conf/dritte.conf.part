@@ -2,7 +2,7 @@
 
 source src_ch_pronatura_waldreservate : def_searchable_features
 {
-    sql_db = dritte
+    sql_db = dritte_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY sg_nr) as id \
             , name::text as label \
