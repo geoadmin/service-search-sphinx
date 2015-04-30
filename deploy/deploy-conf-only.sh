@@ -100,12 +100,6 @@ else
     sed -i "s/.*\[env\].*/&\nclean_index = $clean_index/" $DEPLOYCONFIG
 fi
 
-if [[ $clean_index = "true" ]];
-then
-    # disable code section in deploy.cfg for clean index deploy
-    sed -r -i '/^\[code\]$/,/^\[/ s/^active ?= ?true/active = false/' $DEPLOYCONFIG
-fi 
-
 sudo -u deploy deploy -r deploy-conf-only.cfg $target
 
 # reset dbpattern and indexpattern to null
@@ -113,8 +107,3 @@ perl -p -i -e "s/(dbpattern[\s]*=)([\w\s\.\-]*)$/\1 \n/g" $DEPLOYCONFIG
 perl -p -i -e "s/(indexpattern[\s]*=)(.*)/\1 /g" $DEPLOYCONFIG
 perl -p -i -e "s/(clean_index[\s]*=)(.*)/\1 /g" $DEPLOYCONFIG
 
-if [[ $clean_index = "true" ]];
-then
-    # enable code section in deploy.cfg for standard config deploy
-    sed -r -i '/^\[code\]$/,/^\[/ s/^active ?= ?false/active = true/' $DEPLOYCONFIG
-fi 
