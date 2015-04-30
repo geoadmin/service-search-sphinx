@@ -20,10 +20,6 @@ source def_searchable_features : def_pqsql
     sql_attr_float = lat
     sql_attr_float = lon
     sql_field_string = geom_quadindex
-    sql_attr_string = label_de
-    sql_attr_string = label_fr
-    sql_attr_string = label_it
-    sql_attr_string = label_en
     sql_field_string = detail
 }
 
