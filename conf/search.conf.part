@@ -148,7 +148,7 @@ source src_zipcode : src_swisssearch
         SELECT \
         gid as id \
         , os_uuid::text as feature_id \
-        , plz::text as detail \
+        , 'npa plz zip ' || plz::text as detail \
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((SELECT ak from tlm.swissboundaries_kantone k where st_intersects(ST_PointOnSurface(p.the_geom),k.the_geom)),'')||')</b>' as label \
         , 'zipcode' as origin \
         , quadindex(the_geom) as geom_quadindex \
