@@ -17,6 +17,91 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_fe
         from hydrologie.hydrologie_untersuchungsgebiete_stationen
 }
 
+source src_ch_bafu_strukturguete-hochrhein_sohle : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT geodb_oid as id \
+            , geodb_oid as label \
+            , 'feature' as origin \
+            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , 'ch.bafu.strukturguete-hochrhein_sohle' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , geodb_oid::text as feature_id \
+        from wasser.strukturguete_hochrhein
+}
+
+source src_ch_bafu_strukturguete-hochrhein_rechtesumfeld : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT geodb_oid as id \
+            , geodb_oid as label \
+            , 'feature' as origin \
+            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , 'ch.bafu.strukturguete-hochrhein_rechtesumfeld' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , geodb_oid::text as feature_id \
+        from wasser.strukturguete_hochrhein
+}
+
+source src_ch_bafu_strukturguete-hochrhein_rechtesufer : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT geodb_oid as id \
+            , geodb_oid as label \
+            , 'feature' as origin \
+            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , 'ch.bafu.strukturguete-hochrhein_rechtesufer' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , geodb_oid::text as feature_id \
+        from wasser.strukturguete_hochrhein
+}
+
+source src_ch_bafu_strukturguete-hochrhein_linkesumfeld : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT geodb_oid as id \
+            , geodb_oid as label \
+            , 'feature' as origin \
+            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , 'ch.bafu.strukturguete-hochrhein_linkesumfeld' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , geodb_oid::text as feature_id \
+        from wasser.strukturguete_hochrhein
+}
+
+source src_ch_bafu_strukturguete-hochrhein_linkesufer : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT geodb_oid as id \
+            , geodb_oid as label \
+            , 'feature' as origin \
+            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , 'ch.bafu.strukturguete-hochrhein_linkesufer' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , geodb_oid::text as feature_id \
+        from wasser.strukturguete_hochrhein
+}
+
 source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_features
 {
     sql_db = bafu_dev
@@ -147,4 +232,34 @@ index ch_bafu_gewaesserschutz-badewasserqualitaet : ch_bafu_hydrologie-wassertem
 {
     source = src_ch_bafu_gewaesserschutz-badewasserqualitaet
     path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz-badewasserqualitaet
+}
+
+index ch_bafu_strukturguete-hochrhein_sohle : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_strukturguete-hochrhein_sohle
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_sohle
+}
+
+index ch_bafu_strukturguete-hochrhein_linkesufer : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_strukturguete-hochrhein_linkesufer
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_linkesufer
+}
+
+index ch_bafu_strukturguete-hochrhein_linkesumfeld : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_strukturguete-hochrhein_linkesumfeld
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_linkesumfeld
+}
+
+index ch_bafu_strukturguete-hochrhein_rechtesumfeld : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_strukturguete-hochrhein_rechtesumfeld
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_rechtesumfeld
+}
+
+index ch_bafu_strukturguete-hochrhein_rechtesufer : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_strukturguete-hochrhein_rechtesufer
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_rechtesufer
 }
