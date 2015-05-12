@@ -86,6 +86,10 @@ make index-all
 Wordforms are part of the sphinx conf.
 The swisssearch index (zipcodes) has to be computed after a wordforms update.
 
+####StopWords
+Stopwords are part of the sphinx conf.
+All indices have to be computed after changes in the stopwords file to be taken into account.
+
 ###Command line debugging with python sphinx api
 ```bash
 $ cd lib/sphinxapi
