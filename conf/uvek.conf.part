@@ -260,7 +260,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_2 : def_searchable_featur
 }
 
 #Some tables might be empty!!
-source src_ch_bfe_sachplan-uebertragungsleitungen_anhoerung_1 : def_searchable_features
+source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -294,7 +294,7 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_2 : def_searchable_fe
         from bfe.suel_pl_anhorung
 }
 
-source src_ch_bfe_sachplan-uebertragungsleitungen_anhoerung_3 : def_searchable_features
+source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_3 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
