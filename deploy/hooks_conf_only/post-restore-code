@@ -175,4 +175,12 @@ else
 fi
 
 bash $0 clean_index
+
+# if we deploy to prod we wait 40 seconds before updating the next sphinx backend
+# ELB health check for prod is every 10 seconds, if shinx port is not responding, the elb is redirecting to the other instance
+if [[ $TARGET == prod ]]; then
+  echo -e "${green}waiting 40 seconds before updating the next $TARGET sphinx backend ...${NC}"
+  sleep 40
+fi
+
 exit 0
