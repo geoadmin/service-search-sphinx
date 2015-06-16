@@ -126,7 +126,7 @@ source src_ch_bafu_hydrologischer-atlas_bilanzgebiete : def_searchable_features
         SELECT bgdi_id::bigint as id \
         , name as label \
         , 'feature' as origin \
-        , remove_accents(bgdi_id::text||' '||name||' '||flussgebiet::text||' '||shape_area::text) as detail \
+        , remove_accents(coalesce(name,' ')||' '||coalesce(flussgebiet::text,' ')||' '||coalesce(shape_area::text,' ')) as detail \
         , 'ch.bafu.hydrologischer-atlas_bilanzgebiete' as layer \
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -143,7 +143,7 @@ source src_ch_bafu_hydrologischer-atlas_basisgebiete : def_searchable_features
         SELECT bgdi_id::bigint as id \
         , nummer::text as label \
         , 'feature' as origin \
-        , remove_accents(bgdi_id::text||' '||gebietskennzahl::text||' '||bemerkung||' '||flussgebiet::text||' '||max_hoe::text||' '||min_hoe::text||' '||mit_hoe::text||' '||mit_ns::text||' '||s_w_ns::text||' '||jahrtemp_g::text||' '||winttemp_g::text||' '||shape_area) as detail \
+        , remove_accents(coalesce(gebietskennzahl::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(flussgebiet::text,' ')||' '||coalesce(max_hoe::text,' ')||' '||coalesce(min_hoe::text,' ')||' '||coalesce(mit_hoe::text,' ')||' '||coalesce(mit_ns::text,' ')||' '||coalesce(s_w_ns::text,' ')||' '||coalesce(jahrtemp_g::text,' ')||' '||coalesce(winttemp_g::text,' ')||' '||coalesce(shape_area,' ')) as detail \
         , 'ch.bafu.hydrologischer-atlas_basisgebiete' as layer \
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
