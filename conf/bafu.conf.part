@@ -1,5 +1,73 @@
 ## SOURCES
 
+source src_ch_bafu_hydrologie-q347 : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , gewaesser as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(gewaesser,' ')||' '||coalesce(bilanzid,' ')||' '||coalesce(id::text,' ')||' '||coalesce(basisid,' ')||' '||coalesce(lhg,' ')||' '||coalesce(gewaesser,' ')||' '||coalesce(flaeche::text,' ')||' '||coalesce(q_84_93,' ')||' '||coalesce(qp::text,' ')||' '||coalesce(p,' ')::text||' '||coalesce(qmod::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(symbolisierung,' ')) as detail \
+            , 'ch.bafu.hydrologie-q347' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from hydrologie.hydro_q347
+}
+
+source src_ch_bafu_wasserbau-vermessungsstrecken : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , bezeichnung as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(routeid ::text,' ')||' '||coalesce(gewaessernummer,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(anfangsmass::text,' ')||' '||coalesce(endmass::text,' ')||' '||coalesce(streckenid::text,' ')||' '||coalesce(bezeichnung,' ')||' '||coalesce(laenge_km::text,' ')||' '||coalesce(anzahl_profile::text,' ')||' '||coalesce(aufnahme_intervall::text,' ')||' '||coalesce(aufnahme_letzte::text,' ')||' '||coalesce(gwlnr,' ')) as detail \
+            , 'ch.bafu.wasserbau-vermessungsstrecken' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from wasser.vermessungsstrecken 
+}
+
+source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(kennnr::text,' ')||' '||coalesce(name,' ')||' '||coalesce(gebflaeche::text,' ')||' '||coalesce(coord_x::text,' ')||' '||coalesce(coord_y::text,' ')||' '||coalesce(beginn::text,' ')||' '||coalesce(ende::text,' ')||' '||coalesce(beeinflussung,' ')||' '||coalesce(genauigkeit,' ')||' '||coalesce(anz_jahre::text,' ')||' '||coalesce(nm1q100,' ')||' '||coalesce(nm1q50,' ')||' '||coalesce(nm1q20,' ')||' '||coalesce(nm1q10,' ')||' '||coalesce(nm1q5,' ')||' '||coalesce(nm1q2,' ')||' '||coalesce(nm7q100,' ')||' '||coalesce(nm7q50,' ')||' '||coalesce(nm7q20,' ')||' '||coalesce(nm7q10,' ')||' '||coalesce(nm7q5,' ')||' '||coalesce(nm7q2,' ')||' '||coalesce(nm14q100,' ')||' '||coalesce(nm14q50,' ')||' '||coalesce(nm14q20,' ')||' '||coalesce(nm14q10,' ')||' '||coalesce(nm14q5,' ')||' '||coalesce(nm14q2,' ')||' ' ||coalesce(nm30q100,' ')||' '||coalesce(nm30q50,' ')||' '||coalesce(nm30q20,' ')||' '||coalesce(nm30q10,' ')||' '||coalesce(nm30q5,' ')||' '||ncoalesce(m30q2,' ')||' '||coalesce(hyperlink_d,' ')||' '||coalesce(hyperlink_f,' ')) as detail \
+            , 'ch.bafu.hydrologie-niedrigwasserstatistik' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from hydrologie.niedrigwasserstatistik 
+}
+
+source src_ch_bafu_typisierung-fliessgewaesser : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , objectid_gwn25 as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(gewaessertyp::text,' ')||' '||coalesce(grosserfluss,' ')||' '||coalesce(objectid_gwn25::text,' ')||' '||coalesce(biogeo,' ')||' '||coalesce(hoehe,' ')||' '||coalesce(abfluss,' ')||' '||coalesce(gefaelle,' ')||' '||coalesce(geo,' ')||' '||coalesce(code::text,' ')||' '||coalesce(aehnlichkeit::text,' ')||' '||coalesce(shape_length::text,' ')||' '||coalesce(url_portraits,' ')||' '||coalesce(url_uebersicht_de,' ')||' '||coalesce(url_uebersicht_fr,' ')||' '||coalesce(name,' ')) as detail \
+            , 'ch.bafu.typisierung-fliessgewaesser' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from hydrologie.typ_fliessgewaesser
+}
+
 source src_ch_bafu_gewaesserschutz-klaeranlagen_anteilq347 : def_searchable_features
 {
     sql_db = bafu_dev
