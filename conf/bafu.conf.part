@@ -68,6 +68,91 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_fe
         from hydrologie.hydrologie_untersuchungsgebiete_stationen
 }
 
+source src_ch_bafu_vec25-gewaessernetz_2000 : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+        , name as label \
+        , 'feature' as origin \
+        , remove_accents(coalesce(gwlnr,' ')||' '||coalesce(gewissnr::text,' ')||' '||coalesce(name,' ')||' '||coalesce(objectval,' ')) as detail \
+        , 'ch.bafu.vec25-gewaessernetz_2000' as layer \
+        , quadindex(the_geom) as geom_quadindex \
+        , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+        , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+        , box2d(the_geom) as geom_st_box2d \
+        , bgdi_id::text as feature_id \
+    from vec25.gewaessernetz_2000
+}
+
+source src_ch_bafu_vec25-seen : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+        , name as label \
+        , 'feature' as origin \
+        , remove_accents(coalesce(gewaesserkennzahl::text,' ')||' '||coalesce(seetyp::text,' ')||' '||coalesce(name,' ')||' '||coalesce(ausgleichsbecken::text,' ')||' '||coalesce(reguliert::text,' ')||' '||coalesce(seeflaeche_km2::text,' ')||' '||coalesce(inhalt_see_mio_m3::text,' ')||' '||coalesce(nutzinhalt_mio_m3::text,' ')||' '||coalesce(tiefe_see_m::text,' ')||' '||coalesce(hoehenlage_muem::text,' ')||' ' ||coalesce(uferlaenge_m::text,' ')||' '||coalesce(gwlnr,' ')) as detail \
+        , 'ch.bafu.vec25-seen' as layer \
+        , quadindex(the_geom) as geom_quadindex \
+        , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+        , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+        , box2d(the_geom) as geom_st_box2d \
+        , bgdi_id::text as feature_id \
+    from vec25.seen
+}
+
+source src_ch_bafu_hydrologischer-atlas_flussgebiete : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+        , name as label \
+        , 'feature' as origin \
+        , remove_accents(coalesce(nummer::text,' ')||' '||coalesce(name,' ')||' '||coalesce(shape_area::text,' ')||' '||coalesce(umfang::text,' ')) as detail \
+        , 'ch.bafu.hydrologischer-atlas_flussgebiete' as layer \
+        , quadindex(the_geom) as geom_quadindex \
+        , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+        , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+        , box2d(the_geom) as geom_st_box2d \
+        , bgdi_id::text as feature_id \
+    from hydrologie.atlas_flussgebiete
+}
+
+source src_ch_bafu_hydrologischer-atlas_bilanzgebiete : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+        , name as label \
+        , 'feature' as origin \
+        , remove_accents(coalesce(name,' ')||' '||coalesce(flussgebiet::text,' ')||' '||coalesce(shape_area::text,' ')) as detail \
+        , 'ch.bafu.hydrologischer-atlas_bilanzgebiete' as layer \
+        , quadindex(the_geom) as geom_quadindex \
+        , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+        , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+        , box2d(the_geom) as geom_st_box2d \
+        , bgdi_id::text as feature_id \
+    from hydrologie.atlas_bilanzgebiete
+}
+
+source src_ch_bafu_hydrologischer-atlas_basisgebiete : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+        , nummer::text as label \
+        , 'feature' as origin \
+        , remove_accents(coalesce(gebietskennzahl::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(flussgebiet::text,' ')||' '||coalesce(max_hoe::text,' ')||' '||coalesce(min_hoe::text,' ')||' '||coalesce(mit_hoe::text,' ')||' '||coalesce(mit_ns::text,' ')||' '||coalesce(s_w_ns::text,' ')||' '||coalesce(jahrtemp_g::text,' ')||' '||coalesce(winttemp_g::text,' ')||' '||coalesce(shape_area,' ')) as detail \
+        , 'ch.bafu.hydrologischer-atlas_basisgebiete' as layer \
+        , quadindex(the_geom) as geom_quadindex \
+        , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+        , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+        , box2d(the_geom) as geom_st_box2d \
+        , bgdi_id::text as feature_id \
+    from hydrologie.atlas_basisgebiete
+}
+
 source src_ch_bafu_strukturguete-hochrhein_sohle : def_searchable_features
 {
     sql_db = bafu_dev
@@ -273,6 +358,35 @@ index ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp : ch_bafu_hydrologie-wa
     path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp
 }
 
+index ch_bafu_vec25-gewaessernetz_2000 : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_vec25-gewaessernetz_2000
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_vec25-gewaessernetz_2000
+}
+
+index ch_bafu_vec25-seen : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_vec25-seen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_vec25-seen
+}
+
+index ch_bafu_hydrologischer-atlas_flussgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_hydrologischer-atlas_flussgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer-atlas_flussgebiete
+}
+
+index ch_bafu_hydrologischer-atlas_bilanzgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_hydrologischer-atlas_bilanzgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer-atlas_bilanzgebiete
+}
+
+index ch_bafu_hydrologischer-atlas_basisgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_hydrologischer-atlas_basisgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer-atlas_basisgebiete
+}
 
 index ch_bafu_hydrologie-gewaesserzustandsmessstationen : ch_bafu_hydrologie-wassertemperaturmessstationen
 {
