@@ -387,6 +387,57 @@ source src_ch_bafu_waldreservate : def_searchable_features
         from wald.waldreservate
 }
 
+source src_ch_bafu_mittlere-abfluesse : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , regimenummer as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(regimetyp,' '))||' '||coalesce(regimenummer::text,' ')||' '||coalesce(abflussvar::text,' ')||' '||coalesce(mqn_jahr::text,' ')||' '||coalesce(mqn_jan::text,' ')||' '||coalesce(mqn_feb::text,' ')||' '||coalesce(mqn_mar::text,' ')||' '||coalesce(mqn_apr::text,' ')||' '||coalesce(mqn_mai::text,' ')||' '||coalesce(mqn_jun::text,' ')||' '||coalesce(mqn_jul::text,' ')||' '||coalesce(mqn_aug::text,' ')||' '||coalesce(mqn_sep::text,' ')||' '||coalesce(mqn_okt::text,' ')||' '||coalesce(mqn_nov::text,' ')||' '||coalesce(mqn_dez::text,' ') as detail \
+            , 'ch.bafu.mittlere-abfluesse' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from wasser.mittlere_abfluesse
+}
+
+source src_ch_bafu_wasserbau-querprofilmarken : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , schluesselid as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(typ,' ')||' '||coalesce(herkunft,' ')) as detail \
+            , 'ch.bafu.wasserbau-querprofilmarken' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from wasser.querprofilmarken
+}
+
+source src_ch_bafu_feststoffe-geschiebemessnetz : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , gsch_n as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(geologie,' ')||' '||coalesce(platz,' ')||' '||coalesce(fluss,' ')||' '||coalesce(station,' ')||' '||coalesce(institut,' ')||' '||coalesce(amt,' '))||' '||coalesce(gsch_n::text,' ')||' '||coalesce(lk::text,' ')||' '||coalesce(lage,' ')||' '||coalesce(fn::text,' ')||' '||coalesce(hmax::text,' ')||' '||coalesce(hmin::text,' ')||' '||coalesce(hmed::text,' ')||' '||coalesce(exp,' ')||' '||coalesce(form::text,' ') as detail \
+            , 'ch.bafu.feststoffe-geschiebemessnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from wasser.geschiebemessnetz
+}
+
 
 ## INDICES
 
@@ -535,3 +586,22 @@ index ch_bafu_strukturguete-hochrhein_rechtesufer : ch_bafu_hydrologie-wassertem
     source = src_ch_bafu_strukturguete-hochrhein_rechtesufer
     path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_rechtesufer
 }
+
+index ch_bafu_mittlere-abfluesse : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_mittlere-abfluesse
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_mittlere-abfluesse
+}
+
+index ch_bafu_wasserbau-querprofilmarken : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_wasserbau-querprofilmarken
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasserbau-querprofilmarken
+}
+
+index ch_bafu_feststoffe-geschiebemessnetz : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_feststoffe-geschiebemessnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_feststoffe-geschiebemessnetz
+}
+
