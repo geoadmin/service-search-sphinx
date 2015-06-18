@@ -132,6 +132,74 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_fe
         from hydrologie.hydrologie_untersuchungsgebiete_stationen
 }
 
+source src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objectid as id \
+            ,  name as label \
+            , 'feature' as origin \
+            ,  remove_accents(name)||' '||remove_accents(betriebsbeginn)||' '||remove_accents(stationierung)||' '||remove_accents(flussgebiet)||' '||remove_accents(einzugsgebietsflaeche)||' '||remove_accents(mittlerehoehe)||' '||remove_accents(hoehe)||' '||remove_accents(vergletscherung) as detail \
+            , 'ch.bafu.hydrologie-daueruntersuchung_fliessgewaesser' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objectid::text as feature_id \
+        from hydrologie.hydro_duntersuchung_fliessgewaesser
+}
+
+source src_ch_bafu_hydrologie-hochwassergrenzwertpegel : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objectid as id \
+            ,  name as label \
+            , 'feature' as origin \
+            ,  remove_accents(name)||' '||remove_accents(nummer)||' '||hoehe::text||' '||remove_accents(fluss)||' '||einzugsgebietsflaeche::text||' '||remove_accents(m_beginn)||' '||remove_accents(m_ende) as detail \
+            , 'ch.bafu.hydrologie-hochwassergrenzwertpegel' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objectid::text as feature_id \
+        from hydrologie.hochwassergrenzwertpegel
+}
+
+source src_ch_bafu_hydrologie-untersuchungsgebiete : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT geodb_oid as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , geodb_oid::text||' '||remove_accents(name)||' '||max_hoe::text||' '||min_hoe::text||''||mit_hoe::text||' '||remove_accents(station)||' '||remove_accents(regimetyp)||' '||df::text||' '||sc::text||' '||ms::text||' '||mp::text||' '||antws_tot::text||' '||antogr::text||' '||antwiack::text||' '||antweid::text||' '||antunpr::text||' '||antgeb::text||' '||antindu::text||' '||antgew_ms::text||' '||antveg_los_ov::text||' '||antv_ab86::text||' '||shape_area::text as detail \
+            , 'ch.bafu.hydrologie-untersuchungsgebiete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , geodb_oid::text as feature_id \
+        from hydrologie.hydrologie_untersuchungsgebiete
+}
+
+source src_ch_bafu_hydrologischer-atlas_kantonale-messstationen : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objectid as id \
+            ,  nummer as label \
+            , 'feature' as origin \
+            ,  remove_accents(nummer)||' '||betriebsbeginn::text||' '||hoehe::text||' '||einzugsgebietsflaeche::text||' '||bilanzgebietsnummer::text||' '||vergletscherung::text as detail \
+            , 'ch.bafu.hydrologischer-atlas_kantonale-messstationen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objectid::text as feature_id \
+        from hydrologie.hydro_atlas_kant_messstationen
+}
+
 source src_ch_bafu_vec25-gewaessernetz_2000 : def_searchable_features
 {
     sql_db = bafu_dev
@@ -498,6 +566,30 @@ index ch_bafu_hydrologie-untersuchungsgebiete_stationen : ch_bafu_hydrologie-was
 {
     source = src_ch_bafu_hydrologie-untersuchungsgebiete_stationen
     path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-untersuchungsgebiete_stationen
+}
+
+index ch_bafu_hydrologie-untersuchungsgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_hydrologie-untersuchungsgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-untersuchungsgebiete
+}
+
+index ch_bafu_hydrologie-hochwassergrenzwertpegel : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_hydrologie-hochwassergrenzwertpegel
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-hochwassergrenzwertpegel
+}
+
+index ch_bafu_hydrologischer-atlas_kantonale-messstationen : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_hydrologischer-atlas_kantonale-messstationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer-atlas_kantonale-messstationen
+}
+
+index ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser
 }
 
 index ch_bafu_gewaesserschutz-badewasserqualitaet : ch_bafu_hydrologie-wassertemperaturmessstationen
