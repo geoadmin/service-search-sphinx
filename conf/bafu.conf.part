@@ -156,7 +156,7 @@ source src_ch_bafu_hydrologie-hochwassergrenzwertpegel : def_searchable_features
         SELECT objectid as id \
             ,  name as label \
             , 'feature' as origin \
-            ,  remove_accents(name)||' '||remove_accents(nummer)||' '||hoehe::text||' '||remove_accents(fluss)||' '||einzugsgebietsflaeche::text||' '||remove_accents(m_beginn)||' '||remove_accents(m_ende) as detail \
+            ,  remove_accents(name)||' '||hoehe::text||' '||remove_accents(fluss)||' '||einzugsgebietsflaeche::text||' '||remove_accents(m_beginn)||' '||remove_accents(m_ende) as detail \
             , 'ch.bafu.hydrologie-hochwassergrenzwertpegel' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
