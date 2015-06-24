@@ -7,7 +7,7 @@ source src_ch_bafu_hydrologie-q347 : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , gewaesser as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(gewaesser,' ')||' '||coalesce(bilanzid,' ')||' '||coalesce(id::text,' ')||' '||coalesce(basisid,' ')||' '||coalesce(lhg,' ')||' '||coalesce(gewaesser,' ')||' '||coalesce(flaeche::text,' ')||' '||coalesce(q_84_93,' ')||' '||coalesce(qp::text,' ')||' '||coalesce(p,' ')::text||' '||coalesce(qmod::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(symbolisierung,' ')) as detail \
+            , remove_accents(coalesce(gewaesser,' ')||' '||coalesce(bilanzid,' ')||' '||coalesce(id::text,' ')||' '||coalesce(basisid,' ')||' '||coalesce(lhg,' ')||' '||coalesce(gewaesser,' ')||' '||coalesce(flaeche::text,' ')||' '||coalesce(q_84_93::text,' ')||' '||coalesce(qp::text,' ')||' '||coalesce(p,' ')::text||' '||coalesce(qmod::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(symbolisierung::text,' ')) as detail \
             , 'ch.bafu.hydrologie-q347' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -41,7 +41,7 @@ source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(kennnr::text,' ')||' '||coalesce(name,' ')||' '||coalesce(gebflaeche::text,' ')||' '||coalesce(coord_x::text,' ')||' '||coalesce(coord_y::text,' ')||' '||coalesce(beginn::text,' ')||' '||coalesce(ende::text,' ')||' '||coalesce(beeinflussung,' ')||' '||coalesce(genauigkeit,' ')||' '||coalesce(anz_jahre::text,' ')||' '||coalesce(nm1q100,' ')||' '||coalesce(nm1q50,' ')||' '||coalesce(nm1q20,' ')||' '||coalesce(nm1q10,' ')||' '||coalesce(nm1q5,' ')||' '||coalesce(nm1q2,' ')||' '||coalesce(nm7q100,' ')||' '||coalesce(nm7q50,' ')||' '||coalesce(nm7q20,' ')||' '||coalesce(nm7q10,' ')||' '||coalesce(nm7q5,' ')||' '||coalesce(nm7q2,' ')||' '||coalesce(nm14q100,' ')||' '||coalesce(nm14q50,' ')||' '||coalesce(nm14q20,' ')||' '||coalesce(nm14q10,' ')||' '||coalesce(nm14q5,' ')||' '||coalesce(nm14q2,' ')||' ' ||coalesce(nm30q100,' ')||' '||coalesce(nm30q50,' ')||' '||coalesce(nm30q20,' ')||' '||coalesce(nm30q10,' ')||' '||coalesce(nm30q5,' ')||' '||ncoalesce(m30q2,' ')||' '||coalesce(hyperlink_d,' ')||' '||coalesce(hyperlink_f,' ')) as detail \
+            , remove_accents(coalesce(kennnr::text,' ')||' '||coalesce(name,' ')||' '||coalesce(gebflaeche::text,' ')||' '||coalesce(coord_x::text,' ')||' '||coalesce(coord_y::text,' ')||' '||coalesce(beginn::text,' ')||' '||coalesce(ende::text,' ')||' '||coalesce(beeinflussung,' ')||' '||coalesce(genauigkeit,' ')||' '||coalesce(anz_jahre::text,' ')||' '||coalesce(nm1q100::text,' ')||' '||coalesce(nm1q50::text,' ')||' '||coalesce(nm1q20::text,' ')||' '||coalesce(nm1q10::text,' ')||' '||coalesce(nm1q5::text,' ')||' '||coalesce(nm1q2::text,' ')||' '||coalesce(nm7q100::text,' ')||' '||coalesce(nm7q50::text,' ')||' '||coalesce(nm7q20::text,' ')||' '||coalesce(nm7q10::text,' ')||' '||coalesce(nm7q5::text,' ')||' '||coalesce(nm7q2::text,' ')||' '||coalesce(nm14q100::text,' ')||' '||coalesce(nm14q50::text,' ')||' '||coalesce(nm14q20::text,' ')||' '||coalesce(nm14q10::text,' ')||' '||coalesce(nm14q5::text,' ')||' '||coalesce(nm14q2::text,' ')||' ' ||coalesce(nm30q100::text,' ')||' '||coalesce(nm30q50::text,' ')||' '||coalesce(nm30q20::text,' ')||' '||coalesce(nm30q10::text,' ')||' '||coalesce(nm30q5::text,' ')||' '||coalesce(nm30q2::text,' ')||' '||coalesce(hyperlink_d,' ')||' '||coalesce(hyperlink_f,' ')) as detail \
             , 'ch.bafu.hydrologie-niedrigwasserstatistik' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -58,7 +58,7 @@ source src_ch_bafu_typisierung-fliessgewaesser : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , objectid_gwn25 as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(gewaessertyp::text,' ')||' '||coalesce(grosserfluss,' ')||' '||coalesce(objectid_gwn25::text,' ')||' '||coalesce(biogeo,' ')||' '||coalesce(hoehe,' ')||' '||coalesce(abfluss,' ')||' '||coalesce(gefaelle,' ')||' '||coalesce(geo,' ')||' '||coalesce(code::text,' ')||' '||coalesce(aehnlichkeit::text,' ')||' '||coalesce(shape_length::text,' ')||' '||coalesce(url_portraits,' ')||' '||coalesce(url_uebersicht_de,' ')||' '||coalesce(url_uebersicht_fr,' ')||' '||coalesce(name,' ')) as detail \
+            , remove_accents(coalesce(gewaessertyp::text,' ')||' '||coalesce(grosserfluss,' ')||' '||coalesce(objectid_gwn25::text,' ')||' '||coalesce(biogeo,' ')||' '||coalesce(hoehe,' ')||' '||coalesce(abfluss,' ')||' '||coalesce(gefaelle,' ')||' '||coalesce(geo,' ')||' '||coalesce(code::text,' ')||' '||coalesce(aehnlichkeit::text,' ')||' '||coalesce(shape_length::text,' ')||' '||coalesce(url_portraits,' ')||' '||coalesce(name,' ')) as detail \
             , 'ch.bafu.typisierung-fliessgewaesser' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -275,7 +275,7 @@ source src_ch_bafu_hydrologischer-atlas_basisgebiete : def_searchable_features
         SELECT bgdi_id::bigint as id \
         , nummer::text as label \
         , 'feature' as origin \
-        , remove_accents(coalesce(gebietskennzahl::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(flussgebiet::text,' ')||' '||coalesce(max_hoe::text,' ')||' '||coalesce(min_hoe::text,' ')||' '||coalesce(mit_hoe::text,' ')||' '||coalesce(mit_ns::text,' ')||' '||coalesce(s_w_ns::text,' ')||' '||coalesce(jahrtemp_g::text,' ')||' '||coalesce(winttemp_g::text,' ')||' '||coalesce(shape_area,' ')) as detail \
+        , remove_accents(coalesce(gebietskennzahl::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(flussgebiet::text,' ')||' '||coalesce(max_hoe::text,' ')||' '||coalesce(min_hoe::text,' ')||' '||coalesce(mit_hoe::text,' ')||' '||coalesce(mit_ns::text,' ')||' '||coalesce(s_w_ns::text,' ')||' '||coalesce(jahrtemp_g::text,' ')||' '||coalesce(winttemp_g::text,' ')||' '||coalesce(shape_area::text,' ')) as detail \
         , 'ch.bafu.hydrologischer-atlas_basisgebiete' as layer \
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
