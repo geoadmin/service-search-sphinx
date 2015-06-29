@@ -156,7 +156,7 @@ source src_ch_bafu_hydrologie-hochwasserstatistik : def_searchable_features
         SELECT objectid as id \
             , name as label \
             , 'feature' as origin \
-            , objectid::text||' '||remove_accents(name)||' '||einzugsgebietsflaeche::text||' '||remove_accents(dimension)||' '||kenn_nr::text||' '||statj_anf::text||' '||statj_end::text||' '||statj_tot::text||' '||hq2::text||' '||hq5::text||' '||hq10::text||' '||hq30::text||' '||hq50::text||' '||hq100::text||' '||hq300::text||' '||mittlerehoehe::text||' '||remove_accents(regimename) as detail \
+            , objectid::text||' '||remove_accents(coalesce(name,' '))||' '||coalesce(einzugsgebietsflaeche::text,' ')::text||' '||remove_accents(coalesce(dimension,' '))||' '||coalesce(kenn_nr::text,' ')::text||' '||coalesce(statj_anf::text,' ')::text||' '||coalesce(statj_end::text,' ')::text||' '||coalesce(statj_tot::text,' ')::text||' '||coalesce(hq2::text,' ')::text||' '||coalesce(hq5::text,' ')::text||' '||coalesce(hq10::text,' ')::text||' '||coalesce(hq30::text,' ')::text||' '||coalesce(hq50::text,' ')::text||' '||coalesce(hq100::text,' ')::text||' '||coalesce(hq300::text,' ')::text||' '||coalesce(mittlerehoehe::text,' ')::text||' '||remove_accents(coalesce(regimename,' ')) as detail \
             , 'ch.bafu.hydrologie-hochwasserstatistik' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
