@@ -77,6 +77,10 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_anteilq347 : def_searchable_feat
             , 'feature' as origin \
             , remove_accents(name||' '||rechtswert::text||' '||hochwert::text||' '||hoehe::text||' '||adresse||' '||plz::text||' '||ort||' '||tel_nr||' '||vorfluterbez||' '||name_vorfluter||' '||gewiss_nr::text||' '||reinigungstyp||' '||abw_tagesmittel::text||' '||abw_tagesspitze::text||' '||spitzenbelastung_regen::text||' '||rohabwasser_tag::text||' '||frischschlamm_tag::text||' '||stabilisierter_schlamm_tag::text||' '||bsb5anteil::text||' '||bsb5absolut::text||' '|| coalesce(csbanteil::text,' ')||' '||coalesce(csbabsolut::text,' ')||' '||coalesce(docanteil::text,' ')||' '||coalesce(docabsolut::text,' ')||' '||coalesce(nh4_nanteil::text,' ')||' '||coalesce(nh4_nabsolut::text,' ')||' '||coalesce(nh4_n_ganzjaehrig::text,' ')||' '||coalesce(nanteil::text,' ')||' '||coalesce(nabsolut::text,' ')||' '|| coalesce(n_abwassertemperatur::text,' ')||' '||coalesce(gesamtpanteil::text,' ')||' '||coalesce(gesamtpabsolut::text,' ')||' '||coalesce(gesamt_ungel_stoffe_absolut::text,' ')||' '||coalesce(andere_stoffe,' ')  ||' '||kanton||' '|| vsa_kategorie||' '||coalesce(ausbaugroesse_egw::text,' ')||' '||coalesce(anzahl_nat_einwohner::text,' ')||' '||coalesce(jahr_nat_einwohner::text,' ')||' '||abwasseranteil_q347::text||' '||coalesce(gwlnr,' ')) as detail \
             , 'ch.bafu.gewaesserschutz-klaeranlagen_anteilq347' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
             , nummer::text as feature_id \
         from wasser.klaeranlagen
 }
