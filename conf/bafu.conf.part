@@ -311,7 +311,7 @@ source src_ch_bafu_strukturguete-hochrhein_sohle : def_searchable_features
     sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
-            , id as label \
+            , bgdi_id as label \
             , 'feature' as origin \
             , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
             , 'ch.bafu.strukturguete-hochrhein_sohle' as layer \
@@ -328,7 +328,7 @@ source src_ch_bafu_strukturguete-hochrhein_rechtesumfeld : def_searchable_featur
     sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
-            , id as label \
+            , bgdi_id as label \
             , 'feature' as origin \
             , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
             , 'ch.bafu.strukturguete-hochrhein_rechtesumfeld' as layer \
@@ -345,7 +345,7 @@ source src_ch_bafu_strukturguete-hochrhein_rechtesufer : def_searchable_features
     sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
-            , id as label \
+            , bgdi_id as label \
             , 'feature' as origin \
             , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
             , 'ch.bafu.strukturguete-hochrhein_rechtesufer' as layer \
@@ -362,7 +362,7 @@ source src_ch_bafu_strukturguete-hochrhein_linkesumfeld : def_searchable_feature
     sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
-            , id as label \
+            , bgdi_id as label \
             , 'feature' as origin \
             , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
             , 'ch.bafu.strukturguete-hochrhein_linkesumfeld' as layer \
@@ -379,7 +379,7 @@ source src_ch_bafu_strukturguete-hochrhein_linkesufer : def_searchable_features
     sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
-            , id as label \
+            , bgdi_id as label \
             , 'feature' as origin \
             , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
             , 'ch.bafu.strukturguete-hochrhein_linkesufer' as layer \
