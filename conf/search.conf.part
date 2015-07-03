@@ -86,7 +86,7 @@ source src_swissnames3d : src_swisssearch
         SELECT \
         uuid::text as feature_id \
         , remove_accents(name)::text as detail \
-        , '<b>'||coalesce(name,'')||'</b> swissnames3d point' as label \
+        , '<b>'||coalesce(name,'') as label \
         , 'gazetteer'::text as origin \
         , bgdi_quadindex as geom_quadindex \
         , box2d(the_geom) as geom_st_box2d \
@@ -101,7 +101,7 @@ source src_swissnames3d : src_swisssearch
         SELECT \
         uuid::text as feature_id \
         , remove_accents(name)::text as detail \
-        , '<b>'||coalesce(name,'')||'</b> swissnames3d line' as label \
+        , '<b>'||coalesce(name,'') as label \
         , 'gazetteer'::text as origin \
         , bgdi_quadindex as geom_quadindex \
         , box2d(the_geom) as geom_st_box2d \
@@ -116,7 +116,7 @@ source src_swissnames3d : src_swisssearch
         SELECT \
         uuid::text as feature_id \
         , remove_accents(name)::text as detail \
-        , '<b>'||coalesce(name,'')||'</b> swissnames3d poly' as label \
+        , '<b>'||coalesce(name,'') as label \
         , 'gazetteer'::text as origin \
         , bgdi_quadindex as geom_quadindex \
         , box2d(the_geom) as geom_st_box2d \
