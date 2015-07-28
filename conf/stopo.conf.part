@@ -423,6 +423,22 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_featu
       from geol.view_gisgeol_surfaces_lt10km2
 }
 
+source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT gid as id \
+          , prod_id::text as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ', nr, prod_id, titel )) as detail \
+          , 'ch.swisstopo.geologie-generalkarte-ggk200.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , prod_id::text as feature_id \
+      from geol.kv_ggk_pk
+}
 
 ## INDICES
 
@@ -572,3 +588,8 @@ index ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : ch_swisstopo_verschiebung
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-lt10km2
 }
 
+index ch_swisstopo_geologie-generalkarte-ggk200_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-generalkarte-ggk200_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-generalkarte-ggk200_metadata
+}
