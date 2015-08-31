@@ -1,0 +1,34 @@
+## SOURCES
+
+source src_geonames : def_pqsql
+{
+    sql_attr_float = lat
+    sql_attr_float = lon
+    sql_field_string = detail
+    sql_field_string = label
+    sql_db=geonames_master
+    sql_query = \
+    select geonameid as id \
+    , name as label \
+    , concat_ws(' ', name, alternatenames) as detail \
+    , latitude as lat \
+    , longitude as lon \
+    from geonames 
+}
+
+## INDICES
+
+index geonames
+{
+    source = src_geonames
+    path = /var/lib/sphinxsearch/data/index/geonames
+    type = plain
+    docinfo = extern
+    charset_type = utf-8
+    min_infix_len = 1
+    infix_fields = detail
+    enable_star = 1
+    ondisk_dict = 0
+    preopen = 0
+}
+
