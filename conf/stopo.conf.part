@@ -49,6 +49,23 @@ source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_f
         FROM tlm.swissboundaries_bezirke
 }
 
+source src_ch_swisstopo_landesschwerenetz : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , remove_accents(name) as detail \
+            , 'ch.swisstopo.landesschwerenetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+            , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , coalesce(name,'') || ' ' || coalesce(nr_lsn2004,'') || '' || coalesce(type,'') as label \
+            , bgdi_id::text as feature_id \
+        FROM geol.landesschwerenetz 
+}
+
 source src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : def_searchable_features
 {
     sql_db = stopo_dev
@@ -471,6 +488,12 @@ index ch_swisstopo_verschiebungsvektoren-tsp1
     min_prefix_len = 1
     prefix_fields = geom_quadindex
     enable_star = 1
+}
+
+index ch_swisstopo_landesschwerenetz : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_landesschwerenetz
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landesschwerenetz
 }
 
 index ch_kantone_historische-topografische-namen : ch_swisstopo_verschiebungsvektoren-tsp1
