@@ -474,6 +474,23 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_f
       from geol.kv_ggk_pk
 }
 
+source src_ch_swisstopo_vd_geometa-periodische_nachfuehrung : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT bgdi_id as id \
+          , description::text as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ', canton, description, year::text)) as detail \
+          , 'ch.swisstopo-vd.geometa-periodische_nachfuehrung' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , bgdi_id::text as feature_id \
+      from vd.amopnf_pnf
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren-tsp1
@@ -639,3 +656,10 @@ index ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : ch_swisstopo_vers
     source = src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte
 }
+
+index ch_swisstopo_vd_geometa-periodische_nachfuehrung : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_vd_geometa-periodische_nachfuehrung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vd_geometa-periodische_nachfuehrung
+}
+
