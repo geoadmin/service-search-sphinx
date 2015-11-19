@@ -1,5 +1,22 @@
 ## SOURCES
 
+source src_ch_bav_haltestellen-oev : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(nummer::text, ' ')||' '||coalesce(name, ' ')) as detail \
+            , 'ch.bav.haltestellen-oev' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d   \
+            , bgdi_id::text as feature_id \
+        from bav.oev_haltestellen
+}
+
 source src_ch_astra_ivs-nat : def_searchable_features
 {
     sql_db = uvek_dev
@@ -844,6 +861,12 @@ index ch_astra_ivs-reg_loc
     type = distributed
     local = ch_astra_ivs-reg_loc_sub
     local = ch_astra_ivs-reg_loc_be
+}
+
+index ch_bav_haltestellen-oev : ch_astra_ivs-nat
+{
+    source = src_ch_bav_haltestellen-oev
+    path = /var/lib/sphinxsearch/data/index/ch_bav_haltestellen-oev
 }
 
 index ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : ch_astra_ivs-nat
