@@ -4,7 +4,7 @@ source src_ch_bav_haltestellen-oev : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
-        SELECT bgdi_id::bigint as id \
+        SELECT nummer::bigint as id \
             , name as label \
             , 'feature' as origin \
             , remove_accents(coalesce(nummer::text, ' ')||' '||coalesce(name, ' ')) as detail \
@@ -13,7 +13,7 @@ source src_ch_bav_haltestellen-oev : def_searchable_features
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , box2d(the_geom) as geom_st_box2d   \
-            , bgdi_id::text as feature_id \
+            , nummer::text as feature_id \
         from bav.oev_haltestellen
 }
 
