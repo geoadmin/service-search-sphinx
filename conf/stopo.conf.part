@@ -474,7 +474,7 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_f
       from geol.kv_ggk_pk
 }
 
-source src_ch_swisstopo_vd_geometa-periodische_nachfuehrung : def_searchable_features
+source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -657,9 +657,9 @@ index ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : ch_swisstopo_vers
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte
 }
 
-index ch_swisstopo_vd_geometa-periodische_nachfuehrung : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo-vd_geometa-periodische_nachfuehrung : ch_swisstopo_verschiebungsvektoren-tsp1
 {
-    source = src_ch_swisstopo_vd_geometa-periodische_nachfuehrung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vd_geometa-periodische_nachfuehrung
+    source = src_ch_swisstopo-vd_geometa-periodische_nachfuehrung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-periodische_nachfuehrung
 }
 
