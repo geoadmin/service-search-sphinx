@@ -294,6 +294,40 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2 : def_searchabl
         from bav.sif_pl_anhorung
 }
 
+source src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1 : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , facname_de as label \
+            , 'feature' as origin \
+            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , 'ch.bav.sachplan-infrastruktur-schifffahrt_kraft' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , stabil_id::text as feature_id \
+        from bav.sif_fac_kraft
+}
+
+source src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2 : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , plname_de as label \
+            , 'feature' as origin \
+            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , 'ch.bav.sachplan-infrastruktur-schifffahrt_kraft' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , stabil_id::text as feature_id \
+        from bav.sif_pl_kraft
+}
+
 source src_ch_bav_sachplan-infrastruktur-schiene_kraft_1 : def_searchable_features
 {
     sql_db = uvek_dev
@@ -940,6 +974,25 @@ index ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung
     type = distributed
     local = ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_1
     local = ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2
+}
+
+index ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1 : ch_astra_ivs-nat
+{
+    source = src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1
+}
+
+index ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2 : ch_astra_ivs-nat
+{
+    source = src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2
+}
+
+index ch_bav_sachplan-infrastruktur-schifffahrt_kraft
+{
+    type = distributed
+    local = ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1
+    local = ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2
 }
 
 index ch_bav_sachplan-infrastruktur-schiene_anhorung_1 : ch_astra_ivs-nat
