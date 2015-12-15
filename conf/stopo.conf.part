@@ -491,6 +491,23 @@ source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_fea
       from vd.amopnf_pnf
 }
 
+source src_ch_swisstopo_transformation-bezugsrahmen_hoehe : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT bgdi_id as id \
+          , name::text as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(name,'')) as detail \
+          , 'ch.swisstopo.transformation-bezugsrahmen_hoehe' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , bgdi_id::text as feature_id \
+      from geodaesie.bezugsrahmen_hoehe_pkt
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren-tsp1
@@ -662,4 +679,11 @@ index ch_swisstopo-vd_geometa-periodische_nachfuehrung : ch_swisstopo_verschiebu
     source = src_ch_swisstopo-vd_geometa-periodische_nachfuehrung
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-periodische_nachfuehrung
 }
+
+index ch_swisstopo_transformation-bezugsrahmen_hoehe : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_transformation-bezugsrahmen_hoehe
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_transformation-bezugsrahmen_hoehe
+}
+
 
