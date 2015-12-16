@@ -38,7 +38,7 @@ source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
-        SELECT teilezgnr::bigint as id \
+        SELECT row_number() OVER(ORDER BY teilezgnr asc) as id \
             , teilezgnr as label \
             , 'feature' as origin \
             , remove_accents(coalesce(gwlnr::text,' ')||' '||coalesce(teilezgnr::text,' ')||' '||coalesce(ext_ezg_flussgb::text,' ')) as detail \
