@@ -515,7 +515,7 @@ source src_ch_swisstopo_skitourenkarte-50_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.skitourenkarte-50.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -532,7 +532,7 @@ source src_ch_swisstopo_lk25-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(s_map_number||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk25-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -549,7 +549,7 @@ source src_ch_swisstopo_lk25-papierkarte-zusammensetzung_metadata : def_searchab
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk25-papierkarte-zusammensetzung.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -566,7 +566,7 @@ source src_ch_swisstopo_lk50-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk50-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -583,7 +583,7 @@ source src_ch_swisstopo_lk50-papierkarte-zusammensetzung_metadata : def_searchab
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk50-papierkarte-zusammensetzung.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -600,7 +600,7 @@ source src_ch_swisstopo_lk100-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk100-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -617,7 +617,7 @@ source src_ch_swisstopo_lhk100-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lhk100-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -634,7 +634,7 @@ source src_ch_swisstopo_lk100-papierkarte-zusammensetzung_metadata : def_searcha
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk100-papierkarte-zusammensetzung.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -651,7 +651,7 @@ source src_ch_swisstopo_lk200-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk200-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -668,7 +668,7 @@ source src_ch_swisstopo_wk50-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.wk50-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -685,7 +685,7 @@ source src_ch_swisstopo_wkt33-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(n_scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.wkt33-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -702,7 +702,7 @@ source src_ch_swisstopo_wk50-papierkarte-zusammensetzung_metadata : def_searchab
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.wk50-papierkarte-zusammensetzung.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -719,7 +719,7 @@ source src_ch_swisstopo_wk25-papierkarte-zusammensetzung_metadata : def_searchab
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.wk25-papierkarte-zusammensetzung.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -736,7 +736,7 @@ source src_ch_swisstopo_gk300-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.gk300-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -753,7 +753,7 @@ source src_ch_swisstopo_lk500-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk500-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -770,7 +770,7 @@ source src_ch_swisstopo_lk1000-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.lk1000-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -787,7 +787,7 @@ source src_ch_swisstopo_sfk300-papierkarte_metadata : def_searchable_features
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
           , 'feature' as origin \
-          , remove_accents(coalesce(scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
+          , remove_accents(coalesce(release::text,'')) as detail \
           , 'ch.swisstopo.sfk300-papierkarte_metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -795,6 +795,227 @@ source src_ch_swisstopo_sfk300-papierkarte_metadata : def_searchable_features
           , box2d(the_geom) as geom_st_box2d \
           , pk_product as feature_id \
       from datenstand.view_gridstand_sfk300
+}
+
+source src_ch_swisstopo_stk200-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.stk200-papierkarte_metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from datenstand.view_gridstand_stk200
+}
+
+source src_ch_swisstopo_area-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.area-papierkarte_metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from datenstand.view_gridstand_area250
+}
+
+source src_ch_swisstopo_gkg500-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.gkg500-papierkarte_metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from  geol.view_gridstand_gkg500
+}
+
+source src_ch_swisstopo_gkt500-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.gkt500-papierkarte_metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from  geol.view_gridstand_gkt500
+}
+
+source src_ch_swisstopo_icao-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.icao-papierkarte_metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from  datenstand.view_gridstand_icao500
+}
+
+source src_ch_swisstopo_gkwvul500-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.gkwvul500-papierkarte_metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from  geol.view_gridstand_gkwvul500
+}
+
+source src_ch_swisstopo_gkwvor500-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.gkwvor500-papierkarte_metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from  geol.view_gridstand_gkwvor500
+}
+
+source src_ch_swisstopo_gklgm500-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.gklgm500-papierkarte_metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from  geol.view_gridstand_gklgm500
+}
+
+source src_ch_swisstopo_bk200-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.bk200-papierkarte.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from datenstand.view_gridstand_bk200
+}
+
+source src_ch_swisstopo_gkba500-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.gkba500-papierkarte.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_gridstand_gkba500
+}
+
+source src_ch_swisstopo_gas25-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.gas25-papierkarte.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_gridstand_gas25
+}
+
+source src_ch_swisstopo_gsk-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(s_map_number::text,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.gsk-papierkarte.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_gridstand_gsk
+}
+
+source src_ch_swisstopo_ggk200-papierkarte_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(s_map_number,'')||' '||coalesce(s_title_de,'')||' '||coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.ggk200-papierkarte.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_gridstand_ggk
 }
 
 ## INDICES
@@ -1077,4 +1298,81 @@ index ch_swisstopo_sfk300-papierkarte_metadata : ch_swisstopo_verschiebungsvekto
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_sfk300-papierkarte_metadata
 }
 
+index ch_swisstopo_stk200-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_stk200-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_stk200-papierkarte_metadata
+}
+
+index ch_swisstopo_area-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_area-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_area-papierkarte_metadata
+}
+
+index ch_swisstopo_gkg500-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_gkg500-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_gkg500-papierkarte_metadata
+}
+
+index ch_swisstopo_gkt500-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_gkt500-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_gkt500-papierkarte_metadata
+}
+
+index ch_swisstopo_icao-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_icao-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_icao-papierkarte_metadata
+}
+
+index ch_swisstopo_gkwvul500-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_gkwvul500-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_gkwvul500-papierkarte_metadata
+}
+
+index ch_swisstopo_gkwvor500-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_gkwvor500-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_gkwvor500-papierkarte_metadata
+}
+
+index ch_swisstopo_gklgm500-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_gklgm500-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_gklgm500-papierkarte_metadata
+}
+
+index ch_swisstopo_bk200-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_bk200-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_bk200-papierkarte_metadata
+}
+
+index ch_swisstopo_gkba500-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_gkba500-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_gkba500-papierkarte_metadata
+}
+
+index ch_swisstopo_gas25-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_gas25-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_gas25-papierkarte_metadata
+}
+
+index ch_swisstopo_gsk-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_gsk-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_gsk-papierkarte_metadata
+}
+
+index ch_swisstopo_ggk200-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_ggk200-papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_ggk200-papierkarte_metadata
+}
 
