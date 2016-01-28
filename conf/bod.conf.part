@@ -11,6 +11,7 @@ source layers : def_pqsql
     sql_field_string = topics
     sql_field_string = layer
     sql_field_string = detail
+    sql_field_string = title
 }
 
 source src_layers_de : layers
@@ -20,6 +21,7 @@ source src_layers_de : layers
             bgdi_id::bigint as id \
             , '<b>'||kurzbezeichnung||'</b>' as label \
             , 'layer' as origin \
+            , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
             , bod_layer_id as layer \
             , 'de' as lang \
@@ -37,6 +39,7 @@ source src_layers_fr : layers
             bgdi_id::bigint as id \
             , '<b>'||kurzbezeichnung||'</b>' as label \
             , 'layer' as origin \
+            , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
             , bod_layer_id as layer \
             , 'fr' as lang \
@@ -54,6 +57,7 @@ source src_layers_en : layers
             bgdi_id::bigint as id \
             , '<b>'||kurzbezeichnung||'</b>' as label \
             , 'layer' as origin \
+            , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
             , bod_layer_id as layer \
             , 'en' as lang \
@@ -71,6 +75,7 @@ source src_layers_it : layers
             bgdi_id::bigint as id \
             , '<b>'||kurzbezeichnung||'</b>' as label \
             , 'layer' as origin \
+            , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
             , bod_layer_id as layer \
             , 'it' as lang \
@@ -88,6 +93,7 @@ source src_layers_rm : layers
             bgdi_id::bigint as id \
             , '<b>'||kurzbezeichnung||'</b>' as label \
             , 'layer' as origin \
+            , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
             , bod_layer_id as layer \
             , 'rm' as lang \
@@ -106,7 +112,7 @@ index layers
     docinfo = extern
     charset_type = utf-8
     min_infix_len = 2
-    infix_fields = detail, layer, topics, staging
+    infix_fields = detail, title, layer, topics, staging
 }
 
 
