@@ -678,23 +678,6 @@ source src_ch_swisstopo_wk50-papierkarte_metadata : def_searchable_features
       from datenstand.view_gridstand_lkwander50_shop
 }
 
-source src_ch_swisstopo_wkt33-papierkarte_metadata : def_searchable_features
-{
-   sql_db = stopo_dev
-   sql_query = \
-      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
-          , pk_product as label \
-          , 'feature' as origin \
-          , remove_accents(pk_product||' '||coalesce(s_title_de,'')||' '||coalesce(n_scale::text,'')||' '||coalesce(price::text,'')||' '||coalesce(release::text,'')) as detail \
-          , 'ch.swisstopo.wkt33-papierkarte.metadata' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
-          , pk_product as feature_id \
-      from datenstand.view_gridstand_wkt33_shop
-}
-
 source src_ch_swisstopo_wk50-papierkarte-zusammensetzung_metadata : def_searchable_features
 {
    sql_db = stopo_dev
@@ -1049,12 +1032,6 @@ index ch_swisstopo_wk50-papierkarte_metadata : ch_swisstopo_verschiebungsvektore
 {
     source = src_ch_swisstopo_wk50-papierkarte_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_wk50-papierkarte_metadata
-}
-
-index ch_swisstopo_wkt33-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
-{
-    source = src_ch_swisstopo_wkt33-papierkarte_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_wkt33-papierkarte_metadata
 }
 
 index ch_swisstopo_wk50-papierkarte-zusammensetzung_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
