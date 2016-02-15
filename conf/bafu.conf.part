@@ -59,7 +59,7 @@ source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(kennnr::text,' ')||' '||coalesce(name,' ')||' '||coalesce(gebflaeche::text,' ')||' '||coalesce(coord_x::text,' ')||' '||coalesce(coord_y::text,' ')||' '||coalesce(beginn::text,' ')||' '||coalesce(ende::text,' ')||' '||coalesce(beeinflussung,' ')||' '||coalesce(genauigkeit,' ')||' '||coalesce(anz_jahre::text,' ')||' '||coalesce(nm1q100::text,' ')||' '||coalesce(nm1q50::text,' ')||' '||coalesce(nm1q20::text,' ')||' '||coalesce(nm1q10::text,' ')||' '||coalesce(nm1q5::text,' ')||' '||coalesce(nm1q2::text,' ')||' '||coalesce(nm7q100::text,' ')||' '||coalesce(nm7q50::text,' ')||' '||coalesce(nm7q20::text,' ')||' '||coalesce(nm7q10::text,' ')||' '||coalesce(nm7q5::text,' ')||' '||coalesce(nm7q2::text,' ')||' '||coalesce(nm14q100::text,' ')||' '||coalesce(nm14q50::text,' ')||' '||coalesce(nm14q20::text,' ')||' '||coalesce(nm14q10::text,' ')||' '||coalesce(nm14q5::text,' ')||' '||coalesce(nm14q2::text,' ')||' ' ||coalesce(nm30q100::text,' ')||' '||coalesce(nm30q50::text,' ')||' '||coalesce(nm30q20::text,' ')||' '||coalesce(nm30q10::text,' ')||' '||coalesce(nm30q5::text,' ')||' '||coalesce(nm30q2::text,' ')||' '||coalesce(hyperlink_d,' ')||' '||coalesce(hyperlink_f,' ')) as detail \
+            , remove_accents(coalesce(name,' ')) as detail \
             , 'ch.bafu.hydrologie-niedrigwasserstatistik' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
