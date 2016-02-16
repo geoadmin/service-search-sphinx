@@ -745,7 +745,7 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
         SELECT bgdi_id as id \
             , registrationnumber::text as label \
             , 'feature' as origin \
-            , remove_accents(registrationnumber::text||' '||coalesce(obstacletype,'') ||' '||coalesce(omsid::text,'')) as detail \
+            , remove_accents(concat_ws(' ', registrationnumber, obstacletype, omsid )) as detail \
             , 'ch.bazl.luftfahrthindernis' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1131,6 +1131,12 @@ index ch_bav_laerm-emissionsplan_eisenbahn_nacht : ch_astra_ivs-nat
 {
     source = src_ch_bav_laerm-emissionsplan_eisenbahn_nacht
     path = /var/lib/sphinxsearch/data/index/ch_bav_laerm-emissionsplan_eisenbahn_nacht
+}
+
+index ch_bazl_luftfahrthindernis : ch_astra_ivs-nat
+{
+    source = src_ch_bazl_luftfahrthindernis
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis
 }
 
 index ch_bfe_windenergieanlagen : ch_astra_ivs-nat
