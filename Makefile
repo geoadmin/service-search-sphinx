@@ -51,7 +51,7 @@ index-grep: move-template
 
 .PHONY: index-search
 index-search: move-template
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each address parcel sn25 gg25 kantone district zipcode
+	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each address parcel sn25 gg25 kantone district zipcode swissnames3d haltestellen district_metaphone kantone_metaphone sn25_metaphone swissnames3d_metaphone swissnames3d_metaphone address_metaphone district_soundex kantone_soundex sn25_soundex swissnames3d_soundex haltestellen_soundex address_soundex
 
 .PHONY: index-layer
 index-layer: move-template
