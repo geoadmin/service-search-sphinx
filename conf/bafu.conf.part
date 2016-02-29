@@ -144,7 +144,7 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_fe
         SELECT geodb_oid as id \
             ,  name as label \
             , 'feature' as origin \
-            , geodb_oid::text||' '||remove_accents(name)||' '||betriebsbeginn::text||' '||remove_accents(flussgebiet)||' '||hoehe::text as detail \
+            , coalesce(geodb_oid::text,' ')||' '|| remove_accents(coalesce(name,' '))||' '|| remove_accents(coalesce(flussgebiet,' '))||''||coalesce(hoehe::text,' ')||' '||coalesce(betriebsbeginn::text,' ')||' '||coalesce(einzugsgebietsflaeche::text,' ') as detail \
             , 'ch.bafu.hydrologie-untersuchungsgebiete_stationen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -161,7 +161,7 @@ source src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : def_searchable
         SELECT bgdi_id as id \
             ,  name as label \
             , 'feature' as origin \
-            ,  remove_accents(coalesce(name,' '))||' '||remove_accents(coalesce(betriebsbeginn,' '))||' '||remove_accents(coalesce(stationierung,' '))||' '||remove_accents(coalesce(flussgebiet,' '))||' '||remove_accents(coalesce(mittlerehoehe,' '))||' '||remove_accents(coalesce(hoehe,' '))||' '||remove_accents(coalesce(vergletscherung,' ')) as detail \
+            ,  remove_accents(coalesce(name,' '))||' '||remove_accents(coalesce(betriebsbeginn,' '))||' '||remove_accents(coalesce(stationierung,' '))||' '||remove_accents(coalesce(flussgebiet,' '))||' '||remove_accents(coalesce(einzugsgebietsflaeche,' '))||' '||remove_accents(coalesce(mittlerehoehe,' '))||' '||remove_accents(coalesce(hoehe,' '))||' '||remove_accents(coalesce(vergletscherung,' ')) as detail \
             , 'ch.bafu.hydrologie-daueruntersuchung_fliessgewaesser' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -212,7 +212,7 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete : def_searchable_features
         SELECT bgdi_id as id \
             ,  name as label \
             , 'feature' as origin \
-            , coalesce(geodb_oid::text,' ')::text||' '||remove_accents(coalesce(name,' '))||' '||coalesce(max_hoe::text,' ')::text||' '||coalesce(min_hoe::text,' ')::text||' '||coalesce(mit_hoe::text,' ')::text||' '||remove_accents(coalesce(regimetyp,' '))||' '||coalesce(antv_ab86::text,' ')::text as detail \
+            , remove_accents(coalesce(name,' '))||' '||coalesce(max_hoe::text,' ')||' '||coalesce(min_hoe::text,' ')||' '||coalesce(mit_hoe::text,' ')||' '||coalesce(einzugsgebietsflaeche::text,' ')||' '||remove_accents(coalesce(regimetyp,' '))||' '||coalesce(antv_ab86::text,' ') as detail \
             , 'ch.bafu.hydrologie-untersuchungsgebiete' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
