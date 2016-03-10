@@ -134,23 +134,6 @@ source src_ch_swisstopo_vec200-names-namedlocation : def_searchable_features
         FROM public.vec200_namedlocation
 }
 
-source src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata : def_searchable_features
-{
-    sql_db = stopo_dev
-    sql_query = \
-        SELECT nr as id \
-            , titel as label \
-            , 'feature' as origin \
-            , remove_accents(nr ||' '||titel) as detail \
-            , 'ch.swisstopo.geologie-gravimetrischer_atlas.metadata' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-            , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
-            , nr as feature_id \
-        FROM geol.gravimetrie_atlas_metadata
-}
-
 source src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : def_searchable_features
 {
     sql_db = stopo_dev
@@ -506,6 +489,40 @@ source src_ch_swisstopo_transformation-bezugsrahmen_hoehe : def_searchable_featu
           , box2d(the_geom) as geom_st_box2d \
           , bgdi_id::text as feature_id \
       from geodaesie.bezugsrahmen_hoehe_pkt
+}
+
+source src_ch_swisstopo_skitourenkarte-50_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
+          , 'ch.swisstopo.lk25-papierkarte.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from datenstand.view_gridstand_lkski_shop
+}
+
+source src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
+          , 'ch.swisstopo.geologie-gravimetrischer_atlas.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_gridstand_gravimetrie_atlas_metadata_shop
 }
 
 source src_ch_swisstopo_lk25-papierkarte_metadata : def_searchable_features
@@ -1194,6 +1211,18 @@ index ch_swisstopo_transformation-bezugsrahmen_hoehe : ch_swisstopo_verschiebung
 {
     source = src_ch_swisstopo_transformation-bezugsrahmen_hoehe
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_transformation-bezugsrahmen_hoehe
+}
+
+index ch_swisstopo_geologie-gravimetrischer_atlas_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-gravimetrischer_atlas_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gravimetrischer_atlas_metadata
+}
+
+index ch_swisstopo_skitourenkarte-50_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_skitourenkarte-50_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_skitourenkarte-50_metadata
 }
 
 index ch_swisstopo_lk25-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
