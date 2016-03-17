@@ -942,6 +942,74 @@ source src_ch_astra_mountainbikeland : def_searchable_features
       from astra.chmobil_mountainbikeland
 }
 
+source src_ch_astra_schwerverunfallte-kanton_alkohol : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , canton as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(canton,' ')||' '||coalesce(year::text,' ')||' '||coalesce(population::text,' ')||' '||coalesce(accalcohol_ugt::text,' ')||' '||coalesce(accalcohol_usv::text,' ')||' '||coalesce(accalcohol_ugt_usv::text,' ')||' '||coalesce(accalcohol_ugt_usv_perpopulation::text,' ')) as detail \
+            , 'ch.astra.schwerverunfallte-kanton_alkohol' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from astra.unf_schwer
+}
+
+source src_ch_astra_schwerverunfallte-kanton_geschwindigkeit : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , canton as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(canton,' ')||' '||coalesce(year::text,' ')||' '||coalesce(population::text,' ')||' '||coalesce(accspeed_ugt::text,' ')||' '||coalesce(accspeed_usv::text,' ')||' '||coalesce(accspeed_ugt_usv::text,' ')||' '||coalesce(accspeed_ugt_usv_perpopulation::text,' ')) as detail \
+            , 'ch.astra.schwerverunfallte-kanton_geschwindigkeit' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from astra.unf_schwer
+}
+
+source src_ch_astra_schwerverunfallte-kanton_jahresvergleich : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , canton as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(canton,' ')||' '||coalesce(year::text,' ')||' '||coalesce(acc_ugt::text,' ')||' '||coalesce(acc_usv::text,' ')||' '||coalesce(acc_ugt_usv::text,' ')||' '||coalesce(acc_ugt_lastyear::text,' ')||' '||coalesce(acc_usv_lastyear::text,' ')||' '||coalesce(acc_ugt_usv_lastyear::text,' ')||' '||coalesce(acc_ugt_usv_yearchangepercent::text,' ')) as detail \
+            , 'ch.astra.schwerverunfallte-kanton_jahresvergleich' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from astra.unf_schwer
+}
+
+source src_ch_astra_schwerverunfallte-kanton_pro_einwohner : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , canton as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(canton,' ')||' '||coalesce(year::text,' ')||' '||coalesce(population::text,' ')||' '||coalesce(population::text,' ')||' '||coalesce(acc_ugt::text,' ')||' '||coalesce(acc_usv::text,' ')||' '||coalesce(acc_ugt_usv::text,' ')||' '||coalesce(acc_ugt_usv_perpopulation::text,' ')) as detail \
+            , 'ch.astra.schwerverunfallte-kanton_pro_einwohner' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from astra.unf_schwer
+}
+
 ## INDICES
 
 index ch_astra_ivs-nat
@@ -1355,4 +1423,29 @@ index ch_astra_mountainbikeland : ch_astra_ivs-nat
     source = src_ch_astra_mountainbikeland
     path = /var/lib/sphinxsearch/data/index/ch_astra_mountainbikeland
 }
+
+index ch_astra_schwerverunfallte-kanton_alkohol : ch_astra_ivs-nat
+{
+    source = src_ch_astra_schwerverunfallte-kanton_alkohol
+    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_alkohol
+}
+
+index ch_astra_schwerverunfallte-kanton_geschwindigkeit : ch_astra_ivs-nat
+{
+    source = src_ch_astra_schwerverunfallte-kanton_geschwindigkeit
+    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_geschwindigkeit
+}
+
+index ch_astra_schwerverunfallte-kanton_jahresvergleich : ch_astra_ivs-nat
+{
+    source = src_ch_astra_schwerverunfallte-kanton_jahresvergleich
+    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_jahresvergleich
+}
+
+index ch_astra_schwerverunfallte-kanton_pro_einwohner : ch_astra_ivs-nat
+{
+    source = src_ch_astra_schwerverunfallte-kanton_pro_einwohner
+    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_pro_einwohner
+}
+
 
