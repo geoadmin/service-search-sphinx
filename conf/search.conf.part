@@ -56,27 +56,6 @@ source src_parcel : src_swisssearch
         from kantone.parzellen_sphinx
 }
 
-source src_sn25 : src_swisssearch
-{
-    sql_db=stopo_dev
-    sql_query = \
-        SELECT \
-        objectid as id \
-        , NULL::text as feature_id \
-        , remove_accents(coalesce(name,'')||' '||coalesce(kanton,''))::text as detail \
-        , '<b>'||coalesce(name,'')||'</b> ('||coalesce(kanton,'')||') - '||coalesce(gemname,'') as label  \
-        , 'sn25'::text as origin \
-        , quadindex(the_geom) as geom_quadindex \
-        , box2d(the_geom) as geom_st_box2d \
-        , 5::integer as rank \
-        , st_y((the_geom)) as x \
-        , st_x((the_geom)) as y \
-        , st_y(st_transform(the_geom,4326)) as lat \
-        , st_x(st_transform(the_geom,4326)) as lon \
-        , 1 as num \
-        FROM tlm.swissnames_sn25_und_tlm
-}
-
 source src_swissnames3d : src_swisssearch
 {
     sql_db=stopo_dev
@@ -274,12 +253,6 @@ index gg25 : zipcode
     path = /var/lib/sphinxsearch/data/index/gg25
 }
 
-index sn25 : zipcode
-{
-    source = src_sn25
-    path = /var/lib/sphinxsearch/data/index/sn25
-}
-
 index swissnames3d : zipcode
 {
     source = src_swissnames3d
@@ -326,13 +299,6 @@ index gg25_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/gg25_metaphone
 }
 
-index sn25_metaphone : zipcode
-{
-    morphology = metaphone
-    source = src_sn25
-    path = /var/lib/sphinxsearch/data/index/sn25_metaphone
-}
-
 index swissnames3d_metaphone : zipcode
 {
     morphology = metaphone
@@ -376,13 +342,6 @@ index gg25_soundex : zipcode
     path = /var/lib/sphinxsearch/data/index/gg25_soundex
 }
 
-index sn25_soundex : zipcode
-{
-    morphology = soundex
-    source = src_sn25
-    path = /var/lib/sphinxsearch/data/index/sn25_soundex
-}
-
 index swissnames3d_soundex : zipcode
 {
     morphology = soundex
@@ -418,7 +377,8 @@ index swisssearch
     local = district
     local = kantone
     local = gg25
-    local = sn25
+    local = swissnames3d
+    local = haltestellen
     local = parcel
     local = address
 }
@@ -429,12 +389,14 @@ index swisssearch_fuzzy
     local = district_metaphone
     local = kantone_metaphone
     local = gg25_metaphone
-    local = sn25_metaphone
+    local = swissnames3d_metaphone
+    local = haltestellen_metaphone
     local = address_metaphone
     local = district_soundex
     local = kantone_soundex
     local = gg25_soundex
-    local = sn25_soundex
+    local = swissnames3d_soundex
+    local = haltestellen_soundex
     local = address_soundex
 }
 
