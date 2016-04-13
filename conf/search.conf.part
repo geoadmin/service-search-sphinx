@@ -320,49 +320,6 @@ index address_metaphone: zipcode
     path = /var/lib/sphinxsearch/data/index/address_metaphone
 }
 
-# swisssearch fuzzy soundex
-index district_soundex : zipcode
-{
-    morphology = soundex
-    source = src_district
-    path = /var/lib/sphinxsearch/data/index/district_soundex
-}
-
-index kantone_soundex : zipcode
-{
-    morphology = soundex
-    source = src_kantone
-    path = /var/lib/sphinxsearch/data/index/kantone_soundex
-}
-
-index gg25_soundex : zipcode
-{
-    morphology = soundex
-    source = src_gg25
-    path = /var/lib/sphinxsearch/data/index/gg25_soundex
-}
-
-index swissnames3d_soundex : zipcode
-{
-    morphology = soundex
-    source = src_swissnames3d
-    path = /var/lib/sphinxsearch/data/index/swissnames3d_soundex
-}
-
-index haltestellen_soundex : zipcode
-{
-    morphology = soundex
-    source = src_haltestellen
-    path = /var/lib/sphinxsearch/data/index/haltestellen_soundex
-}
-
-index address_soundex: zipcode
-{
-    morphology = soundex
-    source = src_address
-    path = /var/lib/sphinxsearch/data/index/address_soundex
-}
-
 # only create on demand
 #index address_geocoding : zipcode
 #{
@@ -392,12 +349,6 @@ index swisssearch_fuzzy
     local = swissnames3d_metaphone
     local = haltestellen_metaphone
     local = address_metaphone
-    local = district_soundex
-    local = kantone_soundex
-    local = gg25_soundex
-    local = swissnames3d_soundex
-    local = haltestellen_soundex
-    local = address_soundex
 }
 
 index swisssearch_preview
@@ -422,10 +373,4 @@ index swisssearch_preview_fuzzy
     local = swissnames3d_metaphone
     local = haltestellen_metaphone
     local = address_metaphone
-    local = district_soundex
-    local = kantone_soundex
-    local = gg25_soundex
-    local = swissnames3d_soundex
-    local = haltestellen_soundex
-    local = address_soundex
 }
