@@ -1018,6 +1018,108 @@ source src_ch_swisstopo_ggk200-papierkarte_metadata : def_searchable_features
       from geol.view_gridstand_ggk
 }
 
+source src_ch_swisstopo_geologie-geologischer_atlas : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
+          , 'ch.swisstopo.geologie-geologischer_atlas' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_ga25_grid_shop
+}
+
+source src_ch_swisstopo_geologie-geocover : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
+          , 'ch.swisstopo.geologie-geocover' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_geocover_grid_shop
+}
+
+source src_ch_swisstopo_geologie-generalkarte-ggk200 : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
+          , 'ch.swisstopo.geologie-generalkarte-ggk200' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_gridstand_ggk_shop
+}
+
+source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.swisstopo.pixelkarte-farbe-pk500.noscale' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from datenstand.view_gridstand_datenhaltung_pk500_tilecache_shop
+}
+
+source src_ch_bazl_luftfahrtkarten-icao : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.bazl.luftfahrtkarten-icao' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from datenstand.view_gridstand_icao500_dig
+}
+
+source src_ch_bazl_segelflugkarte : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(coalesce(release::text,'')) as detail \
+          , 'ch.bazl.segelflugkartech.bazl.segelflugkarte' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from datenstand.view_gridstand_sfk300_dig
+}
+
 source src_ch_swisstopo_hebungsraten : def_searchable_features
 {
    sql_db = stopo_dev
@@ -1397,6 +1499,42 @@ index ch_swisstopo_ggk200-papierkarte_metadata : ch_swisstopo_verschiebungsvekto
 {
     source = src_ch_swisstopo_ggk200-papierkarte_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_ggk200-papierkarte_metadata
+}
+
+index ch_swisstopo_geologie-geologischer_atlas : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-geologischer_atlas
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas
+}
+
+index ch_swisstopo_geologie-geocover : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-geocover
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover
+}
+
+index ch_swisstopo_geologie-generalkarte-ggk200 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-generalkarte-ggk200
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-generalkarte-ggk200
+}
+
+index ch_swisstopo_pixelkarte-farbe-pk500_noscale : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_pixelkarte-farbe-pk500_noscale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_pixelkarte-farbe-pk500_noscale
+}
+
+index ch_bazl_luftfahrtkarten-icao : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_bazl_luftfahrtkarten-icao
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrtkarten-icao
+}
+
+index ch_bazl_segelflugkarte : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_bazl_segelflugkarte
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_segelflugkarte
 }
 
 index ch_swisstopo_hebungsraten : ch_swisstopo_verschiebungsvektoren-tsp1
