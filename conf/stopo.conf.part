@@ -294,7 +294,7 @@ source src_ch_swisstopo_geologie-gisgeol-punkte : def_searchable_features
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-punkte' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -311,7 +311,7 @@ source src_ch_swisstopo_geologie-gisgeol-linien : def_searchable_features
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-linien' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -328,7 +328,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km : def_searchable_feature
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-1x1km' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -345,7 +345,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km : def_searchable_featu
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-10x10km' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -362,7 +362,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10to100km2 : def_searchable_fe
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-10to100km2' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -379,7 +379,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2 : def_searchable_
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-100to1000km2' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -396,7 +396,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2 : def_searchabl
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-1000to21000km2' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -413,7 +413,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : def_searchable_fe
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-gt21000km2' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -430,7 +430,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_featu
       SELECT gid as id \
           , sgd_nr::text as label \
           , 'feature' as origin \
-          , remove_accents(sgd_nr::text||' '||coalesce(original_document_id,'')||' '||coalesce(author,'')||' '||coalesce(title,'')) as detail \
+          , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-lt10km2' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
