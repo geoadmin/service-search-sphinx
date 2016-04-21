@@ -562,6 +562,40 @@ source src_ch_bafu_auen-vegetationskarten : def_searchable_features
         from flora.auen_vegetation
 }
 
+source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , remove_accents(park_name) as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ',park_name, objektnummer)) as  detail \
+            , 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from schutzge.paerke_nationaler_bedeutung_zonen
+}
+
+source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objektnummer as id \
+            , remove_accents(park_name) as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ',park_name, objektnummer)) as  detail \
+            , 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objektnummer::text as feature_id \
+        from schutzge.paerke_nationaler_bedeutung_perimeter
+}
+
 
 ## INDICES
 
@@ -770,4 +804,16 @@ index ch_bafu_auen-vegetationskarten : ch_bafu_hydrologie-wassertemperaturmessst
 {
     source = src_ch_bafu_auen-vegetationskarten
     path = /var/lib/sphinxsearch/data/index/ch_bafu_auen-vegetationskarten
+}
+
+index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-paerke_nationaler_bedeutung
+}
+
+index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter
 }
