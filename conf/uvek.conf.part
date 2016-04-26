@@ -1,4 +1,45 @@
 ## SOURCES
+source src_ch_bav_schienennetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT  row_number() over () as id \
+            , label \
+            , origin \
+            , detail \
+            , layer \
+            , geom_quadindex \
+            , lat \
+            , lon \
+            , geom_st_box2d \
+            , feature_id from \
+        ( \
+            SELECT \
+                nom_point as label \
+                , 'feature' as origin \
+                , remove_accents(concat_ws(' ',numero,nom_point,abreviation)) as detail \
+                , 'ch.bav.schienennetz' as layer \
+                , quadindex(the_geom) as geom_quadindex \
+                , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+                , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+                , box2d(the_geom) as geom_st_box2d \
+                , xtf_id::text as feature_id \
+            from bav.schienennetz_point \
+        UNION ALL \
+            SELECT \
+                 nom_segment as label \
+                , 'feature' as origin \
+                , remove_accents(coalesce(nom_segment, ' ')) as detail \
+                , 'ch.bav.schienennetz' as layer \
+                , quadindex(the_geom) as geom_quadindex \
+                , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+                , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+                , box2d(the_geom) as geom_st_box2d \
+                , id::text as feature_id \
+            from bav.schienennetz_segment \
+            ) sub
+}
+
 
 source src_ch_bav_haltestellen-oev : def_searchable_features
 {
@@ -1048,6 +1089,12 @@ index ch_astra_ivs-reg_loc
     type = distributed
     local = ch_astra_ivs-reg_loc_sub
     local = ch_astra_ivs-reg_loc_be
+}
+
+index ch_bav_schienennetz : ch_astra_ivs-nat
+{
+    source = src_ch_bav_schienennetz
+    path = /var/lib/sphinxsearch/data/index/ch_bav_schienennetz
 }
 
 index ch_bav_haltestellen-oev : ch_astra_ivs-nat
