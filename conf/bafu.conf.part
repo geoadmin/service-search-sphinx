@@ -433,14 +433,14 @@ source src_ch_bafu_gewaesserschutz-badewasserqualitaet : def_searchable_features
         SELECT bgdi_id as id \
             , bwname as label \
             , 'feature' as origin \
-            , remove_accents(bwname)||' '||remove_accents(groupid)||' '||remove_accents(rbdsuname)||' '||remove_accents(rbdname)||' '||remove_accents(nwunitname) as detail \
+            , remove_accents(bwid)||' '||remove_accents(bwname)||' '||remove_accents(groupid)||' '||remove_accents(nwunitname)||' '||remove_accents(rbdsuname)||' '||remove_accents(gemeinde)||' '||remove_accents(canton)||' '||remove_accents(bwatercat)||' '||remove_accents(qualitaet_ch) as detail \
             , 'ch.bafu.gewaesserschutz-badewasserqualitaet' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(the_geom) as geom_st_box2d \
             , bgdi_id::text as feature_id \
-        from wasser.gewaesserschutz_badewasserqualitaet
+        from wasser.baqua
 }
 
 source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_features
