@@ -430,16 +430,16 @@ source src_ch_bafu_gewaesserschutz-badewasserqualitaet : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id) as id \
             , bwname as label \
             , 'feature' as origin \
-            , remove_accents(bwid)||' '||remove_accents(bwname)||' '||remove_accents(groupid)||' '||remove_accents(nwunitname)||' '||remove_accents(rbdsuname)||' '||remove_accents(gemeinde)||' '||remove_accents(canton)||' '||remove_accents(bwatercat)||' '||remove_accents(qualitaet_ch) as detail \
+            , coalesce(bwid::text, ' ')||' '||coalesce(remove_accents(bwname), ' ')||' '||coalesce(remove_accents(groupid), ' ')||' '||coalesce(remove_accents(nwunitname), ' ')||' '||coalesce(remove_accents(rbdsuname), ' ')||' '||coalesce(remove_accents(gemeinde), ' ')||' '||coalesce(remove_accents(canton), ' ')||' '||coalesce(bwatercat::text, ' ')||' '||coalesce(qualitaet_ch, ' ') as detail \
             , 'ch.bafu.gewaesserschutz-badewasserqualitaet' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(the_geom) as geom_st_box2d \
-            , bgdi_id::text as feature_id \
+            , bwid::text as feature_id \
         from wasser.baqua
 }
 
