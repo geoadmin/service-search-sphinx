@@ -7,7 +7,7 @@ source src_ch_blw_klimaeignung_typ : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.klimaeignung-typ' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -24,7 +24,7 @@ source src_ch_blw_klimaeignung_koernermais : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.klimaeignung-koernermais' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -41,7 +41,7 @@ source src_ch_blw_klimaeignung_spezialkulturen : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.klimaeignung-spezialkulturen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -58,7 +58,7 @@ source src_ch_blw_klimaeignung_zwischenfruchtbau : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.klimaeignung-zwischenfruchtbau' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -75,7 +75,7 @@ source src_ch_blw_klimaeignung_kartoffeln : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.klimaeignung-kartoffeln' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -92,7 +92,7 @@ source src_ch_blw_klimaeignung_getreidebau : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.klimaeignung-getreidebau' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -109,7 +109,7 @@ source src_ch_blw_klimaeignung_futterbau : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.klimaeignung-futterbau' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -126,7 +126,7 @@ source src_ch_blw_niederschlagshaushalt : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.niederschlagshaushalt' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -143,7 +143,7 @@ source src_ch_blw_klimaeignung_kulturland : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(klimeig_be,' ')||' '||coalesce(zone,' ')) as detail \
+            , remove_accents(concat_ws(' ',klimeig_be,zone)) as detail \
             , 'ch.blw.klimaeignung-kulturland' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -160,7 +160,7 @@ source src_ch_blw_bodeneignung_kulturtyp : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(farbe::text,' ')||' '||coalesce(eignungsei,' ')) as detail \
+            , remove_accents(concat_ws(' ',farbe,eignungsei)) as detail \
             , 'ch.blw.bodeneignung-kulturtyp' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -177,7 +177,7 @@ source src_ch_blw_bodeneignung_gruendigkeit : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(farbe::text,' ')||' '||coalesce(eignungsei,' ')) as detail \
+            , remove_accents(concat_ws(' ',farbe,eignungsei)) as detail \
             , 'ch.blw.bodeneignung-gruendigkeit' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -194,7 +194,7 @@ source src_ch_blw_bodeneignung_skelettgehalt : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(farbe::text,' ')||' '||coalesce(eignungsei,' ')) as detail \
+            , remove_accents(concat_ws(' ',farbe,eignungsei)) as detail \
             , 'ch.blw.bodeneignung-skelettgehalt' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -211,7 +211,7 @@ source src_ch_blw_bodeneignung_wasserspeichervermoegen : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(farbe::text,' ')||' '||coalesce(eignungsei,' ')) as detail \
+            , remove_accents(concat_ws(' ',farbe,eignungsei)) as detail \
             , 'ch.blw.bodeneignung-wasserspeichervermoegen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -228,7 +228,7 @@ source src_ch_blw_bodeneignung_naehrstoffspeichervermoegen : def_searchable_feat
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(farbe::text,' ')||' '||coalesce(eignungsei,' ')) as detail \
+            , remove_accents(concat_ws(' ',farbe,eignungsei)) as detail \
             , 'ch.blw.bodeneignung-naehrstoffspeichervermoegen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -245,7 +245,7 @@ source src_ch_blw_bodeneignung_wasserdurchlaessigkeit : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(farbe::text,' ')||' '||coalesce(eignungsei,' ')) as detail \
+            , remove_accents(concat_ws(' ',farbe,eignungsei)) as detail \
             , 'ch.blw.bodeneignung-wasserdurchlaessigkeit' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -262,7 +262,7 @@ source src_ch_blw_bodeneignung_vernaessung : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(farbe::text,' ')||' '||coalesce(eignungsei,' ')) as detail \
+            , remove_accents(concat_ws(' ',farbe,eignungsei)) as detail \
             , 'ch.blw.bodeneignung-vernaessung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -279,7 +279,7 @@ source src_ch_blw_bodeneignung_kulturland : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(farbe::text,' ')||' '||coalesce(eignungsei,' ')) as detail \
+            , remove_accents(concat_ws(' ',farbe,eignungsei)) as detail \
             , 'ch.blw.bodeneignung-kulturland' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
