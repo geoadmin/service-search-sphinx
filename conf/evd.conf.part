@@ -1,6 +1,6 @@
 ## SOURCES
 
-source src_ch_blw_klimaeignung_typ : def_searchable_features
+source src_ch_blw_klimaeignung-typ : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -17,7 +17,7 @@ source src_ch_blw_klimaeignung_typ : def_searchable_features
         from blw.klimaeignung 
 }
 
-source src_ch_blw_klimaeignung_koernermais : def_searchable_features
+source src_ch_blw_klimaeignung-koernermais : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -34,7 +34,7 @@ source src_ch_blw_klimaeignung_koernermais : def_searchable_features
         from blw.klimaeignung 
 }
 
-source src_ch_blw_klimaeignung_spezialkulturen : def_searchable_features
+source src_ch_blw_klimaeignung-spezialkulturen : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -51,7 +51,7 @@ source src_ch_blw_klimaeignung_spezialkulturen : def_searchable_features
         from blw.klimaeignung 
 }
 
-source src_ch_blw_klimaeignung_zwischenfruchtbau : def_searchable_features
+source src_ch_blw_klimaeignung-zwischenfruchtbau : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -68,7 +68,7 @@ source src_ch_blw_klimaeignung_zwischenfruchtbau : def_searchable_features
         from blw.klimaeignung 
 }
 
-source src_ch_blw_klimaeignung_kartoffeln : def_searchable_features
+source src_ch_blw_klimaeignung-kartoffeln : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -85,7 +85,7 @@ source src_ch_blw_klimaeignung_kartoffeln : def_searchable_features
         from blw.klimaeignung 
 }
 
-source src_ch_blw_klimaeignung_getreidebau : def_searchable_features
+source src_ch_blw_klimaeignung-getreidebau : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -102,7 +102,7 @@ source src_ch_blw_klimaeignung_getreidebau : def_searchable_features
         from blw.klimaeignung 
 }
 
-source src_ch_blw_klimaeignung_futterbau : def_searchable_features
+source src_ch_blw_klimaeignung-futterbau : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -136,7 +136,7 @@ source src_ch_blw_niederschlagshaushalt : def_searchable_features
         from blw.klimaeignung 
 }
 
-source src_ch_blw_klimaeignung_kulturland : def_searchable_features
+source src_ch_blw_klimaeignung-kulturland : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -153,7 +153,7 @@ source src_ch_blw_klimaeignung_kulturland : def_searchable_features
         from blw.klimaeignung 
 }
 
-source src_ch_blw_bodeneignung_kulturtyp : def_searchable_features
+source src_ch_blw_bodeneignung-kulturtyp : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -170,7 +170,7 @@ source src_ch_blw_bodeneignung_kulturtyp : def_searchable_features
         from blw.bodeneignung 
 }
 
-source src_ch_blw_bodeneignung_gruendigkeit : def_searchable_features
+source src_ch_blw_bodeneignung-gruendigkeit : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -187,7 +187,7 @@ source src_ch_blw_bodeneignung_gruendigkeit : def_searchable_features
         from blw.bodeneignung 
 }
 
-source src_ch_blw_bodeneignung_skelettgehalt : def_searchable_features
+source src_ch_blw_bodeneignung-skelettgehalt : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -204,7 +204,7 @@ source src_ch_blw_bodeneignung_skelettgehalt : def_searchable_features
         from blw.bodeneignung 
 }
 
-source src_ch_blw_bodeneignung_wasserspeichervermoegen : def_searchable_features
+source src_ch_blw_bodeneignung-wasserspeichervermoegen : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -221,7 +221,7 @@ source src_ch_blw_bodeneignung_wasserspeichervermoegen : def_searchable_features
         from blw.bodeneignung 
 }
 
-source src_ch_blw_bodeneignung_naehrstoffspeichervermoegen : def_searchable_features
+source src_ch_blw_bodeneignung-naehrstoffspeichervermoegen : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -238,7 +238,7 @@ source src_ch_blw_bodeneignung_naehrstoffspeichervermoegen : def_searchable_feat
         from blw.bodeneignung 
 }
 
-source src_ch_blw_bodeneignung_wasserdurchlaessigkeit : def_searchable_features
+source src_ch_blw_bodeneignung-wasserdurchlaessigkeit : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -255,7 +255,7 @@ source src_ch_blw_bodeneignung_wasserdurchlaessigkeit : def_searchable_features
         from blw.bodeneignung 
 }
 
-source src_ch_blw_bodeneignung_vernaessung : def_searchable_features
+source src_ch_blw_bodeneignung-vernaessung : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -272,7 +272,7 @@ source src_ch_blw_bodeneignung_vernaessung : def_searchable_features
         from blw.bodeneignung 
 }
 
-source src_ch_blw_bodeneignung_kulturland : def_searchable_features
+source src_ch_blw_bodeneignung-kulturland : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
@@ -292,11 +292,11 @@ source src_ch_blw_bodeneignung_kulturland : def_searchable_features
 
 ## INDICES
 
-index ch_blw_klimaeignung_typ
+index ch_blw_klimaeignung-typ
 {
     type = plain
-    source = src_ch_blw_klimaeignung_typ
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_typ
+    source = src_ch_blw_klimaeignung-typ
+    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung-typ
     docinfo = extern
     charset_type = utf-8
     min_infix_len = 2
@@ -306,98 +306,98 @@ index ch_blw_klimaeignung_typ
     enable_star = 1
 }
 
-index ch_blw_klimaeignung_koernermais : ch_blw_klimaeignung_typ
+index ch_blw_klimaeignung-koernermais : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_klimaeignung_koernermais
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_koernermais
+    source = src_ch_blw_klimaeignung-koernermais
+    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung-koernermais
 }
 
-index ch_blw_klimaeignung_spezialkulturen : ch_blw_klimaeignung_typ
+index ch_blw_klimaeignung-spezialkulturen : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_klimaeignung_spezialkulturen
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_spezialkulturen
+    source = src_ch_blw_klimaeignung-spezialkulturen
+    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung-spezialkulturen
 }
 
-index ch_blw_klimaeignung_zwischenfruchtbau : ch_blw_klimaeignung_typ
+index ch_blw_klimaeignung-zwischenfruchtbau : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_klimaeignung_zwischenfruchtbau
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_zwischenfruchtbau
+    source = src_ch_blw_klimaeignung-zwischenfruchtbau
+    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung-zwischenfruchtbau
 }
 
-index ch_blw_klimaeignung_kartoffeln : ch_blw_klimaeignung_typ
+index ch_blw_klimaeignung-kartoffeln : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_klimaeignung_kartoffeln
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_kartoffeln
+    source = src_ch_blw_klimaeignung-kartoffeln
+    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung-kartoffeln
 }
 
-index ch_blw_klimaeignung_getreidebau : ch_blw_klimaeignung_typ
+index ch_blw_klimaeignung-getreidebau : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_klimaeignung_getreidebau
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_getreidebau
+    source = src_ch_blw_klimaeignung-getreidebau
+    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung-getreidebau
 }
 
-index ch_blw_klimaeignung_futterbau : ch_blw_klimaeignung_typ
+index ch_blw_klimaeignung-futterbau : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_klimaeignung_futterbau
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_futterbau
+    source = src_ch_blw_klimaeignung-futterbau
+    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung-futterbau
 }
 
-index ch_blw_klimaeignung_kulturland : ch_blw_klimaeignung_typ
+index ch_blw_klimaeignung-kulturland : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_klimaeignung_kulturland
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_kulturland
+    source = src_ch_blw_klimaeignung-kulturland
+    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung-kulturland
 }
 
-index ch_blw_niederschlagshaushalt : ch_blw_klimaeignung_typ
+index ch_blw_niederschlagshaushalt : ch_blw_klimaeignung-typ
 {
     source = src_ch_blw_niederschlagshaushalt
     path = /var/lib/sphinxsearch/data/index/ch_blw_niederschlagshaushalt
 }
 
-index ch_blw_bodeneignung_kulturtyp : ch_blw_klimaeignung_typ
+index ch_blw_bodeneignung-kulturtyp : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_bodeneignung_kulturtyp
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_kulturtyp
+    source = src_ch_blw_bodeneignung-kulturtyp
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-kulturtyp
 }
 
-index ch_blw_bodeneignung_gruendigkeit : ch_blw_klimaeignung_typ
+index ch_blw_bodeneignung-gruendigkeit : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_bodeneignung_gruendigkeit
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_gruendigkeit
+    source = src_ch_blw_bodeneignung-gruendigkeit
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-gruendigkeit
 }
 
-index ch_blw_bodeneignung_skelettgehalt : ch_blw_klimaeignung_typ
+index ch_blw_bodeneignung-skelettgehalt : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_bodeneignung_skelettgehalt
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_skelettgehalt
+    source = src_ch_blw_bodeneignung-skelettgehalt
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-skelettgehalt
 }
 
-index ch_blw_bodeneignung_wasserspeichervermoegen : ch_blw_klimaeignung_typ
+index ch_blw_bodeneignung-wasserspeichervermoegen : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_bodeneignung_wasserspeichervermoegen
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_wasserspeichervermoegen
+    source = src_ch_blw_bodeneignung-wasserspeichervermoegen
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-wasserspeichervermoegen
 }
 
-index ch_blw_bodeneignung_naehrstoffspeichervermoegen : ch_blw_klimaeignung_typ
+index ch_blw_bodeneignung-naehrstoffspeichervermoegen : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_bodeneignung_naehrstoffspeichervermoegen
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_naehrstoffspeichervermoegen
+    source = src_ch_blw_bodeneignung-naehrstoffspeichervermoegen
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-naehrstoffspeichervermoegen
 }
 
-index ch_blw_bodeneignung_wasserdurchlaessigkeit : ch_blw_klimaeignung_typ
+index ch_blw_bodeneignung-wasserdurchlaessigkeit : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_bodeneignung_wasserdurchlaessigkeit
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_wasserdurchlaessigkeit
+    source = src_ch_blw_bodeneignung-wasserdurchlaessigkeit
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-wasserdurchlaessigkeit
 }
 
-index ch_blw_bodeneignung_vernaessung : ch_blw_klimaeignung_typ
+index ch_blw_bodeneignung-vernaessung : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_bodeneignung_vernaessung
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_vernaessung
+    source = src_ch_blw_bodeneignung-vernaessung
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-vernaessung
 }
 
-index ch_blw_bodeneignung_kulturland : ch_blw_klimaeignung_typ
+index ch_blw_bodeneignung-kulturland : ch_blw_klimaeignung-typ
 {
-    source = src_ch_blw_bodeneignung_kulturland
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_kulturland
+    source = src_ch_blw_bodeneignung-kulturland
+    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung-kulturland
 }
