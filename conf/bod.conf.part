@@ -29,7 +29,7 @@ source src_layers_de : layers
             , staging as staging \
             , bgdi_id::bigint as id \
         from \
-            re3.view_bod_layer_info_de 
+            re3.view_bod_layer_info_de where bodsearch = true
 }
 
 source src_layers_fr : layers
@@ -47,7 +47,7 @@ source src_layers_fr : layers
             , staging as staging \
             , bgdi_id::bigint as id \
         from \
-            re3.view_bod_layer_info_fr 
+            re3.view_bod_layer_info_fr where bodsearch = true
 }
 
 source src_layers_en : layers
@@ -65,7 +65,7 @@ source src_layers_en : layers
             , staging as staging \
             , bgdi_id::bigint as id \
         from \
-            re3.view_bod_layer_info_en 
+            re3.view_bod_layer_info_en where bodsearch = true
 }
 
 source src_layers_it : layers
@@ -83,7 +83,7 @@ source src_layers_it : layers
             , staging as staging \
             , bgdi_id::bigint as id \
         from \
-            re3.view_bod_layer_info_it 
+            re3.view_bod_layer_info_it where bodsearch = true
 }
 
 source src_layers_rm : layers
@@ -101,7 +101,7 @@ source src_layers_rm : layers
             , staging as staging \
             , bgdi_id::bigint as id \
         from \
-            re3.view_bod_layer_info_rm 
+            re3.view_bod_layer_info_rm where bodsearch = true
 }
 
 ## INDICES
