@@ -1137,6 +1137,24 @@ source src_ch_swisstopo_hebungsraten : def_searchable_features
       from geodaesie.hebungsraten_pkt
 }
 
+
+source src_ch_swisstopo_lotabweichungen : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT bgdi_id as id \
+          , name::text as label \
+          , 'feature' as origin  \
+          , remove_accents(concat_ws(' ', name, land, messjahr, instrument, xi_ch, eta_ch, xi_etrf, eta_etrf, symbol )) as detail  \
+          , 'ch.swisstopo.lotabweichungen' as layer  \
+          , quadindex(the_geom) as geom_quadindex  \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon  \
+          , box2d(the_geom) as geom_st_box2d  \
+          , bgdi_id::text as feature_id  \
+      from geodaesie.lotabweichungen_nur_punkte
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren-tsp1
@@ -1541,4 +1559,10 @@ index ch_swisstopo_hebungsraten : ch_swisstopo_verschiebungsvektoren-tsp1
 {
     source = src_ch_swisstopo_hebungsraten
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hebungsraten
+}
+
+index ch_swisstopo_lotabweichungen : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_lotabweichungen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lotabweichungen
 }
