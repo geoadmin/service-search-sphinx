@@ -27,7 +27,7 @@ source src_address : src_swisssearch
         , origin \
         , bgdi_quadindex as geom_quadindex \
         , geom_st_box2d \
-        , 6::integer as rank \
+        , 7::integer as rank \
         , x \
         , y \
         , st_y(st_transform(the_geom,4326)) as lat \
@@ -260,7 +260,7 @@ source src_haltestellen : src_swisssearch
         , 'gazetteer'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(the_geom) as geom_st_box2d \
-        , 5::integer as rank \
+        , 6::integer as rank \
         , st_y((st_geometryn(the_geom,1))) as x \
         , st_x((st_geometryn(the_geom,1))) as y \
         , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
