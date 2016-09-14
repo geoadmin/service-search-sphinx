@@ -64,9 +64,9 @@ source src_ch_bfe_bikesharing : def_searchable_features
     sql_db = uvek_dev
     sql_query = \
         SELECT bgdi_id as id \
-            , provider as label \
+            , providerde as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ',provider,address)) as detail \
+            , remove_accents(concat_ws(' ',providerde,address)) as detail \
             , 'ch.bfe.bikesharing' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
