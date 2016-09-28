@@ -887,7 +887,7 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
-        SELECT bgdi_id as id \
+        SELECT row_number() OVER(ORDER BY bgdi_id) as id \
             , registrationnumber::text as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', registrationnumber, obstacletype, omsid )) as detail \
