@@ -8,26 +8,26 @@ deploy-conf-only.sh
 sphinx deploy wrapper script
 Deploys the sphinx config to the target, if the optional parameter -d is set, all the index using the defined database pattern will be built.
 arguments:
-    -t <<DEPLOY TARGET>> mandatory 
+    -t <<DEPLOY TARGET>> mandatory
         p.e.
         -t int
         -t prod
-    -d <<DATABASE PATTERN>> optional 
-        p.e. 
+    -d <<DATABASE PATTERN>> optional
+        p.e.
         -d lubis_prod -> all indexes using this database will be built
         -d stopo_prod.public -> all indexes using a table from that schema will be built
         -d bafu_prod.gefahren.gfz -> all indexes using this table will be built
         -d all -> all the indexes will be built
         DEFAULT: none
-    -i <<INDEX PATTERN>> optional 
-        p.e. 
+    -i <<INDEX PATTERN>> optional
+        p.e.
         -i ch_swisstopo -> all indexes with infix ***ch_swisstopo*** will be built
         -i all -> all the indexes will be built
-        DEFAULT: none        
+        DEFAULT: none
     -c  <<CLEAN INDEX>> [true|false] optional
         p.e.
         -c true -> on the deploy target missing indexes will be created, orphaned indexes will be deleted
-        DEFAULT: false 
+        DEFAULT: false
         "
 
 if [ ! -f $SPHINXCONFIG ]
@@ -60,7 +60,7 @@ do
 done
 shift $((OPTIND-1))
 
-if [ ! $t_flag ] 
+if [ ! $t_flag ]
 then
     echo "$usage"
     exit 0

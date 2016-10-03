@@ -11,16 +11,16 @@ help:
 	@echo
 	@echo "Indexing only for updates (sudo su sphinxsearch):"
 	@echo
-	@echo "- index-all	           Update all indices (does NOT re-create config file)"
-	@echo "- index-grep	           Update indices that match a given pattern. Pass the pattern as IPATTERN=mypattern directly on the commandline"
-	@echo "- index-search	           Update swisssearch indices (does NOT re-create config file)"
-	@echo "- index-layer	           Update all the layers indices (does NOT re-create config file)"
-	@echo "- index-feature	           Update all the features indices (does NOT re-create config file)"
-	@echo "- move-template	           Move template to the apropriate locations"
+	@echo "- index-all                 Update all indices (does NOT re-create config file)"
+	@echo "- index-grep                Update indices that match a given pattern. Pass the pattern as IPATTERN=mypattern directly on the commandline"
+	@echo "- index-search              Update swisssearch indices (does NOT re-create config file)"
+	@echo "- index-layer               Update all the layers indices (does NOT re-create config file)"
+	@echo "- index-feature             Update all the features indices (does NOT re-create config file)"
+	@echo "- move-template             Move template to the apropriate locations and tests all sql queries"
 	@echo
 	@echo "Generate configuration template:"
 	@echo
-	@echo "- template	           Create sphinx config file from template"
+	@echo "- template                  Create sphinx config file from template"
 	@echo
 	@echo "Deploy:"
 	@echo
@@ -87,7 +87,7 @@ deploy-demo:
 
 .PHONY: deploy-int-clean_index
 deploy-int-clean_index:
-	cd deploy && bash deploy-conf-only.sh -t int -c true 
+	cd deploy && bash deploy-conf-only.sh -t int -c true
 
 .PHONY: deploy-prod-clean_index
 deploy-prod-clean_index:
@@ -104,7 +104,7 @@ ifneq ($(db),)
 else ifneq ($(index),)
 		cd deploy && bash deploy-conf-only.sh -t int -i $(index)
 else
-		cd deploy && bash deploy-conf-only.sh -t int 
+		cd deploy && bash deploy-conf-only.sh -t int
 endif
 
 .PHONY: deploy-prod-config
