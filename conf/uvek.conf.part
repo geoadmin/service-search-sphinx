@@ -59,6 +59,24 @@ source src_ch_bav_haltestellen-oev : def_searchable_features
 }
 
 
+source src_ch_astra_nationalstrassenachsen : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , id as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(strassennummer, ' ')||' '||coalesce(name, ' ')) as detail \
+            , 'ch.astra.nationalstrassenachsen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d   \
+            , bgdi_id::text as feature_id \
+        from astra.nsa
+}
+
+
 source src_ch_astra_ivs-nat : def_searchable_features
 {
     sql_db = uvek_dev
@@ -1502,4 +1520,8 @@ index ch_astra_schwerverunfallte-kanton_pro_einwohner : ch_astra_ivs-nat
     path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_pro_einwohner
 }
 
-
+index ch_astra_nationalstrassenachsen : ch_astra_ivs-nat
+{
+    source = src_ch_astra_nationalstrassenachsen
+    path = /var/lib/sphinxsearch/data/index/ch_astra_nationalstrassenachsen
+}
