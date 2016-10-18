@@ -25,18 +25,22 @@ def pg_get_tables(sql_query,sql_db):
     # conn.cursor will return a cursor object, you can use this cursor to perform queries
     cursor = conn.cursor()
     # execute our Query
-    cursor.execute(sql_query)
-    # retrieve the records from the database
-    records = cursor.fetchall()
-    t = []
-    for i in records:
-        table = re.search('[Bitmap Heap|Index|Seq] Scan.* on ([^ ]+)', i[0])
-        table = table.group(1) if table else None
-        if table and not 'Bitmap Index Scan' in i[0]: 
-            t.append(sql_db+'.'+table)
-            #print "linie: '%s' -> extract: '%s'" % (i[0],table)
-    t = list(set(t)) # get rid of duplicate entries in the list and sorting
-    return  ','.join(sorted(t))
+    try:
+        cursor.execute(sql_query)
+        # retrieve the records from the database
+        records = cursor.fetchall()
+        t = []
+        for i in records:
+            table = re.search('[Bitmap Heap|Index|Seq] Scan.* on ([^ ]+)', i[0])
+            table = table.group(1) if table else None
+            if table and not 'Bitmap Index Scan' in i[0]:
+                t.append(sql_db+'.'+table)
+                #print "linie: '%s' -> extract: '%s'" % (i[0],table)
+        t = list(set(t)) # get rid of duplicate entries in the list and sorting
+        return  ','.join(sorted(t))
+    except Exception as err:
+        sys.stderr.write("ERROR: wrong query detected in database: %s\nquery:\n%s\nerror:\n%s\n" % (sql_db, sql_query, err))
+        return ''
 
 
 if __name__ == '__main__':
