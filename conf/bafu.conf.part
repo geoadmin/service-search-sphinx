@@ -630,6 +630,22 @@ source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : def_sea
         from schutzge.paerke_nationaler_bedeutung_perimeter
 }
 
+source src_ch_bafu_hydrogeologie-markierversuche : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT id as id \
+            , id as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', ort, milieu, markierstoff)) as  detail \
+            , 'ch.bafu.hydrogeologie-markierversuche' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , id::text as feature_id  \
+        from hydrogeolog.hydrogeologie_markierversuche
+}
 
 ## INDICES
 
@@ -863,3 +879,9 @@ index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : ch_bafu_hydr
     source = src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter
     path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter
 }
+
+index ch_bafu_hydrogeologie-markierversuche : ch_bafu_hydrologie-wassertemperaturmessstationen 
+{
+    source = src_ch_bafu_hydrogeologie-markierversuche
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrogeologie-markierversuche
+} 
