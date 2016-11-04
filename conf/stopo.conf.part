@@ -856,7 +856,7 @@ source src_ch_swisstopo_area-papierkarte_metadata : def_searchable_features
           , pk_product as label \
           , 'feature' as origin \
           , remove_accents(coalesce(release::text,'')) as detail \
-          , 'ch.swisstopo.area-papierkarte_metadata' as layer \
+          , 'ch.swisstopo.area-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
@@ -907,30 +907,13 @@ source src_ch_swisstopo_icao-papierkarte_metadata : def_searchable_features
           , pk_product as label \
           , 'feature' as origin \
           , remove_accents(coalesce(release::text,'')) as detail \
-          , 'ch.swisstopo.icao-papierkarte_metadata' as layer \
+          , 'ch.swisstopo.icao-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
           , box2d(the_geom) as geom_st_box2d \
           , pk_product as feature_id \
       from  datenstand.view_gridstand_icao500
-}
-
-source src_ch_swisstopo_geologie-grundwasservulnerabilitaet_papier_metadata : def_searchable_features
-{
-   sql_db = stopo_dev
-   sql_query = \
-      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
-          , pk_product as label \
-          , 'feature' as origin \
-          , remove_accents(coalesce(release::text,'')) as detail \
-          , 'ch.swisstopo.geologie-grundwasservulnerabilitaet_papier.metadata' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
-          , pk_product as feature_id \
-      from  geol.view_gridstand_gkwvul500
 }
 
 source src_ch_swisstopo_gkwvul500-papierkarte_metadata : def_searchable_features
@@ -941,7 +924,7 @@ source src_ch_swisstopo_gkwvul500-papierkarte_metadata : def_searchable_features
           , pk_product as label \
           , 'feature' as origin \
           , remove_accents(coalesce(release::text,'')) as detail \
-          , 'ch.swisstopo.gkwvul500-papierkarte_metadata' as layer \
+          , 'ch.swisstopo.gkwvul500-papierkarte.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
