@@ -61,8 +61,12 @@ index-layer: move-template
 index-feature: move-template
 	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each $(FEATURES_INDICES)
 
+scripts/pre-commit.sh:
+.git/hooks/pre-commit: scripts/pre-commit.sh
+	cp -f $^ $@ && chmod +x $@
+
 .PHONY: template
-template:
+template: .git/hooks/pre-commit
 	@ if [ -z "$$PGPASS" -o -z "$$PGUSER" ]; then \
 		echo "ERROR: Environment variables for db connection PGPASS PGUSER  are not set correctly"; exit 2;\
 	else true; fi
