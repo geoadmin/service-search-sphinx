@@ -1185,18 +1185,6 @@ index ch_swisstopo_wanderkarte25-zus_papier_metadata : ch_swisstopo_verschiebung
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_wanderkarte25-zus_papier_metadata
 }
 
-index ch_swisstopo_segelflugkarte_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
-{
-    source = src_ch_swisstopo_segelflugkarte_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_segelflugkarte_papier_metadata
-}
-
-index ch_swisstopo_icao-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
-{
-    source = src_ch_swisstopo_icao-papierkarte_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_icao-papierkarte_metadata
-}
-
 index ch_swisstopo_burgenkarte200_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
 {
     source = src_ch_swisstopo_burgenkarte200_papier_metadata
