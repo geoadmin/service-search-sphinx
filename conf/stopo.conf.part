@@ -1500,12 +1500,6 @@ index ch_swisstopo_icao-papierkarte_metadata : ch_swisstopo_verschiebungsvektore
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_icao-papierkarte_metadata
 }
 
-index ch_swisstopo_geologie-grundwasservulnerabilitaet_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
-{
-    source = src_ch_swisstopo_geologie-grundwasservulnerabilitaet_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-grundwasservulnerabilitaet_papier_metadata
-}
-
 index ch_swisstopo_gkwvul500-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
 {
     source = src_ch_swisstopo_gkwvul500-papierkarte_metadata
