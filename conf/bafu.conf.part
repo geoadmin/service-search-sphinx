@@ -713,7 +713,6 @@ source src_ch_bafu_karst-einzugsgebietseinheiten : def_searchable_features
             , box2d(the_geom) as geom_st_box2d \
             , objectid::text as feature_id \
         from hydrologie.karst_einzugsgebieteinheiten
->>>>>>> Add sphinx config for karst
 }
 
 source src_ch_bafu_karst-ausdehnung_grundwasservorkommen : def_searchable_features
