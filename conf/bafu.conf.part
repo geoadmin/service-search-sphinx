@@ -647,6 +647,91 @@ source src_ch_bafu_hydrogeologie-markierversuche : def_searchable_features
         from hydrogeolog.hydrogeologie_markierversuche
 }
 
+source src_ch_bafu_karst-einzugsgebiete : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objectid as id \
+            , objectid as label \
+            , 'feature' as origin \
+            , remove_accents(ba_name) as  detail \
+            , 'ch.bafu.karst-einzugsgebiete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objectid::text as feature_id \
+        from hydrologie.karst_einzugsgebiete
+}
+
+source src_ch_bafu_karst-quellen_schwinden : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objectid as id \
+            , objectid as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(ip_type::text, ' ')||' '||coalesce(ip_name, ' '))||' '||coalesce(ip_qclass::text, ' ')||' '||coalesce(ip_reg::text, ' ')||' '||coalesce(ip_exp::text, ' ') as  detail \
+            , 'ch.bafu.karst-quellen_schwinden' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objectid::text as feature_id \
+        from hydrologie.karst_quellen_schwinden
+}
+
+source src_ch_bafu_karst-unterirdische_fliesswege : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objectid as id \
+            , objectid as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(ei_type::text, ' ')||' '||coalesce(ei_hdyn::text, ' ')) as  detail \
+            , 'ch.bafu.karst-unterirdische_fliesswege' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objectid::text as feature_id \
+        from hydrologie.karst_fliesswege
+}
+
+source src_ch_bafu_karst-einzugsgebietseinheiten : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objectid as id \
+            , objectid as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(ub_type::text, ' ')||' '||coalesce(ub_flux::text, ' ')) as  detail \
+            , 'ch.bafu.karst-einzugsgebietseinheiten' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objectid::text as feature_id \
+        from hydrologie.karst_einzugsgebieteinheiten
+>>>>>>> Add sphinx config for karst
+}
+
+source src_ch_bafu_karst-ausdehnung_grundwasservorkommen : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT objectid as id \
+            , objectid as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(nk_type::text, ' ')||' '||coalesce(nk_level::text, ' ')||' '||coalesce(nk_hdyn::text, ' ')) as  detail \
+            , 'ch.bafu.karst-ausdehnung_grundwasservorkommen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , objectid::text as feature_id \
+        from hydrologie.karst_grundwasservorkommen
+}
 ## INDICES
 
 index ch_bafu_hydrologie-wassertemperaturmessstationen
@@ -663,6 +748,35 @@ index ch_bafu_hydrologie-wassertemperaturmessstationen
     enable_star = 1
 }
 
+index ch_bafu_karst-einzugsgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_karst-einzugsgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-einzugsgebiete
+}
+
+index ch_bafu_karst-unterirdische_fliesswege : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_karst-unterirdische_fliesswege
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-unterirdische_fliesswege
+}
+
+index ch_bafu_karst-einzugsgebietseinheiten : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_karst-einzugsgebietseinheiten
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-einzugsgebietseinheiten
+}
+
+index ch_bafu_karst-ausdehnung_grundwasservorkommen : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_karst-ausdehnung_grundwasservorkommen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-ausdehnung_grundwasservorkommen
+}
+
+index ch_bafu_karst-quellen_schwinden : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_karst-quellen_schwinden
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-quellen_schwinden
+}
 index ch_bafu_wrz-wildruhezonen_portal : ch_bafu_hydrologie-wassertemperaturmessstationen
 {
     source = src_ch_bafu_wrz-wildruhezonen_portal
