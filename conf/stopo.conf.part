@@ -440,23 +440,6 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_featu
       from geol.view_gisgeol_surfaces_lt10km2
 }
 
-source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_features
-{
-   sql_db = stopo_dev
-   sql_query = \
-      SELECT gid as id \
-          , prod_id::text as label \
-          , 'feature' as origin \
-          , remove_accents(concat_ws(' ', nr, prod_id, titel )) as detail \
-          , 'ch.swisstopo.geologie-generalkarte-ggk200.metadata' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
-          , prod_id::text as feature_id \
-      from geol.kv_ggk_pk
-}
-
 source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_features
 {
    sql_db = stopo_dev
@@ -798,7 +781,7 @@ source src_ch_swisstopo_geologie-geocover : def_searchable_features
       from geol.view_geocover_grid_shop
 }
 
-source src_ch_swisstopo_geologie-generalkarte-ggk200 : def_searchable_features
+source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -806,13 +789,64 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200 : def_searchable_features
           , pk_product as label \
           , 'feature' as origin \
           , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
-          , 'ch.swisstopo.geologie-generalkarte-ggk200' as layer \
+          , 'ch.swisstopo.geologie-generalkarte-ggk200.metadata' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
           , box2d(the_geom) as geom_st_box2d \
           , pk_product as feature_id \
       from geol.view_gridstand_ggk_shop
+}
+
+source src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
+          , 'ch.swisstopo.geologie-spezialkarten_schweiz.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_gsk_raster
+}
+
+source src_ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
+          , 'ch.swisstopo.geologie-spezialkarten_schweiz_vector.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_gsk_vector
+}
+
+source src_ch_swisstopo_geologie-geologischer_atlas_metadata : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
+          , pk_product as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
+          , 'ch.swisstopo.geologie-geologischer_atlas.metadata' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(the_geom) as geom_st_box2d \
+          , pk_product as feature_id \
+      from geol.view_ga25_grid_shop
 }
 
 source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_searchable_features
@@ -1021,12 +1055,6 @@ index ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : ch_swisstopo_verschiebung
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-lt10km2
 }
 
-index ch_swisstopo_geologie-generalkarte-ggk200_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
-{
-    source = src_ch_swisstopo_geologie-generalkarte-ggk200_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-generalkarte-ggk200_metadata
-}
-
 index ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : ch_swisstopo_verschiebungsvektoren-tsp1
 {
     source = src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte
@@ -1141,6 +1169,24 @@ index ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata : ch_swisstopo_v
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata
 }
 
+index ch_swisstopo_geologie-spezialkarten_schweiz_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-spezialkarten_schweiz_metadata
+}
+
+index ch_swisstopo_geologie-geologischer_atlas_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-geologischer_atlas_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas_metadata
+}
+
+index ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata
+}
+
 index ch_swisstopo_geologie-geologischer_atlas : ch_swisstopo_verschiebungsvektoren-tsp1
 {
     source = src_ch_swisstopo_geologie-geologischer_atlas
@@ -1153,10 +1199,10 @@ index ch_swisstopo_geologie-geocover : ch_swisstopo_verschiebungsvektoren-tsp1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover
 }
 
-index ch_swisstopo_geologie-generalkarte-ggk200 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie-generalkarte-ggk200_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
 {
-    source = src_ch_swisstopo_geologie-generalkarte-ggk200
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-generalkarte-ggk200
+    source = src_ch_swisstopo_geologie-generalkarte-ggk200_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-generalkarte-ggk200_metadata
 }
 
 index ch_swisstopo_hebungsraten : ch_swisstopo_verschiebungsvektoren-tsp1
