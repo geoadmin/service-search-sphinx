@@ -29,13 +29,13 @@ source src_ch_bav_schienennetz : def_searchable_features
             SELECT \
                  nom_segment as label \
                 , 'feature' as origin \
-                , remove_accents(coalesce(nom_segment, ' ')) as detail \
+                , remove_accents(concat_ws(' ', xtf_id_tooltip, nom_segment, kmtext, kmnumero, abreviationet)) as detail \
                 , 'ch.bav.schienennetz' as layer \
                 , quadindex(the_geom) as geom_quadindex \
                 , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
                 , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
                 , box2d(the_geom) as geom_st_box2d \
-                , bgdi_id::text as feature_id \
+                , id::text as feature_id \
             from bav.schienennetz_segment \
             ) sub
 }
