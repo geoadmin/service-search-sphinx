@@ -10,12 +10,12 @@ Sphinx Search service for RE3
 - http://sphinxsearch.com/docs/archives/2.1.5/
 
 ###SPHINX Service Adresses:
-Staging    | URL
------------|------|
-**Dev:**   | http://service-sphinxsearch.dev.bgdi.ch  | 
-**Int:**   | http://service-sphinxsearch.int.bgdi.ch  | 
-**Prod:**  | http://service-sphinxsearch.prod.bgdi.ch  | 
-**Prod public:** |  http://search.geo.admin.ch |
+Staging          | URL
+-----------------|------------------------------------------|
+**Dev:**         | http://service-sphinxsearch.dev.bgdi.ch  |
+**Int:**         | http://service-sphinxsearch.int.bgdi.ch  |
+**Prod:**        | http://service-sphinxsearch.prod.bgdi.ch |
+**Prod public:** | http://search.geo.admin.ch               |
 
 ###Service Setup (update cycle)
 ```bash
@@ -30,12 +30,13 @@ $ /etc/init.d/sphinxsearch start
 **Port:**           9312
 
 ###Service paths:
-Object    | Path
------------|------|
-**PID:**    | /var/run/sphinxsearch  | 
-**Log:**|/var/www/vhosts/service-sphinxsearch/logs/sphinxsearch/|
-**Indexes:**|/var/lib/sphinxsearch/data/index/|
-**Configuration:**|/etc/sphinxsearch/sphinx.conf|
+Object            | Path
+------------------|-----------------------------------|
+**PID:**          | /var/run/sphinxsearch.pid         |
+**Searchd Log**   | /var/log/sphinxsearch/searchd.log |
+**Query Log:**    | /var/log/sphinxsearch/query.log   |
+**Indexes:**      | /var/lib/sphinxsearch/data/index/ |
+**Configuration:**| /etc/sphinxsearch/sphinx.conf     |
 
 ###Search Daemon:
 ```bash
@@ -59,7 +60,7 @@ $ indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
 ####rebuild / build some indexes index1 index2 index3
 There will be a service restart after every index
 ```bash
-$ indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf index1 index2 index3 
+$ indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf index1 index2 index3
 ```
 ####rebuild / build all indexes
 ```bash
@@ -143,8 +144,8 @@ $ make deploy-int-config db=zeitreihen
 ```
 
 ####Deploy **clean_index** to Integration
-You can use this command to 
-* create all the missing indexes 
+You can use this command to
+* create all the missing indexes
 * remove orphaned indexes
 The sphinx configuration will not be deployed. The same command can be used with ```make deploy-prod-clean_index```.
 ```bash
