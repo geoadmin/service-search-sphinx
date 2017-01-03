@@ -17,9 +17,24 @@ source src_ch_pronatura_waldreservate : def_searchable_features
         from pronatura.waldreservate
 }
 
+source src_ch_mobility_standorte : def_searchable_features
+{
+    sql_db = dritte_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , number::text as detail \
+            , 'ch.mobility.standorte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , number::text as label \
+            , bgdi_id::text as feature_id \
+        from mobility.standorte_tooltip
+}
 
 ## INDICES
-
 index ch_pronatura_waldreservate
 {
     type = plain
@@ -34,3 +49,9 @@ index ch_pronatura_waldreservate
     enable_star = 1
 }
 
+
+index ch_mobility_standorte : ch_pronatura_waldreservate
+{
+    source = src_ch_mobility_standorte
+    path = /var/lib/sphinxsearch/data/index/ch_mobility_standorte
+}
