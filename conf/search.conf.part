@@ -166,7 +166,7 @@ source src_swissnames3d : src_swisssearch
         b.lat as lat, \
         b.lon as lon, \
         1 as num, \
-        b.zoomlevel \
+        b.zoomlevel as zoomlevel \
     FROM swissnames s \
     inner join dkm b on s.name = b.name and s.objektklasse = 'TLM_GEBAEUDE' and s.feature_id <> b.feature_id \
     ) s
@@ -189,6 +189,7 @@ source src_gg25 : src_swisssearch
         , st_x(ST_PointOnSurface(g.the_geom)) AS y \
         , st_y(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lon \
+        , -1 as zoomlevel \
         , 1 as num \
         FROM tlm.swissboundaries_gemeinden_uebersetzt g left join tlm.swissboundaries_kantone k on k.kantonsnr = g.kantonsnr 
 }
@@ -210,6 +211,7 @@ source src_kantone : src_swisssearch
         , st_x(ST_PointOnSurface(the_geom)) AS y \
         , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+        , -1 as zoomlevel \
         , 1 as num \
          FROM tlm.swissboundaries_kantone
 }
@@ -232,6 +234,7 @@ source src_district : src_swisssearch
         , st_x(ST_PointOnSurface(the_geom)) AS y \
         , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+        , -1 as zoomlevel \
         , 1 as num \
         FROM tlm.swissboundaries_bezirke 
 }
@@ -253,6 +256,7 @@ source src_zipcode : src_swisssearch
         , st_x(ST_PointOnSurface(the_geom)) AS y \
         , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+        , -1 as zoomlevel \
         , 1 as num \
         FROM vd.gabmo_plz p
 }
@@ -274,6 +278,7 @@ source src_haltestellen : src_swisssearch
         , st_x((st_geometryn(the_geom,1))) as y \
         , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
         , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
+        , -1 as zoomlevel \
         , 1 as num \
         FROM bav.oev_haltestellen 
 }
