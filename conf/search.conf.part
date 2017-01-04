@@ -40,9 +40,9 @@ source src_address : src_swisssearch
 
 source src_parcel : src_swisssearch
 {
-    sql_db=dritte_dev
+    sql_db=mogis_dev
     sql_query = \
-        SELECT id \
+        SELECT row_number() OVER(ORDER BY 1 asc) as id \
         , NULL::text as feature_id \
         , detail \
         , label \
@@ -56,7 +56,7 @@ source src_parcel : src_swisssearch
         , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
         , num \
         , 10 as zoomlevel \
-        from kantone.parzellen_sphinx
+        from parzellen_sphinx
 }
 
 source src_swissnames3d : src_swisssearch
