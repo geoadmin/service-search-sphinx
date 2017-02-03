@@ -69,7 +69,7 @@ source src_swissnames3d : src_swisssearch
         (  \
         SELECT \
         uuid::text as feature_id \
-        ,(regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[0] as name \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
         , objektklasse \
         , bgdi_label_sphinx \
         , bgdi_quadindex \
@@ -85,7 +85,7 @@ source src_swissnames3d : src_swisssearch
         UNION ALL \
         SELECT \
         uuid::text as feature_id \
-        ,(regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[0] as name \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
         , objektklasse \
         , bgdi_label_sphinx \
         , bgdi_quadindex \
@@ -101,7 +101,7 @@ source src_swissnames3d : src_swisssearch
         UNION ALL \
         SELECT \
         uuid::text as feature_id \
-        ,(regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[0] as name \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
         , objektklasse \
         , bgdi_label_sphinx \
         , bgdi_quadindex \
