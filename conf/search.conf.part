@@ -28,7 +28,7 @@ source src_address : src_swisssearch
         , origin \
         , bgdi_quadindex as geom_quadindex \
         , geom_st_box2d \
-        , 6::integer as rank \
+        , 7::integer as rank \
         , x \
         , y \
         , st_y(st_transform(the_geom,4326)) as lat \
@@ -69,6 +69,7 @@ source src_swissnames3d : src_swisssearch
         (  \
         SELECT \
         uuid::text as feature_id \
+        , 6::integer as rank \
         , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
         , objektklasse \
         , bgdi_label_sphinx \
@@ -85,6 +86,7 @@ source src_swissnames3d : src_swisssearch
         UNION ALL \
         SELECT \
         uuid::text as feature_id \
+        , 6::integer as rank \
         , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
         , objektklasse \
         , bgdi_label_sphinx \
@@ -101,6 +103,7 @@ source src_swissnames3d : src_swisssearch
         UNION ALL \
         SELECT \
         uuid::text as feature_id \
+        , 6::integer as rank \
         , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
         , objektklasse \
         , bgdi_label_sphinx \
@@ -114,13 +117,33 @@ source src_swissnames3d : src_swisssearch
         , 9 as zoomlevel \
         , objektart \
         FROM tlm.swissnames3d_poly \
+        WHERE objektart != 'Ort' \
+        UNION ALL \
+        SELECT \
+        uuid::text as feature_id \
+        , 5::integer as rank \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
+        , objektklasse \
+        , bgdi_label_sphinx \
+        , bgdi_quadindex \
+        , the_geom \
+        , st_y(st_ClosestPoint(the_geom,st_centroid(the_geom))) as x \
+        , st_x(st_ClosestPoint(the_geom,st_centroid(the_geom))) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+        , 1 as num \
+        , 9 as zoomlevel \
+        , objektart \
+        FROM tlm.swissnames3d_poly \
+        WHERE objektart = 'Ort' \
         ) sub \
         WHERE  objektart not like 'Haltestelle%' \
     ), \
     dkm as ( \
         SELECT \
         tlm_uuid::text as feature_id \
-        , name \
+        , 6::integer as rank \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
         , objektklasse \
         , bgdi_label_sphinx \
         , bgdi_quadindex \
@@ -133,17 +156,36 @@ source src_swissnames3d : src_swisssearch
         , 10 as zoomlevel \
         , objektart \
         FROM tlm.swissnames3d_dkm10_blacklist \
+        WHERE objektart != 'Ort' \
+        UNION ALL \
+        SELECT \
+        tlm_uuid::text as feature_id \
+        , 5::integer as rank \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
+        , objektklasse \
+        , bgdi_label_sphinx \
+        , bgdi_quadindex \
+        , the_geom \
+        , st_y((st_geometryn(the_geom,1))) as x \
+        , st_x((st_geometryn(the_geom,1))) as y \
+        , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
+        , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
+        , 1 as num \
+        , 10 as zoomlevel \
+        , objektart \
+        FROM tlm.swissnames3d_dkm10_blacklist \
+        WHERE objektart = 'Ort' \
     ) \
     select row_number() OVER(ORDER BY 1 asc) as id , * FROM \
         ( \
     SELECT \
         coalesce(b.feature_id,s.feature_id) as feature_id, \
-        remove_accents(coalesce(b.name, s.name)) as detail, \
+        remove_accents(coalesce(b.name,s.name)) as detail, \
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label, \
         'gazetteer' as origin,  \
         coalesce(b.bgdi_quadindex,s.bgdi_quadindex) as geom_quadindex, \
         box2d(coalesce(b.the_geom,s.the_geom)) as geom_st_box2d, \
-        5::integer as rank, \
+        coalesce(b.rank,s.rank) as rank, \
         coalesce(b.x,s.x) as x, \
         coalesce(b.y,s.y) as y, \
         coalesce(b.lat,s.lat) as lat, \
@@ -155,12 +197,12 @@ source src_swissnames3d : src_swisssearch
     UNION ALL \
     SELECT \
         b.feature_id  as feature_id, \
-        remove_accents( b.name ) as detail, \
+        remove_accents(b.name) as detail, \
         b.bgdi_label_sphinx as label, \
         'gazetteer' as origin, \
         b.bgdi_quadindex  as geom_quadindex, \
         box2d( b.the_geom ) as geom_st_box2d, \
-        5::integer as rank, \
+        b.rank as rank, \
         b.x  as x, \
         b.y as y, \
         b.lat as lat, \
@@ -273,7 +315,7 @@ source src_haltestellen : src_swisssearch
         , 'gazetteer'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(the_geom) as geom_st_box2d \
-        , 7::integer as rank \
+        , 8::integer as rank \
         , st_y((st_geometryn(the_geom,1))) as x \
         , st_x((st_geometryn(the_geom,1))) as y \
         , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
