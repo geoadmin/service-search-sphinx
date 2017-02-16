@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# 
+#
 # read sphinx config file and update all indexes related to input database or input table or index pattern
 
 import os
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     filter_option = ""
     if options.database_filter:
         filter_option='database'
-        
+
     if options.index_filter:
         filter_option='index'
 
@@ -110,7 +110,7 @@ if __name__ == '__main__':
          SPHINXCONFIG=options.config
 
 
-    # SQLITE Initialize and create tables in memory    
+    # SQLITE Initialize and create tables in memory
     conn = sqlite3.connect(":memory:")
     c = conn.cursor()
     c.execute("""
@@ -120,7 +120,7 @@ if __name__ == '__main__':
                     , source_parent text
                     , sql_db text
                     , sql_query text
-                    , indexes 
+                    , indexes
                     text
                     );
                     """)
@@ -147,7 +147,7 @@ if __name__ == '__main__':
     CONN_PORT=re.findall('sql_port\s*=\s*(.*)', data)[0]
 
     # parse sphinx config sources and write them to sqlite sources table ...
-    # TODO: 
+    # TODO:
     # regex which can extract source, sql_db and sql_query in one step
     # step 1 extract source and content in curly braces
     reg_source = re.compile(r'''
@@ -176,11 +176,11 @@ if __name__ == '__main__':
                         , source_parent
                         , sql_db
                         , sql_query
-                        ) 
+                        )
                         VALUES  (? ,?, ?, ?);""" ,(source.strip(), str(source_parent).strip(), sql_db, sql_query))
 
     # parse sphinx config indexes and write them to sqlite indexes table ...
-    # TODO: 
+    # TODO:
     # regex which can extract source, sql_db and sql_query in one step
     # step 1 extract source and content in curly braces
     reg_index = re.compile(r'''
@@ -190,7 +190,7 @@ if __name__ == '__main__':
             .*?                                 # Next part:
             (?P<content> (?<={)[^}]*(?=}))      # catch everything but curly braces
         ''', re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
-    
+
     # get distributed indices first
     distributed_index = {}
     for i in reg_index.finditer(data):
@@ -200,7 +200,7 @@ if __name__ == '__main__':
         index_type = index_type.group(1).strip() if index_type else None
         index_local = re.findall('local\s=\s*(.*)', i.groupdict()['content'])
         index_local = index_local if index_local else None
-        if index_local:    
+        if index_local:
             distributed_index[index]=index_local
 
     for i in reg_index.finditer(data):
@@ -230,12 +230,12 @@ if __name__ == '__main__':
             , a.sql_query as sql
             , i.sphinx_index
             , i.index_parent
-            FROM 
+            FROM
             indexes i left join indexes p on trim(i.index_parent)=trim(p.sphinx_index)
             left join sources a on coalesce(i.source,p.source) = a.source
             left join sources b on a.source_parent = b.source
     """
-    
+
     resultat=[]
     for row in c.execute(sql):
         db = None
@@ -258,15 +258,15 @@ if __name__ == '__main__':
             if options.index_filter in indices or options.index_filter == 'all' or options.index_filter in indices_distributed :
                 db = row['database']
 
-        # output  
+        # output
         if options.command == 'list' and db is not None:
             resultat.append("%s -> %s" % (indices, db))
 
         if options.command == 'update' and db is not None:
             resultat.append("%s" % (indices))
 
-    resultat = sorted(list(set(resultat))) # get rid of duplicate entries in the list and sorting   
-    indent="\n      "     
+    resultat = sorted(list(set(resultat))) # get rid of duplicate entries in the list and sorting
+    indent="\n      "
     if options.command == 'list':
         if resultat:
             print "%s indexes are using the %s pattern: %s%s%s" % (len(resultat), filter_option, options.database_filter or options.index_filter,indent,indent.join(resultat))
@@ -281,7 +281,7 @@ if __name__ == '__main__':
             for line in iter(p.stdout.readline, ''):
                 print line.strip()
             p.stdout.close()
-            
+
         else:
             print 'no sphinx indexes are using the %s pattern %s' % (filter_option, options.database_filter or options.index_filter)
 
