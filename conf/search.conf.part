@@ -294,10 +294,10 @@ source src_zipcode : src_swisssearch
         , quadindex(the_geom) as geom_quadindex \
         , box2d(the_geom) as geom_st_box2d\
         , 1 as rank \
-        , st_y(ST_PointOnSurface(the_geom)) AS x \
-        , st_x(ST_PointOnSurface(the_geom)) AS y \
-        , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-        , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+        , label_y AS x \
+        , label_x AS y \
+        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),4326)) as lat \
+        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),4326)) as lon \
         , -1 as zoomlevel \
         , 1 as num \
         FROM vd.gabmo_plz p
