@@ -57,7 +57,7 @@ source src_layers_en : layers
             bgdi_id::bigint as id \
             , '<b>'||kurzbezeichnung||'</b>' as label \
             , 'layer' as origin \
-            , remove_accents(kurzbezeichnung) as title \
+            , remove_accents(COALESCE(d.kurzbezeichnung_en, d.kurzbezeichnung_de)) as title \
             , remove_accents(volltextsuche) as detail \
             , bod_layer_id as layer \
             , 'en' as lang \
@@ -75,7 +75,7 @@ source src_layers_it : layers
             bgdi_id::bigint as id \
             , '<b>'||kurzbezeichnung||'</b>' as label \
             , 'layer' as origin \
-            , remove_accents(kurzbezeichnung) as title \
+            , remove_accents(COALESCE(d.kurzbezeichnung_it, d.kurzbezeichnung_fr)) as title \
             , remove_accents(volltextsuche) as detail \
             , bod_layer_id as layer \
             , 'it' as lang \
@@ -93,7 +93,7 @@ source src_layers_rm : layers
             bgdi_id::bigint as id \
             , '<b>'||kurzbezeichnung||'</b>' as label \
             , 'layer' as origin \
-            , remove_accents(kurzbezeichnung) as title \
+            , remove_accents(COALESCE(d.kurzbezeichnung_rm, d.kurzbezeichnung_de)) as title \
             , remove_accents(volltextsuche) as detail \
             , bod_layer_id as layer \
             , 'rm' as lang \
