@@ -750,6 +750,23 @@ source src_ch_bafu_karst-ausdehnung_grundwasservorkommen : def_searchable_featur
             , objectid::text as feature_id \
         from hydrologie.karst_grundwasservorkommen
 }
+
+source src_ch_bafu_bundesinventare-bln : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , bln_name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(bln_obj::text, ' ')||' '||coalesce(bln_name, ' ')||' '||coalesce(subareaname, ' ')) as  detail \
+            , 'ch.bafu.bundesinventare-bln' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(the_geom) as geom_st_box2d \
+            , bgdi_id::text as feature_id \
+        from bundinv.bln
+}
 ## INDICES
 
 index ch_bafu_hydrologie-wassertemperaturmessstationen
@@ -794,6 +811,12 @@ index ch_bafu_karst-ausdehnung_grundwasservorkommen : ch_bafu_hydrologie-wassert
 {
     source = src_ch_bafu_karst-ausdehnung_grundwasservorkommen
     path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-ausdehnung_grundwasservorkommen
+}
+
+index ch_bafu_bundesinventare-bln : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-bln
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-bln
 }
 
 index ch_bafu_karst-quellen_schwinden : ch_bafu_hydrologie-wassertemperaturmessstationen
