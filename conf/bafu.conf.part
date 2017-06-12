@@ -50,7 +50,7 @@ source src_ch_bafu_wasserbau-vermessungsstrecken : def_searchable_features
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(the_geom) as geom_st_box2d \
             , bgdi_id::text as feature_id \
-        from wasser.vermessungsstrecken 
+        from wasser.vermessungsstrecken
 }
 
 source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_searchable_features
@@ -85,7 +85,7 @@ source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(the_geom) as geom_st_box2d \
             , bgdi_id::text as feature_id \
-        from hydrologie.niedrigwasserstatistik 
+        from hydrologie.niedrigwasserstatistik
 }
 
 source src_ch_bafu_wrz-wildruhezonen_portal : def_searchable_features
@@ -103,7 +103,7 @@ source src_ch_bafu_wrz-wildruhezonen_portal : def_searchable_features
             , box2d(the_geom) as geom_st_box2d \
             , bgdi_id::text as feature_id \
         from wrzportal.wrz_portal
-} 
+}
 
 source src_ch_bafu_wrz-jagdbanngebiete_select : def_searchable_features
 {
@@ -765,7 +765,7 @@ source src_ch_bafu_bundesinventare-bln : def_searchable_features
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(the_geom) as geom_st_box2d \
             , bgdi_id::text as feature_id \
-        from bundinv.bln
+        from bundinv.bln_v2
 }
 ## INDICES
 
@@ -1041,8 +1041,8 @@ index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : ch_bafu_hydr
     path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter
 }
 
-index ch_bafu_hydrogeologie-markierversuche : ch_bafu_hydrologie-wassertemperaturmessstationen 
+index ch_bafu_hydrogeologie-markierversuche : ch_bafu_hydrologie-wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrogeologie-markierversuche
     path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrogeologie-markierversuche
-} 
+}
