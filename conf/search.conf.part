@@ -9,8 +9,11 @@ source src_swisssearch : def_pqsql
     sql_attr_string = feature_id
     sql_attr_string = origin
     sql_attr_string = geom_st_box2d
+    sql_attr_string = geom_st_box2d_lv95
     sql_attr_float = x
     sql_attr_float = y
+    sql_attr_float = x_lv95
+    sql_attr_float = y_lv95
     sql_attr_float = lat
     sql_attr_float = lon
     sql_field_string = detail
@@ -28,9 +31,12 @@ source src_address : src_swisssearch
         , origin \
         , bgdi_quadindex as geom_quadindex \
         , geom_st_box2d \
+        , geom_st_box2d_lv95 \
         , 7::integer as rank \
         , x \
         , y \
+        , x_lv95 \
+        , y_lv95 \
         , st_y(st_transform(the_geom,4326)) as lat \
         , st_x(st_transform(the_geom,4326)) as lon \
         , num \
