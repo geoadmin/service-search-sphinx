@@ -32,7 +32,8 @@ source src_ch_bafu_hydrologie-q347 : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from hydrologie.hydro_q347
 }
@@ -49,7 +50,8 @@ source src_ch_bafu_wasserbau-vermessungsstrecken : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.vermessungsstrecken
 }
@@ -66,7 +68,8 @@ source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , teilezgnr::text as feature_id \
         from wasser.view_ebene_2km_full
 }
@@ -84,7 +87,8 @@ source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from hydrologie.niedrigwasserstatistik
 }
@@ -101,7 +105,8 @@ source src_ch_bafu_wrz-wildruhezonen_portal : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wrzportal.wrz_portal
 }
@@ -118,7 +123,8 @@ source src_ch_bafu_wrz-jagdbanngebiete_select : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wrzportal.jgd_select
 }
@@ -135,7 +141,8 @@ source src_ch_bafu_typisierung-fliessgewaesser : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from hydrologie.typ_fliessgewaesser
 }
@@ -152,7 +159,8 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_anteilq347 : def_searchable_feat
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , nummer::text as feature_id \
         from wasser.klaeranlagen
 }
@@ -169,7 +177,8 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_ausbaugroesse : def_searchable_f
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , nummer::text as feature_id \
         from wasser.klaeranlagen
 }
@@ -186,7 +195,8 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp : def_searchable_f
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , nummer::text as feature_id \
         from wasser.klaeranlagen
 }
@@ -203,7 +213,8 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , geodb_oid::text as feature_id \
         from hydrologie.hydrologie_untersuchungsgebiete_stationen
 }
@@ -220,7 +231,8 @@ source src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : def_searchable
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from hydrologie.hydro_duntersuchung_fliessgewaesser
 }
@@ -237,7 +249,8 @@ source src_ch_bafu_hydrologie-hochwasserstatistik : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from hydrologie.hochwasserstatistik
 }
@@ -254,7 +267,8 @@ source src_ch_bafu_hydrologie-hochwassergrenzwertpegel : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from hydrologie.hochwassergrenzwertpegel
 }
@@ -271,7 +285,8 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from hydrologie.hydrologie_untersuchungsgebiete
 }
@@ -288,7 +303,8 @@ source src_ch_bafu_hydrologischer-atlas_kantonale-messstationen : def_searchable
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from hydrologie.hydro_atlas_kant_messstationen
 }
@@ -305,7 +321,8 @@ source src_ch_bafu_vec25-gewaessernetz_2000 : def_searchable_features
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
         , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-        , box2d(the_geom) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , bgdi_id::text as feature_id \
     from vec25.gewaessernetz_2000
 }
@@ -322,7 +339,8 @@ source src_ch_bafu_vec25-seen : def_searchable_features
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
         , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-        , box2d(the_geom) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , bgdi_id::text as feature_id \
     from vec25.seen
 }
@@ -339,7 +357,8 @@ source src_ch_bafu_hydrologischer-atlas_flussgebiete : def_searchable_features
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
         , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-        , box2d(the_geom) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , bgdi_id::text as feature_id \
     from hydrologie.atlas_flussgebiete
 }
@@ -356,7 +375,8 @@ source src_ch_bafu_hydrologischer-atlas_bilanzgebiete : def_searchable_features
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
         , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-        , box2d(the_geom) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , bgdi_id::text as feature_id \
     from hydrologie.atlas_bilanzgebiete
 }
@@ -373,7 +393,8 @@ source src_ch_bafu_hydrologischer-atlas_basisgebiete : def_searchable_features
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
         , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-        , box2d(the_geom) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , bgdi_id::text as feature_id \
     from hydrologie.atlas_basisgebiete
 }
@@ -390,7 +411,8 @@ source src_ch_bafu_strukturguete-hochrhein_sohle : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.strukturguete_hochrhein
 }
@@ -407,7 +429,8 @@ source src_ch_bafu_strukturguete-hochrhein_rechtesumfeld : def_searchable_featur
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.strukturguete_hochrhein
 }
@@ -424,7 +447,8 @@ source src_ch_bafu_strukturguete-hochrhein_rechtesufer : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.strukturguete_hochrhein
 }
@@ -441,7 +465,8 @@ source src_ch_bafu_strukturguete-hochrhein_linkesumfeld : def_searchable_feature
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.strukturguete_hochrhein
 }
@@ -458,7 +483,8 @@ source src_ch_bafu_strukturguete-hochrhein_linkesufer : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.strukturguete_hochrhein
 }
@@ -475,7 +501,8 @@ source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_fea
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , nr::text as feature_id \
         from hydrologie.temperaturmessnetz
 }
@@ -492,7 +519,8 @@ source src_ch_bafu_gewaesserschutz-badewasserqualitaet : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bwid::text as feature_id \
         from wasser.baqua
 }
@@ -509,7 +537,8 @@ source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::bigint as feature_id \
         from hydrologie.dbgz
 }
@@ -526,7 +555,8 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , gid::text as feature_id \
         from bundinv.au
 }
@@ -543,7 +573,8 @@ source src_ch_bafu_waldreservate : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wald.waldreservate
 }
@@ -560,7 +591,8 @@ source src_ch_bafu_mittlere-abfluesse : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.mittlere_abfluesse
 }
@@ -577,7 +609,8 @@ source src_ch_bafu_wasserbau-querprofilmarken : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.querprofilmarken
 }
@@ -594,7 +627,8 @@ source src_ch_bafu_feststoffe-geschiebemessnetz : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from wasser.geschiebemessnetz
 }
@@ -611,7 +645,8 @@ source src_ch_bafu_auen-vegetationskarten : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from flora.auen_vegetation
 }
@@ -628,7 +663,8 @@ source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from schutzge.paerke_nationaler_bedeutung_zonen
 }
@@ -645,7 +681,8 @@ source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : def_sea
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , objektnummer::text as feature_id \
         from schutzge.paerke_nationaler_bedeutung_perimeter
 }
@@ -662,7 +699,8 @@ source src_ch_bafu_hydrogeologie-markierversuche : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , id::text as feature_id  \
         from hydrogeolog.hydrogeologie_markierversuche
 }
@@ -679,7 +717,8 @@ source src_ch_bafu_karst-einzugsgebiete : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , objectid::text as feature_id \
         from hydrologie.karst_einzugsgebiete
 }
@@ -696,7 +735,8 @@ source src_ch_bafu_karst-quellen_schwinden : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , objectid::text as feature_id \
         from hydrologie.karst_quellen_schwinden
 }
@@ -713,7 +753,8 @@ source src_ch_bafu_karst-unterirdische_fliesswege : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , objectid::text as feature_id \
         from hydrologie.karst_fliesswege
 }
@@ -730,7 +771,8 @@ source src_ch_bafu_karst-einzugsgebietseinheiten : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , objectid::text as feature_id \
         from hydrologie.karst_einzugsgebieteinheiten
 }
@@ -747,7 +789,8 @@ source src_ch_bafu_karst-ausdehnung_grundwasservorkommen : def_searchable_featur
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , objectid::text as feature_id \
         from hydrologie.karst_grundwasservorkommen
 }
@@ -764,7 +807,8 @@ source src_ch_bafu_bundesinventare-bln : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bundinv.bln_v2
 }
