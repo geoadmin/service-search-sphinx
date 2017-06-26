@@ -16,6 +16,7 @@ source def_searchable_features : def_pqsql
     sql_attr_string = origin
     sql_attr_string = layer
     sql_attr_string = geom_st_box2d
+    sql_attr_string = geom_st_box2d_lv95
     sql_attr_string = label
     sql_attr_float = lat
     sql_attr_float = lon
