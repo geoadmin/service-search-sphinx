@@ -12,6 +12,7 @@ source src_ch_bav_schienennetz : def_searchable_features
             , lat \
             , lon \
             , geom_st_box2d \
+            , geom_st_box2d_lv95 \
             , feature_id from \
         ( \
             SELECT \
@@ -22,7 +23,8 @@ source src_ch_bav_schienennetz : def_searchable_features
                 , quadindex(the_geom) as geom_quadindex \
                 , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
                 , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-                , box2d(the_geom) as geom_st_box2d \
+                , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+                , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
                 , xtf_id::text as feature_id \
             from bav.schienennetz_point \
         UNION ALL \
@@ -34,7 +36,8 @@ source src_ch_bav_schienennetz : def_searchable_features
                 , quadindex(the_geom) as geom_quadindex \
                 , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
                 , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-                , box2d(the_geom) as geom_st_box2d \
+                , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+                , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
                 , id::text as feature_id \
             from bav.schienennetz_segment \
             ) sub
@@ -53,7 +56,8 @@ source src_ch_bav_haltestellen-oev : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d   \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , nummer::text as feature_id \
         from bav.oev_haltestellen
 }
@@ -71,7 +75,8 @@ source src_ch_astra_nationalstrassenachsen : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d   \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from astra.nsa
 }
@@ -89,7 +94,8 @@ source src_ch_astra_ivs-nat : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d   \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , nat_id::text as feature_id \
         from astra.ivs_nat
 }
@@ -106,7 +112,8 @@ source src_ch_astra_ivs-reg_loc : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , reg_loc_id::text as feature_id \
         from astra.ivs_reg_loc
 }
@@ -123,7 +130,8 @@ source src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : def_sea
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , nr::text as feature_id \
         from astra.verkehr_ueber
 }
@@ -140,7 +148,8 @@ source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , nr::text as feature_id \
         from astra.verkehr_reg_loc
 }
@@ -157,7 +166,8 @@ source src_ch_astra_unfaelle-personenschaeden_motorraeder : def_searchable_featu
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
         from astra.unf_pers_motorraeder
 }
@@ -174,7 +184,8 @@ source src_ch_astra_unfaelle-personenschaeden_fussgaenger : def_searchable_featu
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
         from astra.unf_pers_fussgaenger
 }
@@ -191,7 +202,8 @@ source src_ch_astra_unfaelle-personenschaeden_fahrraeder : def_searchable_featur
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
         from astra.unf_pers_fahrraeder
 }
@@ -208,7 +220,8 @@ source src_ch_astra_unfaelle-personenschaeden_getoetete : def_searchable_feature
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
         from astra.unf_pers_getoetete
 }
@@ -225,7 +238,8 @@ source src_ch_astra_unfaelle-personenschaeden_alle : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
         from astra.unf_pers_alle
 }
@@ -242,7 +256,8 @@ source src_ch_bakom_radio-fernsehsender : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , id::text as feature_id \
         from bakom.nisdb_bro_tooltip
 }
@@ -259,7 +274,8 @@ source src_ch_bakom_versorgungsgebiet-tv : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , gid::text as feature_id \
         from bakom.tv_gebiet
 }
@@ -277,7 +293,8 @@ source src_ch_bakom_versorgungsgebiet-ukw : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , gid::text as feature_id \
         from bakom.ukw_gebiet
 }
@@ -294,7 +311,8 @@ source src_ch_bav_kataster-belasteter-standorte-oev : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , vflz_id::text as feature_id \
         FROM bav.kataster_belasteter_standorte_oev
 }
@@ -311,7 +329,8 @@ source src_ch_bazl_kataster-belasteter-standorte-zivilflugplaetze : def_searchab
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , vflz_id::text as feature_id \
       FROM bazl.kataster_belasteter_standorte_zivflpl
 }
@@ -328,7 +347,8 @@ source src_ch_bav_sachplan-infrastruktur-schiene_ausgangslage : def_searchable_f
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bav.sis_angaben
 }
@@ -346,7 +366,8 @@ source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_1 : def_searchable_fea
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bav.sis_fac_anhorung
 }
@@ -363,7 +384,8 @@ source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_2 : def_searchable_fea
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bav.sis_pl_r_anhorung
 }
@@ -380,7 +402,8 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_ausgangslage : def_searchab
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bav.sif_ausgangslage
 }
@@ -398,7 +421,8 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_1 : def_searchabl
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bav.sif_fac_anhorung
 }
@@ -415,7 +439,8 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2 : def_searchabl
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bav.sif_pl_anhorung
 }
@@ -432,7 +457,8 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1 : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bav.sif_fac_kraft
 }
@@ -449,7 +475,8 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2 : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bav.sif_pl_kraft
 }
@@ -466,7 +493,8 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_1 : def_searchable_featur
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bav.sis_fac_kraft
 }
@@ -483,7 +511,8 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_2 : def_searchable_featur
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bav.sis_pl_r_kraft
 }
@@ -501,7 +530,8 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_1 : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bfe.suel_fac_anhorung
 }
@@ -518,7 +548,8 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_2 : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bfe.suel_pl_anhorung
 }
@@ -535,7 +566,8 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_3 : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bfe.suel_fac_r_anhorung
 }
@@ -552,7 +584,8 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_4 : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bfe.suel_pl_r_anhorung
 }
@@ -569,7 +602,8 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_1 : def_searchable_featu
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bfe.suel_fac_kraft
 }
@@ -586,7 +620,8 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_2 : def_searchable_featu
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bfe.suel_fac_r_kraft
 }
@@ -603,7 +638,8 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_3 : def_searchable_featu
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bfe.suel_pl_kraft
 }
@@ -620,7 +656,8 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_4 : def_searchable_featu
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , stabil_id::text as feature_id \
         from bfe.suel_pl_r_kraft
 }
@@ -637,7 +674,8 @@ source src_ch_bfe_kleinwasserkraftpotentiale : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bfe.kleinwasserkraftpotentiale
 }
@@ -653,7 +691,8 @@ source src_ch_bfe_stauanlagen-bundesaufsicht : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , damname::text as label \
             , dam_stabil_id::text as feature_id \
         FROM bfe.stauanlagen_bundesaufsicht
@@ -670,7 +709,8 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_1 : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , facname_de::text as label \
             , stabil_id::text as feature_id \
         FROM bfe.geologische_tiefenlager_fac
@@ -687,7 +727,8 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_2 : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , facname_de::text as label \
             , stabil_id::text as feature_id \
         FROM bfe.geologische_tiefenlager
@@ -704,7 +745,8 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_3 : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , facname_de::text as label \
             , stabil_id::text as feature_id \
         FROM bfe.geologische_tiefenlager_raster
@@ -722,7 +764,8 @@ source src_ch_bfe_statistik-wasserkraftanlagen : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , name::text as label \
             , wastanumber::text as feature_id \
         FROM bfe.statistik_wasserkraftanlagen_powerplant
@@ -739,7 +782,8 @@ source src_ch_bfe_abgeltung-wasserkraftnutzung : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , name::text as label \
             , objectnumber::text as feature_id \
         FROM bfe.abgeltung_wasserkraftnutzung
@@ -756,7 +800,8 @@ source src_ch_bfe_kernkraftwerke : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , name::text as label \
             , plant_id::text as feature_id \
         FROM bfe.kernkraftwerke
@@ -774,7 +819,8 @@ source src_ch_bfe_energiestaedte : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bfe.energiestaedte
 }
@@ -791,7 +837,8 @@ source src_ch_bfe_energiestaedte-energieregionen : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bfe.energiestaedte_energieregionen
 }
@@ -808,7 +855,8 @@ source src_ch_bfe_energiestaedte-2000watt-areale : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bfe.energiestaedte_2000watt_areale
 }
@@ -825,7 +873,8 @@ source src_ch_bfe_energiestaedte-2000watt-aufdemweg : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bfe.energiestaedte_aufdemweg_2000watt
 }
@@ -842,7 +891,8 @@ source src_ch_bav_laerm-emissionsplan_eisenbahn_tag : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bav.laerm_emissionsplan_eisenbahn_tag
 }
@@ -859,7 +909,8 @@ source src_ch_bav_laerm-emissionsplan_eisenbahn_nacht : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bav.laerm_emissionsplan_eisenbahn_nacht
 }
@@ -876,7 +927,8 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         FROM bazl.luftfahrthindernis
 }
@@ -893,7 +945,8 @@ source src_ch_bfe_windenergieanlagen : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d   \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , fac_id::text as feature_id \
         from bfe.view_windenergieanlagen_facility
 }
@@ -910,7 +963,8 @@ source src_ch_bfe_energieforschung : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from bfe.energieforschung
 }
@@ -927,7 +981,8 @@ source src_ch_astra_wanderland : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
           , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , full_number::text as feature_id \
       from astra.chmobil_wanderland
 }
@@ -944,7 +999,8 @@ source src_ch_astra_veloland : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
           , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , full_number::text as feature_id \
       from astra.chmobil_veloland
 }
@@ -961,7 +1017,8 @@ source src_ch_astra_skatingland : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
           , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , full_number::text as feature_id \
       from astra.chmobil_skatingland
 }
@@ -978,7 +1035,8 @@ source src_ch_astra_mountainbikeland : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
           , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , full_number::text as feature_id \
       from astra.chmobil_mountainbikeland
 }
@@ -995,7 +1053,8 @@ source src_ch_astra_schwerverunfallte-kanton_alkohol : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from astra.unf_schwer
 }
@@ -1012,7 +1071,8 @@ source src_ch_astra_schwerverunfallte-kanton_geschwindigkeit : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from astra.unf_schwer
 }
@@ -1029,7 +1089,8 @@ source src_ch_astra_schwerverunfallte-kanton_jahresvergleich : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from astra.unf_schwer
 }
@@ -1046,7 +1107,8 @@ source src_ch_astra_schwerverunfallte-kanton_pro_einwohner : def_searchable_feat
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from astra.unf_schwer
 }
