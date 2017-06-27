@@ -12,7 +12,8 @@ source src_ch_pronatura_waldreservate : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from pronatura.waldreservate
 }
@@ -28,7 +29,8 @@ source src_ch_mobility_standorte : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , number::text as label \
             , bgdi_id::text as feature_id \
         from mobility.standorte_tooltip
