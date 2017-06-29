@@ -279,7 +279,7 @@ source src_kantone : src_swisssearch
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
         , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-        , 4 as rank \
+        , 4::integer as rank \
         , st_y(st_transform(ST_PointOnSurface(the_geom), 21781)) AS x \
         , st_x(st_transform(ST_PointOnSurface(the_geom), 21781)) AS y \
         , st_y(st_transform(ST_PointOnSurface(the_geom), 2056)) AS x_lv95 \
@@ -330,9 +330,7 @@ source src_zipcode : src_swisssearch
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
         , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-        , 1 as rank \
-        , label_y AS x \
-        , label_x AS y \
+        , 1::integer as rank \
         , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),21781)) as x \
         , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),21781)) as y \
         , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),2056)) as x_lv95 \
