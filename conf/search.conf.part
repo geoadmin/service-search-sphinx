@@ -72,6 +72,90 @@ source src_swissnames3d : src_swisssearch
 {
     sql_db=stopo_dev
     sql_query = \
+    WITH swissnames_search as \
+    ( \
+        select * FROM \
+        (  \
+        SELECT \
+        uuid::text as feature_id \
+        , 6::integer as rank \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
+        , objektklasse \
+        , bgdi_label_sphinx \
+        , bgdi_quadindex \
+        , the_geom \
+        , st_y(st_transform(st_geometryn(the_geom,1), 21781)) as x \
+        , st_x(st_transform(st_geometryn(the_geom,1), 21781)) as y \
+        , st_y(st_transform(st_geometryn(the_geom,1), 2056)) as x_lv95 \
+        , st_x(st_transform(st_geometryn(the_geom,1), 2056)) as y_lv95 \
+        , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
+        , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
+        , 1 as num \
+        , 9 as zoomlevel \
+        , objektart \
+        FROM tlm.swissnames3d_point \
+        UNION ALL \
+        SELECT \
+        uuid::text as feature_id \
+        , 6::integer as rank \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
+        , objektklasse \
+        , bgdi_label_sphinx \
+        , bgdi_quadindex \
+        , the_geom \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+        , 1 as num \
+        , 9 as zoomlevel \
+        , objektart \
+        FROM tlm.swissnames3d_line \
+        UNION ALL \
+        SELECT \
+        uuid::text as feature_id \
+        , 6::integer as rank \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
+        , objektklasse \
+        , bgdi_label_sphinx \
+        , bgdi_quadindex \
+        , the_geom \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+        , 1 as num \
+        , 9 as zoomlevel \
+        , objektart \
+        FROM tlm.swissnames3d_poly \
+        WHERE objektart != 'Ort' \
+        UNION ALL \
+        SELECT \
+        uuid::text as feature_id \
+        , 5::integer as rank \
+        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
+        , objektklasse \
+        , bgdi_label_sphinx \
+        , bgdi_quadindex \
+        , the_geom \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+        , 1 as num \
+        , 9 as zoomlevel \
+        , objektart \
+        FROM tlm.swissnames3d_poly \
+        WHERE objektart = 'Ort' \
+        ) sub \
+        WHERE  objektart not like 'Haltestelle%' \
+    ) \
     select row_number() OVER(ORDER BY 1 asc) as id , * FROM \
         ( \
     SELECT \
@@ -91,7 +175,7 @@ source src_swissnames3d : src_swisssearch
         coalesce(b.lon,s.lon) as lon, \
         1 as num, \
         coalesce(b.zoomlevel,s.zoomlevel) as zoomlevel \
-    FROM tlm.swissnames_search s \
+    FROM swissnames_search s \
     left outer join tlm.dkm_search b ON s.feature_id = b.feature_id \
     UNION ALL \
     SELECT \
@@ -111,7 +195,7 @@ source src_swissnames3d : src_swisssearch
         b.lon as lon, \
         1 as num, \
         b.zoomlevel as zoomlevel \
-    FROM tlm.swissnames_search s \
+    FROM swissnames_search s \
     inner join tlm.dkm_search b on s.name = b.name and s.objektklasse = 'TLM_GEBAEUDE' and s.feature_id <> b.feature_id \
     ) s
 }
