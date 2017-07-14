@@ -12,7 +12,8 @@ source src_ch_blw_klimaeignung-typ : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -29,7 +30,8 @@ source src_ch_blw_klimaeignung-koernermais : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -46,7 +48,8 @@ source src_ch_blw_klimaeignung-spezialkulturen : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -63,7 +66,8 @@ source src_ch_blw_klimaeignung-zwischenfruchtbau : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -80,7 +84,8 @@ source src_ch_blw_klimaeignung-kartoffeln : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -97,7 +102,8 @@ source src_ch_blw_klimaeignung-getreidebau : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -114,7 +120,8 @@ source src_ch_blw_klimaeignung-futterbau : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -131,7 +138,8 @@ source src_ch_blw_niederschlagshaushalt : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -148,7 +156,8 @@ source src_ch_blw_klimaeignung-kulturland : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.klimaeignung 
 }
@@ -165,7 +174,8 @@ source src_ch_blw_bodeneignung-kulturtyp : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.bodeneignung 
 }
@@ -182,7 +192,8 @@ source src_ch_blw_bodeneignung-gruendigkeit : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.bodeneignung 
 }
@@ -199,7 +210,8 @@ source src_ch_blw_bodeneignung-skelettgehalt : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.bodeneignung 
 }
@@ -216,7 +228,8 @@ source src_ch_blw_bodeneignung-wasserspeichervermoegen : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.bodeneignung 
 }
@@ -233,7 +246,8 @@ source src_ch_blw_bodeneignung-naehrstoffspeichervermoegen : def_searchable_feat
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.bodeneignung 
 }
@@ -250,7 +264,8 @@ source src_ch_blw_bodeneignung-wasserdurchlaessigkeit : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.bodeneignung 
 }
@@ -267,7 +282,8 @@ source src_ch_blw_bodeneignung-vernaessung : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.bodeneignung 
 }
@@ -284,7 +300,8 @@ source src_ch_blw_bodeneignung-kulturland : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from blw.bodeneignung 
 }

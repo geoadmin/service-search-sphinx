@@ -11,7 +11,8 @@ source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_f
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , name::text as label \
             , id::text as feature_id \
         FROM tlm.swissboundaries_bezirke
@@ -28,7 +29,8 @@ source src_ch_swisstopo_landesschwerenetz : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , coalesce(name,'') || ' ' || coalesce(nr_lsn2004,'') || '' || coalesce(type,'') as label \
             , bgdi_id::text as feature_id \
         FROM geol.landesschwerenetz
@@ -45,7 +47,8 @@ source src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : def_searchable
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , gemname::text as label \
             , id::text as feature_id \
         FROM tlm.swissboundaries_gemeinden
@@ -62,7 +65,8 @@ source src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : def_searchable_f
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , name::text as label \
             , kantonsnr::text as feature_id \
         FROM tlm.swissboundaries_kantone
@@ -79,7 +83,8 @@ source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , plz::text as label \
             , os_uuid::text as feature_id \
         FROM vd.gabmo_plz
@@ -96,7 +101,8 @@ source src_ch_swisstopo_vec200-names-namedlocation : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , coalesce(objname1,'')||' '||coalesce(objname2,'') as label \
             , gtdboid::text as feature_id \
         FROM public.vec200_namedlocation
@@ -114,7 +120,8 @@ source src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : def_searchab
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         FROM geol.gravimetrisch_messpunkte
 }
@@ -131,7 +138,8 @@ source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_fe
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , id::text as feature_id \
         from geol.rohstoffe_industrieminerale
 }
@@ -148,7 +156,8 @@ source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchabl
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , id::text as feature_id \
         from geol.rohstoffe_kohlen_bitumen_erdgas
 }
@@ -165,7 +174,8 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
           , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , id::text as feature_id \
       from geodaesie.verschiebungsvektoren_tsp1
 }
@@ -182,7 +192,8 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
           , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , id::text as feature_id \
       from geodaesie.verschiebungsvektoren_tsp2
 }
@@ -199,7 +210,8 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , id::text as feature_id \
       from geol.rohstoffe_vererzungen
 }
@@ -216,7 +228,8 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_fea
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , id::text as feature_id \
       from geol.geotechnik_ziegeleien_1907
 }
@@ -233,7 +246,8 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_fea
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , id::text as feature_id \
       from geol.geotechnik_ziegeleien_1965
 }
@@ -250,7 +264,8 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_fea
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , id::text as feature_id \
       from geol.geotechnik_ziegeleien_1995
 }
@@ -267,7 +282,8 @@ source src_ch_swisstopo_geologie-gisgeol-punkte : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_points
 }
@@ -284,7 +300,8 @@ source src_ch_swisstopo_geologie-gisgeol-linien : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
           , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_lines
 }
@@ -301,7 +318,8 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km : def_searchable_feature
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_surfaces_1x1km
 }
@@ -318,7 +336,8 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km : def_searchable_featu
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_surfaces_10x10km
 }
@@ -335,7 +354,8 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10to100km2 : def_searchable_fe
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_surfaces_10to100km2
 }
@@ -352,7 +372,8 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2 : def_searchable_
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_surfaces_100to1000km2
 }
@@ -369,7 +390,8 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2 : def_searchabl
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_surfaces_1000to21000km2
 }
@@ -386,7 +408,8 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : def_searchable_fe
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_surfaces_gt21000km2
 }
@@ -403,7 +426,8 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_featu
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
       from geol.view_gisgeol_surfaces_lt10km2
 }
@@ -420,7 +444,8 @@ source src_ch_swisstopo_geologie-tiefengeothermie_projekte : def_searchable_feat
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , bgdi_id::text as feature_id \
       from geol.tiefengeothermie_projekte
 }
@@ -437,7 +462,8 @@ source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_fea
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , bgdi_id::text as feature_id \
       from vd.amopnf_pnf
 }
@@ -454,7 +480,8 @@ source src_ch_swisstopo_transformation-bezugsrahmen_hoehe : def_searchable_featu
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , bgdi_id::text as feature_id \
       from geodaesie.bezugsrahmen_hoehe_pkt
 }
@@ -471,7 +498,8 @@ source src_ch_swisstopo_skitourenkarte-50_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from datenstand.view_gridstand_lkski_shop
 }
@@ -488,7 +516,8 @@ source src_ch_swisstopo_geologie-gravimetrischer_atlas_papier_metadata : def_sea
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_gridstand_gravimetrie_atlas_metadata_shop
 }
@@ -505,7 +534,8 @@ source src_ch_swisstopo_landeskarte25_papier_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from public.lk25_papier
 }
@@ -522,7 +552,8 @@ source src_ch_swisstopo_landeskarte50_papier_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from public.lk50_papier
 }
@@ -539,7 +570,8 @@ source src_ch_swisstopo_landeskarte100_papier_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from public.lk100_papier
 }
@@ -556,7 +588,8 @@ source src_ch_swisstopo_lhk100-papierkarte_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from datenstand.view_gridstand_lk100_shop
 }
@@ -573,7 +606,8 @@ source src_ch_swisstopo_landeskarte200_papier_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from datenstand.view_gridstand_lk200_shop
 }
@@ -590,7 +624,8 @@ source src_ch_swisstopo_wanderkarte50_papier_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from public.lkwander50_papier
 }
@@ -608,7 +643,8 @@ source src_ch_swisstopo_wanderkarte33_papier_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from datenstand.view_gridstand_wkt33_shop
 }
@@ -625,7 +661,8 @@ source src_ch_swisstopo_wk50-papierkarte-zusammensetzung_metadata : def_searchab
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from datenstand.view_gridstand_lkwander50zus_shop
 }
@@ -642,7 +679,8 @@ source src_ch_swisstopo_wanderkarte25-zus_papier_metadata : def_searchable_featu
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from datenstand.view_gridstand_lkwander25zus_shop
 }
@@ -659,7 +697,8 @@ source src_ch_swisstopo_luftfahrtkarten-icao_papier_metadata : def_searchable_fe
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from  public.icao_papier
 }
@@ -676,7 +715,8 @@ source src_ch_swisstopo_burgenkarte200_papier_metadata : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from datenstand.view_gridstand_bk200
 }
@@ -693,7 +733,8 @@ source src_ch_swisstopo_geologie-geologischer_atlas_papier_metadata : def_search
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_gridstand_gas25
 }
@@ -710,7 +751,8 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_papier_metadata : def_sea
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_gridstand_gsk
 }
@@ -727,7 +769,8 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata : def_searc
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_gridstand_ggk
 }
@@ -744,7 +787,8 @@ source src_ch_swisstopo_geologie-geologischer_atlas : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_ga25_grid_shop
 }
@@ -761,7 +805,8 @@ source src_ch_swisstopo_geologie-geocover : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_geocover_grid_shop
 }
@@ -778,7 +823,8 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_f
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_gridstand_ggk_shop
 }
@@ -795,7 +841,8 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata : def_searchable
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_gsk_raster
 }
@@ -812,7 +859,8 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata : def_sea
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_gsk_vector
 }
@@ -829,7 +877,8 @@ source src_ch_swisstopo_geologie-geologischer_atlas_metadata : def_searchable_fe
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_ga25_grid_shop
 }
@@ -846,7 +895,8 @@ source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from datenstand.view_gridstand_datenhaltung_pk500_tilecache_shop
 }
@@ -863,7 +913,8 @@ source src_ch_swisstopo_hebungsraten : def_searchable_features
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(the_geom) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , bgdi_id::text as feature_id \
       from geodaesie.hebungsraten_pkt
 }
@@ -881,7 +932,8 @@ source src_ch_swisstopo_lotabweichungen : def_searchable_features
           , quadindex(the_geom) as geom_quadindex  \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon  \
-          , box2d(the_geom) as geom_st_box2d  \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , id::text as feature_id  \
       from geodaesie.lotabweichungen_nur_punkte
 }

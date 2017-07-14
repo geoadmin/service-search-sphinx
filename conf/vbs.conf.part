@@ -12,7 +12,8 @@ source src_ch_babs_kulturgueter : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , kgs_nr::text as feature_id \
         from babs.kgs
 }
@@ -29,7 +30,8 @@ source src_ch_vbs_waldschadenkarte : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id as feature_id \
         from wascha.projektil
 }
@@ -46,7 +48,8 @@ source src_ch_vbs_armeelogistikcenter : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from militaer.armeelogistikcenter
 }
@@ -63,7 +66,8 @@ source src_ch_vbs_bundestankstellen-bebeco : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from militaer.bundestankstellen_bebeco
 }
@@ -80,7 +84,8 @@ source src_ch_vbs_logistikraeume-armeelogistikcenter : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from militaer.abschnittsregionen_armeelogistikzentren
 }
@@ -97,7 +102,8 @@ source src_ch_vbs_retablierungsstellen : def_searchable_features
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(the_geom) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
         from militaer.retablierungsstellen
 }

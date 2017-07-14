@@ -9,8 +9,11 @@ source src_swisssearch : def_pqsql
     sql_attr_string = feature_id
     sql_attr_string = origin
     sql_attr_string = geom_st_box2d
+    sql_attr_string = geom_st_box2d_lv95
     sql_attr_float = x
     sql_attr_float = y
+    sql_attr_float = x_lv95
+    sql_attr_float = y_lv95
     sql_attr_float = lat
     sql_attr_float = lon
     sql_field_string = detail
@@ -27,10 +30,13 @@ source src_address : src_swisssearch
         , label \
         , origin \
         , bgdi_quadindex as geom_quadindex \
-        , geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , 7::integer as rank \
         , x \
         , y \
+        , st_x(st_transform(st_centroid(the_geom),2056)) as y_lv95 \
+        , st_y(st_transform(st_centroid(the_geom),2056)) as x_lv95 \
         , st_y(st_transform(the_geom,4326)) as lat \
         , st_x(st_transform(the_geom,4326)) as lon \
         , num \
@@ -48,10 +54,13 @@ source src_parcel : src_swisssearch
         , label \
         , origin \
         , bgdi_quadindex as geom_quadindex \
-        , geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , 10::integer as rank \
         , x \
         , y \
+        , st_x(st_transform(st_centroid(the_geom),2056)) as y_lv95 \
+        , st_y(st_transform(st_centroid(the_geom),2056)) as x_lv95 \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
         , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
         , num \
@@ -63,7 +72,7 @@ source src_swissnames3d : src_swisssearch
 {
     sql_db=stopo_dev
     sql_query = \
-    WITH swissnames as \
+    WITH swissnames_search as \
     ( \
         select * FROM \
         (  \
@@ -75,8 +84,10 @@ source src_swissnames3d : src_swisssearch
         , bgdi_label_sphinx \
         , bgdi_quadindex \
         , the_geom \
-        , st_y((st_geometryn(the_geom,1))) as x \
-        , st_x((st_geometryn(the_geom,1))) as y \
+        , st_y(st_transform(st_geometryn(the_geom,1), 21781)) as x \
+        , st_x(st_transform(st_geometryn(the_geom,1), 21781)) as y \
+        , st_y(st_transform(st_geometryn(the_geom,1), 2056)) as x_lv95 \
+        , st_x(st_transform(st_geometryn(the_geom,1), 2056)) as y_lv95 \
         , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
         , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
         , 1 as num \
@@ -92,8 +103,10 @@ source src_swissnames3d : src_swisssearch
         , bgdi_label_sphinx \
         , bgdi_quadindex \
         , the_geom \
-        , st_y(st_ClosestPoint(the_geom,st_centroid(the_geom))) as x \
-        , st_x(st_ClosestPoint(the_geom,st_centroid(the_geom))) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
         , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
         , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
         , 1 as num \
@@ -109,8 +122,10 @@ source src_swissnames3d : src_swisssearch
         , bgdi_label_sphinx \
         , bgdi_quadindex \
         , the_geom \
-        , st_y(st_ClosestPoint(the_geom,st_centroid(the_geom))) as x \
-        , st_x(st_ClosestPoint(the_geom,st_centroid(the_geom))) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
         , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
         , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
         , 1 as num \
@@ -127,8 +142,10 @@ source src_swissnames3d : src_swisssearch
         , bgdi_label_sphinx \
         , bgdi_quadindex \
         , the_geom \
-        , st_y(st_ClosestPoint(the_geom,st_centroid(the_geom))) as x \
-        , st_x(st_ClosestPoint(the_geom,st_centroid(the_geom))) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
+        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
+        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
         , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
         , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
         , 1 as num \
@@ -138,43 +155,6 @@ source src_swissnames3d : src_swisssearch
         WHERE objektart = 'Ort' \
         ) sub \
         WHERE  objektart not like 'Haltestelle%' \
-    ), \
-    dkm as ( \
-        SELECT \
-        tlm_uuid::text as feature_id \
-        , 6::integer as rank \
-        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
-        , objektklasse \
-        , bgdi_label_sphinx \
-        , bgdi_quadindex \
-        , the_geom \
-        , st_y((st_geometryn(the_geom,1))) as x \
-        , st_x((st_geometryn(the_geom,1))) as y \
-        , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
-        , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
-        , 1 as num \
-        , 10 as zoomlevel \
-        , objektart \
-        FROM tlm.swissnames3d_dkm10_blacklist \
-        WHERE objektart != 'Ort' \
-        UNION ALL \
-        SELECT \
-        tlm_uuid::text as feature_id \
-        , 5::integer as rank \
-        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
-        , objektklasse \
-        , bgdi_label_sphinx \
-        , bgdi_quadindex \
-        , the_geom \
-        , st_y((st_geometryn(the_geom,1))) as x \
-        , st_x((st_geometryn(the_geom,1))) as y \
-        , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
-        , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
-        , 1 as num \
-        , 10 as zoomlevel \
-        , objektart \
-        FROM tlm.swissnames3d_dkm10_blacklist \
-        WHERE objektart = 'Ort' \
     ) \
     select row_number() OVER(ORDER BY 1 asc) as id , * FROM \
         ( \
@@ -184,16 +164,19 @@ source src_swissnames3d : src_swisssearch
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label, \
         'gazetteer' as origin,  \
         coalesce(b.bgdi_quadindex,s.bgdi_quadindex) as geom_quadindex, \
-        box2d(coalesce(b.the_geom,s.the_geom)) as geom_st_box2d, \
+        box2d(st_transform(coalesce(b.the_geom,s.the_geom), 21781)) as geom_st_box2d, \
+        box2d(st_transform(coalesce(b.the_geom,s.the_geom), 2056)) as geom_st_box2d_lv95, \
         coalesce(b.rank,s.rank) as rank, \
         coalesce(b.x,s.x) as x, \
         coalesce(b.y,s.y) as y, \
+        coalesce(b.x_lv95,s.x_lv95) as x_lv95, \
+        coalesce(b.y_lv95,s.y_lv95) as y_lv95, \
         coalesce(b.lat,s.lat) as lat, \
         coalesce(b.lon,s.lon) as lon, \
         1 as num, \
         coalesce(b.zoomlevel,s.zoomlevel) as zoomlevel \
-    FROM swissnames s \
-    left outer join dkm b ON s.feature_id = b.feature_id \
+    FROM swissnames_search s \
+    left outer join tlm.dkm_search b ON s.feature_id = b.feature_id \
     UNION ALL \
     SELECT \
         b.feature_id  as feature_id, \
@@ -201,16 +184,19 @@ source src_swissnames3d : src_swisssearch
         b.bgdi_label_sphinx as label, \
         'gazetteer' as origin, \
         b.bgdi_quadindex  as geom_quadindex, \
-        box2d( b.the_geom ) as geom_st_box2d, \
+        box2d(st_transform(b.the_geom, 21781)) as geom_st_box2d, \
+        box2d(st_transform(b.the_geom, 2056)) as geom_st_box2d_lv95, \
         b.rank as rank, \
-        b.x  as x, \
+        b.x as x, \
         b.y as y, \
+        b.x_lv95 as x_lv95, \
+        b.y_lv95 as y_lv95, \
         b.lat as lat, \
         b.lon as lon, \
         1 as num, \
         b.zoomlevel as zoomlevel \
-    FROM swissnames s \
-    inner join dkm b on s.name = b.name and s.objektklasse = 'TLM_GEBAEUDE' and s.feature_id <> b.feature_id \
+    FROM swissnames_search s \
+    inner join tlm.dkm_search b on s.name = b.name and s.objektklasse = 'TLM_GEBAEUDE' and s.feature_id <> b.feature_id \
     ) s
 }
 
@@ -225,10 +211,13 @@ source src_gg25 : src_swisssearch
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label \
         , 'gg25'::text as origin \
         , quadindex(g.the_geom) as geom_quadindex \
-        , box2d(g.the_geom) as geom_st_box2d \
+        , box2d(st_transform(g.the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(g.the_geom, 2056)) as geom_st_box2d_lv95 \
         , 2::integer as rank \
-        , st_y(ST_PointOnSurface(g.the_geom)) AS x \
-        , st_x(ST_PointOnSurface(g.the_geom)) AS y \
+        , st_y(st_transform(ST_PointOnSurface(g.the_geom), 21781)) AS x \
+        , st_x(st_transform(ST_PointOnSurface(g.the_geom), 21781)) AS y \
+        , st_y(st_transform(ST_PointOnSurface(g.the_geom), 2056)) AS x_lv95 \
+        , st_x(st_transform(ST_PointOnSurface(g.the_geom), 2056)) AS y_lv95 \
         , st_y(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lon \
         , -1 as zoomlevel \
@@ -247,10 +236,13 @@ source src_kantone : src_swisssearch
         , '<b>'||name||'</b>' as label \
         , 'kantone'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
-        , box2d(the_geom) as geom_st_box2d \
-        , 4 as rank \
-        , st_y(ST_PointOnSurface(the_geom)) AS x \
-        , st_x(ST_PointOnSurface(the_geom)) AS y \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+        , 4::integer as rank \
+        , st_y(st_transform(ST_PointOnSurface(the_geom), 21781)) AS x \
+        , st_x(st_transform(ST_PointOnSurface(the_geom), 21781)) AS y \
+        , st_y(st_transform(ST_PointOnSurface(the_geom), 2056)) AS x_lv95 \
+        , st_x(st_transform(ST_PointOnSurface(the_geom), 2056)) AS y_lv95 \
         , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , -1 as zoomlevel \
@@ -270,10 +262,13 @@ source src_district : src_swisssearch
         , '<b>'||name||'</b>' as label \
         , 'district'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
-        , box2d(the_geom) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , 3::integer as rank \
-        , st_y(ST_PointOnSurface(the_geom)) AS x \
-        , st_x(ST_PointOnSurface(the_geom)) AS y \
+        , st_y(st_transform(ST_PointOnSurface(the_geom), 21781)) AS x \
+        , st_x(st_transform(ST_PointOnSurface(the_geom), 21781)) AS y \
+        , st_y(st_transform(ST_PointOnSurface(the_geom), 2056)) AS x_lv95 \
+        , st_x(st_transform(ST_PointOnSurface(the_geom), 2056)) AS y_lv95 \
         , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , -1 as zoomlevel \
@@ -292,10 +287,13 @@ source src_zipcode : src_swisssearch
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label \
         , 'zipcode' as origin \
         , quadindex(the_geom) as geom_quadindex \
-        , box2d(the_geom) as geom_st_box2d\
-        , 1 as rank \
-        , label_y AS x \
-        , label_x AS y \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+        , 1::integer as rank \
+        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),21781)) as x \
+        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),21781)) as y \
+        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),2056)) as x_lv95 \
+        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),2056)) as y_lv95 \
         , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),4326)) as lat \
         , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),4326)) as lon \
         , -1 as zoomlevel \
@@ -314,10 +312,13 @@ source src_haltestellen : src_swisssearch
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label \
         , 'gazetteer'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
-        , box2d(the_geom) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , 8::integer as rank \
-        , st_y((st_geometryn(the_geom,1))) as x \
-        , st_x((st_geometryn(the_geom,1))) as y \
+        , st_y(st_transform(st_geometryn(the_geom,1), 21781)) as x \
+        , st_x(st_transform(st_geometryn(the_geom,1), 21781)) as y \
+        , st_y(st_transform(st_geometryn(the_geom,1), 2056)) as x_lv95 \
+        , st_x(st_transform(st_geometryn(the_geom,1), 2056)) as y_lv95 \
         , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
         , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
         , -1 as zoomlevel \
