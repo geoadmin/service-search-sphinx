@@ -332,6 +332,7 @@ index zipcode
 {
     source = src_zipcode
     wordforms = /var/lib/sphinxsearch/data/index/wordforms_main.txt
+    stopwords = /var/lib/sphinxsearch/data/index/stopwords_main.txt
     path = /var/lib/sphinxsearch/data/index/zipcode
     type = plain
     docinfo = extern
