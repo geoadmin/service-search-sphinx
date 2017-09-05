@@ -33,19 +33,19 @@ def pg_get_tables(sql_query,sql_db):
         for i in records:
             table = re.search('[Bitmap Heap|Index|Seq] Scan.* on ([^ ]+)', i[0])
             table = table.group(1) if table else None
-            if table and not 'Bitmap Index Scan' in i[0]:
+            if table and 'Bitmap Index Scan' not in i[0]:
                 t.append(sql_db+'.'+table)
                 #print "linie: '%s' -> extract: '%s'" % (i[0],table)
         t = list(set(t)) # get rid of duplicate entries in the list and sorting
-        return  ','.join(sorted(t))
+        return ','.join(sorted(t))
     except Exception as err:
         sys.stderr.write("ERROR: wrong query detected in database: %s\nquery:\n%s\nerror:\n%s\n" % (sql_db, sql_query, err))
         return ''
 
 
 if __name__ == '__main__':
-    SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
-    USER="sphinxsearch"
+    SPHINXCONFIG = "/etc/sphinxsearch/sphinx.conf"
+    USER = "sphinxsearch"
     myenv = dict(os.environ)
 
     ################################
@@ -108,7 +108,6 @@ if __name__ == '__main__':
 
     if options.config:
          SPHINXCONFIG=options.config
-
 
     # SQLITE Initialize and create tables in memory
     conn = sqlite3.connect(":memory:")
@@ -201,7 +200,7 @@ if __name__ == '__main__':
         index_local = re.findall('local\s=\s*(.*)', i.groupdict()['content'])
         index_local = index_local if index_local else None
         if index_local:
-            distributed_index[index]=index_local
+            distributed_index[index] = index_local
 
     for i in reg_index.finditer(data):
         index, index_parent = parsing_func(i.groupdict()['index'])
@@ -210,7 +209,7 @@ if __name__ == '__main__':
         source = source.group(1).strip() if source else None
         # set index_parent to distributed_index if one exists otherwise index_parent is None
         index_parent = None
-        for k,v in distributed_index.iteritems():
+        for k, v in distributed_index.iteritems():
             if index in v:
                 index_parent = k
         # import only real indexes, no distributed indexes
@@ -236,7 +235,7 @@ if __name__ == '__main__':
             left join sources b on a.source_parent = b.source
     """
 
-    resultat=[]
+    resultat = []
     for row in c.execute(sql):
         db = None
         indices = row['sphinx_index']
@@ -250,7 +249,7 @@ if __name__ == '__main__':
                     db = row['database']
                 # if db filter is more detailed, we have to analyze the sql queries with postgres ANALZYE VERBOSE
             elif options.database_filter.split(".")[0] == row['database']:
-                table =  pg_get_tables(row['sql'], row['database'])
+                table = pg_get_tables(row['sql'], row['database'])
                 db = row['database'] if options.database_filter in table else None
         # indice filter
         # -i pattern
@@ -265,25 +264,25 @@ if __name__ == '__main__':
         if options.command == 'update' and db is not None:
             resultat.append("%s" % (indices))
 
-    resultat = sorted(list(set(resultat))) # get rid of duplicate entries in the list and sorting
+    resultat = sorted(list(set(resultat)))  # get rid of duplicate entries in the list and sorting
     indent="\n      "
     if options.command == 'list':
         if resultat:
-            print "%s indexes are using the %s pattern: %s%s%s" % (len(resultat), filter_option, options.database_filter or options.index_filter,indent,indent.join(resultat))
+            print("%s indexes are using the %s pattern: %s%s%s" % (len(resultat), filter_option, options.database_filter or options.index_filter,indent,indent.join(resultat)))
         else:
-            print "no indexes are using the %s pattern: %s" % (filter_option, options.database_filter or options.index_filter)
+            print("no indexes are using the %s pattern: %s" % (filter_option, options.database_filter or options.index_filter))
     elif options.command == 'update':
         if resultat:
             sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (options.config,' '.join(resultat))
             print sphinx_command
-            #uncomment following lines for real update
+            # uncomment following lines for real update
             p = subprocess.Popen(sphinx_command,stdout=subprocess.PIPE,shell=True, env=myenv)
             for line in iter(p.stdout.readline, ''):
-                print line.strip()
+                print(line.strip())
             p.stdout.close()
 
         else:
-            print 'no sphinx indexes are using the %s pattern %s' % (filter_option, options.database_filter or options.index_filter)
+            print('no sphinx indexes are using the %s pattern %s' % (filter_option, options.database_filter or options.index_filter))
 
 #
 # $Id$
