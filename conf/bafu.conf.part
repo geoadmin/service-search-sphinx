@@ -830,6 +830,25 @@ source src_ch_bafu_bundesinventare-vogelreservate : def_searchable_features
             , objectid::text as feature_id  \
         from bundinv.vogelreservate
 }
+
+source src_ch_bafu_grundwasserkoerper : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , flussgebiet as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(flussgebiet, ' ')||' '||coalesce(grundwasserleitertyp, ' ')||' '||coalesce(naturraum, ' ')||' '||coalesce(grundwasserregime, ' ')) as  detail \
+            , 'ch.bafu.grundwasserkoerper' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id  \
+        from wasser.gwk
+}
+
 ## INDICES
 
 index ch_bafu_hydrologie-wassertemperaturmessstationen
@@ -1114,4 +1133,10 @@ index ch_bafu_bundesinventare-vogelreservate : ch_bafu_hydrologie-wassertemperat
 {
     source = src_ch_bafu_bundesinventare-vogelreservate
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-vogelreservate
+}
+
+index ch_bafu_grundwasserkoerper : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_grundwasserkoerper
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_grundwasserkoerper
 }
