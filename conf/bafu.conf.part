@@ -20,6 +20,25 @@ source src_ch_bafu_alpweiden-herdenschutzhunde : def_searchable_features
 }
 
 
+source src_ch_bafu_bundesinventare-hochmoore : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , hm_name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(hm_obj::text, ' ')||' '||coalesce(hm_name, ' ')||' '||coalesce(hm_typ::text,' ')) as detail \
+            , 'ch.bafu.bundesinventare-hochmoore' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.hm
+}
+
+
 source src_ch_bafu_hydrologie-q347 : def_searchable_features
 {
     sql_db = bafu_dev
@@ -970,6 +989,12 @@ index ch_bafu_hydrologie-gewaesserzustandsmessstationen : ch_bafu_hydrologie-was
 {
     source = src_ch_bafu_hydrologie-gewaesserzustandsmessstationen
     path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-gewaesserzustandsmessstationen
+}
+
+index ch_bafu_bundesinventare-hochmoore : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-hochmoore
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-hochmoore
 }
 
 index ch_bafu_hydrologie-q347 : ch_bafu_hydrologie-wassertemperaturmessstationen
