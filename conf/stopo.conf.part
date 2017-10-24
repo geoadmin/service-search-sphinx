@@ -1,4 +1,4 @@
-## SOURCES
+# SOURCES
 
 source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_features
 {
@@ -197,6 +197,26 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
           , id::text as feature_id \
       from geodaesie.verschiebungsvektoren_tsp2
 }
+
+
+source src_ch_swisstopo_geologie-bohrungen_tiefer_500 : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT  bgdi_id as id \
+            , COALESCE(name, '') as label \
+            , 'feature' as origin \
+            , remove_accents(COALESCE(name, '')) as detail \
+            , 'ch.swisstopo.geologie-bohrungen_tiefer_500' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from geol.bohrungen_500
+}
+
 
 source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
 {
@@ -994,6 +1014,12 @@ index ch_swisstopo_vec200-names-namedlocation : ch_swisstopo_verschiebungsvektor
 {
     source = src_ch_swisstopo_vec200-names-namedlocation
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-names-namedlocation
+}
+
+index ch_swisstopo_geologie-bohrungen_tiefer_500 : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-bohrungen_tiefer_500
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-bohrungen_tiefer_500
 }
 
 index ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : ch_swisstopo_verschiebungsvektoren-tsp1
