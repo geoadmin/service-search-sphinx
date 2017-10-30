@@ -2,7 +2,7 @@
 
 source src_ch_blw_klimaeignung-typ : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -20,7 +20,7 @@ source src_ch_blw_klimaeignung-typ : def_searchable_features
 
 source src_ch_blw_klimaeignung-koernermais : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -38,7 +38,7 @@ source src_ch_blw_klimaeignung-koernermais : def_searchable_features
 
 source src_ch_blw_klimaeignung-spezialkulturen : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -56,7 +56,7 @@ source src_ch_blw_klimaeignung-spezialkulturen : def_searchable_features
 
 source src_ch_blw_klimaeignung-zwischenfruchtbau : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -74,7 +74,7 @@ source src_ch_blw_klimaeignung-zwischenfruchtbau : def_searchable_features
 
 source src_ch_blw_klimaeignung-kartoffeln : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -92,7 +92,7 @@ source src_ch_blw_klimaeignung-kartoffeln : def_searchable_features
 
 source src_ch_blw_klimaeignung-getreidebau : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -110,7 +110,7 @@ source src_ch_blw_klimaeignung-getreidebau : def_searchable_features
 
 source src_ch_blw_klimaeignung-futterbau : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -128,7 +128,7 @@ source src_ch_blw_klimaeignung-futterbau : def_searchable_features
 
 source src_ch_blw_niederschlagshaushalt : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -146,7 +146,7 @@ source src_ch_blw_niederschlagshaushalt : def_searchable_features
 
 source src_ch_blw_klimaeignung-kulturland : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -164,7 +164,7 @@ source src_ch_blw_klimaeignung-kulturland : def_searchable_features
 
 source src_ch_blw_bodeneignung-kulturtyp : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -182,7 +182,7 @@ source src_ch_blw_bodeneignung-kulturtyp : def_searchable_features
 
 source src_ch_blw_bodeneignung-gruendigkeit : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -200,7 +200,7 @@ source src_ch_blw_bodeneignung-gruendigkeit : def_searchable_features
 
 source src_ch_blw_bodeneignung-skelettgehalt : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -218,7 +218,7 @@ source src_ch_blw_bodeneignung-skelettgehalt : def_searchable_features
 
 source src_ch_blw_bodeneignung-wasserspeichervermoegen : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -236,7 +236,7 @@ source src_ch_blw_bodeneignung-wasserspeichervermoegen : def_searchable_features
 
 source src_ch_blw_bodeneignung-naehrstoffspeichervermoegen : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -254,7 +254,7 @@ source src_ch_blw_bodeneignung-naehrstoffspeichervermoegen : def_searchable_feat
 
 source src_ch_blw_bodeneignung-wasserdurchlaessigkeit : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -272,7 +272,7 @@ source src_ch_blw_bodeneignung-wasserdurchlaessigkeit : def_searchable_features
 
 source src_ch_blw_bodeneignung-vernaessung : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -290,7 +290,7 @@ source src_ch_blw_bodeneignung-vernaessung : def_searchable_features
 
 source src_ch_blw_bodeneignung-kulturland : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_lv95_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
