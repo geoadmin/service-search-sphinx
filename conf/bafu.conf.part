@@ -3,7 +3,7 @@
 
 source src_ch_bafu_alpweiden-herdenschutzhunde : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
@@ -22,7 +22,7 @@ source src_ch_bafu_alpweiden-herdenschutzhunde : def_searchable_features
 
 source src_ch_bafu_hydrologie-q347 : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , gewaesser as label \
@@ -40,7 +40,7 @@ source src_ch_bafu_hydrologie-q347 : def_searchable_features
 
 source src_ch_bafu_wasserbau-vermessungsstrecken : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , bezeichnung as label \
@@ -58,7 +58,7 @@ source src_ch_bafu_wasserbau-vermessungsstrecken : def_searchable_features
 
 source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY teilezgnr asc) as id \
             , teilezgnr as label \
@@ -77,7 +77,7 @@ source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_searchable_features
 
 source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , name as label \
@@ -95,7 +95,7 @@ source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
 
 source src_ch_bafu_wrz-wildruhezonen_portal : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , wrz_name as label \
@@ -113,7 +113,7 @@ source src_ch_bafu_wrz-wildruhezonen_portal : def_searchable_features
 
 source src_ch_bafu_wrz-jagdbanngebiete_select : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , jb_name as label \
@@ -131,7 +131,7 @@ source src_ch_bafu_wrz-jagdbanngebiete_select : def_searchable_features
 
 source src_ch_bafu_typisierung-fliessgewaesser : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , objectid_gwn25 as label \
@@ -149,7 +149,7 @@ source src_ch_bafu_typisierung-fliessgewaesser : def_searchable_features
 
 source src_ch_bafu_gewaesserschutz-klaeranlagen_anteilq347 : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT nummer::bigint as id \
             , name as label \
@@ -167,7 +167,7 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_anteilq347 : def_searchable_feat
 
 source src_ch_bafu_gewaesserschutz-klaeranlagen_ausbaugroesse : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT nummer::bigint as id \
             , name as label \
@@ -185,7 +185,7 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_ausbaugroesse : def_searchable_f
 
 source src_ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT nummer::bigint as id \
             , name as label \
@@ -203,7 +203,7 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp : def_searchable_f
 
 source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT geodb_oid as id \
             ,  name as label \
@@ -221,7 +221,7 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_fe
 
 source src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             ,  name as label \
@@ -239,7 +239,7 @@ source src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : def_searchable
 
 source src_ch_bafu_hydrologie-hochwasserstatistik : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             , name as label \
@@ -257,7 +257,7 @@ source src_ch_bafu_hydrologie-hochwasserstatistik : def_searchable_features
 
 source src_ch_bafu_hydrologie-hochwassergrenzwertpegel : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             ,  name as label \
@@ -275,7 +275,7 @@ source src_ch_bafu_hydrologie-hochwassergrenzwertpegel : def_searchable_features
 
 source src_ch_bafu_hydrologie-untersuchungsgebiete : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             ,  name as label \
@@ -293,7 +293,7 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete : def_searchable_features
 
 source src_ch_bafu_hydrologischer-atlas_kantonale-messstationen : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             ,  nummer as label \
@@ -311,7 +311,7 @@ source src_ch_bafu_hydrologischer-atlas_kantonale-messstationen : def_searchable
 
 source src_ch_bafu_vec25-gewaessernetz_2000 : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
         , name as label \
@@ -329,7 +329,7 @@ source src_ch_bafu_vec25-gewaessernetz_2000 : def_searchable_features
 
 source src_ch_bafu_vec25-seen : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
         , name as label \
@@ -347,7 +347,7 @@ source src_ch_bafu_vec25-seen : def_searchable_features
 
 source src_ch_bafu_hydrologischer-atlas_flussgebiete : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
         , name as label \
@@ -365,7 +365,7 @@ source src_ch_bafu_hydrologischer-atlas_flussgebiete : def_searchable_features
 
 source src_ch_bafu_hydrologischer-atlas_bilanzgebiete : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
         , name as label \
@@ -383,7 +383,7 @@ source src_ch_bafu_hydrologischer-atlas_bilanzgebiete : def_searchable_features
 
 source src_ch_bafu_hydrologischer-atlas_basisgebiete : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
         , nummer::text as label \
@@ -401,7 +401,7 @@ source src_ch_bafu_hydrologischer-atlas_basisgebiete : def_searchable_features
 
 source src_ch_bafu_strukturguete-hochrhein_sohle : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             , bgdi_id as label \
@@ -419,7 +419,7 @@ source src_ch_bafu_strukturguete-hochrhein_sohle : def_searchable_features
 
 source src_ch_bafu_strukturguete-hochrhein_rechtesumfeld : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             , bgdi_id as label \
@@ -437,7 +437,7 @@ source src_ch_bafu_strukturguete-hochrhein_rechtesumfeld : def_searchable_featur
 
 source src_ch_bafu_strukturguete-hochrhein_rechtesufer : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             , bgdi_id as label \
@@ -455,7 +455,7 @@ source src_ch_bafu_strukturguete-hochrhein_rechtesufer : def_searchable_features
 
 source src_ch_bafu_strukturguete-hochrhein_linkesumfeld : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             , bgdi_id as label \
@@ -473,7 +473,7 @@ source src_ch_bafu_strukturguete-hochrhein_linkesumfeld : def_searchable_feature
 
 source src_ch_bafu_strukturguete-hochrhein_linkesufer : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             , bgdi_id as label \
@@ -491,7 +491,7 @@ source src_ch_bafu_strukturguete-hochrhein_linkesufer : def_searchable_features
 
 source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT nr::bigint as id \
             , name as label \
@@ -509,7 +509,7 @@ source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_fea
 
 source src_ch_bafu_gewaesserschutz-badewasserqualitaet : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id) as id \
             , bwname as label \
@@ -527,7 +527,7 @@ source src_ch_bafu_gewaesserschutz-badewasserqualitaet : def_searchable_features
 
 source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT nr::bigint as id \
             , name as label \
@@ -545,7 +545,7 @@ source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_fe
 
 source src_ch_bafu_bundesinventare-auen : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT gid::bigint as id \
             , au_name as label \
@@ -563,7 +563,7 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
 
 source src_ch_bafu_waldreservate : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , name::text as label \
@@ -581,7 +581,7 @@ source src_ch_bafu_waldreservate : def_searchable_features
 
 source src_ch_bafu_mittlere-abfluesse : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , regimenummer as label \
@@ -599,7 +599,7 @@ source src_ch_bafu_mittlere-abfluesse : def_searchable_features
 
 source src_ch_bafu_wasserbau-querprofilmarken : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , schluesselid as label \
@@ -617,7 +617,7 @@ source src_ch_bafu_wasserbau-querprofilmarken : def_searchable_features
 
 source src_ch_bafu_feststoffe-geschiebemessnetz : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , gsch_n as label \
@@ -635,7 +635,7 @@ source src_ch_bafu_feststoffe-geschiebemessnetz : def_searchable_features
 
 source src_ch_bafu_auen-vegetationskarten : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , remove_accents(coalesce(auveg_name,' ')||' ') as label \
@@ -653,7 +653,7 @@ source src_ch_bafu_auen-vegetationskarten : def_searchable_features
 
 source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , remove_accents(park_name) as label \
@@ -671,7 +671,7 @@ source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_searchable_fe
 
 source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT objektnummer as id \
             , remove_accents(park_name) as label \
@@ -689,7 +689,7 @@ source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : def_sea
 
 source src_ch_bafu_hydrogeologie-markierversuche : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT id as id \
             , id as label \
@@ -707,7 +707,7 @@ source src_ch_bafu_hydrogeologie-markierversuche : def_searchable_features
 
 source src_ch_bafu_karst-einzugsgebiete : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT objectid as id \
             , objectid as label \
@@ -725,7 +725,7 @@ source src_ch_bafu_karst-einzugsgebiete : def_searchable_features
 
 source src_ch_bafu_karst-quellen_schwinden : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT objectid as id \
             , objectid as label \
@@ -743,7 +743,7 @@ source src_ch_bafu_karst-quellen_schwinden : def_searchable_features
 
 source src_ch_bafu_karst-unterirdische_fliesswege : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT objectid as id \
             , objectid as label \
@@ -761,7 +761,7 @@ source src_ch_bafu_karst-unterirdische_fliesswege : def_searchable_features
 
 source src_ch_bafu_karst-einzugsgebietseinheiten : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT objectid as id \
             , objectid as label \
@@ -779,7 +779,7 @@ source src_ch_bafu_karst-einzugsgebietseinheiten : def_searchable_features
 
 source src_ch_bafu_karst-ausdehnung_grundwasservorkommen : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT objectid as id \
             , objectid as label \
@@ -797,7 +797,7 @@ source src_ch_bafu_karst-ausdehnung_grundwasservorkommen : def_searchable_featur
 
 source src_ch_bafu_bundesinventare-bln : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , bln_name as label \
@@ -815,7 +815,7 @@ source src_ch_bafu_bundesinventare-bln : def_searchable_features
 
 source src_ch_bafu_bundesinventare-vogelreservate : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT objectid as id \
             , name as label \
@@ -833,7 +833,7 @@ source src_ch_bafu_bundesinventare-vogelreservate : def_searchable_features
 
 source src_ch_bafu_grundwasserkoerper : def_searchable_features
 {
-    sql_db = bafu_lv95_dev
+    sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id as id \
             , flussgebiet as label \

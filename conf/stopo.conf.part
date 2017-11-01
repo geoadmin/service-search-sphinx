@@ -2,7 +2,7 @@
 
 source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT id as id \
             , 'feature' as origin \
@@ -20,7 +20,7 @@ source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_f
 
 source src_ch_swisstopo_landesschwerenetz : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
@@ -38,7 +38,7 @@ source src_ch_swisstopo_landesschwerenetz : def_searchable_features
 
 source src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT id as id \
             , 'feature' as origin \
@@ -56,7 +56,7 @@ source src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : def_searchable
 
 source src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT kantonsnr as id \
             , 'feature' as origin \
@@ -74,7 +74,7 @@ source src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : def_searchable_f
 
 source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT bgdi_id::int as id \
             , 'feature' as origin \
@@ -92,7 +92,7 @@ source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_searchable_features
 
 source src_ch_swisstopo_vec200-names-namedlocation : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
@@ -110,7 +110,7 @@ source src_ch_swisstopo_vec200-names-namedlocation : def_searchable_features
 
 source src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT bgdi_id as id \
             , stationnam as label \
@@ -128,7 +128,7 @@ source src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : def_searchab
 
 source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY id asc) as id \
             , name_ads as label \
@@ -146,7 +146,7 @@ source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_fe
 
 source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY id asc) as id \
             , name_ads as label \
@@ -164,7 +164,7 @@ source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchabl
 
 source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY id asc) as id \
           , name as label \
@@ -182,7 +182,7 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
 
 source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY id asc) as id \
           , name as label \
@@ -201,7 +201,7 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
 
 source src_ch_swisstopo_geologie-bohrungen_tiefer_500 : def_searchable_features
 {
-    sql_db = stopo_lv95_dev
+    sql_db = stopo_dev
     sql_query = \
         SELECT  bgdi_id as id \
             , COALESCE(name, '') as label \
@@ -220,7 +220,7 @@ source src_ch_swisstopo_geologie-bohrungen_tiefer_500 : def_searchable_features
 
 source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY id asc) as id \
           , name_ads as label \
@@ -238,7 +238,7 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
 
 source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY id asc) as id \
           , ziegelei_2 as label \
@@ -256,7 +256,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_fea
 
 source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY id asc) as id \
           , ziegelei as label \
@@ -274,7 +274,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_fea
 
 source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY id asc) as id \
           , ziegeleien as label \
@@ -292,7 +292,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_fea
 
 source src_ch_swisstopo_geologie-gisgeol-punkte : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -310,7 +310,7 @@ source src_ch_swisstopo_geologie-gisgeol-punkte : def_searchable_features
 
 source src_ch_swisstopo_geologie-gisgeol-linien : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -328,7 +328,7 @@ source src_ch_swisstopo_geologie-gisgeol-linien : def_searchable_features
 
 source src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -346,7 +346,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km : def_searchable_feature
 
 source src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -364,7 +364,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km : def_searchable_featu
 
 source src_ch_swisstopo_geologie-gisgeol-flaechen-10to100km2 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -382,7 +382,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10to100km2 : def_searchable_fe
 
 source src_ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -400,7 +400,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2 : def_searchable_
 
 source src_ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -418,7 +418,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2 : def_searchabl
 
 source src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -436,7 +436,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : def_searchable_fe
 
 source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
           , sgd_nr::text as label \
@@ -454,7 +454,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_featu
 
 source src_ch_swisstopo_geologie-tiefengeothermie_projekte : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT bgdi_id as id \
           , name as label \
@@ -472,7 +472,7 @@ source src_ch_swisstopo_geologie-tiefengeothermie_projekte : def_searchable_feat
 
 source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT bgdi_id as id \
           , description::text as label \
@@ -490,7 +490,7 @@ source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_fea
 
 source src_ch_swisstopo_transformation-bezugsrahmen_hoehe : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT bgdi_id as id \
           , name::text as label \
@@ -508,7 +508,7 @@ source src_ch_swisstopo_transformation-bezugsrahmen_hoehe : def_searchable_featu
 
 source src_ch_swisstopo_skitourenkarte-50_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -526,7 +526,7 @@ source src_ch_swisstopo_skitourenkarte-50_metadata : def_searchable_features
 
 source src_ch_swisstopo_geologie-gravimetrischer_atlas_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -544,7 +544,7 @@ source src_ch_swisstopo_geologie-gravimetrischer_atlas_papier_metadata : def_sea
 
 source src_ch_swisstopo_landeskarte25_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -562,7 +562,7 @@ source src_ch_swisstopo_landeskarte25_papier_metadata : def_searchable_features
 
 source src_ch_swisstopo_landeskarte50_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -580,7 +580,7 @@ source src_ch_swisstopo_landeskarte50_papier_metadata : def_searchable_features
 
 source src_ch_swisstopo_landeskarte100_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -598,7 +598,7 @@ source src_ch_swisstopo_landeskarte100_papier_metadata : def_searchable_features
 
 source src_ch_swisstopo_lhk100-papierkarte_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -616,7 +616,7 @@ source src_ch_swisstopo_lhk100-papierkarte_metadata : def_searchable_features
 
 source src_ch_swisstopo_landeskarte200_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -634,7 +634,7 @@ source src_ch_swisstopo_landeskarte200_papier_metadata : def_searchable_features
 
 source src_ch_swisstopo_wanderkarte50_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -653,7 +653,7 @@ source src_ch_swisstopo_wanderkarte50_papier_metadata : def_searchable_features
 
 source src_ch_swisstopo_wanderkarte33_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -671,7 +671,7 @@ source src_ch_swisstopo_wanderkarte33_papier_metadata : def_searchable_features
 
 source src_ch_swisstopo_wk50-papierkarte-zusammensetzung_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -689,7 +689,7 @@ source src_ch_swisstopo_wk50-papierkarte-zusammensetzung_metadata : def_searchab
 
 source src_ch_swisstopo_wanderkarte25-zus_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -707,7 +707,7 @@ source src_ch_swisstopo_wanderkarte25-zus_papier_metadata : def_searchable_featu
 
 source src_ch_swisstopo_luftfahrtkarten-icao_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -725,7 +725,7 @@ source src_ch_swisstopo_luftfahrtkarten-icao_papier_metadata : def_searchable_fe
 
 source src_ch_swisstopo_burgenkarte200_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -743,7 +743,7 @@ source src_ch_swisstopo_burgenkarte200_papier_metadata : def_searchable_features
 
 source src_ch_swisstopo_geologie-geologischer_atlas_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -761,7 +761,7 @@ source src_ch_swisstopo_geologie-geologischer_atlas_papier_metadata : def_search
 
 source src_ch_swisstopo_geologie-spezialkarten_schweiz_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -779,7 +779,7 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_papier_metadata : def_sea
 
 source src_ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -797,7 +797,7 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata : def_searc
 
 source src_ch_swisstopo_geologie-geologischer_atlas : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -815,7 +815,7 @@ source src_ch_swisstopo_geologie-geologischer_atlas : def_searchable_features
 
 source src_ch_swisstopo_geologie-geocover : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -833,7 +833,7 @@ source src_ch_swisstopo_geologie-geocover : def_searchable_features
 
 source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -851,7 +851,7 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_f
 
 source src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -869,7 +869,7 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata : def_searchable
 
 source src_ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -887,7 +887,7 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata : def_sea
 
 source src_ch_swisstopo_geologie-geologischer_atlas_metadata : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -905,7 +905,7 @@ source src_ch_swisstopo_geologie-geologischer_atlas_metadata : def_searchable_fe
 
 source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT row_number() OVER(ORDER BY pk_product asc) as id \
           , pk_product as label \
@@ -923,7 +923,7 @@ source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_searchable_features
 
 source src_ch_swisstopo_hebungsraten : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT bgdi_id as id \
           , ord_nr::text as label \
@@ -942,7 +942,7 @@ source src_ch_swisstopo_hebungsraten : def_searchable_features
 
 source src_ch_swisstopo_lotabweichungen : def_searchable_features
 {
-   sql_db = stopo_lv95_dev
+   sql_db = stopo_dev
    sql_query = \
       SELECT id as id \
           , name::text as label \

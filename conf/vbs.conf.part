@@ -2,7 +2,7 @@
 
 source src_ch_babs_kulturgueter : def_searchable_features
 {
-    sql_db = vbs_lv95_dev
+    sql_db = vbs_dev
     sql_query = \
         SELECT kgs_nr::bigint as id \
             , zkob as label \
@@ -20,7 +20,7 @@ source src_ch_babs_kulturgueter : def_searchable_features
 
 source src_ch_vbs_waldschadenkarte : def_searchable_features
 {
-    sql_db = vbs_lv95_dev
+    sql_db = vbs_dev
     sql_query = \
         SELECT bgdi_id as id \
             , lauf_nr as label \
@@ -38,7 +38,7 @@ source src_ch_vbs_waldschadenkarte : def_searchable_features
 
 source src_ch_vbs_armeelogistikcenter : def_searchable_features
 {
-    sql_db = vbs_lv95_dev
+    sql_db = vbs_dev
     sql_query = \
         SELECT bgdi_id as id \
             ,  name as label \
@@ -56,7 +56,7 @@ source src_ch_vbs_armeelogistikcenter : def_searchable_features
 
 source src_ch_vbs_bundestankstellen-bebeco : def_searchable_features
 {
-    sql_db = vbs_lv95_dev
+    sql_db = vbs_dev
     sql_query = \
         SELECT bgdi_id as id \
             ,  ort as label \
@@ -74,7 +74,7 @@ source src_ch_vbs_bundestankstellen-bebeco : def_searchable_features
 
 source src_ch_vbs_logistikraeume-armeelogistikcenter : def_searchable_features
 {
-    sql_db = vbs_lv95_dev
+    sql_db = vbs_dev
     sql_query = \
         SELECT bgdi_id as id \
             ,  kantone as label \
@@ -92,7 +92,7 @@ source src_ch_vbs_logistikraeume-armeelogistikcenter : def_searchable_features
 
 source src_ch_vbs_retablierungsstellen : def_searchable_features
 {
-    sql_db = vbs_lv95_dev
+    sql_db = vbs_dev
     sql_query = \
         SELECT bgdi_id as id \
             ,  name as label \

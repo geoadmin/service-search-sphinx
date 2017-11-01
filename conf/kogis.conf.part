@@ -2,7 +2,7 @@
 
 source src_ch_swisstopo_fixpunkte-lfp1 : def_searchable_features
 {
-    sql_db = kogis_lv95_dev
+    sql_db = kogis_dev
     sql_query = \
         SELECT gid::bigint as id \
             , pointid as label \
@@ -20,7 +20,7 @@ source src_ch_swisstopo_fixpunkte-lfp1 : def_searchable_features
 
 source src_ch_swisstopo_fixpunkte-lfp2 : def_searchable_features
 {
-    sql_db = kogis_lv95_dev
+    sql_db = kogis_dev
     sql_query = \
         SELECT gid::bigint as id \
             , pointid as label \
@@ -38,7 +38,7 @@ source src_ch_swisstopo_fixpunkte-lfp2 : def_searchable_features
 
 source src_ch_swisstopo_fixpunkte-hfp1 : def_searchable_features
 {
-    sql_db = kogis_lv95_dev
+    sql_db = kogis_dev
     sql_query = \
         SELECT gid::bigint as id \
             , pointid as label \
@@ -56,7 +56,7 @@ source src_ch_swisstopo_fixpunkte-hfp1 : def_searchable_features
 
 source src_ch_swisstopo_fixpunkte-hfp2 : def_searchable_features
 {
-    sql_db = kogis_lv95_dev
+    sql_db = kogis_dev
     sql_query = \
         SELECT gid::bigint as id \
             , pointid as label \
@@ -74,7 +74,7 @@ source src_ch_swisstopo_fixpunkte-hfp2 : def_searchable_features
 
 source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
 {
-    sql_db = kogis_lv95_dev
+    sql_db = kogis_dev
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
