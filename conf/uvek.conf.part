@@ -1128,12 +1128,6 @@ index ch_astra_strassenverkehrszaehlung_messstellen-regional_lokal : ch_astra_iv
     path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen-regional_lokal
 }
 
-index ch_bfe_bikesharing : ch_astra_ivs-nat
-{
-    source = src_ch_bfe_bikesharing
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_bikesharing
-}
-
 index ch_astra_unfaelle-personenschaeden_motorraeder : ch_astra_ivs-nat
 {
     source = src_ch_astra_unfaelle-personenschaeden_motorraeder
