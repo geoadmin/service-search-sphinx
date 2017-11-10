@@ -40,6 +40,7 @@ source src_swisssearch_preview : def_pqsql
     sql_attr_float = y_lv95
     sql_attr_float = lat
     sql_attr_float = lon
+    sql_field_string = detail
     sql_field_string = detail_de
     sql_field_string = detail_fr
     sql_field_string = detail_it
@@ -78,6 +79,7 @@ source src_address_preview : src_swisssearch_preview
     sql_query = \
         SELECT feature_id \
         , feature_id \
+        , detail \
         , detail_de \
         , detail_fr \
         , detail_it \
