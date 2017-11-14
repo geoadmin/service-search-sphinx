@@ -30,7 +30,6 @@ source src_swisssearch_preview : def_pqsql
     sql_attr_string = label_fr
     sql_attr_string = label_it
     sql_attr_string = label_rm
-    sql_attr_string = label_en
     sql_attr_string = feature_id
     sql_attr_string = origin
     sql_attr_string = geom_st_box2d
@@ -46,7 +45,6 @@ source src_swisssearch_preview : def_pqsql
     sql_field_string = detail_fr
     sql_field_string = detail_it
     sql_field_string = detail_rm
-    sql_field_string = detail_en
     sql_field_string = geom_quadindex
 }
 
@@ -85,13 +83,11 @@ source src_address_preview : src_swisssearch_preview
         , detail_fr \
         , detail_it \
         , detail_rm \
-        , detail_en \
         , label \
         , label_de \
         , label_fr \
         , label_it \
         , label_rm \
-        , label_en \
         , origin \
         , geom_st_box2d \
         , geom_st_box2d_lv95 \
@@ -142,13 +138,11 @@ source src_parcel_preview : src_swisssearch_preview
         , detail as detail_fr \
         , detail as detail_it \
         , detail as detail_rm \
-        , detail as detail_en \
         , label \
         , label as label_de \
         , label as label_fr \
         , label as label_it \
         , label as label_rm \
-        , label as label_en \
         , origin \
         , bgdi_quadindex as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -394,13 +388,11 @@ source src_swissnames3d_preview : src_swisssearch_preview
         remove_accents(coalesce(b.name,s.name)) as detail_fr, \
         remove_accents(coalesce(b.name,s.name)) as detail_it, \
         remove_accents(coalesce(b.name,s.name)) as detail_rm, \
-        remove_accents(coalesce(b.name,s.name)) as detail_en, \
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label, \
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_de, \
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_fr, \
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_it, \
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_rm, \
-        coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_en, \
         'gazetteer' as origin,  \
         coalesce(b.bgdi_quadindex,s.bgdi_quadindex) as geom_quadindex, \
         box2d(st_transform(coalesce(b.the_geom,s.the_geom), 21781)) as geom_st_box2d, \
@@ -424,13 +416,11 @@ source src_swissnames3d_preview : src_swisssearch_preview
         remove_accents(b.name) as detail_fr, \
         remove_accents(b.name) as detail_it, \
         remove_accents(b.name) as detail_rm, \
-        remove_accents(b.name) as detail_en, \
         b.bgdi_label_sphinx as label, \
         b.bgdi_label_sphinx as label_de, \
         b.bgdi_label_sphinx as label_fr, \
         b.bgdi_label_sphinx as label_it, \
         b.bgdi_label_sphinx as label_rm, \
-        b.bgdi_label_sphinx as label_en, \
         'gazetteer' as origin, \
         b.bgdi_quadindex  as geom_quadindex, \
         box2d(st_transform(b.the_geom, 21781)) as geom_st_box2d, \
@@ -486,13 +476,11 @@ source src_gg25_preview : src_swisssearch_preview
         , remove_accents(gemname||' '||k.ak)::text as detail_fr \
         , remove_accents(gemname||' '||k.ak)::text as detail_it \
         , remove_accents(gemname||' '||k.ak)::text as detail_rm \
-        , remove_accents(gemname||' '||k.ak)::text as detail_en \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_de \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_fr \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_it \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_rm \
-        , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_en \
         , 'gg25'::text as origin \
         , quadindex(g.the_geom) as geom_quadindex \
         , box2d(st_transform(g.the_geom, 21781)) as geom_st_box2d \
@@ -546,13 +534,11 @@ source src_kantone_preview : src_swisssearch_preview
         , remove_accents(name ||' '||ak) as detail_fr \
         , remove_accents(name ||' '||ak) as detail_it \
         , remove_accents(name ||' '||ak) as detail_rm \
-        , remove_accents(name ||' '||ak) as detail_en \
         , '<b>'||name||'</b>' as label \
         , '<b>'||name||'</b>' as label_de \
         , '<b>'||name||'</b>' as label_fr \
         , '<b>'||name||'</b>' as label_it \
         , '<b>'||name||'</b>' as label_rm \
-        , '<b>'||name||'</b>' as label_en \
         , 'kantone'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -606,13 +592,11 @@ source src_district_preview : src_swisssearch_preview
         , name::text as detail_fr \
         , name::text as detail_it \
         , name::text as detail_rm \
-        , name::text as detail_en \
         , '<b>'||name||'</b>' as label \
         , '<b>'||name||'</b>' as label_de \
         , '<b>'||name||'</b>' as label_fr \
         , '<b>'||name||'</b>' as label_it \
         , '<b>'||name||'</b>' as label_rm \
-        , '<b>'||name||'</b>' as label_en \
         , 'district'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -666,13 +650,11 @@ source src_zipcode_preview : src_swisssearch_preview
         , plz::text as detail_fr \
         , plz::text as detail_it \
         , plz::text as detail_rm \
-        , plz::text as detail_en \
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label \
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_de \
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_fr \
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_it \
         , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_rm \
-        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_en \
         , 'zipcode' as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -726,13 +708,11 @@ source src_haltestellen_preview : src_swisssearch_preview
         , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail_fr \
         , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail_it \
         , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail_rm \
-        , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail_en \
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label \
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_de \
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_fr \
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_it \
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_rm \
-        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_en \
         , 'gazetteer'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
