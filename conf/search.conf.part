@@ -76,7 +76,7 @@ source src_address_preview : src_swisssearch_preview
 {
     sql_db=kogis_dev
     sql_query = \
-        SELECT feature_id \
+        SELECT id \
         , feature_id \
         , detail \
         , detail_de \
