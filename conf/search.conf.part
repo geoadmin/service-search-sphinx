@@ -89,6 +89,7 @@ source src_address_preview : src_swisssearch_preview
         , label_it \
         , label_rm \
         , origin \
+        , bgdi_quadindex as geom_quadindex \
         , geom_st_box2d \
         , geom_st_box2d_lv95 \
         , 7::integer as rank \
