@@ -1083,7 +1083,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_1 : def_searchabl
     sql_query = \
         SELECT facpt_id as id \
             , 'feature' as origin \
-            , remove_accents(facptname_de)||' '||remove_accents(facptname_fr)||' '||remove_accents(facptname_it)||' '||remove_accents(fackind_de)||' '||remove_accents(fackind_fr)||' '||remove_accents(fackind_it)  as detail \
+            , remove_accents(concat_ws(' ',facptname_de,facptname_fr,facptname_it,facptname_de,fackind_de,fackind_fr,fackind_it)) as detail \
             , 'ch.bfe.sachplan-geologie-tiefenlager_vernehmlassung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1101,7 +1101,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_2 : def_searchabl
     sql_query = \
         SELECT pmarea_id as id \
             , 'feature' as origin \
-            , remove_accents(pmname_de)||' '||remove_accents(pmname_fr)||' '||remove_accents(pmname_it)||' '||remove_accents(pmkind_de)||' '||remove_accents(pmkind_fr)||' '||remove_accents(pmkind_it)  as detail \
+            , remove_accents(concat_ws(' ',pmname_de,pmname_fr,pmname_it,pmname_de,pmkind_de,pmkind_fr,pmkind_it)) as detail \
             , 'ch.bfe.sachplan-geologie-tiefenlager_vernehmlassung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1119,7 +1119,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_3 : def_searchabl
     sql_query = \
         SELECT pmpt_id as id \
             , 'feature' as origin \
-            , remove_accents(pmname_de)||' '||remove_accents(pmname_fr)||' '||remove_accents(pmname_it)||' '||remove_accents(pmkind_de)||' '||remove_accents(pmkind_fr)||' '||remove_accents(pmkind_it)  as detail \
+            , remove_accents(concat_ws(' ',pmname_de,pmname_fr,pmname_it,pmname_de,pmkind_de,pmkind_fr,pmkind_it)) as detail \
             , 'ch.bfe.sachplan-geologie-tiefenlager_vernehmlassung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
