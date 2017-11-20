@@ -96,7 +96,7 @@ source src_ch_bfs_gebaeude_wohnungs_register_preview : def_searchable_features
     sql_attr_uint = lang
     sql_db = kogis_dev
     sql_query = \
-        SELECT id \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , origin \
             , detail \
             , layer \
