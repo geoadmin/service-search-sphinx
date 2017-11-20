@@ -1,3 +1,6 @@
+# Makefile env
+SHELL = /bin/bash
+
 IPATTERN ?= 'Set IPATTERN variable in call'
 INDEX ?= 'Set INDEX variable to specify the index to create'
 FEATURES_INDICES := $(shell find /var/lib/sphinxsearch/data/index/ -type f -name 'ch_*spa' | sed 's:/var/lib/sphinxsearch/data/index/::' |  sed 's:.spa::')
@@ -68,11 +71,14 @@ scripts/pre-commit.sh:
 .PHONY: template
 template: .git/hooks/pre-commit
 	@ if [ -z "$$PGPASS" -o -z "$$PGUSER" ]; then \
-		echo "ERROR: Environment variables for db connection PGPASS PGUSER  are not set correctly"; exit 2;\
+	  echo "ERROR: Environment variables for db connection PGPASS PGUSER  are not set correctly"; exit 2;\
 	else true; fi
 	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/'  conf/db.conf.in  > conf/db.conf
 	cat conf/db.conf conf/*.part > conf/sphinx.conf
-	indextool --checkconfig -c conf/sphinx.conf
+	$(eval CONFIG_VALID=$(shell indextool --checkconfig -c conf/sphinx.conf | grep "config valid"))
+	@if [ "${CONFIG_VALID}" = "config valid" ]; then \
+	  echo ${CONFIG_VALID}; \
+	else echo "Invalid config" && indextool --checkconfig -c conf/sphinx.conf && exit 2; fi
 
 .PHONY: deploy-int
 deploy-int:
