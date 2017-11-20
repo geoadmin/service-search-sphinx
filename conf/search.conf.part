@@ -747,13 +747,28 @@ index zipcode
     preopen = 1
 }
 
+index zipcode_preview
+{
+    source = src_zipcode_preview
+    wordforms = /var/lib/sphinxsearch/data/index/wordforms_main.txt
+    path = /var/lib/sphinxsearch/data/index/zipcode_preview
+    type = plain
+    docinfo = extern
+    charset_type = utf-8
+    min_infix_len = 1
+    infix_fields = detail,detail_de,detail_fr,detail_it,detail_rm,geom_quadindex
+    enable_star = 1
+    ondisk_dict = 0
+    preopen = 1
+}
+
 index district : zipcode
 {
     source = src_district
     path = /var/lib/sphinxsearch/data/index/district
 }
 
-index district_preview : zipcode
+index district_preview : zipcode_preview
 {
     source = src_district_preview
     path = /var/lib/sphinxsearch/data/index/district_preview
@@ -765,7 +780,7 @@ index kantone : zipcode
     path = /var/lib/sphinxsearch/data/index/kantone
 }
 
-index kantone_preview : zipcode
+index kantone_preview : zipcode_preview
 {
     source = src_kantone_preview
     path = /var/lib/sphinxsearch/data/index/kantone_preview
@@ -777,7 +792,7 @@ index gg25 : zipcode
     path = /var/lib/sphinxsearch/data/index/gg25
 }
 
-index gg25_preview : zipcode
+index gg25_preview : zipcode_preview
 {
     source = src_gg25_preview
     path = /var/lib/sphinxsearch/data/index/gg25_preview
@@ -789,7 +804,7 @@ index swissnames3d : zipcode
     path = /var/lib/sphinxsearch/data/index/swissnames3d
 }
 
-index swissnames3d_preview : zipcode
+index swissnames3d_preview : zipcode_preview
 {
     source = src_swissnames3d_preview
     path = /var/lib/sphinxsearch/data/index/swissnames3d_preview
@@ -801,7 +816,7 @@ index haltestellen : zipcode
     path = /var/lib/sphinxsearch/data/index/haltestellen
 }
 
-index haltestellen_preview : zipcode
+index haltestellen_preview : zipcode_preview
 {
     source = src_haltestellen_preview
     path = /var/lib/sphinxsearch/data/index/haltestellen_preview
@@ -813,7 +828,7 @@ index parcel : zipcode
     path = /var/lib/sphinxsearch/data/index/parcel
 }
 
-index parcel_preview : zipcode
+index parcel_preview : zipcode_preview
 {
     source = src_parcel_preview
     path = /var/lib/sphinxsearch/data/index/parcel_preview
@@ -825,7 +840,7 @@ index address : zipcode
     path = /var/lib/sphinxsearch/data/index/address
 }
 
-index address_preview : zipcode
+index address_preview : zipcode_preview
 {
     source = src_address_preview
     path = /var/lib/sphinxsearch/data/index/address_preview
@@ -839,7 +854,7 @@ index district_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/district_metaphone
 }
 
-index district_metaphone_preview : zipcode
+index district_metaphone_preview : zipcode_preview
 {
     morphology = metaphone
     source = src_district_preview
@@ -853,7 +868,7 @@ index kantone_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/kantone_metaphone
 }
 
-index kantone_metaphone_preview : zipcode
+index kantone_metaphone_preview : zipcode_preview
 {
     morphology = metaphone
     source = src_kantone_preview
@@ -867,7 +882,7 @@ index gg25_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/gg25_metaphone
 }
 
-index gg25_metaphone_preview : zipcode
+index gg25_metaphone_preview : zipcode_preview
 {
     morphology = metaphone
     source = src_gg25_preview
@@ -881,7 +896,7 @@ index swissnames3d_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/swissnames3d_metaphone
 }
 
-index swissnames3d_metaphone_preview : zipcode
+index swissnames3d_metaphone_preview : zipcode_preview
 {
     morphology = metaphone
     source = src_swissnames3d_preview
@@ -895,7 +910,7 @@ index haltestellen_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/haltestellen_metaphone
 }
 
-index haltestellen_metaphone_preview : zipcode
+index haltestellen_metaphone_preview : zipcode_preview
 {
     morphology = metaphone
     source = src_haltestellen_preview
@@ -909,7 +924,7 @@ index address_metaphone: zipcode
     path = /var/lib/sphinxsearch/data/index/address_metaphone
 }
 
-index address_metaphone_preview : zipcode
+index address_metaphone_preview : zipcode_preview
 {
     morphology = metaphone
     source = src_address_preview

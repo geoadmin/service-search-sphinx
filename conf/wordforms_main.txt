@@ -1,9 +1,8 @@
 # Deutsch
-W > Weg
-Al > Allee
-Str > Strasse
-Pl > Platz
-GI > Industriegebiet
+w > weg
+al > allee
+str > strasse
+gi > industriegebiet
 
 # francais
 ch > chemin
@@ -21,3 +20,6 @@ pass > passage
 # italiano
 v > viale
 p > piazza
+
+# agnostic
+pl > pla
