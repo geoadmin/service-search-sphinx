@@ -20,34 +20,6 @@ source src_swisssearch : def_pqsql
     sql_field_string = geom_quadindex
 }
 
-source src_swisssearch_preview : def_pqsql
-{
-    sql_attr_uint = num
-    sql_attr_uint = rank
-    sql_attr_uint = zoomlevel
-    sql_attr_string = label
-    sql_attr_string = label_de
-    sql_attr_string = label_fr
-    sql_attr_string = label_it
-    sql_attr_string = label_rm
-    sql_attr_string = feature_id
-    sql_attr_string = origin
-    sql_attr_string = geom_st_box2d
-    sql_attr_string = geom_st_box2d_lv95
-    sql_attr_float = x
-    sql_attr_float = y
-    sql_attr_float = x_lv95
-    sql_attr_float = y_lv95
-    sql_attr_float = lat
-    sql_attr_float = lon
-    sql_field_string = detail
-    sql_field_string = detail_de
-    sql_field_string = detail_fr
-    sql_field_string = detail_it
-    sql_field_string = detail_rm
-    sql_field_string = geom_quadindex
-}
-
 source src_address : src_swisssearch
 {
     sql_db=kogis_dev
@@ -72,38 +44,6 @@ source src_address : src_swisssearch
         FROM bfs.adressen_sphinx
 }
 
-source src_address_preview : src_swisssearch_preview
-{
-    sql_db=kogis_dev
-    sql_query = \
-        SELECT id \
-        , feature_id \
-        , detail \
-        , detail_de \
-        , detail_fr \
-        , detail_it \
-        , detail_rm \
-        , label \
-        , label_de \
-        , label_fr \
-        , label_it \
-        , label_rm \
-        , origin \
-        , bgdi_quadindex as geom_quadindex \
-        , geom_st_box2d \
-        , geom_st_box2d_lv95 \
-        , 7::integer as rank \
-        , x \
-        , y \
-        , y_lv95 \
-        , x_lv95 \
-        , st_y(st_transform(the_geom,4326)) as lat \
-        , st_x(st_transform(the_geom,4326)) as lon \
-        , num \
-        , 10 as zoomlevel \
-        FROM bfs.adressen_sphinx_preview
-}
-
 source src_parcel : src_swisssearch
 {
     sql_db=dritte_dev
@@ -112,38 +52,6 @@ source src_parcel : src_swisssearch
         , NULL::text as feature_id \
         , detail \
         , label \
-        , origin \
-        , bgdi_quadindex as geom_quadindex \
-        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-        , 10::integer as rank \
-        , x \
-        , y \
-        , st_x(st_transform(st_centroid(the_geom),2056)) as y_lv95 \
-        , st_y(st_transform(st_centroid(the_geom),2056)) as x_lv95 \
-        , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-        , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-        , num \
-        , 10 as zoomlevel \
-        from kantone.parzellen_sphinx
-}
-
-source src_parcel_preview : src_swisssearch_preview
-{
-    sql_db=dritte_dev
-    sql_query = \
-        SELECT id \
-        , NULL::text as feature_id \
-        , detail \
-        , detail as detail_de \
-        , detail as detail_fr \
-        , detail as detail_it \
-        , detail as detail_rm \
-        , label \
-        , label as label_de \
-        , label as label_fr \
-        , label as label_it \
-        , label as label_rm \
         , origin \
         , bgdi_quadindex as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -292,154 +200,6 @@ source src_swissnames3d : src_swisssearch
     ) s
 }
 
-source src_swissnames3d_preview : src_swisssearch_preview
-{
-    sql_db=stopo_dev
-    sql_query = \
-    WITH swissnames_search as \
-    ( \
-        select * FROM \
-        (  \
-        SELECT \
-        uuid::text as feature_id \
-        , 6::integer as rank \
-        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
-        , objektklasse \
-        , bgdi_label_sphinx \
-        , bgdi_quadindex \
-        , the_geom \
-        , st_y(st_transform(st_geometryn(the_geom,1), 21781)) as x \
-        , st_x(st_transform(st_geometryn(the_geom,1), 21781)) as y \
-        , st_y(st_transform(st_geometryn(the_geom,1), 2056)) as x_lv95 \
-        , st_x(st_transform(st_geometryn(the_geom,1), 2056)) as y_lv95 \
-        , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
-        , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
-        , 1 as num \
-        , 9 as zoomlevel \
-        , objektart \
-        FROM tlm.swissnames3d_point \
-        UNION ALL \
-        SELECT \
-        uuid::text as feature_id \
-        , 6::integer as rank \
-        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
-        , objektklasse \
-        , bgdi_label_sphinx \
-        , bgdi_quadindex \
-        , the_geom \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-        , 1 as num \
-        , 9 as zoomlevel \
-        , objektart \
-        FROM tlm.swissnames3d_line \
-        UNION ALL \
-        SELECT \
-        uuid::text as feature_id \
-        , 6::integer as rank \
-        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
-        , objektklasse \
-        , bgdi_label_sphinx \
-        , bgdi_quadindex \
-        , the_geom \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-        , 1 as num \
-        , 9 as zoomlevel \
-        , objektart \
-        FROM tlm.swissnames3d_poly \
-        WHERE objektart != 'Ort' \
-        UNION ALL \
-        SELECT \
-        uuid::text as feature_id \
-        , 5::integer as rank \
-        , remove_accents(concat_ws(' ', name, (regexp_matches(bgdi_label_sphinx, E' - (.*)$'))[1])) as name \
-        , objektklasse \
-        , bgdi_label_sphinx \
-        , bgdi_quadindex \
-        , the_geom \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as x \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 21781)) as y \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as x_lv95 \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)), 2056)) as y_lv95 \
-        , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
-        , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-        , 1 as num \
-        , 9 as zoomlevel \
-        , objektart \
-        FROM tlm.swissnames3d_poly \
-        WHERE objektart = 'Ort' \
-        ) sub \
-        WHERE  objektart not like 'Haltestelle%' \
-    ) \
-    select distinct on (feature_id) row_number() OVER(ORDER BY 1 asc) as id , * FROM \
-        ( \
-    SELECT \
-        coalesce(b.feature_id,s.feature_id) as feature_id, \
-        remove_accents(coalesce(b.name,s.name)) as detail, \
-        remove_accents(coalesce(b.name,s.name)) as detail_de, \
-        remove_accents(coalesce(b.name,s.name)) as detail_fr, \
-        remove_accents(coalesce(b.name,s.name)) as detail_it, \
-        remove_accents(coalesce(b.name,s.name)) as detail_rm, \
-        coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label, \
-        coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_de, \
-        coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_fr, \
-        coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_it, \
-        coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label_rm, \
-        'gazetteer' as origin,  \
-        coalesce(b.bgdi_quadindex,s.bgdi_quadindex) as geom_quadindex, \
-        box2d(st_transform(coalesce(b.the_geom,s.the_geom), 21781)) as geom_st_box2d, \
-        box2d(st_transform(coalesce(b.the_geom,s.the_geom), 2056)) as geom_st_box2d_lv95, \
-        coalesce(b.rank,s.rank) as rank, \
-        coalesce(b.x,s.x) as x, \
-        coalesce(b.y,s.y) as y, \
-        coalesce(b.x_lv95,s.x_lv95) as x_lv95, \
-        coalesce(b.y_lv95,s.y_lv95) as y_lv95, \
-        coalesce(b.lat,s.lat) as lat, \
-        coalesce(b.lon,s.lon) as lon, \
-        1 as num, \
-        coalesce(b.zoomlevel,s.zoomlevel) as zoomlevel \
-    FROM swissnames_search s \
-    left outer join tlm.dkm_search b ON s.feature_id = b.feature_id \
-    UNION ALL \
-    SELECT \
-        b.feature_id  as feature_id, \
-        remove_accents(b.name) as detail, \
-        remove_accents(b.name) as detail_de, \
-        remove_accents(b.name) as detail_fr, \
-        remove_accents(b.name) as detail_it, \
-        remove_accents(b.name) as detail_rm, \
-        b.bgdi_label_sphinx as label, \
-        b.bgdi_label_sphinx as label_de, \
-        b.bgdi_label_sphinx as label_fr, \
-        b.bgdi_label_sphinx as label_it, \
-        b.bgdi_label_sphinx as label_rm, \
-        'gazetteer' as origin, \
-        b.bgdi_quadindex  as geom_quadindex, \
-        box2d(st_transform(b.the_geom, 21781)) as geom_st_box2d, \
-        box2d(st_transform(b.the_geom, 2056)) as geom_st_box2d_lv95, \
-        b.rank as rank, \
-        b.x as x, \
-        b.y as y, \
-        b.x_lv95 as x_lv95, \
-        b.y_lv95 as y_lv95, \
-        b.lat as lat, \
-        b.lon as lon, \
-        1 as num, \
-        b.zoomlevel as zoomlevel \
-    FROM swissnames_search s \
-    inner join tlm.dkm_search b on s.name = b.name and s.objektklasse = 'TLM_GEBAEUDE' and s.feature_id <> b.feature_id \
-    ) s
-}
-
 source src_gg25 : src_swisssearch
 {
     sql_db=stopo_dev
@@ -449,39 +209,6 @@ source src_gg25 : src_swisssearch
         , id::text as feature_id \
         , remove_accents(gemname||' '||k.ak)::text as detail \
         , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label \
-        , 'gg25'::text as origin \
-        , quadindex(g.the_geom) as geom_quadindex \
-        , box2d(st_transform(g.the_geom, 21781)) as geom_st_box2d \
-        , box2d(st_transform(g.the_geom, 2056)) as geom_st_box2d_lv95 \
-        , 2::integer as rank \
-        , st_y(st_transform(ST_PointOnSurface(g.the_geom), 21781)) AS x \
-        , st_x(st_transform(ST_PointOnSurface(g.the_geom), 21781)) AS y \
-        , st_y(st_transform(ST_PointOnSurface(g.the_geom), 2056)) AS x_lv95 \
-        , st_x(st_transform(ST_PointOnSurface(g.the_geom), 2056)) AS y_lv95 \
-        , st_y(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lat \
-        , st_x(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lon \
-        , -1 as zoomlevel \
-        , 1 as num \
-        FROM tlm.swissboundaries_gemeinden_uebersetzt g left join tlm.swissboundaries_kantone k on k.kantonsnr = g.kantonsnr
-}
-
-source src_gg25_preview : src_swisssearch_preview
-{
-    sql_db=stopo_dev
-    sql_query = \
-        SELECT \
-        row_number() OVER(ORDER BY id asc) as id \
-        , id::text as feature_id \
-        , remove_accents(gemname||' '||k.ak)::text as detail \
-        , remove_accents(gemname||' '||k.ak)::text as detail_de \
-        , remove_accents(gemname||' '||k.ak)::text as detail_fr \
-        , remove_accents(gemname||' '||k.ak)::text as detail_it \
-        , remove_accents(gemname||' '||k.ak)::text as detail_rm \
-        , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label \
-        , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_de \
-        , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_fr \
-        , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_it \
-        , '<b>'||coalesce(gemname,'')||' ('||coalesce(k.ak,'')||')</b>' as label_rm \
         , 'gg25'::text as origin \
         , quadindex(g.the_geom) as geom_quadindex \
         , box2d(st_transform(g.the_geom, 21781)) as geom_st_box2d \
@@ -523,39 +250,6 @@ source src_kantone : src_swisssearch
          FROM tlm.swissboundaries_kantone
 }
 
-source src_kantone_preview : src_swisssearch_preview
-{
-    sql_db=stopo_dev
-    sql_query = \
-        SELECT \
-        kantonsnr::integer as id \
-        , kantonsnr::text as feature_id \
-        , remove_accents(name ||' '||ak) as detail \
-        , remove_accents(name ||' '||ak) as detail_de \
-        , remove_accents(name ||' '||ak) as detail_fr \
-        , remove_accents(name ||' '||ak) as detail_it \
-        , remove_accents(name ||' '||ak) as detail_rm \
-        , '<b>'||name||'</b>' as label \
-        , '<b>'||name||'</b>' as label_de \
-        , '<b>'||name||'</b>' as label_fr \
-        , '<b>'||name||'</b>' as label_it \
-        , '<b>'||name||'</b>' as label_rm \
-        , 'kantone'::text as origin \
-        , quadindex(the_geom) as geom_quadindex \
-        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-        , 4::integer as rank \
-        , st_y(st_transform(ST_PointOnSurface(the_geom), 21781)) AS x \
-        , st_x(st_transform(ST_PointOnSurface(the_geom), 21781)) AS y \
-        , st_y(st_transform(ST_PointOnSurface(the_geom), 2056)) AS x_lv95 \
-        , st_x(st_transform(ST_PointOnSurface(the_geom), 2056)) AS y_lv95 \
-        , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-        , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-        , -1 as zoomlevel \
-        , 1 as num \
-         FROM tlm.swissboundaries_kantone
-}
-
 source src_district : src_swisssearch
 {
     sql_db=stopo_dev
@@ -565,39 +259,6 @@ source src_district : src_swisssearch
         , id::text as feature_id \
         , name::text as detail \
         , '<b>'||name||'</b>' as label \
-        , 'district'::text as origin \
-        , quadindex(the_geom) as geom_quadindex \
-        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-        , 3::integer as rank \
-        , st_y(st_transform(ST_PointOnSurface(the_geom), 21781)) AS x \
-        , st_x(st_transform(ST_PointOnSurface(the_geom), 21781)) AS y \
-        , st_y(st_transform(ST_PointOnSurface(the_geom), 2056)) AS x_lv95 \
-        , st_x(st_transform(ST_PointOnSurface(the_geom), 2056)) AS y_lv95 \
-        , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-        , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-        , -1 as zoomlevel \
-        , 1 as num \
-        FROM tlm.swissboundaries_bezirke
-}
-
-source src_district_preview : src_swisssearch_preview
-{
-    sql_db=stopo_dev
-    sql_query = \
-        SELECT \
-        id::integer as id \
-        , id::text as feature_id \
-        , name::text as detail \
-        , name::text as detail_de \
-        , name::text as detail_fr \
-        , name::text as detail_it \
-        , name::text as detail_rm \
-        , '<b>'||name||'</b>' as label \
-        , '<b>'||name||'</b>' as label_de \
-        , '<b>'||name||'</b>' as label_fr \
-        , '<b>'||name||'</b>' as label_it \
-        , '<b>'||name||'</b>' as label_rm \
         , 'district'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -639,39 +300,6 @@ source src_zipcode : src_swisssearch
         FROM vd.gabmo_plz p
 }
 
-source src_zipcode_preview : src_swisssearch_preview
-{
-    sql_db=stopo_dev
-    sql_query = \
-        SELECT \
-        gid as id \
-        , os_uuid::text as feature_id \
-        , plz::text as detail \
-        , plz::text as detail_de \
-        , plz::text as detail_fr \
-        , plz::text as detail_it \
-        , plz::text as detail_rm \
-        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label \
-        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_de \
-        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_fr \
-        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_it \
-        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label_rm \
-        , 'zipcode' as origin \
-        , quadindex(the_geom) as geom_quadindex \
-        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-        , 1::integer as rank \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),21781)) as x \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),21781)) as y \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),2056)) as x_lv95 \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),2056)) as y_lv95 \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),4326)) as lat \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),4326)) as lon \
-        , -1 as zoomlevel \
-        , 1 as num \
-        FROM vd.gabmo_plz p
-}
-
 source src_haltestellen : src_swisssearch
 {
     sql_db=uvek_dev
@@ -681,39 +309,6 @@ source src_haltestellen : src_swisssearch
         , xtf_id::text as feature_id \
         , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail \
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label \
-        , 'gazetteer'::text as origin \
-        , quadindex(the_geom) as geom_quadindex \
-        , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-        , 8::integer as rank \
-        , st_y(st_transform(st_geometryn(the_geom,1), 21781)) as x \
-        , st_x(st_transform(st_geometryn(the_geom,1), 21781)) as y \
-        , st_y(st_transform(st_geometryn(the_geom,1), 2056)) as x_lv95 \
-        , st_x(st_transform(st_geometryn(the_geom,1), 2056)) as y_lv95 \
-        , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
-        , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
-        , -1 as zoomlevel \
-        , 1 as num \
-        FROM bav.oev_haltestellen
-}
-
-source src_haltestellen_preview : src_swisssearch_preview
-{
-    sql_db=uvek_dev
-    sql_query = \
-        SELECT \
-        bgdi_id as id \
-        , xtf_id::text as feature_id \
-        , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail \
-        , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail_de \
-        , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail_fr \
-        , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail_it \
-        , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail_rm \
-        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label \
-        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_de \
-        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_fr \
-        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_it \
-        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label_rm \
         , 'gazetteer'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -747,31 +342,10 @@ index zipcode
     preopen = 1
 }
 
-index zipcode_preview
-{
-    source = src_zipcode_preview
-    wordforms = /var/lib/sphinxsearch/data/index/wordforms_main.txt
-    path = /var/lib/sphinxsearch/data/index/zipcode_preview
-    type = plain
-    docinfo = extern
-    charset_type = utf-8
-    min_infix_len = 1
-    infix_fields = detail,detail_de,detail_fr,detail_it,detail_rm,geom_quadindex
-    enable_star = 1
-    ondisk_dict = 0
-    preopen = 1
-}
-
 index district : zipcode
 {
     source = src_district
     path = /var/lib/sphinxsearch/data/index/district
-}
-
-index district_preview : zipcode_preview
-{
-    source = src_district_preview
-    path = /var/lib/sphinxsearch/data/index/district_preview
 }
 
 index kantone : zipcode
@@ -780,22 +354,10 @@ index kantone : zipcode
     path = /var/lib/sphinxsearch/data/index/kantone
 }
 
-index kantone_preview : zipcode_preview
-{
-    source = src_kantone_preview
-    path = /var/lib/sphinxsearch/data/index/kantone_preview
-}
-
 index gg25 : zipcode
 {
     source = src_gg25
     path = /var/lib/sphinxsearch/data/index/gg25
-}
-
-index gg25_preview : zipcode_preview
-{
-    source = src_gg25_preview
-    path = /var/lib/sphinxsearch/data/index/gg25_preview
 }
 
 index swissnames3d : zipcode
@@ -804,22 +366,10 @@ index swissnames3d : zipcode
     path = /var/lib/sphinxsearch/data/index/swissnames3d
 }
 
-index swissnames3d_preview : zipcode_preview
-{
-    source = src_swissnames3d_preview
-    path = /var/lib/sphinxsearch/data/index/swissnames3d_preview
-}
-
 index haltestellen : zipcode
 {
     source = src_haltestellen
     path = /var/lib/sphinxsearch/data/index/haltestellen
-}
-
-index haltestellen_preview : zipcode_preview
-{
-    source = src_haltestellen_preview
-    path = /var/lib/sphinxsearch/data/index/haltestellen_preview
 }
 
 index parcel : zipcode
@@ -828,22 +378,10 @@ index parcel : zipcode
     path = /var/lib/sphinxsearch/data/index/parcel
 }
 
-index parcel_preview : zipcode_preview
-{
-    source = src_parcel_preview
-    path = /var/lib/sphinxsearch/data/index/parcel_preview
-}
-
 index address : zipcode
 {
     source = src_address
     path = /var/lib/sphinxsearch/data/index/address
-}
-
-index address_preview : zipcode_preview
-{
-    source = src_address_preview
-    path = /var/lib/sphinxsearch/data/index/address_preview
 }
 
 # swisssearch fuzzy metaphone
@@ -854,25 +392,11 @@ index district_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/district_metaphone
 }
 
-index district_metaphone_preview : zipcode_preview
-{
-    morphology = metaphone
-    source = src_district_preview
-    path = /var/lib/sphinxsearch/data/index/district_metaphone_preview
-}
-
 index kantone_metaphone : zipcode
 {
     morphology = metaphone
     source = src_kantone
     path = /var/lib/sphinxsearch/data/index/kantone_metaphone
-}
-
-index kantone_metaphone_preview : zipcode_preview
-{
-    morphology = metaphone
-    source = src_kantone_preview
-    path = /var/lib/sphinxsearch/data/index/kantone_metaphone_preview
 }
 
 index gg25_metaphone : zipcode
@@ -882,25 +406,11 @@ index gg25_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/gg25_metaphone
 }
 
-index gg25_metaphone_preview : zipcode_preview
-{
-    morphology = metaphone
-    source = src_gg25_preview
-    path = /var/lib/sphinxsearch/data/index/gg25_metaphone_preview
-}
-
 index swissnames3d_metaphone : zipcode
 {
     morphology = metaphone
     source = src_swissnames3d
     path = /var/lib/sphinxsearch/data/index/swissnames3d_metaphone
-}
-
-index swissnames3d_metaphone_preview : zipcode_preview
-{
-    morphology = metaphone
-    source = src_swissnames3d_preview
-    path = /var/lib/sphinxsearch/data/index/swissnames3d_metaphone_preview
 }
 
 index haltestellen_metaphone : zipcode
@@ -910,25 +420,11 @@ index haltestellen_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/haltestellen_metaphone
 }
 
-index haltestellen_metaphone_preview : zipcode_preview
-{
-    morphology = metaphone
-    source = src_haltestellen_preview
-    path = /var/lib/sphinxsearch/data/index/haltestellen_metaphone_preview
-}
-
 index address_metaphone: zipcode
 {
     morphology = metaphone
     source = src_address
     path = /var/lib/sphinxsearch/data/index/address_metaphone
-}
-
-index address_metaphone_preview : zipcode_preview
-{
-    morphology = metaphone
-    source = src_address_preview
-    path = /var/lib/sphinxsearch/data/index/address_metaphone_preview
 }
 
 # only create on demand
@@ -951,19 +447,6 @@ index swisssearch
     local = address
 }
 
-index swisssearch_preview
-{
-    type = distributed
-    local = zipcode_preview
-    local = district_preview
-    local = kantone_preview
-    local = gg25_preview
-    local = swissnames3d_preview
-    local = haltestellen_preview
-    local = parcel_preview
-    local = address_preview
-}
-
 index swisssearch_fuzzy
 {
     type = distributed
@@ -973,15 +456,4 @@ index swisssearch_fuzzy
     local = swissnames3d_metaphone
     local = haltestellen_metaphone
     local = address_metaphone
-}
-
-index swisssearch_fuzzy_preview
-{
-    type = distributed
-    local = district_metaphone_preview
-    local = kantone_metaphone_preview
-    local = gg25_metaphone_preview
-    local = swissnames3d_metaphone_preview
-    local = haltestellen_metaphone_preview
-    local = address_metaphone_preview
 }
