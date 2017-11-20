@@ -92,8 +92,8 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
 
 source src_ch_bfs_gebaeude_wohnungs_register_preview : def_searchable_features
 {
-    sql_attr_string = agnostic
-    sql_attr_string = lang
+    sql_attr_uint = agnostic
+    sql_attr_uint = lang
     sql_db = kogis_dev
     sql_query = \
         SELECT id \
