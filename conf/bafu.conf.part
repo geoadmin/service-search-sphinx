@@ -566,18 +566,180 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
-        SELECT gid::bigint as id \
-            , au_name as label \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
             , 'feature' as origin \
-            , au_obj::text||' '||remove_accents(au_name) as detail \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')||' '||coalesce(auen_type_de,' ')||' '||coalesce(auen_type_fr,' ')||' '||coalesce(auen_type_it,' ')) as detail \
             , 'ch.bafu.bundesinventare-auen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
             , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , gid::text as feature_id \
-        from bundinv.au
+            , bgdi_id::text as feature_id \
+        from bundinv.auen
+}
+
+source src_ch_bafu_bundesinventare-auen_anhang2 : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')||' '||coalesce(typ_de,' ')||' '||coalesce(typ_fr,' ')||' '||coalesce(typ_it,' ')) as detail \
+            , 'ch.bafu.bundesinventare-auen_anhang2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.auen_anhang2
+}
+
+source src_ch_bafu_bundesinventare-amphibien : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , 'ch.bafu.bundesinventare-amphibien' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.amphibien
+}
+
+source src_ch_bafu_bundesinventare-amphibien_anhang4 : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , 'ch.bafu.bundesinventare-amphibien_anhang4' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.amphibien_anhang4
+}
+
+source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , 'ch.bafu.bundesinventare-amphibien_wanderobjekte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.amphibien_wanderobjekte
+}
+
+source src_ch_bafu_bundesinventare-flachmoore : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , 'ch.bafu.bundesinventare-flachmoore' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.flachmoore
+}
+
+source src_ch_bafu_bundesinventare-hochmoore : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')||' '||coalesce(hochmoore_type_de,' ')||' '||coalesce(hochmoore_type_fr,' ')||' '||coalesce(hochmoore_type_it,' ')) as detail \
+            , 'ch.bafu.bundesinventare-hochmoore' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.hochmoore
+}
+
+source src_ch_bafu_bundesinventare-moorlandschaften : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , 'ch.bafu.bundesinventare-moorlandschaften' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.moorlandschaften
+}
+
+source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.trockenwiesen
+}
+
+source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2 : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden_anhang2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.trockenwiesen_anhang2
 }
 
 source src_ch_bafu_waldreservate : def_searchable_features
@@ -1032,6 +1194,60 @@ index ch_bafu_bundesinventare-auen : ch_bafu_hydrologie-wassertemperaturmessstat
 {
     source = src_ch_bafu_bundesinventare-auen
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen
+}
+
+index ch_bafu_bundesinventare-auen_anhang2 : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-auen_anhang2
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen_anhang2
+}
+
+index ch_bafu_bundesinventare-amphibien : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-amphibien
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien
+}
+
+index ch_bafu_bundesinventare-amphibien_anhang4 : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-amphibien_anhang4
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien_anhang4
+}
+
+index ch_bafu_bundesinventare-amphibien_wanderobjekte : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-amphibien_wanderobjekte
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien_wanderobjekte
+}
+
+index ch_bafu_bundesinventare-flachmoore : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-flachmoore
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-flachmoore
+}
+
+index ch_bafu_bundesinventare-hochmoore : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-hochmoore
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-hochmoore
+}
+
+index ch_bafu_bundesinventare-moorlandschaften : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-moorlandschaften
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-moorlandschaften
+}
+
+index ch_bafu_bundesinventare-trockenwiesen_trockenweiden : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-trockenwiesen_trockenweiden
+}
+
+index ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2 : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2
 }
 
 index ch_bafu_waldreservate : ch_bafu_hydrologie-wassertemperaturmessstationen
