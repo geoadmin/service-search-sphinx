@@ -43,7 +43,7 @@ source src_ch_sem_sachplan_asyl_facilities_anhoerung : def_searchable_features
         SELECT bgdi_id as id \
             , stabil_id as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(facname_de::text, ' ')||' '||coalesce(facname_fr, ' '))||' '||coalesce(facname_it::text, ' ') as  detail \
+            , remove_accents(coalesce(facname_de, ' ')||' '||coalesce(facname_fr, ' '))||' '||coalesce(facname_it, ' ') as  detail \
             , 'ch.sem.sachplan-asyl_anhoerung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -61,7 +61,7 @@ source src_ch_sem_sachplan_asyl_facilities_kraft : def_searchable_features
         SELECT bgdi_id as id \
             , stabil_id as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(facname_de::text, ' ')||' '||coalesce(facname_fr, ' '))||' '||coalesce(facname_it::text, ' ') as  detail \
+            , remove_accents(coalesce(facname_de, ' ')||' '||coalesce(facname_fr, ' '))||' '||coalesce(facname_it, ' ') as  detail \
             , 'ch.sem.sachplan-asyl_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
