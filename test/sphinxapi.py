@@ -15,7 +15,6 @@
 # did not, you can find it at http://www.gnu.org/
 #
 
-import sys  # unused
 import select
 import socket
 import re
