@@ -569,7 +569,7 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')||' '||coalesce(auen_type_de,' ')||' '||coalesce(auen_type_fr,' ')||' '||coalesce(auen_type_it,' ')) as detail \
+            , remove_accents(concat_ws(' ', objnummer::text, name, auen_type_de, auen_type_fr,auen_type_it)) as detail \
             , 'ch.bafu.bundesinventare-auen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -587,7 +587,7 @@ source src_ch_bafu_bundesinventare-auen_anhang2 : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')||' '||coalesce(typ_de,' ')||' '||coalesce(typ_fr,' ')||' '||coalesce(typ_it,' ')) as detail \
+            , remove_accents(concat_ws(' ', objnummer::text, name, typ_de, typ_fr,typ_it)) as detail \
             , 'ch.bafu.bundesinventare-auen_anhang2' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -605,7 +605,7 @@ source src_ch_bafu_bundesinventare-amphibien : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ', objnummer::text, name)) as detail \
             , 'ch.bafu.bundesinventare-amphibien' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -623,7 +623,7 @@ source src_ch_bafu_bundesinventare-amphibien_anhang4 : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ', objnummer::text, name)) as detail \
             , 'ch.bafu.bundesinventare-amphibien_anhang4' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -641,7 +641,7 @@ source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_searchable_feat
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ', objnummer::text, name)) as detail \
             , 'ch.bafu.bundesinventare-amphibien_wanderobjekte' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -659,7 +659,7 @@ source src_ch_bafu_bundesinventare-flachmoore : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ', objnummer::text, name)) as detail \
             , 'ch.bafu.bundesinventare-flachmoore' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -677,7 +677,7 @@ source src_ch_bafu_bundesinventare-hochmoore : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')||' '||coalesce(hochmoore_type_de,' ')||' '||coalesce(hochmoore_type_fr,' ')||' '||coalesce(hochmoore_type_it,' ')) as detail \
+            , remove_accents(concat_ws(' ', objnummer::text,name,hochmoore_type_de,hochmoore_type_fr,hochmoore_type_it)) as detail \
             , 'ch.bafu.bundesinventare-hochmoore' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -695,7 +695,7 @@ source src_ch_bafu_bundesinventare-moorlandschaften : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ', objnummer::text,name)) as detail \
             , 'ch.bafu.bundesinventare-moorlandschaften' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -713,7 +713,7 @@ source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden : def_searchable_
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ',objnummer::text,name)) as detail \
             , 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -731,7 +731,7 @@ source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2 : def_sea
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ',objnummer::text,name)) as detail \
             , 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden_anhang2' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
