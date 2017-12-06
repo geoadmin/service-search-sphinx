@@ -36,7 +36,7 @@ source src_ch_mobility_standorte : def_searchable_features
         from mobility.standorte_tooltip
 }
 
-source src_ch_sem_sachplan_asyl_facilities_anhoerung : def_searchable_features
+source src_ch_sem_sachplan-asyl_facilities_anhoerung : def_searchable_features
 {
     sql_db = dritte_dev
     sql_query = \
@@ -54,7 +54,7 @@ source src_ch_sem_sachplan_asyl_facilities_anhoerung : def_searchable_features
         from sem.sachplan_asyl_facilities_anhorung
 }
 
-source src_ch_sem_sachplan_asyl_facilities_kraft : def_searchable_features
+source src_ch_sem_sachplan-asyl_facilities_kraft : def_searchable_features
 {
     sql_db = dritte_dev
     sql_query = \
@@ -96,16 +96,16 @@ index ch_mobility_standorte : ch_pronatura_waldreservate
 }
 
 
-index ch_sem_sachplan_asyl_facilities_anhoerung : ch_pronatura_waldreservate
+index ch_sem_sachplan-asyl_facilities_anhoerung : ch_pronatura_waldreservate
 {
-    source = src_ch_sem_sachplan_asyl_facilities_anhoerung
-    path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan_asyl_facilities_anhoerung
+    source = src_ch_sem_sachplan-asyl_facilities_anhoerung
+    path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan-asyl_facilities_anhoerung
 }
 
 
-index ch_sem_sachplan_asyl_facilities_kraft : ch_pronatura_waldreservate
+index ch_sem_sachplan-asyl_facilities_kraft : ch_pronatura_waldreservate
 {
-    source = src_ch_sem_sachplan_asyl_facilities_kraft
-    path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan_asyl_facilities_kraft
+    source = src_ch_sem_sachplan-asyl_facilities_kraft
+    path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan-asyl_facilities_kraft
 }
 
