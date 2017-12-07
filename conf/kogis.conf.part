@@ -81,7 +81,7 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , origin \
             , detail \
-            , layer \
+            , 'ch.bfs.gebaeude_wohnungs_register' as layer \
             , geom_quadindex \
             , lat \
             , lon \
