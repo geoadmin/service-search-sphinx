@@ -1138,7 +1138,7 @@ source src_ch_bav_anlagen-schienengueterverkehr : def_searchable_features
          SELECT bgdi_id as id \
              , name as label \
              , 'feature' as origin \
-             , remove_accents(coalesce(dst_nr::text, ' ')||' '||coalesce(name, ' '))||' '||coalesce(dst_abk, ' ') as  detail \
+             , remove_accents(concat_ws(' ',dst_nr::text,name,dst_abk)) as  detail \
              , 'ch.bav.anlagen-schienengueterverkehr' as layer \
              , quadindex(the_geom) as geom_quadindex \
              , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
