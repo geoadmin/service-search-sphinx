@@ -258,18 +258,18 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
-      SELECT row_number() OVER(ORDER BY id asc) as id \
-          , name_ads as label \
+        SELECT bgdi_id::bigint as id \
+          , obname as label \
           , 'feature' as origin \
-          , remove_accents(name_ads) as detail \
+          , remove_accents(concat_ws(' ', obname, obnamealt, grkinds, edmikinds, emkinds)) as detail \
           , 'ch.swisstopo.geologie-rohstoffe-vererzungen' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , id::text as feature_id \
-      from geol.rohstoffe_vererzungen
+          , bgdi_id::text as feature_id \
+      from geol.rohstoffe_vererz
 }
 
 source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_features
