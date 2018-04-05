@@ -130,7 +130,7 @@ source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_fe
 {
     sql_db = stopo_dev
     sql_query = \
-        SELECT bgdi_id::bigint as id \
+        SELECT obid::bigint as id \
             , obname as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', obname, obnamealt, imkinds, edrskinds)) as detail \
@@ -140,7 +140,7 @@ source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_fe
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
+            , obid::text as feature_id \
         from geol.rohstoffe_industriemin
 }
 
@@ -148,7 +148,7 @@ source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchabl
 {
     sql_db = stopo_dev
     sql_query = \
-        SELECT bgdi_id::bigint as id \
+        SELECT obid::bigint as id \
             , obname as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', obname, obnamealt, erkinds, ederkinds)) as detail \
@@ -158,7 +158,7 @@ source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchabl
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
+            , obid::text as feature_id \
         from geol.rohstoffe_kohlenbitumenerdgas
 }
 
@@ -166,7 +166,7 @@ source src_ch_swisstopo_geologie-rohstoffe-naturwerksteine_abbau : def_searchabl
 {
     sql_db = stopo_dev
     sql_query = \
-        SELECT bgdi_id::bigint as id \
+        SELECT obid::bigint as id \
             , obname as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', obname, tckind, ltkinds, emkinds, stkind)) as detail \
@@ -176,7 +176,7 @@ source src_ch_swisstopo_geologie-rohstoffe-naturwerksteine_abbau : def_searchabl
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
+            , obid::text as feature_id \
         from geol.rohstoffe_naturwerksteineabbau
 }
 
@@ -184,7 +184,7 @@ source src_ch_swisstopo_geologie-rohstoffe-gebrochene_gesteine_abbau : def_searc
 {
     sql_db = stopo_dev
     sql_query = \
-        SELECT bgdi_id::bigint as id \
+        SELECT obid::bigint as id \
             , obname as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', obname, tckind, ltkinds, emkinds)) as detail \
@@ -194,7 +194,7 @@ source src_ch_swisstopo_geologie-rohstoffe-gebrochene_gesteine_abbau : def_searc
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
+            , obid::text as feature_id \
         from geol.rohstoffe_gebrochenegesteineabbau
 }
 
@@ -258,7 +258,7 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
-        SELECT bgdi_id::bigint as id \
+        SELECT obid::bigint as id \
           , obname as label \
           , 'feature' as origin \
           , remove_accents(concat_ws(' ', obname, obnamealt, grkinds, edmikinds, emkinds)) as detail \
@@ -268,7 +268,7 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , bgdi_id::text as feature_id \
+          , obid::text as feature_id \
       from geol.rohstoffe_vererz
 }
 
