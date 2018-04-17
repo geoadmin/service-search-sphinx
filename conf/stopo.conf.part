@@ -995,7 +995,7 @@ source src_ch_swisstopo_lotabweichungen : def_searchable_features
 }
 
 
-source src_ch_swisstopo_amtliches_strassenverzeichnis : def_searchable_features
+source src_ch_swisstopo_amtliches-strassenverzeichnis : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -1032,6 +1032,7 @@ source src_ch_swisstopo_swiss-map-vector25_metadata : def_searchable_features
       from public.shop_perimeter_vector25
 }
 
+=======
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren-tsp1
@@ -1366,15 +1367,14 @@ index ch_swisstopo_lotabweichungen : ch_swisstopo_verschiebungsvektoren-tsp1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lotabweichungen
 }
 
-index ch_swisstopo_amtliches_strassenverzeichnis : ch_swisstopo_verschiebungsvektoren-tsp1
-{
-    source = src_ch_swisstopo_amtliches_strassenverzeichnis
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_strassenverzeichnis
-}
-
 index ch_swisstopo_swiss-map-vector25_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
 {
     source = src_ch_swisstopo_swiss-map-vector25_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swiss-map-vector25_metadata
 }
 
+index ch_swisstopo_amtliches-strassenverzeichnis : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_amtliches-strassenverzeichnis
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches-strassenverzeichnis
+}
