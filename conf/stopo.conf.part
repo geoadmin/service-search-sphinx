@@ -994,6 +994,25 @@ source src_ch_swisstopo_lotabweichungen : def_searchable_features
       from geodaesie.lotabweichungen_nur_punkte
 }
 
+
+source src_ch_swisstopo_amtliches_strassenverzeichnis : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT bgdi_id as id \
+          , label::text as label \
+          , 'feature' as origin  \
+          , remove_accents(concat_ws(' ', esid, label)) as detail  \
+          , 'ch.swisstopo.amtliches-strassenverzeichnis' as layer  \
+          , quadindex(the_geom) as geom_quadindex  \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon  \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id  \
+      from vd.streetnames
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren-tsp1
@@ -1326,4 +1345,10 @@ index ch_swisstopo_lotabweichungen : ch_swisstopo_verschiebungsvektoren-tsp1
 {
     source = src_ch_swisstopo_lotabweichungen
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lotabweichungen
+}
+
+index ch_swisstopo_amtliches_strassenverzeichnis : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_amtliches_strassenverzeichnis
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_strassenverzeichnis
 }
