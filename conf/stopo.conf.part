@@ -1000,7 +1000,7 @@ source src_ch_swisstopo_amtliches-strassenverzeichnis : def_searchable_features
    sql_db = stopo_dev
    sql_query = \
       SELECT bgdi_id as id \
-          , label::text as label \
+          , concat_ws(' ', label, split_part(plzo, ' ', 1) , gdename) as label \
           , 'feature' as origin  \
           , remove_accents(concat_ws(' ', esid, label)) as detail  \
           , 'ch.swisstopo.amtliches-strassenverzeichnis' as layer  \
