@@ -1032,7 +1032,6 @@ source src_ch_swisstopo_swiss-map-vector25_metadata : def_searchable_features
       from public.shop_perimeter_vector25
 }
 
-=======
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren-tsp1
