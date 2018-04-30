@@ -1018,8 +1018,8 @@ source src_ch_swisstopo_swiss-map-vector25_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
-      SELECT bgdi_id as id \
-          , lk_name::text as label \
+      SELECT kbnum as id \
+          , kbnum::text as label \
           , 'feature' as origin  \
           , remove_accents(concat_ws(' ', lk_name, kbnum::text, release::text)) as detail  \
           , 'ch.swisstopo.swiss-map-vector25.metadata' as layer  \
@@ -1028,7 +1028,7 @@ source src_ch_swisstopo_swiss-map-vector25_metadata : def_searchable_features
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon  \
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , bgdi_id::text as feature_id  \
+          , kbnum::text as feature_id  \
       from public.shop_perimeter_vector25
 }
 
