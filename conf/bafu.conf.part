@@ -578,6 +578,24 @@ source src_ch_bafu_bundesinventare-auen_anhang2 : def_searchable_features
         from bundinv.auen_anhang2
 }
 
+source src_ch_bafu_bundesinventare-auen_vegetation_alpin : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , objname as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', objnummer::text, objname, vegetation, devegetati, frvegetati, itvegetati)) as detail \
+            , 'ch.bafu.bundesinventare-auen_vegetation_alpin' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.auen_vegetation_alpin
+}
+
 source src_ch_bafu_bundesinventare-amphibien : def_searchable_features
 {
     sql_db = bafu_dev
@@ -1174,6 +1192,12 @@ index ch_bafu_bundesinventare-auen_anhang2 : ch_bafu_hydrologie-wassertemperatur
 {
     source = src_ch_bafu_bundesinventare-auen_anhang2
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen_anhang2
+}
+
+index ch_bafu_bundesinventare-auen_vegetation_alpin : ch_bafu_hydrologie-wassertemperaturmessstationen 
+{
+    source = src_ch_bafu_bundesinventare-auen_vegetation_alpin
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen_vegetation_alpin
 }
 
 index ch_bafu_bundesinventare-amphibien : ch_bafu_hydrologie-wassertemperaturmessstationen
