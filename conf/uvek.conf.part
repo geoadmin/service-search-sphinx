@@ -244,6 +244,216 @@ source src_ch_astra_unfaelle-personenschaeden_alle : def_searchable_features
         from astra.unf_pers_alle
 }
 
+
+source src_ch_bakom_notruf-112_festnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(festnetz_112, ' ')||' '||coalesce(fn_addresse_112, ' ')) as detail \
+            , 'ch.bakom.notruf-112_festnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_fn_112
+}
+
+
+source src_ch_bakom_notruf-117_festnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(festnetz_117, ' ')||' '||coalesce(fn_addresse_117, ' ')) as detail \
+            , 'ch.bakom.notruf-117_festnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_fn_117
+}
+
+
+source src_ch_bakom_notruf-118_festnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(festnetz_118, ' ')||' '||coalesce(fn_addresse_118, ' ')) as detail \
+            , 'ch.bakom.notruf-118_festnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_fn_118
+}
+
+
+source src_ch_bakom_notruf-143_festnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(festnetz_143, ' ')||' '||coalesce(fn_addresse_143, ' ')) as detail \
+            , 'ch.bakom.notruf-143_festnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_fn_143
+}
+
+
+source src_ch_bakom_notruf-144_festnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(festnetz_144, ' ')||' '||coalesce(fn_addresse_144, ' ')) as detail \
+            , 'ch.bakom.notruf-144_festnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_fn_144
+}
+
+
+source src_ch_bakom_notruf-112_satellit : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(satellit_112, ' ')||' '||coalesce(sa_addresse_112, ' ')) as detail \
+            , 'ch.bakom.notruf-112_satellit' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_sa_112
+}
+
+
+source src_ch_bakom_notruf-112_mobilnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(mobile_112, ' ')||' '||coalesce(mo_addresse_112, ' ')) as detail \
+            , 'ch.bakom.notruf-112_mobilnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_mo_112
+}
+
+
+source src_ch_bakom_notruf-117_mobilnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(mobile_117, ' ')||' '||coalesce(mo_addresse_117, ' ')) as detail \
+            , 'ch.bakom.notruf-117_mobilnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_mo_117
+}
+
+
+source src_ch_bakom_notruf-118_mobilnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(mobile_118, ' ')||' '||coalesce(mo_addresse_118, ' ')) as detail \
+            , 'ch.bakom.notruf-118_mobilnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_mo_118
+}
+
+
+source src_ch_bakom_notruf-143_mobilnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(mobile_143, ' ')||' '||coalesce(mo_addresse_143, ' ')) as detail \
+            , 'ch.bakom.notruf-143_mobilnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_mo_143
+}
+
+
+source src_ch_bakom_notruf-144_mobilnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(coalesce(mobile_144, ' ')||' '||coalesce(mo_addresse_144, ' ')) as detail \
+            , 'ch.bakom.notruf-144_mobilnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_mo_144
+}
+
+
 source src_ch_bakom_radio-fernsehsender : def_searchable_features
 {
     sql_db = uvek_dev
@@ -261,6 +471,7 @@ source src_ch_bakom_radio-fernsehsender : def_searchable_features
             , id::text as feature_id \
         from bakom.nisdb_bro
 }
+
 
 source src_ch_bakom_versorgungsgebiet-tv : def_searchable_features
 {
@@ -1228,6 +1439,72 @@ index ch_astra_unfaelle-personenschaeden_alle : ch_astra_ivs-nat
 {
     source = src_ch_astra_unfaelle-personenschaeden_alle
     path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_alle
+}
+
+index ch_bakom_notruf-112_festnetz : ch_astra_ivs-nat 
+{
+    source = src_ch_bakom_notruf-112_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-112_festnetz
+}
+
+index ch_bakom_notruf-117_festnetz : ch_astra_ivs-nat 
+{
+    source = src_ch_bakom_notruf-117_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-117_festnetz
+}
+
+index ch_bakom_notruf-118_festnetz : ch_astra_ivs-nat 
+{
+    source = src_ch_bakom_notruf-118_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-118_festnetz
+}
+
+index ch_bakom_notruf-143_festnetz : ch_astra_ivs-nat 
+{
+    source = src_ch_bakom_notruf-143_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-143_festnetz
+}
+
+index ch_bakom_notruf-144_festnetz : ch_astra_ivs-nat 
+{
+    source = src_ch_bakom_notruf-144_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-144_festnetz
+}
+
+index ch_bakom_notruf-112_mobilnetz : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_notruf-112_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-112_mobilnetz
+}
+
+index ch_bakom_notruf-117_mobilnetz : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_notruf-117_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-117_mobilnetz
+}
+
+index ch_bakom_notruf-118_mobilnetz : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_notruf-118_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-118_mobilnetz
+}
+
+index ch_bakom_notruf-143_mobilnetz : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_notruf-143_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-143_mobilnetz
+}
+
+index ch_bakom_notruf-144_mobilnetz : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_notruf-144_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-144_mobilnetz
+}
+
+index ch_bakom_notruf-112_satellit : ch_astra_ivs-nat
+{
+    source = src_ch_bakom_notruf-112_satellit
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-112_satellit
 }
 
 index ch_bakom_radio-fernsehsender : ch_astra_ivs-nat
