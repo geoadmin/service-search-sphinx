@@ -252,7 +252,7 @@ source src_ch_bakom_notruf : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(festnetz_112, ' ')||' '||coalesce(fn_addresse_112, ' ')||coalesce(festnetz_117, ' ')||' '||coalesce(fn_addresse_117, ' ')||coalesce(festnetz_118, ' ')||' '||coalesce(fn_addresse_118, ' ')||coalesce(festnetz_143, ' ')||' '||coalesce(fn_addresse_143, ' ')||coalesce(festnetz_144, ' ')||' '||coalesce(fn_addresse_144, ' ')||coalesce(festnetz_147, ' ')||' '||coalesce(fn_addresse_147, ' ')||coalesce(satellit_112, ' ')||' '||coalesce(sa_addresse_112, ' ')||coalesce(mobile_112, ' ')||' '||coalesce(mo_addresse_112, ' ')||coalesce(mobile_117, ' ')||' '||coalesce(mo_addresse_117, ' ')||coalesce(mobile_118, ' ')||' '||coalesce(mo_addresse_118, ' ')||coalesce(mobile_143, ' ')||' '||coalesce(mo_addresse_143, ' ')||coalesce(mobile_144, ' ')||' '||coalesce(mo_addresse_144, ' ')||coalesce(mobile_147, ' ')||' '||coalesce(mo_addresse_147, ' ')) as detail \
+            , remove_accents(concat_ws(' ', festnetz_112, fn_addresse_112, festnetz_117, fn_addresse_117, festnetz_118, fn_addresse_118, festnetz_143, fn_addresse_143, festnetz_144, fn_addresse_144, festnetz_147, fn_addresse_147, satellit_112, sa_addresse_112, mobile_112, mo_addresse_112, mobile_117, mo_addresse_117, mobile_118, mo_addresse_118, mobile_143, mo_addresse_143, mobile_144, mo_addresse_144, mobile_147, mo_addresse_147)) as detail \
             , 'ch.bakom.notruf' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -271,7 +271,7 @@ source src_ch_bakom_notruf-112_festnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(festnetz_112, ' ')||' '||coalesce(fn_addresse_112, ' ')) as detail \
+            , remove_accents(concat_ws(' ', festnetz_112, fn_addresse_112)) as detail \
             , 'ch.bakom.notruf-112_festnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -290,7 +290,7 @@ source src_ch_bakom_notruf-117_festnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(festnetz_117, ' ')||' '||coalesce(fn_addresse_117, ' ')) as detail \
+            , remove_accents(concat_ws(' ', festnetz_117, fn_addresse_117)) as detail \
             , 'ch.bakom.notruf-117_festnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -309,7 +309,7 @@ source src_ch_bakom_notruf-118_festnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(festnetz_118, ' ')||' '||coalesce(fn_addresse_118, ' ')) as detail \
+            , remove_accents(concat_ws(' ', festnetz_118, fn_addresse_118)) as detail \
             , 'ch.bakom.notruf-118_festnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -328,7 +328,7 @@ source src_ch_bakom_notruf-143_festnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(festnetz_143, ' ')||' '||coalesce(fn_addresse_143, ' ')) as detail \
+            , remove_accents(concat_ws(' ', festnetz_143, fn_addresse_143)) as detail \
             , 'ch.bakom.notruf-143_festnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -347,7 +347,7 @@ source src_ch_bakom_notruf-144_festnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(festnetz_144, ' ')||' '||coalesce(fn_addresse_144, ' ')) as detail \
+            , remove_accents(concat_ws(' ', festnetz_144, fn_addresse_144)) as detail \
             , 'ch.bakom.notruf-144_festnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -366,7 +366,7 @@ source src_ch_bakom_notruf-147_festnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(festnetz_147, ' ')||' '||coalesce(fn_addresse_147, ' ')) as detail \
+            , remove_accents(concat_ws(' ', festnetz_147, fn_addresse_147)) as detail \
             , 'ch.bakom.notruf-147_festnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -385,7 +385,7 @@ source src_ch_bakom_notruf-112_satellit : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(satellit_112, ' ')||' '||coalesce(sa_addresse_112, ' ')) as detail \
+            , remove_accents(concat_ws(' ', satellit_112, sa_addresse_112)) as detail \
             , 'ch.bakom.notruf-112_satellit' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -404,7 +404,7 @@ source src_ch_bakom_notruf-112_mobilnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(mobile_112, ' ')||' '||coalesce(mo_addresse_112, ' ')) as detail \
+            , remove_accents(concat_ws(' ', mobile_112, mo_addresse_112)) as detail \
             , 'ch.bakom.notruf-112_mobilnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -423,7 +423,7 @@ source src_ch_bakom_notruf-117_mobilnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(mobile_117, ' ')||' '||coalesce(mo_addresse_117, ' ')) as detail \
+            , remove_accents(concat_ws(' ', mobile_117, mo_addresse_117)) as detail \
             , 'ch.bakom.notruf-117_mobilnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -442,7 +442,7 @@ source src_ch_bakom_notruf-118_mobilnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(mobile_118, ' ')||' '||coalesce(mo_addresse_118, ' ')) as detail \
+            , remove_accents(concat_ws(' ', mobile_118, mo_addresse_118)) as detail \
             , 'ch.bakom.notruf-118_mobilnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -461,7 +461,7 @@ source src_ch_bakom_notruf-143_mobilnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(mobile_143, ' ')||' '||coalesce(mo_addresse_143, ' ')) as detail \
+            , remove_accents(concat_ws(' ', mobile_143, mo_addresse_143)) as detail \
             , 'ch.bakom.notruf-143_mobilnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -480,7 +480,7 @@ source src_ch_bakom_notruf-144_mobilnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(mobile_144, ' ')||' '||coalesce(mo_addresse_144, ' ')) as detail \
+            , remove_accents(concat_ws(' ', mobile_144, mo_addresse_144)) as detail \
             , 'ch.bakom.notruf-144_mobilnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -499,7 +499,7 @@ source src_ch_bakom_notruf-147_mobilnetz : def_searchable_features
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(mobile_147, ' ')||' '||coalesce(mo_addresse_147, ' ')) as detail \
+            , remove_accents(concat_ws(' ', mobile_147, mo_addresse_147)) as detail \
             , 'ch.bakom.notruf-147_mobilnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
