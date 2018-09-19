@@ -304,7 +304,7 @@ source src_ch_swisstopo_geologie-bohrungen_tiefer_500 : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from geol.bohrungen_500
+        from geol.bohrungen_tiefer_500
 }
 
 
