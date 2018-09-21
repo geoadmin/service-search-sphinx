@@ -54,7 +54,7 @@ source src_ch_vbs_armeelogistikcenter : def_searchable_features
         from militaer.armeelogistikcenter
 }
 
-source src_ch_vbs_bundestankstellen-bebeco : def_searchable_features
+source src_ch_vbs_bundestankstellen_bebeco : def_searchable_features
 {
     sql_db = vbs_dev
     sql_query = \
@@ -72,7 +72,7 @@ source src_ch_vbs_bundestankstellen-bebeco : def_searchable_features
         from militaer.bundestankstellen_bebeco
 }
 
-source src_ch_vbs_logistikraeume-armeelogistikcenter : def_searchable_features
+source src_ch_vbs_logistikraeume_armeelogistikcenter : def_searchable_features
 {
     sql_db = vbs_dev
     sql_query = \
@@ -116,12 +116,8 @@ index ch_babs_kulturgueter
     source = src_ch_babs_kulturgueter
     path = /var/lib/sphinxsearch/data/index/ch_babs_kulturgueter
     docinfo = extern
-    charset_type = utf-8
     min_infix_len = 2
-    infix_fields = detail
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
-    enable_star = 1
+    expand_keywords = 1
 }
 
 index ch_vbs_armeelogistikcenter : ch_babs_kulturgueter
@@ -136,16 +132,16 @@ index ch_vbs_waldschadenkarte : ch_babs_kulturgueter
     path = /var/lib/sphinxsearch/data/index/ch_vbs_waldschadenkarte
 }
 
-index ch_vbs_bundestankstellen-bebeco : ch_babs_kulturgueter
+index ch_vbs_bundestankstellen_bebeco : ch_babs_kulturgueter
 {
-    source = src_ch_vbs_bundestankstellen-bebeco
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_bundestankstellen-bebeco
+    source = src_ch_vbs_bundestankstellen_bebeco
+    path = /var/lib/sphinxsearch/data/index/ch_vbs_bundestankstellen_bebeco
 }
 
-index ch_vbs_logistikraeume-armeelogistikcenter : ch_babs_kulturgueter
+index ch_vbs_logistikraeume_armeelogistikcenter : ch_babs_kulturgueter
 {
-    source = src_ch_vbs_logistikraeume-armeelogistikcenter
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_logistikraeume-armeelogistikcenter
+    source = src_ch_vbs_logistikraeume_armeelogistikcenter
+    path = /var/lib/sphinxsearch/data/index/ch_vbs_logistikraeume_armeelogistikcenter
 }
 
 index ch_vbs_retablierungsstellen : ch_babs_kulturgueter

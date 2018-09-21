@@ -1,7 +1,7 @@
 ## SOURCES
 
 
-source src_ch_bafu_alpweiden-herdenschutzhunde : def_searchable_features
+source src_ch_bafu_alpweiden_herdenschutzhunde : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -19,7 +19,7 @@ source src_ch_bafu_alpweiden-herdenschutzhunde : def_searchable_features
         from fauna.alpenweiden_herdenschutzhunde
 }
 
-source src_ch_bafu_fauna-wildtierkorridor_national : def_searchable_features
+source src_ch_bafu_fauna_wildtierkorridor_national : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -55,7 +55,7 @@ source src_ch_bafu_hydrologie-q347 : def_searchable_features
         from hydrologie.hydro_q347
 }
 
-source src_ch_bafu_wasserbau-vermessungsstrecken : def_searchable_features
+source src_ch_bafu_wasserbau_vermessungsstrecken : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -73,7 +73,7 @@ source src_ch_bafu_wasserbau-vermessungsstrecken : def_searchable_features
         from wasser.vermessungsstrecken
 }
 
-source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_searchable_features
+source src_ch_bafu_wasser_teileinzugsgebiete_2 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -92,7 +92,7 @@ source src_ch_bafu_wasser-teileinzugsgebiete_2 : def_searchable_features
 }
 
 
-source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
+source src_ch_bafu_hydrologie_niedrigwasserstatistik : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -110,7 +110,7 @@ source src_ch_bafu_hydrologie-niedrigwasserstatistik : def_searchable_features
         from hydrologie.niedrigwasserstatistik
 }
 
-source src_ch_bafu_wrz-wildruhezonen_portal : def_searchable_features
+source src_ch_bafu_wrz_wildruhezonen_portal : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -128,7 +128,7 @@ source src_ch_bafu_wrz-wildruhezonen_portal : def_searchable_features
         from wrzportal.wrz_portal
 }
 
-source src_ch_bafu_wrz-jagdbanngebiete_select : def_searchable_features
+source src_ch_bafu_wrz_jagdbanngebiete_select : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -146,7 +146,7 @@ source src_ch_bafu_wrz-jagdbanngebiete_select : def_searchable_features
         from wrzportal.jgd_select
 }
 
-source src_ch_bafu_typisierung-fliessgewaesser : def_searchable_features
+source src_ch_bafu_typisierung_fliessgewaesser : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -164,7 +164,7 @@ source src_ch_bafu_typisierung-fliessgewaesser : def_searchable_features
         from hydrologie.typisierung_fliessgewaesser
 }
 
-source src_ch_bafu_gewaesserschutz-klaeranlagen_anteilq347 : def_searchable_features
+source src_ch_bafu_gewaesserschutz_klaeranlagen_anteilq347 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -182,7 +182,7 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_anteilq347 : def_searchable_feat
         from wasser.klaeranlagen
 }
 
-source src_ch_bafu_gewaesserschutz-klaeranlagen_ausbaugroesse : def_searchable_features
+source src_ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -200,7 +200,7 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_ausbaugroesse : def_searchable_f
         from wasser.klaeranlagen
 }
 
-source src_ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp : def_searchable_features
+source src_ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -218,7 +218,7 @@ source src_ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp : def_searchable_f
         from wasser.klaeranlagen
 }
 
-source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_features
+source src_ch_bafu_hydrologie_untersuchungsgebiete_stationen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -236,7 +236,7 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete_stationen : def_searchable_fe
         from hydrologie.hydrologie_untersuchungsgebiete_stationen
 }
 
-source src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : def_searchable_features
+source src_ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -254,7 +254,7 @@ source src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : def_searchable
         from hydrologie.hydro_duntersuchung_fliessgewaesser
 }
 
-source src_ch_bafu_hydrologie-hochwasserstatistik : def_searchable_features
+source src_ch_bafu_hydrologie_hochwasserstatistik : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -272,7 +272,7 @@ source src_ch_bafu_hydrologie-hochwasserstatistik : def_searchable_features
         from hydrologie.hochwasserstatistik
 }
 
-source src_ch_bafu_hydrologie-hochwassergrenzwertpegel : def_searchable_features
+source src_ch_bafu_hydrologie_hochwassergrenzwertpegel : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -290,7 +290,7 @@ source src_ch_bafu_hydrologie-hochwassergrenzwertpegel : def_searchable_features
         from hydrologie.hochwassergrenzwertpegel
 }
 
-source src_ch_bafu_hydrologie-untersuchungsgebiete : def_searchable_features
+source src_ch_bafu_hydrologie_untersuchungsgebiete : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -308,7 +308,7 @@ source src_ch_bafu_hydrologie-untersuchungsgebiete : def_searchable_features
         from hydrologie.hydrologie_untersuchungsgebiete
 }
 
-source src_ch_bafu_hydrologischer-atlas_kantonale-messstationen : def_searchable_features
+source src_ch_bafu_hydrologischer_atlas_kantonale_messstationen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -326,7 +326,7 @@ source src_ch_bafu_hydrologischer-atlas_kantonale-messstationen : def_searchable
         from hydrologie.hydro_atlas_kant_messstationen
 }
 
-source src_ch_bafu_vec25-gewaessernetz_2000 : def_searchable_features
+source src_ch_bafu_vec25_gewaessernetz_2000 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -344,7 +344,7 @@ source src_ch_bafu_vec25-gewaessernetz_2000 : def_searchable_features
     from vec25.gewaessernetz_2000
 }
 
-source src_ch_bafu_vec25-seen : def_searchable_features
+source src_ch_bafu_vec25_seen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -362,7 +362,7 @@ source src_ch_bafu_vec25-seen : def_searchable_features
     from vec25.seen
 }
 
-source src_ch_bafu_hydrologischer-atlas_flussgebiete : def_searchable_features
+source src_ch_bafu_hydrologischer_atlas_flussgebiete : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -380,7 +380,7 @@ source src_ch_bafu_hydrologischer-atlas_flussgebiete : def_searchable_features
     from hydrologie.atlas_flussgebiete
 }
 
-source src_ch_bafu_hydrologischer-atlas_bilanzgebiete : def_searchable_features
+source src_ch_bafu_hydrologischer_atlas_bilanzgebiete : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -398,7 +398,7 @@ source src_ch_bafu_hydrologischer-atlas_bilanzgebiete : def_searchable_features
     from hydrologie.atlas_bilanzgebiete
 }
 
-source src_ch_bafu_hydrologischer-atlas_basisgebiete : def_searchable_features
+source src_ch_bafu_hydrologischer_atlas_basisgebiete : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -416,7 +416,7 @@ source src_ch_bafu_hydrologischer-atlas_basisgebiete : def_searchable_features
     from hydrologie.atlas_basisgebiete
 }
 
-source src_ch_bafu_strukturguete-hochrhein_sohle : def_searchable_features
+source src_ch_bafu_strukturguete_hochrhein_sohle : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -434,7 +434,7 @@ source src_ch_bafu_strukturguete-hochrhein_sohle : def_searchable_features
         from wasser.strukturguete_hochrhein
 }
 
-source src_ch_bafu_strukturguete-hochrhein_rechtesumfeld : def_searchable_features
+source src_ch_bafu_strukturguete_hochrhein_rechtesumfeld : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -452,7 +452,7 @@ source src_ch_bafu_strukturguete-hochrhein_rechtesumfeld : def_searchable_featur
         from wasser.strukturguete_hochrhein
 }
 
-source src_ch_bafu_strukturguete-hochrhein_rechtesufer : def_searchable_features
+source src_ch_bafu_strukturguete_hochrhein_rechtesufer : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -470,7 +470,7 @@ source src_ch_bafu_strukturguete-hochrhein_rechtesufer : def_searchable_features
         from wasser.strukturguete_hochrhein
 }
 
-source src_ch_bafu_strukturguete-hochrhein_linkesumfeld : def_searchable_features
+source src_ch_bafu_strukturguete_hochrhein_linkesumfeld : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -488,7 +488,7 @@ source src_ch_bafu_strukturguete-hochrhein_linkesumfeld : def_searchable_feature
         from wasser.strukturguete_hochrhein
 }
 
-source src_ch_bafu_strukturguete-hochrhein_linkesufer : def_searchable_features
+source src_ch_bafu_strukturguete_hochrhein_linkesufer : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -506,7 +506,7 @@ source src_ch_bafu_strukturguete-hochrhein_linkesufer : def_searchable_features
         from wasser.strukturguete_hochrhein
 }
 
-source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_features
+source src_ch_bafu_hydrologie_wassertemperaturmessstationen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -524,7 +524,7 @@ source src_ch_bafu_hydrologie-wassertemperaturmessstationen : def_searchable_fea
         from hydrologie.temperaturmessnetz
 }
 
-source src_ch_bafu_gewaesserschutz-badewasserqualitaet : def_searchable_features
+source src_ch_bafu_gewaesserschutz_badewasserqualitaet : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -542,7 +542,7 @@ source src_ch_bafu_gewaesserschutz-badewasserqualitaet : def_searchable_features
         from wasser.baqua
 }
 
-source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_features
+source src_ch_bafu_hydrologie_gewaesserzustandsmessstationen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -560,7 +560,7 @@ source src_ch_bafu_hydrologie-gewaesserzustandsmessstationen : def_searchable_fe
         from hydrologie.dbgz
 }
 
-source src_ch_bafu_bundesinventare-auen : def_searchable_features
+source src_ch_bafu_bundesinventare_auen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -578,7 +578,7 @@ source src_ch_bafu_bundesinventare-auen : def_searchable_features
         from bundinv.auen
 }
 
-source src_ch_bafu_bundesinventare-auen_anhang2 : def_searchable_features
+source src_ch_bafu_bundesinventare_auen_anhang2 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -596,7 +596,7 @@ source src_ch_bafu_bundesinventare-auen_anhang2 : def_searchable_features
         from bundinv.auen_anhang2
 }
 
-source src_ch_bafu_bundesinventare-auen_vegetation_alpin : def_searchable_features
+source src_ch_bafu_bundesinventare_auen_vegetation_alpin : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -614,7 +614,7 @@ source src_ch_bafu_bundesinventare-auen_vegetation_alpin : def_searchable_featur
         from bundinv.auen_vegetation_alpin
 }
 
-source src_ch_bafu_bundesinventare-amphibien : def_searchable_features
+source src_ch_bafu_bundesinventare_amphibien : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -632,7 +632,7 @@ source src_ch_bafu_bundesinventare-amphibien : def_searchable_features
         from bundinv.amphibien
 }
 
-source src_ch_bafu_bundesinventare-amphibien_anhang4 : def_searchable_features
+source src_ch_bafu_bundesinventare_amphibien_anhang4 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -650,7 +650,7 @@ source src_ch_bafu_bundesinventare-amphibien_anhang4 : def_searchable_features
         from bundinv.amphibien_anhang4
 }
 
-source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_searchable_features
+source src_ch_bafu_bundesinventare_amphibien_wanderobjekte : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -668,7 +668,7 @@ source src_ch_bafu_bundesinventare-amphibien_wanderobjekte : def_searchable_feat
         from bundinv.amphibien_wanderobjekte
 }
 
-source src_ch_bafu_bundesinventare-flachmoore : def_searchable_features
+source src_ch_bafu_bundesinventare_flachmoore : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -686,7 +686,7 @@ source src_ch_bafu_bundesinventare-flachmoore : def_searchable_features
         from bundinv.flachmoore
 }
 
-source src_ch_bafu_bundesinventare-hochmoore : def_searchable_features
+source src_ch_bafu_bundesinventare_hochmoore : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -704,7 +704,7 @@ source src_ch_bafu_bundesinventare-hochmoore : def_searchable_features
         from bundinv.hochmoore
 }
 
-source src_ch_bafu_bundesinventare-moorlandschaften : def_searchable_features
+source src_ch_bafu_bundesinventare_moorlandschaften : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -722,7 +722,7 @@ source src_ch_bafu_bundesinventare-moorlandschaften : def_searchable_features
         from bundinv.moorlandschaften
 }
 
-source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden : def_searchable_features
+source src_ch_bafu_bundesinventare_trockenwiesen_trockenweiden : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -740,7 +740,7 @@ source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden : def_searchable_
         from bundinv.trockenwiesen
 }
 
-source src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2 : def_searchable_features
+source src_ch_bafu_bundesinventare_trockenwiesen_trockenweiden_anhang2 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -776,7 +776,7 @@ source src_ch_bafu_waldreservate : def_searchable_features
         from wald.waldreservate
 }
 
-source src_ch_bafu_mittlere-abfluesse : def_searchable_features
+source src_ch_bafu_mittlere_abfluesse : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -794,7 +794,7 @@ source src_ch_bafu_mittlere-abfluesse : def_searchable_features
         from wasser.mittlere_abfluesse
 }
 
-source src_ch_bafu_wasserbau-querprofilmarken : def_searchable_features
+source src_ch_bafu_wasserbau_querprofilmarken : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -812,7 +812,7 @@ source src_ch_bafu_wasserbau-querprofilmarken : def_searchable_features
         from wasser.querprofilmarken
 }
 
-source src_ch_bafu_feststoffe-geschiebemessnetz : def_searchable_features
+source src_ch_bafu_feststoffe_geschiebemessnetz : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -830,7 +830,7 @@ source src_ch_bafu_feststoffe-geschiebemessnetz : def_searchable_features
         from wasser.geschiebemessnetz
 }
 
-source src_ch_bafu_auen-vegetationskarten : def_searchable_features
+source src_ch_bafu_auen_vegetationskarten : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -848,7 +848,7 @@ source src_ch_bafu_auen-vegetationskarten : def_searchable_features
         from flora.auen_vegetation
 }
 
-source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_searchable_features
+source src_ch_bafu_schutzgebiete_paerke_nationaler_bedeutung : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -866,7 +866,7 @@ source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : def_searchable_fe
         from schutzge.paerke_nationaler_bedeutung_zonen
 }
 
-source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : def_searchable_features
+source src_ch_bafu_schutzgebiete_paerke_nationaler_bedeutung_perimeter : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -884,7 +884,7 @@ source src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : def_sea
         from schutzge.paerke_nationaler_bedeutung_perimeter
 }
 
-source src_ch_bafu_hydrogeologie-markierversuche : def_searchable_features
+source src_ch_bafu_hydrogeologie_markierversuche : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -902,7 +902,7 @@ source src_ch_bafu_hydrogeologie-markierversuche : def_searchable_features
         from hydrogeolog.hydrogeologie_markierversuche
 }
 
-source src_ch_bafu_karst-einzugsgebiete : def_searchable_features
+source src_ch_bafu_karst_einzugsgebiete : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -920,7 +920,7 @@ source src_ch_bafu_karst-einzugsgebiete : def_searchable_features
         from hydrologie.karst_einzugsgebiete
 }
 
-source src_ch_bafu_karst-quellen_schwinden : def_searchable_features
+source src_ch_bafu_karst_quellen_schwinden : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -938,7 +938,7 @@ source src_ch_bafu_karst-quellen_schwinden : def_searchable_features
         from hydrologie.karst_quellen_schwinden
 }
 
-source src_ch_bafu_karst-unterirdische_fliesswege : def_searchable_features
+source src_ch_bafu_karst_unterirdische_fliesswege : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -956,7 +956,7 @@ source src_ch_bafu_karst-unterirdische_fliesswege : def_searchable_features
         from hydrologie.karst_fliesswege
 }
 
-source src_ch_bafu_karst-einzugsgebietseinheiten : def_searchable_features
+source src_ch_bafu_karst_einzugsgebietseinheiten : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -974,7 +974,7 @@ source src_ch_bafu_karst-einzugsgebietseinheiten : def_searchable_features
         from hydrologie.karst_einzugsgebieteinheiten
 }
 
-source src_ch_bafu_karst-ausdehnung_grundwasservorkommen : def_searchable_features
+source src_ch_bafu_karst_ausdehnung_grundwasservorkommen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -992,7 +992,7 @@ source src_ch_bafu_karst-ausdehnung_grundwasservorkommen : def_searchable_featur
         from hydrologie.karst_grundwasservorkommen
 }
 
-source src_ch_bafu_bundesinventare-bln : def_searchable_features
+source src_ch_bafu_bundesinventare_bln : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -1010,7 +1010,7 @@ source src_ch_bafu_bundesinventare-bln : def_searchable_features
         from bundinv.bln_v2
 }
 
-source src_ch_bafu_bundesinventare-vogelreservate : def_searchable_features
+source src_ch_bafu_bundesinventare_vogelreservate : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
@@ -1048,359 +1048,355 @@ source src_ch_bafu_grundwasserkoerper : def_searchable_features
 
 ## INDICES
 
-index ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     type = plain
-    source = src_ch_bafu_hydrologie-wassertemperaturmessstationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-wassertemperaturmessstationen
+    source = src_ch_bafu_hydrologie_wassertemperaturmessstationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_wassertemperaturmessstationen
     docinfo = extern
-    charset_type = utf-8
     min_infix_len = 2
-    infix_fields = detail
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
-    enable_star = 1
+    expand_keywords = 1
 }
 
-index ch_bafu_alpweiden-herdenschutzhunde : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_alpweiden_herdenschutzhunde : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_alpweiden-herdenschutzhunde
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_alpweiden-herdenschutzhunde
+    source = src_ch_bafu_alpweiden_herdenschutzhunde
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_alpweiden_herdenschutzhunde
 }
 
-index ch_bafu_karst-einzugsgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_karst_einzugsgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_karst-einzugsgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-einzugsgebiete
+    source = src_ch_bafu_karst_einzugsgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_einzugsgebiete
 }
 
-index ch_bafu_karst-unterirdische_fliesswege : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_karst_unterirdische_fliesswege : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_karst-unterirdische_fliesswege
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-unterirdische_fliesswege
+    source = src_ch_bafu_karst_unterirdische_fliesswege
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_unterirdische_fliesswege
 }
 
-index ch_bafu_karst-einzugsgebietseinheiten : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_karst_einzugsgebietseinheiten : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_karst-einzugsgebietseinheiten
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-einzugsgebietseinheiten
+    source = src_ch_bafu_karst_einzugsgebietseinheiten
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_einzugsgebietseinheiten
 }
 
-index ch_bafu_karst-ausdehnung_grundwasservorkommen : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_karst_ausdehnung_grundwasservorkommen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_karst-ausdehnung_grundwasservorkommen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-ausdehnung_grundwasservorkommen
+    source = src_ch_bafu_karst_ausdehnung_grundwasservorkommen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_ausdehnung_grundwasservorkommen
 }
 
-index ch_bafu_bundesinventare-bln : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_bln : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-bln
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-bln
+    source = src_ch_bafu_bundesinventare_bln
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_bln
 }
 
-index ch_bafu_karst-quellen_schwinden : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_karst_quellen_schwinden : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_karst-quellen_schwinden
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst-quellen_schwinden
+    source = src_ch_bafu_karst_quellen_schwinden
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_quellen_schwinden
 }
-index ch_bafu_wrz-wildruhezonen_portal : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_wrz_wildruhezonen_portal : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_wrz-wildruhezonen_portal
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz-wildruhezonen_portal
+    source = src_ch_bafu_wrz_wildruhezonen_portal
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz_wildruhezonen_portal
 }
 
-index ch_bafu_wrz-jagdbanngebiete_select : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_wrz_jagdbanngebiete_select : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_wrz-jagdbanngebiete_select
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz-jagdbanngebiete_select
+    source = src_ch_bafu_wrz_jagdbanngebiete_select
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz_jagdbanngebiete_select
 }
 
-index ch_bafu_gewaesserschutz-klaeranlagen_anteilq347 : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_gewaesserschutz_klaeranlagen_anteilq347 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_gewaesserschutz-klaeranlagen_anteilq347
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz-klaeranlagen_anteilq347
+    source = src_ch_bafu_gewaesserschutz_klaeranlagen_anteilq347
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_klaeranlagen_anteilq347
 }
 
-index ch_bafu_gewaesserschutz-klaeranlagen_ausbaugroesse : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_gewaesserschutz-klaeranlagen_ausbaugroesse
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz-klaeranlagen_ausbaugroesse
+    source = src_ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse
 }
 
-index ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz-klaeranlagen_reinigungstyp
+    source = src_ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp
 }
 
-index ch_bafu_vec25-gewaessernetz_2000 : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_vec25_gewaessernetz_2000 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_vec25-gewaessernetz_2000
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_vec25-gewaessernetz_2000
+    source = src_ch_bafu_vec25_gewaessernetz_2000
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_vec25_gewaessernetz_2000
 }
 
-index ch_bafu_vec25-seen : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_vec25_seen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_vec25-seen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_vec25-seen
+    source = src_ch_bafu_vec25_seen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_vec25_seen
 }
 
-index ch_bafu_hydrologischer-atlas_flussgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologischer_atlas_flussgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologischer-atlas_flussgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer-atlas_flussgebiete
+    source = src_ch_bafu_hydrologischer_atlas_flussgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer_atlas_flussgebiete
 }
 
-index ch_bafu_hydrologischer-atlas_bilanzgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologischer_atlas_bilanzgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologischer-atlas_bilanzgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer-atlas_bilanzgebiete
+    source = src_ch_bafu_hydrologischer_atlas_bilanzgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer_atlas_bilanzgebiete
 }
 
-index ch_bafu_hydrologischer-atlas_basisgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologischer_atlas_basisgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologischer-atlas_basisgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer-atlas_basisgebiete
+    source = src_ch_bafu_hydrologischer_atlas_basisgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer_atlas_basisgebiete
 }
 
-index ch_bafu_hydrologie-gewaesserzustandsmessstationen : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_gewaesserzustandsmessstationen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologie-gewaesserzustandsmessstationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-gewaesserzustandsmessstationen
+    source = src_ch_bafu_hydrologie_gewaesserzustandsmessstationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_gewaesserzustandsmessstationen
 }
 
-index ch_bafu_hydrologie-q347 : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_q347 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologie-q347
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-q347
+    source = src_ch_bafu_hydrologie_q347
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_q347
 }
 
-index ch_bafu_wasserbau-vermessungsstrecken : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_wasserbau_vermessungsstrecken : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_wasserbau-vermessungsstrecken
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasserbau-vermessungsstrecken
+    source = src_ch_bafu_wasserbau_vermessungsstrecken
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasserbau_vermessungsstrecken
 }
 
-index ch_bafu_wasser-teileinzugsgebiete_2 : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_wasser_teileinzugsgebiete_2 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_wasser-teileinzugsgebiete_2
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser-teileinzugsgebiete_2
+    source = src_ch_bafu_wasser_teileinzugsgebiete_2
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser_teileinzugsgebiete_2
 }
 
 
-index ch_bafu_hydrologie-niedrigwasserstatistik : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_niedrigwasserstatistik : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologie-niedrigwasserstatistik
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-niedrigwasserstatistik
+    source = src_ch_bafu_hydrologie_niedrigwasserstatistik
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_niedrigwasserstatistik
 }
 
-index ch_bafu_typisierung-fliessgewaesser : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_typisierung_fliessgewaesser : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_typisierung-fliessgewaesser
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_typisierung-fliessgewaesser
+    source = src_ch_bafu_typisierung_fliessgewaesser
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_typisierung_fliessgewaesser
 }
 
-index ch_bafu_bundesinventare-auen : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_auen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-auen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen
+    source = src_ch_bafu_bundesinventare_auen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_auen
 }
 
-index ch_bafu_bundesinventare-auen_anhang2 : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_auen_anhang2 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-auen_anhang2
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen_anhang2
+    source = src_ch_bafu_bundesinventare_auen_anhang2
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_auen_anhang2
 }
 
-index ch_bafu_bundesinventare-auen_vegetation_alpin : ch_bafu_hydrologie-wassertemperaturmessstationen 
+index ch_bafu_bundesinventare_auen_vegetation_alpin : ch_bafu_hydrologie_wassertemperaturmessstationen 
 {
-    source = src_ch_bafu_bundesinventare-auen_vegetation_alpin
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-auen_vegetation_alpin
+    source = src_ch_bafu_bundesinventare_auen_vegetation_alpin
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_auen_vegetation_alpin
 }
 
-index ch_bafu_bundesinventare-amphibien : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_amphibien : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-amphibien
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien
+    source = src_ch_bafu_bundesinventare_amphibien
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_amphibien
 }
 
-index ch_bafu_bundesinventare-amphibien_anhang4 : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_amphibien_anhang4 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-amphibien_anhang4
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien_anhang4
+    source = src_ch_bafu_bundesinventare_amphibien_anhang4
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_amphibien_anhang4
 }
 
-index ch_bafu_bundesinventare-amphibien_wanderobjekte : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_amphibien_wanderobjekte : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-amphibien_wanderobjekte
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-amphibien_wanderobjekte
+    source = src_ch_bafu_bundesinventare_amphibien_wanderobjekte
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_amphibien_wanderobjekte
 }
 
-index ch_bafu_bundesinventare-flachmoore : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_flachmoore : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-flachmoore
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-flachmoore
+    source = src_ch_bafu_bundesinventare_flachmoore
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_flachmoore
 }
 
-index ch_bafu_bundesinventare-hochmoore : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_hochmoore : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-hochmoore
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-hochmoore
+    source = src_ch_bafu_bundesinventare_hochmoore
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_hochmoore
 }
 
-index ch_bafu_bundesinventare-moorlandschaften : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_moorlandschaften : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-moorlandschaften
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-moorlandschaften
+    source = src_ch_bafu_bundesinventare_moorlandschaften
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_moorlandschaften
 }
 
-index ch_bafu_bundesinventare-trockenwiesen_trockenweiden : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_trockenwiesen_trockenweiden : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-trockenwiesen_trockenweiden
+    source = src_ch_bafu_bundesinventare_trockenwiesen_trockenweiden
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_trockenwiesen_trockenweiden
 }
 
-index ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2 : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_trockenwiesen_trockenweiden_anhang2 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-trockenwiesen_trockenweiden_anhang2
+    source = src_ch_bafu_bundesinventare_trockenwiesen_trockenweiden_anhang2
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_trockenwiesen_trockenweiden_anhang2
 }
 
-index ch_bafu_waldreservate : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_waldreservate : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_waldreservate
     path = /var/lib/sphinxsearch/data/index/ch_bafu_waldreservate
 }
 
-index ch_bafu_hydrologie-untersuchungsgebiete_stationen : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_untersuchungsgebiete_stationen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologie-untersuchungsgebiete_stationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-untersuchungsgebiete_stationen
+    source = src_ch_bafu_hydrologie_untersuchungsgebiete_stationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_untersuchungsgebiete_stationen
 }
 
-index ch_bafu_hydrologie-untersuchungsgebiete : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_untersuchungsgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologie-untersuchungsgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-untersuchungsgebiete
+    source = src_ch_bafu_hydrologie_untersuchungsgebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_untersuchungsgebiete
 }
 
-index ch_bafu_hydrologie-hochwassergrenzwertpegel : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_hochwassergrenzwertpegel : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologie-hochwassergrenzwertpegel
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-hochwassergrenzwertpegel
+    source = src_ch_bafu_hydrologie_hochwassergrenzwertpegel
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_hochwassergrenzwertpegel
 }
 
-index ch_bafu_hydrologischer-atlas_kantonale-messstationen : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologischer_atlas_kantonale_messstationen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologischer-atlas_kantonale-messstationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer-atlas_kantonale-messstationen
+    source = src_ch_bafu_hydrologischer_atlas_kantonale_messstationen
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer_atlas_kantonale_messstationen
 }
 
-index ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-daueruntersuchung_fliessgewaesser
+    source = src_ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser
 }
 
-index ch_bafu_gewaesserschutz-badewasserqualitaet : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_gewaesserschutz_badewasserqualitaet : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_gewaesserschutz-badewasserqualitaet
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz-badewasserqualitaet
+    source = src_ch_bafu_gewaesserschutz_badewasserqualitaet
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_badewasserqualitaet
 }
 
-index ch_bafu_strukturguete-hochrhein_sohle : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_strukturguete_hochrhein_sohle : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_strukturguete-hochrhein_sohle
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_sohle
+    source = src_ch_bafu_strukturguete_hochrhein_sohle
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_sohle
 }
 
-index ch_bafu_strukturguete-hochrhein_linkesufer : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_strukturguete_hochrhein_linkesufer : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_strukturguete-hochrhein_linkesufer
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_linkesufer
+    source = src_ch_bafu_strukturguete_hochrhein_linkesufer
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_linkesufer
 }
 
-index ch_bafu_strukturguete-hochrhein_linkesumfeld : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_strukturguete_hochrhein_linkesumfeld : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_strukturguete-hochrhein_linkesumfeld
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_linkesumfeld
+    source = src_ch_bafu_strukturguete_hochrhein_linkesumfeld
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_linkesumfeld
 }
 
-index ch_bafu_strukturguete-hochrhein_rechtesumfeld : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_strukturguete_hochrhein_rechtesumfeld : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_strukturguete-hochrhein_rechtesumfeld
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_rechtesumfeld
+    source = src_ch_bafu_strukturguete_hochrhein_rechtesumfeld
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_rechtesumfeld
 }
 
-index ch_bafu_strukturguete-hochrhein_rechtesufer : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_strukturguete_hochrhein_rechtesufer : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_strukturguete-hochrhein_rechtesufer
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete-hochrhein_rechtesufer
+    source = src_ch_bafu_strukturguete_hochrhein_rechtesufer
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_rechtesufer
 }
 
-index ch_bafu_mittlere-abfluesse : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_mittlere_abfluesse : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_mittlere-abfluesse
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_mittlere-abfluesse
+    source = src_ch_bafu_mittlere_abfluesse
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_mittlere_abfluesse
 }
 
-index ch_bafu_wasserbau-querprofilmarken : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_wasserbau_querprofilmarken : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_wasserbau-querprofilmarken
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasserbau-querprofilmarken
+    source = src_ch_bafu_wasserbau_querprofilmarken
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasserbau_querprofilmarken
 }
 
-index ch_bafu_feststoffe-geschiebemessnetz : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_feststoffe_geschiebemessnetz : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_feststoffe-geschiebemessnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_feststoffe-geschiebemessnetz
+    source = src_ch_bafu_feststoffe_geschiebemessnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_feststoffe_geschiebemessnetz
 }
 
-index ch_bafu_hydrologie-hochwasserstatistik : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrologie_hochwasserstatistik : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrologie-hochwasserstatistik
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie-hochwasserstatistik
+    source = src_ch_bafu_hydrologie_hochwasserstatistik
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_hochwasserstatistik
 }
 
-index ch_bafu_auen-vegetationskarten : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_auen_vegetationskarten : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_auen-vegetationskarten
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_auen-vegetationskarten
+    source = src_ch_bafu_auen_vegetationskarten
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_auen_vegetationskarten
 }
 
-index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_schutzgebiete_paerke_nationaler_bedeutung : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-paerke_nationaler_bedeutung
+    source = src_ch_bafu_schutzgebiete_paerke_nationaler_bedeutung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete_paerke_nationaler_bedeutung
 }
 
-index ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_schutzgebiete_paerke_nationaler_bedeutung_perimeter : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete-paerke_nationaler_bedeutung_perimeter
+    source = src_ch_bafu_schutzgebiete_paerke_nationaler_bedeutung_perimeter
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete_paerke_nationaler_bedeutung_perimeter
 }
 
-index ch_bafu_hydrogeologie-markierversuche : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_hydrogeologie_markierversuche : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_hydrogeologie-markierversuche
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrogeologie-markierversuche
+    source = src_ch_bafu_hydrogeologie_markierversuche
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrogeologie_markierversuche
 }
 
-index ch_bafu_bundesinventare-vogelreservate : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_bundesinventare_vogelreservate : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventare-vogelreservate
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare-vogelreservate
+    source = src_ch_bafu_bundesinventare_vogelreservate
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_vogelreservate
 }
 
-index ch_bafu_grundwasserkoerper : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_grundwasserkoerper : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_grundwasserkoerper
     path = /var/lib/sphinxsearch/data/index/ch_bafu_grundwasserkoerper
 }
 
-index ch_bafu_fauna-wildtierkorridor_national : ch_bafu_hydrologie-wassertemperaturmessstationen
+index ch_bafu_fauna_wildtierkorridor_national : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_fauna-wildtierkorridor_national
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_fauna-wildtierkorridor_national
+    source = src_ch_bafu_fauna_wildtierkorridor_national
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_fauna_wildtierkorridor_national
 }
 

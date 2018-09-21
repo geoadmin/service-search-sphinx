@@ -1,6 +1,6 @@
 ## SOURCES
 
-source src_ch_bfs_generalisierte-grenzen_agglomerationen_g1 : def_searchable_features
+source src_ch_bfs_generalisierte_grenzen_agglomerationen_g1 : def_searchable_features
 {
     sql_db = edi_dev
     sql_query = \
@@ -19,7 +19,7 @@ source src_ch_bfs_generalisierte-grenzen_agglomerationen_g1 : def_searchable_fea
 }
 
 
-source src_ch_bfs_generalisierte-grenzen_agglomerationen_g2 : def_searchable_features
+source src_ch_bfs_generalisierte_grenzen_agglomerationen_g2 : def_searchable_features
 {
     sql_db = edi_dev
     sql_query = \
@@ -39,22 +39,18 @@ source src_ch_bfs_generalisierte-grenzen_agglomerationen_g2 : def_searchable_fea
 
 ## INDICES
 
-index ch_bfs_generalisierte-grenzen_agglomerationen_g1
+index ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     type = plain
-    source = src_ch_bfs_generalisierte-grenzen_agglomerationen_g1
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_generalisierte-grenzen_agglomerationen_g1
+    source = src_ch_bfs_generalisierte_grenzen_agglomerationen_g1
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_generalisierte_grenzen_agglomerationen_g1
     docinfo = extern
-    charset_type = utf-8
     min_infix_len = 2
-    infix_fields = detail
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
-    enable_star = 1
+    expand_keywords = 1
 }
 
-index ch_bfs_generalisierte-grenzen_agglomerationen_g2 : ch_bfs_generalisierte-grenzen_agglomerationen_g1
+index ch_bfs_generalisierte_grenzen_agglomerationen_g2 : ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
-    source = src_ch_bfs_generalisierte-grenzen_agglomerationen_g2
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_generalisierte-grenzen_agglomerationen_g2
+    source = src_ch_bfs_generalisierte_grenzen_agglomerationen_g2
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_generalisierte_grenzen_agglomerationen_g2
 }

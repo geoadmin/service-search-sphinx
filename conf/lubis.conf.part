@@ -1,6 +1,6 @@
 ## SOURCES
 
-source src_ch_swisstopo_lubis-bildstreifen : def_searchable_features_with_year
+source src_ch_swisstopo_lubis_bildstreifen : def_searchable_features_with_year
 {
     sql_db = lubis_dev
     sql_query = \
@@ -19,7 +19,7 @@ source src_ch_swisstopo_lubis-bildstreifen : def_searchable_features_with_year
         FROM ads40.view_bildstreifen
 }
 
-source src_ch_swisstopo_lubis-luftbilder_schraegaufnahmen : def_searchable_features_with_year
+source src_ch_swisstopo_lubis_luftbilder_schraegaufnahmen : def_searchable_features_with_year
 {
     sql_db = lubis_dev
     sql_query = \
@@ -38,7 +38,7 @@ source src_ch_swisstopo_lubis-luftbilder_schraegaufnahmen : def_searchable_featu
         from swisstopo_oblique.view_bilder
 }
 
-source src_ch_swisstopo_lubis-luftbilder_farbe : def_searchable_features_with_year
+source src_ch_swisstopo_lubis_luftbilder_farbe : def_searchable_features_with_year
 {
     sql_db = lubis_dev
     sql_query = \
@@ -57,7 +57,7 @@ source src_ch_swisstopo_lubis-luftbilder_farbe : def_searchable_features_with_ye
         from public.luftbilder_swisstopo_color
 }
 
-source src_ch_swisstopo_lubis-luftbilder_schwarzweiss: def_searchable_features_with_year
+source src_ch_swisstopo_lubis_luftbilder_schwarzweiss: def_searchable_features_with_year
 {
     sql_db = lubis_dev
     sql_query = \
@@ -76,7 +76,7 @@ source src_ch_swisstopo_lubis-luftbilder_schwarzweiss: def_searchable_features_w
         from public.luftbilder_swisstopo_bw
 }
 
-source src_ch_swisstopo_lubis-luftbilder_infrarot: def_searchable_features_with_year
+source src_ch_swisstopo_lubis_luftbilder_infrarot: def_searchable_features_with_year
 {
     sql_db = lubis_dev
     sql_query = \
@@ -95,7 +95,7 @@ source src_ch_swisstopo_lubis-luftbilder_infrarot: def_searchable_features_with_
         from public.luftbilder_swisstopo_ir
 }
 
-source src_ch_swisstopo_lubis-luftbilder-dritte-kantone : def_searchable_features_with_year
+source src_ch_swisstopo_lubis_luftbilder_dritte_kantone : def_searchable_features_with_year
 {
     sql_db = lubis_dev
     sql_query = \
@@ -114,7 +114,7 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-kantone : def_searchable_feature
         from public.luftbilder_dritte_kantone
 }
 
-source src_ch_swisstopo_lubis-luftbilder-dritte-firmen : def_searchable_features_with_year
+source src_ch_swisstopo_lubis_luftbilder_dritte_firmen : def_searchable_features_with_year
 {
     sql_db = lubis_dev
     sql_query = \
@@ -133,7 +133,7 @@ source src_ch_swisstopo_lubis-luftbilder-dritte-firmen : def_searchable_features
         FROM public.luftbilder_dritte_firmen
 }
 
-source src_ch_swisstopo_lubis-terrestrische_aufnahmen : def_searchable_features_with_year
+source src_ch_swisstopo_lubis_terrestrische_aufnahmen : def_searchable_features_with_year
 {
     sql_db = lubis_dev
     sql_query = \
@@ -154,58 +154,54 @@ source src_ch_swisstopo_lubis-terrestrische_aufnahmen : def_searchable_features_
 
 ## INDICES
 
-index ch_swisstopo_lubis-bildstreifen
+index ch_swisstopo_lubis_bildstreifen
 {
     type = plain
-    source = src_ch_swisstopo_lubis-bildstreifen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-bildstreifen
+    source = src_ch_swisstopo_lubis_bildstreifen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_bildstreifen
     docinfo = extern
-    charset_type = utf-8
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
     min_infix_len = 2
-    infix_fields = detail
-    enable_star = 1
+    expand_keywords = 1
 }
 
-index ch_swisstopo_lubis-luftbilder_schraegaufnahmen : ch_swisstopo_lubis-bildstreifen
+index ch_swisstopo_lubis_luftbilder_schraegaufnahmen : ch_swisstopo_lubis_bildstreifen
 {
-    source = src_ch_swisstopo_lubis-luftbilder_schraegaufnahmen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-luftbilder_schraegaufnahmen
+    source = src_ch_swisstopo_lubis_luftbilder_schraegaufnahmen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_schraegaufnahmen
 }
 
-index ch_swisstopo_lubis-luftbilder_farbe : ch_swisstopo_lubis-bildstreifen
+index ch_swisstopo_lubis_luftbilder_farbe : ch_swisstopo_lubis_bildstreifen
 {
-    source = src_ch_swisstopo_lubis-luftbilder_farbe
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-luftbilder_farbe
+    source = src_ch_swisstopo_lubis_luftbilder_farbe
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_farbe
 }
 
-index ch_swisstopo_lubis-luftbilder_schwarzweiss : ch_swisstopo_lubis-luftbilder_farbe
+index ch_swisstopo_lubis_luftbilder_schwarzweiss : ch_swisstopo_lubis_luftbilder_farbe
 {
-    source = src_ch_swisstopo_lubis-luftbilder_schwarzweiss
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-luftbilder_schwarzweiss
+    source = src_ch_swisstopo_lubis_luftbilder_schwarzweiss
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_schwarzweiss
 }
 
-index ch_swisstopo_lubis-luftbilder_infrarot : ch_swisstopo_lubis-luftbilder_farbe
+index ch_swisstopo_lubis_luftbilder_infrarot : ch_swisstopo_lubis_luftbilder_farbe
 {
-    source = src_ch_swisstopo_lubis-luftbilder_infrarot
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-luftbilder_infrarot
+    source = src_ch_swisstopo_lubis_luftbilder_infrarot
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_infrarot
 }
 
-index ch_swisstopo_lubis-luftbilder-dritte-kantone : ch_swisstopo_lubis-luftbilder_farbe
+index ch_swisstopo_lubis_luftbilder_dritte_kantone : ch_swisstopo_lubis_luftbilder_farbe
 {
-    source = src_ch_swisstopo_lubis-luftbilder-dritte-kantone
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-luftbilder-dritte-kantone
+    source = src_ch_swisstopo_lubis_luftbilder_dritte_kantone
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_dritte_kantone
 }
 
-index ch_swisstopo_lubis-luftbilder-dritte-firmen : ch_swisstopo_lubis-luftbilder_farbe
+index ch_swisstopo_lubis_luftbilder_dritte_firmen : ch_swisstopo_lubis_luftbilder_farbe
 {
-    source = src_ch_swisstopo_lubis-luftbilder-dritte-firmen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-luftbilder-dritte-firmen
+    source = src_ch_swisstopo_lubis_luftbilder_dritte_firmen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_dritte_firmen
 }
 
-index ch_swisstopo_lubis-terrestrische_aufnahmen : ch_swisstopo_lubis-luftbilder_farbe
+index ch_swisstopo_lubis_terrestrische_aufnahmen : ch_swisstopo_lubis_luftbilder_farbe
 {
-    source = src_ch_swisstopo_lubis-terrestrische_aufnahmen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis-terrestrische_aufnahmen
+    source = src_ch_swisstopo_lubis_terrestrische_aufnahmen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_terrestrische_aufnahmen
 }

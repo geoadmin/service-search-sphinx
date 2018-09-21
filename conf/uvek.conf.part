@@ -44,7 +44,7 @@ source src_ch_bav_schienennetz : def_searchable_features
 }
 
 
-source src_ch_bav_haltestellen-oev : def_searchable_features
+source src_ch_bav_haltestellen_oev : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -82,7 +82,7 @@ source src_ch_astra_nationalstrassenachsen : def_searchable_features
 }
 
 
-source src_ch_astra_ivs-nat : def_searchable_features
+source src_ch_astra_ivs_nat : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -100,7 +100,7 @@ source src_ch_astra_ivs-nat : def_searchable_features
         from astra.ivs_nat
 }
 
-source src_ch_astra_ivs-reg_loc : def_searchable_features
+source src_ch_astra_ivs_reg_loc : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -118,7 +118,7 @@ source src_ch_astra_ivs-reg_loc : def_searchable_features
         from astra.ivs_reg_loc
 }
 
-source src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : def_searchable_features
+source src_ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -154,7 +154,7 @@ source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
         from astra.verkehr_reg_loc
 }
 
-source src_ch_astra_unfaelle-personenschaeden_motorraeder : def_searchable_features
+source src_ch_astra_unfaelle_personenschaeden_motorraeder : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -172,7 +172,7 @@ source src_ch_astra_unfaelle-personenschaeden_motorraeder : def_searchable_featu
         from astra.unf_pers_motorraeder
 }
 
-source src_ch_astra_unfaelle-personenschaeden_fussgaenger : def_searchable_features
+source src_ch_astra_unfaelle_personenschaeden_fussgaenger : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -190,7 +190,7 @@ source src_ch_astra_unfaelle-personenschaeden_fussgaenger : def_searchable_featu
         from astra.unf_pers_fussgaenger
 }
 
-source src_ch_astra_unfaelle-personenschaeden_fahrraeder : def_searchable_features
+source src_ch_astra_unfaelle_personenschaeden_fahrraeder : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -208,7 +208,7 @@ source src_ch_astra_unfaelle-personenschaeden_fahrraeder : def_searchable_featur
         from astra.unf_pers_fahrraeder
 }
 
-source src_ch_astra_unfaelle-personenschaeden_getoetete : def_searchable_features
+source src_ch_astra_unfaelle_personenschaeden_getoetete : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -226,7 +226,7 @@ source src_ch_astra_unfaelle-personenschaeden_getoetete : def_searchable_feature
         from astra.unf_pers_getoetete
 }
 
-source src_ch_astra_unfaelle-personenschaeden_alle : def_searchable_features
+source src_ch_astra_unfaelle_personenschaeden_alle : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -264,7 +264,7 @@ source src_ch_bakom_notruf : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-112_festnetz : def_searchable_features
+source src_ch_bakom_notruf_112_festnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -283,7 +283,7 @@ source src_ch_bakom_notruf-112_festnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-117_festnetz : def_searchable_features
+source src_ch_bakom_notruf_117_festnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -302,7 +302,7 @@ source src_ch_bakom_notruf-117_festnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-118_festnetz : def_searchable_features
+source src_ch_bakom_notruf_118_festnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -321,7 +321,7 @@ source src_ch_bakom_notruf-118_festnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-143_festnetz : def_searchable_features
+source src_ch_bakom_notruf_143_festnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -340,7 +340,7 @@ source src_ch_bakom_notruf-143_festnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-144_festnetz : def_searchable_features
+source src_ch_bakom_notruf_144_festnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -359,7 +359,7 @@ source src_ch_bakom_notruf-144_festnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-147_festnetz : def_searchable_features
+source src_ch_bakom_notruf_147_festnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -378,7 +378,7 @@ source src_ch_bakom_notruf-147_festnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-112_satellit : def_searchable_features
+source src_ch_bakom_notruf_112_satellit : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -397,7 +397,7 @@ source src_ch_bakom_notruf-112_satellit : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-112_mobilnetz : def_searchable_features
+source src_ch_bakom_notruf_112_mobilnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -416,7 +416,7 @@ source src_ch_bakom_notruf-112_mobilnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-117_mobilnetz : def_searchable_features
+source src_ch_bakom_notruf_117_mobilnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -435,7 +435,7 @@ source src_ch_bakom_notruf-117_mobilnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-118_mobilnetz : def_searchable_features
+source src_ch_bakom_notruf_118_mobilnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -454,7 +454,7 @@ source src_ch_bakom_notruf-118_mobilnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-143_mobilnetz : def_searchable_features
+source src_ch_bakom_notruf_143_mobilnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -473,7 +473,7 @@ source src_ch_bakom_notruf-143_mobilnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-144_mobilnetz : def_searchable_features
+source src_ch_bakom_notruf_144_mobilnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -492,7 +492,7 @@ source src_ch_bakom_notruf-144_mobilnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf-147_mobilnetz : def_searchable_features
+source src_ch_bakom_notruf_147_mobilnetz : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -511,7 +511,7 @@ source src_ch_bakom_notruf-147_mobilnetz : def_searchable_features
 }
 
 
-source src_ch_bakom_radio-fernsehsender : def_searchable_features
+source src_ch_bakom_radio_fernsehsender : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -530,7 +530,7 @@ source src_ch_bakom_radio-fernsehsender : def_searchable_features
 }
 
 
-source src_ch_bakom_versorgungsgebiet-tv : def_searchable_features
+source src_ch_bakom_versorgungsgebiet_tv : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -549,7 +549,7 @@ source src_ch_bakom_versorgungsgebiet-tv : def_searchable_features
 }
 
 
-source src_ch_bakom_versorgungsgebiet-ukw : def_searchable_features
+source src_ch_bakom_versorgungsgebiet_ukw : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -567,7 +567,7 @@ source src_ch_bakom_versorgungsgebiet-ukw : def_searchable_features
         from bakom.ukw_gebiet
 }
 
-source src_ch_bav_kataster-belasteter-standorte-oev : def_searchable_features
+source src_ch_bav_kataster_belasteter_standorte_oev : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -585,7 +585,7 @@ source src_ch_bav_kataster-belasteter-standorte-oev : def_searchable_features
         FROM bav.kataster_belasteter_standorte_oev
 }
 
-source src_ch_bazl_kataster-belasteter-standorte-zivilflugplaetze : def_searchable_features
+source src_ch_bazl_kataster_belasteter_standorte_zivilflugplaetze : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -603,7 +603,7 @@ source src_ch_bazl_kataster-belasteter-standorte-zivilflugplaetze : def_searchab
       FROM bazl.kataster_belasteter_standorte_zivflpl
 }
 
-source src_ch_bav_sachplan-infrastruktur-schiene_ausgangslage : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schiene_ausgangslage : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -622,7 +622,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_ausgangslage : def_searchable_f
 }
 
 ## This table is empyt in test..
-source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_1 : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schiene_anhorung_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -640,7 +640,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_1 : def_searchable_fea
         from bav.sis_fac_anhorung
 }
 
-source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_2 : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schiene_anhorung_2 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -658,7 +658,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_anhorung_2 : def_searchable_fea
         from bav.sis_pl_r_anhorung
 }
 
-source src_ch_bav_sachplan-infrastruktur-schifffahrt_ausgangslage : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -677,7 +677,7 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_ausgangslage : def_searchab
 }
 
 ## This table is empyt in test..
-source src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_1 : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -695,7 +695,7 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_1 : def_searchabl
         from bav.sif_fac_anhorung
 }
 
-source src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2 : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -713,7 +713,7 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2 : def_searchabl
         from bav.sif_pl_anhorung
 }
 
-source src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1 : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -731,7 +731,7 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1 : def_searchable_fe
         from bav.sif_fac_kraft
 }
 
-source src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2 : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -749,7 +749,7 @@ source src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2 : def_searchable_fe
         from bav.sif_pl_kraft
 }
 
-source src_ch_bav_sachplan-infrastruktur-schiene_kraft_1 : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schiene_kraft_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -767,7 +767,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_1 : def_searchable_featur
         from bav.sis_fac_kraft
 }
 
-source src_ch_bav_sachplan-infrastruktur-schiene_kraft_2 : def_searchable_features
+source src_ch_bav_sachplan_infrastruktur_schiene_kraft_2 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -786,7 +786,7 @@ source src_ch_bav_sachplan-infrastruktur-schiene_kraft_2 : def_searchable_featur
 }
 
 #Some tables might be empty!!
-source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_1 : def_searchable_features
+source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -804,7 +804,7 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_1 : def_searchable_fe
         from bfe.suel_fac_anhorung
 }
 
-source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_2 : def_searchable_features
+source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_2 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -822,7 +822,7 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_2 : def_searchable_fe
         from bfe.suel_pl_anhorung
 }
 
-source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_3 : def_searchable_features
+source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_3 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -840,7 +840,7 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_3 : def_searchable_fe
         from bfe.suel_fac_r_anhorung
 }
 
-source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_4 : def_searchable_features
+source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_4 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -858,7 +858,7 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_4 : def_searchable_fe
         from bfe.suel_pl_r_anhorung
 }
 
-source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_1 : def_searchable_features
+source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -876,7 +876,7 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_1 : def_searchable_featu
         from bfe.suel_fac_kraft
 }
 
-source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_2 : def_searchable_features
+source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_2 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -894,7 +894,7 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_2 : def_searchable_featu
         from bfe.suel_fac_r_kraft
 }
 
-source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_3 : def_searchable_features
+source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_3 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -912,7 +912,7 @@ source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_3 : def_searchable_featu
         from bfe.suel_pl_kraft
 }
 
-source src_ch_bfe_sachplan-uebertragungsleitungen_kraft_4 : def_searchable_features
+source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_4 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -948,7 +948,7 @@ source src_ch_bfe_kleinwasserkraftpotentiale : def_searchable_features
         from bfe.kleinwasserkraftpotentiale
 }
 
-source src_ch_bfe_stauanlagen-bundesaufsicht : def_searchable_features
+source src_ch_bfe_stauanlagen_bundesaufsicht : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -966,7 +966,7 @@ source src_ch_bfe_stauanlagen-bundesaufsicht : def_searchable_features
         FROM bfe.stauanlagen_bundesaufsicht
 }
 
-source src_ch_bfe_sachplan-geologie-tiefenlager_1 : def_searchable_features
+source src_ch_bfe_sachplan_geologie_tiefenlager_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -984,7 +984,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_1 : def_searchable_features
         FROM bfe.geologische_tiefenlager_fac
 }
 
-source src_ch_bfe_sachplan-geologie-tiefenlager_2 : def_searchable_features
+source src_ch_bfe_sachplan_geologie_tiefenlager_2 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1002,7 +1002,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_2 : def_searchable_features
         FROM bfe.geologische_tiefenlager
 }
 
-source src_ch_bfe_sachplan-geologie-tiefenlager_3 : def_searchable_features
+source src_ch_bfe_sachplan_geologie_tiefenlager_3 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1021,7 +1021,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_3 : def_searchable_features
 }
 # Layer ch.bfe.sachplan-geologie-tiefenlager-thematische-darstellung is composed of the same 3 layers
 
-source src_ch_bfe_statistik-wasserkraftanlagen : def_searchable_features
+source src_ch_bfe_statistik_wasserkraftanlagen : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1039,7 +1039,7 @@ source src_ch_bfe_statistik-wasserkraftanlagen : def_searchable_features
         FROM bfe.statistik_wasserkraftanlagen_powerplant
 }
 
-source src_ch_bfe_abgeltung-wasserkraftnutzung : def_searchable_features
+source src_ch_bfe_abgeltung_wasserkraftnutzung : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1093,7 +1093,7 @@ source src_ch_bfe_energiestaedte : def_searchable_features
         from bfe.energiestaedte
 }
 
-source src_ch_bfe_energiestaedte-energieregionen : def_searchable_features
+source src_ch_bfe_energiestaedte_energieregionen : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1111,7 +1111,7 @@ source src_ch_bfe_energiestaedte-energieregionen : def_searchable_features
         from bfe.energiestaedte_energieregionen
 }
 
-source src_ch_bfe_energiestaedte-2000watt-areale : def_searchable_features
+source src_ch_bfe_energiestaedte_2000watt_areale : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1129,7 +1129,7 @@ source src_ch_bfe_energiestaedte-2000watt-areale : def_searchable_features
         from bfe.energiestaedte_2000watt_areale
 }
 
-source src_ch_bfe_energiestaedte-2000watt-aufdemweg : def_searchable_features
+source src_ch_bfe_energiestaedte_2000watt_aufdemweg : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1273,7 +1273,7 @@ source src_ch_astra_mountainbikeland : def_searchable_features
       from astra.chmobil_mountainbikeland
 }
 
-source src_ch_astra_schwerverunfallte-kanton_alkohol : def_searchable_features
+source src_ch_astra_schwerverunfallte_kanton_alkohol : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1291,7 +1291,7 @@ source src_ch_astra_schwerverunfallte-kanton_alkohol : def_searchable_features
         from astra.unf_schwer
 }
 
-source src_ch_astra_schwerverunfallte-kanton_geschwindigkeit : def_searchable_features
+source src_ch_astra_schwerverunfallte_kanton_geschwindigkeit : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1309,7 +1309,7 @@ source src_ch_astra_schwerverunfallte-kanton_geschwindigkeit : def_searchable_fe
         from astra.unf_schwer
 }
 
-source src_ch_astra_schwerverunfallte-kanton_jahresvergleich : def_searchable_features
+source src_ch_astra_schwerverunfallte_kanton_jahresvergleich : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1327,7 +1327,7 @@ source src_ch_astra_schwerverunfallte-kanton_jahresvergleich : def_searchable_fe
         from astra.unf_schwer
 }
 
-source src_ch_astra_schwerverunfallte-kanton_pro_einwohner : def_searchable_features
+source src_ch_astra_schwerverunfallte_kanton_pro_einwohner : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1345,7 +1345,7 @@ source src_ch_astra_schwerverunfallte-kanton_pro_einwohner : def_searchable_feat
         from astra.unf_schwer
 }
 
-source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_1 : def_searchable_features
+source src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1363,7 +1363,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_1 : def_searchabl
         FROM bfe.geologische_tief_vernehm_fac_pt
 }
 
-source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_2 : def_searchable_features
+source src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1381,7 +1381,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_2 : def_searchabl
         FROM bfe.geologische_tief_vernehm_pm_area
 }
 
-source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_3 : def_searchable_features
+source src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3 : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1399,7 +1399,7 @@ source src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_3 : def_searchabl
         FROM bfe.geologische_tief_vernehm_pm_pt
 }
 
-source src_ch_bav_anlagen-schienengueterverkehr : def_searchable_features
+source src_ch_bav_anlagen_schienengueterverkehr : def_searchable_features
  {
      sql_db = uvek_dev
      sql_query = \
@@ -1419,542 +1419,538 @@ source src_ch_bav_anlagen-schienengueterverkehr : def_searchable_features
 
 ## INDICES
 
-index ch_astra_ivs-nat
+index ch_astra_ivs_nat
 {
     type = plain
-    source = src_ch_astra_ivs-nat
-    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-nat
+    source = src_ch_astra_ivs_nat
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs_nat
     docinfo = extern
-    charset_type = utf-8
     min_infix_len = 2
-    infix_fields = detail
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
-    enable_star = 1
+    expand_keywords = 1
 }
 
-index ch_astra_ivs-nat-verlaeufe : ch_astra_ivs-nat
+index ch_astra_ivs_nat_verlaeufe : ch_astra_ivs_nat
 {
-    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-nat-verlaeufe
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs_nat_verlaeufe
 }
 
-index ch_astra_ivs-reg_loc : ch_astra_ivs-nat
+index ch_astra_ivs_reg_loc : ch_astra_ivs_nat
 {
-    source = src_ch_astra_ivs-reg_loc
-    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs-reg_loc
+    source = src_ch_astra_ivs_reg_loc
+    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs_reg_loc
 }
 
-index ch_bav_schienennetz : ch_astra_ivs-nat
+index ch_bav_schienennetz : ch_astra_ivs_nat
 {
     source = src_ch_bav_schienennetz
     path = /var/lib/sphinxsearch/data/index/ch_bav_schienennetz
 }
 
-index ch_bav_haltestellen-oev : ch_astra_ivs-nat
+index ch_bav_haltestellen_oev : ch_astra_ivs_nat
 {
-    source = src_ch_bav_haltestellen-oev
-    path = /var/lib/sphinxsearch/data/index/ch_bav_haltestellen-oev
+    source = src_ch_bav_haltestellen_oev
+    path = /var/lib/sphinxsearch/data/index/ch_bav_haltestellen_oev
 }
 
-index ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet : ch_astra_ivs-nat
+index ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet : ch_astra_ivs_nat
 {
-    source = src_ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet
-    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen-uebergeordnet
+    source = src_ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet
+    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet
 }
 
-index ch_astra_strassenverkehrszaehlung_messstellen-regional_lokal : ch_astra_ivs-nat
+index ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal : ch_astra_ivs_nat
 {
     source = src_ch_astra_strassenverkehrszaehlung_lokal
-    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen-regional_lokal
+    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal
 }
 
-index ch_astra_unfaelle-personenschaeden_motorraeder : ch_astra_ivs-nat
+index ch_astra_unfaelle_personenschaeden_motorraeder : ch_astra_ivs_nat
 {
-    source = src_ch_astra_unfaelle-personenschaeden_motorraeder
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_motorraeder
+    source = src_ch_astra_unfaelle_personenschaeden_motorraeder
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_motorraeder
 }
 
-index ch_astra_unfaelle-personenschaeden_fussgaenger : ch_astra_ivs-nat
+index ch_astra_unfaelle_personenschaeden_fussgaenger : ch_astra_ivs_nat
 {
-    source = src_ch_astra_unfaelle-personenschaeden_fussgaenger
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_fussgaenger
+    source = src_ch_astra_unfaelle_personenschaeden_fussgaenger
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_fussgaenger
 }
 
-index ch_astra_unfaelle-personenschaeden_fahrraeder : ch_astra_ivs-nat
+index ch_astra_unfaelle_personenschaeden_fahrraeder : ch_astra_ivs_nat
 {
-    source = src_ch_astra_unfaelle-personenschaeden_fahrraeder
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_fahrraeder
+    source = src_ch_astra_unfaelle_personenschaeden_fahrraeder
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_fahrraeder
 }
 
-index ch_astra_unfaelle-personenschaeden_getoetete : ch_astra_ivs-nat
+index ch_astra_unfaelle_personenschaeden_getoetete : ch_astra_ivs_nat
 {
-    source = src_ch_astra_unfaelle-personenschaeden_getoetete
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_getoetete
+    source = src_ch_astra_unfaelle_personenschaeden_getoetete
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_getoetete
 }
 
-index ch_astra_unfaelle-personenschaeden_alle : ch_astra_ivs-nat
+index ch_astra_unfaelle_personenschaeden_alle : ch_astra_ivs_nat
 {
-    source = src_ch_astra_unfaelle-personenschaeden_alle
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle-personenschaeden_alle
+    source = src_ch_astra_unfaelle_personenschaeden_alle
+    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_alle
 }
 
-index ch_bakom_notruf : ch_astra_ivs-nat 
+index ch_bakom_notruf : ch_astra_ivs_nat 
 {
     source = src_ch_bakom_notruf
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf
 }
 
-index ch_bakom_notruf-112_festnetz : ch_astra_ivs-nat 
+index ch_bakom_notruf_112_festnetz : ch_astra_ivs_nat 
 {
-    source = src_ch_bakom_notruf-112_festnetz 
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-112_festnetz
+    source = src_ch_bakom_notruf_112_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_festnetz
 }
 
-index ch_bakom_notruf-117_festnetz : ch_astra_ivs-nat 
+index ch_bakom_notruf_117_festnetz : ch_astra_ivs_nat 
 {
-    source = src_ch_bakom_notruf-117_festnetz 
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-117_festnetz
+    source = src_ch_bakom_notruf_117_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_117_festnetz
 }
 
-index ch_bakom_notruf-118_festnetz : ch_astra_ivs-nat 
+index ch_bakom_notruf_118_festnetz : ch_astra_ivs_nat 
 {
-    source = src_ch_bakom_notruf-118_festnetz 
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-118_festnetz
+    source = src_ch_bakom_notruf_118_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_118_festnetz
 }
 
-index ch_bakom_notruf-143_festnetz : ch_astra_ivs-nat 
+index ch_bakom_notruf_143_festnetz : ch_astra_ivs_nat 
 {
-    source = src_ch_bakom_notruf-143_festnetz 
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-143_festnetz
+    source = src_ch_bakom_notruf_143_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_143_festnetz
 }
 
-index ch_bakom_notruf-144_festnetz : ch_astra_ivs-nat 
+index ch_bakom_notruf_144_festnetz : ch_astra_ivs_nat 
 {
-    source = src_ch_bakom_notruf-144_festnetz 
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-144_festnetz
+    source = src_ch_bakom_notruf_144_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_144_festnetz
 }
 
-index ch_bakom_notruf-147_festnetz : ch_astra_ivs-nat 
+index ch_bakom_notruf_147_festnetz : ch_astra_ivs_nat 
 {
-    source = src_ch_bakom_notruf-147_festnetz 
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-147_festnetz
+    source = src_ch_bakom_notruf_147_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_147_festnetz
 }
 
-index ch_bakom_notruf-112_mobilnetz : ch_astra_ivs-nat
+index ch_bakom_notruf_112_mobilnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf-112_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-112_mobilnetz
+    source = src_ch_bakom_notruf_112_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_mobilnetz
 }
 
-index ch_bakom_notruf-117_mobilnetz : ch_astra_ivs-nat
+index ch_bakom_notruf_117_mobilnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf-117_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-117_mobilnetz
+    source = src_ch_bakom_notruf_117_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_117_mobilnetz
 }
 
-index ch_bakom_notruf-118_mobilnetz : ch_astra_ivs-nat
+index ch_bakom_notruf_118_mobilnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf-118_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-118_mobilnetz
+    source = src_ch_bakom_notruf_118_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_118_mobilnetz
 }
 
-index ch_bakom_notruf-143_mobilnetz : ch_astra_ivs-nat
+index ch_bakom_notruf_143_mobilnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf-143_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-143_mobilnetz
+    source = src_ch_bakom_notruf_143_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_143_mobilnetz
 }
 
-index ch_bakom_notruf-144_mobilnetz : ch_astra_ivs-nat
+index ch_bakom_notruf_144_mobilnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf-144_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-144_mobilnetz
+    source = src_ch_bakom_notruf_144_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_144_mobilnetz
 }
 
-index ch_bakom_notruf-147_mobilnetz : ch_astra_ivs-nat
+index ch_bakom_notruf_147_mobilnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf-147_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-147_mobilnetz
+    source = src_ch_bakom_notruf_147_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_147_mobilnetz
 }
 
-index ch_bakom_notruf-112_satellit : ch_astra_ivs-nat
+index ch_bakom_notruf_112_satellit : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf-112_satellit
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf-112_satellit
+    source = src_ch_bakom_notruf_112_satellit
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_satellit
 }
 
-index ch_bakom_radio-fernsehsender : ch_astra_ivs-nat
+index ch_bakom_radio_fernsehsender : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_radio-fernsehsender
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_radio-fernsehsender
+    source = src_ch_bakom_radio_fernsehsender
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_radio_fernsehsender
 }
 
-index ch_bakom_versorgungsgebiet-tv : ch_astra_ivs-nat
+index ch_bakom_versorgungsgebiet_tv : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_versorgungsgebiet-tv
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet-tv
+    source = src_ch_bakom_versorgungsgebiet_tv
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet_tv
 }
 
-index ch_bakom_versorgungsgebiet-ukw : ch_astra_ivs-nat
+index ch_bakom_versorgungsgebiet_ukw : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_versorgungsgebiet-ukw
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet-ukw
+    source = src_ch_bakom_versorgungsgebiet_ukw
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet_ukw
 }
 
-index ch_bav_sachplan-infrastruktur-schiene_ausgangslage : ch_astra_ivs-nat
+index ch_bav_sachplan_infrastruktur_schiene_ausgangslage : ch_astra_ivs_nat
 {
-    source = src_ch_bav_sachplan-infrastruktur-schiene_ausgangslage
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schiene_ausgangslage
+    source = src_ch_bav_sachplan_infrastruktur_schiene_ausgangslage
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_ausgangslage
 }
 
-index ch_bav_kataster-belasteter-standorte-oev : ch_astra_ivs-nat
+index ch_bav_kataster_belasteter_standorte_oev : ch_astra_ivs_nat
 {   
-    source = src_ch_bav_kataster-belasteter-standorte-oev
-    path = /var/lib/sphinxsearch/data/index/ch_bav_kataster-belasteter-standorte-oev
+    source = src_ch_bav_kataster_belasteter_standorte_oev
+    path = /var/lib/sphinxsearch/data/index/ch_bav_kataster_belasteter_standorte_oev
 }
 
-index ch_bazl_kataster-belasteter-standorte-zivilflugplaetze : ch_astra_ivs-nat
+index ch_bazl_kataster_belasteter_standorte_zivilflugplaetze : ch_astra_ivs_nat
 {
-    source = src_ch_bazl_kataster-belasteter-standorte-zivilflugplaetze
-    path = /var/lib/sphinxsearch/data/index/ch_bazl_kataster-belasteter-standorte-zivilflugplaetze
+    source = src_ch_bazl_kataster_belasteter_standorte_zivilflugplaetze
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_kataster_belasteter_standorte_zivilflugplaetze
 }
 
-index ch_bav_sachplan-infrastruktur-schifffahrt_ausgangslage : ch_astra_ivs-nat
+index ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage : ch_astra_ivs_nat
 {
-    source = src_ch_bav_sachplan-infrastruktur-schifffahrt_ausgangslage
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schifffahrt_ausgangslage
+    source = src_ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage
 }
 
-index ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_1 : ch_astra_ivs-nat
+index ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1 : ch_astra_ivs_nat
 {
-    source = src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_1
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_1
+    source = src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1
 }
 
-index ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2 : ch_astra_ivs-nat
+index ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2 : ch_astra_ivs_nat
 {
-    source = src_ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2
+    source = src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2
 }
 
-index ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung
-{
-    type = distributed
-    local = ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_1
-    local = ch_bav_sachplan-infrastruktur-schifffahrt_anhoerung_2
-}
-
-index ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1 : ch_astra_ivs-nat
-{
-    source = src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1
-}
-
-index ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2 : ch_astra_ivs-nat
-{
-    source = src_ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2
-}
-
-index ch_bav_sachplan-infrastruktur-schifffahrt_kraft
+index ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung
 {
     type = distributed
-    local = ch_bav_sachplan-infrastruktur-schifffahrt_kraft_1
-    local = ch_bav_sachplan-infrastruktur-schifffahrt_kraft_2
+    local = ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1
+    local = ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2
 }
 
-index ch_bav_sachplan-infrastruktur-schiene_anhorung_1 : ch_astra_ivs-nat
+index ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1 : ch_astra_ivs_nat
 {
-    source = src_ch_bav_sachplan-infrastruktur-schiene_anhorung_1
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schiene_anhorung_1
+    source = src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1
 }
 
-index ch_bav_sachplan-infrastruktur-schiene_anhorung_2 : ch_astra_ivs-nat
+index ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2 : ch_astra_ivs_nat
 {
-    source = src_ch_bav_sachplan-infrastruktur-schiene_anhorung_2
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schiene_anhorung_2
+    source = src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2
 }
 
-index ch_bav_sachplan-infrastruktur-schiene_anhorung 
-{
-    type = distributed
-    local = ch_bav_sachplan-infrastruktur-schiene_anhorung_1
-    local = ch_bav_sachplan-infrastruktur-schiene_anhorung_2
-}
-
-index ch_bav_sachplan-infrastruktur-schiene_kraft_1 : ch_astra_ivs-nat
-{
-    source = src_ch_bav_sachplan-infrastruktur-schiene_kraft_1
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schiene_kraft_1
-}
-
-index ch_bav_sachplan-infrastruktur-schiene_kraft_2 : ch_astra_ivs-nat
-{
-    source = src_ch_bav_sachplan-infrastruktur-schiene_kraft_2
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan-infrastruktur-schiene_kraft_2
-}
-
-index ch_bav_sachplan-infrastruktur-schiene_kraft 
+index ch_bav_sachplan_infrastruktur_schifffahrt_kraft
 {
     type = distributed
-    local = ch_bav_sachplan-infrastruktur-schiene_kraft_1
-    local = ch_bav_sachplan-infrastruktur-schiene_kraft_2
+    local = ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1
+    local = ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2
 }
 
-index ch_bfe_kleinwasserkraftpotentiale : ch_astra_ivs-nat
+index ch_bav_sachplan_infrastruktur_schiene_anhorung_1 : ch_astra_ivs_nat
+{
+    source = src_ch_bav_sachplan_infrastruktur_schiene_anhorung_1
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_anhorung_1
+}
+
+index ch_bav_sachplan_infrastruktur_schiene_anhorung_2 : ch_astra_ivs_nat
+{
+    source = src_ch_bav_sachplan_infrastruktur_schiene_anhorung_2
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_anhorung_2
+}
+
+index ch_bav_sachplan_infrastruktur_schiene_anhorung 
+{
+    type = distributed
+    local = ch_bav_sachplan_infrastruktur_schiene_anhorung_1
+    local = ch_bav_sachplan_infrastruktur_schiene_anhorung_2
+}
+
+index ch_bav_sachplan_infrastruktur_schiene_kraft_1 : ch_astra_ivs_nat
+{
+    source = src_ch_bav_sachplan_infrastruktur_schiene_kraft_1
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_kraft_1
+}
+
+index ch_bav_sachplan_infrastruktur_schiene_kraft_2 : ch_astra_ivs_nat
+{
+    source = src_ch_bav_sachplan_infrastruktur_schiene_kraft_2
+    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_kraft_2
+}
+
+index ch_bav_sachplan_infrastruktur_schiene_kraft 
+{
+    type = distributed
+    local = ch_bav_sachplan_infrastruktur_schiene_kraft_1
+    local = ch_bav_sachplan_infrastruktur_schiene_kraft_2
+}
+
+index ch_bfe_kleinwasserkraftpotentiale : ch_astra_ivs_nat
 {
     source = src_ch_bfe_kleinwasserkraftpotentiale
     path = /var/lib/sphinxsearch/data/index/ch_bfe_kleinwasserkraftpotentiale
 }
 
-index ch_bfe_stauanlagen-bundesaufsicht : ch_astra_ivs-nat
+index ch_bfe_stauanlagen_bundesaufsicht : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_stauanlagen-bundesaufsicht
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_stauanlagen-bundesaufsicht
+    source = src_ch_bfe_stauanlagen_bundesaufsicht
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_stauanlagen_bundesaufsicht
 }
 
-index ch_bfe_sachplan-geologie-tiefenlager_1 : ch_astra_ivs-nat
+index ch_bfe_sachplan_geologie_tiefenlager_1 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-geologie-tiefenlager_1
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_1
+    source = src_ch_bfe_sachplan_geologie_tiefenlager_1
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_1
 }
 
-index ch_bfe_sachplan-geologie-tiefenlager_2 : ch_astra_ivs-nat
+index ch_bfe_sachplan_geologie_tiefenlager_2 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-geologie-tiefenlager_2
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_2
+    source = src_ch_bfe_sachplan_geologie_tiefenlager_2
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_2
 }
 
-index ch_bfe_sachplan-geologie-tiefenlager_3 : ch_astra_ivs-nat
+index ch_bfe_sachplan_geologie_tiefenlager_3 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-geologie-tiefenlager_3
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_3
+    source = src_ch_bfe_sachplan_geologie_tiefenlager_3
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_3
 }
 
-index ch_bfe_sachplan-geologie-tiefenlager
-{
-    type = distributed
-    local = ch_bfe_sachplan-geologie-tiefenlager_1
-    local = ch_bfe_sachplan-geologie-tiefenlager_2
-    local = ch_bfe_sachplan-geologie-tiefenlager_3
-}
-
-index ch_bfe_sachplan-geologie-tiefenlager-thematische-darstellung
+index ch_bfe_sachplan_geologie_tiefenlager
 {
     type = distributed
-    local = ch_bfe_sachplan-geologie-tiefenlager_1
-    local = ch_bfe_sachplan-geologie-tiefenlager_2
-    local = ch_bfe_sachplan-geologie-tiefenlager_3
+    local = ch_bfe_sachplan_geologie_tiefenlager_1
+    local = ch_bfe_sachplan_geologie_tiefenlager_2
+    local = ch_bfe_sachplan_geologie_tiefenlager_3
 }
 
-index ch_bfe_statistik-wasserkraftanlagen : ch_astra_ivs-nat
+index ch_bfe_sachplan_geologie_tiefenlager_thematische_darstellung
 {
-    source = src_ch_bfe_statistik-wasserkraftanlagen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_statistik-wasserkraftanlagen
+    type = distributed
+    local = ch_bfe_sachplan_geologie_tiefenlager_1
+    local = ch_bfe_sachplan_geologie_tiefenlager_2
+    local = ch_bfe_sachplan_geologie_tiefenlager_3
 }
 
-index ch_bfe_abgeltung-wasserkraftnutzung : ch_astra_ivs-nat
+index ch_bfe_statistik_wasserkraftanlagen : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_abgeltung-wasserkraftnutzung
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_abgeltung-wasserkraftnutzung
+    source = src_ch_bfe_statistik_wasserkraftanlagen
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_statistik_wasserkraftanlagen
 }
 
-index ch_bfe_kernkraftwerke : ch_astra_ivs-nat
+index ch_bfe_abgeltung_wasserkraftnutzung : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_abgeltung_wasserkraftnutzung
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_abgeltung_wasserkraftnutzung
+}
+
+index ch_bfe_kernkraftwerke : ch_astra_ivs_nat
 {
     source = src_ch_bfe_kernkraftwerke
     path = /var/lib/sphinxsearch/data/index/ch_bfe_kernkraftwerke
 }
 
-index ch_bfe_energiestaedte : ch_astra_ivs-nat
+index ch_bfe_energiestaedte : ch_astra_ivs_nat
 {
     source = src_ch_bfe_energiestaedte
     path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte
 }
 
-index ch_bfe_energiestaedte-energieregionen : ch_astra_ivs-nat
+index ch_bfe_energiestaedte_energieregionen : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_energiestaedte-energieregionen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte-energieregionen
+    source = src_ch_bfe_energiestaedte_energieregionen
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_energieregionen
 }
 
-index ch_bfe_energiestaedte-2000watt-areale : ch_astra_ivs-nat
+index ch_bfe_energiestaedte_2000watt_areale : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_energiestaedte-2000watt-areale
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte-2000watt-areale
+    source = src_ch_bfe_energiestaedte_2000watt_areale
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_2000watt_areale
 }
 
-index ch_bfe_energiestaedte-2000watt-aufdemweg : ch_astra_ivs-nat
+index ch_bfe_energiestaedte_2000watt_aufdemweg : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_energiestaedte-2000watt-aufdemweg 
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte-2000watt-aufdemweg 
+    source = src_ch_bfe_energiestaedte_2000watt_aufdemweg 
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_2000watt_aufdemweg 
 }
 
-index ch_bazl_luftfahrthindernis : ch_astra_ivs-nat
+index ch_bazl_luftfahrthindernis : ch_astra_ivs_nat
 {
     source = src_ch_bazl_luftfahrthindernis
     path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis
 }
 
-index ch_bfe_windenergieanlagen : ch_astra_ivs-nat
+index ch_bfe_windenergieanlagen : ch_astra_ivs_nat
 {
     source = src_ch_bfe_windenergieanlagen
     path = /var/lib/sphinxsearch/data/index/ch_bfe_windenergieanlagen
 }
 
-index ch_bfe_sachplan-uebertragungsleitungen_anhorung_1 : ch_astra_ivs-nat
+index ch_bfe_sachplan_uebertragungsleitungen_anhorung_1 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_1
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-uebertragungsleitungen_anhorung_1
+    source = src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_1
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_1
 }
 
-index ch_bfe_sachplan-uebertragungsleitungen_anhorung_2 : ch_astra_ivs-nat
+index ch_bfe_sachplan_uebertragungsleitungen_anhorung_2 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_2
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-uebertragungsleitungen_anhorung_2
+    source = src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_2
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_2
 }
 
-index ch_bfe_sachplan-uebertragungsleitungen_anhorung_3 : ch_astra_ivs-nat
+index ch_bfe_sachplan_uebertragungsleitungen_anhorung_3 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_3
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-uebertragungsleitungen_anhorung_3
+    source = src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_3
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_3
 }
 
-index ch_bfe_sachplan-uebertragungsleitungen_anhorung_4 : ch_astra_ivs-nat
+index ch_bfe_sachplan_uebertragungsleitungen_anhorung_4 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-uebertragungsleitungen_anhorung_4
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-uebertragungsleitungen_anhorung_4
+    source = src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_4
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_4
 }
 
-index ch_bfe_sachplan-uebertragungsleitungen_anhorung 
-{
-    type = distributed
-    local = ch_bfe_sachplan-uebertragungsleitungen_anhorung_1
-    local = ch_bfe_sachplan-uebertragungsleitungen_anhorung_2
-    local = ch_bfe_sachplan-uebertragungsleitungen_anhorung_3
-    local = ch_bfe_sachplan-uebertragungsleitungen_anhorung_4
-}
-
-index ch_bfe_sachplan-uebertragungsleitungen_kraft_1 : ch_astra_ivs-nat
-{
-    source = src_ch_bfe_sachplan-uebertragungsleitungen_kraft_1
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-uebertragungsleitungen_kraft_1
-}
-
-index ch_bfe_sachplan-uebertragungsleitungen_kraft_2 : ch_astra_ivs-nat
-{
-    source = src_ch_bfe_sachplan-uebertragungsleitungen_kraft_2
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-uebertragungsleitungen_kraft_2
-}
-
-index ch_bfe_sachplan-uebertragungsleitungen_kraft_3 : ch_astra_ivs-nat
-{
-    source = src_ch_bfe_sachplan-uebertragungsleitungen_kraft_3
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-uebertragungsleitungen_kraft_3
-}
-
-index ch_bfe_sachplan-uebertragungsleitungen_kraft_4 : ch_astra_ivs-nat
-{
-    source = src_ch_bfe_sachplan-uebertragungsleitungen_kraft_4
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-uebertragungsleitungen_kraft_4
-}
-
-index ch_bfe_sachplan-uebertragungsleitungen_kraft 
+index ch_bfe_sachplan_uebertragungsleitungen_anhorung 
 {
     type = distributed
-    local = ch_bfe_sachplan-uebertragungsleitungen_kraft_1
-    local = ch_bfe_sachplan-uebertragungsleitungen_kraft_2
-    local = ch_bfe_sachplan-uebertragungsleitungen_kraft_3
-    local = ch_bfe_sachplan-uebertragungsleitungen_kraft_4
+    local = ch_bfe_sachplan_uebertragungsleitungen_anhorung_1
+    local = ch_bfe_sachplan_uebertragungsleitungen_anhorung_2
+    local = ch_bfe_sachplan_uebertragungsleitungen_anhorung_3
+    local = ch_bfe_sachplan_uebertragungsleitungen_anhorung_4
 }
 
-index ch_bfe_energieforschung : ch_astra_ivs-nat
+index ch_bfe_sachplan_uebertragungsleitungen_kraft_1 : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_sachplan_uebertragungsleitungen_kraft_1
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_1
+}
+
+index ch_bfe_sachplan_uebertragungsleitungen_kraft_2 : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_sachplan_uebertragungsleitungen_kraft_2
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_2
+}
+
+index ch_bfe_sachplan_uebertragungsleitungen_kraft_3 : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_sachplan_uebertragungsleitungen_kraft_3
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_3
+}
+
+index ch_bfe_sachplan_uebertragungsleitungen_kraft_4 : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_sachplan_uebertragungsleitungen_kraft_4
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_4
+}
+
+index ch_bfe_sachplan_uebertragungsleitungen_kraft 
+{
+    type = distributed
+    local = ch_bfe_sachplan_uebertragungsleitungen_kraft_1
+    local = ch_bfe_sachplan_uebertragungsleitungen_kraft_2
+    local = ch_bfe_sachplan_uebertragungsleitungen_kraft_3
+    local = ch_bfe_sachplan_uebertragungsleitungen_kraft_4
+}
+
+index ch_bfe_energieforschung : ch_astra_ivs_nat
 {
     source = src_ch_bfe_energieforschung
     path = /var/lib/sphinxsearch/data/index/ch_bfe_energieforschung
 }
 
-index ch_astra_wanderland : ch_astra_ivs-nat
+index ch_astra_wanderland : ch_astra_ivs_nat
 {
     source = src_ch_astra_wanderland
     path = /var/lib/sphinxsearch/data/index/ch_astra_wanderland
 }
 
-index ch_astra_veloland : ch_astra_ivs-nat
+index ch_astra_veloland : ch_astra_ivs_nat
 {
     source = src_ch_astra_veloland
     path = /var/lib/sphinxsearch/data/index/ch_astra_veloland
 }
 
-index ch_astra_skatingland : ch_astra_ivs-nat
+index ch_astra_skatingland : ch_astra_ivs_nat
 {
     source = src_ch_astra_skatingland
     path = /var/lib/sphinxsearch/data/index/ch_astra_skatingland
 }
 
-index ch_astra_mountainbikeland : ch_astra_ivs-nat
+index ch_astra_mountainbikeland : ch_astra_ivs_nat
 {
     source = src_ch_astra_mountainbikeland
     path = /var/lib/sphinxsearch/data/index/ch_astra_mountainbikeland
 }
 
-index ch_astra_schwerverunfallte-kanton_alkohol : ch_astra_ivs-nat
+index ch_astra_schwerverunfallte_kanton_alkohol : ch_astra_ivs_nat
 {
-    source = src_ch_astra_schwerverunfallte-kanton_alkohol
-    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_alkohol
+    source = src_ch_astra_schwerverunfallte_kanton_alkohol
+    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte_kanton_alkohol
 }
 
-index ch_astra_schwerverunfallte-kanton_geschwindigkeit : ch_astra_ivs-nat
+index ch_astra_schwerverunfallte_kanton_geschwindigkeit : ch_astra_ivs_nat
 {
-    source = src_ch_astra_schwerverunfallte-kanton_geschwindigkeit
-    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_geschwindigkeit
+    source = src_ch_astra_schwerverunfallte_kanton_geschwindigkeit
+    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte_kanton_geschwindigkeit
 }
 
-index ch_astra_schwerverunfallte-kanton_jahresvergleich : ch_astra_ivs-nat
+index ch_astra_schwerverunfallte_kanton_jahresvergleich : ch_astra_ivs_nat
 {
-    source = src_ch_astra_schwerverunfallte-kanton_jahresvergleich
-    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_jahresvergleich
+    source = src_ch_astra_schwerverunfallte_kanton_jahresvergleich
+    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte_kanton_jahresvergleich
 }
 
-index ch_astra_schwerverunfallte-kanton_pro_einwohner : ch_astra_ivs-nat
+index ch_astra_schwerverunfallte_kanton_pro_einwohner : ch_astra_ivs_nat
 {
-    source = src_ch_astra_schwerverunfallte-kanton_pro_einwohner
-    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte-kanton_pro_einwohner
+    source = src_ch_astra_schwerverunfallte_kanton_pro_einwohner
+    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte_kanton_pro_einwohner
 }
 
-index ch_astra_nationalstrassenachsen : ch_astra_ivs-nat
+index ch_astra_nationalstrassenachsen : ch_astra_ivs_nat
 {
     source = src_ch_astra_nationalstrassenachsen
     path = /var/lib/sphinxsearch/data/index/ch_astra_nationalstrassenachsen
 }
 
-index ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_1 : ch_astra_ivs-nat
+index ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_1
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_1
+    source = src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1
 }
 
-index ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_2 : ch_astra_ivs-nat
+index ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_2
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_2
+    source = src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2
 }
 
-index ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_3 : ch_astra_ivs-nat
+index ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3 : ch_astra_ivs_nat
 {
-    source = src_ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_3
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_3
+    source = src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3
 }
 
-index ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung
+index ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung
 {
     type = distributed
-    local = ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_1
-    local = ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_2
-    local = ch_bfe_sachplan-geologie-tiefenlager_vernehmlassung_3
+    local = ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1
+    local = ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2
+    local = ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3
 }
 
-index ch_bav_anlagen-schienengueterverkehr : ch_astra_ivs-nat
+index ch_bav_anlagen_schienengueterverkehr : ch_astra_ivs_nat
 {
-    source = src_ch_bav_anlagen-schienengueterverkehr
-    path = /var/lib/sphinxsearch/data/index/ch_bav_anlagen-schienengueterverkehr
+    source = src_ch_bav_anlagen_schienengueterverkehr
+    path = /var/lib/sphinxsearch/data/index/ch_bav_anlagen_schienengueterverkehr
 }
 
