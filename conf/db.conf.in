@@ -44,10 +44,8 @@ searchd
     pid_file = /var/run/sphinxsearch/searchd.pid
     # mysql listener
     listen = localhost:9306:mysql41
-    ondisk_dict_default = 1
     preopen_indexes = 0
     dist_threads = 7
     read_timeout = 5
     max_children = 50
-    max_matches = 10000
 }

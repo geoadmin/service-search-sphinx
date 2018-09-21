@@ -4,7 +4,7 @@ service-sphinxsearch
 Sphinx Search service for RE3
 ---------------------------------------------------
 
-### SPHINX doc (2.1.5):
+### SPHINX doc (2.2.11):
 
 - http://sphinxsearch.com/docs/
 - http://sphinxsearch.com/docs/current.html
@@ -23,10 +23,9 @@ Staging          | URL
 
 ```bash
 $ make template
-$ sudo su sphinxsearch
 $ make move-template
-$ /etc/init.d/sphinxsearch stop
-$ /etc/init.d/sphinxsearch start
+$ sudo -u root systemctl stop sphinxsearch
+$ sudo -u root systemctl start sphinxsearch
 ```
 
 ### Service Details:
@@ -45,20 +44,16 @@ Object            | Path
 
 ### Search Daemon:
 
-```bash
-$ sudo su - sphinxsearch
-```
-
 #### stop
 
 ```bash
-$ /etc/init.d/sphinxsearch stop
+$ sudo -u root systemctl stop sphinxsearch
 ```
 
 #### start
 
 ```bash
-$ /etc/init.d/sphinxsearch start
+$ sudo -u root systemctl start sphinxsearch
 ```
 
 #### validate config
@@ -72,13 +67,13 @@ $ indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
 There will be a service restart after every index
 
 ```bash
-$ indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf index1 index2 index3
+$ sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf index1 index2 index3
 ```
 
 #### rebuild / build all indexes
 
 ```bash
-$ indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf --all
+$ sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf --all
 ```
 multithread indexer is not possible: http://sphinxsearch.com/forum/view.html?id=3936a
 
@@ -96,7 +91,6 @@ To create all indices
 
 ```
 make template
-sudo su sphinxsearch
 make move-template
 make index-all
 ```

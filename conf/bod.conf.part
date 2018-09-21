@@ -3,7 +3,6 @@
 source layers : def_pqsql
 {
     sql_db = bod_dev
-    sql_attr_bigint = id
     sql_attr_string = lang
     sql_attr_string = origin
     sql_attr_string = label
@@ -110,9 +109,8 @@ index layers
 {
     type = plain
     docinfo = extern
-    charset_type = utf-8
     min_infix_len = 2
-    infix_fields = detail, title, layer, topics, staging
+    expand_keywords = 1
 }
 
 
@@ -120,7 +118,6 @@ index layers_de : layers
 {
     source = src_layers_de
     path = /var/lib/sphinxsearch/data/index/layers_de
-    ondisk_dict = 0
     preopen = 1
 }
 

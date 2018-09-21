@@ -116,7 +116,7 @@ SPH_GROUPBY_ATTRPAIR    = 5
 
 
 class SphinxClient:
-    def __init__ (self):
+    def __init__ (self, timeout=0):
         """
         Create a new client object, and fill defaults.
         """
@@ -225,7 +225,7 @@ class SphinxClient:
                 addr = ( self._host, self._port )
                 desc = '%s;%s' % addr
             sock = socket.socket ( af, socket.SOCK_STREAM )
-            sock.settimeout ( self._timeout )
+            sock.settimeout ( 200 )
             sock.connect ( addr )
         except socket.error as msg:
             if sock:

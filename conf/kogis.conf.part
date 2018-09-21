@@ -1,6 +1,6 @@
 ## SOURCES
 
-source src_ch_swisstopo_fixpunkte-lfp1 : def_searchable_features
+source src_ch_swisstopo_fixpunkte_lfp1 : def_searchable_features
 {
     sql_db = kogis_dev
     sql_query = \
@@ -18,7 +18,7 @@ source src_ch_swisstopo_fixpunkte-lfp1 : def_searchable_features
         from fpds.punkt_lage_lfp1
 }
 
-source src_ch_swisstopo_fixpunkte-lfp2 : def_searchable_features
+source src_ch_swisstopo_fixpunkte_lfp2 : def_searchable_features
 {
     sql_db = kogis_dev
     sql_query = \
@@ -36,7 +36,7 @@ source src_ch_swisstopo_fixpunkte-lfp2 : def_searchable_features
         from fpds.punkt_lage_lfp2
 }
 
-source src_ch_swisstopo_fixpunkte-hfp1 : def_searchable_features
+source src_ch_swisstopo_fixpunkte_hfp1 : def_searchable_features
 {
     sql_db = kogis_dev
     sql_query = \
@@ -54,7 +54,7 @@ source src_ch_swisstopo_fixpunkte-hfp1 : def_searchable_features
         from fpds.punkt_hoehe_hfp1
 }
 
-source src_ch_swisstopo_fixpunkte-hfp2 : def_searchable_features
+source src_ch_swisstopo_fixpunkte_hfp2 : def_searchable_features
 {
     sql_db = kogis_dev
     sql_query = \
@@ -97,39 +97,35 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
 
 ## INDICES
 
-index ch_swisstopo_fixpunkte-hfp1
+index ch_swisstopo_fixpunkte_hfp1
 {
     type = plain
-    source = src_ch_swisstopo_fixpunkte-hfp1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-hfp1
+    source = src_ch_swisstopo_fixpunkte_hfp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp1
     docinfo = extern
-    charset_type = utf-8
     min_infix_len = 2
-    infix_fields = detail
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
-    enable_star = 1
+    expand_keywords = 1
 }
 
-index ch_swisstopo_fixpunkte-hfp2 : ch_swisstopo_fixpunkte-hfp1
+index ch_swisstopo_fixpunkte_hfp2 : ch_swisstopo_fixpunkte_hfp1
 {
-    source = src_ch_swisstopo_fixpunkte-hfp2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-hfp2
+    source = src_ch_swisstopo_fixpunkte_hfp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp2
 }
 
-index ch_swisstopo_fixpunkte-lfp1 : ch_swisstopo_fixpunkte-hfp1
+index ch_swisstopo_fixpunkte_lfp1 : ch_swisstopo_fixpunkte_hfp1
 {
-    source = src_ch_swisstopo_fixpunkte-lfp1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-lfp1
+    source = src_ch_swisstopo_fixpunkte_lfp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp1
 }
 
-index ch_swisstopo_fixpunkte-lfp2 : ch_swisstopo_fixpunkte-hfp1
+index ch_swisstopo_fixpunkte_lfp2 : ch_swisstopo_fixpunkte_hfp1
 {
-    source = src_ch_swisstopo_fixpunkte-lfp2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte-lfp2
+    source = src_ch_swisstopo_fixpunkte_lfp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp2
 }
 
-index ch_bfs_gebaeude_wohnungs_register : ch_swisstopo_fixpunkte-hfp1
+index ch_bfs_gebaeude_wohnungs_register : ch_swisstopo_fixpunkte_hfp1
 {
     min_infix_len = 1
     source = src_ch_bfs_gebaeude_wohnungs_register

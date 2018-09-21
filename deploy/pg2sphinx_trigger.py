@@ -83,9 +83,6 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
 
     # Some initial tests
-    if not getpass.getuser() == USER:
-        sys.exit("ERROR: Script has to be executed with user %s, you are executing the script with %s"  % (USER,getpass.getuser()) )
-
     if not os.path.isfile(options.config):
         sys.exit("ERROR: Sphinx config file doesn't exist: %s" % options.config)
 
@@ -273,7 +270,10 @@ if __name__ == '__main__':
             print("no indexes are using the %s pattern: %s" % (filter_option, options.database_filter or options.index_filter))
     elif options.command == 'update':
         if resultat:
-            sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (options.config,' '.join(resultat))
+            if getpass.getuser() == USER:
+                sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (options.config,' '.join(resultat))
+            else:
+                sphinx_command = 'sudo -u %s indexer --config %s --verbose --rotate --sighup-each %s' % (USER,options.config,' '.join(resultat))
             print sphinx_command
             # uncomment following lines for real update
             p = subprocess.Popen(sphinx_command,stdout=subprocess.PIPE,shell=True, env=myenv)

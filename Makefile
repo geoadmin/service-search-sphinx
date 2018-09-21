@@ -27,9 +27,6 @@ help:
 	@echo
 	@echo "Deploy:"
 	@echo
-	@echo "- deploy-int                Deploy all the indices in integration"
-	@echo "- deploy-prod               Deploy all the indices in production"
-	@echo "- deploy-demo               Deploy all the indices on a demo instance"
 	@echo "- deploy-int-config         Deploy the sphinx config only in integration, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
 	@echo "                            an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this prefix will be updated.,"
 	@echo "- deploy-prod-config        Deploy the sphinx config only in production, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
@@ -79,21 +76,6 @@ template: .git/hooks/pre-commit
 	@if [ "${CONFIG_VALID}" = "config valid" ]; then \
 	  echo ${CONFIG_VALID}; \
 	else echo "Invalid config" && indextool --checkconfig -c conf/sphinx.conf && exit 2; fi
-
-.PHONY: deploy-int
-deploy-int:
-	sudo -u deploy deploy  -r deploy/deploy.cfg int
-	cd deploy && bash deploy-conf-only.sh -t int 2> /dev/null
-
-.PHONY: deploy-prod
-deploy-prod:
-	sudo -u deploy deploy  -r deploy/deploy.cfg prod
-	cd deploy && bash deploy-conf-only.sh -t prod
-
-.PHONY: deploy-demo
-deploy-demo:
-	sudo -u deploy deploy  -r deploy/deploy.cfg demo
-	cd deploy && bash deploy-conf-only.sh -t demo
 
 .PHONY: deploy-int-clean_index
 deploy-int-clean_index:

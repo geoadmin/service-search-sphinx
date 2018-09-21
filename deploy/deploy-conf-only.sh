@@ -1,7 +1,7 @@
 #!/bin/bash
 SPHINXCONFIG=/etc/sphinxsearch/sphinx.conf
 SPHINXWORDFORMS=/var/lib/sphinxsearch/data/index/wordforms_*.txt
-DEPLOYCONFIG=./deploy-conf-only.cfg
+DEPLOYCONFIG=./deploy.cfg
 
 usage="
 deploy-conf-only.sh
@@ -100,10 +100,9 @@ else
     sed -i "s/.*\[env\].*/&\nclean_index = $clean_index/" $DEPLOYCONFIG
 fi
 
-sudo -u deploy deploy -r deploy-conf-only.cfg $target
+sudo -u deploy deploy -r deploy.cfg $target
 
 # reset dbpattern and indexpattern to null
 perl -p -i -e "s/(dbpattern[\s]*=)([\w\s\.\-]*)$/\1 \n/g" $DEPLOYCONFIG
 perl -p -i -e "s/(indexpattern[\s]*=)(.*)/\1 /g" $DEPLOYCONFIG
 perl -p -i -e "s/(clean_index[\s]*=)(.*)/\1 /g" $DEPLOYCONFIG
-

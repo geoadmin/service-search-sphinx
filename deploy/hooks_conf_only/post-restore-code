@@ -67,23 +67,28 @@ then
     exit 0;
 fi
 
+# activate sphinx service
+echo "activate sphinx service..."
+sed 's/START=no/START=yes/g' /etc/default/sphinxsearch > /tmp/default_sphinxsearch
+cp /tmp/default_sphinxsearch /etc/default/sphinxsearch
+
 echo "create index directory $SPHINXINDEX if it does not yet exists..."
 sudo -u sphinxsearch mkdir -p $SPHINXINDEX
 
 echo "make backup of current sphinx config..."
-sudo -u sphinxsearch cp -f /etc/sphinxsearch/sphinx.conf /etc/sphinxsearch/sphinx.conf.backup
+cp -f /etc/sphinxsearch/sphinx.conf /etc/sphinxsearch/sphinx.conf.backup
 
 # start sphinxsearch if it is not running with old configuration
 if ! pgrep searchd > /dev/null
 then
     echo -e "    ${red}WARNING: service was not running${NC}"
     echo "starting sphinx service with old configuration ..."
-    sudo -u sphinxsearch /etc/init.d/sphinxsearch start | grep -i "WARNING\|ERROR"
+    sudo -u root systemctl start sphinxsearch
 fi
 
 echo "copy files preserving timestamp ..."
-sudo -u sphinxsearch cp -f $CODE_DIR""sphinx.conf /etc/sphinxsearch/
-sudo -u sphinxsearch cp -f $CODE_DIR""*.py /etc/sphinxsearch/
+cp -f $CODE_DIR""sphinx.conf /etc/sphinxsearch/
+cp -f $CODE_DIR""*.py /etc/sphinxsearch/
 sudo -u sphinxsearch rsync --update --delete --include="*/" --include="*txt" --include="*py" --exclude="*" -qavz $CODE_DIR $SPHINXINDEX
 
 DBSUFFIX=$DBSUFFIX_DEFAULT
@@ -106,27 +111,29 @@ then
 fi
 
 echo "replace db suffix with $DBSUFFIX (p.e. lubis_3d_dev -> lubis_3d$DBSUFFIX)..."
-#                                       (----------$1---------)(---$3---)(-------------$4--------------)   (---$5--)
-sudo -u sphinxsearch perl -X -wi -pe 's#(sql_db[ \t]*=[ \t]*\b)(([^\W"]+)(_master|_dev|_prod|_int|_demo)\b|([^\W"]+))#$1$3$5'$DBSUFFIX'#gi' /etc/sphinxsearch/sphinx.conf
+#                  (----------$1---------)(---$3---)(-------------$4--------------)   (---$5--)
+perl -X -wi -pe 's#(sql_db[ \t]*=[ \t]*\b)(([^\W"]+)(_master|_dev|_prod|_int|_demo)\b|([^\W"]+))#$1$3$5'$DBSUFFIX'#gi' /etc/sphinxsearch/sphinx.conf
 
 if [ ! -z "$DBPATTERN" ]
 then
     echo "updating sphinx indexes, using database pattern: $DBPATTERN"
     if [ "$DBPATTERN" == "all" ]
     then
-        sudo -u sphinxsearch python -u $PGTRIGGER -c update 
+        python -u $PGTRIGGER -c update
     else
-        sudo -u sphinxsearch python -u $PGTRIGGER -d $DBPATTERN -c update    
+        python -u $PGTRIGGER -d $DBPATTERN -c update
     fi
 elif [ ! -z "$INDEXPATTERN" ]
 then
     echo "updating sphinx indexes, using index pattern: $INDEXPATTERN"
-    sudo -u sphinxsearch python -u $PGTRIGGER -i $INDEXPATTERN -c update    
+    python -u $PGTRIGGER -i $INDEXPATTERN -c update
 else
     echo "no sphinx indexes will be updated ..."
     # reload new sphinx configuration
     echo "trying to load new sphinx config ..."
-    sudo -u sphinxsearch /etc/init.d/sphinxsearch reload | grep -i "WARNING\|ERROR"
+    sudo -u root systemctl stop sphinxsearch
+    sleep 5
+    sudo -u root systemctl start sphinxsearch
 fi
 
 COUNTER=1
@@ -147,17 +154,16 @@ do
         echo -e "${red}service not running, try $COUNTER of $WAITFORSPHINX to start service ...${NC}"
     fi
     echo "    starting sphinx service with new config ..."
-    sudo -u sphinxsearch /etc/init.d/sphinxsearch start | grep -i "WARNING\|ERROR"
-    sleep 5
+    sudo -u root systemctl start sphinxsearch
     COUNTER=$(($COUNTER +1))
     if test $COUNTER -gt $WAITFORSPHINX
     then
         # if service cannot be started with new config, use old config instead
         echo -e "${red}service could not be started, using old config${NC}"
         if [ -f "/etc/sphinxsearch/sphinx.conf.backup" ]; then
-            sudo -u sphinxsearch mv /etc/sphinxsearch/sphinx.conf.backup /etc/sphinxsearch/sphinx.conf
+            mv /etc/sphinxsearch/sphinx.conf.backup /etc/sphinxsearch/sphinx.conf
             echo "    starting sphinx service with old config ..."
-            sudo -u sphinxsearch /etc/init.d/sphinxsearch start | grep -i "WARNING\|ERROR"
+            sudo -u root systemctl start sphinxsearch
         else
             echo -e "${red}WARNING: no valid sphinx configuration available. SERVICE NOT RUNNING${NC}"
             exit 1
@@ -171,7 +177,7 @@ if pgrep searchd > /dev/null
 then
     echo -e "${green}service is running with process id: $(pgrep searchd)${NC}"
 else
-    echo -e "${red}WARNING: $(sudo -u sphinxsearch /etc/init.d/sphinxsearch status)${NC}"
+    echo -e "${red}WARNING: $(sudo -u root systemctl status sphinxsearch)${NC}"
 fi
 
 bash $0 clean_index

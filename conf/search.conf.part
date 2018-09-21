@@ -334,12 +334,10 @@ index zipcode
     path = /var/lib/sphinxsearch/data/index/zipcode
     type = plain
     docinfo = extern
-    charset_type = utf-8
     min_infix_len = 1
-    infix_fields = detail,geom_quadindex
-    enable_star = 1
-    ondisk_dict = 0
     preopen = 1
+    dict=crc
+    infix_fields = detail,geom_quadindex
 }
 
 index district : zipcode

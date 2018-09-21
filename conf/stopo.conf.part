@@ -1,6 +1,6 @@
 # SOURCES
 
-source src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : def_searchable_features
+source src_ch_swisstopo_swissboundaries3d_bezirk_flaeche_fill : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -36,7 +36,7 @@ source src_ch_swisstopo_landesschwerenetz : def_searchable_features
         FROM geol.landesschwerenetz
 }
 
-source src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : def_searchable_features
+source src_ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -54,7 +54,7 @@ source src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : def_searchable
         FROM tlm.swissboundaries_gemeinden
 }
 
-source src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : def_searchable_features
+source src_ch_swisstopo_swissboundaries3d_kanton_flaeche_fill : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -72,7 +72,7 @@ source src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : def_searchable_f
         FROM tlm.swissboundaries_kantone
 }
 
-source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_searchable_features
+source src_ch_swisstopo_vd_ortschaftenverzeichnis_plz : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -90,7 +90,7 @@ source src_ch_swisstopo-vd_ortschaftenverzeichnis_plz : def_searchable_features
         FROM vd.gabmo_plz
 }
 
-source src_ch_swisstopo_vec200-names-namedlocation : def_searchable_features
+source src_ch_swisstopo_vec200_names_namedlocation : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -108,7 +108,7 @@ source src_ch_swisstopo_vec200-names-namedlocation : def_searchable_features
         FROM public.vec200_namedlocation
 }
 
-source src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : def_searchable_features
+source src_ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -126,7 +126,7 @@ source src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : def_searchab
         FROM geol.gravimetrisch_messpunkte
 }
 
-source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_features
+source src_ch_swisstopo_geologie_rohstoffe_industrieminerale : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -144,7 +144,7 @@ source src_ch_swisstopo_geologie-rohstoffe-industrieminerale : def_searchable_fe
         from geol.rohstoffe_industriemin
 }
 
-source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchable_features
+source src_ch_swisstopo_geologie_rohstoffe_kohlen_bitumen_erdgas : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -162,7 +162,7 @@ source src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : def_searchabl
         from geol.rohstoffe_kohlenbitumenerdgas
 }
 
-source src_ch_swisstopo_geologie-rohstoffe-naturwerksteine_abbau : def_searchable_features
+source src_ch_swisstopo_geologie_rohstoffe_naturwerksteine_abbau : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -180,7 +180,7 @@ source src_ch_swisstopo_geologie-rohstoffe-naturwerksteine_abbau : def_searchabl
         from geol.rohstoffe_naturwerksteineabbau
 }
 
-source src_ch_swisstopo_geologie-rohstoffe-gebrochene_gesteine_abbau : def_searchable_features
+source src_ch_swisstopo_geologie_rohstoffe_gebrochene_gesteine_abbau : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -198,7 +198,7 @@ source src_ch_swisstopo_geologie-rohstoffe-gebrochene_gesteine_abbau : def_searc
         from geol.rohstoffe_gebrochenegesteineabbau
 }
 
-source src_ch_swisstopo_geologie-rohstoffe-gips_abbau_verarbeitung : def_searchable_features
+source src_ch_swisstopo_geologie_rohstoffe_gips_abbau_verarbeitung : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -216,7 +216,7 @@ source src_ch_swisstopo_geologie-rohstoffe-gips_abbau_verarbeitung : def_searcha
         from geol.rohstoffe_gipsabbauverarbeitung
 }
 
-source src_ch_swisstopo_geologie-rohstoffe-salz_abbau_verarbeitung : def_searchable_features
+source src_ch_swisstopo_geologie_rohstoffe_salz_abbau_verarbeitung : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -234,7 +234,7 @@ source src_ch_swisstopo_geologie-rohstoffe-salz_abbau_verarbeitung : def_searcha
         from geol.rohstoffe_salzabbauverarbeitung
 }
 
-source src_ch_swisstopo_geologie-rohstoffe-zement_abbau_verarbeitung : def_searchable_features
+source src_ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -252,7 +252,7 @@ source src_ch_swisstopo_geologie-rohstoffe-zement_abbau_verarbeitung : def_searc
         from geol.rohstoffe_zementabbauverarbeitung
 }
 
-source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
+source src_ch_swisstopo_verschiebungsvektoren_tsp1 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -270,7 +270,7 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp1 : def_searchable_features
       from geodaesie.verschiebungsvektoren_tsp1
 }
 
-source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
+source src_ch_swisstopo_verschiebungsvektoren_tsp2 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -289,7 +289,7 @@ source src_ch_swisstopo_verschiebungsvektoren-tsp2 : def_searchable_features
 }
 
 
-source src_ch_swisstopo_geologie-bohrungen_tiefer_500 : def_searchable_features
+source src_ch_swisstopo_geologie_bohrungen_tiefer_500 : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -308,7 +308,7 @@ source src_ch_swisstopo_geologie-bohrungen_tiefer_500 : def_searchable_features
 }
 
 
-source src_ch_swisstopo_geologie-geothermische_potenzialstudien_reg : def_searchable_features
+source src_ch_swisstopo_geologie_geothermische_potenzialstudien_reg : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -327,7 +327,7 @@ source src_ch_swisstopo_geologie-geothermische_potenzialstudien_reg : def_search
 }
 
 
-source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
+source src_ch_swisstopo_geologie_rohstoffe_vererzungen : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -345,7 +345,7 @@ source src_ch_swisstopo_geologie-rohstoffe-vererzungen : def_searchable_features
       from geol.rohstoffe_vererz
 }
 
-source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_features
+source src_ch_swisstopo_geologie_geotechnik_ziegeleien_1907 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -363,7 +363,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : def_searchable_fea
       from geol.geotechnik_ziegeleien_1907
 }
 
-source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_features
+source src_ch_swisstopo_geologie_geotechnik_ziegeleien_1965 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -381,7 +381,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : def_searchable_fea
       from geol.geotechnik_ziegeleien_1965
 }
 
-source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_features
+source src_ch_swisstopo_geologie_geotechnik_ziegeleien_1995 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -399,7 +399,7 @@ source src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : def_searchable_fea
       from geol.geotechnik_ziegeleien_1995
 }
 
-source src_ch_swisstopo_geologie-gisgeol-punkte : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_punkte : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -417,7 +417,7 @@ source src_ch_swisstopo_geologie-gisgeol-punkte : def_searchable_features
       from geol.view_gisgeol_points
 }
 
-source src_ch_swisstopo_geologie-gisgeol-linien : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_linien : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -435,7 +435,7 @@ source src_ch_swisstopo_geologie-gisgeol-linien : def_searchable_features
       from geol.view_gisgeol_lines
 }
 
-source src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_flaechen_1x1km : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -453,7 +453,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km : def_searchable_feature
       from geol.view_gisgeol_surfaces_1x1km
 }
 
-source src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_flaechen_10x10km : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -471,7 +471,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km : def_searchable_featu
       from geol.view_gisgeol_surfaces_10x10km
 }
 
-source src_ch_swisstopo_geologie-gisgeol-flaechen-10to100km2 : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_flaechen_10to100km2 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -489,7 +489,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-10to100km2 : def_searchable_fe
       from geol.view_gisgeol_surfaces_10to100km2
 }
 
-source src_ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2 : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -507,7 +507,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2 : def_searchable_
       from geol.view_gisgeol_surfaces_100to1000km2
 }
 
-source src_ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2 : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -525,7 +525,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2 : def_searchabl
       from geol.view_gisgeol_surfaces_1000to21000km2
 }
 
-source src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -543,7 +543,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : def_searchable_fe
       from geol.view_gisgeol_surfaces_gt21000km2
 }
 
-source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_features
+source src_ch_swisstopo_geologie_gisgeol_flaechen_lt10km2 : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -561,7 +561,7 @@ source src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : def_searchable_featu
       from geol.view_gisgeol_surfaces_lt10km2
 }
 
-source src_ch_swisstopo_geologie-tiefengeothermie_projekte : def_searchable_features
+source src_ch_swisstopo_geologie_tiefengeothermie_projekte : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -579,7 +579,7 @@ source src_ch_swisstopo_geologie-tiefengeothermie_projekte : def_searchable_feat
       from geol.tiefengeothermie_projekte_pkt
 }
 
-source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_features
+source src_ch_swisstopo_vd_geometa_periodische_nachfuehrung : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -597,7 +597,7 @@ source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_fea
       from vd.amopnf_pnf
 }
 
-source src_ch_swisstopo_transformation-bezugsrahmen_hoehe : def_searchable_features
+source src_ch_swisstopo_transformation_bezugsrahmen_hoehe : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -615,7 +615,7 @@ source src_ch_swisstopo_transformation-bezugsrahmen_hoehe : def_searchable_featu
       from geodaesie.bezugsrahmen_hoehe_pkt
 }
 
-source src_ch_swisstopo_skitourenkarte-50_metadata : def_searchable_features
+source src_ch_swisstopo_skitourenkarte_50_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -633,7 +633,7 @@ source src_ch_swisstopo_skitourenkarte-50_metadata : def_searchable_features
       from datenstand.view_gridstand_lkski_shop
 }
 
-source src_ch_swisstopo_geologie-gravimetrischer_atlas_papier_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_gravimetrischer_atlas_papier_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -705,7 +705,7 @@ source src_ch_swisstopo_landeskarte100_papier_metadata : def_searchable_features
       from public.lk100_papier
 }
 
-source src_ch_swisstopo_lhk100-papierkarte_metadata : def_searchable_features
+source src_ch_swisstopo_lhk100_papierkarte_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -778,7 +778,7 @@ source src_ch_swisstopo_wanderkarte33_papier_metadata : def_searchable_features
       from datenstand.view_gridstand_wkt33_shop
 }
 
-source src_ch_swisstopo_wanderkarte25-zus_papier_metadata : def_searchable_features
+source src_ch_swisstopo_wanderkarte25_zus_papier_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -796,7 +796,7 @@ source src_ch_swisstopo_wanderkarte25-zus_papier_metadata : def_searchable_featu
       from datenstand.view_gridstand_lkwander25zus_shop
 }
 
-source src_ch_swisstopo_luftfahrtkarten-icao_papier_metadata : def_searchable_features
+source src_ch_swisstopo_luftfahrtkarten_icao_papier_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -832,7 +832,7 @@ source src_ch_swisstopo_burgenkarte200_papier_metadata : def_searchable_features
       from datenstand.view_gridstand_bk200
 }
 
-source src_ch_swisstopo_geologie-geologischer_atlas_vector_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_geologischer_atlas_vector_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -850,7 +850,7 @@ source src_ch_swisstopo_geologie-geologischer_atlas_vector_metadata : def_search
       from geol.view_gridstand_gas25
 }
 
-source src_ch_swisstopo_geologie-geologischer_atlas_papier_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_geologischer_atlas_papier_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -868,7 +868,7 @@ source src_ch_swisstopo_geologie-geologischer_atlas_papier_metadata : def_search
       from geol.view_gridstand_gas25
 }
 
-source src_ch_swisstopo_geologie-spezialkarten_schweiz_papier_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_spezialkarten_schweiz_papier_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -886,7 +886,7 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_papier_metadata : def_sea
       from geol.view_gridstand_gsk
 }
 
-source src_ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_generalkarte_ggk200_papier_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -904,7 +904,7 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata : def_searc
       from geol.view_gridstand_ggk
 }
 
-source src_ch_swisstopo_geologie-geologischer_atlas : def_searchable_features
+source src_ch_swisstopo_geologie_geologischer_atlas : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -922,7 +922,7 @@ source src_ch_swisstopo_geologie-geologischer_atlas : def_searchable_features
       from geol.view_ga25_grid_shop
 }
 
-source src_ch_swisstopo_geologie-geocover : def_searchable_features
+source src_ch_swisstopo_geologie_geocover : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -940,7 +940,7 @@ source src_ch_swisstopo_geologie-geocover : def_searchable_features
       from geol.view_geocover_grid_shop
 }
 
-source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_generalkarte_ggk200_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -958,7 +958,7 @@ source src_ch_swisstopo_geologie-generalkarte-ggk200_metadata : def_searchable_f
       from geol.view_gridstand_ggk_shop
 }
 
-source src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_spezialkarten_schweiz_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -976,7 +976,7 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata : def_searchable
       from geol.view_gsk_raster
 }
 
-source src_ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_spezialkarten_schweiz_vector_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -994,7 +994,7 @@ source src_ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata : def_sea
       from geol.view_gsk_vector
 }
 
-source src_ch_swisstopo_geologie-geologischer_atlas_metadata : def_searchable_features
+source src_ch_swisstopo_geologie_geologischer_atlas_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -1012,7 +1012,7 @@ source src_ch_swisstopo_geologie-geologischer_atlas_metadata : def_searchable_fe
       from geol.view_ga25_grid_shop
 }
 
-source src_ch_swisstopo_pixelkarte-farbe-pk500_noscale : def_searchable_features
+source src_ch_swisstopo_pixelkarte_farbe_pk500_noscale : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -1068,7 +1068,7 @@ source src_ch_swisstopo_lotabweichungen : def_searchable_features
 }
 
 
-source src_ch_swisstopo_amtliches-strassenverzeichnis : def_searchable_features
+source src_ch_swisstopo_amtliches_strassenverzeichnis : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -1087,7 +1087,7 @@ source src_ch_swisstopo_amtliches-strassenverzeichnis : def_searchable_features
 }
 
 
-source src_ch_swisstopo_swiss-map-vector25_metadata : def_searchable_features
+source src_ch_swisstopo_swiss_map_vector25_metadata : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
@@ -1107,370 +1107,366 @@ source src_ch_swisstopo_swiss-map-vector25_metadata : def_searchable_features
 
 ## INDICES
 
-index ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_verschiebungsvektoren_tsp1
 {
     type = plain
-    source = src_ch_swisstopo_verschiebungsvektoren-tsp1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren-tsp1
+    source = src_ch_swisstopo_verschiebungsvektoren_tsp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren_tsp1
     docinfo = extern
-    charset_type = utf-8
     min_infix_len = 2
-    infix_fields = detail
-    min_prefix_len = 1
-    prefix_fields = geom_quadindex
-    enable_star = 1
+    expand_keywords = 1
 }
 
-index ch_swisstopo_landesschwerenetz : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_landesschwerenetz : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_landesschwerenetz
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landesschwerenetz
 }
 
-index ch_swisstopo_verschiebungsvektoren-tsp2 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_verschiebungsvektoren_tsp2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_verschiebungsvektoren-tsp2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren-tsp2
+    source = src_ch_swisstopo_verschiebungsvektoren_tsp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren_tsp2
 }
 
-index ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_swissboundaries3d_bezirk_flaeche_fill : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-bezirk-flaeche_fill
+    source = src_ch_swisstopo_swissboundaries3d_bezirk_flaeche_fill
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d_bezirk_flaeche_fill
 }
 
-index ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-gemeinde-flaeche_fill
+    source = src_ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill
 }
 
-index ch_swisstopo_swissboundaries3d-kanton-flaeche_fill : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_swissboundaries3d_kanton_flaeche_fill : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_swissboundaries3d-kanton-flaeche_fill
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d-kanton-flaeche_fill
+    source = src_ch_swisstopo_swissboundaries3d_kanton_flaeche_fill
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d_kanton_flaeche_fill
 }
 
-index ch_swisstopo-vd_ortschaftenverzeichnis_plz : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_vd_ortschaftenverzeichnis_plz : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo-vd_ortschaftenverzeichnis_plz
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_ortschaftenverzeichnis_plz
+    source = src_ch_swisstopo_vd_ortschaftenverzeichnis_plz
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vd_ortschaftenverzeichnis_plz
 }
 
-index ch_swisstopo_vec200-names-namedlocation : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_vec200_names_namedlocation : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_vec200-names-namedlocation
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200-names-namedlocation
+    source = src_ch_swisstopo_vec200_names_namedlocation
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200_names_namedlocation
 }
 
-index ch_swisstopo_geologie-bohrungen_tiefer_500 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_bohrungen_tiefer_500 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-bohrungen_tiefer_500
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-bohrungen_tiefer_500
+    source = src_ch_swisstopo_geologie_bohrungen_tiefer_500
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_bohrungen_tiefer_500
 }
 
-index ch_swisstopo_geologie-geothermische_potenzialstudien_regional : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geothermische_potenzialstudien_regional : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geothermische_potenzialstudien_reg
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geothermische_potenzialstudien_regional
+    source = src_ch_swisstopo_geologie_geothermische_potenzialstudien_reg
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geothermische_potenzialstudien_regional
 }
 
-index ch_swisstopo_geologie-geotechnik-ziegeleien_1907 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geotechnik_ziegeleien_1907 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1907
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1907
+    source = src_ch_swisstopo_geologie_geotechnik_ziegeleien_1907
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geotechnik_ziegeleien_1907
 }
 
-index ch_swisstopo_geologie-geotechnik-ziegeleien_1965 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geotechnik_ziegeleien_1965 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1965
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1965
+    source = src_ch_swisstopo_geologie_geotechnik_ziegeleien_1965
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geotechnik_ziegeleien_1965
 }
 
-index ch_swisstopo_geologie-geotechnik-ziegeleien_1995 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geotechnik_ziegeleien_1995 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geotechnik-ziegeleien_1995
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geotechnik-ziegeleien_1995
+    source = src_ch_swisstopo_geologie_geotechnik_ziegeleien_1995
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geotechnik_ziegeleien_1995
 }
 
-index ch_swisstopo_geologie-rohstoffe-vererzungen : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_rohstoffe_vererzungen : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-rohstoffe-vererzungen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-vererzungen
+    source = src_ch_swisstopo_geologie_rohstoffe_vererzungen
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_vererzungen
 }
 
-index ch_swisstopo_geologie-rohstoffe-industrieminerale : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_rohstoffe_industrieminerale : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-rohstoffe-industrieminerale
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-industrieminerale
+    source = src_ch_swisstopo_geologie_rohstoffe_industrieminerale
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_industrieminerale
 }
 
-index ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_rohstoffe_kohlen_bitumen_erdgas : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-kohlen_bitumen_erdgas
+    source = src_ch_swisstopo_geologie_rohstoffe_kohlen_bitumen_erdgas
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_kohlen_bitumen_erdgas
 }
 
-index ch_swisstopo_geologie-rohstoffe-naturwerksteine_abbau : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_rohstoffe_naturwerksteine_abbau : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-rohstoffe-naturwerksteine_abbau
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-naturwerksteine_abbau
+    source = src_ch_swisstopo_geologie_rohstoffe_naturwerksteine_abbau
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_naturwerksteine_abbau
 }
 
-index ch_swisstopo_geologie-rohstoffe-gebrochene_gesteine_abbau : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_rohstoffe_gebrochene_gesteine_abbau : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-rohstoffe-gebrochene_gesteine_abbau
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-gebrochene_gesteine_abbau
+    source = src_ch_swisstopo_geologie_rohstoffe_gebrochene_gesteine_abbau
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_gebrochene_gesteine_abbau
 }
 
-index ch_swisstopo_geologie-rohstoffe-gips_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_rohstoffe_gips_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-rohstoffe-gips_abbau_verarbeitung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-gips_abbau_verarbeitung
+    source = src_ch_swisstopo_geologie_rohstoffe_gips_abbau_verarbeitung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_gips_abbau_verarbeitung
 }
 
-index ch_swisstopo_geologie-rohstoffe-salz_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_rohstoffe_salz_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-rohstoffe-salz_abbau_verarbeitung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-salz_abbau_verarbeitung
+    source = src_ch_swisstopo_geologie_rohstoffe_salz_abbau_verarbeitung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_salz_abbau_verarbeitung
 }
 
-index ch_swisstopo_geologie-rohstoffe-zement_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-rohstoffe-zement_abbau_verarbeitung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-rohstoffe-zement_abbau_verarbeitung
+    source = src_ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung
 }
 
-index ch_swisstopo_geologie-gisgeol-punkte : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_punkte : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-punkte
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-punkte
+    source = src_ch_swisstopo_geologie_gisgeol_punkte
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_punkte
 }
 
-index ch_swisstopo_geologie-gisgeol-linien : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_linien : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-linien
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-linien
+    source = src_ch_swisstopo_geologie_gisgeol_linien
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_linien
 }
 
-index ch_swisstopo_geologie-gisgeol-flaechen-1x1km : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_flaechen_1x1km : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-flaechen-1x1km
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-1x1km
+    source = src_ch_swisstopo_geologie_gisgeol_flaechen_1x1km
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_1x1km
 }
 
-index ch_swisstopo_geologie-gisgeol-flaechen-10x10km : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_flaechen_10x10km : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-flaechen-10x10km
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-10x10km
+    source = src_ch_swisstopo_geologie_gisgeol_flaechen_10x10km
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_10x10km
 }
 
-index ch_swisstopo_geologie-gisgeol-flaechen-10to100km2 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_flaechen_10to100km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-flaechen-10to100km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-10to100km2
+    source = src_ch_swisstopo_geologie_gisgeol_flaechen_10to100km2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_10to100km2
 }
 
-index ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-100to1000km2
+    source = src_ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2
 }
 
-index ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-1000to21000km2
+    source = src_ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2
 }
 
-index ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-gt21000km2
+    source = src_ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2
 }
 
-index ch_swisstopo_geologie-gisgeol-flaechen-lt10km2 : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gisgeol_flaechen_lt10km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gisgeol-flaechen-lt10km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gisgeol-flaechen-lt10km2
+    source = src_ch_swisstopo_geologie_gisgeol_flaechen_lt10km2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_lt10km2
 }
 
-index ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gravimetrischer_atlas_messpunkte
+    source = src_ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte
 }
 
-index ch_swisstopo_geologie-tiefengeothermie_projekte : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_tiefengeothermie_projekte : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-tiefengeothermie_projekte
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-tiefengeothermie_projekte
+    source = src_ch_swisstopo_geologie_tiefengeothermie_projekte
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_tiefengeothermie_projekte
 }
 
-index ch_swisstopo-vd_geometa-periodische_nachfuehrung : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_vd_geometa_periodische_nachfuehrung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo-vd_geometa-periodische_nachfuehrung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo-vd_geometa-periodische_nachfuehrung
+    source = src_ch_swisstopo_vd_geometa_periodische_nachfuehrung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vd_geometa_periodische_nachfuehrung
 }
 
-index ch_swisstopo_transformation-bezugsrahmen_hoehe : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_transformation_bezugsrahmen_hoehe : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_transformation-bezugsrahmen_hoehe
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_transformation-bezugsrahmen_hoehe
+    source = src_ch_swisstopo_transformation_bezugsrahmen_hoehe
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_transformation_bezugsrahmen_hoehe
 }
 
-index ch_swisstopo_geologie-gravimetrischer_atlas_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_gravimetrischer_atlas_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-gravimetrischer_atlas_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-gravimetrischer_atlas_papier_metadata
+    source = src_ch_swisstopo_geologie_gravimetrischer_atlas_papier_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gravimetrischer_atlas_papier_metadata
 }
 
-index ch_swisstopo_skitourenkarte-50_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_skitourenkarte_50_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_skitourenkarte-50_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_skitourenkarte-50_metadata
+    source = src_ch_swisstopo_skitourenkarte_50_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_skitourenkarte_50_metadata
 }
 
-index ch_swisstopo_landeskarte25_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_landeskarte25_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_landeskarte25_papier_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landeskarte25_papier_metadata
 }
 
-index ch_swisstopo_landeskarte50_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_landeskarte50_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_landeskarte50_papier_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landeskarte50_papier_metadata
 }
 
-index ch_swisstopo_landeskarte100_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_landeskarte100_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_landeskarte100_papier_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landeskarte100_papier_metadata
 }
 
-index ch_swisstopo_lhk100-papierkarte_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_lhk100_papierkarte_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_lhk100-papierkarte_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lhk100-papierkarte_metadata
+    source = src_ch_swisstopo_lhk100_papierkarte_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lhk100_papierkarte_metadata
 }
 
-index ch_swisstopo_landeskarte200_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_landeskarte200_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_landeskarte200_papier_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landeskarte200_papier_metadata
 }
 
-index ch_swisstopo_wanderkarte50_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_wanderkarte50_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_wanderkarte50_papier_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_wanderkarte50_papier_metadata
 }
 
-index ch_swisstopo_wanderkarte33_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_wanderkarte33_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_wanderkarte33_papier_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_wanderkarte33_papier_metadata
 }
 
-index ch_swisstopo_wanderkarte25-zus_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_wanderkarte25_zus_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_wanderkarte25-zus_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_wanderkarte25-zus_papier_metadata
+    source = src_ch_swisstopo_wanderkarte25_zus_papier_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_wanderkarte25_zus_papier_metadata
 }
 
-index ch_swisstopo_luftfahrtkarten-icao_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_luftfahrtkarten_icao_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_luftfahrtkarten-icao_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_luftfahrtkarten-icao_papier_metadata
+    source = src_ch_swisstopo_luftfahrtkarten_icao_papier_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_luftfahrtkarten_icao_papier_metadata
 }
 
-index ch_swisstopo_burgenkarte200_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_burgenkarte200_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_burgenkarte200_papier_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_burgenkarte200_papier_metadata
 }
 
-index ch_swisstopo_geologie-geologischer_atlas_vector_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geologischer_atlas_vector_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geologischer_atlas_vector_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas_vector_metadata
+    source = src_ch_swisstopo_geologie_geologischer_atlas_vector_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geologischer_atlas_vector_metadata
 }
 
-index ch_swisstopo_geologie-geologischer_atlas_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geologischer_atlas_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geologischer_atlas_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas_papier_metadata
+    source = src_ch_swisstopo_geologie_geologischer_atlas_papier_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geologischer_atlas_papier_metadata
 }
 
-index ch_swisstopo_geologie-spezialkarten_schweiz_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_spezialkarten_schweiz_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-spezialkarten_schweiz_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-spezialkarten_schweiz_papier_metadata
+    source = src_ch_swisstopo_geologie_spezialkarten_schweiz_papier_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_spezialkarten_schweiz_papier_metadata
 }
 
-index ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_generalkarte_ggk200_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-generalkarte-ggk200_papier_metadata
+    source = src_ch_swisstopo_geologie_generalkarte_ggk200_papier_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_generalkarte_ggk200_papier_metadata
 }
 
-index ch_swisstopo_geologie-spezialkarten_schweiz_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_spezialkarten_schweiz_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-spezialkarten_schweiz_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-spezialkarten_schweiz_metadata
+    source = src_ch_swisstopo_geologie_spezialkarten_schweiz_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_spezialkarten_schweiz_metadata
 }
 
-index ch_swisstopo_geologie-geologischer_atlas_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geologischer_atlas_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geologischer_atlas_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas_metadata
+    source = src_ch_swisstopo_geologie_geologischer_atlas_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geologischer_atlas_metadata
 }
 
-index ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_spezialkarten_schweiz_vector_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-spezialkarten_schweiz_vector_metadata
+    source = src_ch_swisstopo_geologie_spezialkarten_schweiz_vector_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_spezialkarten_schweiz_vector_metadata
 }
 
-index ch_swisstopo_geologie-geologischer_atlas : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geologischer_atlas : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geologischer_atlas
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geologischer_atlas
+    source = src_ch_swisstopo_geologie_geologischer_atlas
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geologischer_atlas
 }
 
-index ch_swisstopo_geologie-geocover : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_geocover : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-geocover
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-geocover
+    source = src_ch_swisstopo_geologie_geocover
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geocover
 }
 
-index ch_swisstopo_geologie-generalkarte-ggk200_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_geologie_generalkarte_ggk200_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_geologie-generalkarte-ggk200_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-generalkarte-ggk200_metadata
+    source = src_ch_swisstopo_geologie_generalkarte_ggk200_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_generalkarte_ggk200_metadata
 }
 
-index ch_swisstopo_hebungsraten : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_hebungsraten : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_hebungsraten
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hebungsraten
 }
 
-index ch_swisstopo_lotabweichungen : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_lotabweichungen : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_lotabweichungen
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lotabweichungen
 }
 
-index ch_swisstopo_swiss-map-vector25_metadata : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_swiss_map_vector25_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_swiss-map-vector25_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swiss-map-vector25_metadata
+    source = src_ch_swisstopo_swiss_map_vector25_metadata
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swiss_map_vector25_metadata
 }
 
-index ch_swisstopo_amtliches-strassenverzeichnis : ch_swisstopo_verschiebungsvektoren-tsp1
+index ch_swisstopo_amtliches_strassenverzeichnis : ch_swisstopo_verschiebungsvektoren_tsp1
 {
-    source = src_ch_swisstopo_amtliches-strassenverzeichnis
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches-strassenverzeichnis
+    source = src_ch_swisstopo_amtliches_strassenverzeichnis
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_strassenverzeichnis
 }
