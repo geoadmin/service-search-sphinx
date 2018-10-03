@@ -560,6 +560,24 @@ source src_ch_swisstopo_geologie-tiefengeothermie_projekte : def_searchable_feat
       from geol.tiefengeothermie_projekte
 }
 
+source src_ch_swisstopo_geologie-tiefengeothermie_projekte_pkt : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT bgdi_id as id \
+          , name as label \
+          , 'feature' as origin \
+          , remove_accents(name) as detail \
+          , 'ch.swisstopo.geologie-tiefengeothermie_projekte' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id \
+      from geol.tiefengeothermie_projekte_pkt
+}
+
 source src_ch_swisstopo-vd_geometa-periodische_nachfuehrung : def_searchable_features
 {
    sql_db = stopo_dev
@@ -1280,6 +1298,12 @@ index ch_swisstopo_geologie-tiefengeothermie_projekte : ch_swisstopo_verschiebun
 {
     source = src_ch_swisstopo_geologie-tiefengeothermie_projekte
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-tiefengeothermie_projekte
+}
+
+index ch_swisstopo_geologie-tiefengeothermie_projekte_pkt : ch_swisstopo_verschiebungsvektoren-tsp1
+{
+    source = src_ch_swisstopo_geologie-tiefengeothermie_projekte_pkt
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie-tiefengeothermie_projekte_pkt
 }
 
 index ch_swisstopo-vd_geometa-periodische_nachfuehrung : ch_swisstopo_verschiebungsvektoren-tsp1
