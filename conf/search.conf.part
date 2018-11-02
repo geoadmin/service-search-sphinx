@@ -283,7 +283,7 @@ source src_zipcode : src_swisssearch
         gid as id \
         , os_uuid::text as feature_id \
         , plz::text as detail \
-        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce((select array_to_string(array_agg(ak order by st_area(st_intersection(p.the_geom,k.the_geom))desc),',') FROM tlm.swissboundaries_kantone k WHERE st_intersects(p.the_geom,k.the_geom)),'')||')</b>' as label \
+        , '<b>'||coalesce(plz::text,'')||' - '||coalesce(langtext,'')||' ('||coalesce(canton,'')||')</b>' as label \
         , 'zipcode' as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
