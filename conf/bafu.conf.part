@@ -19,6 +19,24 @@ source src_ch_bafu_alpweiden-herdenschutzhunde : def_searchable_features
         from fauna.alpenweiden_herdenschutzhunde
 }
 
+source src_ch_bafu_fauna-wildtierkorridor_national : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , objnummer as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ',objnummer,name,zustand_de,zustand_fr,zustand_it)) as detail \
+            , 'ch.bafu.fauna-wildtierkorridor_national' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from fauna.wildtierkorridore_national
+}
+
 source src_ch_bafu_hydrologie-q347 : def_searchable_features
 {
     sql_db = bafu_dev
@@ -1379,3 +1397,10 @@ index ch_bafu_grundwasserkoerper : ch_bafu_hydrologie-wassertemperaturmessstatio
     source = src_ch_bafu_grundwasserkoerper
     path = /var/lib/sphinxsearch/data/index/ch_bafu_grundwasserkoerper
 }
+
+index ch_bafu_fauna-wildtierkorridor_national : ch_bafu_hydrologie-wassertemperaturmessstationen
+{
+    source = src_ch_bafu_fauna-wildtierkorridor_national
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_fauna-wildtierkorridor_national
+}
+
