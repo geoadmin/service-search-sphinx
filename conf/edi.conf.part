@@ -42,6 +42,7 @@ source src_ch_bfs_generalisierte_grenzen_agglomerationen_g2 : def_searchable_fea
 index ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     type = plain
+    dict=crc
     source = src_ch_bfs_generalisierte_grenzen_agglomerationen_g1
     path = /var/lib/sphinxsearch/data/index/ch_bfs_generalisierte_grenzen_agglomerationen_g1
     docinfo = extern

@@ -312,6 +312,7 @@ source src_ch_blw_bodeneignung_kulturland : def_searchable_features
 index ch_blw_klimaeignung_typ
 {
     type = plain
+    dict=crc
     source = src_ch_blw_klimaeignung_typ
     path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_typ
     docinfo = extern

@@ -100,6 +100,7 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
 index ch_swisstopo_fixpunkte_hfp1
 {
     type = plain
+    dict=crc
     source = src_ch_swisstopo_fixpunkte_hfp1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp1
     docinfo = extern

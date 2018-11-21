@@ -77,6 +77,7 @@ source src_ch_sem_sachplan_asyl_kraft : def_searchable_features
 index ch_pronatura_waldreservate
 {
     type = plain
+    dict=crc
     source = src_ch_pronatura_waldreservate
     path = /var/lib/sphinxsearch/data/index/ch_pronatura_waldreservate
     docinfo = extern
