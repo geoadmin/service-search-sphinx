@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # variables set here:
-#   $TARGET: name of the symbolic remote host key (see remote_hosts 
+#   $TARGET: name of the symbolic remote host key (see remote_hosts
 #            section in config file)
 
 PROJECT_NAME=$1
@@ -79,7 +79,7 @@ echo "make backup of current sphinx config..."
 cp -f /etc/sphinxsearch/sphinx.conf /etc/sphinxsearch/sphinx.conf.backup
 
 # start sphinxsearch if it is not running with old configuration
-if ! pgrep searchd > /dev/null
+if ! searchd --status > /dev/null
 then
     echo -e "    ${red}WARNING: service was not running${NC}"
     echo "starting sphinx service with old configuration ..."
@@ -147,7 +147,7 @@ done
 # Check if service is running, if not try to restart the service
 WAITFORSPHINX=3
 COUNTER=0
-while ! pgrep searchd > /dev/null
+while ! searchd --status > /dev/null
 do
     if [ $COUNTER -ne 0 ]; then
         # Show this message after the first try only
@@ -173,7 +173,7 @@ do
     fi
 done
 
-if pgrep searchd > /dev/null
+if searchd --status > /dev/null
 then
     echo -e "${green}service is running with process id: $(pgrep searchd)${NC}"
 else
