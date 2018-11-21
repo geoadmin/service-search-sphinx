@@ -1110,6 +1110,7 @@ source src_ch_swisstopo_swiss_map_vector25_metadata : def_searchable_features
 index ch_swisstopo_verschiebungsvektoren_tsp1
 {
     type = plain
+    dict=crc
     source = src_ch_swisstopo_verschiebungsvektoren_tsp1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren_tsp1
     docinfo = extern

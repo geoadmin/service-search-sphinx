@@ -157,6 +157,7 @@ source src_ch_swisstopo_lubis_terrestrische_aufnahmen : def_searchable_features_
 index ch_swisstopo_lubis_bildstreifen
 {
     type = plain
+    dict=crc
     source = src_ch_swisstopo_lubis_bildstreifen
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_bildstreifen
     docinfo = extern

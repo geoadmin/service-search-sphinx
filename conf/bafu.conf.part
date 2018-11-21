@@ -1051,6 +1051,7 @@ source src_ch_bafu_grundwasserkoerper : def_searchable_features
 index ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     type = plain
+    dict=crc
     source = src_ch_bafu_hydrologie_wassertemperaturmessstationen
     path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_wassertemperaturmessstationen
     docinfo = extern

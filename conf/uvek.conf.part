@@ -1422,6 +1422,7 @@ source src_ch_bav_anlagen_schienengueterverkehr : def_searchable_features
 index ch_astra_ivs_nat
 {
     type = plain
+    dict=crc
     source = src_ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_astra_ivs_nat
     docinfo = extern

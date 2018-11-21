@@ -113,6 +113,7 @@ source src_ch_vbs_retablierungsstellen : def_searchable_features
 index ch_babs_kulturgueter
 {
     type = plain
+    dict=crc
     source = src_ch_babs_kulturgueter
     path = /var/lib/sphinxsearch/data/index/ch_babs_kulturgueter
     docinfo = extern
