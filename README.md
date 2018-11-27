@@ -103,7 +103,7 @@ The swisssearch index (zipcodes) has to be computed after a wordforms update.
 ### Command line debugging with python sphinx api
 
 ```bash
-$ cd lib/sphinxapi
+$ cd test
 $ python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
 ```
 
@@ -111,7 +111,7 @@ $ python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
 
 Before the deploy make sure that the following steps have been done
 * ```make template```
-* ```make move-template``` with user sphinxsearch
+* ```make move-template```
 
 #### Deploy config to Integration, no indexes will be built
 
@@ -166,7 +166,6 @@ $ cd service-sphinxsearch/
 $ git checkout master
 $ git pull origin master
 $ make template
-$ sudo su sphinxsearch
 $ make move-template
 $ make deploy-int-config db=zeitreihen
 ```
