@@ -172,16 +172,9 @@ $ make deploy-int-config db=zeitreihen
 
 #### Deploy **clean_index** to Integration
 
-You can use this command to
+You can use this command to synchronize the remote sphinx config with the remote indices:
 * create all the missing indexes
 * remove orphaned indexes
-The sphinx configuration will not be deployed. The same command can be used with ```make deploy-prod-clean_index```.
-
-```bash
-$ make deploy-int-clean_index
-```
-
-:information_source:
-With each call of ``make deploy-int-config``or `make deploy-prod-config``the indexes on the deploy target will be synchronized with the new config.
-* new indexes will be generated
-* orphaned indexes will be removed
+The sphinx configuration will not be deployed. The command can be used with integration or production: 
+* ``$ make deploy-int-clean_index``
+* ``$ make deploy-prod-clean_index``
