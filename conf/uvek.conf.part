@@ -1424,7 +1424,6 @@ index ch_astra_ivs_nat
     dict=crc
     source = src_ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_astra_ivs_nat
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }

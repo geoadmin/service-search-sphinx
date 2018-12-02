@@ -80,7 +80,6 @@ index ch_pronatura_waldreservate
     dict=crc
     source = src_ch_pronatura_waldreservate
     path = /var/lib/sphinxsearch/data/index/ch_pronatura_waldreservate
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }

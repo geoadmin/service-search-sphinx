@@ -1054,7 +1054,6 @@ index ch_bafu_hydrologie_wassertemperaturmessstationen
     dict=crc
     source = src_ch_bafu_hydrologie_wassertemperaturmessstationen
     path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_wassertemperaturmessstationen
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }

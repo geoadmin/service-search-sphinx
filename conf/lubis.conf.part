@@ -160,7 +160,6 @@ index ch_swisstopo_lubis_bildstreifen
     dict=crc
     source = src_ch_swisstopo_lubis_bildstreifen
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_bildstreifen
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }

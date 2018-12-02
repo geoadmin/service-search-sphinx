@@ -109,7 +109,6 @@ index layers
 {
     type = plain
     dict=crc
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }
