@@ -333,7 +333,6 @@ index zipcode
     wordforms = /var/lib/sphinxsearch/data/index/wordforms_main.txt
     path = /var/lib/sphinxsearch/data/index/zipcode
     type = plain
-    docinfo = extern
     min_infix_len = 1
     preopen = 1
     dict=crc
@@ -344,42 +343,49 @@ index district : zipcode
 {
     source = src_district
     path = /var/lib/sphinxsearch/data/index/district
+    ondisk_attrs = 0
 }
 
 index kantone : zipcode
 {
     source = src_kantone
     path = /var/lib/sphinxsearch/data/index/kantone
+    ondisk_attrs = 0
 }
 
 index gg25 : zipcode
 {
     source = src_gg25
     path = /var/lib/sphinxsearch/data/index/gg25
+    ondisk_attrs = 0
 }
 
 index swissnames3d : zipcode
 {
     source = src_swissnames3d
     path = /var/lib/sphinxsearch/data/index/swissnames3d
+    ondisk_attrs = 0
 }
 
 index haltestellen : zipcode
 {
     source = src_haltestellen
     path = /var/lib/sphinxsearch/data/index/haltestellen
+    ondisk_attrs = 0
 }
 
 index parcel : zipcode
 {
     source = src_parcel
     path = /var/lib/sphinxsearch/data/index/parcel
+    ondisk_attrs = 0
 }
 
 index address : zipcode
 {
     source = src_address
     path = /var/lib/sphinxsearch/data/index/address
+    ondisk_attrs = 0
 }
 
 # swisssearch fuzzy metaphone
@@ -388,6 +394,7 @@ index district_metaphone : zipcode
     morphology = metaphone
     source = src_district
     path = /var/lib/sphinxsearch/data/index/district_metaphone
+    preopen = 0
 }
 
 index kantone_metaphone : zipcode
@@ -395,6 +402,7 @@ index kantone_metaphone : zipcode
     morphology = metaphone
     source = src_kantone
     path = /var/lib/sphinxsearch/data/index/kantone_metaphone
+    preopen = 0
 }
 
 index gg25_metaphone : zipcode
@@ -402,6 +410,7 @@ index gg25_metaphone : zipcode
     morphology = metaphone
     source = src_gg25
     path = /var/lib/sphinxsearch/data/index/gg25_metaphone
+    preopen = 0
 }
 
 index swissnames3d_metaphone : zipcode
@@ -409,6 +418,7 @@ index swissnames3d_metaphone : zipcode
     morphology = metaphone
     source = src_swissnames3d
     path = /var/lib/sphinxsearch/data/index/swissnames3d_metaphone
+    preopen = 0
 }
 
 index haltestellen_metaphone : zipcode
@@ -416,6 +426,7 @@ index haltestellen_metaphone : zipcode
     morphology = metaphone
     source = src_haltestellen
     path = /var/lib/sphinxsearch/data/index/haltestellen_metaphone
+    preopen = 0
 }
 
 index address_metaphone: zipcode
@@ -423,6 +434,7 @@ index address_metaphone: zipcode
     morphology = metaphone
     source = src_address
     path = /var/lib/sphinxsearch/data/index/address_metaphone
+    preopen = 0
 }
 
 # only create on demand

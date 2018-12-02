@@ -48,4 +48,7 @@ searchd
     dist_threads = 7
     read_timeout = 5
     max_children = 50
+    binlog_path =
+    watchdog = 0
+    ondisk_attrs_default = 1
 }

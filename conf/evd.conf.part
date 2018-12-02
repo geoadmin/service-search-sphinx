@@ -315,7 +315,6 @@ index ch_blw_klimaeignung_typ
     dict=crc
     source = src_ch_blw_klimaeignung_typ
     path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_typ
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }

@@ -103,7 +103,6 @@ index ch_swisstopo_fixpunkte_hfp1
     dict=crc
     source = src_ch_swisstopo_fixpunkte_hfp1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp1
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -131,4 +130,5 @@ index ch_bfs_gebaeude_wohnungs_register : ch_swisstopo_fixpunkte_hfp1
     min_infix_len = 1
     source = src_ch_bfs_gebaeude_wohnungs_register
     path = /var/lib/sphinxsearch/data/index/ch_bfs_gebaeude_wohnungs_register
+    ondisk_attrs = 0
 }

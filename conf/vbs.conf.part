@@ -116,7 +116,6 @@ index ch_babs_kulturgueter
     dict=crc
     source = src_ch_babs_kulturgueter
     path = /var/lib/sphinxsearch/data/index/ch_babs_kulturgueter
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }

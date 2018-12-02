@@ -45,7 +45,6 @@ index ch_bfs_generalisierte_grenzen_agglomerationen_g1
     dict=crc
     source = src_ch_bfs_generalisierte_grenzen_agglomerationen_g1
     path = /var/lib/sphinxsearch/data/index/ch_bfs_generalisierte_grenzen_agglomerationen_g1
-    docinfo = extern
     min_infix_len = 2
     expand_keywords = 1
 }
