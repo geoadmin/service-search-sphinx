@@ -131,7 +131,9 @@ else
     echo "no sphinx indexes will be updated ..."
     # reload new sphinx configuration
     echo "trying to load new sphinx config ..."
+    # we need both stop scripts because systemctl is not always working...
     sudo -u root systemctl stop sphinxsearch
+    sudo -u sphinxsearch -s searchd --stop
     sleep 5
     sudo -u root systemctl start sphinxsearch
 fi
