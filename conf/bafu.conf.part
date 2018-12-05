@@ -37,7 +37,7 @@ source src_ch_bafu_fauna_wildtierkorridor_national : def_searchable_features
         from fauna.wildtierkorridore_national
 }
 
-source src_ch_bafu_hydrologie-q347 : def_searchable_features
+source src_ch_bafu_hydrologie_q347 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
