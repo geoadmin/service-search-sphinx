@@ -1296,6 +1296,7 @@ source src_ch_bfe_biomasse_verholzt : def_searchable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
+            , name as label \
             , remove_accents(concat_ws(' ',name)) as detail \
             , 'ch.bfe.biomasse-verholzt' as layer \
             , quadindex(the_geom) as geom_quadindex \
@@ -1313,6 +1314,7 @@ source src_ch_bfe_biomasse_nicht_verholzt : def_searchable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
+            , name as label \
             , remove_accents(concat_ws(' ',name)) as detail \
             , 'ch.bfe.biomasse-nicht-verholzt' as layer \
             , quadindex(the_geom) as geom_quadindex \
