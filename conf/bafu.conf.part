@@ -578,6 +578,25 @@ source src_ch_bafu_bundesinventare_auen : def_searchable_features
         from bundinv.auen
 }
 
+source src_ch_bafu_auen_ausserhalb_bundesinventar : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', objnummer::text, name)) as detail \
+            , 'ch.bafu.auen-ausserhalb_bundesinventar' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , objnummer::text as feature_id \
+        from schutzge.auen_ausserhalb_bundinv
+}
+
+
 source src_ch_bafu_bundesinventare_auen_anhang2 : def_searchable_features
 {
     sql_db = bafu_dev
@@ -1398,5 +1417,11 @@ index ch_bafu_fauna_wildtierkorridor_national : ch_bafu_hydrologie_wassertempera
 {
     source = src_ch_bafu_fauna_wildtierkorridor_national
     path = /var/lib/sphinxsearch/data/index/ch_bafu_fauna_wildtierkorridor_national
+}
+
+index ch_bafu_auen_ausserhalb_bundesinventar : ch_bafu_hydrologie_wassertemperaturmessstationen
+{
+    source = src_ch_bafu_auen_ausserhalb_bundesinventar
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_auen_ausserhalb_bundesinventar
 }
 
