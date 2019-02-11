@@ -1452,6 +1452,24 @@ source src_ch_bav_anlagen_schienengueterverkehr : def_searchable_features
          from bav.anlagen_schienengueterverkehr
  }
 
+source src_ch_bfe_biogasanlagen : def_searchable_features
+ {
+     sql_db = uvek_dev
+     sql_query = \
+         SELECT plant_id as id \
+             , name as label \
+             , 'feature' as origin \
+             , remove_accents(concat_ws(' ',name,operator,facilitykind,place,beginingofoperation,web,combinedheatandpower,upgradingcapacity,upgradingtechnology_de,upgradingtechnology_fr,upgradingtechnology_en,upgradingtechnology_it,valorizationtype_de,valorizationtype_fr,valorizationtype_en,valorizationtype_it)) as  detail \
+             , 'ch.bfe.biogasanlagen' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+             , plant_id::text as feature_id \
+         from bfe.biogasanlagen
+ }
+
 ## INDICES
 
 index ch_astra_ivs_nat
@@ -1999,5 +2017,11 @@ index ch_bav_anlagen_schienengueterverkehr : ch_astra_ivs_nat
 {
     source = src_ch_bav_anlagen_schienengueterverkehr
     path = /var/lib/sphinxsearch/data/index/ch_bav_anlagen_schienengueterverkehr
+}
+
+index ch_bfe_biogasanlagen : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_biogasanlagen
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_biogasanlagen
 }
 
