@@ -404,7 +404,7 @@ source src_ch_swisstopo_geologie_gisgeol_punkte : def_searchable_features
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-punkte' as layer \
@@ -414,7 +414,7 @@ source src_ch_swisstopo_geologie_gisgeol_punkte : def_searchable_features
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_points
+      from geol.view_gisgeol_points_aggregated
 }
 
 source src_ch_swisstopo_geologie_gisgeol_linien : def_searchable_features
@@ -422,7 +422,7 @@ source src_ch_swisstopo_geologie_gisgeol_linien : def_searchable_features
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-linien' as layer \
@@ -432,7 +432,7 @@ source src_ch_swisstopo_geologie_gisgeol_linien : def_searchable_features
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_lines
+      from geol.view_gisgeol_lines_aggregated
 }
 
 source src_ch_swisstopo_geologie_gisgeol_flaechen_1x1km : def_searchable_features
@@ -440,7 +440,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_1x1km : def_searchable_feature
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-1x1km' as layer \
@@ -450,7 +450,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_1x1km : def_searchable_feature
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_surfaces_1x1km
+      from geol.view_gisgeol_surfaces_1x1km_aggregated
 }
 
 source src_ch_swisstopo_geologie_gisgeol_flaechen_10x10km : def_searchable_features
@@ -458,7 +458,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_10x10km : def_searchable_featu
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-10x10km' as layer \
@@ -468,7 +468,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_10x10km : def_searchable_featu
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_surfaces_10x10km
+      from geol.view_gisgeol_surfaces_10x10km_aggregated
 }
 
 source src_ch_swisstopo_geologie_gisgeol_flaechen_10to100km2 : def_searchable_features
@@ -476,7 +476,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_10to100km2 : def_searchable_fe
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-10to100km2' as layer \
@@ -486,7 +486,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_10to100km2 : def_searchable_fe
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_surfaces_10to100km2
+      from geol.view_gisgeol_surfaces_10to100km2_aggregated
 }
 
 source src_ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2 : def_searchable_features
@@ -494,7 +494,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2 : def_searchable_
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-100to1000km2' as layer \
@@ -504,7 +504,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2 : def_searchable_
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_surfaces_100to1000km2
+      from geol.view_gisgeol_surfaces_100to1000km2_aggregated
 }
 
 source src_ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2 : def_searchable_features
@@ -512,7 +512,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2 : def_searchabl
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-1000to21000km2' as layer \
@@ -522,7 +522,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2 : def_searchabl
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_surfaces_1000to21000km2
+      from geol.view_gisgeol_surfaces_1000to21000km2_aggregated
 }
 
 source src_ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2 : def_searchable_features
@@ -530,7 +530,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2 : def_searchable_fe
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-gt21000km2' as layer \
@@ -540,7 +540,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2 : def_searchable_fe
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_surfaces_gt21000km2
+      from geol.view_gisgeol_surfaces_gt21000km2_aggregated
 }
 
 source src_ch_swisstopo_geologie_gisgeol_flaechen_lt10km2 : def_searchable_features
@@ -548,7 +548,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_lt10km2 : def_searchable_featu
    sql_db = stopo_dev
    sql_query = \
       SELECT gid as id \
-          , sgd_nr::text as label \
+          , sphinx_index as label \
           , 'feature' as origin \
           , concat_ws(' ', sgd_nr, original_document_id, doccreation_date, remove_accents(author), remove_accents(title),  remove_accents(auxiliary_information)) as detail \
           , 'ch.swisstopo.geologie-gisgeol-flaechen-lt10km2' as layer \
@@ -558,7 +558,7 @@ source src_ch_swisstopo_geologie_gisgeol_flaechen_lt10km2 : def_searchable_featu
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , gid::text as feature_id \
-      from geol.view_gisgeol_surfaces_lt10km2
+      from geol.view_gisgeol_surfaces_lt10km2_aggregated
 }
 
 source src_ch_swisstopo_geologie_tiefengeothermie_projekte : def_searchable_features
