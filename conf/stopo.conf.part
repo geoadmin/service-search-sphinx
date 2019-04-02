@@ -108,6 +108,23 @@ source src_ch_swisstopo_vec200_names_namedlocation : def_searchable_features
         FROM public.vec200_namedlocation
 }
 
+source src_ch_swisstopo_vec25_gewaessernetz_referenz : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', name, gwlnr)) as detail \
+            , 'ch.swisstopo.vec25-gewaessernetz_referenz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        FROM public.v25_gewaessernetz_ref
+}
+
 source src_ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte : def_searchable_features
 {
     sql_db = stopo_dev
@@ -1469,4 +1486,10 @@ index ch_swisstopo_amtliches_strassenverzeichnis : ch_swisstopo_verschiebungsvek
 {
     source = src_ch_swisstopo_amtliches_strassenverzeichnis
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_strassenverzeichnis
+}
+
+index ch_swisstopo_vec25_gewaessernetz_referenz : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_vec25_gewaessernetz_referenz
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25_gewaessernetz_referenz
 }
