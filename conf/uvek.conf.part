@@ -161,7 +161,7 @@ source src_ch_astra_unfaelle_personenschaeden_motorraeder : def_searchable_featu
         SELECT bgdi_id as id \
             , accidenttype_de as label \
             , 'feature' as origin \
-            , remove_accents(accidenttype_de||' '||accidenttype_fr||' '||accidenttype_it||' '||accidenttypecode::text||' '||accidentday_de||' '||accidentday_fr||' '||accidentday_it||' '||accidentyear::text||' '||severitycategory_de||' '||severitycategory_fr||' '||severitycategory_it||' '||severitycategorycode::text||' '||roadtype_de||' '||roadtype_fr||' '||roadtype_it||' '||roadtypecode::text||' '||canton||' '||fsocommunecode::text) as detail \
+            , remove_accents(concat_ws(' ', accidenttype_de, accidenttype_fr, accidenttype_it, accidenttype_en, accidenttypecode::text, accidentday_de, accidentday_fr, accidentday_it, accidentday_en, accidentmonth_de, accidentmonth_fr, accidentmonth_it, accidentmonth_en, accidentyear::text, severitycategory_de, severitycategory_fr, severitycategory_it, severitycategory_en, severitycategorycode::text, roadtype_de, roadtype_fr, roadtype_it, roadtype_en, roadtypecode::text, canton, fsocommunecode::text)) as detail \
             , 'ch.astra.unfaelle-personenschaeden_motorraeder' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -169,7 +169,7 @@ source src_ch_astra_unfaelle_personenschaeden_motorraeder : def_searchable_featu
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
-        from astra.unf_pers_motorraeder
+        from astra.v_unf_pers_motorraeder
 }
 
 source src_ch_astra_unfaelle_personenschaeden_fussgaenger : def_searchable_features
@@ -179,7 +179,7 @@ source src_ch_astra_unfaelle_personenschaeden_fussgaenger : def_searchable_featu
         SELECT bgdi_id as id \
             , accidenttype_de as label \
             , 'feature' as origin \
-            , remove_accents(accidenttype_de||' '||accidenttype_fr||' '||accidenttype_it||' '||accidenttypecode::text||' '||accidentday_de||' '||accidentday_fr||' '||accidentday_it||' '||accidentyear::text||' '||severitycategory_de||' '||severitycategory_fr||' '||severitycategory_it||' '||severitycategorycode::text||' '||roadtype_de||' '||roadtype_fr||' '||roadtype_it||' '||roadtypecode::text||' '||canton||' '||fsocommunecode::text) as detail \
+            , remove_accents(concat_ws(' ', accidenttype_de, accidenttype_fr, accidenttype_it, accidenttype_en, accidenttypecode::text, accidentday_de, accidentday_fr, accidentday_it, accidentday_en, accidentmonth_de, accidentmonth_fr, accidentmonth_it, accidentmonth_en, accidentyear::text, severitycategory_de, severitycategory_fr, severitycategory_it, severitycategory_en, severitycategorycode::text, roadtype_de, roadtype_fr, roadtype_it, roadtype_en, roadtypecode::text, canton, fsocommunecode::text)) as detail \
             , 'ch.astra.unfaelle-personenschaeden_fussgaenger' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -187,7 +187,7 @@ source src_ch_astra_unfaelle_personenschaeden_fussgaenger : def_searchable_featu
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
-        from astra.unf_pers_fussgaenger
+        from astra.v_unf_pers_fussgaenger
 }
 
 source src_ch_astra_unfaelle_personenschaeden_fahrraeder : def_searchable_features
@@ -197,7 +197,7 @@ source src_ch_astra_unfaelle_personenschaeden_fahrraeder : def_searchable_featur
         SELECT bgdi_id as id \
             , accidenttype_de as label \
             , 'feature' as origin \
-            , remove_accents(accidenttype_de||' '||accidenttype_fr||' '||accidenttype_it||' '||accidenttypecode::text||' '||accidentday_de||' '||accidentday_fr||' '||accidentday_it||' '||accidentyear::text||' '||severitycategory_de||' '||severitycategory_fr||' '||severitycategory_it||' '||severitycategorycode::text||' '||roadtype_de||' '||roadtype_fr||' '||roadtype_it||' '||roadtypecode::text||' '||canton||' '||fsocommunecode::text) as detail \
+            , remove_accents(concat_ws(' ', accidenttype_de, accidenttype_fr, accidenttype_it, accidenttype_en, accidenttypecode::text, accidentday_de, accidentday_fr, accidentday_it, accidentday_en, accidentmonth_de, accidentmonth_fr, accidentmonth_it, accidentmonth_en, accidentyear::text, severitycategory_de, severitycategory_fr, severitycategory_it, severitycategory_en, severitycategorycode::text, roadtype_de, roadtype_fr, roadtype_it, roadtype_en, roadtypecode::text, canton, fsocommunecode::text)) as detail \
             , 'ch.astra.unfaelle-personenschaeden_fahrraeder' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -205,7 +205,7 @@ source src_ch_astra_unfaelle_personenschaeden_fahrraeder : def_searchable_featur
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
-        from astra.unf_pers_fahrraeder
+        from astra.v_unf_pers_fahrraeder
 }
 
 source src_ch_astra_unfaelle_personenschaeden_getoetete : def_searchable_features
@@ -215,7 +215,7 @@ source src_ch_astra_unfaelle_personenschaeden_getoetete : def_searchable_feature
         SELECT bgdi_id as id \
             , accidenttype_de as label \
             , 'feature' as origin \
-            , remove_accents(accidenttype_de||' '||accidenttype_fr||' '||accidenttype_it||' '||accidenttypecode::text||' '||accidentday_de||' '||accidentday_fr||' '||accidentday_it||' '||accidentyear::text||' '||severitycategory_de||' '||severitycategory_fr||' '||severitycategory_it||' '||severitycategorycode::text||' '||roadtype_de||' '||roadtype_fr||' '||roadtype_it||' '||roadtypecode::text||' '||canton||' '||fsocommunecode::text) as detail \
+            , remove_accents(concat_ws(' ', accidenttype_de, accidenttype_fr, accidenttype_it, accidenttype_en, accidenttypecode::text, accidentday_de, accidentday_fr, accidentday_it, accidentday_en, accidentmonth_de, accidentmonth_fr, accidentmonth_it, accidentmonth_en, accidentyear::text, severitycategory_de, severitycategory_fr, severitycategory_it, severitycategory_en, severitycategorycode::text, roadtype_de, roadtype_fr, roadtype_it, roadtype_en, roadtypecode::text, canton, fsocommunecode::text)) as detail \
             , 'ch.astra.unfaelle-personenschaeden_getoetete' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -223,7 +223,7 @@ source src_ch_astra_unfaelle_personenschaeden_getoetete : def_searchable_feature
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
-        from astra.unf_pers_getoetete
+        from astra.v_unf_pers_getoetete
 }
 
 source src_ch_astra_unfaelle_personenschaeden_alle : def_searchable_features
@@ -233,7 +233,7 @@ source src_ch_astra_unfaelle_personenschaeden_alle : def_searchable_features
         SELECT bgdi_id as id \
             , accidenttype_de as label \
             , 'feature' as origin \
-            , remove_accents(accidenttype_de||' '||accidenttype_fr||' '||accidenttype_it||' '||accidenttypecode::text||' '||accidentday_de||' '||accidentday_fr||' '||accidentday_it||' '||accidentyear::text||' '||severitycategory_de||' '||severitycategory_fr||' '||severitycategory_it||' '||severitycategorycode::text||' '||roadtype_de||' '||roadtype_fr||' '||roadtype_it||' '||roadtypecode::text||' '||canton||' '||fsocommunecode::text) as detail \
+            , remove_accents(concat_ws(' ', accidenttype_de, accidenttype_fr, accidenttype_it, accidenttype_en, accidenttypecode::text, accidentday_de, accidentday_fr, accidentday_it, accidentday_en, accidentmonth_de, accidentmonth_fr, accidentmonth_it, accidentmonth_en, accidentyear::text, severitycategory_de, severitycategory_fr, severitycategory_it, severitycategory_en, severitycategorycode::text, roadtype_de, roadtype_fr, roadtype_it, roadtype_en, roadtypecode::text, canton, fsocommunecode::text)) as detail \
             , 'ch.astra.unfaelle-personenschaeden_alle' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -241,7 +241,7 @@ source src_ch_astra_unfaelle_personenschaeden_alle : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , uuid::text as feature_id \
-        from astra.unf_pers_alle
+        from astra.v_unf_pers_alle
 }
 
 
