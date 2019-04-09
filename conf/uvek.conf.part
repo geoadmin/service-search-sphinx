@@ -1326,6 +1326,24 @@ source src_ch_bfe_biomasse_nicht_verholzt : def_searchable_features
         FROM bfe.biomasse
 }
 
+source src_ch_bfe_kehrichtverbrennungsanlagen : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , 'feature' as origin \
+            , name as label \
+            , remove_accents(concat_ws(' ',name)) as detail \
+            , 'ch.bfe.kehrichtverbrennungsanlagen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        FROM bfe.kehrichtverbrennungsanlagen
+}
+
 source src_ch_bfe_sachplan_geologie_tiefenlager_1 : def_searchable_features
 {
     sql_db = uvek_dev
@@ -1959,6 +1977,12 @@ index ch_bfe_biomasse_nicht_verholzt : ch_astra_ivs_nat
 {
     source = src_ch_bfe_biomasse_nicht_verholzt
     path = /var/lib/sphinxsearch/data/index/ch_bfe_biomasse_nicht_verholzt
+}
+
+index ch_bfe_kehrichtverbrennungsanlagen : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_kehrichtverbrennungsanlagen
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_kehrichtverbrennungsanlagen
 }
 
 index ch_bfe_sachplan_geologie_tiefenlager_1 : ch_astra_ivs_nat
