@@ -113,6 +113,7 @@ source src_ch_swisstopo_vec25_gewaessernetz_referenz : def_searchable_features
     sql_db = stopo_dev
     sql_query = \
         SELECT bgdi_id as id \
+            , remove_accents(concat_ws(' ', name, gwlnr)) as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', name, gwlnr)) as detail \
             , 'ch.swisstopo.vec25-gewaessernetz_referenz' as layer \
