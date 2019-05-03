@@ -196,7 +196,7 @@ source src_swissnames3d : src_swisssearch
         1 as num, \
         b.zoomlevel as zoomlevel \
     FROM swissnames_search s \
-    inner join tlm.dkm_search b on s.name = b.name and s.objektklasse = 'TLM_GEBAEUDE' and s.feature_id <> b.feature_id \
+    inner join tlm.dkm_search b on s.name = b.name and s.feature_id <> b.feature_id \
     ) s
 }
 
