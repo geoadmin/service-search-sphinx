@@ -1092,24 +1092,6 @@ source src_ch_bfe_energiestaedte_2000watt_areale : def_searchable_features
         from bfe.energiestaedte_2000watt_areale
 }
 
-source src_ch_bfe_energiestaedte_2000watt_aufdemweg : def_searchable_features
-{
-    sql_db = uvek_dev
-    sql_query = \
-        SELECT bgdi_id::bigint as id \
-            , name as label \
-            , 'feature' as origin \
-            , remove_accents(name) as detail \
-            , 'ch.bfe.energiestaedte-2000watt-aufdemweg' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-            , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
-        from bfe.energiestaedte_aufdemweg_2000watt
-}
-
 source src_ch_bazl_luftfahrthindernis : def_searchable_features
 {
     sql_db = uvek_dev
@@ -1840,12 +1822,6 @@ index ch_bfe_energiestaedte_2000watt_areale : ch_astra_ivs_nat
 {
     source = src_ch_bfe_energiestaedte_2000watt_areale
     path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_2000watt_areale
-}
-
-index ch_bfe_energiestaedte_2000watt_aufdemweg : ch_astra_ivs_nat
-{
-    source = src_ch_bfe_energiestaedte_2000watt_aufdemweg 
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_2000watt_aufdemweg 
 }
 
 index ch_bazl_luftfahrthindernis : ch_astra_ivs_nat
