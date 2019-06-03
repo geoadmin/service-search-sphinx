@@ -1416,60 +1416,6 @@ source src_ch_bfe_sachplan_geologie_tiefenlager_3 : def_searchable_features
         FROM bfe.sachplan_geologie_tiefenlager_pm_pt
 }
 
-source src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1 : def_searchable_features
-{
-    sql_db = uvek_dev
-    sql_query = \
-        SELECT facpt_id as id \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ',facptname_de,facptname_fr,facptname_it,facptname_de,fackind_de,fackind_fr,fackind_it)) as detail \
-            , 'ch.bfe.sachplan-geologie-tiefenlager_vernehmlassung' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , facptname_de::text as label \
-            , facpt_id::text as feature_id \
-        FROM bfe.geologische_tief_vernehm_fac_pt
-}
-
-source src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2 : def_searchable_features
-{
-    sql_db = uvek_dev
-    sql_query = \
-        SELECT pmarea_id as id \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ',pmname_de,pmname_fr,pmname_it,pmname_de,pmkind_de,pmkind_fr,pmkind_it)) as detail \
-            , 'ch.bfe.sachplan-geologie-tiefenlager_vernehmlassung' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , pmname_de::text as label \
-            , pmarea_id::text as feature_id \
-        FROM bfe.geologische_tief_vernehm_pm_area
-}
-
-source src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3 : def_searchable_features
-{
-    sql_db = uvek_dev
-    sql_query = \
-        SELECT pmpt_id as id \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ',pmname_de,pmname_fr,pmname_it,pmname_de,pmkind_de,pmkind_fr,pmkind_it)) as detail \
-            , 'ch.bfe.sachplan-geologie-tiefenlager_vernehmlassung' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , pmname_de::text as label \
-            , pmpt_id::text as feature_id \
-        FROM bfe.geologische_tief_vernehm_pm_pt
-}
-
 source src_ch_bav_anlagen_schienengueterverkehr : def_searchable_features
  {
      sql_db = uvek_dev
@@ -2028,32 +1974,6 @@ index ch_bfe_sachplan_geologie_tiefenlager
     local = ch_bfe_sachplan_geologie_tiefenlager_1
     local = ch_bfe_sachplan_geologie_tiefenlager_2
     local = ch_bfe_sachplan_geologie_tiefenlager_3
-}
-
-index ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1 : ch_astra_ivs_nat
-{
-    source = src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1
-}
-
-index ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2 : ch_astra_ivs_nat
-{
-    source = src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2
-}
-
-index ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3 : ch_astra_ivs_nat
-{
-    source = src_ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3
-}
-
-index ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung
-{
-    type = distributed
-    local = ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_1
-    local = ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_2
-    local = ch_bfe_sachplan_geologie_tiefenlager_vernehmlassung_3
 }
 
 index ch_bav_anlagen_schienengueterverkehr : ch_astra_ivs_nat
