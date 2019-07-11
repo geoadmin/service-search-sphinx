@@ -59,10 +59,10 @@ source src_parcel : src_swisssearch
         , 10::integer as rank \
         , x \
         , y \
-        , st_x(st_transform(st_centroid(the_geom),2056)) as y_lv95 \
-        , st_y(st_transform(st_centroid(the_geom),2056)) as x_lv95 \
-        , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-        , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+        , st_x(st_transform(the_geom_point,2056)) as y_lv95 \
+        , st_y(st_transform(the_geom_point,2056)) as x_lv95 \
+        , st_y(st_transform(the_geom_point,4326)) as lat \
+        , st_x(st_transform(the_geom_point,4326)) as lon \
         , num \
         , 10 as zoomlevel \
         from vd.parzellen_sphinx
