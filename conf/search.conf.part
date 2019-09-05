@@ -289,12 +289,12 @@ source src_zipcode : src_swisssearch
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
         , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
         , 1::integer as rank \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),21781)) as x \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),21781)) as y \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),2056)) as x_lv95 \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),2056)) as y_lv95 \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),21781),4326)) as lat \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),21781),4326)) as lon \
+        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),2056),21781)) as x \
+        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),2056),21781)) as y \
+        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),2056),2056)) as x_lv95 \
+        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),2056),2056)) as y_lv95 \
+        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),2056),4326)) as lat \
+        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),2056),4326)) as lon \
         , -1 as zoomlevel \
         , 1 as num \
         FROM vd.gabmo_plz p
