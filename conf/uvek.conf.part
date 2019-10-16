@@ -1218,7 +1218,7 @@ source src_ch_astra_mountainbikeland : def_searchable_features
       from astra.chmobil_mountainbikeland
 }
 
-source src_ch_swisstopo_schneeschuhwanderland : def_searchable_features
+source src_ch_swisstopo_schneeschuhwandern : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1226,7 +1226,7 @@ source src_ch_swisstopo_schneeschuhwanderland : def_searchable_features
           , title as label \
           , 'feature' as origin \
           , remove_accents(concat_ws(' ',full_number,title)) as detail \
-          , 'ch.swisstopo.schneeschuhwanderland' as layer \
+          , 'ch.swisstopo.schneeschuhwandern' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
           , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
@@ -1914,10 +1914,10 @@ index ch_astra_mountainbikeland : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_astra_mountainbikeland
 }
 
-index ch_swisstopo_schneeschuhwanderland : ch_astra_ivs_nat
+index ch_swisstopo_schneeschuhwandern : ch_astra_ivs_nat
 {
-    source = src_ch_swisstopo_schneeschuhwanderland
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_schneeschuhwanderland
+    source = src_ch_swisstopo_schneeschuhwandern
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_schneeschuhwandern
 }
 
 index ch_astra_schwerverunfallte_kanton_alkohol : ch_astra_ivs_nat
