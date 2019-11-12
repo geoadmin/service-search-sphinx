@@ -1470,6 +1470,42 @@ source src_ch_bfe_biogasanlagen : def_searchable_features
          from bfe.biogasanlagen
  }
 
+source src_ch_bfe_erneuerbarheizen : def_searchable_features
+ {
+     sql_db = uvek_dev
+     sql_query = \
+         SELECT xtf_id as id \
+             , company as label \
+             , 'feature' as origin \
+             , remove_accents(concat_ws(' ',company)) as  detail \
+             , 'ch.bfe.erneuerbarheizen' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+             , xtf_id::text as feature_id \
+         from bfe.erneuerbarheizen
+ }
+
+source src_ch_bfe_komo_projekte : def_searchable_features
+ {
+     sql_db = uvek_dev
+     sql_query = \
+         SELECT xtf_id as id \
+             , id as label \
+             , 'feature' as origin \
+             , remove_accents(concat_ws(' ',project_title_de,project_title_fr,project_title_it,project_title_en)) as  detail \
+             , 'ch.bfe.komo-projekte' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+             , xtf_id::text as feature_id \
+         from bfe.komo_projekte
+ }
+
 ## INDICES
 
 index ch_astra_ivs_nat
@@ -2011,4 +2047,18 @@ index ch_bfe_biogasanlagen : ch_astra_ivs_nat
     source = src_ch_bfe_biogasanlagen
     path = /var/lib/sphinxsearch/data/index/ch_bfe_biogasanlagen
 }
+
+index ch_bfe_erneuerbarheizen : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_erneuerbarheizen
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_erneuerbarheizen
+}
+
+index ch_bfe_komo_projekte : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_komo_projekte
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_komo_projekte
+}
+
+
 
