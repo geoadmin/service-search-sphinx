@@ -172,6 +172,24 @@ source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
         from astra.verkehr_reg_loc
 }
 
+source src_ch_astra_strassenverkehrszaehlung_uebergeordnet : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , mlocname as label \
+            , 'feature' as origin \
+            , remove_accents(mlocname) as detail \
+            , 'ch.astra.strassenverkehrszaehlung-uebergeordnet' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from astra.strassenverkehrszaelung_uebergeordnet
+}
+
 source src_ch_astra_unfaelle_personenschaeden_motorraeder : def_searchable_features
 {
     sql_db = uvek_dev
@@ -1570,6 +1588,12 @@ index ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal : ch_astra_iv
 {
     source = src_ch_astra_strassenverkehrszaehlung_lokal
     path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal
+}
+
+index ch_astra_strassenverkehrszaehlung_uebergeordnet : ch_astra_ivs_nat
+{
+    source = src_ch_astra_strassenverkehrszaehlung_uebergeordnet
+    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_uebergeordnet
 }
 
 index ch_astra_unfaelle_personenschaeden_motorraeder : ch_astra_ivs_nat
