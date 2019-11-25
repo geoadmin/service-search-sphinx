@@ -1513,7 +1513,7 @@ source src_ch_bfe_thermische_netze : def_searchable_features
          SELECT xtf_id as id \
              , name as label \
              , 'feature' as origin \
-             , remove_accents(concat_ws(' ',name)) as  detail \
+             , remove_accents(name) as  detail \
              , 'ch.bfe.thermische-netze' as layer \
              , quadindex(the_geom) as geom_quadindex \
              , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
