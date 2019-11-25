@@ -1506,6 +1506,24 @@ source src_ch_bfe_komo_projekte : def_searchable_features
          from bfe.komo_projekte
  }
 
+source src_ch_bfe_thermische_netze : def_searchable_features
+ {
+     sql_db = uvek_dev
+     sql_query = \
+         SELECT xtf_id as id \
+             , name as label \
+             , 'feature' as origin \
+             , remove_accents(concat_ws(' ',name)) as  detail \
+             , 'ch.bfe.thermische-netze' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+             , xtf_id::text as feature_id \
+         from bfe.thermische_netze
+ }
+
 ## INDICES
 
 index ch_astra_ivs_nat
@@ -2060,5 +2078,9 @@ index ch_bfe_komo_projekte : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bfe_komo_projekte
 }
 
-
+index ch_bfe_thermische_netze : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_thermische_netze
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_thermische_netze
+}
 
