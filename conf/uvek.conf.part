@@ -187,7 +187,7 @@ source src_ch_astra_strassenverkehrszaehlung_uebergeordnet : def_searchable_feat
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from astra.strassenverkehrszaelung_uebergeordnet
+        from astra.strassenverkehrszaehlung_uebergeordnet
 }
 
 source src_ch_astra_unfaelle_personenschaeden_motorraeder : def_searchable_features
