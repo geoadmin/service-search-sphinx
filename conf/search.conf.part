@@ -156,7 +156,7 @@ source src_swissnames3d : src_swisssearch
         ) sub \
         WHERE  objektart not like 'Haltestelle%' \
     ) \
-    select distinct on (feature_id) row_number() OVER(ORDER BY 1 asc) as id , * FROM \
+    select distinct on (feature_id, detail) row_number() OVER(ORDER BY 1 asc) as id , * FROM \
         ( \
     SELECT \
         coalesce(b.feature_id,s.feature_id) as feature_id, \
