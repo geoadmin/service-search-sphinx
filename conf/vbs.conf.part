@@ -41,9 +41,9 @@ source src_ch_vbs_armeelogistikcenter : def_searchable_features
     sql_db = vbs_dev
     sql_query = \
         SELECT bgdi_id as id \
-            ,  name as label \
+            , name as label \
             , 'feature' as origin \
-            ,  remove_accents(coalesce(name,' '))||' '||remove_accents(coalesce(abkuerzung,' ')) as detail \
+            , remove_accents(concat_ws(' ', name, abkuerzung)) as detail \
             , 'ch.vbs.armeelogistikcenter' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -61,7 +61,7 @@ source src_ch_vbs_bundestankstellen_bebeco : def_searchable_features
         SELECT bgdi_id as id \
             ,  ort as label \
             , 'feature' as origin \
-            ,  remove_accents(coalesce(ort,' '))||' '||remove_accents(coalesce(strasse,' '))||' '||plz::text as detail \
+            , remove_accents(concat_ws(' ', ort, strasse, plz)) as detail \
             , 'ch.vbs.bundestankstellen-bebeco' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -77,9 +77,9 @@ source src_ch_vbs_logistikraeume_armeelogistikcenter : def_searchable_features
     sql_db = vbs_dev
     sql_query = \
         SELECT bgdi_id as id \
-            ,  kantone as label \
+            , kantone as label \
             , 'feature' as origin \
-            ,  remove_accents(coalesce(region,' '))||' '||remove_accents(coalesce(kantone,' ')) as detail \
+            , remove_accents(concat_ws(' ', region, kantone)) as detail \
             , 'ch.vbs.logistikraeume-armeelogistikcenter' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
