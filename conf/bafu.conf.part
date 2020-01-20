@@ -1090,7 +1090,7 @@ source src_ch_bafu_wasser_vorfluter : def_searchable_features
         SELECT bgdi_id as id \
             , id as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(id, ' ')||' '||coalesce(ezgnr, ' ')||' '||coalesce(gewaessername, ' ')||' '||coalesce(gwlnr, ' ')) as  detail \
+            , remove_accents(coalesce(id::text, ' ')||' '||coalesce(ezgnr::text, ' ')||' '||coalesce(gewaessername, ' ')||' '||coalesce(gwlnr, ' ')) as  detail \
             , 'ch.bafu.wasser-vorfluter' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
