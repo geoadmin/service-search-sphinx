@@ -5,7 +5,7 @@ source src_ch_swisstopo_lubis_bildstreifen : def_searchable_features_with_year
     sql_db = lubis_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY bildstreifen_nr asc) as id \
-            , flugdatum::date ||' '||bildstreifen_nr::text as label \
+            , concat_ws(' ', flugdatum, bildstreifen_nr) as label \
             , 'feature' as origin \
             , bildstreifen_nr as detail \
             , 'ch.swisstopo.lubis-bildstreifen' as layer \
@@ -43,9 +43,9 @@ source src_ch_swisstopo_lubis_luftbilder_farbe : def_searchable_features_with_ye
     sql_db = lubis_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
             , 'feature' as origin \
-            , ebkey || ' ' || coalesce(ort,'')  as detail \
+            , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder_farbe' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -62,9 +62,9 @@ source src_ch_swisstopo_lubis_luftbilder_schwarzweiss: def_searchable_features_w
     sql_db = lubis_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
             , 'feature' as origin \
-            , ebkey || ' ' || coalesce(ort,'')  as detail \
+            , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder_schwarzweiss' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -81,9 +81,9 @@ source src_ch_swisstopo_lubis_luftbilder_infrarot: def_searchable_features_with_
     sql_db = lubis_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
             , 'feature' as origin \
-            , ebkey || ' ' || coalesce(ort,'')  as detail \
+            , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder_infrarot' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -100,9 +100,9 @@ source src_ch_swisstopo_lubis_luftbilder_dritte_kantone : def_searchable_feature
     sql_db = lubis_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
             , 'feature' as origin \
-            , ebkey || ' ' || coalesce(ort,'')  as detail \
+            , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder-dritte-kantone' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -119,9 +119,9 @@ source src_ch_swisstopo_lubis_luftbilder_dritte_firmen : def_searchable_features
     sql_db = lubis_dev
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , flugdatum::date ||' '||bildnummer::text||' ('||coalesce(ort,'')||', '||coalesce(ebkey,'')||')' as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
             , 'feature' as origin \
-            , ebkey || ' ' || coalesce(ort,'')  as detail \
+            , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder-dritte-firmen' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
