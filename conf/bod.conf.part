@@ -18,7 +18,7 @@ source src_layers_de : layers
     sql_query = \
         SELECT \
             bgdi_id::bigint as id \
-            , '<b>'||kurzbezeichnung||'</b>' as label \
+            , concat('<b>', kurzbezeichnung, '</b>') as label \
             , 'layer' as origin \
             , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
@@ -36,7 +36,7 @@ source src_layers_fr : layers
     sql_query = \
         SELECT \
             bgdi_id::bigint as id \
-            , '<b>'||kurzbezeichnung||'</b>' as label \
+            , concat('<b>', kurzbezeichnung, '</b>') as label \
             , 'layer' as origin \
             , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
@@ -54,7 +54,7 @@ source src_layers_en : layers
     sql_query = \
         SELECT \
             bgdi_id::bigint as id \
-            , '<b>'||kurzbezeichnung||'</b>' as label \
+            , concat('<b>', kurzbezeichnung, '</b>') as label \
             , 'layer' as origin \
             , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
@@ -72,7 +72,7 @@ source src_layers_it : layers
     sql_query = \
         SELECT \
             bgdi_id::bigint as id \
-            , '<b>'||kurzbezeichnung||'</b>' as label \
+            , concat('<b>', kurzbezeichnung, '</b>') as label \
             , 'layer' as origin \
             , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
@@ -90,7 +90,7 @@ source src_layers_rm : layers
     sql_query = \
         SELECT \
             bgdi_id::bigint as id \
-            , '<b>'||kurzbezeichnung||'</b>' as label \
+            , concat('<b>', kurzbezeichnung, '</b>') as label \
             , 'layer' as origin \
             , remove_accents(kurzbezeichnung) as title \
             , remove_accents(volltextsuche) as detail \
