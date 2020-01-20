@@ -51,7 +51,7 @@ source src_ch_bav_haltestellen_oev : def_searchable_features
         SELECT nummer::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(nummer::text, ' ')||' '||coalesce(name, ' ')) as detail \
+            , remove_accents(concat_ws(' ', nummer, name)) as detail \
             , 'ch.bav.haltestellen-oev' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -70,7 +70,7 @@ source src_ch_astra_nationalstrassenachsen : def_searchable_features
         SELECT bgdi_id as id \
             , id as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(strassennummer, ' ')||' '||coalesce(name, ' ')) as detail \
+            , remove_accents(concat_ws(' ', strassennummer, name)) as detail \
             , 'ch.astra.nationalstrassenachsen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -89,7 +89,7 @@ source src_ch_astra_ivs_nat : def_searchable_features
         SELECT nat_id::bigint as id \
             , ivs_nummer as label \
             , 'feature' as origin \
-            , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
+            , remove_accents(concat_ws(' ', ivs_slaname, ivs_nummer, ivs_signatur)) as detail \
             , 'ch.astra.ivs-nat' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -107,7 +107,7 @@ source src_ch_astra_ivs_nat_verlaeufe : def_searchable_features
         SELECT nat_id::bigint as id \
             , ivs_nummer as label \
             , 'feature' as origin \
-            , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
+            , remove_accents(concat_ws(' ', ivs_slaname, ivs_nummer, ivs_signatur)) as detail \
             , 'ch.astra.ivs-nat-verlaeufe' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -125,7 +125,7 @@ source src_ch_astra_ivs_reg_loc : def_searchable_features
         SELECT reg_loc_id::bigint as id \
             , ivs_nummer as label \
             , 'feature' as origin \
-            , remove_accents(ivs_slaname)||' '||remove_accents(ivs_nummer)||' '||remove_accents(ivs_signatur) as detail \
+            , remove_accents(concat_ws(' ', ivs_slaname, ivs_nummer, ivs_signatur)) as detail \
             , 'ch.astra.ivs-reg_loc' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -143,7 +143,7 @@ source src_ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet : def_sea
         SELECT nr::bigint as id \
             , zaehlstellen_bezeichnung as label \
             , 'feature' as origin \
-            , nr||' '||remove_accents(zaehlstellen_bezeichnung) as detail \
+            , remove_accents(concat_ws(' ', nr, zaehlstellen_bezeichnung)) as detail \
             , 'ch.astra.strassenverkehrszaehlung_messstellen-uebergeordnet' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -161,7 +161,7 @@ source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
         SELECT nr::bigint as id \
             , zaehlstellen_bezeichnung as label \
             , 'feature' as origin \
-            , nr||' '||remove_accents(zaehlstellen_bezeichnung) as detail \
+            , remove_accents(concat_ws(' ', nr, zaehlstellen_bezeichnung)) as detail \
             , 'ch.astra.strassenverkehrszaehlung_messstellen-regional_lokal' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -554,7 +554,7 @@ source src_ch_bakom_radio_fernsehsender : def_searchable_features
         SELECT id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(name)||' '||remove_accents(code) as detail \
+            , remove_accents(concat_ws(' ', name, code)) as detail \
             , 'ch.bakom.radio-fernsehsender' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -646,7 +646,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_ausgangslage : def_searchable_f
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(name)||' '||remove_accents(description_de)||' '||remove_accents(description_fr)||' '||remove_accents(description_it)||' '||remove_accents(anlage_id)  as detail \
+            , remove_accents(concat_ws(' ', name, description_de, description_fr, description_it, anlage_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_ausgangslage' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -665,7 +665,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_anhorung_1 : def_searchable_fea
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
             , 'feature' as origin \
-            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', facname_de, facname_fr, facname_it, doc_title, stabil_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -683,7 +683,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_anhorung_2 : def_searchable_fea
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
             , 'feature' as origin \
-            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', plname_de, plname_fr, plname_it, doc_title, stabil_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -701,7 +701,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage : def_searchab
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(name)||' '||remove_accents(description_de)||' '||remove_accents(description_fr)||' '||remove_accents(description_it)||' '||remove_accents(anlage_id)  as detail \
+            , remove_accents(concat_ws(' ', name, description_de, description_fr, description_it, anlage_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schifffahrt_ausgangslage' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -720,7 +720,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1 : def_searchabl
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
             , 'feature' as origin \
-            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', facname_de, facname_fr, facname_it, doc_title, stabil_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schifffahrt_anhoerung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -738,7 +738,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2 : def_searchabl
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
             , 'feature' as origin \
-            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', plname_de, plname_fr, plname_it, doc_title, stabil_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schifffahrt_anhoerung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -756,7 +756,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1 : def_searchable_fe
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
             , 'feature' as origin \
-            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', facname_de, facname_fr, facname_it, doc_title, stabil_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schifffahrt_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -774,7 +774,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2 : def_searchable_fe
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
             , 'feature' as origin \
-            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', plname_de, plname_fr, plname_it, doc_title, stabil_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schifffahrt_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -792,7 +792,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_kraft_1 : def_searchable_featur
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
             , 'feature' as origin \
-            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', facname_de, facname_fr, facname_it, doc_title, stabil_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -810,7 +810,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_kraft_2 : def_searchable_featur
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
             , 'feature' as origin \
-            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', plname_de, plname_fr, plname_it, doc_title, stabil_id)) as detail \
             , 'ch.bav.sachplan-infrastruktur-schiene_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -829,7 +829,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_1 : def_searchable_fe
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
             , 'feature' as origin \
-            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', facname_de, facname_fr, facname_it, doc_title, stabil_id)) as detail \
             , 'ch.bfe.sachplan-uebertragungsleitungen_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -847,7 +847,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_2 : def_searchable_fe
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
             , 'feature' as origin \
-            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', plname_de, plname_fr, plname_it, doc_title, stabil_id)) as detail \
             , 'ch.bfe.sachplan-uebertragungsleitungen_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -865,7 +865,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_3 : def_searchable_fe
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
             , 'feature' as origin \
-            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', facname_de, facname_fr, facname_it, doc_title, stabil_id)) as detail \
             , 'ch.bfe.sachplan-uebertragungsleitungen_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -883,7 +883,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_4 : def_searchable_fe
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
             , 'feature' as origin \
-            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', plname_de, plname_fr, plname_it, doc_title, stabil_id)) as detail \
             , 'ch.bfe.sachplan-uebertragungsleitungen_anhorung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -901,7 +901,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_1 : def_searchable_featu
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
             , 'feature' as origin \
-            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', facname_de, facname_fr, facname_it, doc_title, stabil_id)) as detail \
             , 'ch.bfe.sachplan-uebertragungsleitungen_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -919,7 +919,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_2 : def_searchable_featu
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
             , 'feature' as origin \
-            , remove_accents(facname_de)||' '||remove_accents(facname_fr)||' '||remove_accents(facname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', facname_de, facname_fr, facname_it, doc_title, stabil_id)) as detail \
             , 'ch.bfe.sachplan-uebertragungsleitungen_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -937,7 +937,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_3 : def_searchable_featu
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
             , 'feature' as origin \
-            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', plname_de, plname_fr, plname_it, doc_title, stabil_id)) as detail \
             , 'ch.bfe.sachplan-uebertragungsleitungen_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -955,7 +955,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_4 : def_searchable_featu
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
             , 'feature' as origin \
-            , remove_accents(plname_de)||' '||remove_accents(plname_fr)||' '||remove_accents(plname_it)||' '||remove_accents(doc_title)||' '||remove_accents(stabil_id)  as detail \
+            , remove_accents(concat_ws(' ', plname_de, plname_fr, plname_it, doc_title, stabil_id)) as detail \
             , 'ch.bfe.sachplan-uebertragungsleitungen_kraft' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1008,7 +1008,7 @@ source src_ch_bfe_statistik_wasserkraftanlagen : def_searchable_features
     sql_query = \
         SELECT wastanumber as id \
             , 'feature' as origin \
-            , (wastanumber)||' '||remove_accents(name)||' '||remove_accents(location) as detail \
+            , remove_accents(concat_ws(' ', wastanumber, name, location)) as detail \
             , 'ch.bfe.statistik-wasserkraftanlagen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1153,7 +1153,7 @@ source src_ch_bfe_energieforschung : def_searchable_features
         SELECT bgdi_id as id \
             , projektnummer as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(titel,' ')||' '||coalesce(projektnummer,' '))||' '||coalesce(leuchtturm::text,' ') as detail \
+            , remove_accents(concat_ws(' ', titel, projektnummer, leuchtturm)) as detail \
             , 'ch.bfe.energieforschung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -1261,7 +1261,7 @@ source src_ch_astra_schwerverunfallte_kanton_alkohol : def_searchable_features
         SELECT bgdi_id as id \
             , canton as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(canton,' ')||' '||coalesce(year::text,' ')||' '||coalesce(population::text,' ')||' '||coalesce(accalcohol_ugt::text,' ')||' '||coalesce(accalcohol_usv::text,' ')||' '||coalesce(accalcohol_ugt_usv::text,' ')||' '||coalesce(accalcohol_ugt_usv_perpopulation::text,' ')) as detail \
+            , remove_accents(concat_ws(' ', canton, year, population, accalcohol_ugt, accalcohol_usv, accalcohol_ugt_usv, accalcohol_ugt_usv_perpopulation)) as detail \
             , 'ch.astra.schwerverunfallte-kanton_alkohol' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -1279,7 +1279,7 @@ source src_ch_astra_schwerverunfallte_kanton_geschwindigkeit : def_searchable_fe
         SELECT bgdi_id as id \
             , canton as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(canton,' ')||' '||coalesce(year::text,' ')||' '||coalesce(population::text,' ')||' '||coalesce(accspeed_ugt::text,' ')||' '||coalesce(accspeed_usv::text,' ')||' '||coalesce(accspeed_ugt_usv::text,' ')||' '||coalesce(accspeed_ugt_usv_perpopulation::text,' ')) as detail \
+            , remove_accents(concat_ws(' ', canton, year, population, accspeed_ugt, accspeed_usv, accspeed_ugt_usv, accspeed_ugt_usv_perpopulation)) as detail \
             , 'ch.astra.schwerverunfallte-kanton_geschwindigkeit' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -1297,7 +1297,7 @@ source src_ch_astra_schwerverunfallte_kanton_jahresvergleich : def_searchable_fe
         SELECT bgdi_id as id \
             , canton as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(canton,' ')||' '||coalesce(year::text,' ')||' '||coalesce(acc_ugt::text,' ')||' '||coalesce(acc_usv::text,' ')||' '||coalesce(acc_ugt_usv::text,' ')||' '||coalesce(acc_ugt_lastyear::text,' ')||' '||coalesce(acc_usv_lastyear::text,' ')||' '||coalesce(acc_ugt_usv_lastyear::text,' ')||' '||coalesce(acc_ugt_usv_yearchangepercent::text,' ')) as detail \
+            , remove_accents(concat_ws(' ', canton, year, acc_ugt, acc_usv, acc_ugt_usv, acc_ugt_lastyear, acc_usv_lastyear, acc_ugt_usv_lastyear, acc_ugt_usv_yearchangepercent)) as detail \
             , 'ch.astra.schwerverunfallte-kanton_jahresvergleich' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -1315,7 +1315,7 @@ source src_ch_astra_schwerverunfallte_kanton_pro_einwohner : def_searchable_feat
         SELECT bgdi_id as id \
             , canton as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(canton,' ')||' '||coalesce(year::text,' ')||' '||coalesce(population::text,' ')||' '||coalesce(population::text,' ')||' '||coalesce(acc_ugt::text,' ')||' '||coalesce(acc_usv::text,' ')||' '||coalesce(acc_ugt_usv::text,' ')||' '||coalesce(acc_ugt_usv_perpopulation::text,' ')) as detail \
+            , remove_accents(concat_ws(' ', canton, year, population, acc_ugt, acc_usv, acc_ugt_usv, acc_ugt_usv_perpopulation)) as detail \
             , 'ch.astra.schwerverunfallte-kanton_pro_einwohner' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
