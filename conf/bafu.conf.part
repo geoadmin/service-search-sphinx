@@ -62,7 +62,7 @@ source src_ch_bafu_hydrologie_q347 : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , gewaesser as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(gewaesser,' ')||' '||coalesce(bilanzid,' ')||' '||coalesce(id::text,' ')||' '||coalesce(basisid,' ')||' '||coalesce(lhg,' ')||' '||coalesce(gewaesser,' ')||' '||coalesce(flaeche::text,' ')||' '||coalesce(q_84_93::text,' ')||' '||coalesce(qp::text,' ')||' '||coalesce(p,' ')::text||' '||coalesce(qmod::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(symbolisierung::text,' ')) as detail \
+            , remove_accents(concat_ws(' ', gewaesser, bilanzid, id, basisid, lhg, flaeche, q_84_93, qp, p, qmod, bemerkung, symbolisierung)) as detail \
             , 'ch.bafu.hydrologie-q347' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -80,7 +80,7 @@ source src_ch_bafu_wasserbau_vermessungsstrecken : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , bezeichnung as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(routeid ::text,' ')||' '||coalesce(gewaessernummer,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(anfangsmass::text,' ')||' '||coalesce(endmass::text,' ')||' '||coalesce(streckenid::text,' ')||' '||coalesce(bezeichnung,' ')||' '||coalesce(laenge_km::text,' ')||' '||coalesce(anzahl_profile::text,' ')||' '||coalesce(aufnahme_intervall::text,' ')||' '||coalesce(aufnahme_letzte::text,' ')||' '||coalesce(gwlnr,' ')) as detail \
+            , remove_accents(concat_ws(' ', routeid, gewaessernummer, bemerkung, anfangsmass, endmass, streckenid, bezeichnung, laenge_km, anzahl_profile, aufnahme_intervall, aufnahme_intervall, gwlnr)) as detail \
             , 'ch.bafu.wasserbau-vermessungsstrecken' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -98,7 +98,7 @@ source src_ch_bafu_wasser_teileinzugsgebiete_2 : def_searchable_features
         SELECT row_number() OVER(ORDER BY teilezgnr asc) as id \
             , teilezgnr as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(gwlnr::text,' ')||' '||coalesce(teilezgnr::text,' ')||' '||coalesce(ext_ezg_flussgb::text,' ')) as detail \
+            , remove_accents(concat_ws(' ', gwlnr, teilezgnr, ext_ezg_flussgb)) as detail \
             , 'ch.bafu.wasser-teileinzugsgebiete_2' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -135,7 +135,7 @@ source src_ch_bafu_wrz_wildruhezonen_portal : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , wrz_name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(wrz_name,' ')||' '||coalesce(kanton,' ')||' '||coalesce(beschlussjahr,' ')||' '||coalesce(schutzs_de,' ')||' '||coalesce(schutzs_fr,' ')||' '||coalesce(schutzs_it,' ')) as detail \
+            , remove_accents(concat_ws(' ', wrz_name, kanton, beschlussjahr, schutzs_de, schutzs_fr, schutzs_it)) as detail \
             , 'ch.bafu.wrz-wildruhezonen_portal' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -153,7 +153,7 @@ source src_ch_bafu_wrz_jagdbanngebiete_select : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , jb_name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(jb_name,' ')||' '||coalesce(kanton,' ')||' '||coalesce(beschlussjahr,' ')||' '||coalesce(schutzs_de,' ')||' '||coalesce(schutzs_fr,' ')||' '||coalesce(schutzs_it,' ')) as detail \
+            , remove_accents(concat_ws(' ', jb_name, kanton, beschlussjahr, schutzs_de, schutzs_fr, schutzs_it)) as detail \
             , 'ch.bafu.wrz-jagdbanngebiete_select' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -171,7 +171,7 @@ source src_ch_bafu_typisierung_fliessgewaesser : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , objectid_gwn25 as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(gewaessertyp::text,' ')||' '||coalesce(grosserfluss,' ')||' '||coalesce(objectid_gwn25::text,' ')||' '||coalesce(biogeo,' ')||' '||coalesce(hoehe,' ')||' '||coalesce(abfluss,' ')||' '||coalesce(gefaelle,' ')||' '||coalesce(geo,' ')||' '||coalesce(code::text,' ')||' '||coalesce(aehnlichkeit::text,' ')||' '||coalesce(shape_length::text,' ')||' '||coalesce(url_portraits,' ')||' '||coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ', gewaessertyp, grosserfluss, objectid_gwn25, biogeo, hoehe, abfluss, gefaelle, geo, code, aehnlichkeit, shape_length, url_portraits, name)) as detail \
             , 'ch.bafu.typisierung-fliessgewaesser' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -189,7 +189,7 @@ source src_ch_bafu_gewaesserschutz_klaeranlagen_anteilq347 : def_searchable_feat
         SELECT nummer::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(nummer::text,' ')||' '||coalesce(name,' ')||' '||coalesce(ort,' ')||' '||coalesce(name_vorfluter,' ')||' '||coalesce(gewiss_nr::text,' ')||' '||coalesce(reinigungstyp,' ')||' '||coalesce(abw_tagesmittel::text,' ')||' '||coalesce(abw_tagesspitze::text,' ')||' '||coalesce(spitzenbelastung_regen::text,' ')||' '||coalesce(rohabwasser_tag::text,' ')||' '||coalesce(frischschlamm_tag::text,' ')||' '||coalesce(stabilisierter_schlamm_tag::text,' ')||' '||coalesce(bsb5anteil::text,' ')||' '||coalesce(bsb5absolut::text,' ')||' '||coalesce(csbanteil::text,' ')||' '||coalesce(csbabsolut::text,' ')||' '||coalesce(docanteil::text,' ')||' '||coalesce(docabsolut::text,' ')||' '||coalesce(nh4_nanteil::text,' ')||' '||coalesce(nh4_nabsolut::text,' ')||' '||coalesce(nh4_n_ganzjaehrig::text,' ')||' '||coalesce(nanteil::text,' ')||' '||coalesce(nabsolut::text,' ')||' '|| coalesce(n_abwassertemperatur::text,' ')||' '||coalesce(gesamtpanteil::text,' ')||' '||coalesce(gesamtpabsolut::text,' ')||' '||coalesce(gesamt_ungel_stoffe_absolut::text,' ')||' '||coalesce(andere_stoffe,' ')  ||' '||coalesce(kanton,' ')||' '||coalesce(vsa_kategorie,' ')||' '||coalesce(ausbaugroesse_egw::text,' ')||' '||coalesce(anzahl_nat_einwohner::text,' ')||' '||coalesce(jahr_nat_einwohner::text,' ')||' '||coalesce(abwasseranteil_q347::text,' ')||' '||coalesce(gwlnr,' ')) as detail \
+            , remove_accents(concat_ws(' ', nummer, name, ort, name_vorfluter, gewiss_nr, reinigungstyp, abw_tagesmittel, abw_tagesspitze, spitzenbelastung_regen, rohabwasser_tag, frischschlamm_tag, stabilisierter_schlamm_tag, bsb5anteil, bsb5absolut, csbanteil, csbabsolut, docanteil, docabsolut, nh4_nanteil, nh4_nabsolut, nh4_n_ganzjaehrig, nanteil, nabsolut, n_abwassertemperatur, gesamtpanteil, gesamtpabsolut, gesamt_ungel_stoffe_absolut, andere_stoffe, kanton, vsa_kategorie, ausbaugroesse_egw, anzahl_nat_einwohner, jahr_nat_einwohner, abwasseranteil_q347, gwlnr)) as detail \
             , 'ch.bafu.gewaesserschutz-klaeranlagen_anteilq347' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -207,7 +207,7 @@ source src_ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse : def_searchable_f
         SELECT nummer::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(nummer::text,' ')||' '||coalesce(name,' ')||' '||coalesce(ort,' ')||' '||coalesce(name_vorfluter,' ')||' '||coalesce(gewiss_nr::text,' ')||' '||coalesce(reinigungstyp,' ')||' '||coalesce(abw_tagesmittel::text,' ')||' '||coalesce(abw_tagesspitze::text,' ')||' '||coalesce(spitzenbelastung_regen::text,' ')||' '||coalesce(rohabwasser_tag::text,' ')||' '||coalesce(frischschlamm_tag::text,' ')||' '||coalesce(stabilisierter_schlamm_tag::text,' ')||' '||coalesce(bsb5anteil::text,' ')||' '||coalesce(bsb5absolut::text,' ')||' '||coalesce(csbanteil::text,' ')||' '||coalesce(csbabsolut::text,' ')||' '||coalesce(docanteil::text,' ')||' '||coalesce(docabsolut::text,' ')||' '||coalesce(nh4_nanteil::text,' ')||' '||coalesce(nh4_nabsolut::text,' ')||' '||coalesce(nh4_n_ganzjaehrig::text,' ')||' '||coalesce(nanteil::text,' ')||' '||coalesce(nabsolut::text,' ')||' '|| coalesce(n_abwassertemperatur::text,' ')||' '||coalesce(gesamtpanteil::text,' ')||' '||coalesce(gesamtpabsolut::text,' ')||' '||coalesce(gesamt_ungel_stoffe_absolut::text,' ')||' '||coalesce(andere_stoffe,' ')  ||' '||coalesce(kanton,' ')||' '||coalesce(vsa_kategorie,' ')||' '||coalesce(ausbaugroesse_egw::text,' ')||' '||coalesce(anzahl_nat_einwohner::text,' ')||' '||coalesce(jahr_nat_einwohner::text,' ')||' '||coalesce(abwasseranteil_q347::text,' ')||' '||coalesce(gwlnr,' ')) as detail \
+            , remove_accents(concat_ws(' ', nummer, name, ort, name_vorfluter, gewiss_nr, reinigungstyp, abw_tagesmittel, abw_tagesspitze, spitzenbelastung_regen, rohabwasser_tag, frischschlamm_tag, stabilisierter_schlamm_tag, bsb5anteil, bsb5absolut, csbanteil, csbabsolut, docanteil, docabsolut, nh4_nanteil, nh4_nabsolut, nh4_n_ganzjaehrig, nanteil, nabsolut, n_abwassertemperatur, gesamtpanteil, gesamtpabsolut, gesamt_ungel_stoffe_absolut, andere_stoffe, kanton, vsa_kategorie, ausbaugroesse_egw, anzahl_nat_einwohner, jahr_nat_einwohner, abwasseranteil_q347, gwlnr)) as detail \
             , 'ch.bafu.gewaesserschutz-klaeranlagen_ausbaugroesse' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -225,7 +225,7 @@ source src_ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp : def_searchable_f
         SELECT nummer::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(nummer::text,' ')||' '||coalesce(name,' ')||' '||coalesce(ort,' ')||' '||coalesce(name_vorfluter,' ')||' '||coalesce(gewiss_nr::text,' ')||' '||coalesce(reinigungstyp,' ')||' '||coalesce(abw_tagesmittel::text,' ')||' '||coalesce(abw_tagesspitze::text,' ')||' '||coalesce(spitzenbelastung_regen::text,' ')||' '||coalesce(rohabwasser_tag::text,' ')||' '||coalesce(frischschlamm_tag::text,' ')||' '||coalesce(stabilisierter_schlamm_tag::text,' ')||' '||coalesce(bsb5anteil::text,' ')||' '||coalesce(bsb5absolut::text,' ')||' '||coalesce(csbanteil::text,' ')||' '||coalesce(csbabsolut::text,' ')||' '||coalesce(docanteil::text,' ')||' '||coalesce(docabsolut::text,' ')||' '||coalesce(nh4_nanteil::text,' ')||' '||coalesce(nh4_nabsolut::text,' ')||' '||coalesce(nh4_n_ganzjaehrig::text,' ')||' '||coalesce(nanteil::text,' ')||' '||coalesce(nabsolut::text,' ')||' '|| coalesce(n_abwassertemperatur::text,' ')||' '||coalesce(gesamtpanteil::text,' ')||' '||coalesce(gesamtpabsolut::text,' ')||' '||coalesce(gesamt_ungel_stoffe_absolut::text,' ')||' '||coalesce(andere_stoffe,' ')  ||' '||coalesce(kanton,' ')||' '||coalesce(vsa_kategorie,' ')||' '||coalesce(ausbaugroesse_egw::text,' ')||' '||coalesce(anzahl_nat_einwohner::text,' ')||' '||coalesce(jahr_nat_einwohner::text,' ')||' '||coalesce(abwasseranteil_q347::text,' ')||' '||coalesce(gwlnr,' ')) as detail \
+            , remove_accents(concat_ws(' ', nummer, name, ort, name_vorfluter, gewiss_nr, reinigungstyp, abw_tagesmittel, abw_tagesspitze, spitzenbelastung_regen, rohabwasser_tag, frischschlamm_tag, stabilisierter_schlamm_tag, bsb5anteil, bsb5absolut, csbanteil, csbabsolut, docanteil, docabsolut, nh4_nanteil, nh4_nabsolut, nh4_n_ganzjaehrig, nanteil, nabsolut, n_abwassertemperatur, gesamtpanteil, gesamtpabsolut, gesamt_ungel_stoffe_absolut, andere_stoffe, kanton, vsa_kategorie, ausbaugroesse_egw, anzahl_nat_einwohner, jahr_nat_einwohner, abwasseranteil_q347, gwlnr)) as detail \
             , 'ch.bafu.gewaesserschutz-klaeranlagen_reinigungstyp' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -243,7 +243,7 @@ source src_ch_bafu_hydrologie_untersuchungsgebiete_stationen : def_searchable_fe
         SELECT geodb_oid as id \
             ,  name as label \
             , 'feature' as origin \
-            , coalesce(geodb_oid::text,' ')||' '|| remove_accents(coalesce(name,' '))||' '|| remove_accents(coalesce(flussgebiet,' '))||''||coalesce(hoehe::text,' ')||' '||coalesce(betriebsbeginn::text,' ')||' '||coalesce(einzugsgebietsflaeche::text,' ') as detail \
+            , remove_accents(concat_ws(' ', geodb_oid, name, flussgebiet, hoehe, betriebsbeginn, einzugsgebietsflaeche)) as detail \
             , 'ch.bafu.hydrologie-untersuchungsgebiete_stationen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -261,7 +261,7 @@ source src_ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser : def_searchable
         SELECT bgdi_id as id \
             ,  name as label \
             , 'feature' as origin \
-            ,  remove_accents(coalesce(name,' '))||' '||remove_accents(coalesce(betriebsbeginn,' '))||' '||remove_accents(coalesce(stationierung,' '))||' '||remove_accents(coalesce(flussgebiet,' '))||' '||remove_accents(coalesce(einzugsgebietsflaeche,' '))||' '||remove_accents(coalesce(mittlerehoehe,' '))||' '||remove_accents(coalesce(hoehe,' '))||' '||remove_accents(coalesce(vergletscherung,' ')) as detail \
+            , remove_accents(concat_ws(' ', name, betriebsbeginn, stationierung, flussgebiet, einzugsgebietsflaeche, mittlerehoehe, hoehe, vergletscherung)) as detail \
             , 'ch.bafu.hydrologie-daueruntersuchung_fliessgewaesser' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -279,7 +279,7 @@ source src_ch_bafu_hydrologie_hochwasserstatistik : def_searchable_features
         SELECT bgdi_id as id \
             , name as label \
             , 'feature' as origin \
-            , objectid::text||' '||remove_accents(coalesce(name,' ')) as detail \
+            , remove_accents(concat_ws(' ', objectid, name)) as detail \
             , 'ch.bafu.hydrologie-hochwasserstatistik' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -297,7 +297,7 @@ source src_ch_bafu_hydrologie_hochwassergrenzwertpegel : def_searchable_features
         SELECT bgdi_id as id \
             ,  name as label \
             , 'feature' as origin \
-            ,  remove_accents(coalesce(name,' '))||' '||coalesce(hoehe::text,' ')::text||' '||remove_accents(coalesce(fluss,' '))||' '||coalesce(einzugsgebietsflaeche::text,' ')::text||' '||remove_accents(coalesce(m_beginn,' '))||' '||remove_accents(coalesce(m_ende,' ')) as detail \
+            , remove_accents(concat_ws(' ', name, hoehe, fluss, einzugsgebietsflaeche, m_beginn, m_ende)) as detail \
             , 'ch.bafu.hydrologie-hochwassergrenzwertpegel' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -315,7 +315,7 @@ source src_ch_bafu_hydrologie_untersuchungsgebiete : def_searchable_features
         SELECT bgdi_id as id \
             ,  name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(name,' '))||' '||coalesce(max_hoe::text,' ')||' '||coalesce(min_hoe::text,' ')||' '||coalesce(mit_hoe::text,' ')||' '||coalesce(einzugsgebietsflaeche::text,' ')||' '||remove_accents(coalesce(regimetyp,' '))||' '||coalesce(antv_ab86::text,' ') as detail \
+            , remove_accents(concat_ws(' ', name, max_hoe, min_hoe, einzugsgebietsflaeche, regimetyp, antv_ab86)) as detail \
             , 'ch.bafu.hydrologie-untersuchungsgebiete' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -333,7 +333,7 @@ source src_ch_bafu_hydrologischer_atlas_kantonale_messstationen : def_searchable
         SELECT bgdi_id as id \
             ,  nummer as label \
             , 'feature' as origin \
-            ,  remove_accents(coalesce(nummer,' '))||' '||coalesce(betriebsbeginn::text,' ')::text||' '||coalesce(hoehe::text,' ')::text||' '||coalesce(einzugsgebietsflaeche::text,' ')::text||' '||coalesce(bilanzgebietsnummer::text,' ')::text||' '||coalesce(vergletscherung::text,' ')::text as detail \
+            , remove_accents(concat_ws(' ', nummer, betriebsbeginn, hoehe, einzugsgebietsflaeche, bilanzgebietsnummer, vergletscherung)) as detail \
             , 'ch.bafu.hydrologischer-atlas_kantonale-messstationen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -351,7 +351,7 @@ source src_ch_bafu_vec25_gewaessernetz_2000 : def_searchable_features
         SELECT bgdi_id::bigint as id \
         , name as label \
         , 'feature' as origin \
-        , remove_accents(coalesce(gwlnr,' ')||' '||coalesce(gewissnr::text,' ')||' '||coalesce(name,' ')||' '||coalesce(objectval,' ')) as detail \
+        , remove_accents(concat_ws(' ', gwlnr, gewissnr, name, objectval)) as detail \
         , 'ch.bafu.vec25-gewaessernetz_2000' as layer \
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -369,7 +369,7 @@ source src_ch_bafu_vec25_seen : def_searchable_features
         SELECT bgdi_id::bigint as id \
         , name as label \
         , 'feature' as origin \
-        , remove_accents(coalesce(gewaesserkennzahl::text,' ')||' '||coalesce(seetyp::text,' ')||' '||coalesce(name,' ')||' '||coalesce(ausgleichsbecken::text,' ')||' '||coalesce(reguliert::text,' ')||' '||coalesce(seeflaeche_km2::text,' ')||' '||coalesce(inhalt_see_mio_m3::text,' ')||' '||coalesce(nutzinhalt_mio_m3::text,' ')||' '||coalesce(tiefe_see_m::text,' ')||' '||coalesce(hoehenlage_muem::text,' ')||' ' ||coalesce(uferlaenge_m::text,' ')||' '||coalesce(gwlnr,' ')) as detail \
+        , remove_accents(concat_ws(' ', gewaesserkennzahl, seetyp, name, ausgleichsbecken, reguliert, seeflaeche_km2, inhalt_see_mio_m3, nutzinhalt_mio_m3, tiefe_see_m, hoehenlage_muem, uferlaenge_m, gwlnr)) as detail \
         , 'ch.bafu.vec25-seen' as layer \
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -387,7 +387,7 @@ source src_ch_bafu_hydrologischer_atlas_flussgebiete : def_searchable_features
         SELECT bgdi_id::bigint as id \
         , name as label \
         , 'feature' as origin \
-        , remove_accents(coalesce(nummer::text,' ')||' '||coalesce(name,' ')||' '||coalesce(shape_area::text,' ')||' '||coalesce(umfang::text,' ')) as detail \
+        , remove_accents(concat_ws(' ', nummer, name, shape_area, umfang)) as detail \
         , 'ch.bafu.hydrologischer-atlas_flussgebiete' as layer \
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -405,7 +405,7 @@ source src_ch_bafu_hydrologischer_atlas_bilanzgebiete : def_searchable_features
         SELECT bgdi_id::bigint as id \
         , name as label \
         , 'feature' as origin \
-        , remove_accents(coalesce(name,' ')||' '||coalesce(flussgebiet::text,' ')||' '||coalesce(shape_area::text,' ')) as detail \
+        , remove_accents(concat_ws(' ', name, flussgebiet, shape_area)) as detail \
         , 'ch.bafu.hydrologischer-atlas_bilanzgebiete' as layer \
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -423,7 +423,7 @@ source src_ch_bafu_hydrologischer_atlas_basisgebiete : def_searchable_features
         SELECT bgdi_id::bigint as id \
         , nummer::text as label \
         , 'feature' as origin \
-        , remove_accents(coalesce(gebietskennzahl::text,' ')||' '||coalesce(bemerkung,' ')||' '||coalesce(flussgebiet::text,' ')||' '||coalesce(max_hoe::text,' ')||' '||coalesce(min_hoe::text,' ')||' '||coalesce(mit_hoe::text,' ')||' '||coalesce(mit_ns::text,' ')||' '||coalesce(s_w_ns::text,' ')||' '||coalesce(jahrtemp_g::text,' ')||' '||coalesce(winttemp_g::text,' ')||' '||coalesce(shape_area::text,' ')) as detail \
+        , remove_accents(concat_ws(' ', gebietskennzahl, bemerkung, flussgebiet, max_hoe, min_hoe, mit_hoe, mit_ns, s_w_ns, jahrtemp_g, winttemp_g, shape_area)) as detail \
         , 'ch.bafu.hydrologischer-atlas_basisgebiete' as layer \
         , quadindex(the_geom) as geom_quadindex \
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -441,7 +441,7 @@ source src_ch_bafu_strukturguete_hochrhein_sohle : def_searchable_features
         SELECT bgdi_id as id \
             , bgdi_id as label \
             , 'feature' as origin \
-            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , remove_accents(concat_ws(' ', l_umfeld, l_ufer, r_ufer, sohle)) as detail \
             , 'ch.bafu.strukturguete-hochrhein_sohle' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -459,7 +459,7 @@ source src_ch_bafu_strukturguete_hochrhein_rechtesumfeld : def_searchable_featur
         SELECT bgdi_id as id \
             , bgdi_id as label \
             , 'feature' as origin \
-            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , remove_accents(concat_ws(' ', l_umfeld, l_ufer, r_ufer, r_umfeld, sohle)) as detail \
             , 'ch.bafu.strukturguete-hochrhein_rechtesumfeld' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -477,7 +477,7 @@ source src_ch_bafu_strukturguete_hochrhein_rechtesufer : def_searchable_features
         SELECT bgdi_id as id \
             , bgdi_id as label \
             , 'feature' as origin \
-            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , remove_accents(concat_ws(' ', l_umfeld, l_ufer, r_ufer, r_umfeld, sohle)) as detail \
             , 'ch.bafu.strukturguete-hochrhein_rechtesufer' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -495,7 +495,7 @@ source src_ch_bafu_strukturguete_hochrhein_linkesumfeld : def_searchable_feature
         SELECT bgdi_id as id \
             , bgdi_id as label \
             , 'feature' as origin \
-            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , remove_accents(concat_ws(' ', l_umfeld, l_ufer, r_ufer, r_umfeld, sohle)) as detail \
             , 'ch.bafu.strukturguete-hochrhein_linkesumfeld' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -513,7 +513,7 @@ source src_ch_bafu_strukturguete_hochrhein_linkesufer : def_searchable_features
         SELECT bgdi_id as id \
             , bgdi_id as label \
             , 'feature' as origin \
-            , l_umfeld::text||' '||l_ufer::text||' '||r_ufer::text||' '||r_umfeld::text||' '||sohle::text as detail \
+            , remove_accents(concat_ws(' ', l_umfeld, l_ufer, r_ufer, r_umfeld, sohle)) as detail \
             , 'ch.bafu.strukturguete-hochrhein_linkesufer' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -531,7 +531,7 @@ source src_ch_bafu_hydrologie_wassertemperaturmessstationen : def_searchable_fea
         SELECT nr::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , nr::text||' '||remove_accents(name) as detail \
+            , remove_accents(concat_ws(' ', nr, name )) as detail \
             , 'ch.bafu.hydrologie-wassertemperaturmessstationen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -567,7 +567,7 @@ source src_ch_bafu_hydrologie_gewaesserzustandsmessstationen : def_searchable_fe
         SELECT nr::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , nr::text||' '||remove_accents(name)||' '||remove_accents(gewaesser) as detail \
+            , remove_accents(concat_ws(' ', nr, name, gewaesser)) as detail \
             , 'ch.bafu.hydrologie-gewaesserzustandsmessstationen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -585,7 +585,7 @@ source src_ch_bafu_bundesinventare_auen : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', objnummer::text, name, auen_type_de, auen_type_fr,auen_type_it)) as detail \
+            , remove_accents(concat_ws(' ', objnummer, name, auen_type_de, auen_type_fr,auen_type_it)) as detail \
             , 'ch.bafu.bundesinventare-auen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -802,7 +802,7 @@ source src_ch_bafu_waldreservate : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , name::text as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(name)||' '||mcpfe_class as detail \
+            , remove_accents(concat_ws(objnummer, name,mcpfe_class)) as detail \
             , 'ch.bafu.waldreservate' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -820,7 +820,7 @@ source src_ch_bafu_mittlere_abfluesse : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , regimenummer as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(regimetyp,' '))||' '||coalesce(regimenummer::text,' ')||' '||coalesce(abflussvar::text,' ')||' '||coalesce(mqn_jahr::text,' ')||' '||coalesce(mqn_jan::text,' ')||' '||coalesce(mqn_feb::text,' ')||' '||coalesce(mqn_mar::text,' ')||' '||coalesce(mqn_apr::text,' ')||' '||coalesce(mqn_mai::text,' ')||' '||coalesce(mqn_jun::text,' ')||' '||coalesce(mqn_jul::text,' ')||' '||coalesce(mqn_aug::text,' ')||' '||coalesce(mqn_sep::text,' ')||' '||coalesce(mqn_okt::text,' ')||' '||coalesce(mqn_nov::text,' ')||' '||coalesce(mqn_dez::text,' ') as detail \
+            , remove_accents(concat_ws(' ', regimetyp, regimenummer, abflussvar, mqn_jahr, mqn_jan, mqn_feb, mqn_mar, mqn_apr, mqn_mai, mqn_jun, mqn_jul, mqn_aug, mqn_sep, mqn_okt, mqn_nov, mqn_dez)) as detail \
             , 'ch.bafu.mittlere-abfluesse' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -838,7 +838,7 @@ source src_ch_bafu_wasserbau_querprofilmarken : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , schluesselid as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(typ,' ')||' '||coalesce(herkunft,' ')) as detail \
+            , remove_accents(concat_ws(' ', typ, herkunft)) as detail \
             , 'ch.bafu.wasserbau-querprofilmarken' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -856,7 +856,7 @@ source src_ch_bafu_feststoffe_geschiebemessnetz : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , gsch_n as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(geologie,' ')||' '||coalesce(platz,' ')||' '||coalesce(fluss,' ')||' '||coalesce(station,' ')||' '||coalesce(institut,' ')||' '||coalesce(amt,' '))||' '||coalesce(gsch_n::text,' ')||' '||coalesce(lk::text,' ')||' '||coalesce(lage,' ')||' '||coalesce(fn::text,' ')||' '||coalesce(hmax::text,' ')||' '||coalesce(hmin::text,' ')||' '||coalesce(hmed::text,' ')||' '||coalesce(exp,' ')||' '||coalesce(form::text,' ') as detail \
+            , remove_accents(concat_ws(' ', geologie, platz, fluss, station, institut, amt, gsch_n, lk, lage, fn, hmax, hmin, hmed, exp, form)) as detail \
             , 'ch.bafu.feststoffe-geschiebemessnetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -872,9 +872,9 @@ source src_ch_bafu_auen_vegetationskarten : def_searchable_features
     sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
-            , remove_accents(coalesce(auveg_name,' ')||' ') as label \
+            , auveg_name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(auveg_obj::text,' ')||' '||coalesce(auveg_name,' ')||' '||coalesce(auveg_jahr::text,' ')||' '||coalesce(auveg_k22::text,' ')) as detail \
+            , remove_accents(concat_ws(' ', auveg_obj, auveg_name, auveg_jahr, auveg_k22)) as detail \
             , 'ch.bafu.auen-vegetationskarten' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -964,7 +964,7 @@ source src_ch_bafu_karst_quellen_schwinden : def_searchable_features
         SELECT objectid as id \
             , objectid as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(ip_type::text, ' ')||' '||coalesce(ip_name, ' '))||' '||coalesce(ip_qclass::text, ' ')||' '||coalesce(ip_reg::text, ' ')||' '||coalesce(ip_exp::text, ' ') as  detail \
+            , remove_accents(concat_ws(' ', ip_type, ip_name, ip_qclass, ip_reg, ip_exp)) as detail \
             , 'ch.bafu.karst-quellen_schwinden' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -982,7 +982,7 @@ source src_ch_bafu_karst_unterirdische_fliesswege : def_searchable_features
         SELECT objectid as id \
             , objectid as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(ei_type::text, ' ')||' '||coalesce(ei_hdyn::text, ' ')) as  detail \
+            , remove_accents(concat_ws(' ', ei_type, ei_hdyn)) as detail \
             , 'ch.bafu.karst-unterirdische_fliesswege' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1000,7 +1000,7 @@ source src_ch_bafu_karst_einzugsgebietseinheiten : def_searchable_features
         SELECT objectid as id \
             , objectid as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(ub_type::text, ' ')||' '||coalesce(ub_flux::text, ' ')) as  detail \
+            , remove_accents(concat_ws(' ', ub_type, ub_flux)) as detail \
             , 'ch.bafu.karst-einzugsgebietseinheiten' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1018,7 +1018,7 @@ source src_ch_bafu_karst_ausdehnung_grundwasservorkommen : def_searchable_featur
         SELECT objectid as id \
             , objectid as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(nk_type::text, ' ')||' '||coalesce(nk_level::text, ' ')||' '||coalesce(nk_hdyn::text, ' ')) as  detail \
+            , remove_accents(concat_ws(' ', nk_type, nk_level, nk_hdyn)) as detail \
             , 'ch.bafu.karst-ausdehnung_grundwasservorkommen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1036,7 +1036,7 @@ source src_ch_bafu_bundesinventare_bln : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , bln_name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(bln_obj::text, ' ')||' '||coalesce(bln_name, ' ')||' '||coalesce(subareaname, ' ')) as  detail \
+            , remove_accents(concat_ws(' ', bln_obj, bln_name, subareaname)) as detail \
             , 'ch.bafu.bundesinventare-bln' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1054,7 +1054,7 @@ source src_ch_bafu_bundesinventare_vogelreservate : def_searchable_features
         SELECT objectid as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(obj_gisflaeche::text, ' ')||' '||coalesce(name, ' ')) as  detail \
+            , remove_accents(concat_ws(' ', obj_gisflaeche, name)) as detail \
             , 'ch.bafu.bundesinventare-vogelreservate' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1072,7 +1072,7 @@ source src_ch_bafu_grundwasserkoerper : def_searchable_features
         SELECT bgdi_id as id \
             , flussgebiet as label \
             , 'feature' as origin \
-            , remove_accents(coalesce(flussgebiet, ' ')||' '||coalesce(grundwasserleitertyp, ' ')||' '||coalesce(naturraum, ' ')||' '||coalesce(grundwasserregime, ' ')) as  detail \
+            , remove_accents(concat_ws(' ' , flussgebiet, grundwasserleitertyp, naturraum, grundwasserregime)) as detail \
             , 'ch.bafu.grundwasserkoerper' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
