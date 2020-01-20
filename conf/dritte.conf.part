@@ -7,7 +7,7 @@ source src_ch_pronatura_waldreservate : def_searchable_features
         SELECT bgdi_id as id \
             , name::text as label \
             , 'feature' as origin \
-            , objnummer::text||' '||remove_accents(name)||' '||mcpfe as detail \
+            , remove_accents(concat_ws(' ', objnummer, name, mcpfe)) as detail \
             , 'ch.pronatura.waldreservate' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
