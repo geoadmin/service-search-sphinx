@@ -1117,6 +1117,7 @@ source src_ch_bafu_wasser_gebietsauslaesse : def_searchable_features
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id  \
         from wasser.gebietsauslaesse
+}
 
 ## INDICES
 
@@ -1489,6 +1490,7 @@ index ch_bafu_wasser_vorfluter : ch_bafu_hydrologie_wassertemperaturmessstatione
     source = src_ch_bafu_wasser_vorfluter
     path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser_vorfluter
 }
+
 index ch_bafu_wasser_gebietsauslaesse : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_wasser_gebietsauslaesse
