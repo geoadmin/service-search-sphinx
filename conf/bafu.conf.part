@@ -95,20 +95,20 @@ source src_ch_bafu_wasser_teileinzugsgebiete_2 : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
-        SELECT row_number() OVER(ORDER BY teilezgnr asc) as id \
-            , teilezgnr as label \
+        SELECT ezgnr as id \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', gwlnr, teilezgnr, ext_ezg_flussgb)) as detail \
+            , remove_accents(concat_ws(' ', ezgnr, gewaessername)) as detail \
             , 'ch.bafu.wasser-teileinzugsgebiete_2' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , teilezgnr::text as feature_id \
-        from wasser.view_ebene_2km_full
-}
+            , ezgnr::text as label \
+            , ezgnr::text as feature_id \
+        from wasser.teileinzugsgebiete_2_full
 
+}
 
 source src_ch_bafu_hydrologie_niedrigwasserstatistik : def_searchable_features
 {
