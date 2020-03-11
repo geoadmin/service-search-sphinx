@@ -207,8 +207,8 @@ source src_gg25 : src_swisssearch
         SELECT \
         row_number() OVER(ORDER BY id asc) as id \
         , id::text as feature_id \
-        , remove_accents(concat_ws(' ', gemname, k.ak)) as detail \
-        , concat('<b>', gemname, ' (', k.ak, ')</b>') as label \
+        , remove_accents(concat_ws(' ', trim(gemname), trim(k.ak))) as detail \
+        , concat('<b>', trim(gemname), ' (', k.ak, ')</b>') as label \
         , 'gg25'::text as origin \
         , quadindex(g.the_geom) as geom_quadindex \
         , box2d(st_transform(g.the_geom, 21781)) as geom_st_box2d \
@@ -233,7 +233,7 @@ source src_kantone : src_swisssearch
         kantonsnr::integer as id \
         , kantonsnr::text as feature_id \
         , remove_accents(concat_ws(' ', name, ak)) as detail \
-        , concat('<b>', name, '</b>') as label \
+        , concat('<b>', trim(name), '</b>') as label \
         , 'kantone'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -258,7 +258,7 @@ source src_district : src_swisssearch
         id::integer as id \
         , id::text as feature_id \
         , name::text as detail \
-        , concat('<b>', name, '</b>') as label \
+        , concat('<b>', trim(name), '</b>') as label \
         , 'district'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -283,7 +283,7 @@ source src_zipcode : src_swisssearch
         gid as id \
         , os_uuid::text as feature_id \
         , plz::text as detail \
-        , concat('<b>', plz, ' - ', langtext, ' (', canton, ')</b>') as label \
+        , concat('<b>', plz, ' - ', trim(langtext), ' (', trim(canton), ')</b>') as label \
         , 'zipcode' as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -308,7 +308,7 @@ source src_haltestellen : src_swisssearch
         bgdi_id as id \
         , xtf_id::text as feature_id \
         , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail \
-        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',verkehrsmittel)) , '</i> ','<b>',name,'</b>') as label \
+        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',trim(verkehrsmittel))) , '</i> ','<b>',trim(name),'</b>') as label \
         , 'gazetteer'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
