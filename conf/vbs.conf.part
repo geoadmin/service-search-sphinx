@@ -108,6 +108,25 @@ source src_ch_vbs_retablierungsstellen : def_searchable_features
         from militaer.retablierungsstellen
 }
 
+
+source src_ch_vbs_schiessanzeigen : def_searchable_features
+{
+    sql_db = vbs_dev
+    sql_query = \
+        SELECT belplan_id as id \
+            ,  bezeichnung as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', bezeichnung, belplan_id)) as detail \
+            , 'ch.vbs.schiessanzeigen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , belplan_id::text as feature_id \
+        from public.v_schiessanzeigen
+}
+
 ## INDICES
 
 index ch_babs_kulturgueter
@@ -148,4 +167,10 @@ index ch_vbs_retablierungsstellen : ch_babs_kulturgueter
 {
     source = src_ch_vbs_retablierungsstellen
     path = /var/lib/sphinxsearch/data/index/ch_vbs_retablierungsstellen
+}
+
+index ch_vbs_schiessanzeigen : ch_babs_kulturgueter
+{
+    source = src_ch_vbs_schiessanzeigen
+    path = /var/lib/sphinxsearch/data/index/ch_vbs_schiessanzeigen
 }
