@@ -362,6 +362,82 @@ source src_ch_swisstopo_geologie_bohrungen_tiefer_500 : def_searchable_features
 }
 
 
+source src_ch_swisstopo_geologie_geoevents_demnaechst : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT  post_id as id \
+            , COALESCE(post_title, '') as label \
+            , 'feature' as origin \
+            , concat_ws(' ', remove_accents(post_title), remove_accents(allgemein_leadtext), remove_accents(treffpunkt_gemeinde)) as detail \
+            , 'ch.swisstopo.geologie-geoevents_demnaechst' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , post_id::text as feature_id \
+        from geol.v_erlebnis_naechste
+}
+
+
+source src_ch_swisstopo_geologie_geoevents_anfrage : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT  post_id as id \
+            , COALESCE(post_title, '') as label \
+            , 'feature' as origin \
+            , concat_ws(' ', remove_accents(post_title), remove_accents(allgemein_leadtext), remove_accents(treffpunkt_gemeinde)) as detail \
+            , 'ch.swisstopo.geologie-geoevents_anfrage' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , post_id::text as feature_id \
+        from geol.v_erlebnis_anfrage
+}
+
+
+source src_ch_swisstopo_geologie_geologie_geosites : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT  post_id as id \
+            , COALESCE(post_title, '') as label \
+            , 'feature' as origin \
+            , concat_ws(' ', remove_accents(post_title), remove_accents(allgemein_leadtext), remove_accents(treffpunkt_gemeinde)) as detail \
+            , 'ch.swisstopo.geologie-geosites' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , post_id::text as feature_id \
+        from geol.v_erlebnis_sites
+}
+
+
+source src_ch_swisstopo_geologie_geologie_geowege : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT  post_id as id \
+            , COALESCE(post_title, '') as label \
+            , 'feature' as origin \
+            , concat_ws(' ', remove_accents(agg_sphinx_post_title), remove_accents(agg_sphinx_allgemein_leadtext), remove_accents(agg_sphinx_treffpunkt_gemeinde)) as detail \
+            , 'ch.swisstopo.geologie-geowege' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , post_id::text as feature_id \
+        from geol.v_erlebnis_geowege_tracks
+}
+
+
 source src_ch_swisstopo_geologie_geothermische_potenzialstudien_reg : def_searchable_features
 {
     sql_db = stopo_dev
@@ -1199,6 +1275,30 @@ index ch_swisstopo_geologie_bohrungen_tiefer_500 : ch_swisstopo_verschiebungsvek
 {
     source = src_ch_swisstopo_geologie_bohrungen_tiefer_500
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_bohrungen_tiefer_500
+}
+
+index ch_swisstopo_geologie_geoevents_demnaechst : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_geologie_geoevents_demnaechst
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geoevents_demnaechst
+}
+
+index ch_swisstopo_geologie_geoevents_anfrage : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_geologie_geoevents_anfrage
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geoevents_anfrage
+}
+
+index ch_swisstopo_geologie_geowege : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_geologie_geowege
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geowege
+}
+
+index ch_swisstopo_geologie_geosites : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_geologie_geosites
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geosites
 }
 
 index ch_swisstopo_geologie_geothermische_potenzialstudien_regional : ch_swisstopo_verschiebungsvektoren_tsp1
