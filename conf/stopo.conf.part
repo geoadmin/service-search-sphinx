@@ -400,7 +400,7 @@ source src_ch_swisstopo_geologie_geoevents_anfrage : def_searchable_features
 }
 
 
-source src_ch_swisstopo_geologie_geologie_geosites : def_searchable_features
+source src_ch_swisstopo_geologie_geosites : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
@@ -419,12 +419,12 @@ source src_ch_swisstopo_geologie_geologie_geosites : def_searchable_features
 }
 
 
-source src_ch_swisstopo_geologie_geologie_geowege : def_searchable_features
+source src_ch_swisstopo_geologie_geowege : def_searchable_features
 {
     sql_db = stopo_dev
     sql_query = \
         SELECT  post_id as id \
-            , COALESCE(post_title, '') as label \
+            , COALESCE(agg_sphinx_post_title, '') as label \
             , 'feature' as origin \
             , concat_ws(' ', remove_accents(agg_sphinx_post_title), remove_accents(agg_sphinx_allgemein_leadtext), remove_accents(agg_sphinx_treffpunkt_gemeinde)) as detail \
             , 'ch.swisstopo.geologie-geowege' as layer \
