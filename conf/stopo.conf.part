@@ -1141,6 +1141,25 @@ source src_ch_swisstopo_swiss_map_vector25_metadata : def_searchable_features
       from public.shop_perimeter_vector25
 }
 
+
+source src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT adr_egaid as id \
+          , concat_ws(' ', adr_egaid) as label \
+          , 'feature' as origin  \
+          , remove_accents(concat_ws(' ', adr_egaid, bdg_egid, adr_edid, str_esid, str_label, adr_number)) as detail  \
+          , 'ch.swisstopo.amtliches-gebaeudeadressverzeichnis' as layer  \
+          , quadindex(the_geom) as geom_quadindex  \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon  \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , adr_egaid::text as feature_id  \
+      from vd.addressverzeichnis
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren_tsp1
@@ -1511,6 +1530,12 @@ index ch_swisstopo_amtliches_strassenverzeichnis : ch_swisstopo_verschiebungsvek
 {
     source = src_ch_swisstopo_amtliches_strassenverzeichnis
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_strassenverzeichnis
+}
+
+index ch_swisstopo_amtliches_gebaeudeadressverzeichnis : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_gebaeudeadressverzeichnis
 }
 
 index ch_swisstopo_vec25_gewaessernetz_referenz : ch_swisstopo_verschiebungsvektoren_tsp1
