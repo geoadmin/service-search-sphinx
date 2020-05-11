@@ -1223,7 +1223,7 @@ source src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis : def_searchable_fea
    sql_db = stopo_dev
    sql_query = \
       SELECT adr_egaid as id \
-          , concat_ws(' ', adr_egaid) as label \
+          , concat_ws(' ', str_label, adr_number, adr_zip) as label \
           , 'feature' as origin  \
           , remove_accents(concat_ws(' ', adr_egaid, bdg_egid, adr_edid, str_esid, str_label, adr_number)) as detail  \
           , 'ch.swisstopo.amtliches-gebaeudeadressverzeichnis' as layer  \
