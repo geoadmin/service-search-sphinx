@@ -872,9 +872,9 @@ source src_ch_bafu_auen_vegetationskarten : def_searchable_features
     sql_db = bafu_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
-            , auveg_name as label \
+            , name as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', auveg_obj, auveg_name, auveg_jahr, auveg_k22)) as detail \
+            , remove_accents(concat_ws(' ', obj_nummer, name, kartierjahr, primaervegetation_de, primaervegetation_fr, primaervegetation_it)) as detail \
             , 'ch.bafu.auen-vegetationskarten' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
@@ -882,7 +882,7 @@ source src_ch_bafu_auen_vegetationskarten : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from flora.auen_vegetation
+        from flora.auen_vegetationskarte
 }
 
 source src_ch_bafu_schutzgebiete_paerke_nationaler_bedeutung : def_searchable_features
