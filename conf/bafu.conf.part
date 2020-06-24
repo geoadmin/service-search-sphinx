@@ -1137,10 +1137,11 @@ source src_ch_bafu_hydrologie_hydromessstationen : def_searchable_features
         from hydrologie.lhg
 }
 
+source src_ch_bafu_gefahren_gefaehrdungszonen : def_searchable_features
 {
     sql_db = bafu_dev
     sql_query = \
-        SELECT zone as id \
+        SELECT bgdi_id as id \
             , zone as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', zone)) as  detail \
