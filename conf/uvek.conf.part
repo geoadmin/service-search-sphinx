@@ -1236,6 +1236,78 @@ source src_ch_astra_mountainbikeland : def_searchable_features
       from astra.chmobil_mountainbikeland
 }
 
+source src_ch_astra_wanderland_sperrungen_umleitungen : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+      SELECT bgdi_id AS id \
+          , title_de as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',title_de,title_fr,title_it,title_en)) as detail \
+          , 'ch.astra.wanderland-sperrungen_umleitungen' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+          , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id \
+      from astra.v_sperrungen_umleitungen_line_wanderland
+}
+
+source src_ch_astra_veloland_sperrungen_umleitungen : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+      SELECT bgdi_id AS id \
+          , title_de as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',title_de,title_fr,title_it,title_en)) as detail \
+          , 'ch.astra.veloland-sperrungen_umleitungen' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+          , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id \
+      from astra.v_sperrungen_umleitungen_line_veloland
+}
+
+source src_ch_astra_skatingland_sperrungen_umleitungen : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+      SELECT bgdi_id AS id \
+          , title_de as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',title_de,title_fr,title_it,title_en)) as detail \
+          , 'ch.astra.skatingland-sperrungen_umleitungen' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+          , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id \
+      from astra.v_sperrungen_umleitungen_line_skatingland
+}
+
+source src_ch_astra_mountainbikeland_sperrungen_umleitungen : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+      SELECT bgdi_id AS id \
+          , title_de as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',title_de,title_fr,title_it,title_en)) as detail \
+          , 'ch.astra.mountainbikeland-sperrungen_umleitungen' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+          , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id \
+      from astra.v_sperrungen_umleitungen_line_mtbland
+}
+
 source src_ch_swisstopo_schneeschuhwandern : def_searchable_features
 {
     sql_db = uvek_dev
@@ -1990,6 +2062,30 @@ index ch_astra_mountainbikeland : ch_astra_ivs_nat
 {
     source = src_ch_astra_mountainbikeland
     path = /var/lib/sphinxsearch/data/index/ch_astra_mountainbikeland
+}
+
+index ch_astra_wanderland_sperrungen_umleitungen : ch_astra_ivs_nat
+{
+    source = src_ch_astra_wanderland_sperrungen_umleitungen
+    path = /var/lib/sphinxsearch/data/index/ch_astra_wanderland_sperrungen_umleitungen
+}
+
+index ch_astra_veloland_sperrungen_umleitungen : ch_astra_ivs_nat
+{
+    source = src_ch_astra_veloland_sperrungen_umleitungen
+    path = /var/lib/sphinxsearch/data/index/ch_astra_veloland_sperrungen_umleitungen
+}
+
+index ch_astra_skatingland_sperrungen_umleitungen : ch_astra_ivs_nat
+{
+    source = src_ch_astra_skatingland_sperrungen_umleitungen
+    path = /var/lib/sphinxsearch/data/index/ch_astra_skatingland_sperrungen_umleitungen
+}
+
+index ch_astra_mountainbikeland_sperrungen_umleitungen : ch_astra_ivs_nat
+{
+    source = src_ch_astra_mountainbikeland_sperrungen_umleitungen
+    path = /var/lib/sphinxsearch/data/index/ch_astra_mountainbikeland_sperrungen_umleitungen
 }
 
 index ch_swisstopo_schneeschuhwandern : ch_astra_ivs_nat
