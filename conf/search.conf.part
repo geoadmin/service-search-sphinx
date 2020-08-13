@@ -24,24 +24,24 @@ source src_address : src_swisssearch
 {
     sql_db=kogis_dev
     sql_query = \
-        SELECT id \
-        , feature_id \
-        , detail \
-        , label \
-        , origin \
-        , bgdi_quadindex as geom_quadindex \
-        , geom_st_box2d \
-        , geom_st_box2d_lv95 \
+        SELECT bgdi_id AS id \
+        , egid_edid::character varying(15) AS feature_id \
+        , remove_accents(concat_ws(' ', strname_deinr, array_to_string(strname, ' '), array_to_string(strnamk, ' '), dplz4, dplzname, ggdenr, ggdename, gdekt)) as detail \
+        , concat(strname_deinr, ' <b>', dplz4, ' ', dplzname,'<b>') as label \
+        , 'address'::text AS origin \
+        , geom_quadindex AS bgdi_quadindex \
+        , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) AS geom_st_box2d_lv95 \
         , 7::integer as rank \
-        , x \
-        , y \
-        , y_lv95 \
-        , x_lv95 \
+        , st_y(st_transform(the_geom, 21781)) AS x \
+        , st_x(st_transform(the_geom, 21781)) AS y \
+        , st_x(st_transform(the_geom, 2056)) AS y_lv95 \
+        , st_y(st_transform(the_geom, 2056)) AS x_lv95 \
         , st_y(st_transform(the_geom,4326)) as lat \
         , st_x(st_transform(the_geom,4326)) as lon \
-        , num \
+        , NULLIF(regexp_replace(deinr::text, '[^0-9]'::text, ''::text, 'g'::text), ''::text)::integer AS num \
         , 10 as zoomlevel \
-        FROM bfs.adressen_sphinx
+        FROM bfs.gwr_chsdi
 }
 
 source src_parcel : src_swisssearch
