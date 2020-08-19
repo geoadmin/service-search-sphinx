@@ -45,7 +45,7 @@ source src_ch_bfs_landschaftswandel : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , gmde as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ',gmd_name,gmd_nr::text,aname,acode::text)) as detail \
+            , remove_accents(concat_ws(' ',gmde::text,aname,acode::text)) as detail \
             , 'ch.bfs.landschaftswandel' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
