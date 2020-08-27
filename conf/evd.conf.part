@@ -324,6 +324,77 @@ source src_ch_blw_ursprungsbezeichnungen_fleisch : def_searchable_features
         from blw.ursprungsbezeichnungen 
 }
 
+source src_ch_blw_ursprungsbezeichnungen_kaese : def_searchable_features
+{
+    sql_db = evd_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , objekt_d as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', objektcode, objekt_d, objekt_f, objekt_i)) as detail \
+            , 'ch.blw.ursprungsbezeichnungen-kaese' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from blw.ursprungsbezeichnungen 
+}
+
+source src_ch_blw_ursprungsbezeichnungen_konditoreiwaren : def_searchable_features
+{
+    sql_db = evd_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , objekt_d as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', objektcode, objekt_d, objekt_f, objekt_i)) as detail \
+            , 'ch.blw.ursprungsbezeichnungen-konditoreiwaren' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from blw.ursprungsbezeichnungen 
+}
+
+source src_ch_blw_ursprungsbezeichnungen_pflanzen : def_searchable_features
+{
+    sql_db = evd_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , objekt_d as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', objektcode, objekt_d, objekt_f, objekt_i)) as detail \
+            , 'ch.blw.ursprungsbezeichnungen-pflanzen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from blw.ursprungsbezeichnungen 
+}
+
+source src_ch_blw_ursprungsbezeichnungen_spirituosen : def_searchable_features
+{
+    sql_db = evd_dev
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , objekt_d as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', objektcode, objekt_d, objekt_f, objekt_i)) as detail \
+            , 'ch.blw.ursprungsbezeichnungen-spirituosen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from blw.ursprungsbezeichnungen 
+}
 
 ## INDICES
 
@@ -437,4 +508,28 @@ index ch_blw_ursprungsbezeichnungen_fleisch : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_ursprungsbezeichnungen_fleisch
     path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_fleisch
+}
+
+index ch_blw_ursprungsbezeichnungen_kaese : ch_blw_klimaeignung_typ
+{
+    source = src_ch_blw_ursprungsbezeichnungen_kaese
+    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_kaese
+}
+
+index ch_blw_ursprungsbezeichnungen_konditoreiwaren : ch_blw_klimaeignung_typ
+{
+    source = src_ch_blw_ursprungsbezeichnungen_konditoreiwaren
+    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_konditoreiwaren
+}
+
+index ch_blw_ursprungsbezeichnungen_pflanzen : ch_blw_klimaeignung_typ
+{
+    source = src_ch_blw_ursprungsbezeichnungen_pflanzen
+    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_pflanzen
+}
+
+index ch_blw_ursprungsbezeichnungen_spirituosen : ch_blw_klimaeignung_typ
+{
+    source = src_ch_blw_ursprungsbezeichnungen_spirituosen
+    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_spirituosen
 }
