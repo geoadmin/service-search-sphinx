@@ -311,7 +311,7 @@ source src_ch_blw_ursprungsbezeichnungen_fleisch : def_searchable_features
     sql_db = evd_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
-            , objektcode as label \
+            , objekt_d as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', objektcode, objekt_d, objekt_f, objekt_i)) as detail \
             , 'ch.blw.ursprungsbezeichnungen-fleisch' as layer \
