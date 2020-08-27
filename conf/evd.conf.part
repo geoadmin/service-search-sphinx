@@ -306,7 +306,7 @@ source src_ch_blw_bodeneignung_kulturland : def_searchable_features
         from blw.bodeneignung 
 }
 
-source src_ch_blw_ursprungbezeichnungen_fleisch : def_searchable_features
+source src_ch_blw_ursprungsbezeichnungen_fleisch : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
