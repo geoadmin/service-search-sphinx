@@ -306,14 +306,14 @@ source src_ch_blw_bodeneignung_kulturland : def_searchable_features
         from blw.bodeneignung 
 }
 
-source src_ch_blw_ursprungsbezeichnungen_fleisch_objektcode : def_searchable_features
+source src_ch_blw_ursprungsbezeichnungen_fleisch : def_searchable_features
 {
     sql_db = evd_dev
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , objektcode as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', objektcode)) as detail \
+            , remove_accents(concat_ws(' ', objektcode, objekt_d, objekt_f, objekt_i)) as detail \
             , 'ch.blw.ursprungsbezeichnungen-fleisch' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -433,8 +433,8 @@ index ch_blw_bodeneignung_kulturland : ch_blw_klimaeignung_typ
     path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_kulturland
 }
 
-index ch_blw_ursprungsbezeichnungen_fleisch_objektcode : ch_blw_klimaeignung_typ
+index ch_blw_ursprungsbezeichnungen_fleisch : ch_blw_klimaeignung_typ
 {
-    source = src_ch_blw_ursprungsbezeichnungen_fleisch_objektcode
-    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_fleisch_objektcode
+    source = src_ch_blw_ursprungsbezeichnungen_fleisch
+    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_fleisch
 }
