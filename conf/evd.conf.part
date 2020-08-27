@@ -321,7 +321,7 @@ source src_ch_blw_ursprungsbezeichnungen_fleisch : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.ursprungsbezeichnungen 
+        from blw.ursprungsbezeichnungen_fleisch
 }
 
 source src_ch_blw_ursprungsbezeichnungen_kaese : def_searchable_features
@@ -339,7 +339,7 @@ source src_ch_blw_ursprungsbezeichnungen_kaese : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.ursprungsbezeichnungen 
+        from blw.ursprungsbezeichnungen_kaese
 }
 
 source src_ch_blw_ursprungsbezeichnungen_konditoreiwaren : def_searchable_features
@@ -357,7 +357,7 @@ source src_ch_blw_ursprungsbezeichnungen_konditoreiwaren : def_searchable_featur
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.ursprungsbezeichnungen 
+        from blw.ursprungsbezeichnungen_konditoreiwaren
 }
 
 source src_ch_blw_ursprungsbezeichnungen_pflanzen : def_searchable_features
@@ -375,7 +375,7 @@ source src_ch_blw_ursprungsbezeichnungen_pflanzen : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.ursprungsbezeichnungen 
+        from blw.ursprungsbezeichnungen_pflanzen
 }
 
 source src_ch_blw_ursprungsbezeichnungen_spirituosen : def_searchable_features
@@ -393,7 +393,7 @@ source src_ch_blw_ursprungsbezeichnungen_spirituosen : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.ursprungsbezeichnungen 
+        from blw.ursprungsbezeichnungen_spirituosen
 }
 
 ## INDICES
