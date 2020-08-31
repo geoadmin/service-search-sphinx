@@ -57,6 +57,28 @@ source src_ch_bfs_landschaftswandel : def_searchable_features
 }
 
 
+source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
+{
+    sql_attr_uint = agnostic
+    sql_attr_uint = lang
+    sql_db = kogis_dev
+    sql_query = \
+        SELECT id \
+            , origin \
+            , detail \
+            , layer \
+            , geom_quadindex \
+            , lat \
+            , lon \
+            , geom_st_box2d \
+            , geom_st_box2d_lv95 \
+            , label \
+            , feature_id \
+            , agnostic \
+            , lang \
+        FROM bfs.gwr_sphinx
+}
+
 ## INDICES
 
 index ch_bfs_generalisierte_grenzen_agglomerationen_g1
@@ -81,3 +103,10 @@ index ch_bfs_landschaftswandel : ch_bfs_generalisierte_grenzen_agglomerationen_g
     path = /var/lib/sphinxsearch/data/index/ch_bfs_landschaftswandel
 }
 
+index ch_bfs_gebaeude_wohnungs_register : ch_swisstopo_fixpunkte_hfp1
+{
+    min_infix_len = 1
+    source = src_ch_bfs_gebaeude_wohnungs_register
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_gebaeude_wohnungs_register
+    ondisk_attrs = 0
+}
