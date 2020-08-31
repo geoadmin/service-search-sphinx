@@ -103,7 +103,7 @@ index ch_bfs_landschaftswandel : ch_bfs_generalisierte_grenzen_agglomerationen_g
     path = /var/lib/sphinxsearch/data/index/ch_bfs_landschaftswandel
 }
 
-index ch_bfs_gebaeude_wohnungs_register : ch_swisstopo_fixpunkte_hfp1
+index ch_bfs_gebaeude_wohnungs_register : ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     min_infix_len = 1
     source = src_ch_bfs_gebaeude_wohnungs_register
