@@ -18,7 +18,7 @@ source src_ch_babs_kulturgueter : def_searchable_features
         from babs.kgs
 }
 
-source src_ch_vbs_kataster-belasteter-standorte-militaer : def_searchable_features
+source src_ch_vbs_kataster_belasteter_standorte_militaer : def_searchable_features
 {
     sql_db = vbs_dev
     sql_query = \
@@ -159,7 +159,7 @@ index ch_babs_kulturgueter
 
 index ch_vbs_kataster_belasteter_standorte_militaer : ch_babs_kulturgueter
 {
-    source = src_ch_vbs_kataster-belasteter-standorte-militaer
+    source = src_ch_vbs_kataster_belasteter_standorte_militaer
     path = /var/lib/sphinxsearch/data/index/ch_vbs_kataster_belasteter_standorte_militaer
 }
 
