@@ -79,7 +79,7 @@ source src_ch_vbs_bundestankstellen_bebeco : def_searchable_features
         SELECT bgdi_id as id \
             ,  ort as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', ort, strasse, plz)) as detail \
+            , remove_accents(concat_ws(' ', ort, standort, adresse, plz, produkt_de, produkt_fr, produkt_it)) as detail \
             , 'ch.vbs.bundestankstellen-bebeco' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
