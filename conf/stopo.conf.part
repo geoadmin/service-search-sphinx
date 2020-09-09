@@ -1236,6 +1236,24 @@ source src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis : def_searchable_fea
       from vd.addressverzeichnis
 }
 
+source src_ch_swisstopo_geologie_felslabore : def_searchable_features
+{
+   sql_db = stopo_dev
+   sql_query = \
+      SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+          , name as label \
+          , 'feature' as origin \
+          , remove_accents(concat_ws(' ',name, operator)) as detail \
+          , 'ch.swisstopo.geologie-felslabore' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id \
+      from geol.felslabore
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren_tsp1
@@ -1642,4 +1660,10 @@ index ch_swisstopo_vec25_gewaessernetz_referenz : ch_swisstopo_verschiebungsvekt
 {
     source = src_ch_swisstopo_vec25_gewaessernetz_referenz
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25_gewaessernetz_referenz
+}
+
+index ch_swisstopo_geologie_felslabore : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_geologie_felslabore
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_felslabore
 }
