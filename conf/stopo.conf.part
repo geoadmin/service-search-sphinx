@@ -1240,7 +1240,7 @@ source src_ch_swisstopo_geologie_felslabore : def_searchable_features
 {
    sql_db = stopo_dev
    sql_query = \
-      SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+      SELECT bgdi_id id \
           , name as label \
           , 'feature' as origin \
           , remove_accents(concat_ws(' ',name, operator)) as detail \
