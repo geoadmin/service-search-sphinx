@@ -74,20 +74,24 @@ source src_ch_swisstopo_fixpunkte_hfp2 : def_searchable_features
 
 source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
 {
+    sql_attr_uint = agnostic
+    sql_attr_uint = lang
     sql_db = kogis_dev
     sql_query = \
-        SELECT bgdi_id as id \
-            , concat_ws(' ', egid, strname_deinr, plz_plz6, dplzname) as label \
-            , 'feature'::text AS origin \
-            , remove_accents(concat_ws(' ', egid, strname_deinr, plz_plz6, dplzname)) as detail \
-            , 'ch.bfs.gebaeude_wohnungs_register'::text AS layer \
+        SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
+            , origin \
+            , detail \
+            , 'ch.bfs.gebaeude_wohnungs_register' as layer \
             , geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom), 4326)) AS lat \
-            , st_x(st_transform(st_centroid(the_geom), 4326)) AS lon \
-            , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) AS geom_st_box2d_lv95 \
-            , egid_edid AS feature_id \
-        FROM bfs.gwr_chsdi
+            , lat \
+            , lon \
+            , geom_st_box2d \
+            , geom_st_box2d_lv95 \
+            , label \
+            , feature_id \
+            , agnostic \
+            , lang \
+        FROM bfs.adressen_sphinx_features
 }
 
 
