@@ -61,7 +61,7 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
 {
     sql_attr_uint = agnostic
     sql_attr_uint = lang
-    sql_db = edi_dev
+    sql_db = kogis_dev
     sql_query = \
         SELECT id \
             , origin \
