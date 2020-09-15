@@ -22,7 +22,7 @@ source src_swisssearch : def_pqsql
 
 source src_address : src_swisssearch
 {
-    sql_db=edi_dev
+    sql_db=kogis_dev
     sql_query = \
         SELECT bgdi_id AS id \
         , egid_edid::character varying(15) AS feature_id \
