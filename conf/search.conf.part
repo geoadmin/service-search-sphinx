@@ -29,7 +29,7 @@ source src_address : src_swisssearch
         , remove_accents(concat_ws(' ', strname_deinr, array_to_string(strname, ' '), array_to_string(strnamk, ' '), dplz4, dplzname, ggdenr, ggdename, gdekt)) as detail \
         , concat(strname_deinr, ' <b>', dplz4, ' ', dplzname,'<b>') as label \
         , 'address'::text AS origin \
-        , geom_quadindex \
+        , geom_quadindex AS bgdi_quadindex \
         , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
         , box2d(st_transform(the_geom, 2056)) AS geom_st_box2d_lv95 \
         , 7::integer as rank \
