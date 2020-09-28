@@ -59,7 +59,7 @@ source src_ch_vbs_bundestankstellen_bebeco : def_searchable_features
     sql_db = vbs_dev
     sql_query = \
         SELECT bgdi_id as id \
-            ,  ort as label \
+            , coalesce(ort, '')||' '||coalesce(standort, '') as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', ort, standort, adresse, plz, produkt_de, produkt_fr, produkt_it)) as detail \
             , 'ch.vbs.bundestankstellen-bebeco' as layer \
