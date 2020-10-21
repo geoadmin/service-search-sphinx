@@ -698,7 +698,7 @@ source src_ch_swisstopo_geologie_tiefengeothermie_projekte : def_searchable_feat
       SELECT bgdi_id as id \
           , name as label \
           , 'feature' as origin \
-          , remove_accents(name) as detail \
+          , remove_accents(concat_ws(' ', name, status_de, status_fr, status_en, system_de, system_fr, system_en)) as detail \
           , 'ch.swisstopo.geologie-tiefengeothermie_projekte' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
