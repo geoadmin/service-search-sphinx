@@ -27,7 +27,7 @@ source src_address : src_swisssearch
         SELECT bgdi_id AS id \
         , egid_edid::character varying(15) AS feature_id \
         , remove_accents(concat_ws(' ', strname_deinr, dplz4, dplzname, ggdenr, ggdename, 'ch', gdekt)) as detail \
-        , concat(strname_deinr, ' <b>', dplz4, ' ', dplzname,'<b>') as label \
+        , concat(strname_deinr, ' <b>', dplz4, ' ', dplzname,'</b>') as label \
         , 'address'::text AS origin \
         , geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
