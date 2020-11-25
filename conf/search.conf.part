@@ -307,8 +307,8 @@ source src_haltestellen : src_swisssearch
         SELECT \
         bgdi_id as id \
         , xtf_id::text as feature_id \
-        , remove_accents(concat_ws(' ',name, betriebspunkttyp, verkehrsmittel))::text as detail \
-        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen',trim(verkehrsmittel))) , '</i> ','<b>',trim(name),'</b>') as label \
+        , remove_accents(concat_ws(' ', name, nummer))::text as detail \
+        , concat_ws('','<i>', lower(concat_ws('_','Haltestellen', trim(verkehrsmittel_bezeichnung_de))) , '</i> ','<b>',trim(name),'</b>') as label \
         , 'gazetteer'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
