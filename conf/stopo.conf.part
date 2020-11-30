@@ -144,6 +144,23 @@ source src_ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte : def_searchab
         FROM geol.gravimetrisch_messpunkte
 }
 
+source src_ch_swisstopo_geologie_gletscherausdehnung : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , remove_accents(concat_ws(' ', name)) as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', name)) as detail \
+            , 'ch.swisstopo.geologie-gletscherausdehnung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+            , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        FROM geol.view_gletscherausdehnung_tooltip
+}
 source src_ch_swisstopo_geologie_rohstoffe_industrieminerale : def_searchable_features
 {
     sql_db = stopo_dev
@@ -1666,4 +1683,10 @@ index ch_swisstopo_geologie_felslabore : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_felslabore
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_felslabore
+}
+
+index ch_swisstopo_geologie_gletscherausdehnung : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_geologie_gletscherausdehnung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gletscherausdehnung
 }
