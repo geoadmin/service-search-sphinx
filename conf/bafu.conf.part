@@ -1467,7 +1467,7 @@ index ch_bafu_mittlere_abfluesse : ch_bafu_hydrologie_wassertemperaturmessstatio
     path = /var/lib/sphinxsearch/data/index/ch_bafu_mittlere_abfluesse
 }
 
-index ch_bafu_mittlere_abfluesse : ch_bafu_hydrologie_wassertemperaturmessstationen
+index ch_bafu_mittlere_abfluesse_zukunft : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_mittlere_abfluesse_zukunft
     path = /var/lib/sphinxsearch/data/index/ch_bafu_mittlere_abfluesse_zukunft
