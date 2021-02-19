@@ -510,42 +510,6 @@ source src_ch_swisstopo_geologie_geotechnik_ziegeleien_1907 : def_searchable_fea
       from geol.geotechnik_ziegeleien_1907
 }
 
-source src_ch_swisstopo_geologie_geotechnik_ziegeleien_1965 : def_searchable_features
-{
-   sql_db = stopo_dev
-   sql_query = \
-      SELECT row_number() OVER(ORDER BY id asc) as id \
-          , ziegelei as label \
-          , 'feature' as origin \
-          , remove_accents(ziegelei) as detail \
-          , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1965' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-          , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , id::text as feature_id \
-      from geol.geotechnik_ziegeleien_1965
-}
-
-source src_ch_swisstopo_geologie_geotechnik_ziegeleien_1995 : def_searchable_features
-{
-   sql_db = stopo_dev
-   sql_query = \
-      SELECT row_number() OVER(ORDER BY id asc) as id \
-          , ziegeleien as label \
-          , 'feature' as origin \
-          , remove_accents(ziegeleien) as detail \
-          , 'ch.swisstopo.geologie-geotechnik-ziegeleien_1995' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-          , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , id::text as feature_id \
-      from geol.geotechnik_ziegeleien_1995
-}
-
 source src_ch_swisstopo_geologie_gisgeol_punkte : def_searchable_features
 {
    sql_db = stopo_dev
@@ -1347,18 +1311,6 @@ index ch_swisstopo_geologie_geotechnik_ziegeleien_1907 : ch_swisstopo_verschiebu
 {
     source = src_ch_swisstopo_geologie_geotechnik_ziegeleien_1907
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geotechnik_ziegeleien_1907
-}
-
-index ch_swisstopo_geologie_geotechnik_ziegeleien_1965 : ch_swisstopo_verschiebungsvektoren_tsp1
-{
-    source = src_ch_swisstopo_geologie_geotechnik_ziegeleien_1965
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geotechnik_ziegeleien_1965
-}
-
-index ch_swisstopo_geologie_geotechnik_ziegeleien_1995 : ch_swisstopo_verschiebungsvektoren_tsp1
-{
-    source = src_ch_swisstopo_geologie_geotechnik_ziegeleien_1995
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geotechnik_ziegeleien_1995
 }
 
 index ch_swisstopo_geologie_rohstoffe_vererzungen : ch_swisstopo_verschiebungsvektoren_tsp1
