@@ -1597,6 +1597,24 @@ source src_ch_bfe_erneuerbarheizen : def_searchable_features
          from bfe.renewable_heating
  }
 
+source src_ch_bfe_erneuerbarheizen_mehrfamilienhaeuser : def_searchable_features
+ {
+     sql_db = uvek_dev
+     sql_query = \
+         SELECT bgdi_id as id \
+             , company as label \
+             , 'feature' as origin \
+             , remove_accents(concat_ws(' ',company)) as  detail \
+             , 'ch.bfe.erneuerbarheizen-mehrfamilienhaeuser' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+             , bgdi_id::text as feature_id \
+         from bfe.renewable_heating_mfh
+ }
+
 source src_ch_bfe_komo_projekte : def_searchable_features
  {
      sql_db = uvek_dev
@@ -2215,6 +2233,12 @@ index ch_bfe_erneuerbarheizen : ch_astra_ivs_nat
 {
     source = src_ch_bfe_erneuerbarheizen
     path = /var/lib/sphinxsearch/data/index/ch_bfe_erneuerbarheizen
+}
+
+index ch_bfe_erneuerbarheizen_mehrfamilienhaeuser  : ch_astra_ivs_nat
+{
+    source = src_ch_bfe_erneuerbarheizen_mehrfamilienhaeuser
+    path = /var/lib/sphinxsearch/data/index/ch_bfe_erneuerbarheizen_mehrfamilienhaeuser
 }
 
 index ch_bfe_komo_projekte : ch_astra_ivs_nat
