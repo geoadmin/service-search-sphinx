@@ -686,6 +686,24 @@ source src_ch_bafu_bundesinventare_amphibien_wanderobjekte : def_searchable_feat
         from bundinv.amphibien_wanderobjekte
 }
 
+source src_ch_bafu_amphibienwanderung_verkehrskonflikte : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT nr_datenbank::bigint as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', nr_datenbank::text, name)) as detail \
+            , 'ch.bafu.amphibienwanderung-verkehrskonflikte' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , nr_datenbank::text as feature_id \
+        from fauna.amphibienwanderung_verkehrskonflikte
+}
+
 source src_ch_bafu_bundesinventare_flachmoore : def_searchable_features
 {
     sql_db = bafu_dev
@@ -1331,6 +1349,12 @@ index ch_bafu_bundesinventare_amphibien_wanderobjekte : ch_bafu_hydrologie_wasse
 {
     source = src_ch_bafu_bundesinventare_amphibien_wanderobjekte
     path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_amphibien_wanderobjekte
+}
+
+index ch_bafu_amphibienwanderung_verkehrskonflikte : ch_bafu_hydrologie_wassertemperaturmessstationen
+{
+    source = src_ch_bafu_amphibienwanderung_verkehrskonflikte
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_amphibienwanderung_verkehrskonflikte
 }
 
 index ch_bafu_bundesinventare_flachmoore : ch_bafu_hydrologie_wassertemperaturmessstationen
