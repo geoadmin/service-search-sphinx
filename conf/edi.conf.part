@@ -114,7 +114,7 @@ source src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos : def_searchab
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , xtf_id::text as feature_id \
-        from ( SELECT * FROM view_isos_foto UNION SELECT * FROM view_isos_foto_ob UNION SELECT * FROM view_isos_foto_obt UNION SELECT * FROM view_isos_foto_obth) as f
+        from view_isos_sphinx
 }
 
 
