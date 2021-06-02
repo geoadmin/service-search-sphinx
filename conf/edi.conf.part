@@ -118,6 +118,25 @@ source src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos : def_searchab
 }
 
 
+source src_ch_bag_radioaktivitaet_atmosphaere : def_searchable_features
+{
+    sql_db = edi_dev
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY station asc) as id \
+            , station as label \
+            , 'feature' as origin \
+            , remove_accents(station) as detail \
+            , 'ch.bag.radioaktivitaet-atmosphaere' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , station::text as feature_id \
+        from bag.radioaktivitaet
+}
+
+
 ## INDICES
 
 index ch_bfs_generalisierte_grenzen_agglomerationen_g1
@@ -160,4 +179,10 @@ index ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos : ch_bfs_generalisi
 {
     source = src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos
     path = /var/lib/sphinxsearch/data/index/ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos
+}
+
+index ch_bag_radioaktivitaet_atmosphaere : ch_bfs_generalisierte_grenzen_agglomerationen_g1
+{
+    source = src_ch_bag_radioaktivitaet_atmosphaere
+    path = /var/lib/sphinxsearch/data/index/ch_bag_radioaktivitaet_atmosphaere
 }
