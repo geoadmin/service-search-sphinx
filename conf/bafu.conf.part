@@ -848,23 +848,6 @@ source src_ch_bafu_mittlere_abfluesse_zukunft : def_searchable_features
         from wasser.mittlere_abfluesse_zukunft
 }
 
-source src_ch_bafu_wasserbau_querprofilmarken : def_searchable_features
-{
-    sql_db = bafu_dev
-    sql_query = \
-        SELECT bgdi_id::bigint as id \
-            , schluesselid as label \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ', typ, herkunft)) as detail \
-            , 'ch.bafu.wasserbau-querprofilmarken' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
-            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
-        from wasser.querprofilmarken
-}
 
 source src_ch_bafu_feststoffe_geschiebemessnetz : def_searchable_features
 {
@@ -1469,12 +1452,6 @@ index ch_bafu_mittlere_abfluesse_zukunft : ch_bafu_hydrologie_wassertemperaturme
 {
     source = src_ch_bafu_mittlere_abfluesse_zukunft
     path = /var/lib/sphinxsearch/data/index/ch_bafu_mittlere_abfluesse_zukunft
-}
-
-index ch_bafu_wasserbau_querprofilmarken : ch_bafu_hydrologie_wassertemperaturmessstationen
-{
-    source = src_ch_bafu_wasserbau_querprofilmarken
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasserbau_querprofilmarken
 }
 
 index ch_bafu_feststoffe_geschiebemessnetz : ch_bafu_hydrologie_wassertemperaturmessstationen
