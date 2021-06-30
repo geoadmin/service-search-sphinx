@@ -17,7 +17,7 @@ NC='\e[0m' # No Color
 start_sphinx() {
     # since systemctl can fail and the service can still run we have to check the success of it with searchd
     sudo -u root systemctl start sphinxsearch || { echo "systemctl start was not successful, checking searchd --status instead ..."; }
-    wait 1
+    sleep 5
     searchd --status
     return $?
 }
