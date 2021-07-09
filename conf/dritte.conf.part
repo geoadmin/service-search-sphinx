@@ -18,24 +18,6 @@ source src_ch_pronatura_waldreservate : def_searchable_features
         from pronatura.waldreservate
 }
 
-source src_ch_mobility_standorte : def_searchable_features
-{
-    sql_db = dritte_dev
-    sql_query = \
-        SELECT bgdi_id as id \
-            , 'feature' as origin \
-            , number::text as detail \
-            , 'ch.mobility.standorte' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , number::text as label \
-            , bgdi_id::text as feature_id \
-        from mobility.standorte_tooltip
-}
-
 source src_ch_sem_sachplan_asyl_anhoerung : def_searchable_features
 {
     sql_db = dritte_dev
@@ -82,13 +64,6 @@ index ch_pronatura_waldreservate
     path = /var/lib/sphinxsearch/data/index/ch_pronatura_waldreservate
     min_infix_len = 2
     expand_keywords = 1
-}
-
-
-index ch_mobility_standorte : ch_pronatura_waldreservate
-{
-    source = src_ch_mobility_standorte
-    path = /var/lib/sphinxsearch/data/index/ch_mobility_standorte
 }
 
 
