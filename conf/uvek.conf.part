@@ -1093,24 +1093,6 @@ source src_ch_bfe_energiestaedte : def_searchable_features
         from bfe.energiestaedte
 }
 
-source src_ch_bfe_energiestaedte_energieregionen : def_searchable_features
-{
-    sql_db = uvek_dev
-    sql_query = \
-        SELECT bgdi_id::bigint as id \
-            , name as label \
-            , 'feature' as origin \
-            , remove_accents(name) as detail \
-            , 'ch.bfe.energiestaedte-energieregionen' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-            , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
-        from bfe.energiestaedte_energieregionen
-}
-
 source src_ch_bfe_energiestaedte_2000watt_areale : def_searchable_features
 {
     sql_db = uvek_dev
@@ -1985,12 +1967,6 @@ index ch_bfe_energiestaedte : ch_astra_ivs_nat
 {
     source = src_ch_bfe_energiestaedte
     path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte
-}
-
-index ch_bfe_energiestaedte_energieregionen : ch_astra_ivs_nat
-{
-    source = src_ch_bfe_energiestaedte_energieregionen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_energieregionen
 }
 
 index ch_bfe_energiestaedte_2000watt_areale : ch_astra_ivs_nat
