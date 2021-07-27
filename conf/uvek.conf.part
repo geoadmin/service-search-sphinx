@@ -414,6 +414,25 @@ source src_ch_bakom_notruf_144_festnetz : def_searchable_features
 }
 
 
+source src_ch_bakom_notruf_145_festnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', festnetz_145, fn_addresse_145)) as detail \
+            , 'ch.bakom.notruf-145_festnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_fn_145
+}
+
+
 source src_ch_bakom_notruf_147_festnetz : def_searchable_features
 {
     sql_db = uvek_dev
@@ -544,6 +563,25 @@ source src_ch_bakom_notruf_144_mobilnetz : def_searchable_features
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
         from bakom.notruf_mo_144
+}
+
+
+source src_ch_bakom_notruf_145_mobilnetz : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bfs_nummer::bigint as id \
+            ,  name as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', mobile_145, mo_addresse_145)) as detail \
+            , 'ch.bakom.notruf-145_mobilnetz' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
+            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bfs_nummer::text as feature_id \
+        from bakom.notruf_mo_145
 }
 
 
@@ -1777,6 +1815,12 @@ index ch_bakom_notruf_144_festnetz : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_144_festnetz
 }
 
+index ch_bakom_notruf_145_festnetz : ch_astra_ivs_nat 
+{
+    source = src_ch_bakom_notruf_145_festnetz 
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_145_festnetz
+}
+
 index ch_bakom_notruf_147_festnetz : ch_astra_ivs_nat 
 {
     source = src_ch_bakom_notruf_147_festnetz 
@@ -1811,6 +1855,12 @@ index ch_bakom_notruf_144_mobilnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_144_mobilnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_144_mobilnetz
+}
+
+index ch_bakom_notruf_145_mobilnetz : ch_astra_ivs_nat
+{
+    source = src_ch_bakom_notruf_145_mobilnetz
+    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_145_mobilnetz
 }
 
 index ch_bakom_notruf_147_mobilnetz : ch_astra_ivs_nat
