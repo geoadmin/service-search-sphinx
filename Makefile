@@ -1,10 +1,66 @@
 # Makefile env
 SHELL = /bin/bash
 
-IPATTERN ?= 'Set IPATTERN variable in call'
+.DEFAULT_GOAL := help
+
+export SERVICE_NAME := service-sphinxsearch
+export ENV_FILE?=dev.env
+
+CURRENT_DIR := $(shell pwd)
+
+# Colors
+RESET := $(shell tput sgr0)
+RED := $(shell tput setaf 1)
+GREEN := $(shell tput setaf 2)
+YELLOW := $(shell tput setaf 3)
+BLUE := $(shell tput setaf 6)
+BOLD :=$(shell tput bold)
+
+# Docker metadata dynamic env variables for envsubst etc.
+export GIT_HASH ?= $(shell git rev-parse HEAD)
+export GIT_HASH_SHORT ?= $(shell git rev-parse --short HEAD)
+export GIT_BRANCH ?= $(shell git symbolic-ref HEAD --short 2>/dev/null)
+export GIT_DIRTY ?= "$(shell git status --porcelain | head -n 10)"
+export GIT_TAG ?= $(shell git describe --tags || echo "no version info")
+export AUTHOR ?= $(USER)
+
+# Docker variables dynamic env variables for envsubst etc.
+export DOCKER_REGISTRY ?= 974517877189.dkr.ecr.eu-central-1.amazonaws.com
+export DOCKER_LOCAL_TAG ?= local-$(USER)-$(GIT_HASH_SHORT)
+export DOCKER_IMG_LOCAL_TAG ?= $(DOCKER_REGISTRY)/$(SERVICE_NAME):$(DOCKER_LOCAL_TAG)
+
+
+# check if environment file exists
+ifneq ("$(wildcard $(ENV_FILE))","")
+include ${ENV_FILE}
+else
+$(error "environment file does not exist ${ENV_FILE}")
+endif
+
+# Commands
+DOCKER_EXEC :=  docker run \
+				--rm \
+				-it \
+				-p ${SPHINX_PORT}:$(SPHINX_PORT) \
+				-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
+				--name $(DOCKER_LOCAL_TAG) \
+				$(DOCKER_IMG_LOCAL_TAG)
+
+DOCKER_EXEC_LOCAL :=  docker run \
+				--rm \
+				-it \
+				-p ${SPHINX_PORT}:$(SPHINX_PORT) \
+				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
+				--name $(DOCKER_LOCAL_TAG) \
+				$(DOCKER_IMG_LOCAL_TAG)
+
+
+# AWS variables
+AWS_DEFAULT_REGION = eu-central-1
+
 INDEX ?= 'Set INDEX variable to specify the index to create'
-FEATURES_INDICES := $(shell find /var/lib/sphinxsearch/data/index/ -type f -name 'ch_*spa' | sed 's:/var/lib/sphinxsearch/data/index/::' |  sed 's:.spa::')
-GREP_INDICES := $(shell if [ -f conf/sphinx.conf ]; then grep "^index .*$(IPATTERN).*" conf/sphinx.conf | sed 's: \: .*::' | grep ".*$(IPATTERN).*" | sed 's:index ::'; fi)
+FEATURES_INDICES := $(shell find $(SPHINX_INDEX) -type f -name 'ch_*spa' | sed 's:$(SPHINX_INDEX)::' |  sed 's:.spa::')
+GREP_INDICES := $(shell if [ -f $(SPHINX_INDEX)/sphinx.conf ]; then grep "^index .*$(IPATTERN).*" $(SPHINX_INDEX)/sphinx.conf | sed 's: \: .*::' | grep ".*$(IPATTERN).*" | sed 's:index ::'; fi)
 
 .PHONY: help
 help:
@@ -12,114 +68,119 @@ help:
 	@echo
 	@echo "Possible targets:"
 	@echo
-	@echo "Indexing only for updates (sudo su sphinxsearch):"
+	@echo "${BOLD}${BLUE}docker targets:${RESET}"
+	@echo "- dockerlogin               Login to the AWS ECR registery for pulling/pushing docker images"
+	@echo "- dockerbuild               Builds a docker image with the tag ${DOCKER_LOCAL_TAG}"
+	@echo "- dockerrun                 Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_INDEX)${RESET} in background"
+	@echo "- dockerrundebug            Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_INDEX)${RESET} in foreground"
+
 	@echo
-	@echo "- index-all                 Update all indices (does NOT re-create config file)"
+	@echo "${BOLD}${BLUE}sphinxsearch targets:${RESET}"
+	@echo "- index-all                 Create / Update all indices (does NOT re-create config file)"
 	@echo "- index-grep                Update indices that match a given pattern. Pass the pattern as IPATTERN=mypattern directly on the commandline"
 	@echo "- index-search              Update swisssearch indices (does NOT re-create config file)"
 	@echo "- index-layer               Update all the layers indices (does NOT re-create config file)"
 	@echo "- index-feature             Update all the features indices (does NOT re-create config file)"
-	@echo "- move-template             Move template to the apropriate locations"
+	@echo "- check-config              Check the sphinx config: ${YELLOW}$(SPHINX_INDEX)sphinx.conf${RESET}"
+	@echo "- check-config-local        Check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET}"
+	@echo "- check-queries-local       Check the queries with the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET}"
+	@echo "- move-template             Move local template to final location: ${YELLOW}$(SPHINX_INDEX)${RESET}"
 	@echo
 	@echo "Generate configuration template:"
-	@echo
 	@echo "- template                  Create sphinx config file from template"
 	@echo
-	@echo "Deploy:"
+	@echo "VARIABLES"
+	@echo "-----------"
+	@echo "- GIT_HASH:               ${YELLOW}${GIT_HASH}${RESET}"
+	@echo "- GIT_HASH_SHORT:         ${YELLOW}${GIT_HASH_SHORT}${RESET}"
+	@echo "- GIT_BRANCH:             ${YELLOW}${GIT_BRANCH}${RESET}"
+	@echo "- GIT_TAG:                ${YELLOW}${GIT_TAG}${RESET}"
+	@echo "- GIT_DIRTY:              ${YELLOW}${GIT_DIRTY}${RESET}"
 	@echo
-	@echo "- deploy-int-config         Deploy the sphinx config only in integration, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
-	@echo "                            an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this prefix will be updated.,"
-	@echo "- deploy-prod-config        Deploy the sphinx config only in production, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
-	@echo "                            an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this prefix will be updated."
-	@echo "- deploy-demo-config        Deploy the sphinx config only on a demo instance, an optional DB pattern can be indicated db=database.schema.table, all indexes using this DB source will be updated,"
-	@echo "                            an optional index pattern can be indicated  index=ch_swisstopo, all indexes with this praefix will be updated."
-	@echo "- deploy-int-clean_index    On the deploy target, new indexes will be generated and orphaned indexes will be deleted"
-	@echo "- deploy-prod-clean_index   On the deploy target, new indexes will be generated and orphaned indexes will be deleted"
-	@echo "- deploy-demo-clean_index   On the deploy target, new indexes will be generated and orphaned indexes will be deleted"
+	@echo "- AUTHOR/USER:            ${YELLOW}${AUTHOR}/${USER}${RESET}"
+	@echo "- DOCKER_REGISTRY:        ${YELLOW}${DOCKER_REGISTRY}${RESET}"
+	@echo "- DOCKER_LOCAL_TAG:       ${YELLOW}${DOCKER_LOCAL_TAG}${RESET}"
+	@echo "- DOCKER_IMG_LOCAL_TAG:   ${YELLOW}${DOCKER_IMG_LOCAL_TAG}${RESET}"
+	@echo
+	@echo "- ENV_FILE:               ${YELLOW}${ENV_FILE}${RESET}"
+	@echo "- SPHINX_PORT:            ${YELLOW}${SPHINX_PORT}${RESET}"
+	@echo "- SPHINX_INDEX:           ${YELLOW}${SPHINX_INDEX}${RESET}"
 
 .PHONY: index
-index: move-template
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each $(INDEX)
+index:
+	$(DOCKER_EXEC) indexer --verbose --rotate  --sighup-each $(INDEX)
 
 .PHONY: index-all
-index-all: move-template
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each --all
+index-all:
+	$(DOCKER_EXEC) indexer --verbose --all
 
 .PHONY: index-grep
-index-grep: move-template
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each $(GREP_INDICES)
+index-grep:
+	$(DOCKER_EXEC) indexer --verbose $(GREP_INDICES)
 
 .PHONY: index-search
-index-search: move-template
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each address parcel gg25 kantone district zipcode swissnames3d haltestellen district_metaphone kantone_metaphone swissnames3d_metaphone swissnames3d_metaphone address_metaphone district_soundex kantone_soundex swissnames3d_soundex haltestellen_soundex address_soundex
+index-search:
+	$(DOCKER_EXEC) indexer --verbose address parcel gg25 kantone district zipcode swissnames3d haltestellen district_metaphone kantone_metaphone swissnames3d_metaphone swissnames3d_metaphone address_metaphone district_soundex kantone_soundex swissnames3d_soundex haltestellen_soundex address_soundex
 
 .PHONY: index-layer
-index-layer: move-template
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each layers_de layers_fr layers_it layers_en layers_rm
+index-layer:
+	$(DOCKER_EXEC) indexer --verbose layers_de layers_fr layers_it layers_en layers_rm
 
 .PHONY: index-feature
-index-feature: move-template
-	indexer --verbose --rotate --config conf/sphinx.conf  --sighup-each $(FEATURES_INDICES)
+index-feature:
+	$(DOCKER_EXEC) indexer --verbose --rotate --sighup-each $(FEATURES_INDICES)
+
+.PHONY: check-config
+check-config: dockerbuild
+	$(DOCKER_EXEC) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
+
+.PHONY: check-config-local
+check-config-local: dockerbuild template
+	$(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf | grep "config valid"
+	DOCKER_EXEC_LOCAL="$(DOCKER_EXEC_LOCAL)" ./scripts/pre-commit.sh
 
 scripts/pre-commit.sh:
 .git/hooks/pre-commit: scripts/pre-commit.sh
 	cp -f $^ $@ && chmod +x $@
 
 .PHONY: template
-template: .git/hooks/pre-commit
-	@ if [ -z "$$PGPASS" -o -z "$$PGUSER" ]; then \
+template:
+	@ if [ -z "$(PGPASS)" -o -z "$(PGUSER)" ]; then \
 	  echo "ERROR: Environment variables for db connection PGPASS PGUSER  are not set correctly"; exit 2;\
 	else true; fi
 	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/'  conf/db.conf.in  > conf/db.conf
 	cat conf/db.conf conf/*.part > conf/sphinx.conf
-	$(eval CONFIG_VALID=$(shell indextool --checkconfig -c conf/sphinx.conf | grep "config valid"))
-	@if [ "${CONFIG_VALID}" = "config valid" ]; then \
-	  echo ${CONFIG_VALID}; \
-	else echo "Invalid config" && indextool --checkconfig -c conf/sphinx.conf && exit 2; fi
-
-.PHONY: deploy-int-clean_index
-deploy-int-clean_index:
-	cd deploy && bash deploy-conf-only.sh -t int -c true
-
-.PHONY: deploy-prod-clean_index
-deploy-prod-clean_index:
-	cd deploy && bash deploy-conf-only.sh -t prod -c true
-
-.PHONY: deploy-demo-clean_index
-deploy-demo-clean_index:
-	cd deploy && bash deploy-conf-only.sh -t demo -c true
-
-.PHONY: deploy-int-config
-deploy-int-config:
-ifneq ($(db),)
-		cd deploy && bash deploy-conf-only.sh -t int -d $(db)
-else ifneq ($(index),)
-		cd deploy && bash deploy-conf-only.sh -t int -i $(index)
-else
-		cd deploy && bash deploy-conf-only.sh -t int
-endif
-
-.PHONY: deploy-prod-config
-deploy-prod-config:
-ifneq ($(db),)
-		cd deploy && bash deploy-conf-only.sh -t prod -d $(db)
-else ifneq ($(index),)
-		cd deploy && bash deploy-conf-only.sh -t prod -i $(index)
-else
-		cd deploy && bash deploy-conf-only.sh -t prod
-endif
-
-.PHONY: deploy-demo-config
-deploy-demo-config:
-ifneq ($(db),)
-		cd deploy && bash deploy-conf-only.sh -t demo -d $(db)
-else ifneq ($(index),)
-		cd deploy && bash deploy-conf-only.sh -t demo -i $(index)
-else
-		cd deploy && bash deploy-conf-only.sh -t demo
-endif
-
 
 .PHONY: move-template
-move-template:
-	bash deploy/move-template.sh
+move-template: template check-config-local
+	cp -a conf/sphinx.conf $(SPHINX_INDEX)
+
+## docker commands
+.PHONY: dockerlogin
+dockerlogin:
+	aws --profile swisstopo-bgdi-builder ecr get-login-password --region $(AWS_DEFAULT_REGION) | docker login --username AWS --password-stdin $(DOCKER_REGISTRY)
+
+.PHONY: dockerbuild
+dockerbuild:
+	docker build \
+		-q \
+		--tag $(DOCKER_IMG_LOCAL_TAG) .
+
+.PHONY: dockerrun
+dockerrun: dockerbuild
+	docker run \
+		--rm \
+		-d \
+		-p $(SPHINX_PORT):$(SPHINX_PORT) \
+		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
+		--name $(DOCKER_LOCAL_TAG) \
+		$(DOCKER_IMG_LOCAL_TAG)
+
+.PHONY: dockerrundebug
+dockerrundebug: dockerbuild
+	docker run \
+		--rm \
+		-p $(SPHINX_PORT):$(SPHINX_PORT) \
+		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
+		--name $(DOCKER_LOCAL_TAG) \
+		$(DOCKER_IMG_LOCAL_TAG)
