@@ -1,16 +1,13 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # read sphinx config file and update all indexes related to input database or input table or index pattern
 
 import os
 import sys
-import time
-import getpass
 import re
 import sqlite3
 import psycopg2
-import optparse
 import subprocess
 from optparse import OptionParser
 
@@ -45,7 +42,6 @@ def pg_get_tables(sql_query,sql_db):
 
 if __name__ == '__main__':
     SPHINXCONFIG = "/etc/sphinxsearch/sphinx.conf"
-    USER = "sphinxsearch"
     myenv = dict(os.environ)
 
     ################################
@@ -140,10 +136,10 @@ if __name__ == '__main__':
         data=myfile.read()
 
     # Parse PG Connection from Sphinx Config
-    CONN_HOST=re.findall('sql_host\s*=\s*(.*)', data)[0]
-    CONN_USER=re.findall('sql_user\s*=\s*(.*)', data)[0]
-    CONN_PWD=re.findall('sql_pass\s*=\s*(.*)', data)[0]
-    CONN_PORT=re.findall('sql_port\s*=\s*(.*)', data)[0]
+    CONN_HOST = re.findall(r'sql_host\s*=\s*(.*)', data)[0]
+    CONN_USER = re.findall(r'sql_user\s*=\s*(.*)', data)[0]
+    CONN_PWD = re.findall(r'sql_pass\s*=\s*(.*)', data)[0]
+    CONN_PORT = re.findall(r'sql_port\s*=\s*(.*)', data)[0]
 
     # parse sphinx config sources and write them to sqlite sources table ...
     # TODO:
@@ -164,10 +160,11 @@ if __name__ == '__main__':
     for i in reg_source.finditer(data):
         source, source_parent = parsing_func(i.groupdict()['source'])
         # step 2 extract sql_db and sql_query from curly braced content
-        sql_db = re.search('sql_db\s*=\s*([\w]+)', i.groupdict()['content'])
+        sql_db = re.search(r'sql_db\s*=\s*([\w]+)', i.groupdict()['content'])
         sql_db = sql_db.group(1) if sql_db else None
 
-        sql_query = re.findall('^\s+sql_query\s*=(.*)$', i.groupdict()['content'], re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
+        sql_query = re.findall(r'^\s+sql_query\s*=(.*)$', i.groupdict()
+                               ['content'], re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
         sql_query = sql_query[0].replace('\\','').replace('\n', '').strip() if sql_query else None
         c.execute("""
                     INSERT INTO sources (
@@ -195,9 +192,9 @@ if __name__ == '__main__':
     for i in reg_index.finditer(data):
         index, index_parent = parsing_func(i.groupdict()['index'])
         # distributed indexes
-        index_type = re.search('type\s=\s*(.*)', i.groupdict()['content'])
+        index_type = re.search(r'type\s=\s*(.*)', i.groupdict()['content'])
         index_type = index_type.group(1).strip() if index_type else None
-        index_local = re.findall('local\s=\s*(.*)', i.groupdict()['content'])
+        index_local = re.findall(r'local\s=\s*(.*)', i.groupdict()['content'])
         index_local = index_local if index_local else None
         if index_local:
             distributed_index[index] = index_local
@@ -205,11 +202,11 @@ if __name__ == '__main__':
     for i in reg_index.finditer(data):
         index, index_parent = parsing_func(i.groupdict()['index'])
         # step 2 extract sql_db and sql_query from curly braced content
-        source = re.search('source\s=\s*(.*)', i.groupdict()['content'])
+        source = re.search(r'source\s=\s*(.*)', i.groupdict()['content'])
         source = source.group(1).strip() if source else None
         # set index_parent to distributed_index if one exists otherwise index_parent is None
         index_parent = None
-        for k, v in distributed_index.iteritems():
+        for k, v in distributed_index.items():
             if index in v:
                 index_parent = k
         # import only real indexes, no distributed indexes
@@ -277,11 +274,9 @@ if __name__ == '__main__':
             print("no indexes are using the %s pattern: %s" % (filter_option, options.database_filter or options.index_filter))
     elif options.command == 'update':
         if resultat:
-            if getpass.getuser() == USER:
-                sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (options.config,' '.join(resultat))
-            else:
-                sphinx_command = 'sudo -u %s indexer --config %s --verbose --rotate --sighup-each %s' % (USER,options.config,' '.join(resultat))
-            print sphinx_command
+            sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (
+                options.config, ' '.join(resultat))
+            print(sphinx_command)
             # uncomment following lines for real update
             p = subprocess.Popen(sphinx_command,stdout=subprocess.PIPE,shell=True, env=myenv)
             for line in iter(p.stdout.readline, ''):
