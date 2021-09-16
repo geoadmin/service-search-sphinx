@@ -72,12 +72,15 @@ if __name__ == '__main__':
 
     6) list all indexes with the prefix pattern ch_swisstopo_vec25
     python pg2sphinx_trigger.py -c list -i ch_swisstopo_vec25
-    \n"""
+
+    7) list all indexes which are based on a comma separated list of databse prefixes
+    python pg2sphinx_trigger.py -c list -d stopo_dev.vd.os_realestate,stopo_dev.vd.os_dpr_mine
+   \n"""
 
     OptionParser.format_epilog = lambda self, formatter: self.epilog
     parser = OptionParser(epilog=epilog)
-    parser.add_option("-d","--database_filter", dest="database_filter", default=None, action="store", help="Database Filter: optional database prefix")
-    parser.add_option("-i","--index_filter", dest="index_filter", default=None, action="store", help="Index Filter: optional index prefix")
+    parser.add_option("-d","--database_filter", dest="database_filter", default=None, action="store", help="Database Filter: optional comma separated list of database prefix")
+    parser.add_option("-i","--index_filter", dest="index_filter", default=None, action="store", help="Index Filter: optional comma separated list of index prefix")
     parser.add_option("-c","--command", dest="command", default="list", action="store", help="-c list: will list all the indexes touched by the database filter\n-c update: will update all the indexes touched by the database filter.")
     parser.add_option("-s","--sphinxconf", dest="config", default=SPHINXCONFIG, action="store", help="-s /path/to/sphinx/sphinx.conf")
     (options, args) = parser.parse_args()
@@ -233,33 +236,37 @@ if __name__ == '__main__':
     """
 
     resultat = []
-    for row in c.execute(sql):
-        db = None
-        indices = row['sphinx_index']
-        indices_distributed = row['index_parent']
-        # database filter
-        # -d pattern
-        if options.index_filter is None:
-            if (options.database_filter and options.database_filter.count('.')==0) or (options.database_filter == None):
-                # db only filter can be applied to sphinx config, no need to query postgres db
-                if options.database_filter is None or options.database_filter == row['database']:
+    looper_list = options.index_filter.split(",") if options.index_filter else options.database_filter.split(",") if options.database_filter else ["all"]
+    for looper in looper_list if looper_list else []:
+        index_filter = looper if options.index_filter else None
+        database_filter = looper if options.database_filter else None
+        for row in c.execute(sql):
+            db = None
+            indices = row['sphinx_index']
+            indices_distributed = row['index_parent']
+            # database filter
+            # -d pattern
+            if index_filter is None:
+                if (database_filter and database_filter.count('.')==0) or (database_filter == None):
+                    # db only filter can be applied to sphinx config, no need to query postgres db
+                    if database_filter is None or database_filter == row['database']:
+                        db = row['database']
+                    # if db filter is more detailed, we have to analyze the sql queries with postgres ANALZYE VERBOSE
+                elif database_filter.split(".")[0] == row['database']:
+                    table = pg_get_tables(row['sql'], row['database'])
+                    db = row['database'] if database_filter in table else None
+            # indice filter
+            # -i pattern
+            else:
+                if index_filter in indices or index_filter == 'all' or index_filter in indices_distributed :
                     db = row['database']
-                # if db filter is more detailed, we have to analyze the sql queries with postgres ANALZYE VERBOSE
-            elif options.database_filter.split(".")[0] == row['database']:
-                table = pg_get_tables(row['sql'], row['database'])
-                db = row['database'] if options.database_filter in table else None
-        # indice filter
-        # -i pattern
-        else:
-            if options.index_filter in indices or options.index_filter == 'all' or options.index_filter in indices_distributed :
-                db = row['database']
 
-        # output
-        if options.command == 'list' and db is not None:
-            resultat.append("%s -> %s" % (indices, db))
+            # output
+            if options.command == 'list' and db is not None:
+                resultat.append("%s -> %s" % (indices, db))
 
-        if options.command == 'update' and db is not None:
-            resultat.append("%s" % (indices))
+            if options.command == 'update' and db is not None:
+                resultat.append("%s" % (indices))
 
     resultat = sorted(list(set(resultat)))  # get rid of duplicate entries in the list and sorting
     indent="\n      "
