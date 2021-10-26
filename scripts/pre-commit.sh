@@ -1,20 +1,26 @@
 #!/bin/bash
-# check with indextool
 set -e
 set -u
+set -o pipefail
 
-BRANCH_NAME=$(git branch | grep '*' | sed 's/* //')
-
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+TEST=false
+echo "start hook"
 # ignore hook when rebase or merge
-if [ $BRANCH_NAME != '(no branch)' ]; then
-    # check queriesi
-    echo "checking queries ..."
-ERROR=$(
-    for database in $(${DOCKER_EXEC_LOCAL} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c list | awk '$2 ~ /->/ {print $3}' | sort | uniq); do
-        database="${database%%[[:cntrl:]]}"
-        ${DOCKER_EXEC_LOCAL} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c list -d "${database}." | grep -i ERROR -a4 || continue
-    done
-)
-    [ -z "${ERROR}" ] || { echo -e "$(tput setaf 1)Nothing has been commited because of the following error in the query:\n${ERROR} $(tput sgr0)"; exit 1; }
-    echo "succesfully finished"
+if [ "${BRANCH_NAME}" != '(no branch)' ]; then
+    while read -r st file; do
+        echo "checking $st $file ..."
+        # skip deleted files
+        if [ "$st" == 'D' ]; then continue; fi
+
+        # do a check only if conf/*.part files have been modified / staged
+        if [[ "$file" =~ (.part)$ ]]; then
+            echo "detected changes in file $file"
+            TEST=true
+        fi
+    done < <(git diff --cached --name-status)
+fi
+
+if [ "$TEST" = "true" ]; then
+    make check-config-local
 fi
