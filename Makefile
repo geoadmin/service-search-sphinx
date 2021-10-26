@@ -29,6 +29,9 @@ export DOCKER_REGISTRY ?= 974517877189.dkr.ecr.eu-central-1.amazonaws.com
 export DOCKER_LOCAL_TAG ?= local-$(USER)-$(GIT_HASH_SHORT)
 export DOCKER_IMG_LOCAL_TAG ?= $(DOCKER_REGISTRY)/$(SERVICE_NAME):$(DOCKER_LOCAL_TAG)
 
+# git pre-commit hook
+GIT_DIR := $(shell git rev-parse --git-dir)
+HOOK_DIR := $(GIT_DIR)/hooks
 
 # check if environment file exists
 ifneq ("$(wildcard $(ENV_FILE))","")
@@ -40,7 +43,6 @@ endif
 # Commands
 DOCKER_EXEC :=  docker run \
 				--rm \
-				-it \
 				-p ${SPHINX_PORT}:$(SPHINX_PORT) \
 				-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
 				--name $(DOCKER_LOCAL_TAG) \
@@ -48,7 +50,6 @@ DOCKER_EXEC :=  docker run \
 
 DOCKER_EXEC_LOCAL :=  docker run \
 				--rm \
-				-it \
 				-p ${SPHINX_PORT}:$(SPHINX_PORT) \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
 				--name $(DOCKER_LOCAL_TAG) \
@@ -84,10 +85,11 @@ help:
 	@echo "- check-config              Check the sphinx config: ${YELLOW}$(SPHINX_INDEX)sphinx.conf${RESET}"
 	@echo "- check-config-local        Check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET}"
 	@echo "- check-queries-local       Check the queries with the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET}"
-	@echo "- move-template             Move local template to final location: ${YELLOW}$(SPHINX_INDEX)${RESET}"
 	@echo
-	@echo "Generate configuration template:"
+	@echo "${BOLD}${BLUE}general targets:${RESET}"
+	@echo "- git_hook                  install pre-commit git hook"
 	@echo "- template                  Create sphinx config file from template"
+	@echo "- move-template             Move local template to final location: ${YELLOW}$(SPHINX_INDEX)${RESET}"
 	@echo
 	@echo "VARIABLES"
 	@echo "-----------"
@@ -137,11 +139,17 @@ check-config: dockerbuild
 .PHONY: check-config-local
 check-config-local: dockerbuild template
 	$(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf | grep "config valid"
-	DOCKER_EXEC_LOCAL="$(DOCKER_EXEC_LOCAL)" ./scripts/pre-commit.sh
+	DOCKER_EXEC_LOCAL="$(DOCKER_EXEC_LOCAL)" ./scripts/check-config-local.sh
 
-scripts/pre-commit.sh:
-.git/hooks/pre-commit: scripts/pre-commit.sh
-	cp -f $^ $@ && chmod +x $@
+.PHONY: git_hook
+git_hook:
+	cmp -s scripts/pre-commit.sh ${HOOK_DIR}/pre-commit; \
+	RETVAL=$$?; \
+	if [[ $$RETVAL -ne 0 ]]; then \
+		echo "install/update git hook"; \
+		mkdir -p ${HOOK_DIR}; \
+		cp -f scripts/pre-commit.sh ${HOOK_DIR}/pre-commit && chmod +x ${HOOK_DIR}/pre-commit; \
+	fi
 
 .PHONY: template
 template:
