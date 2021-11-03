@@ -45,10 +45,11 @@ searchd
     # mysql listener
     listen = localhost:9306:mysql41
     preopen_indexes = 0
-    dist_threads = 7
+    # dist_threads should be number of cpus/cores
+    dist_threads = $CPUS
     read_timeout = 5
     max_children = 50
     binlog_path =
-    watchdog = 0
+    watchdog = 1
     ondisk_attrs_default = 1
 }
