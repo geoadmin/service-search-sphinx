@@ -7,6 +7,7 @@ export SERVICE_NAME := service-sphinxsearch
 export ENV_FILE?=dev.env
 
 CURRENT_DIR := $(shell pwd)
+CPUS ?= $(shell grep -c ^processor /proc/cpuinfo)
 
 # Colors
 RESET := $(shell tput sgr0)
@@ -156,7 +157,7 @@ template:
 	@ if [ -z "$(PGPASS)" -o -z "$(PGUSER)" ]; then \
 	  echo "ERROR: Environment variables for db connection PGPASS PGUSER  are not set correctly"; exit 2;\
 	else true; fi
-	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/'  conf/db.conf.in  > conf/db.conf
+	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/' -e 's/$$CPUS/$(CPUS)/' conf/db.conf.in  > conf/db.conf
 	cat conf/db.conf conf/*.part > conf/sphinx.conf
 
 .PHONY: move-template
