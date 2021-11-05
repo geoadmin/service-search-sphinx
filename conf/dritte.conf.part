@@ -2,7 +2,7 @@
 
 source src_ch_pronatura_waldreservate : def_searchable_features
 {
-    sql_db = dritte_dev
+    sql_db = dritte_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , name::text as label \
@@ -20,7 +20,7 @@ source src_ch_pronatura_waldreservate : def_searchable_features
 
 source src_ch_sem_sachplan_asyl_anhoerung : def_searchable_features
 {
-    sql_db = dritte_dev
+    sql_db = dritte_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , stabil_id as label \
@@ -38,7 +38,7 @@ source src_ch_sem_sachplan_asyl_anhoerung : def_searchable_features
 
 source src_ch_sem_sachplan_asyl_kraft : def_searchable_features
 {
-    sql_db = dritte_dev
+    sql_db = dritte_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , stabil_id as label \

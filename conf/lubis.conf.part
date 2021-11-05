@@ -2,7 +2,7 @@
 
 source src_ch_swisstopo_lubis_bildstreifen : def_searchable_features_with_year
 {
-    sql_db = lubis_dev
+    sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bildstreifen_nr asc) as id \
             , concat_ws(' ', flugdatum, bildstreifen_nr) as label \
@@ -21,7 +21,7 @@ source src_ch_swisstopo_lubis_bildstreifen : def_searchable_features_with_year
 
 source src_ch_swisstopo_lubis_luftbilder_schraegaufnahmen : def_searchable_features_with_year
 {
-    sql_db = lubis_dev
+    sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , concat_ws(' ',flightdate::date, ebkey::text)  as label \
@@ -40,7 +40,7 @@ source src_ch_swisstopo_lubis_luftbilder_schraegaufnahmen : def_searchable_featu
 
 source src_ch_swisstopo_lubis_luftbilder_farbe : def_searchable_features_with_year
 {
-    sql_db = lubis_dev
+    sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
@@ -59,7 +59,7 @@ source src_ch_swisstopo_lubis_luftbilder_farbe : def_searchable_features_with_ye
 
 source src_ch_swisstopo_lubis_luftbilder_schwarzweiss: def_searchable_features_with_year
 {
-    sql_db = lubis_dev
+    sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
@@ -78,7 +78,7 @@ source src_ch_swisstopo_lubis_luftbilder_schwarzweiss: def_searchable_features_w
 
 source src_ch_swisstopo_lubis_luftbilder_infrarot: def_searchable_features_with_year
 {
-    sql_db = lubis_dev
+    sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
@@ -97,7 +97,7 @@ source src_ch_swisstopo_lubis_luftbilder_infrarot: def_searchable_features_with_
 
 source src_ch_swisstopo_lubis_luftbilder_dritte_kantone : def_searchable_features_with_year
 {
-    sql_db = lubis_dev
+    sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
@@ -116,7 +116,7 @@ source src_ch_swisstopo_lubis_luftbilder_dritte_kantone : def_searchable_feature
 
 source src_ch_swisstopo_lubis_luftbilder_dritte_firmen : def_searchable_features_with_year
 {
-    sql_db = lubis_dev
+    sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
@@ -135,7 +135,7 @@ source src_ch_swisstopo_lubis_luftbilder_dritte_firmen : def_searchable_features
 
 source src_ch_swisstopo_lubis_terrestrische_aufnahmen : def_searchable_features_with_year
 {
-    sql_db = lubis_dev
+    sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY inventory_number asc) as id \
             , lpad(bilder.inventory_number::text, 14, '0'::text) as label \

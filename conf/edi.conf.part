@@ -2,7 +2,7 @@
 
 source src_ch_bfs_generalisierte_grenzen_agglomerationen_g1 : def_searchable_features
 {
-    sql_db = edi_dev
+    sql_db = edi_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , gmd_name as label \
@@ -21,7 +21,7 @@ source src_ch_bfs_generalisierte_grenzen_agglomerationen_g1 : def_searchable_fea
 
 source src_ch_bfs_generalisierte_grenzen_agglomerationen_g2 : def_searchable_features
 {
-    sql_db = edi_dev
+    sql_db = edi_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , gmd_name as label \
@@ -40,7 +40,7 @@ source src_ch_bfs_generalisierte_grenzen_agglomerationen_g2 : def_searchable_fea
 
 source src_ch_bfs_landschaftswandel : def_searchable_features
 {
-    sql_db = edi_dev
+    sql_db = edi_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , gmde as label \
@@ -61,7 +61,7 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
 {
     sql_attr_uint = agnostic
     sql_attr_uint = lang
-    sql_db = edi_dev
+    sql_db = edi_${DBSTAGING}
     sql_query = \
         SELECT id \
             , origin \
@@ -82,7 +82,7 @@ source src_ch_bfs_gebaeude_wohnungs_register : def_searchable_features
 
 source src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder : def_searchable_features
 {
-    sql_db = bak_dev
+    sql_db = bak_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY xtf_id asc) as id \
             , name as label \
@@ -101,7 +101,7 @@ source src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder : def_searchable_fea
 
 source src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos : def_searchable_features
 {
-    sql_db = bak_dev
+    sql_db = bak_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY xtf_id asc) as id \
             , name as label \
@@ -120,7 +120,7 @@ source src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos : def_searchab
 
 source src_ch_bag_radioaktivitaet_atmosphaere : def_searchable_features
 {
-    sql_db = edi_dev
+    sql_db = edi_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , station as label \
