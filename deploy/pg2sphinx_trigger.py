@@ -278,11 +278,7 @@ if __name__ == '__main__':
                 options.config, ' '.join(resultat))
             print(sphinx_command)
             # uncomment following lines for real update
-            p = subprocess.Popen(sphinx_command,stdout=subprocess.PIPE,shell=True, env=myenv)
-            for line in iter(p.stdout.readline, ''):
-                print(line.strip())
-            p.stdout.close()
-
+            subprocess.run(sphinx_command , shell=True)
         else:
             print('no sphinx indexes are using the %s pattern %s' % (filter_option, options.database_filter or options.index_filter))
 
