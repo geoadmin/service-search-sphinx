@@ -28,7 +28,7 @@ export AUTHOR ?= $(USER)
 
 # Docker variables dynamic env variables for envsubst etc.
 export DOCKER_REGISTRY ?= 974517877189.dkr.ecr.eu-central-1.amazonaws.com
-export DOCKER_LOCAL_TAG ?= local-$(USER)-$(GIT_HASH_SHORT)
+export DOCKER_LOCAL_TAG ?= local-$(USER)-$(STAGING)-$(GIT_HASH_SHORT)
 export DOCKER_IMG_LOCAL_TAG ?= $(DOCKER_REGISTRY)/$(SERVICE_NAME):$(DOCKER_LOCAL_TAG)
 export DOCKER_INDEX_VOLUME ?= sphinx_index_$(STAGING)
 
@@ -45,18 +45,17 @@ endif
 
 # Maintenance / Index Commands
 # EFS Index will be mounted as bind mount
-DOCKER_EXEC :=  docker run \
+export DOCKER_EXEC :=  docker run \
 				--rm \
 				-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
-				--name $(DOCKER_LOCAL_TAG) \
+				--name $(DOCKER_LOCAL_TAG)_maintenance \
 				$(DOCKER_IMG_LOCAL_TAG)
 
-DOCKER_EXEC_LOCAL :=  docker run \
+export DOCKER_EXEC_LOCAL :=  docker run \
 				--rm \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
-				--name $(DOCKER_LOCAL_TAG) \
+				--name $(DOCKER_LOCAL_TAG)_maintenance \
 				$(DOCKER_IMG_LOCAL_TAG)
-
 
 # AWS variables
 AWS_DEFAULT_REGION = eu-central-1
@@ -79,6 +78,8 @@ help:
 
 	@echo
 	@echo "${BOLD}${BLUE}sphinxsearch targets:${RESET}"
+	@echo "- pg2sphinx                 Create / Update indices based on DB or INDEX pattern, EFS index will be synced to docker volumes (does NOT re-create config file)"
+	@echo "                            (STAGING=(dev|int|prod) DB= or INDEX= ) p.e. STAGING=dev DB=bod_dev make pg2sphinx"
 	@echo "- index-all                 Create / Update all indices (does NOT re-create config file)"
 	@echo "- index-grep                Update indices that match a given pattern. Pass the pattern as IPATTERN=mypattern directly on the commandline"
 	@echo "- index-search              Update swisssearch indices (does NOT re-create config file)"
@@ -95,22 +96,22 @@ help:
 	@echo
 	@echo "VARIABLES"
 	@echo "-----------"
-	@echo "- GIT_HASH:               ${YELLOW}${GIT_HASH}${RESET}"
-	@echo "- GIT_HASH_SHORT:         ${YELLOW}${GIT_HASH_SHORT}${RESET}"
-	@echo "- GIT_BRANCH:             ${YELLOW}${GIT_BRANCH}${RESET}"
-	@echo "- GIT_TAG:                ${YELLOW}${GIT_TAG}${RESET}"
-	@echo "- GIT_DIRTY:              ${YELLOW}${GIT_DIRTY}${RESET}"
+	@echo "- GIT_HASH:                 ${YELLOW}${GIT_HASH}${RESET}"
+	@echo "- GIT_HASH_SHORT:           ${YELLOW}${GIT_HASH_SHORT}${RESET}"
+	@echo "- GIT_BRANCH:               ${YELLOW}${GIT_BRANCH}${RESET}"
+	@echo "- GIT_TAG:                  ${YELLOW}${GIT_TAG}${RESET}"
+	@echo "- GIT_DIRTY:                ${YELLOW}${GIT_DIRTY}${RESET}"
 	@echo
-	@echo "- AUTHOR/USER:            ${YELLOW}${AUTHOR}/${USER}${RESET}"
-	@echo "- DOCKER_REGISTRY:        ${YELLOW}${DOCKER_REGISTRY}${RESET}"
-	@echo "- DOCKER_LOCAL_TAG:       ${YELLOW}${DOCKER_LOCAL_TAG}${RESET}"
-	@echo "- DOCKER_IMG_LOCAL_TAG:   ${YELLOW}${DOCKER_IMG_LOCAL_TAG}${RESET}"
-	@echo "- DOCKER_INDEX_VOLUME:    ${YELLOW}${DOCKER_INDEX_VOLUME}${RESET}"
+	@echo "- AUTHOR/USER:              ${YELLOW}${AUTHOR}/${USER}${RESET}"
+	@echo "- DOCKER_REGISTRY:          ${YELLOW}${DOCKER_REGISTRY}${RESET}"
+	@echo "- DOCKER_LOCAL_TAG:         ${YELLOW}${DOCKER_LOCAL_TAG}${RESET}"
+	@echo "- DOCKER_IMG_LOCAL_TAG:     ${YELLOW}${DOCKER_IMG_LOCAL_TAG}${RESET}"
+	@echo "- DOCKER_INDEX_VOLUME:      ${YELLOW}${DOCKER_INDEX_VOLUME}${RESET}"
 	@echo
-	@echo "- STAGING:                ${YELLOW}${STAGING}${RESET}"
-	@echo "- ENV_FILE:               ${YELLOW}${ENV_FILE}${RESET}"
-	@echo "- SPHINX_PORT:            ${YELLOW}${SPHINX_PORT}${RESET}"
-	@echo "- SPHINX_INDEX:           ${YELLOW}${SPHINX_INDEX}${RESET}"
+	@echo "- STAGING:                  ${YELLOW}${STAGING}${RESET}"
+	@echo "- ENV_FILE:                 ${YELLOW}${ENV_FILE}${RESET}"
+	@echo "- SPHINX_PORT:              ${YELLOW}${SPHINX_PORT}${RESET}"
+	@echo "- SPHINX_INDEX:             ${YELLOW}${SPHINX_INDEX}${RESET}"
 
 .PHONY: index
 index:
@@ -157,7 +158,7 @@ git_hook:
 
 .PHONY: template
 template:
-	cat conf/db.conf.part conf/*.part > conf/sphinx.conf.in
+	cat conf/*.part > conf/sphinx.conf.in
 	export $(shell cat $(ENV_FILE)) && envsubst < conf/sphinx.conf.in > conf/sphinx.conf
 
 .PHONY: move-template
@@ -181,7 +182,7 @@ dockerrun: dockerbuild
 		--rm \
 		-d \
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
-		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
+		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index_efs/ \
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
@@ -196,3 +197,8 @@ dockerrundebug: dockerbuild
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
+
+
+.PHONY: pg2sphinx
+pg2sphinx:
+	export $(shell cat $(ENV_FILE)) && ./scripts/pg2sphinx.sh

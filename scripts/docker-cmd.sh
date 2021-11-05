@@ -1,6 +1,5 @@
 #!/bin/bash
 set -euo pipefail
-echo "DEBUG docker-cmd.sh"
 
 # fancy output
 green='\e[0;32m'
