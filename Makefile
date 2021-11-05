@@ -29,6 +29,7 @@ export AUTHOR ?= $(USER)
 export DOCKER_REGISTRY ?= 974517877189.dkr.ecr.eu-central-1.amazonaws.com
 export DOCKER_LOCAL_TAG ?= local-$(USER)-$(GIT_HASH_SHORT)
 export DOCKER_IMG_LOCAL_TAG ?= $(DOCKER_REGISTRY)/$(SERVICE_NAME):$(DOCKER_LOCAL_TAG)
+export DOCKER_INDEX_VOLUME ?= sphinx_ltclm
 
 # git pre-commit hook
 GIT_DIR := $(shell git rev-parse --git-dir)
@@ -41,17 +42,16 @@ else
 $(error "environment file does not exist ${ENV_FILE}")
 endif
 
-# Commands
+# Maintenance / Index Commands
+# EFS Index will be mounted as bind mount
 DOCKER_EXEC :=  docker run \
 				--rm \
-				-p ${SPHINX_PORT}:$(SPHINX_PORT) \
 				-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
 				--name $(DOCKER_LOCAL_TAG) \
 				$(DOCKER_IMG_LOCAL_TAG)
 
 DOCKER_EXEC_LOCAL :=  docker run \
 				--rm \
-				-p ${SPHINX_PORT}:$(SPHINX_PORT) \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
 				--name $(DOCKER_LOCAL_TAG) \
 				$(DOCKER_IMG_LOCAL_TAG)
@@ -127,7 +127,7 @@ index-search:
 
 .PHONY: index-layer
 index-layer:
-	$(DOCKER_EXEC) indexer --verbose layers_de layers_fr layers_it layers_en layers_rm
+	$(DOCKER_EXEC) indexer --verbose layers_de layers_fr layers_it layers_en layers_rm --rotate
 
 .PHONY: index-feature
 index-feature:
@@ -182,6 +182,7 @@ dockerrun: dockerbuild
 		-d \
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
 		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
+		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
 
@@ -189,7 +190,9 @@ dockerrun: dockerbuild
 dockerrundebug: dockerbuild
 	docker run \
 		--rm \
+		-it \
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
-		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
+		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index_efs/ \
+		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
