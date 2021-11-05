@@ -1,7 +1,7 @@
 ## SOURCES
 source src_ch_bav_schienennetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT  row_number() over () as id \
             , label \
@@ -46,7 +46,7 @@ source src_ch_bav_schienennetz : def_searchable_features
 
 source src_ch_bav_haltestellen_oev : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT nummer::bigint as id \
             , name as label \
@@ -65,7 +65,7 @@ source src_ch_bav_haltestellen_oev : def_searchable_features
 
 source src_ch_bav_seilbahnen_bundeskonzession : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::int as id \
             , search_name as label \
@@ -84,7 +84,7 @@ source src_ch_bav_seilbahnen_bundeskonzession : def_searchable_features
 
 source src_ch_astra_nationalstrassenachsen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , id as label \
@@ -103,7 +103,7 @@ source src_ch_astra_nationalstrassenachsen : def_searchable_features
 
 source src_ch_astra_ivs_nat : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT nat_id::bigint as id \
             , ivs_nummer as label \
@@ -121,7 +121,7 @@ source src_ch_astra_ivs_nat : def_searchable_features
 
 source src_ch_astra_ivs_nat_verlaeufe : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT nat_id::bigint as id \
             , ivs_nummer as label \
@@ -139,7 +139,7 @@ source src_ch_astra_ivs_nat_verlaeufe : def_searchable_features
 
 source src_ch_astra_ivs_reg_loc : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT reg_loc_id::bigint as id \
             , ivs_nummer as label \
@@ -157,7 +157,7 @@ source src_ch_astra_ivs_reg_loc : def_searchable_features
 
 source src_ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT nr::bigint as id \
             , zaehlstellen_bezeichnung as label \
@@ -175,7 +175,7 @@ source src_ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet : def_sea
 
 source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT nr::bigint as id \
             , zaehlstellen_bezeichnung as label \
@@ -193,7 +193,7 @@ source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
 
 source src_ch_astra_strassenverkehrszaehlung_uebergeordnet : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , mlocname as label \
@@ -211,7 +211,7 @@ source src_ch_astra_strassenverkehrszaehlung_uebergeordnet : def_searchable_feat
 
 source src_ch_astra_unfaelle_personenschaeden_motorraeder : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , accidenttype_de as label \
@@ -229,7 +229,7 @@ source src_ch_astra_unfaelle_personenschaeden_motorraeder : def_searchable_featu
 
 source src_ch_astra_unfaelle_personenschaeden_fussgaenger : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , accidenttype_de as label \
@@ -247,7 +247,7 @@ source src_ch_astra_unfaelle_personenschaeden_fussgaenger : def_searchable_featu
 
 source src_ch_astra_unfaelle_personenschaeden_fahrraeder : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , accidenttype_de as label \
@@ -265,7 +265,7 @@ source src_ch_astra_unfaelle_personenschaeden_fahrraeder : def_searchable_featur
 
 source src_ch_astra_unfaelle_personenschaeden_getoetete : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , accidenttype_de as label \
@@ -283,7 +283,7 @@ source src_ch_astra_unfaelle_personenschaeden_getoetete : def_searchable_feature
 
 source src_ch_astra_unfaelle_personenschaeden_alle : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , accidenttype_de as label \
@@ -302,7 +302,7 @@ source src_ch_astra_unfaelle_personenschaeden_alle : def_searchable_features
 
 source src_ch_bakom_notruf : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -321,7 +321,7 @@ source src_ch_bakom_notruf : def_searchable_features
 
 source src_ch_bakom_notruf_112_festnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -340,7 +340,7 @@ source src_ch_bakom_notruf_112_festnetz : def_searchable_features
 
 source src_ch_bakom_notruf_117_festnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -359,7 +359,7 @@ source src_ch_bakom_notruf_117_festnetz : def_searchable_features
 
 source src_ch_bakom_notruf_118_festnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -378,7 +378,7 @@ source src_ch_bakom_notruf_118_festnetz : def_searchable_features
 
 source src_ch_bakom_notruf_143_festnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -397,7 +397,7 @@ source src_ch_bakom_notruf_143_festnetz : def_searchable_features
 
 source src_ch_bakom_notruf_144_festnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -416,7 +416,7 @@ source src_ch_bakom_notruf_144_festnetz : def_searchable_features
 
 source src_ch_bakom_notruf_145_festnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -435,7 +435,7 @@ source src_ch_bakom_notruf_145_festnetz : def_searchable_features
 
 source src_ch_bakom_notruf_147_festnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -454,7 +454,7 @@ source src_ch_bakom_notruf_147_festnetz : def_searchable_features
 
 source src_ch_bakom_notruf_112_satellit : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -473,7 +473,7 @@ source src_ch_bakom_notruf_112_satellit : def_searchable_features
 
 source src_ch_bakom_notruf_112_mobilnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -492,7 +492,7 @@ source src_ch_bakom_notruf_112_mobilnetz : def_searchable_features
 
 source src_ch_bakom_notruf_117_mobilnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -511,7 +511,7 @@ source src_ch_bakom_notruf_117_mobilnetz : def_searchable_features
 
 source src_ch_bakom_notruf_118_mobilnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -530,7 +530,7 @@ source src_ch_bakom_notruf_118_mobilnetz : def_searchable_features
 
 source src_ch_bakom_notruf_143_mobilnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -549,7 +549,7 @@ source src_ch_bakom_notruf_143_mobilnetz : def_searchable_features
 
 source src_ch_bakom_notruf_144_mobilnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -568,7 +568,7 @@ source src_ch_bakom_notruf_144_mobilnetz : def_searchable_features
 
 source src_ch_bakom_notruf_145_mobilnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -587,7 +587,7 @@ source src_ch_bakom_notruf_145_mobilnetz : def_searchable_features
 
 source src_ch_bakom_notruf_147_mobilnetz : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bfs_nummer::bigint as id \
             ,  name as label \
@@ -606,7 +606,7 @@ source src_ch_bakom_notruf_147_mobilnetz : def_searchable_features
 
 source src_ch_bakom_radio_fernsehsender : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT id::bigint as id \
             , name as label \
@@ -625,7 +625,7 @@ source src_ch_bakom_radio_fernsehsender : def_searchable_features
 
 source src_ch_bakom_versorgungsgebiet_tv : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT gid::bigint as id \
             , prog as label \
@@ -644,7 +644,7 @@ source src_ch_bakom_versorgungsgebiet_tv : def_searchable_features
 
 source src_ch_bakom_versorgungsgebiet_ukw : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT gid::bigint as id \
             , prog as label \
@@ -662,7 +662,7 @@ source src_ch_bakom_versorgungsgebiet_ukw : def_searchable_features
 
 source src_ch_bav_kataster_belasteter_standorte_oev : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT vflz_id as id \
             , katasternummer::text as label \
@@ -680,7 +680,7 @@ source src_ch_bav_kataster_belasteter_standorte_oev : def_searchable_features
 
 source src_ch_bazl_kataster_belasteter_standorte_zivilflugplaetze : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT vflz_id as id \
           , katasternummer as label \
@@ -698,7 +698,7 @@ source src_ch_bazl_kataster_belasteter_standorte_zivilflugplaetze : def_searchab
 
 source src_ch_bav_sachplan_infrastruktur_schiene_ausgangslage : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , name as label \
@@ -717,7 +717,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_ausgangslage : def_searchable_f
 ## This table is empyt in test..
 source src_ch_bav_sachplan_infrastruktur_schiene_anhorung_1 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
@@ -735,7 +735,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_anhorung_1 : def_searchable_fea
 
 source src_ch_bav_sachplan_infrastruktur_schiene_anhorung_2 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
@@ -753,7 +753,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_anhorung_2 : def_searchable_fea
 
 source src_ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , name as label \
@@ -772,7 +772,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage : def_searchab
 ## This table is empyt in test..
 source src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
@@ -790,7 +790,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1 : def_searchabl
 
 source src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
@@ -808,7 +808,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2 : def_searchabl
 
 source src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
@@ -826,7 +826,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1 : def_searchable_fe
 
 source src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
@@ -844,7 +844,7 @@ source src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2 : def_searchable_fe
 
 source src_ch_bav_sachplan_infrastruktur_schiene_kraft_1 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
@@ -862,7 +862,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_kraft_1 : def_searchable_featur
 
 source src_ch_bav_sachplan_infrastruktur_schiene_kraft_2 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
@@ -881,7 +881,7 @@ source src_ch_bav_sachplan_infrastruktur_schiene_kraft_2 : def_searchable_featur
 #Some tables might be empty!!
 source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_1 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
@@ -899,7 +899,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_1 : def_searchable_fe
 
 source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_2 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
@@ -917,7 +917,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_2 : def_searchable_fe
 
 source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_3 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
@@ -935,7 +935,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_3 : def_searchable_fe
 
 source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_4 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
@@ -953,7 +953,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_4 : def_searchable_fe
 
 source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_1 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
@@ -971,7 +971,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_1 : def_searchable_featu
 
 source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_2 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , facname_de as label \
@@ -989,7 +989,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_2 : def_searchable_featu
 
 source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_3 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
@@ -1007,7 +1007,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_3 : def_searchable_featu
 
 source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_4 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY bgdi_id asc) as id \
             , plname_de as label \
@@ -1025,7 +1025,7 @@ source src_ch_bfe_sachplan_uebertragungsleitungen_kraft_4 : def_searchable_featu
 
 source src_ch_bfe_kleinwasserkraftpotentiale : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , gwlnr as label \
@@ -1043,7 +1043,7 @@ source src_ch_bfe_kleinwasserkraftpotentiale : def_searchable_features
 
 source src_ch_bfe_stauanlagen_bundesaufsicht : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT dam_stabil_id as id \
             , 'feature' as origin \
@@ -1061,7 +1061,7 @@ source src_ch_bfe_stauanlagen_bundesaufsicht : def_searchable_features
 
 source src_ch_bfe_statistik_wasserkraftanlagen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT wastanumber as id \
             , 'feature' as origin \
@@ -1079,7 +1079,7 @@ source src_ch_bfe_statistik_wasserkraftanlagen : def_searchable_features
 
 source src_ch_bfe_abgeltung_wasserkraftnutzung : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT objectnumber as id \
             , 'feature' as origin \
@@ -1097,7 +1097,7 @@ source src_ch_bfe_abgeltung_wasserkraftnutzung : def_searchable_features
 
 source src_ch_bfe_kernkraftwerke : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT plant_id as id \
             , 'feature' as origin \
@@ -1115,7 +1115,7 @@ source src_ch_bfe_kernkraftwerke : def_searchable_features
 
 source src_ch_bfe_energiestaedte : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , name as label \
@@ -1133,7 +1133,7 @@ source src_ch_bfe_energiestaedte : def_searchable_features
 
 source src_ch_bfe_energiestaedte_2000watt_areale : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , name as label \
@@ -1151,7 +1151,7 @@ source src_ch_bfe_energiestaedte_2000watt_areale : def_searchable_features
 
 source src_ch_bazl_luftfahrthindernis : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , registrationnumber::text as label \
@@ -1169,7 +1169,7 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
 
 source src_ch_bfe_windenergieanlagen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY fac_id asc) as id \
             , fac_name as label \
@@ -1187,7 +1187,7 @@ source src_ch_bfe_windenergieanlagen : def_searchable_features
 
 source src_ch_bfe_energieforschung : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , title_de as label \
@@ -1205,7 +1205,7 @@ source src_ch_bfe_energieforschung : def_searchable_features
 
 source src_ch_astra_wanderland : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT id \
           , title as label \
@@ -1223,7 +1223,7 @@ source src_ch_astra_wanderland : def_searchable_features
 
 source src_ch_astra_veloland : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT id \
           , title as label \
@@ -1241,7 +1241,7 @@ source src_ch_astra_veloland : def_searchable_features
 
 source src_ch_astra_skatingland : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT id \
           , title as label \
@@ -1259,7 +1259,7 @@ source src_ch_astra_skatingland : def_searchable_features
 
 source src_ch_astra_mountainbikeland : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT id \
           , title as label \
@@ -1277,7 +1277,7 @@ source src_ch_astra_mountainbikeland : def_searchable_features
 
 source src_ch_astra_wanderland_sperrungen_umleitungen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT bgdi_id AS id \
           , title_de as label \
@@ -1295,7 +1295,7 @@ source src_ch_astra_wanderland_sperrungen_umleitungen : def_searchable_features
 
 source src_ch_astra_veloland_sperrungen_umleitungen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT bgdi_id AS id \
           , title_de as label \
@@ -1313,7 +1313,7 @@ source src_ch_astra_veloland_sperrungen_umleitungen : def_searchable_features
 
 source src_ch_astra_skatingland_sperrungen_umleitungen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT bgdi_id AS id \
           , title_de as label \
@@ -1331,7 +1331,7 @@ source src_ch_astra_skatingland_sperrungen_umleitungen : def_searchable_features
 
 source src_ch_astra_mountainbikeland_sperrungen_umleitungen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT bgdi_id AS id \
           , title_de as label \
@@ -1349,7 +1349,7 @@ source src_ch_astra_mountainbikeland_sperrungen_umleitungen : def_searchable_fea
 
 source src_ch_swisstopo_schneeschuhwandern : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
       SELECT id \
           , title as label \
@@ -1367,7 +1367,7 @@ source src_ch_swisstopo_schneeschuhwandern : def_searchable_features
 
 source src_ch_astra_schwerverunfallte_kanton_alkohol : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , canton as label \
@@ -1385,7 +1385,7 @@ source src_ch_astra_schwerverunfallte_kanton_alkohol : def_searchable_features
 
 source src_ch_astra_schwerverunfallte_kanton_geschwindigkeit : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , canton as label \
@@ -1403,7 +1403,7 @@ source src_ch_astra_schwerverunfallte_kanton_geschwindigkeit : def_searchable_fe
 
 source src_ch_astra_schwerverunfallte_kanton_jahresvergleich : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , canton as label \
@@ -1421,7 +1421,7 @@ source src_ch_astra_schwerverunfallte_kanton_jahresvergleich : def_searchable_fe
 
 source src_ch_astra_schwerverunfallte_kanton_pro_einwohner : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , canton as label \
@@ -1439,7 +1439,7 @@ source src_ch_astra_schwerverunfallte_kanton_pro_einwohner : def_searchable_feat
 
 source src_ch_bfe_fernwaerme_angebot : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
@@ -1457,7 +1457,7 @@ source src_ch_bfe_fernwaerme_angebot : def_searchable_features
 
 source src_ch_bfe_biomasse_verholzt : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
@@ -1475,7 +1475,7 @@ source src_ch_bfe_biomasse_verholzt : def_searchable_features
 
 source src_ch_bfe_biomasse_nicht_verholzt : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
@@ -1493,7 +1493,7 @@ source src_ch_bfe_biomasse_nicht_verholzt : def_searchable_features
 
 source src_ch_bfe_kehrichtverbrennungsanlagen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
@@ -1511,7 +1511,7 @@ source src_ch_bfe_kehrichtverbrennungsanlagen : def_searchable_features
 
 source src_ch_bfe_sachplan_geologie_tiefenlager_1 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT facpt_id as id \
             , 'feature' as origin \
@@ -1529,7 +1529,7 @@ source src_ch_bfe_sachplan_geologie_tiefenlager_1 : def_searchable_features
 
 source src_ch_bfe_sachplan_geologie_tiefenlager_2 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT pmarea_id as id \
             , 'feature' as origin \
@@ -1547,7 +1547,7 @@ source src_ch_bfe_sachplan_geologie_tiefenlager_2 : def_searchable_features
 
 source src_ch_bfe_sachplan_geologie_tiefenlager_3 : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT pmpt_id as id \
             , 'feature' as origin \
@@ -1565,7 +1565,7 @@ source src_ch_bfe_sachplan_geologie_tiefenlager_3 : def_searchable_features
 
 source src_ch_bav_anlagen_schienengueterverkehr : def_searchable_features
  {
-     sql_db = uvek_dev
+     sql_db = uvek_${DBSTAGING}
      sql_query = \
          SELECT bgdi_id as id \
              , name as label \
@@ -1583,7 +1583,7 @@ source src_ch_bav_anlagen_schienengueterverkehr : def_searchable_features
 
 source src_ch_bfe_biogasanlagen : def_searchable_features
  {
-     sql_db = uvek_dev
+     sql_db = uvek_${DBSTAGING}
      sql_query = \
          SELECT plant_id as id \
              , name as label \
@@ -1601,7 +1601,7 @@ source src_ch_bfe_biogasanlagen : def_searchable_features
 
 source src_ch_bfe_erneuerbarheizen : def_searchable_features
  {
-     sql_db = uvek_dev
+     sql_db = uvek_${DBSTAGING}
      sql_query = \
          SELECT xtf_id as id \
              , company as label \
@@ -1619,7 +1619,7 @@ source src_ch_bfe_erneuerbarheizen : def_searchable_features
 
 source src_ch_bfe_erneuerbarheizen_mehrfamilienhaeuser : def_searchable_features
  {
-     sql_db = uvek_dev
+     sql_db = uvek_${DBSTAGING}
      sql_query = \
          SELECT bgdi_id as id \
              , company as label \
@@ -1637,7 +1637,7 @@ source src_ch_bfe_erneuerbarheizen_mehrfamilienhaeuser : def_searchable_features
 
 source src_ch_bfe_komo_projekte : def_searchable_features
  {
-     sql_db = uvek_dev
+     sql_db = uvek_${DBSTAGING}
      sql_query = \
          SELECT xtf_id as id \
              , id as label \
@@ -1655,7 +1655,7 @@ source src_ch_bfe_komo_projekte : def_searchable_features
 
 source src_ch_bfe_thermische_netze : def_searchable_features
  {
-     sql_db = uvek_dev
+     sql_db = uvek_${DBSTAGING}
      sql_query = \
          SELECT xtf_id as id \
              , name as label \
@@ -1779,51 +1779,51 @@ index ch_astra_unfaelle_personenschaeden_alle : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_alle
 }
 
-index ch_bakom_notruf : ch_astra_ivs_nat 
+index ch_bakom_notruf : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf
 }
 
-index ch_bakom_notruf_112_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_112_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_112_festnetz 
+    source = src_ch_bakom_notruf_112_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_festnetz
 }
 
-index ch_bakom_notruf_117_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_117_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_117_festnetz 
+    source = src_ch_bakom_notruf_117_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_117_festnetz
 }
 
-index ch_bakom_notruf_118_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_118_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_118_festnetz 
+    source = src_ch_bakom_notruf_118_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_118_festnetz
 }
 
-index ch_bakom_notruf_143_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_143_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_143_festnetz 
+    source = src_ch_bakom_notruf_143_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_143_festnetz
 }
 
-index ch_bakom_notruf_144_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_144_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_144_festnetz 
+    source = src_ch_bakom_notruf_144_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_144_festnetz
 }
 
-index ch_bakom_notruf_145_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_145_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_145_festnetz 
+    source = src_ch_bakom_notruf_145_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_145_festnetz
 }
 
-index ch_bakom_notruf_147_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_147_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_147_festnetz 
+    source = src_ch_bakom_notruf_147_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_147_festnetz
 }
 
@@ -1900,7 +1900,7 @@ index ch_bav_sachplan_infrastruktur_schiene_ausgangslage : ch_astra_ivs_nat
 }
 
 index ch_bav_kataster_belasteter_standorte_oev : ch_astra_ivs_nat
-{   
+{
     source = src_ch_bav_kataster_belasteter_standorte_oev
     path = /var/lib/sphinxsearch/data/index/ch_bav_kataster_belasteter_standorte_oev
 }
@@ -1967,7 +1967,7 @@ index ch_bav_sachplan_infrastruktur_schiene_anhorung_2 : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_anhorung_2
 }
 
-index ch_bav_sachplan_infrastruktur_schiene_anhorung 
+index ch_bav_sachplan_infrastruktur_schiene_anhorung
 {
     type = distributed
     local = ch_bav_sachplan_infrastruktur_schiene_anhorung_1
@@ -1986,7 +1986,7 @@ index ch_bav_sachplan_infrastruktur_schiene_kraft_2 : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_kraft_2
 }
 
-index ch_bav_sachplan_infrastruktur_schiene_kraft 
+index ch_bav_sachplan_infrastruktur_schiene_kraft
 {
     type = distributed
     local = ch_bav_sachplan_infrastruktur_schiene_kraft_1
@@ -2079,7 +2079,7 @@ index ch_bfe_sachplan_uebertragungsleitungen_anhorung_4 : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_4
 }
 
-index ch_bfe_sachplan_uebertragungsleitungen_anhorung 
+index ch_bfe_sachplan_uebertragungsleitungen_anhorung
 {
     type = distributed
     local = ch_bfe_sachplan_uebertragungsleitungen_anhorung_1
@@ -2112,7 +2112,7 @@ index ch_bfe_sachplan_uebertragungsleitungen_kraft_4 : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_4
 }
 
-index ch_bfe_sachplan_uebertragungsleitungen_kraft 
+index ch_bfe_sachplan_uebertragungsleitungen_kraft
 {
     type = distributed
     local = ch_bfe_sachplan_uebertragungsleitungen_kraft_1

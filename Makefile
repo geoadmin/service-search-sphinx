@@ -4,7 +4,8 @@ SHELL = /bin/bash
 .DEFAULT_GOAL := help
 
 export SERVICE_NAME := service-sphinxsearch
-export ENV_FILE?=dev.env
+export STAGING?=dev
+export ENV_FILE?=$(STAGING).env
 
 CURRENT_DIR := $(shell pwd)
 CPUS ?= $(shell grep -c ^processor /proc/cpuinfo)
@@ -29,7 +30,7 @@ export AUTHOR ?= $(USER)
 export DOCKER_REGISTRY ?= 974517877189.dkr.ecr.eu-central-1.amazonaws.com
 export DOCKER_LOCAL_TAG ?= local-$(USER)-$(GIT_HASH_SHORT)
 export DOCKER_IMG_LOCAL_TAG ?= $(DOCKER_REGISTRY)/$(SERVICE_NAME):$(DOCKER_LOCAL_TAG)
-export DOCKER_INDEX_VOLUME ?= sphinx_ltclm
+export DOCKER_INDEX_VOLUME ?= sphinx_index_$(STAGING)
 
 # git pre-commit hook
 GIT_DIR := $(shell git rev-parse --git-dir)
@@ -104,7 +105,9 @@ help:
 	@echo "- DOCKER_REGISTRY:        ${YELLOW}${DOCKER_REGISTRY}${RESET}"
 	@echo "- DOCKER_LOCAL_TAG:       ${YELLOW}${DOCKER_LOCAL_TAG}${RESET}"
 	@echo "- DOCKER_IMG_LOCAL_TAG:   ${YELLOW}${DOCKER_IMG_LOCAL_TAG}${RESET}"
+	@echo "- DOCKER_INDEX_VOLUME:    ${YELLOW}${DOCKER_INDEX_VOLUME}${RESET}"
 	@echo
+	@echo "- STAGING:                ${YELLOW}${STAGING}${RESET}"
 	@echo "- ENV_FILE:               ${YELLOW}${ENV_FILE}${RESET}"
 	@echo "- SPHINX_PORT:            ${YELLOW}${SPHINX_PORT}${RESET}"
 	@echo "- SPHINX_INDEX:           ${YELLOW}${SPHINX_INDEX}${RESET}"
@@ -154,11 +157,8 @@ git_hook:
 
 .PHONY: template
 template:
-	@ if [ -z "$(PGPASS)" -o -z "$(PGUSER)" ]; then \
-	  echo "ERROR: Environment variables for db connection PGPASS PGUSER  are not set correctly"; exit 2;\
-	else true; fi
-	sed -e 's/$$PGUSER/$(PGUSER)/' -e 's/$$PGPASS/$(PGPASS)/' -e 's/$$CPUS/$(CPUS)/' conf/db.conf.in  > conf/db.conf
-	cat conf/db.conf conf/*.part > conf/sphinx.conf
+	cat conf/db.conf.part conf/*.part > conf/sphinx.conf.in
+	export $(shell cat $(ENV_FILE)) && envsubst < conf/sphinx.conf.in > conf/sphinx.conf
 
 .PHONY: move-template
 move-template: template check-config-local
