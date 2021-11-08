@@ -80,11 +80,6 @@ help:
 	@echo "${BOLD}${BLUE}sphinxsearch targets:${RESET}"
 	@echo "- pg2sphinx                 Create / Update indices based on DB or INDEX pattern, EFS index will be synced to docker volumes (does NOT re-create config file)"
 	@echo "                            (STAGING=(dev|int|prod) DB= or INDEX= ) p.e. STAGING=dev DB=bod_dev make pg2sphinx"
-	@echo "- index-all                 Create / Update all indices (does NOT re-create config file)"
-	@echo "- index-grep                Update indices that match a given pattern. Pass the pattern as IPATTERN=mypattern directly on the commandline"
-	@echo "- index-search              Update swisssearch indices (does NOT re-create config file)"
-	@echo "- index-layer               Update all the layers indices (does NOT re-create config file)"
-	@echo "- index-feature             Update all the features indices (does NOT re-create config file)"
 	@echo "- check-config              Check the sphinx config: ${YELLOW}$(SPHINX_INDEX)sphinx.conf${RESET}"
 	@echo "- check-config-local        Check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET}"
 	@echo "- check-queries-local       Check the queries with the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET}"
@@ -113,29 +108,9 @@ help:
 	@echo "- SPHINX_PORT:              ${YELLOW}${SPHINX_PORT}${RESET}"
 	@echo "- SPHINX_INDEX:             ${YELLOW}${SPHINX_INDEX}${RESET}"
 
-.PHONY: index
-index:
-	$(DOCKER_EXEC) indexer --verbose --rotate  --sighup-each $(INDEX)
-
-.PHONY: index-all
-index-all:
-	$(DOCKER_EXEC) indexer --verbose --all
-
-.PHONY: index-grep
-index-grep:
-	$(DOCKER_EXEC) indexer --verbose $(GREP_INDICES)
-
-.PHONY: index-search
-index-search:
-	$(DOCKER_EXEC) indexer --verbose address parcel gg25 kantone district zipcode swissnames3d haltestellen district_metaphone kantone_metaphone swissnames3d_metaphone swissnames3d_metaphone address_metaphone district_soundex kantone_soundex swissnames3d_soundex haltestellen_soundex address_soundex
-
-.PHONY: index-layer
-index-layer:
-	$(DOCKER_EXEC) indexer --verbose layers_de layers_fr layers_it layers_en layers_rm --rotate
-
-.PHONY: index-feature
-index-feature:
-	$(DOCKER_EXEC) indexer --verbose --rotate --sighup-each $(FEATURES_INDICES)
+.PHONY: pg2sphinx
+pg2sphinx:
+	export $(shell cat $(ENV_FILE)) && ./scripts/pg2sphinx.sh
 
 .PHONY: check-config
 check-config: dockerbuild
@@ -199,6 +174,3 @@ dockerrundebug: dockerbuild
 		$(DOCKER_IMG_LOCAL_TAG)
 
 
-.PHONY: pg2sphinx
-pg2sphinx:
-	export $(shell cat $(ENV_FILE)) && ./scripts/pg2sphinx.sh

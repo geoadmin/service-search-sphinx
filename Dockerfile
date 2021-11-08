@@ -18,7 +18,7 @@ RUN groupadd -r geodata -g 2500 && \
 RUN mkdir -p /var/lib/sphinxsearch/data/index/
 RUN mkdir -p /var/lib/sphinxsearch/data/index_efs/
 
-COPY scripts/docker* deploy/pg2sphinx_trigger.py /
+COPY scripts/docker* scripts/pg2sphinx_trigger.py /
 
 # change ownerships to geodata which will run the service or the maintenance scripts
 RUN chown -R geodata:geodata /var/lib/sphinxsearch/data/ && \
