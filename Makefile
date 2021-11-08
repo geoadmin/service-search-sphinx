@@ -47,12 +47,14 @@ endif
 # EFS Index will be mounted as bind mount
 export DOCKER_EXEC :=  docker run \
 				--rm \
+				-t \
 				-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
 				--name $(DOCKER_LOCAL_TAG)_maintenance \
 				$(DOCKER_IMG_LOCAL_TAG)
 
 export DOCKER_EXEC_LOCAL :=  docker run \
 				--rm \
+				-t \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
 				--name $(DOCKER_LOCAL_TAG)_maintenance \
 				$(DOCKER_IMG_LOCAL_TAG)
@@ -110,7 +112,7 @@ help:
 
 .PHONY: pg2sphinx
 pg2sphinx:
-	export $(shell cat $(ENV_FILE)) && ./scripts/pg2sphinx.sh
+	export $(shell cat $(ENV_FILE)) && DOCKER_INDEX_VOLUME=$(DOCKER_INDEX_VOLUME) ./scripts/pg2sphinx.sh
 
 .PHONY: check-config
 check-config: dockerbuild
@@ -138,7 +140,7 @@ template:
 
 .PHONY: move-template
 move-template: template check-config-local
-	cp -a conf/sphinx.conf $(SPHINX_INDEX)
+	cp -a conf/sphinx.conf conf/wordforms_main.txt $(SPHINX_INDEX)
 
 ## docker commands
 .PHONY: dockerlogin
