@@ -46,24 +46,4 @@ if [ ! -z ${INDEX:-} ]; then
     ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -i ${INDEX}
 fi
 
-echo "update container"
-# filter by volume, all the containers with the same volume are updated
-for container in $(docker ps -a --format {{.Names}} --filter volume=${DOCKER_INDEX_VOLUME}); do
-    echo ""
-    echo "rotating indexes on container ${container}..."
-    docker exec -i "${container}" /bin/bash <<-EOF
-    set -eu
-    echo "sync efs to volume (${SPHINX_INDEX} -> ${DOCKER_INDEX_VOLUME})"
-    rsync --update -av --delete --exclude '*.tmp.*' /var/lib/sphinxsearch/data/index_efs/ /var/lib/sphinxsearch/data/index/
-    pkill -1 searchd
-    sleep 5
-    echo "sync volume to efs (${DOCKER_INDEX_VOLUME} -> ${SPHINX_INDEX})"
-    rsync --update -av --delete --exclude '*.tmp.*' --exclude '*.new.*' --exclude '*.spl' /var/lib/sphinxsearch/data/index/ /var/lib/sphinxsearch/data/index_efs/
-    searchd --status
-EOF
-done
-
-# Sync Volume Index data back to EFS clean EFS from *.new.* files
-find ${SPHINX_INDEX} -name "*.new.*" -delete
-
 echo "finished"
