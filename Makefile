@@ -156,7 +156,7 @@ dockerbuild:
 .PHONY: dockerrun
 dockerrun: dockerbuild
 	docker run \
-		--rm \
+		--restart=always \
 		-d \
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
 		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index_efs/ \
