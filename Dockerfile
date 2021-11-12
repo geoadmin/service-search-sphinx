@@ -8,6 +8,7 @@ RUN apt-get update && \
     vim \
     procps \
     rsync \
+    cron \
     default-mysql-client && \
     apt-get clean
 
@@ -19,6 +20,10 @@ RUN mkdir -p /var/lib/sphinxsearch/data/index/
 RUN mkdir -p /var/lib/sphinxsearch/data/index_efs/
 
 COPY scripts/docker* scripts/pg2sphinx_trigger.py /
+
+# set up cron for non root user
+RUN chmod gu+rw /var/run
+RUN chmod gu+s /usr/sbin/cron
 
 # change ownerships to geodata which will run the service or the maintenance scripts
 RUN chown -R geodata:geodata /var/lib/sphinxsearch/data/ && \
