@@ -3,10 +3,10 @@
 set -e
 set -u
 
-BRANCH_NAME=$(git branch | grep '*' | sed 's/* //')
+BRANCH_NAME=$(git branch | grep -E '^\*' | sed 's/* //')
 
 # ignore hook when rebase or merge
-if [ $BRANCH_NAME != '(no branch)' ]; then
+if [ "$BRANCH_NAME" != '(no branch)' ]; then
     # check queriesi
     echo "checking queries ..."
 ERROR=$(

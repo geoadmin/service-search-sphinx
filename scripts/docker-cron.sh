@@ -13,12 +13,12 @@ LOG_PREFIX="[ $$ - $(date +"%F %T")] "
     # sync back rotated Indexes to EFS
     # remove *.new.* files FROM EFS
 
-LOCKFILE="/var/lock/`basename $0`"
+LOCKFILE="/var/lock/$(basename "$0")"
 LOCKFD=99
 
 # PRIVATE
-_lock()             { flock -$1 $LOCKFD; }
-_no_more_locking()  { _lock u; _lock xn && rm -f $LOCKFILE; }
+_lock()             { flock -"$1" "$LOCKFD"; }
+_no_more_locking()  { _lock u; _lock xn && rm -f "$LOCKFILE"; }
 _prepare_locking()  { eval "exec $LOCKFD>\"$LOCKFILE\""; trap _no_more_locking EXIT; }
 
 # ON START
@@ -36,39 +36,38 @@ echo "${LOG_PREFIX}start"
     # index files are new, not yet roteated
     # index files are new, already rotated on another node
 # this is the array of index files that are new on EFS and outdated in the local volume, they have been rotated updated already elsewhere
-new_files_rotated=($(rsync --update -avin --delete --exclude '*.tmp.*' --exclude '*.new.*' --include '*.sp*' --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME} | egrep '^>.*.sp.*$' | awk '{print $2}'))
+mapfile -t new_files_rotated < <(rsync --update -avin --delete --exclude '*.tmp.*' --exclude '*.new.*' --include '*.sp*' --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME} | grep -E '^>.*.sp.*$' | awk '{print $2}')
 # this is the array of new index files that are new on EFS and not yet rotated
-new_files=($(rsync --update -avin --delete --exclude '*.tmp.*' ${SPHINX_EFS} ${SPHINX_VOLUME} | egrep '^>.*.new.*' | awk '{print $2}'))
+mapfile -t new_files < <(rsync --update -avin --delete --exclude '*.tmp.*' ${SPHINX_EFS} ${SPHINX_VOLUME} | grep -E '^>.*.new.*' | awk '{print $2}')
 # this array will merge the combination of these two arrays
-new_files_merged=($(echo ${new_files[@]}))
-
+mapfile -t new_files_merged < <(echo "${new_files[@]}")
 
 # sync EFS to VOLUME
 echo "${LOG_PREFIX}sync efs to volume (${SPHINX_EFS} -> ${SPHINX_VOLUME})"
 rsync --update -av --delete --exclude '*.tmp.*' ${SPHINX_EFS} ${SPHINX_VOLUME}
 
 # rename already rotated files before index rotation from *.sp* to .*.new.sp*
-echo "${LOG_PREFIX}-> $(date +"%F %T") rename already rotated, new index files: ${new_files_rotated[@]}..."
+echo "${LOG_PREFIX}-> $(date +"%F %T") rename already rotated, new index files: ${new_files_rotated[*]}..."
 
 # strip file extension from filename and expand it to the full list of existing files in SPHINX Volume
 pushd "${SPHINX_VOLUME}"
 tmp_array=()
-for new_file in ${new_files_rotated[@]};do
+for new_file in "${new_files_rotated[@]}";do
     base=${new_file%.*}
-    tmp_array+=(${base}*)
+    tmp_array+=("${base}"*)
 done
-new_files_rotated=($(printf "%s\n" "${tmp_array[@]}" | sort -u | tr '\n' ' '))
-for rotated in ${new_files_rotated[@]}; do
+mapfile -t new_files_rotated < <(printf "%s\n" "${tmp_array[@]}" | sort -u | tr '\n' ' ')
+for rotated in "${new_files_rotated[@]}"; do
     base=${rotated%.*}
     extension=${rotated##*.}
     new_file="${base}.new.${extension}"
     mv -f "${rotated}" "${new_file}"
-    new_files_merged+=(${new_file})
+    new_files_merged+=("${new_file}")
 done
 popd
 
 # remove duplicates from array
-new_files_merged=($(printf "%s\n" "${new_files_merged[@]}" | sort -u | tr '\n' ' '))
+mapfile -t new_files_merged < <(printf "%s\n" "${new_files_merged[@]}" | sort -u | tr '\n' ' ')
 
 # start index rotation
 pkill -1 searchd
@@ -77,8 +76,8 @@ pkill -1 searchd
 all_files_are_gone=false
 while ! ${all_files_are_gone}; do
     all_files_are_gone=true
-    for new_file in ${new_files_merged[@]}; do
-        [ -f ${SPHINX_VOLUME}${new_file} ] && all_files_are_gone=false
+    for new_file in "${new_files_merged[@]}"; do
+        [ -f "${SPHINX_VOLUME}${new_file}" ] && all_files_are_gone=false
     done
     sleep 1
 done
@@ -88,8 +87,8 @@ rsync --update -av --exclude '*.tmp.*' --exclude '*.new.*' --exclude '*.spl' --i
 
 # delete new files list from rsync from EFS
 echo "${LOG_PREFIX}-> $(date +"%F %T") delete new files list from sync"
-for new_file in ${new_files[@]}; do
-    rm ${SPHINX_EFS}${new_file} -rf || :
+for new_file in "${new_files[@]}"; do
+    rm "${SPHINX_EFS}${new_file}" -rf || :
 done
 
 echo "${LOG_PREFIX}-> $(date +"%F %T") finished"
