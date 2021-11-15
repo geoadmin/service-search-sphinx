@@ -28,7 +28,7 @@ export AUTHOR ?= $(USER)
 
 # Docker variables dynamic env variables for envsubst etc.
 export DOCKER_REGISTRY ?= 974517877189.dkr.ecr.eu-central-1.amazonaws.com
-export DOCKER_LOCAL_TAG ?= local-$(USER)-$(STAGING)-$(GIT_HASH_SHORT)
+export DOCKER_LOCAL_TAG ?= local-$(USER)-$(GIT_HASH_SHORT)
 export DOCKER_IMG_LOCAL_TAG ?= $(DOCKER_REGISTRY)/$(SERVICE_NAME):$(DOCKER_LOCAL_TAG)
 export DOCKER_INDEX_VOLUME ?= sphinx_index_$(STAGING)
 
