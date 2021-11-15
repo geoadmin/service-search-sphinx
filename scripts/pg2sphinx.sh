@@ -10,9 +10,9 @@ lock() {
     counter=0
     max_counter=60 # max loops
     nap_time=60 # loop time in seconds
-    while docker ps -a --format {{.Names}} | grep --silent ${LOCK_TAG} -w; do
+    while docker ps -a --format '{{.Names}}' | grep --silent "${LOCK_TAG}" -w; do
         ((counter+=1))
-        if (( ${counter} > ${max_counter} )); then
+        if (( counter > max_counter )); then
             >&2 echo "maintenance operations are locked"
             exit 1
         fi
@@ -24,26 +24,26 @@ lock() {
         --rm \
         -d \
         -t \
-        -v ${SPHINX_INDEX}:/var/lib/sphinxsearch/data/index/ \
-        --name ${LOCK_TAG} \
-        ${DOCKER_IMG_LOCAL_TAG} /bin/bash
+        -v "${SPHINX_INDEX}":/var/lib/sphinxsearch/data/index/ \
+        --name "${LOCK_TAG}" \
+        "${DOCKER_IMG_LOCAL_TAG}" /bin/bash
 }
 
 unlock() {
-    docker stop ${LOCK_TAG}
+    docker stop "${LOCK_TAG}"
 }
 
 trap "unlock" exit
 lock
 
-if [ ! -z ${DB:-} ]; then
+if [ -n "${DB:-}" ]; then
     # call pg2sphinx trigger with DATABASE pattern
-    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -d ${DB}
+    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -d "${DB}"
 fi
 
-if [ ! -z ${INDEX:-} ]; then
+if [ -n "${INDEX:-}" ]; then
     # call pg2sphinx trigger with INDEX pattern
-    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -i ${INDEX}
+    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -i "${INDEX}"
 fi
 
 echo "finished"

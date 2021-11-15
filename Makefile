@@ -1,9 +1,9 @@
 # Makefile env
-SHELL = /bin/bash
+SHELL=/bin/bash -o pipefail
 
 .DEFAULT_GOAL := help
 
-export SERVICE_NAME := service-sphinxsearch
+export SERVICE_NAME := service-search-sphinx
 export STAGING?=dev
 export ENV_FILE?=$(STAGING).env
 
@@ -43,6 +43,12 @@ else
 $(error "environment file does not exist ${ENV_FILE}")
 endif
 
+# check db access
+DB_ACCESS := $(shell pg_isready -h ${PGHOST} &> /dev/null && echo true || echo false)
+ifeq ($(DB_ACCESS),false)
+$(error ${RED}we need a valid postgres connection for this makefile connection to '$(PGHOST)' was not successful${RESET})
+endif
+
 # Maintenance / Index Commands
 # EFS Index will be mounted as bind mount
 export DOCKER_EXEC :=  docker run \
@@ -62,9 +68,8 @@ export DOCKER_EXEC_LOCAL :=  docker run \
 # AWS variables
 AWS_DEFAULT_REGION = eu-central-1
 
-INDEX ?= 'Set INDEX variable to specify the index to create'
-FEATURES_INDICES := $(shell find $(SPHINX_INDEX) -type f -name 'ch_*spa' | sed 's:$(SPHINX_INDEX)::' |  sed 's:.spa::')
-GREP_INDICES := $(shell if [ -f $(SPHINX_INDEX)/sphinx.conf ]; then grep "^index .*$(IPATTERN).*" $(SPHINX_INDEX)/sphinx.conf | sed 's: \: .*::' | grep ".*$(IPATTERN).*" | sed 's:index ::'; fi)
+INDEX ?= 'Set INDEX variable to specify the index or index prefix to create'
+DB ?= 'Set DB variable to specify the database pattern for the index creation'
 
 .PHONY: help
 help:
@@ -74,7 +79,8 @@ help:
 	@echo
 	@echo "${BOLD}${BLUE}docker targets:${RESET}"
 	@echo "- dockerlogin               Login to the AWS ECR registery for pulling/pushing docker images"
-	@echo "- dockerbuild               Builds a docker image with the tag ${DOCKER_LOCAL_TAG}"
+	@echo "- dockerbuild               Builds a docker image with the tag ${YELLOW}${DOCKER_LOCAL_TAG}${RESET}"
+	@echo "- dockerpush                Push the docker local image ${YELLOW}${DOCKER_LOCAL_TAG}${RESET} to AWS ECR registry"
 	@echo "- dockerrun                 Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_INDEX)${RESET} in background"
 	@echo "- dockerrundebug            Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_INDEX)${RESET} in foreground"
 
@@ -109,6 +115,9 @@ help:
 	@echo "- ENV_FILE:                 ${YELLOW}${ENV_FILE}${RESET}"
 	@echo "- SPHINX_PORT:              ${YELLOW}${SPHINX_PORT}${RESET}"
 	@echo "- SPHINX_INDEX:             ${YELLOW}${SPHINX_INDEX}${RESET}"
+	@echo
+	@echo "- CPUS:                     ${YELLOW}${CPUS}${RESET}"
+	@echo "- DB_ACCESS:                ${YELLOW}${DB_ACCESS}${RESET}"
 
 .PHONY: pg2sphinx
 pg2sphinx:
@@ -153,6 +162,10 @@ dockerbuild:
 		-q \
 		--tag $(DOCKER_IMG_LOCAL_TAG) .
 
+.PHONY: dockerpush
+dockerpush: dockerbuild
+	docker push $(DOCKER_IMG_LOCAL_TAG)
+
 .PHONY: dockerrun
 dockerrun: dockerbuild
 	docker run \
@@ -174,5 +187,3 @@ dockerrundebug: dockerbuild
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
-
-
