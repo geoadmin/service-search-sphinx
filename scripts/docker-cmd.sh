@@ -32,6 +32,8 @@ for index in ${array_config[@]}; do
     if ! $(ls "${SPHINXINDEX_EFS}${index}".* &> /dev/null); then
         echo -e "\t${yellow}creating index ${index}${NC}"
         indexer "${index}" &> /dev/null
+        # sync missing indexes back to EFS
+        rsync --update -av --include "${index}.*" --exclude '*' /${SPHINXINDEX_VOLUME} ${SPHINXINDEX_EFS}
     fi
 done
 
