@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# read sphinx config file and update all indexes related to input database or input table or index pattern
+# read sphinx config file and update all indexes related to input database or
+# input table or index pattern
 
 import os
-import sys
 import re
 import sqlite3
-import psycopg2
 import subprocess
-from optparse import OptionParser
+import sys
+from optparse import OptionParser  # pylint: disable=deprecated-module
+
+import psycopg2  # pylint: disable=import-error
 
 
-def pg_get_tables(sql_query,sql_db):
+def pg_get_tables(sql_query, sql_db):
     # add 'EXPLAIN VERBOSE ' to sql string
     sql_query = 'EXPLAIN VERBOSE ' + sql_query
 
-    conn_string = "host='%s' dbname='%s' user='%s' password='%s'" % (CONN_HOST,sql_db,CONN_USER,CONN_PWD)
+    conn_string = "host='%s' dbname='%s' user='%s' password='%s'" % (
+        CONN_HOST, sql_db, CONN_USER, CONN_PWD
+    )
     # get a connection, if a connect cannot be made an exception will be raised here
     conn = psycopg2.connect(conn_string)
     # conn.cursor will return a cursor object, you can use this cursor to perform queries
@@ -27,16 +31,18 @@ def pg_get_tables(sql_query,sql_db):
         # retrieve the records from the database
         records = cursor.fetchall()
         t = []
-        for i in records:
-            table = re.search('[Bitmap Heap|Index|Seq] Scan.* on ([^ ]+)', i[0])
-            table = table.group(1) if table else None
-            if table and 'Bitmap Index Scan' not in i[0]:
-                t.append(sql_db+'.'+table)
-                #print "linie: '%s' -> extract: '%s'" % (i[0],table)
-        t = list(set(t)) # get rid of duplicate entries in the list and sorting
+        for record in records:
+            table_i = re.search('[Bitmap Heap|Index|Seq] Scan.* on ([^ ]+)', record[0])
+            table_i = table_i.group(1) if table_i else None
+            if table_i and 'Bitmap Index Scan' not in record[0]:
+                t.append(sql_db + '.' + table_i)
+        t = list(set(t))  # get rid of duplicate entries in the list and sorting
         return ','.join(sorted(t))
-    except Exception as err:
-        sys.stderr.write("ERROR: wrong query detected in database: %s\nquery:\n%s\nerror:\n%s\n" % (sql_db, sql_query, err))
+    except psycopg2.OperationalError as err:
+        sys.stderr.write(
+            "ERROR: wrong query detected in database: %s\nquery:\n%s\nerror:\n%s\n" %
+            (sql_db, sql_query, err)
+        )
         return ''
 
 
@@ -75,10 +81,39 @@ if __name__ == '__main__':
 
     OptionParser.format_epilog = lambda self, formatter: self.epilog
     parser = OptionParser(epilog=epilog)
-    parser.add_option("-d","--database_filter", dest="database_filter", default=None, action="store", help="Database Filter: optional comma separated list of database prefix")
-    parser.add_option("-i","--index_filter", dest="index_filter", default=None, action="store", help="Index Filter: optional comma separated list of index prefix")
-    parser.add_option("-c","--command", dest="command", default="list", action="store", help="-c list: will list all the indexes touched by the database filter\n-c update: will update all the indexes touched by the database filter.")
-    parser.add_option("-s","--sphinxconf", dest="config", default=SPHINXCONFIG, action="store", help="-s /path/to/sphinx/sphinx.conf")
+    parser.add_option(
+        "-d",
+        "--database_filter",
+        dest="database_filter",
+        default=None,
+        action="store",
+        help="Database Filter: optional comma separated list of database prefix"
+    )
+    parser.add_option(
+        "-i",
+        "--index_filter",
+        dest="index_filter",
+        default=None,
+        action="store",
+        help="Index Filter: optional comma separated list of index prefix"
+    )
+    parser.add_option(
+        "-c",
+        "--command",
+        dest="command",
+        default="list",
+        action="store",
+        help="-c list: will list all the indexes touched by the database filter\n\
+            -c update: will update all the indexes touched by the database filter."
+    )
+    parser.add_option(
+        "-s",
+        "--sphinxconf",
+        dest="config",
+        default=SPHINXCONFIG,
+        action="store",
+        help="-s /path/to/sphinx/sphinx.conf"
+    )
     (options, args) = parser.parse_args()
 
     # Some initial tests
@@ -86,29 +121,30 @@ if __name__ == '__main__':
         sys.exit("ERROR: Sphinx config file doesn't exist: %s" % options.config)
 
     # -c --command
-    if options.command not in ['list','update']:
+    if options.command not in ['list', 'update']:
         parser.print_help()
-        sys.exit( 1 )
+        sys.exit(1)
 
     # choose -d or -i
     if options.database_filter and options.index_filter:
         parser.print_help()
-        sys.exit( 1 )
+        sys.exit(1)
 
     filter_option = ""
     if options.database_filter:
-        filter_option='database'
+        filter_option = 'database'
 
     if options.index_filter:
-        filter_option='index'
+        filter_option = 'index'
 
     if options.config:
-         SPHINXCONFIG=options.config
+        SPHINXCONFIG = options.config
 
     # SQLITE Initialize and create tables in memory
-    conn = sqlite3.connect(":memory:")
-    c = conn.cursor()
-    c.execute("""
+    sqlite_conn = sqlite3.connect(":memory:")
+    c = sqlite_conn.cursor()
+    c.execute(
+        """
                 create table sources (
                     id INTEGER PRIMARY KEY
                     , source text
@@ -118,22 +154,25 @@ if __name__ == '__main__':
                     , indexes
                     text
                     );
-                    """)
+                    """
+    )
 
-    c.execute("""
+    c.execute(
+        """
                 create table indexes (
                     id INTEGER PRIMARY KEY
                     , sphinx_index text
                     , index_parent
                     , source text
                     );
-                    """)
+                    """
+    )
     # switch to sqlite3 dictionary mode
     c.row_factory = sqlite3.Row
 
     # Read Sphinx Config
-    with open (SPHINXCONFIG, "r") as myfile:
-        data=myfile.read()
+    with open(SPHINXCONFIG, "r") as myfile:
+        data = myfile.read()
 
     # Parse PG Connection from Sphinx Config
     CONN_HOST = re.findall(r'sql_host\s*=\s*(.*)', data)[0]
@@ -142,16 +181,19 @@ if __name__ == '__main__':
     CONN_PORT = re.findall(r'sql_port\s*=\s*(.*)', data)[0]
 
     # parse sphinx config sources and write them to sqlite sources table ...
-    # TODO:
+    # TUDU:
     # regex which can extract source, sql_db and sql_query in one step
     # step 1 extract source and content in curly braces
-    reg_source = re.compile(r'''
+    reg_source = re.compile(
+        r'''
             ^
             source\s+                           # source start
             (?P<source>[^\n]+)                  # catch source group
             .*?                                 # Next part:
             (?P<content> (?<={)[^}]*(?=}))      # catch everything but curly braces
-        ''', re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE )
+        ''',
+        re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE
+    )
 
     # Parent : Child1  -> ('Parent', 'Child1')
     # Parent2: Child2  -> ('Parent2', 'Child2')
@@ -160,32 +202,43 @@ if __name__ == '__main__':
     for i in reg_source.finditer(data):
         source, source_parent = parsing_func(i.groupdict()['source'])
         # step 2 extract sql_db and sql_query from curly braced content
-        sql_db = re.search(r'sql_db\s*=\s*([\w]+)', i.groupdict()['content'])
-        sql_db = sql_db.group(1) if sql_db else None
+        sql_db_name = re.search(r'sql_db\s*=\s*([\w]+)', i.groupdict()['content'])
+        sql_db_name = sql_db_name.group(1) if sql_db_name else None
 
-        sql_query = re.findall(r'^\s+sql_query\s*=(.*)$', i.groupdict()
-                               ['content'], re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
-        sql_query = sql_query[0].replace('\\','').replace('\n', '').strip() if sql_query else None
-        c.execute("""
+        sql_db_query = re.findall(
+            r'^\s+sql_query\s*=(.*)$',
+            i.groupdict()['content'],
+            re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE
+        )
+        sql_db_query = sql_db_query[0].replace('\\',
+                                               '').replace('\n',
+                                                           '').strip() if sql_db_query else None
+        c.execute(
+            """
                     INSERT INTO sources (
                         source
                         , source_parent
                         , sql_db
                         , sql_query
                         )
-                        VALUES  (? ,?, ?, ?);""" ,(source.strip(), str(source_parent).strip(), sql_db, sql_query))
+                        VALUES  (? ,?, ?, ?);""",
+            (source.strip(), str(source_parent).strip(), sql_db_name, sql_db_query)
+        )
 
     # parse sphinx config indexes and write them to sqlite indexes table ...
-    # TODO:
+    # TUDU:
     # regex which can extract source, sql_db and sql_query in one step
     # step 1 extract source and content in curly braces
-    reg_index = re.compile(r'''
+    reg_index = re.compile(
+        r'''
             ^
             index\s+                            # index start
             (?P<index>[^\n]+)                   # catch indexgroup
             .*?                                 # Next part:
             (?P<content> (?<={)[^}]*(?=}))      # catch everything but curly braces
-        ''', re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE)
+        ''',
+        re.MULTILINE | re.DOTALL | re.VERBOSE | re.UNICODE
+    )
 
     # get distributed indices first
     distributed_index = {}
@@ -210,13 +263,16 @@ if __name__ == '__main__':
             if index in v:
                 index_parent = k
         # import only real indexes, no distributed indexes
-        if not ( source is None and index_parent is None ):
-            c.execute("""
+        if not (source is None and index_parent is None):
+            c.execute(
+                """
                         INSERT INTO indexes (
                             sphinx_index
                             , index_parent
                             ,source
-                            ) VALUES(?, ?, ?);""" ,(index.strip(), str(index_parent).strip(), source))
+                            ) VALUES(?, ?, ?);""",
+                (index.strip(), str(index_parent).strip(), source)
+            )
 
     # output
     sql = """
@@ -233,7 +289,11 @@ if __name__ == '__main__':
     """
 
     resultat = []
-    looper_list = options.index_filter.split(",") if options.index_filter else options.database_filter.split(",") if options.database_filter else ["all"]
+    looper_list = options.index_filter.split(
+        ","
+    ) if options.index_filter else options.database_filter.split(
+        ","
+    ) if options.database_filter else ["all"]
     for looper in looper_list if looper_list else []:
         index_filter = looper if options.index_filter else None
         database_filter = looper if options.database_filter else None
@@ -244,18 +304,23 @@ if __name__ == '__main__':
             # database filter
             # -d pattern
             if index_filter is None:
-                if (database_filter and database_filter.count('.')==0) or (database_filter == None):
+                if (database_filter and
+                    database_filter.count('.') == 0) or (database_filter is None):
                     # db only filter can be applied to sphinx config, no need to query postgres db
                     if database_filter is None or database_filter == row['database']:
                         db = row['database']
-                    # if db filter is more detailed, we have to analyze the sql queries with postgres ANALZYE VERBOSE
+                    # if db filter is more detailed, we have to analyze the sql
+                    # queries with postgres ANALZYE VERBOSE
                 elif database_filter.split(".")[0] == row['database']:
                     table = pg_get_tables(row['sql'], row['database'])
                     db = row['database'] if database_filter in table else None
             # indice filter
             # -i pattern
             else:
-                if index_filter in indices or index_filter == 'all' or index_filter in indices_distributed :
+                if (
+                    index_filter in indices or index_filter == 'all' or
+                    index_filter in indices_distributed
+                ):
                     db = row['database']
 
             # output
@@ -266,21 +331,36 @@ if __name__ == '__main__':
                 resultat.append("%s" % (indices))
 
     resultat = sorted(list(set(resultat)))  # get rid of duplicate entries in the list and sorting
-    indent="\n      "
+    indent = "\n      "
     if options.command == 'list':
         if resultat:
-            print("%s indexes are using the %s pattern: %s%s%s" % (len(resultat), filter_option, options.database_filter or options.index_filter,indent,indent.join(resultat)))
+            print(
+                "%s indexes are using the %s pattern: %s%s%s" % (
+                    len(resultat),
+                    filter_option,
+                    options.database_filter or options.index_filter,
+                    indent,
+                    indent.join(resultat)
+                )
+            )
         else:
-            print("no indexes are using the %s pattern: %s" % (filter_option, options.database_filter or options.index_filter))
+            print(
+                "no indexes are using the %s pattern: %s" %
+                (filter_option, options.database_filter or options.index_filter)
+            )
     elif options.command == 'update':
         if resultat:
-            sphinx_command = 'indexer --config %s --verbose --rotate --sighup-each %s' % (
-                options.config, ' '.join(resultat))
+            sphinx_command = 'indexer --config %s --verbose %s' % (
+                options.config, ' '.join(resultat)
+            )
             print(sphinx_command)
             # uncomment following lines for real update
-            subprocess.run(sphinx_command , shell=True)
+            subprocess.run(sphinx_command, shell=True, check=True)
         else:
-            print('no sphinx indexes are using the %s pattern %s' % (filter_option, options.database_filter or options.index_filter))
+            print(
+                'no sphinx indexes are using the %s pattern %s' %
+                (filter_option, options.database_filter or options.index_filter)
+            )
 
 #
 # $Id$

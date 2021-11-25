@@ -3,3 +3,4 @@
 *.swp
 conf/*.in
 *~
+.vscode/
