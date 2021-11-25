@@ -1,5 +1,5 @@
 # Makefile env
-SHELL=/bin/bash -o pipefail
+SHELL=/bin/bash
 
 .DEFAULT_GOAL := help
 
@@ -26,6 +26,19 @@ export GIT_DIRTY ?= "$(shell git status --porcelain | head -n 10)"
 export GIT_TAG ?= $(shell git describe --tags || echo "no version info")
 export AUTHOR ?= $(USER)
 
+# general targets timestamps
+REQUIREMENTS := $(PIP_FILE) $(PIP_FILE_LOCK)
+
+# Find all python files that are not inside a hidden directory (directory starting with .)
+PYTHON_FILES := $(shell find ./* -type f -name "*.py" -print)
+
+# Find all bash files that are not inside a hidden directory (directory starting with .)
+BASH_FILES := $(shell find ./* -type f -name "*.sh" -print)
+
+# PIPENV files
+PIP_FILE = Pipfile
+PIP_FILE_LOCK = Pipfile.lock
+
 # Docker variables dynamic env variables for envsubst etc.
 export DOCKER_REGISTRY ?= 974517877189.dkr.ecr.eu-central-1.amazonaws.com
 export DOCKER_LOCAL_TAG ?= local-$(USER)-$(GIT_HASH_SHORT)
@@ -35,6 +48,15 @@ export DOCKER_INDEX_VOLUME ?= sphinx_index_$(STAGING)
 # git pre-commit hook
 GIT_DIR := $(shell git rev-parse --git-dir)
 HOOK_DIR := $(GIT_DIR)/hooks
+
+# Commands
+PIPENV_RUN := pipenv run
+PYTHON := $(PIPENV_RUN) python3
+PIP := $(PIPENV_RUN) pip3
+YAPF := $(PIPENV_RUN) yapf
+ISORT := $(PIPENV_RUN) isort
+PYLINT := $(PIPENV_RUN) pylint
+SHELLCHECK := $(PIPENV_RUN) shellcheck
 
 # check if environment file exists
 ifneq ("$(wildcard $(ENV_FILE))","")
@@ -46,7 +68,7 @@ endif
 # check db access
 DB_ACCESS := $(shell pg_isready -h ${PGHOST} &> /dev/null && echo true || echo false)
 ifeq ($(DB_ACCESS),false)
-$(error ${RED}we need a valid postgres connection for this makefile connection to '$(PGHOST)' was not successful${RESET})
+$(warning ${RED}we need a valid postgres connection for this correct use of makefile! connection to '$(PGHOST)' was not successful${RESET})
 endif
 
 # Maintenance / Index Commands
@@ -77,25 +99,36 @@ help:
 	@echo
 	@echo "Possible targets:"
 	@echo
+	@echo "${BOLD}${BLUE}Setup TARGETS${RESET}"
+	@echo "- setup                     Create the python virtual environment and activate it"
+	@echo "- dev                       Create the python virtual environment with developper tools and activate it"
+	@echo "- ci                        Create the python virtual environment and install requirements based on the Pipfile.lock"
+	@echo
+	@echo "${BOLD}${BLUE}Formating, linting targets${RESET}"
+	@echo "- format                    Format the python source code"
+	@echo "- ci-check-format           Format the python source code and check if any files has changed. This is meant to be used by the CI."
+	@echo "- lint                      Lint the python source code"
+	@echo "- shellcheck                shellcheck all the bash scripts"
+	@echo "- format-lint               Format and lint the python source code"
+	@echo "- test                      Run the tests"
+	@echo
 	@echo "${BOLD}${BLUE}docker targets:${RESET}"
 	@echo "- dockerlogin               Login to the AWS ECR registery for pulling/pushing docker images"
 	@echo "- dockerbuild               Builds a docker image with the tag ${YELLOW}${DOCKER_LOCAL_TAG}${RESET}"
 	@echo "- dockerpush                Push the docker local image ${YELLOW}${DOCKER_LOCAL_TAG}${RESET} to AWS ECR registry"
 	@echo "- dockerrun                 Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_INDEX)${RESET} in background"
 	@echo "- dockerrundebug            Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_INDEX)${RESET} in foreground"
-
 	@echo
-	@echo "${BOLD}${BLUE}sphinxsearch targets:${RESET}"
+	@echo "${BOLD}${BLUE}sphinxsearch config and index creation targets:${RESET}"
 	@echo "- pg2sphinx                 Create / Update indices based on DB or INDEX pattern, EFS index will be synced to docker volumes (does NOT re-create config file)"
 	@echo "                            (STAGING=(dev|int|prod) DB= or INDEX= ) p.e. STAGING=dev DB=bod_dev make pg2sphinx"
+	@echo "- config                    Create sphinx config file from template"
+	@echo "- move-config               Move local sphinx config to final location: ${YELLOW}$(SPHINX_INDEX)${RESET}"
 	@echo "- check-config              Check the sphinx config: ${YELLOW}$(SPHINX_INDEX)sphinx.conf${RESET}"
-	@echo "- check-config-local        Check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET}"
-	@echo "- check-queries-local       Check the queries with the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET}"
+	@echo "- check-config-local        Check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET} and the queries"
 	@echo
 	@echo "${BOLD}${BLUE}general targets:${RESET}"
 	@echo "- git_hook                  install pre-commit git hook"
-	@echo "- template                  Create sphinx config file from template"
-	@echo "- move-template             Move local template to final location: ${YELLOW}$(SPHINX_INDEX)${RESET}"
 	@echo
 	@echo "VARIABLES"
 	@echo "-----------"
@@ -119,18 +152,74 @@ help:
 	@echo "- CPUS:                     ${YELLOW}${CPUS}${RESET}"
 	@echo "- DB_ACCESS:                ${YELLOW}${DB_ACCESS}${RESET}"
 
+
+# Build targets. Calling setup is all that is needed for the local files to be installed as needed.
+
+.PHONY: dev
+dev: $(REQUIREMENTS)
+	pipenv install --dev
+	pipenv shell
+
+
+.PHONY: setup
+setup: $(REQUIREMENTS)
+	pipenv install
+	pipenv shell
+
+
+.PHONY: ci
+ci: $(REQUIREMENTS)
+	# Create virtual env with all packages for development using the Pipfile.lock
+	pipenv sync --dev
+
+
+# linting target, calls upon yapf to make sure your code is easier to read and respects some conventions.
+
+.PHONY: format
+format:
+	$(YAPF) -p -i --style .style.yapf $(PYTHON_FILES)
+	$(ISORT) $(PYTHON_FILES)
+
+
+.PHONY: ci-check-format
+ci-check-format: format
+	@if [[ -n `git status --porcelain --untracked-files=no` ]]; then \
+		>&2 echo "ERROR: the following files are not formatted correctly"; \
+		>&2 echo "'git status --porcelain' reported changes in those files after a 'make format' :"; \
+		>&2 git status --porcelain --untracked-files=no; \
+		exit 1; \
+	fi
+
+
+.PHONY: lint
+lint:
+	$(PYLINT) $(PYTHON_FILES)
+
+
+.PHONY: format-lint
+format-lint: format lint
+
+
+.PHONY: shellcheck
+shellcheck:
+	$(SHELLCHECK) $(BASH_FILES)
+
+
 .PHONY: pg2sphinx
 pg2sphinx:
 	export $(shell cat $(ENV_FILE)) && DOCKER_INDEX_VOLUME=$(DOCKER_INDEX_VOLUME) ./scripts/pg2sphinx.sh
+
 
 .PHONY: check-config
 check-config: dockerbuild
 	$(DOCKER_EXEC) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
 
+
 .PHONY: check-config-local
-check-config-local: dockerbuild template
-	$(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf | grep "config valid"
+check-config-local: dockerbuild config
+	$(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf | grep "config valid" || $(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
 	DOCKER_EXEC_LOCAL="$(DOCKER_EXEC_LOCAL)" ./scripts/check-config-local.sh
+
 
 .PHONY: git_hook
 git_hook:
@@ -142,29 +231,39 @@ git_hook:
 		cp -f scripts/pre-commit.sh ${HOOK_DIR}/pre-commit && chmod +x ${HOOK_DIR}/pre-commit; \
 	fi
 
-.PHONY: template
-template:
+
+.PHONY: config
+config:
 	cat conf/*.part > conf/sphinx.conf.in
 	export $(shell cat $(ENV_FILE)) && envsubst < conf/sphinx.conf.in > conf/sphinx.conf
 
-.PHONY: move-template
-move-template: template check-config-local
+
+.PHONY: move-config
+move-config: config check-config-local
 	cp -a conf/sphinx.conf conf/wordforms_main.txt $(SPHINX_INDEX)
+
 
 ## docker commands
 .PHONY: dockerlogin
 dockerlogin:
 	aws --profile swisstopo-bgdi-builder ecr get-login-password --region $(AWS_DEFAULT_REGION) | docker login --username AWS --password-stdin $(DOCKER_REGISTRY)
 
+
 .PHONY: dockerbuild
 dockerbuild:
 	docker build \
 		-q \
+        --build-arg GIT_HASH="${GIT_HASH}" \
+        --build-arg GIT_BRANCH="${GIT_BRANCH}" \
+        --build-arg VERSION="${GIT_TAG}" \
+        --build-arg AUTHOR="${AUTHOR}" \
 		--tag $(DOCKER_IMG_LOCAL_TAG) .
+
 
 .PHONY: dockerpush
 dockerpush: dockerbuild
 	docker push $(DOCKER_IMG_LOCAL_TAG)
+
 
 .PHONY: dockerrun
 dockerrun: dockerbuild
@@ -176,6 +275,7 @@ dockerrun: dockerbuild
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
+
 
 .PHONY: dockerrundebug
 dockerrundebug: dockerbuild
