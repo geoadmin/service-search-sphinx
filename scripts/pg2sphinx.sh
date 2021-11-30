@@ -24,7 +24,7 @@ lock() {
         --rm \
         -d \
         -t \
-        -v "${SPHINX_INDEX}":/var/lib/sphinxsearch/data/index/ \
+        -v "${SPHINX_EFS}":/var/lib/sphinxsearch/data/index/ \
         --name "${LOCK_TAG}" \
         "${DOCKER_IMG_LOCAL_TAG}" /bin/bash
 }

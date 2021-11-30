@@ -36,7 +36,7 @@ indexer
 
 searchd
 {
-    listen = 9312
+    listen = $SPHINX_PORT
     # syslog -> logstash -> kibana
     log = /var/log/sphinxsearch/searchd.log
     # syslog -> logstash -> kibana

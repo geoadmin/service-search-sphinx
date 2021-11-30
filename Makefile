@@ -76,7 +76,7 @@ endif
 export DOCKER_EXEC :=  docker run \
 				--rm \
 				-t \
-				-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index/ \
+				-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index/ \
 				--name $(DOCKER_LOCAL_TAG)_maintenance \
 				$(DOCKER_IMG_LOCAL_TAG)
 
@@ -116,15 +116,15 @@ help:
 	@echo "- dockerlogin               Login to the AWS ECR registery for pulling/pushing docker images"
 	@echo "- dockerbuild               Builds a docker image with the tag ${YELLOW}${DOCKER_LOCAL_TAG}${RESET}"
 	@echo "- dockerpush                Push the docker local image ${YELLOW}${DOCKER_LOCAL_TAG}${RESET} to AWS ECR registry"
-	@echo "- dockerrun                 Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_INDEX)${RESET} in background"
-	@echo "- dockerrundebug            Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_INDEX)${RESET} in foreground"
+	@echo "- dockerrun                 Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_EFS)${RESET} in background"
+	@echo "- dockerrundebug            Run the docker container on port ${YELLOW}$(SPHINX_PORT)${RESET} with index and config files from ${YELLOW}$(SPHINX_EFS)${RESET} in foreground"
 	@echo
 	@echo "${BOLD}${BLUE}sphinxsearch config and index creation targets:${RESET}"
 	@echo "- pg2sphinx                 Create / Update indices based on DB or INDEX pattern, EFS index will be synced to docker volumes (does NOT re-create config file)"
 	@echo "                            (STAGING=(dev|int|prod) DB= or INDEX= ) p.e. STAGING=dev DB=bod_dev make pg2sphinx"
 	@echo "- config                    Create sphinx config file from template"
-	@echo "- move-config               Move local sphinx config to final location: ${YELLOW}$(SPHINX_INDEX)${RESET}"
-	@echo "- check-config              Check the sphinx config: ${YELLOW}$(SPHINX_INDEX)sphinx.conf${RESET}"
+	@echo "- move-config               Move local sphinx config to final location: ${YELLOW}$(SPHINX_EFS)${RESET}"
+	@echo "- check-config              Check the sphinx config: ${YELLOW}$(SPHINX_EFS)sphinx.conf${RESET}"
 	@echo "- check-config-local        Check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET} and the queries"
 	@echo
 	@echo "${BOLD}${BLUE}general targets:${RESET}"
@@ -147,7 +147,7 @@ help:
 	@echo "- STAGING:                  ${YELLOW}${STAGING}${RESET}"
 	@echo "- ENV_FILE:                 ${YELLOW}${ENV_FILE}${RESET}"
 	@echo "- SPHINX_PORT:              ${YELLOW}${SPHINX_PORT}${RESET}"
-	@echo "- SPHINX_INDEX:             ${YELLOW}${SPHINX_INDEX}${RESET}"
+	@echo "- SPHINX_EFS:             ${YELLOW}${SPHINX_EFS}${RESET}"
 	@echo
 	@echo "- CPUS:                     ${YELLOW}${CPUS}${RESET}"
 	@echo "- DB_ACCESS:                ${YELLOW}${DB_ACCESS}${RESET}"
@@ -240,7 +240,7 @@ config:
 
 .PHONY: move-config
 move-config: config check-config-local
-	cp -a conf/sphinx.conf conf/wordforms_main.txt $(SPHINX_INDEX)
+	cp -a conf/sphinx.conf conf/wordforms_main.txt $(SPHINX_EFS)
 
 
 ## docker commands
@@ -271,7 +271,7 @@ dockerrun: dockerbuild
 		--restart=always \
 		-d \
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
-		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index_efs/ \
+		-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index_efs/ \
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
@@ -283,7 +283,7 @@ dockerrundebug: dockerbuild
 		--rm \
 		-it \
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
-		-v $(SPHINX_INDEX):/var/lib/sphinxsearch/data/index_efs/ \
+		-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index_efs/ \
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
