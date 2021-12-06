@@ -44,6 +44,7 @@ rm ${SPHINXINDEX_VOLUME}*.spl 2> /dev/null || :
 rsync --update --delete -av --exclude "*.tmp.*" --stats ${SPHINXINDEX_EFS} ${SPHINXINDEX_VOLUME} || :
 
 # start cron service as geodata user only if container is started in service mode (no cmd has been passed to docker run)
+# cron will sync every n minutes EFS to Docker volume and send a SIGHUP to searchd service
 service cron start || exit 1
 crontab < docker-crontab
 
