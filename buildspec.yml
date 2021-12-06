@@ -8,6 +8,7 @@ env:
     AWS_DEFAULT_REGION: eu-central-1
     USER: "aws_code_build"
     PIPENV_NOSPIN: 1
+    TERM: "xterm-256color"
 
 phases:
   install:

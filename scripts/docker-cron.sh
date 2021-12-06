@@ -1,5 +1,6 @@
 #!/bin/bash
 # executed as cronjob every 15 minutes
+# shellcheck disable=SC2068
 set -eu
 SPHINX_EFS="/var/lib/sphinxsearch/data/index_efs/"
 SPHINX_VOLUME="/var/lib/sphinxsearch/data/index/"
@@ -56,14 +57,16 @@ for new_file in "${new_files_rotated[@]}";do
     base=${new_file%.*}
     tmp_array+=("${base}"*)
 done
-mapfile -t new_files_rotated < <(printf "%s\n" "${tmp_array[@]}" | sort -u | tr '\n' ' ')
-for rotated in "${new_files_rotated[@]}"; do
-    base=${rotated%.*}
-    extension=${rotated##*.}
-    new_file="${base}.new.${extension}"
-    mv -f "${rotated}" "${new_file}"
-    new_files_merged+=("${new_file}")
-done
+if ((${#tmp_array[@]})); then
+    mapfile -t new_files_rotated < <(printf "%s\n" "${tmp_array[@]}" | sort -u | tr '\n' ' ')
+    for rotated in ${new_files_rotated[@]}; do # shellcheck disable=SC2068
+        base=${rotated%.*}
+        extension=${rotated##*.}
+        new_file="${base}.new.${extension}"
+        mv -f "${rotated}" "${new_file}"
+        new_files_merged+=("${new_file}")
+    done
+fi
 popd
 
 # remove duplicates from array
