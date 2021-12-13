@@ -4,7 +4,7 @@ source src_ch_swisstopo_fixpunkte_lfp1 : def_searchable_features
 {
     sql_db = kogis_dev
     sql_query = \
-        SELECT gid::bigint as id \
+        SELECT gid as id \
             , pointid as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', pointid, nummer)) as detail \
@@ -15,7 +15,7 @@ source src_ch_swisstopo_fixpunkte_lfp1 : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , pointid::text as feature_id \
-        from fpds.punkt_lage_lfp1
+        from fida.punkt_lage_lfp1
 }
 
 source src_ch_swisstopo_fixpunkte_lfp2 : def_searchable_features
