@@ -19,6 +19,8 @@ mapfile -t array_orphaned < <(comm -13 --nocheck-order <(printf '%s\n' "${array_
 # remove orphaned indexes
 echo -e "${green}looking for orphaned indexes in filesystem. ${NC}"
 for index in "${array_orphaned[@]}"; do
+    # skip empty elements
+    [[ -z ${index} ]] && continue
     # skip .new files, we need them to sighup searchd / rotate index updates
     if [[ ! $index == *.new ]]; then
         echo -e "\t${red} deleting orphaned index ${index} from filesystem. ${NC}"
@@ -29,6 +31,8 @@ done
 # create missing indexes
 echo -e "${green}check all index from sphinx.conf and create them if they dont exist on filesystem. ${NC}"
 for index in "${array_config[@]}"; do
+    # skip empty elements
+    [[ -z ${index} ]] && continue
     if ! eval 'ls "${SPHINXINDEX_EFS}${index}".* &> /dev/null'; then
         echo -e "\t${yellow}creating index ${index}${NC}"
         indexer "${index}" &> /dev/null
