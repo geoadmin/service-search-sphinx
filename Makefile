@@ -77,6 +77,7 @@ export DOCKER_EXEC :=  docker run \
 				--rm \
 				-t \
 				-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index/ \
+				--env-file $(ENV_FILE) \
 				--name $(DOCKER_LOCAL_TAG)_maintenance \
 				$(DOCKER_IMG_LOCAL_TAG)
 
@@ -84,6 +85,7 @@ export DOCKER_EXEC_LOCAL :=  docker run \
 				--rm \
 				-t \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
+				--env-file $(ENV_FILE) \
 				--name $(DOCKER_LOCAL_TAG)_maintenance \
 				$(DOCKER_IMG_LOCAL_TAG)
 
@@ -122,10 +124,7 @@ help:
 	@echo "${BOLD}${BLUE}sphinxsearch config and index creation targets:${RESET}"
 	@echo "- pg2sphinx                 Create / Update indices based on DB or INDEX pattern, EFS index will be synced to docker volumes (does NOT re-create config file)"
 	@echo "                            (STAGING=(dev|int|prod) DB= or INDEX= ) p.e. STAGING=dev DB=bod_dev make pg2sphinx"
-	@echo "- config                    Create sphinx config file from template"
-	@echo "- move-config               Move local sphinx config to final location: ${YELLOW}$(SPHINX_EFS)${RESET}"
-	@echo "- check-config              Check the sphinx config: ${YELLOW}$(SPHINX_EFS)sphinx.conf${RESET}"
-	@echo "- check-config-local        Check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET} and the queries"
+	@echo "- check-config-local        build and check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET} and the queries"
 	@echo
 	@echo "${BOLD}${BLUE}general targets:${RESET}"
 	@echo "- git_hook                  install pre-commit git hook"
@@ -147,7 +146,7 @@ help:
 	@echo "- STAGING:                  ${YELLOW}${STAGING}${RESET}"
 	@echo "- ENV_FILE:                 ${YELLOW}${ENV_FILE}${RESET}"
 	@echo "- SPHINX_PORT:              ${YELLOW}${SPHINX_PORT}${RESET}"
-	@echo "- SPHINX_EFS:             ${YELLOW}${SPHINX_EFS}${RESET}"
+	@echo "- SPHINX_EFS:               ${YELLOW}${SPHINX_EFS}${RESET}"
 	@echo
 	@echo "- CPUS:                     ${YELLOW}${CPUS}${RESET}"
 	@echo "- DB_ACCESS:                ${YELLOW}${DB_ACCESS}${RESET}"
@@ -210,11 +209,6 @@ pg2sphinx:
 	export $(shell cat $(ENV_FILE)) && DOCKER_INDEX_VOLUME=$(DOCKER_INDEX_VOLUME) ./scripts/pg2sphinx.sh
 
 
-.PHONY: check-config
-check-config: dockerbuild
-	$(DOCKER_EXEC) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
-
-
 .PHONY: check-config-local
 check-config-local: dockerbuild config
 	$(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf | grep "config valid" || $(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
@@ -236,11 +230,6 @@ git_hook:
 config:
 	cat conf/*.part > conf/sphinx.conf.in
 	export $(shell cat $(ENV_FILE)) && envsubst < conf/sphinx.conf.in > conf/sphinx.conf
-
-
-.PHONY: move-config
-move-config: config check-config-local
-	cp -a conf/sphinx.conf conf/wordforms_main.txt $(SPHINX_EFS)
 
 
 ## docker commands
@@ -273,6 +262,7 @@ dockerrun: dockerbuild
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
 		-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index_efs/ \
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
+		--env-file $(ENV_FILE) \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
 
@@ -285,5 +275,6 @@ dockerrundebug: dockerbuild
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
 		-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index_efs/ \
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
+		--env-file $(ENV_FILE) \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)

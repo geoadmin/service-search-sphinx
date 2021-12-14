@@ -9,6 +9,7 @@ RUN apt-get update && \
     procps \
     rsync \
     cron \
+    gettext-base \
     default-mysql-client && \
     apt-get clean
 
@@ -20,6 +21,7 @@ RUN mkdir -p /var/lib/sphinxsearch/data/index/
 RUN mkdir -p /var/lib/sphinxsearch/data/index_efs/
 
 COPY scripts/docker* scripts/pg2sphinx_trigger.py /
+COPY conf /conf/
 
 # set up cron for non root user
 RUN chmod gu+rw /var/run
@@ -31,6 +33,7 @@ RUN chown -R geodata:geodata /var/lib/sphinxsearch/data/ && \
     chown -R geodata:geodata /var/log/sphinxsearch/ && \
     chown -R geodata:geodata /pg2sphinx_trigger.py && \
     chown -R geodata:geodata /docker-* && \
+    chown -R geodata:geodata /conf && \
     chown -R geodata:geodata /etc/sphinxsearch/
 
 

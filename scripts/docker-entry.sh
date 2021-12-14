@@ -1,15 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-# symlink from efs config or volume config to default container location
-if [[ -f /var/lib/sphinxsearch/data/index/sphinx.conf ]]; then
-    ln -fs /var/lib/sphinxsearch/data/index/sphinx.conf /etc/sphinxsearch/sphinx.conf
-elif [[ -f /var/lib/sphinxsearch/data/index_efs/sphinx.conf ]]; then
-    ln -fs /var/lib/sphinxsearch/data/index_efs/sphinx.conf /etc/sphinxsearch/sphinx.conf
-else
-    >&2 echo "no valid sphinx config found in mounted volume or efs"
-    exit 1
-fi
+# build sphinx config with current environment
+cat conf/*.part > conf/sphinx.conf.in
+envsubst < conf/sphinx.conf.in > conf/sphinx.conf
+
+# copy sphinx config and wordforms from github / image content into docker volume
+cp -f conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
+cp -f conf/wordforms_main.txt /etc/sphinxsearch/wordforms_main.txt
 
 # always remove lock files from mounted shared storage
 rm -rf /var/lib/sphinxsearch/data/index/*.spl 2> /dev/null || :
