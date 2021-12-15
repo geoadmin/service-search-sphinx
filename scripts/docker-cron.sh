@@ -54,12 +54,16 @@ echo "${LOG_PREFIX}-> $(date +"%F %T") rename already rotated, new index files: 
 pushd "${SPHINX_VOLUME}"
 tmp_array=()
 for new_file in "${new_files_rotated[@]}";do
+    # skip empty elements
+    [[ -z ${new_file} ]] && continue
     base=${new_file%.*}
     tmp_array+=("${base}"*)
 done
 if ((${#tmp_array[@]})); then
     mapfile -t new_files_rotated < <(printf "%s\n" "${tmp_array[@]}" | sort -u | tr '\n' ' ')
     for rotated in ${new_files_rotated[@]}; do # shellcheck disable=SC2068
+        # skip empty elements
+        [[ -z ${rotated} ]] && continue
         base=${rotated%.*}
         extension=${rotated##*.}
         new_file="${base}.new.${extension}"
@@ -80,6 +84,8 @@ all_files_are_gone=false
 while ! ${all_files_are_gone}; do
     all_files_are_gone=true
     for new_file in "${new_files_merged[@]}"; do
+        # skip empty elements
+        [[ -z ${new_file} ]] && continue
         [ -f "${SPHINX_VOLUME}${new_file}" ] && all_files_are_gone=false
     done
     sleep 1
@@ -91,6 +97,8 @@ rsync --update -av --exclude '*.tmp.*' --exclude '*.new.*' --exclude '*.spl' --i
 # delete new files list from rsync from EFS
 echo "${LOG_PREFIX}-> $(date +"%F %T") delete new files list from sync"
 for new_file in "${new_files[@]}"; do
+    # skip empty elements
+    [[ -z ${new_file} ]] && continue
     rm "${SPHINX_EFS}${new_file}" -rf || :
 done
 
