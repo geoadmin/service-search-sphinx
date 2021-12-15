@@ -12,4 +12,4 @@ cp -f conf/wordforms_main.txt /etc/sphinxsearch/wordforms_main.txt
 # always remove lock files from mounted shared storage
 rm -rf /var/lib/sphinxsearch/data/index/*.spl 2> /dev/null || :
 
-exec "$@"
+exec gosu geodata "$@"
