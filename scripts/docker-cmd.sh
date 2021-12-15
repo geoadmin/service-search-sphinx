@@ -33,7 +33,7 @@ echo -e "${green}check all index from sphinx.conf and create them if they dont e
 for index in "${array_config[@]}"; do
     # skip empty elements
     [[ -z ${index} ]] && continue
-    if ! eval 'ls "${SPHINXINDEX_EFS}${index}".* &> /dev/null'; then
+    if ! ls "${SPHINXINDEX_EFS}${index}".* &> /dev/null; then
         echo -e "\t${yellow}creating index ${index}${NC}"
         indexer "${index}" &> /dev/null
         # sync missing indexes back to EFS
