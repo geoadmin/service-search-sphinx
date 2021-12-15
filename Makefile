@@ -205,8 +205,8 @@ shellcheck:
 
 
 .PHONY: pg2sphinx
-pg2sphinx:
-	export $(shell cat $(ENV_FILE)) && DOCKER_INDEX_VOLUME=$(DOCKER_INDEX_VOLUME) ./scripts/pg2sphinx.sh
+pg2sphinx: load_env $(SPHINX_EFS) dockerbuild
+	DOCKER_INDEX_VOLUME=$(DOCKER_INDEX_VOLUME) ./scripts/pg2sphinx.sh
 
 
 .PHONY: check-config-local
@@ -227,9 +227,9 @@ git_hook:
 
 
 .PHONY: config
-config:
+config: load_env
 	cat conf/*.part > conf/sphinx.conf.in
-	export $(shell cat $(ENV_FILE)) && envsubst < conf/sphinx.conf.in > conf/sphinx.conf
+	envsubst < conf/sphinx.conf.in > conf/sphinx.conf
 
 
 ## docker commands
@@ -254,8 +254,24 @@ dockerpush: dockerbuild
 	docker push $(DOCKER_IMG_LOCAL_TAG)
 
 
+define load_env
+	@echo " - load env file $(ENV_FILE)"
+	$(eval include $(ENV_FILE))
+	$(eval export)
+endef
+
+
+load_env:
+	$(call load_env)
+
+
+# mount folder has to be created first, otherwise docker is creating the folder with root ownership
+$(SPHINX_EFS): load_env
+	@echo "Folder $@ does not exist"
+	mkdir -p $@
+
 .PHONY: dockerrun
-dockerrun: dockerbuild
+dockerrun: dockerbuild $(SPHINX_EFS)
 	docker run \
 		--restart=always \
 		-d \
@@ -268,7 +284,7 @@ dockerrun: dockerbuild
 
 
 .PHONY: dockerrundebug
-dockerrundebug: dockerbuild
+dockerrundebug: dockerbuild $(SPHINX_EFS)
 	docker run \
 		--rm \
 		-it \
