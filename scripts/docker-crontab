@@ -8,5 +8,5 @@
 SHELL="/bin/bash"
 USER="geodata"
 
-*/5 * * * * bash /docker-cron.sh
+*/5 * * * * bash /index-sync-rotate.sh
 # it is important to add a new-line

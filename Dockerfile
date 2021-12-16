@@ -31,7 +31,7 @@ RUN apt-get update && \
     chown -R geodata:geodata /var/log/sphinxsearch/ && \
     chown -R geodata:geodata /etc/sphinxsearch/
 
-COPY scripts/docker-* scripts/pg2sphinx_trigger.py /
+COPY scripts/docker-* scripts/index-sync-rotate.sh scripts/pg2sphinx_trigger.py /
 COPY conf /conf/
 
 # default CMD
