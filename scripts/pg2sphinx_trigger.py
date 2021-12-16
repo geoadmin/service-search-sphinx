@@ -4,14 +4,14 @@
 # read sphinx config file and update all indexes related to input database or
 # input table or index pattern
 
+import argparse
 import os
 import re
 import sqlite3
 import subprocess
 import sys
-from optparse import OptionParser  # pylint: disable=deprecated-module
 
-import psycopg2  # pylint: disable=import-error
+import psycopg2
 
 
 def pg_get_tables(sql_query, sql_db):
@@ -79,9 +79,10 @@ if __name__ == '__main__':
     python pg2sphinx_trigger.py -c list -d stopo_dev.vd.os_realestate,stopo_dev.vd.os_dpr_mine
    \n"""
 
-    OptionParser.format_epilog = lambda self, formatter: self.epilog
-    parser = OptionParser(epilog=epilog)
-    parser.add_option(
+    parser = argparse.ArgumentParser(epilog=epilog, formatter_class=argparse.RawTextHelpFormatter)
+    required = parser.add_argument_group('required arguments')
+    optional = parser.add_argument_group('optional arguments')
+    optional.add_argument(
         "-d",
         "--database_filter",
         dest="database_filter",
@@ -89,7 +90,7 @@ if __name__ == '__main__':
         action="store",
         help="Database Filter: optional comma separated list of database prefix"
     )
-    parser.add_option(
+    optional.add_argument(
         "-i",
         "--index_filter",
         dest="index_filter",
@@ -97,7 +98,7 @@ if __name__ == '__main__':
         action="store",
         help="Index Filter: optional comma separated list of index prefix"
     )
-    parser.add_option(
+    required.add_argument(
         "-c",
         "--command",
         dest="command",
@@ -106,39 +107,40 @@ if __name__ == '__main__':
         help="-c list: will list all the indexes touched by the database filter\n\
             -c update: will update all the indexes touched by the database filter."
     )
-    parser.add_option(
+    required.add_argument(
         "-s",
         "--sphinxconf",
         dest="config",
         default=SPHINXCONFIG,
         action="store",
-        help="-s /path/to/sphinx/sphinx.conf"
+        required=True,
+        help="-s /path/to/sphinx/sphinx.conf",
     )
-    (options, args) = parser.parse_args()
+    args = parser.parse_args()
 
     # Some initial tests
-    if not os.path.isfile(options.config):
-        sys.exit("ERROR: Sphinx config file doesn't exist: %s" % options.config)
+    if not os.path.isfile(args.config):
+        sys.exit("ERROR: Sphinx config file doesn't exist: %s" % args.config)
 
     # -c --command
-    if options.command not in ['list', 'update']:
+    if args.command not in ['list', 'update']:
         parser.print_help()
         sys.exit(1)
 
     # choose -d or -i
-    if options.database_filter and options.index_filter:
+    if args.database_filter and args.index_filter:
         parser.print_help()
         sys.exit(1)
 
     filter_option = ""
-    if options.database_filter:
+    if args.database_filter:
         filter_option = 'database'
 
-    if options.index_filter:
+    if args.index_filter:
         filter_option = 'index'
 
-    if options.config:
-        SPHINXCONFIG = options.config
+    if args.config:
+        SPHINXCONFIG = args.config
 
     # SQLITE Initialize and create tables in memory
     sqlite_conn = sqlite3.connect(":memory:")
@@ -289,14 +291,12 @@ if __name__ == '__main__':
     """
 
     resultat = []
-    looper_list = options.index_filter.split(
+    looper_list = args.index_filter.split(",") if args.index_filter else args.database_filter.split(
         ","
-    ) if options.index_filter else options.database_filter.split(
-        ","
-    ) if options.database_filter else ["all"]
+    ) if args.database_filter else ["all"]
     for looper in looper_list if looper_list else []:
-        index_filter = looper if options.index_filter else None
-        database_filter = looper if options.database_filter else None
+        index_filter = looper if args.index_filter else None
+        database_filter = looper if args.database_filter else None
         for row in c.execute(sql):
             db = None
             indices = row['sphinx_index']
@@ -324,21 +324,21 @@ if __name__ == '__main__':
                     db = row['database']
 
             # output
-            if options.command == 'list' and db is not None:
+            if args.command == 'list' and db is not None:
                 resultat.append("%s -> %s" % (indices, db))
 
-            if options.command == 'update' and db is not None:
+            if args.command == 'update' and db is not None:
                 resultat.append("%s" % (indices))
 
     resultat = sorted(list(set(resultat)))  # get rid of duplicate entries in the list and sorting
     indent = "\n      "
-    if options.command == 'list':
+    if args.command == 'list':
         if resultat:
             print(
                 "%s indexes are using the %s pattern: %s%s%s" % (
                     len(resultat),
                     filter_option,
-                    options.database_filter or options.index_filter,
+                    args.database_filter or args.index_filter,
                     indent,
                     indent.join(resultat)
                 )
@@ -346,20 +346,18 @@ if __name__ == '__main__':
         else:
             print(
                 "no indexes are using the %s pattern: %s" %
-                (filter_option, options.database_filter or options.index_filter)
+                (filter_option, args.database_filter or args.index_filter)
             )
-    elif options.command == 'update':
+    elif args.command == 'update':
         if resultat:
-            sphinx_command = 'indexer --config %s --verbose %s' % (
-                options.config, ' '.join(resultat)
-            )
+            sphinx_command = 'indexer --config %s --verbose %s' % (args.config, ' '.join(resultat))
             print(sphinx_command)
             # uncomment following lines for real update
             subprocess.run(sphinx_command, shell=True, check=True)
         else:
             print(
                 'no sphinx indexes are using the %s pattern %s' %
-                (filter_option, options.database_filter or options.index_filter)
+                (filter_option, args.database_filter or args.index_filter)
             )
 
 #
