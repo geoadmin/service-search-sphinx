@@ -3,6 +3,10 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[packages]
+# added for pylint on scripts/pg2sphinx_trigger.py import-error
+psycopg2-binary = "2.8.6"
+
 [dev-packages]
 yapf = "*"
 pylint = "*"
