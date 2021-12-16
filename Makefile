@@ -92,8 +92,10 @@ export DOCKER_EXEC_LOCAL :=  docker run \
 # AWS variables
 AWS_DEFAULT_REGION = eu-central-1
 
-INDEX ?= 'Set INDEX variable to specify the index or index prefix to create'
-DB ?= 'Set DB variable to specify the database pattern for the index creation'
+# Set INDEX variable to specify the index or index prefix to create
+INDEX ?=
+# Set DB variable to specify the database pattern for the index creation
+DB ?=
 
 .PHONY: help
 help:
@@ -206,6 +208,12 @@ shellcheck:
 
 .PHONY: pg2sphinx
 pg2sphinx: load_env $(SPHINX_EFS) dockerbuild
+ifndef INDEX
+ifndef DB
+	@echo "you have to set INDEX or DB variable for this target"
+	false
+endif
+endif
 	DOCKER_INDEX_VOLUME=$(DOCKER_INDEX_VOLUME) ./scripts/pg2sphinx.sh
 
 
