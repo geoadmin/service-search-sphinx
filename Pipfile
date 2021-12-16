@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 # added for pylint on scripts/pg2sphinx_trigger.py import-error
-psycopg2-binary = "2.8.6"
+psycopg2-binary = "*"
 
 [dev-packages]
 yapf = "*"
@@ -14,4 +14,4 @@ pylint-flask = "*"
 shellcheck-py = "*"
 
 [requires]
-python_version = "3"
+python_version = "3.9"

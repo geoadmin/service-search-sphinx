@@ -91,7 +91,7 @@ while i < len(sys.argv):
         i += 1
         geoanchor.append(float(sys.argv[i]))
     else:
-        q = '%s%s ' % (q, arg)
+        q = f'{q}{arg} '
     i += 1
 
 # do query
@@ -112,23 +112,20 @@ if limit:
 res = cl.Query(q, index)
 
 if not res:
-    print('query failed: %s' % cl.GetLastError())
+    print(f'query failed: {cl.GetLastError()}')
     sys.exit(1)
 
 if cl.GetLastWarning():
-    print('WARNING: %s\n' % cl.GetLastWarning())
+    print(f'WARNING: {cl.GetLastWarning()}\n')
 
 print(
-    'Query \'%s\' retrieved %d of %d matches in %s sec' %
-    (q, res['total'], res['total_found'], res['time'])
+    f"Query \'{q}\' retrieved {res['total']} of {res['total_found']} matches in {res['time']} sec"
 )
 print('Query stats:')
 
 if 'words' in res:
     for info in res['words']:
-        print(
-            '\t\'%s\' found %d times in %d documents' % (info['word'], info['hits'], info['docs'])
-        )
+        print(f"\t\'{info['word']}\' found {info['hits']} times in {info['docs']} documents")
 
 if 'matches' in res:
     n = 1
@@ -141,9 +138,9 @@ if 'matches' in res:
             value = match['attrs'][attrname]
             if attrtype == SPH_ATTR_TIMESTAMP:
                 value = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(value))
-            attrsdump = '%s, %s=%s' % (attrsdump, attrname, value)
+            attrsdump = f'{attrsdump}, {attrname}={value}'
 
-        print('%d. doc_id=%s, weight=%d%s' % (n, match['id'], match['weight'], attrsdump))
+        print(f"{n} doc_id={match['id']}, weight={match['weight']}{attrsdump}")
         n += 1
 
 #
