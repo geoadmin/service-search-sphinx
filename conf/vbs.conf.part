@@ -148,7 +148,7 @@ source src_ch_vbs_schiessanzeigen : def_searchable_features
 
 source src_ch_vbs_armee_kriegsdenkmaeler : def_searchable_features
 {
-    sql_db = vbs_dev
+    sql_db = vbs_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             ,  bezeichnung as label \

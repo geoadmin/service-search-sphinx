@@ -1673,7 +1673,7 @@ source src_ch_bfe_thermische_netze : def_searchable_features
 
 source src_ch_bfe_waermepotential_gewaesser : def_searchable_features
  {
-     sql_db = uvek_dev
+     sql_db = uvek_${DBSTAGING}
      sql_query = \
          SELECT bgdi_id as id \
              , name as label \

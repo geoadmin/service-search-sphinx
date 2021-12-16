@@ -182,7 +182,7 @@ if __name__ == '__main__':
     CONN_PORT = re.findall(r'sql_port\s*=\s*(.*)', data)[0]
 
     # parse sphinx config sources and write them to sqlite sources table ...
-    # TUDU:
+    # TODO: # pylint: disable=fixme
     # regex which can extract source, sql_db and sql_query in one step
     # step 1 extract source and content in curly braces
     reg_source = re.compile(
@@ -227,7 +227,7 @@ if __name__ == '__main__':
         )
 
     # parse sphinx config indexes and write them to sqlite indexes table ...
-    # TUDU:
+    # TODO: # pylint: disable=fixme
     # regex which can extract source, sql_db and sql_query in one step
     # step 1 extract source and content in curly braces
     reg_index = re.compile(
