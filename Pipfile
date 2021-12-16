@@ -5,9 +5,10 @@ name = "pypi"
 
 [packages]
 # added for pylint on scripts/pg2sphinx_trigger.py import-error
-psycopg2-binary = "*"
+psycopg2-binary = "~=2.9.2"
 
 [dev-packages]
+six = "*"
 yapf = "*"
 pylint = "*"
 pylint-flask = "*"
