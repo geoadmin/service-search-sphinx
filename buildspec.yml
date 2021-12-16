@@ -63,12 +63,12 @@ phases:
     commands:
       # Only push image to registry for merge to develop and master
       - |
-        if [ "${GITHUB_BRANCH}" = "master" ] || [ "${GITHUB_BRANCH}" = "develop" ]; then
+        if [ "${GITHUB_BRANCH}" = "master" ] || [ "${GITHUB_BRANCH}" = "develop" ] || [ "${GITHUB_BRANCH}" = "feature_dockerize_BGDIINF_SB-1977_ltclm" ]; then
           echo "Pushing image ${DOCKER_IMG_TAG} to the registry"
           docker push ${DOCKER_IMG_TAG}
         fi
       - |
-        if [ "${GITHUB_BRANCH}" = "develop" ]; then
+        if [ "${GITHUB_BRANCH}" = "develop" ] || [ "${GITHUB_BRANCH}" = "feature_dockerize_BGDIINF_SB-1977_ltclm" ]; then
           echo "Pushing image ${DOCKER_IMG_TAG_LATEST} to the registry"
           docker push ${DOCKER_IMG_TAG_LATEST}
         fi
