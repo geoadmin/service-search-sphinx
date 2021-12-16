@@ -18,9 +18,8 @@ def pg_get_tables(sql_query, sql_db):
     # add 'EXPLAIN VERBOSE ' to sql string
     sql_query = 'EXPLAIN VERBOSE ' + sql_query
 
-    conn_string = "host='%s' dbname='%s' user='%s' password='%s'" % (
-        CONN_HOST, sql_db, CONN_USER, CONN_PWD
-    )
+    conn_string = f"host='{CONN_HOST}' dbname='{sql_db}' user='{CONN_USER}' password='{CONN_PWD}'"
+
     # get a connection, if a connect cannot be made an exception will be raised here
     conn = psycopg2.connect(conn_string)
     # conn.cursor will return a cursor object, you can use this cursor to perform queries
@@ -40,8 +39,8 @@ def pg_get_tables(sql_query, sql_db):
         return ','.join(sorted(t))
     except psycopg2.OperationalError as err:
         sys.stderr.write(
-            "ERROR: wrong query detected in database: %s\nquery:\n%s\nerror:\n%s\n" %
-            (sql_db, sql_query, err)
+            f"ERROR: wrong query detected in database: {sql_query}"\
+            f"\nquery:\n{sql_query}\nerror:\n{err}\n"
         )
         return ''
 
@@ -120,7 +119,7 @@ if __name__ == '__main__':
 
     # Some initial tests
     if not os.path.isfile(args.config):
-        sys.exit("ERROR: Sphinx config file doesn't exist: %s" % args.config)
+        sys.exit(f"ERROR: Sphinx config file doesn't exist: {args.config}")
 
     # -c --command
     if args.command not in ['list', 'update']:
@@ -173,7 +172,7 @@ if __name__ == '__main__':
     c.row_factory = sqlite3.Row
 
     # Read Sphinx Config
-    with open(SPHINXCONFIG, "r") as myfile:
+    with open(SPHINXCONFIG, "r", encoding="utf-8") as myfile:
         data = myfile.read()
 
     # Parse PG Connection from Sphinx Config
@@ -311,7 +310,7 @@ if __name__ == '__main__':
                         db = row['database']
                     # if db filter is more detailed, we have to analyze the sql
                     # queries with postgres ANALZYE VERBOSE
-                elif database_filter.split(".")[0] == row['database']:
+                elif database_filter.split(".", maxsplit=1)[0] == row['database']:
                     table = pg_get_tables(row['sql'], row['database'])
                     db = row['database'] if database_filter in table else None
             # indice filter
@@ -325,39 +324,35 @@ if __name__ == '__main__':
 
             # output
             if args.command == 'list' and db is not None:
-                resultat.append("%s -> %s" % (indices, db))
+                resultat.append(f"{indices} -> {db}")
 
             if args.command == 'update' and db is not None:
-                resultat.append("%s" % (indices))
+                resultat.append(f"{indices}")
 
     resultat = sorted(list(set(resultat)))  # get rid of duplicate entries in the list and sorting
     indent = "\n      "
     if args.command == 'list':
         if resultat:
             print(
-                "%s indexes are using the %s pattern: %s%s%s" % (
-                    len(resultat),
-                    filter_option,
-                    args.database_filter or args.index_filter,
-                    indent,
-                    indent.join(resultat)
+                f"{len(resultat)} indexes are using the {filter_option}"\
+                "pattern: {args.database_filter or args.index_filter}"\
+                f"{indent}{indent.join(resultat)}"
                 )
-            )
         else:
             print(
-                "no indexes are using the %s pattern: %s" %
-                (filter_option, args.database_filter or args.index_filter)
+                f"no indexes are using the {filter_option}"\
+                f"pattern: {args.database_filter or args.index_filter}"
             )
     elif args.command == 'update':
         if resultat:
-            sphinx_command = 'indexer --config %s --verbose %s' % (args.config, ' '.join(resultat))
+            sphinx_command = f"indexer --config {args.config} --verbose {' '.join(resultat)}"
             print(sphinx_command)
             # uncomment following lines for real update
             subprocess.run(sphinx_command, shell=True, check=True)
         else:
             print(
-                'no sphinx indexes are using the %s pattern %s' %
-                (filter_option, args.database_filter or args.index_filter)
+                f"no sphinx indexes are using the {filter_option} "\
+                f"pattern {args.database_filter or args.index_filter}"
             )
 
 #
