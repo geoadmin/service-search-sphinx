@@ -274,12 +274,14 @@ load_env:
 
 
 # mount folder has to be created first, otherwise docker is creating the folder with root ownership
+sphinx_efs: $(SPHINX_EFS)
+
 $(SPHINX_EFS): load_env
-	@echo "Folder $@ does not exist"
+	@echo "create folder $@ if it does not yet exist"
 	mkdir -p $@
 
 .PHONY: dockerrun
-dockerrun: dockerbuild $(SPHINX_EFS)
+dockerrun: dockerbuild sphinx_efs
 	docker run \
 		--restart=always \
 		-d \
@@ -292,7 +294,7 @@ dockerrun: dockerbuild $(SPHINX_EFS)
 
 
 .PHONY: dockerrundebug
-dockerrundebug: dockerbuild $(SPHINX_EFS)
+dockerrundebug: dockerbuild sphinx_efs
 	docker run \
 		--rm \
 		-it \
