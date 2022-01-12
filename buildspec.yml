@@ -61,14 +61,18 @@ phases:
 
   post_build:
     commands:
-      # Only push image to registry for merge to develop and master
+      # Only push images from develop-YYYY-MM-DD or master branch
+      # NOTE: we are not restrictive on the develop branch name and accept any branch name starting
+      # with develop. This let us the liberty to work also with a normal develop branch or a
+      # develop-FEATURE branch for long term development.
       - |
-        if [ "${GITHUB_BRANCH}" = "master" ] || [ "${GITHUB_BRANCH}" = "develop" ] || [ "${GITHUB_BRANCH}" = "feature_dockerize_BGDIINF_SB-1977_ltclm" ]; then
-          echo "Pushing image ${DOCKER_IMG_TAG} to the registry"
-          docker push ${DOCKER_IMG_TAG}
-        fi
-      - |
-        if [ "${GITHUB_BRANCH}" = "develop" ] || [ "${GITHUB_BRANCH}" = "feature_dockerize_BGDIINF_SB-1977_ltclm" ]; then
-          echo "Pushing image ${DOCKER_IMG_TAG_LATEST} to the registry"
+        if [[ "${GITHUB_BRANCH}" == master ]] || \
+           [[ "${GITHUB_BRANCH}" == develop* ]]
+        then
+          if [ "${DOCKER_IMG_TAG}" != "" ]; then
+            echo "Push tagged image ${DOCKER_IMG_TAG}"
+            docker push ${DOCKER_IMG_TAG}
+          fi
+          echo "Push latest tag image ${DOCKER_IMG_TAG_LATEST}"
           docker push ${DOCKER_IMG_TAG_LATEST}
         fi
