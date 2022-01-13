@@ -3,7 +3,7 @@
 source def_pqsql
 {
     type = pgsql
-    sql_host = pg-0.dev.bgdi.ch
+    sql_host = $PGHOST
     sql_user = $PGUSER
     sql_pass = $PGPASS
     sql_port = 5432
@@ -36,7 +36,7 @@ indexer
 
 searchd
 {
-    listen = 9312
+    listen = $SPHINX_PORT
     # syslog -> logstash -> kibana
     log = /var/log/sphinxsearch/searchd.log
     # syslog -> logstash -> kibana
@@ -45,10 +45,11 @@ searchd
     # mysql listener
     listen = localhost:9306:mysql41
     preopen_indexes = 0
-    dist_threads = 7
+    # dist_threads should be number of cpus/cores
+    dist_threads = $CPUS
     read_timeout = 5
     max_children = 50
     binlog_path =
-    watchdog = 0
+    watchdog = 1
     ondisk_attrs_default = 1
 }

@@ -2,7 +2,7 @@
 
 source src_ch_blw_klimaeignung_typ : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -15,12 +15,12 @@ source src_ch_blw_klimaeignung_typ : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_klimaeignung_koernermais : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -33,12 +33,12 @@ source src_ch_blw_klimaeignung_koernermais : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_klimaeignung_spezialkulturen : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -51,12 +51,12 @@ source src_ch_blw_klimaeignung_spezialkulturen : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_klimaeignung_zwischenfruchtbau : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -69,12 +69,12 @@ source src_ch_blw_klimaeignung_zwischenfruchtbau : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_klimaeignung_kartoffeln : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -87,12 +87,12 @@ source src_ch_blw_klimaeignung_kartoffeln : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_klimaeignung_getreidebau : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -105,12 +105,12 @@ source src_ch_blw_klimaeignung_getreidebau : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_klimaeignung_futterbau : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -123,12 +123,12 @@ source src_ch_blw_klimaeignung_futterbau : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_niederschlagshaushalt : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -141,12 +141,12 @@ source src_ch_blw_niederschlagshaushalt : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_klimaeignung_kulturland : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , klimeig_be as label \
@@ -159,12 +159,12 @@ source src_ch_blw_klimaeignung_kulturland : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.klimaeignung 
+        from blw.klimaeignung
 }
 
 source src_ch_blw_bodeneignung_kulturtyp : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -177,12 +177,12 @@ source src_ch_blw_bodeneignung_kulturtyp : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.bodeneignung 
+        from blw.bodeneignung
 }
 
 source src_ch_blw_bodeneignung_gruendigkeit : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -195,12 +195,12 @@ source src_ch_blw_bodeneignung_gruendigkeit : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.bodeneignung 
+        from blw.bodeneignung
 }
 
 source src_ch_blw_bodeneignung_skelettgehalt : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -213,12 +213,12 @@ source src_ch_blw_bodeneignung_skelettgehalt : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.bodeneignung 
+        from blw.bodeneignung
 }
 
 source src_ch_blw_bodeneignung_wasserspeichervermoegen : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -231,12 +231,12 @@ source src_ch_blw_bodeneignung_wasserspeichervermoegen : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.bodeneignung 
+        from blw.bodeneignung
 }
 
 source src_ch_blw_bodeneignung_naehrstoffspeichervermoegen : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -249,12 +249,12 @@ source src_ch_blw_bodeneignung_naehrstoffspeichervermoegen : def_searchable_feat
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.bodeneignung 
+        from blw.bodeneignung
 }
 
 source src_ch_blw_bodeneignung_wasserdurchlaessigkeit : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -267,12 +267,12 @@ source src_ch_blw_bodeneignung_wasserdurchlaessigkeit : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.bodeneignung 
+        from blw.bodeneignung
 }
 
 source src_ch_blw_bodeneignung_vernaessung : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -285,12 +285,12 @@ source src_ch_blw_bodeneignung_vernaessung : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.bodeneignung 
+        from blw.bodeneignung
 }
 
 source src_ch_blw_bodeneignung_kulturland : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , eignungsei as label \
@@ -303,12 +303,12 @@ source src_ch_blw_bodeneignung_kulturland : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        from blw.bodeneignung 
+        from blw.bodeneignung
 }
 
 source src_ch_blw_ursprungsbezeichnungen_fleisch : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , objekt_d as label \
@@ -326,7 +326,7 @@ source src_ch_blw_ursprungsbezeichnungen_fleisch : def_searchable_features
 
 source src_ch_blw_ursprungsbezeichnungen_kaese : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , objekt_d as label \
@@ -344,7 +344,7 @@ source src_ch_blw_ursprungsbezeichnungen_kaese : def_searchable_features
 
 source src_ch_blw_ursprungsbezeichnungen_konditoreiwaren : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , objekt_d as label \
@@ -362,7 +362,7 @@ source src_ch_blw_ursprungsbezeichnungen_konditoreiwaren : def_searchable_featur
 
 source src_ch_blw_ursprungsbezeichnungen_pflanzen : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , objekt_d as label \
@@ -380,7 +380,7 @@ source src_ch_blw_ursprungsbezeichnungen_pflanzen : def_searchable_features
 
 source src_ch_blw_ursprungsbezeichnungen_spirituosen : def_searchable_features
 {
-    sql_db = evd_dev
+    sql_db = evd_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id::bigint as id \
             , objekt_d as label \
