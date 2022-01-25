@@ -1,6 +1,7 @@
 version: 0.2
 
 env:
+  shell: bash
   variables:
     IMAGE_BASE_NAME: "service-search-sphinx"
     REGISTRY: "974517877189.dkr.ecr.eu-central-1.amazonaws.com"
