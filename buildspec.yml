@@ -22,14 +22,8 @@ phases:
   pre_build:
     commands:
       - echo "Export of the image tag for build and push purposes"
-      # Reading git branch (the utility in the deploy script is unable to read it automatically on CodeBuild)
-      # see https://stackoverflow.com/questions/47657423/get-github-git-branch-for-aws-codebuild
-      - export GITHUB_BRANCH="$(git symbolic-ref HEAD --short 2>/dev/null)"
-      - |
-        if [ "${GITHUB_BRANCH}" = "" ] ; then
-          GITHUB_BRANCH="$(git branch -a --contains HEAD | sed -n 2p | awk '{ printf $1 }')";
-          export GITHUB_BRANCH=${GITHUB_BRANCH#remotes/origin/};
-        fi
+      - echo "CODEBUILD_WEBHOOK_HEAD_REF=${CODEBUILD_WEBHOOK_HEAD_REF} CODEBUILD_WEBHOOK_BASE_REF=${CODEBUILD_WEBHOOK_BASE_REF}"
+      - export GITHUB_BRANCH="${CODEBUILD_WEBHOOK_HEAD_REF#refs/heads/}"
       - export GITHUB_COMMIT=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - export GITHUB_TAG="$(git describe --tags 2>/dev/null)"
       - echo "GITHUB_BRANCH=${GITHUB_BRANCH} GITHUB_COMMIT=${GITHUB_COMMIT} GITHUB_TAG=${GITHUB_TAG} DOCKER_IMG_TAG=${DOCKER_IMG_TAG}"
@@ -45,10 +39,10 @@ phases:
       - make shellcheck
       - echo Build started on $(date)
       - export DOCKER_IMG_TAG=${REGISTRY}/${IMAGE_BASE_NAME}:${GITHUB_TAG}
-      - export DOCKER_IMG_TAG_LATEST=${REGISTRY}/${IMAGE_BASE_NAME}:${GITHUB_BRANCH}.latest
+      - export DOCKER_IMG_TAG_LATEST=${REGISTRY}/${IMAGE_BASE_NAME}:${GITHUB_BRANCH//\//_}.latest
       - |-
         if [ "${GITHUB_TAG}" = "" ] ; then
-          export DOCKER_IMG_TAG=${REGISTRY}/${IMAGE_BASE_NAME}:${GITHUB_BRANCH}.${GITHUB_COMMIT}
+          export DOCKER_IMG_TAG=${REGISTRY}/${IMAGE_BASE_NAME}:${GITHUB_BRANCH//\//_}.${GITHUB_COMMIT}
           export GITHUB_TAG=${GITHUB_COMMIT}
         fi
       - echo "Building docker image with tags ${DOCKER_IMG_TAG} and ${DOCKER_IMG_TAG_LATEST}"
