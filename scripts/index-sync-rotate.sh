@@ -4,6 +4,8 @@
 set -eu
 SPHINX_EFS="/var/lib/sphinxsearch/data/index_efs/"
 SPHINX_VOLUME="/var/lib/sphinxsearch/data/index/"
+SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
+RSYNC_INCLUDE="/tmp/include.txt"
 LOG_PREFIX="[ $$ - $(date +"%F %T")] "
 
 # every 15 minutes
@@ -32,20 +34,25 @@ exlock_now()        { _lock xn; }  # obtain an exclusive lock immediately or fai
 exlock_now || { echo "${LOG_PREFIX}locked"; exit 1; }
 echo "${LOG_PREFIX}start"
 
+# create include-from file from sphinx config for selective rsync from EFS -> LOCAL
+mapfile -t array_config < <(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}' | sed -n -e 's|^.*/||p')
+printf "%s.*\\n" "${array_config[@]}" > "${RSYNC_INCLUDE}"
+
 # collect some metadata for a smart rsync
 # we have to detect the following use cases:
     # index files are new, not yet roteated
     # index files are new, already rotated on another node
 # this is the array of index files that are new on EFS and outdated in the local volume, they have been rotated updated already elsewhere
-mapfile -t new_files_rotated < <(rsync --update -avin --delete --exclude '*.tmp.*' --exclude '*.new.*' --include '*.sp*' --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME} | grep -E '^>.*.sp.*$' | awk '{print $2}')
+mapfile -t new_files_rotated < <(rsync --update -avin --delete --exclude '*.tmp.*' --exclude '*.new.*' --include-from "${RSYNC_INCLUDE}" --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME} | grep -E '^>.*.sp.*$' | awk '{print $2}')
 # this is the array of new index files that are new on EFS and not yet rotated
-mapfile -t new_files < <(rsync --update -avin --delete --exclude '*.tmp.*' ${SPHINX_EFS} ${SPHINX_VOLUME} | grep -E '^>.*.new.*' | awk '{print $2}')
+mapfile -t new_files < <(rsync --update -avin --delete --exclude '*.tmp.*' --include-from "${RSYNC_INCLUDE}" --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME} | grep -E '^>.*.new.*' | awk '{print $2}')
 # this array will merge the combination of these two arrays
 mapfile -t new_files_merged < <(echo "${new_files[@]}")
 
 # sync EFS to VOLUME
+# do not delete anything in local volume, in case the efs has been cleaned / removed indexes will still exist in local storage
 echo "${LOG_PREFIX}sync efs to volume (${SPHINX_EFS} -> ${SPHINX_VOLUME})"
-rsync --update -av --delete --exclude '*.tmp.*' ${SPHINX_EFS} ${SPHINX_VOLUME}
+rsync --update -av --exclude '*.tmp.*' --include-from "${RSYNC_INCLUDE}" --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME}
 
 # rename already rotated files before index rotation from *.sp* to .*.new.sp*
 echo "${LOG_PREFIX}-> $(date +"%F %T") rename already rotated, new index files: ${new_files_rotated[*]}..."
@@ -60,7 +67,7 @@ for new_file in "${new_files_rotated[@]}";do
     tmp_array+=("${base}"*)
 done
 if ((${#tmp_array[@]})); then
-    mapfile -t new_files_rotated < <(printf "%s\n" "${tmp_array[@]}" | sort -u | tr '\n' ' ')
+    mapfile -t new_files_rotated < <(printf "%s\\n" "${tmp_array[@]}" | sort -u | tr '\n' ' ')
     for rotated in ${new_files_rotated[@]}; do # shellcheck disable=SC2068
         # skip empty elements
         [[ -z ${rotated} ]] && continue
@@ -74,7 +81,7 @@ fi
 popd
 
 # remove duplicates from array
-mapfile -t new_files_merged < <(printf "%s\n" "${new_files_merged[@]}" | sort -u | tr '\n' ' ')
+mapfile -t new_files_merged < <(printf "%s\\n" "${new_files_merged[@]}" | sort -u | tr '\n' ' ')
 
 # start index rotation
 pkill -1 searchd
@@ -92,7 +99,7 @@ while ! ${all_files_are_gone}; do
 done
 
 echo "${LOG_PREFIX}-> $(date +"%F %T") sync volume to efs (${SPHINX_VOLUME} -> ${SPHINX_EFS})"
-rsync --update -av --exclude '*.tmp.*' --exclude '*.new.*' --exclude '*.spl' --include '*.sp*' --exclude '*' ${SPHINX_VOLUME} ${SPHINX_EFS}
+rsync --update -av --exclude '*.tmp.*' --exclude '*.new.*' --exclude '*.spl' --include-from "${RSYNC_INCLUDE}" --exclude '*' ${SPHINX_VOLUME} ${SPHINX_EFS}
 
 # delete new files list from rsync from EFS
 echo "${LOG_PREFIX}-> $(date +"%F %T") delete new files list from sync"
