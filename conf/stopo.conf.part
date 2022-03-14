@@ -1168,9 +1168,9 @@ source src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis : def_searchable_fea
    sql_db = stopo_dev
    sql_query = \
       SELECT adr_egaid as id \
-          , concat_ws(' ', str_label, adr_number, adr_zip) as label \
+          , concat_ws(' ', stn_label, adr_number, zip_label) as label \
           , 'feature' as origin  \
-          , remove_accents(concat_ws(' ', adr_egaid, bdg_egid, adr_edid, str_esid, str_label, adr_number)) as detail  \
+          , remove_accents(concat_ws(' ', adr_egaid, bdg_egid, adr_edid, str_esid, stn_label, adr_number)) as detail  \
           , 'ch.swisstopo.amtliches-gebaeudeadressverzeichnis' as layer  \
           , quadindex(the_geom) as geom_quadindex  \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
