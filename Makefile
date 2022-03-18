@@ -71,6 +71,8 @@ ifeq ($(DB_ACCESS),false)
 $(warning ${RED}we need a valid postgres connection for this correct use of makefile! connection to '$(PGHOST)' was not successful${RESET})
 endif
 
+PPID := $(shell echo $$PPID)
+
 # Maintenance / Index Commands
 # EFS Index will be mounted as bind mount
 export DOCKER_EXEC :=  docker run \
@@ -78,7 +80,7 @@ export DOCKER_EXEC :=  docker run \
 				-t \
 				-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index/ \
 				--env-file $(ENV_FILE) \
-				--name $(DOCKER_LOCAL_TAG)_maintenance \
+				--name $(DOCKER_LOCAL_TAG)_maintenance_$(PPID)\
 				$(DOCKER_IMG_LOCAL_TAG)
 
 export DOCKER_EXEC_LOCAL :=  docker run \
@@ -86,7 +88,7 @@ export DOCKER_EXEC_LOCAL :=  docker run \
 				-t \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
 				--env-file $(ENV_FILE) \
-				--name $(DOCKER_LOCAL_TAG)_maintenance \
+				--name $(DOCKER_LOCAL_TAG)_maintenance_$(PPID) \
 				$(DOCKER_IMG_LOCAL_TAG)
 
 # AWS variables
