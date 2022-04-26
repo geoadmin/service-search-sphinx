@@ -75,9 +75,11 @@ PPID := $(shell echo $$PPID)
 
 # Maintenance / Index Commands
 # EFS Index will be mounted as bind mount
+# DOCKER_EXEC will always check if a newer image exists on ecr -> develop.latest support
 export DOCKER_EXEC :=  docker run \
 				--rm \
 				-t \
+				--pull=always \
 				-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index/ \
 				--env-file $(ENV_FILE) \
 				--name $(DOCKER_LOCAL_TAG)_maintenance_$(PPID)\
@@ -209,14 +211,14 @@ shellcheck:
 
 
 .PHONY: pg2sphinx
-pg2sphinx: load_env $(SPHINX_EFS) dockerbuild
+pg2sphinx: load_env $(SPHINX_EFS)
 ifndef INDEX
 ifndef DB
 	@echo "you have to set INDEX or DB variable for this target"
 	false
 endif
 endif
-	DOCKER_INDEX_VOLUME=$(DOCKER_INDEX_VOLUME) ./scripts/pg2sphinx.sh
+	./scripts/pg2sphinx.sh
 
 
 .PHONY: check-config-local
