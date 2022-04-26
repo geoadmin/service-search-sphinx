@@ -2,7 +2,10 @@
 set -euo pipefail
 
 docker_is_logged_in() {
-    jq -e --arg url "${DOCKER_REGISTRY}" '.auths | has($url)' ~/.docker/config.json > /dev/null
+    # this will check if the ecr token is still valid
+    # the token expires after 12 hours so the credential info in
+    # ~/.docker/config.json might be misleading
+    ${DOCKER_EXEC} pwd &> /dev/null
 }
 
 # check if we are already logged in
