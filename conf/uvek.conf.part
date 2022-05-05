@@ -1156,7 +1156,7 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
         SELECT bgdi_id as id \
             , registrationnumber::text as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', registrationnumber, obstacletype, omsid )) as detail \
+            , remove_accents(concat_ws(' ', registrationnumber)) as detail \
             , 'ch.bazl.luftfahrthindernis' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -1164,7 +1164,25 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        FROM bazl.luftfahrthindernis
+        FROM bazl.view_obstacles
+}
+
+source src_ch_bazl_luftfahrthindernis_aktuell : def_searchable_features
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , registrationnumber::text as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', registrationnumber)) as detail \
+            , 'ch.bazl.luftfahrthindernis-aktuell' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        FROM bazl.view_obstacles_active
 }
 
 source src_ch_bfe_windenergieanlagen : def_searchable_features
@@ -1779,51 +1797,51 @@ index ch_astra_unfaelle_personenschaeden_alle : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_alle
 }
 
-index ch_bakom_notruf : ch_astra_ivs_nat 
+index ch_bakom_notruf : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf
 }
 
-index ch_bakom_notruf_112_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_112_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_112_festnetz 
+    source = src_ch_bakom_notruf_112_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_festnetz
 }
 
-index ch_bakom_notruf_117_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_117_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_117_festnetz 
+    source = src_ch_bakom_notruf_117_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_117_festnetz
 }
 
-index ch_bakom_notruf_118_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_118_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_118_festnetz 
+    source = src_ch_bakom_notruf_118_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_118_festnetz
 }
 
-index ch_bakom_notruf_143_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_143_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_143_festnetz 
+    source = src_ch_bakom_notruf_143_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_143_festnetz
 }
 
-index ch_bakom_notruf_144_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_144_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_144_festnetz 
+    source = src_ch_bakom_notruf_144_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_144_festnetz
 }
 
-index ch_bakom_notruf_145_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_145_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_145_festnetz 
+    source = src_ch_bakom_notruf_145_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_145_festnetz
 }
 
-index ch_bakom_notruf_147_festnetz : ch_astra_ivs_nat 
+index ch_bakom_notruf_147_festnetz : ch_astra_ivs_nat
 {
-    source = src_ch_bakom_notruf_147_festnetz 
+    source = src_ch_bakom_notruf_147_festnetz
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_147_festnetz
 }
 
@@ -1900,7 +1918,7 @@ index ch_bav_sachplan_infrastruktur_schiene_ausgangslage : ch_astra_ivs_nat
 }
 
 index ch_bav_kataster_belasteter_standorte_oev : ch_astra_ivs_nat
-{   
+{
     source = src_ch_bav_kataster_belasteter_standorte_oev
     path = /var/lib/sphinxsearch/data/index/ch_bav_kataster_belasteter_standorte_oev
 }
@@ -1967,7 +1985,7 @@ index ch_bav_sachplan_infrastruktur_schiene_anhorung_2 : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_anhorung_2
 }
 
-index ch_bav_sachplan_infrastruktur_schiene_anhorung 
+index ch_bav_sachplan_infrastruktur_schiene_anhorung
 {
     type = distributed
     local = ch_bav_sachplan_infrastruktur_schiene_anhorung_1
@@ -1986,7 +2004,7 @@ index ch_bav_sachplan_infrastruktur_schiene_kraft_2 : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_kraft_2
 }
 
-index ch_bav_sachplan_infrastruktur_schiene_kraft 
+index ch_bav_sachplan_infrastruktur_schiene_kraft
 {
     type = distributed
     local = ch_bav_sachplan_infrastruktur_schiene_kraft_1
@@ -2049,6 +2067,12 @@ index ch_bazl_luftfahrthindernis : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis
 }
 
+index ch_bazl_luftfahrthindernis_aktuell : ch_astra_ivs_nat
+{
+    source = src_ch_bazl_luftfahrthindernis_aktuell
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis_aktuell
+}
+
 index ch_bfe_windenergieanlagen : ch_astra_ivs_nat
 {
     source = src_ch_bfe_windenergieanlagen
@@ -2079,7 +2103,7 @@ index ch_bfe_sachplan_uebertragungsleitungen_anhorung_4 : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_4
 }
 
-index ch_bfe_sachplan_uebertragungsleitungen_anhorung 
+index ch_bfe_sachplan_uebertragungsleitungen_anhorung
 {
     type = distributed
     local = ch_bfe_sachplan_uebertragungsleitungen_anhorung_1
@@ -2112,7 +2136,7 @@ index ch_bfe_sachplan_uebertragungsleitungen_kraft_4 : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_4
 }
 
-index ch_bfe_sachplan_uebertragungsleitungen_kraft 
+index ch_bfe_sachplan_uebertragungsleitungen_kraft
 {
     type = distributed
     local = ch_bfe_sachplan_uebertragungsleitungen_kraft_1
