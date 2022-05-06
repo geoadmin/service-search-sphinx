@@ -1167,7 +1167,7 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
         FROM bazl.view_obstacles
 }
 
-source src_ch_bazl_luftfahrthindernis_aktuell : def_searchable_features
+source src_ch_bazl_luftfahrthindernis_aenderungen : def_searchable_features
 {
     sql_db = uvek_dev
     sql_query = \
@@ -1175,7 +1175,7 @@ source src_ch_bazl_luftfahrthindernis_aktuell : def_searchable_features
             , registrationnumber::text as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', registrationnumber)) as detail \
-            , 'ch.bazl.luftfahrthindernis-aktuell' as layer \
+            , 'ch.bazl.luftfahrthindernis-aenderungen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -2067,10 +2067,10 @@ index ch_bazl_luftfahrthindernis : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis
 }
 
-index ch_bazl_luftfahrthindernis_aktuell : ch_astra_ivs_nat
+index ch_bazl_luftfahrthindernis_aenderungen : ch_astra_ivs_nat
 {
-    source = src_ch_bazl_luftfahrthindernis_aktuell
-    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis_aktuell
+    source = src_ch_bazl_luftfahrthindernis_aenderungen
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis_aenderungen
 }
 
 index ch_bfe_windenergieanlagen : ch_astra_ivs_nat
