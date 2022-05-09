@@ -925,24 +925,6 @@ source src_ch_swisstopo_burgenkarte200_papier_metadata : def_searchable_features
       from datenstand.view_gridstand_bk200
 }
 
-source src_ch_swisstopo_geologie_geologischer_atlas_vector_metadata : def_searchable_features
-{
-   sql_db = stopo_dev
-   sql_query = \
-      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
-          , pk_product as label \
-          , 'feature' as origin \
-          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
-          , 'ch.swisstopo.geologie-geologischer_atlas_vector.metadata' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , pk_product as feature_id \
-      from geol.view_gridstand_gas25
-}
-
 source src_ch_swisstopo_geologie_geologischer_atlas_papier_metadata : def_searchable_features
 {
    sql_db = stopo_dev
@@ -1067,24 +1049,6 @@ source src_ch_swisstopo_geologie_spezialkarten_schweiz_vector_metadata : def_sea
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , pk_product as feature_id \
       from geol.view_gsk_vector
-}
-
-source src_ch_swisstopo_geologie_geologischer_atlas_metadata : def_searchable_features
-{
-   sql_db = stopo_dev
-   sql_query = \
-      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
-          , pk_product as label \
-          , 'feature' as origin \
-          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
-          , 'ch.swisstopo.geologie-geologischer_atlas.metadata' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , pk_product as feature_id \
-      from geol.view_ga25_grid_shop
 }
 
 source src_ch_swisstopo_pixelkarte_farbe_pk500_noscale : def_searchable_features
@@ -1517,12 +1481,6 @@ index ch_swisstopo_burgenkarte200_papier_metadata : ch_swisstopo_verschiebungsve
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_burgenkarte200_papier_metadata
 }
 
-index ch_swisstopo_geologie_geologischer_atlas_vector_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
-{
-    source = src_ch_swisstopo_geologie_geologischer_atlas_vector_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geologischer_atlas_vector_metadata
-}
-
 index ch_swisstopo_geologie_geologischer_atlas_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_geologischer_atlas_papier_metadata
@@ -1539,12 +1497,6 @@ index ch_swisstopo_geologie_spezialkarten_schweiz_metadata : ch_swisstopo_versch
 {
     source = src_ch_swisstopo_geologie_spezialkarten_schweiz_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_spezialkarten_schweiz_metadata
-}
-
-index ch_swisstopo_geologie_geologischer_atlas_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
-{
-    source = src_ch_swisstopo_geologie_geologischer_atlas_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geologischer_atlas_metadata
 }
 
 index ch_swisstopo_geologie_spezialkarten_schweiz_vector_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
