@@ -1060,7 +1060,7 @@ source src_ch_swisstopo_amtliches_strassenverzeichnis : def_searchable_features
       SELECT bgdi_id as id \
           , concat_ws(' ', stn_label, zip_label) as label \
           , 'feature' as origin  \
-          , remove_accents(concat_ws(' ', esid, stn_label, zip_label)) as detail  \
+          , remove_accents(concat_ws(' ', str_esid, stn_label, zip_label)) as detail  \
           , 'ch.swisstopo.amtliches-strassenverzeichnis' as layer  \
           , quadindex(the_geom) as geom_quadindex  \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
