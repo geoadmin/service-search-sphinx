@@ -744,24 +744,6 @@ source src_ch_swisstopo_skitourenkarte_50_metadata : def_searchable_features
       from datenstand.view_gridstand_lkski_shop
 }
 
-source src_ch_swisstopo_landeskarte25_papier_metadata : def_searchable_features
-{
-   sql_db = stopo_dev
-   sql_query = \
-      SELECT row_number() OVER(ORDER BY pk_product asc) as id \
-          , pk_product as label \
-          , 'feature' as origin \
-          , remove_accents(concat_ws(' ',s_map_number, s_title_de,release::text)) as detail \
-          , 'ch.swisstopo.landeskarte25_papier.metadata' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
-          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
-          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , pk_product as feature_id \
-      from public.lk25_papier
-}
-
 source src_ch_swisstopo_landeskarte50_papier_metadata : def_searchable_features
 {
    sql_db = stopo_dev
@@ -1257,12 +1239,6 @@ index ch_swisstopo_skitourenkarte_50_metadata : ch_swisstopo_verschiebungsvektor
 {
     source = src_ch_swisstopo_skitourenkarte_50_metadata
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_skitourenkarte_50_metadata
-}
-
-index ch_swisstopo_landeskarte25_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
-{
-    source = src_ch_swisstopo_landeskarte25_papier_metadata
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landeskarte25_papier_metadata
 }
 
 index ch_swisstopo_landeskarte50_papier_metadata : ch_swisstopo_verschiebungsvektoren_tsp1
