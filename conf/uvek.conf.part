@@ -334,7 +334,7 @@ source src_ch_bakom_notruf_112_festnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_fn_112
+        from bakom.notruf
 }
 
 
@@ -353,7 +353,7 @@ source src_ch_bakom_notruf_117_festnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_fn_117
+        from bakom.notruf
 }
 
 
@@ -372,7 +372,7 @@ source src_ch_bakom_notruf_118_festnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_fn_118
+        from bakom.notruf
 }
 
 
@@ -391,7 +391,7 @@ source src_ch_bakom_notruf_143_festnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_fn_143
+        from bakom.notruf
 }
 
 
@@ -410,7 +410,7 @@ source src_ch_bakom_notruf_144_festnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_fn_144
+        from bakom.notruf
 }
 
 
@@ -429,7 +429,7 @@ source src_ch_bakom_notruf_145_festnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_fn_145
+        from bakom.notruf
 }
 
 
@@ -448,7 +448,7 @@ source src_ch_bakom_notruf_147_festnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_fn_147
+        from bakom.notruf
 }
 
 
@@ -467,7 +467,7 @@ source src_ch_bakom_notruf_112_satellit : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_sa_112
+        from bakom.notruf
 }
 
 
@@ -486,7 +486,7 @@ source src_ch_bakom_notruf_112_mobilnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_mo_112
+        from bakom.notruf
 }
 
 
@@ -505,7 +505,7 @@ source src_ch_bakom_notruf_117_mobilnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_mo_117
+        from bakom.notruf
 }
 
 
@@ -524,7 +524,7 @@ source src_ch_bakom_notruf_118_mobilnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_mo_118
+        from bakom.notruf
 }
 
 
@@ -543,7 +543,7 @@ source src_ch_bakom_notruf_143_mobilnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_mo_143
+        from bakom.notruf
 }
 
 
@@ -562,7 +562,7 @@ source src_ch_bakom_notruf_144_mobilnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_mo_144
+        from bakom.notruf
 }
 
 
@@ -581,7 +581,7 @@ source src_ch_bakom_notruf_145_mobilnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_mo_145
+        from bakom.notruf
 }
 
 
@@ -600,7 +600,7 @@ source src_ch_bakom_notruf_147_mobilnetz : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bfs_nummer::text as feature_id \
-        from bakom.notruf_mo_147
+        from bakom.notruf
 }
 
 
