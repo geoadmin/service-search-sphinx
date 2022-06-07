@@ -6,6 +6,7 @@ source src_swisssearch : def_pqsql
     sql_attr_uint = rank
     sql_attr_uint = zoomlevel
     sql_attr_string = label
+    sql_attr_string = objektklasse
     sql_attr_string = feature_id
     sql_attr_string = origin
     sql_attr_string = geom_st_box2d
@@ -28,6 +29,7 @@ source src_address : src_swisssearch
         , egid_edid::character varying(15) AS feature_id \
         , remove_accents(concat_ws(' ', replace(concat(array_to_string(strname, ' <deinr> '), ' ', deinr),'<deinr>',deinr), dplz4, dplzname, ggdenr, ggdename, 'ch', gdekt)) as detail \
         , concat(replace(concat(array_to_string(strname, ' <deinr> | '), ' ', deinr),'<deinr>',deinr), ' <b>', dplz4, ' ', dplzname,'</b>') as label \
+        , NULL as objektklasse \
         , 'address'::text AS origin \
         , geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
@@ -51,6 +53,7 @@ source src_parcel : src_swisssearch
         SELECT id \
         , NULL::text as feature_id \
         , detail \
+        , NULL as objektklasse \
         , label \
         , origin \
         , bgdi_quadindex as geom_quadindex \
@@ -161,6 +164,7 @@ source src_swissnames3d : src_swisssearch
     SELECT \
         coalesce(b.feature_id,s.feature_id) as feature_id, \
         remove_accents(coalesce(b.name,s.name)) as detail, \
+        coalesce(b.objektklasse ,s.objektklasse) as objektklasse, \
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label, \
         'gazetteer' as origin,  \
         coalesce(b.bgdi_quadindex,s.bgdi_quadindex) as geom_quadindex, \
@@ -181,6 +185,7 @@ source src_swissnames3d : src_swisssearch
     SELECT \
         b.feature_id  as feature_id, \
         remove_accents(b.name) as detail, \
+        remove_accents(b.objektklasse) as objektklasse, \
         b.bgdi_label_sphinx as label, \
         'gazetteer' as origin, \
         b.bgdi_quadindex  as geom_quadindex, \
@@ -208,6 +213,7 @@ source src_gg25 : src_swisssearch
         row_number() OVER(ORDER BY id asc) as id \
         , id::text as feature_id \
         , remove_accents(concat_ws(' ', trim(gemname), trim(k.ak))) as detail \
+        , NULL as objektklasse \
         , concat('<b>', trim(gemname), ' (', k.ak, ')</b>') as label \
         , 'gg25'::text as origin \
         , quadindex(g.the_geom) as geom_quadindex \
@@ -233,6 +239,7 @@ source src_kantone : src_swisssearch
         kantonsnr::integer as id \
         , kantonsnr::text as feature_id \
         , remove_accents(concat_ws(' ', name, ak)) as detail \
+        , NULL as objektklasse \
         , concat('<b>', trim(name), '</b>') as label \
         , 'kantone'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
@@ -258,6 +265,7 @@ source src_district : src_swisssearch
         id::integer as id \
         , id::text as feature_id \
         , name::text as detail \
+        , NULL as objektklasse \
         , concat('<b>', trim(name), '</b>') as label \
         , 'district'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
@@ -284,6 +292,7 @@ source src_zipcode : src_swisssearch
         , os_uuid::text as feature_id \
         , plz::text as detail \
         , concat('<b>', plz, ' - ', trim(langtext), ' (', trim(canton), ')</b>') as label \
+        , NULL as objektklasse \
         , 'zipcode' as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
@@ -308,6 +317,7 @@ source src_haltestellen : src_swisssearch
         bgdi_id as id \
         , xtf_id::text as feature_id \
         , remove_accents(concat_ws(' ', name, nummer, betriebspunkttyp_bezeichnung_de, verkehrsmittel_bezeichnung_de))::text as detail \
+        , NULL as objektklasse \
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen', trim(verkehrsmittel_bezeichnung_de))) , '</i> ','<b>',trim(name),'</b>') as label \
         , 'gazetteer'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
