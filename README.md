@@ -87,14 +87,6 @@ To see options of make
 $ make
 ```
 
-To create all indices
-
-```
-make template
-make move-template
-make index-all
-```
-
 #### Wordforms
 
 Wordforms are part of the sphinx conf.
