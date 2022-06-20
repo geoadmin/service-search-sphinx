@@ -5,7 +5,7 @@ docker_is_logged_in() {
     # this will check if the ecr token is still valid
     # the token expires after 12 hours so the credential info in
     # ~/.docker/config.json might be misleading
-    ${DOCKER_EXEC} pwd &> /dev/null
+    docker pull "${DOCKER_IMG_LOCAL_TAG}" &> /dev/null
 }
 
 # check if we are already logged in
