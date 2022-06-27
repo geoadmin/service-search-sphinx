@@ -24,7 +24,7 @@ source src_ch_swisstopo_landesschwerenetz : def_searchable_features
     sql_query = \
         SELECT bgdi_id as id \
             , 'feature' as origin \
-            , remove_accents(name) as detail \
+            , remove_accents(concat_ws(' ', nr_lsn2004, name, type)) as detail \
             , 'ch.swisstopo.landesschwerenetz' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
@@ -33,7 +33,7 @@ source src_ch_swisstopo_landesschwerenetz : def_searchable_features
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , concat(name, ' ', nr_lsn2004, type) as label \
             , bgdi_id::text as feature_id \
-        FROM geol.landesschwerenetz
+        FROM fida.landesschwerenetz
 }
 
 source src_ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill : def_searchable_features
@@ -837,6 +837,43 @@ source src_ch_swisstopo_geologie_felslabore : def_searchable_features
       from geol.felslabore
 }
 
+source src_ch_swisstopo_fixpunkte_hfp1 : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT gid::bigint as id \
+            , pointid as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', pointid)) as detail \
+            , 'ch.swisstopo.fixpunkte-hfp1' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , pointid::text as feature_id \
+        from fida.punkt_hoehe_hfp1
+}
+
+source src_ch_swisstopo_fixpunkte_lfp1 : def_searchable_features
+{
+    sql_db = stopo_dev
+    sql_query = \
+        SELECT gid as id \
+            , pointid as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', pointid)) as detail \
+            , 'ch.swisstopo.fixpunkte-lfp1' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , pointid::text as feature_id \
+        from fida.punkt_lage_lfp1
+}
+
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren_tsp1
@@ -1117,4 +1154,16 @@ index ch_swisstopo_geologie_gletscherausdehnung : ch_swisstopo_verschiebungsvekt
 {
     source = src_ch_swisstopo_geologie_gletscherausdehnung
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gletscherausdehnung
+}
+
+index ch_swisstopo_fixpunkte_hfp1 : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_fixpunkte_hfp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp1
+}
+
+index ch_swisstopo_fixpunkte_lfp1 : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_fixpunkte_lfp1
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp1
 }
