@@ -2,7 +2,7 @@
 
 source src_ch_swisstopo_fixpunkte_lfp2 : def_searchable_features
 {
-    sql_db = kogis_dev
+    sql_db = kogis_${DBSTAGING}
     sql_query = \
         SELECT gid::bigint as id \
             , pointid as label \
@@ -20,7 +20,7 @@ source src_ch_swisstopo_fixpunkte_lfp2 : def_searchable_features
 
 source src_ch_swisstopo_fixpunkte_hfp2 : def_searchable_features
 {
-    sql_db = kogis_dev
+    sql_db = kogis_${DBSTAGING}
     sql_query = \
         SELECT gid::bigint as id \
             , pointid as label \
