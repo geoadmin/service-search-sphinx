@@ -1707,6 +1707,24 @@ source src_ch_bfe_waermepotential_gewaesser : def_searchable_features
          from bfe.waermepotential_gewaesser
  }
 
+source src_ch_bazl_gebietsbeschraenkungen_drohnen : def_searchable_features
+ {
+     sql_db = uvek_dev
+     sql_query = \
+         SELECT bgdi_id as id \
+             , zone_name_de as label \
+             , 'feature' as origin \
+             , remove_accents(zone_name_de) as  detail \
+             , 'ch.bazl.gebietsbeschraenkungen-drohnen' as layer \
+             , quadindex(the_geom) as geom_quadindex \
+             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+             , bgdi_id::text as feature_id \
+         from bazl.gebietsbeschraenkungen_drohnen
+ }
+
 ## INDICES
 
 index ch_astra_ivs_nat
@@ -2325,4 +2343,10 @@ index ch_bfe_waermepotential_gewaesser : ch_astra_ivs_nat
 {
     source = src_ch_bfe_waermepotential_gewaesser
     path = /var/lib/sphinxsearch/data/index/ch_bfe_waermepotential_gewaesser
+}
+
+index ch_bazl_gebietsbeschraenkungen_drohnen : ch_astra_ivs_nat
+{
+    source = src_ch_bazl_gebietsbeschraenkungen_drohnen
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_gebietsbeschraenkungen_drohnen
 }
