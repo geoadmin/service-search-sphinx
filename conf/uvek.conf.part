@@ -1169,7 +1169,7 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
 
 source src_ch_bazl_luftfahrthindernis_aenderungen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , registrationnumber::text as label \
