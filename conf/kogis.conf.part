@@ -1,23 +1,5 @@
 ## SOURCES
 
-source src_ch_swisstopo_fixpunkte_lfp1 : def_searchable_features
-{
-    sql_db = kogis_${DBSTAGING}
-    sql_query = \
-        SELECT gid as id \
-            , pointid as label \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ', pointid, nummer)) as detail \
-            , 'ch.swisstopo.fixpunkte-lfp1' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , pointid::text as feature_id \
-        from fida.punkt_lage_lfp1
-}
-
 source src_ch_swisstopo_fixpunkte_lfp2 : def_searchable_features
 {
     sql_db = kogis_${DBSTAGING}
@@ -34,24 +16,6 @@ source src_ch_swisstopo_fixpunkte_lfp2 : def_searchable_features
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , pointid::text as feature_id \
         from fpds.punkt_lage_lfp2
-}
-
-source src_ch_swisstopo_fixpunkte_hfp1 : def_searchable_features
-{
-    sql_db = kogis_${DBSTAGING}
-    sql_query = \
-        SELECT gid::bigint as id \
-            , pointid as label \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ', pointid, nummer, bgdi_label)) as detail \
-            , 'ch.swisstopo.fixpunkte-hfp1' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , pointid::text as feature_id \
-        from fpds.punkt_hoehe_hfp1
 }
 
 source src_ch_swisstopo_fixpunkte_hfp2 : def_searchable_features
@@ -75,29 +39,17 @@ source src_ch_swisstopo_fixpunkte_hfp2 : def_searchable_features
 
 ## INDICES
 
-index ch_swisstopo_fixpunkte_hfp1
+index ch_swisstopo_fixpunkte_hfp2
 {
     type = plain
     dict=crc
-    source = src_ch_swisstopo_fixpunkte_hfp1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp1
     min_infix_len = 2
     expand_keywords = 1
-}
-
-index ch_swisstopo_fixpunkte_hfp2 : ch_swisstopo_fixpunkte_hfp1
-{
     source = src_ch_swisstopo_fixpunkte_hfp2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp2
 }
 
-index ch_swisstopo_fixpunkte_lfp1 : ch_swisstopo_fixpunkte_hfp1
-{
-    source = src_ch_swisstopo_fixpunkte_lfp1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp1
-}
-
-index ch_swisstopo_fixpunkte_lfp2 : ch_swisstopo_fixpunkte_hfp1
+index ch_swisstopo_fixpunkte_lfp2 : ch_swisstopo_fixpunkte_hfp2
 {
     source = src_ch_swisstopo_fixpunkte_lfp2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp2
