@@ -1,4 +1,6 @@
 *.conf
 *.pyc
 *.swp
+conf/*.in
 *~
+.vscode/
