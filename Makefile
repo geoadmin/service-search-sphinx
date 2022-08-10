@@ -79,7 +79,6 @@ PPID := $(shell echo $$PPID)
 export DOCKER_EXEC :=  docker run \
 				--rm \
 				-t \
-				--pull=always \
 				-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index/ \
 				--env-file $(ENV_FILE) \
 				--name $(DOCKER_LOCAL_TAG)_maintenance_$(PPID)\
