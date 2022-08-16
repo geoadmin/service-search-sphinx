@@ -246,7 +246,7 @@ config: load_env
 ## docker commands
 .PHONY: dockerlogin
 dockerlogin:
-	aws --profile swisstopo-bgdi-builder ecr get-login-password --region $(AWS_DEFAULT_REGION) | docker login --username AWS --password-stdin $(DOCKER_REGISTRY)
+	aws --profile swisstopo-bgdi-builder ecr get-login-password --region $(AWS_DEFAULT_REGION) | docker login --username AWS --password-stdin $(DOCKER_REGISTRY) 2> /dev/null
 
 
 .PHONY: dockerbuild
