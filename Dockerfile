@@ -25,6 +25,9 @@ RUN groupadd -r geodata -g 2500 && \
     # create mountpoint folders with geodata ownership
     install -o geodata -g geodata -d /var/lib/sphinxsearch/data/index/ && \
     install -o geodata -p geodata -d /var/lib/sphinxsearch/data/index_efs/ && \
+    # TODO: redirect logs to stdout # only working if container is running as root
+    # ln -sv /dev/stdout /var/log/sphinxsearch/query.log && \
+    # ln -sv /dev/stdout /var/log/sphinxsearch/searchd.log && \
     # change ownerships to geodata which will run the service or the maintenance scripts
     # and mount the efs folder
     chown -R geodata:geodata /var/run/sphinxsearch/ && \
