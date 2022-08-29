@@ -28,7 +28,6 @@ LOG_PREFIX="[ $$ - $(date +"%F %T")] "
 
 # only indexes will be synced to docker volume that have been updated completely updated on EFS,
 # a completely updated index consists of the following 7 new files:
-    # .spa
     # .spd
     # .spe
     # .sph
@@ -37,7 +36,7 @@ LOG_PREFIX="[ $$ - $(date +"%F %T")] "
     # .sps
 
 SPHINX_FILE_EXTENSIONS=('spa' 'spd' 'spe' 'sph' 'spi' 'spk' 'spm' 'spp' 'sps')
-SPHINX_INDEX_READY=('spa' 'spd' 'spe' 'sph' 'spi' 'spp' 'sps')
+SPHINX_INDEX_READY=('spd' 'spe' 'sph' 'spi' 'spp' 'sps')
 SPHINX_INDEXES=$(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}' | sed -n -e 's|^.*/||p')
 
 LOCKFILE="/var/lock/$(basename "$0")"
