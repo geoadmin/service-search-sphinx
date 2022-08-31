@@ -7,16 +7,16 @@ set -o pipefail
 check_exit_code() {
     exit_code=$?
     # full path to output file
-    local checker_file="/var/lib/container_probes/checker_ready.txt"
+    #local checker_file="/var/lib/container_probes/checker_ready.txt"
 
     # analyze exit code with trapped function
     if [ ${exit_code} -ne 0 ]; then
         # Clear the readiness file
-        echo "ERROR: Liveness probe failed with code ${exit_code}" | tee "${checker_file}"
+        echo "ERROR: Liveness probe failed with code ${exit_code}" # | tee "${checker_file}"
     else
         # TODO: implement robust readiness check
         #./checker_ready.sh
-        echo "READY" | tee ${checker_file}
+        echo "READY" # | tee ${checker_file}
     fi
     exit ${exit_code}
 }
