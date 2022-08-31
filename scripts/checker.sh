@@ -13,6 +13,7 @@ check_exit_code() {
     if [ ${exit_code} -ne 0 ]; then
         # Clear the readiness file
         echo "ERROR: Liveness probe failed with code ${exit_code}" # | tee "${checker_file}"
+        exit_code=1
     else
         # TODO: implement robust readiness check
         #./checker_ready.sh
