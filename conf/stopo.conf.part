@@ -862,7 +862,7 @@ source src_ch_swisstopo_fixpunkte_lfp1 : def_searchable_features
         SELECT gid as id \
             , pointid as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', pointid)) as detail \
+            , remove_accents(concat_ws(' ', pointid, nummer)) as detail \
             , 'ch.swisstopo.fixpunkte-lfp1' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
