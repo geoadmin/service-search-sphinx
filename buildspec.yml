@@ -23,7 +23,14 @@ phases:
     commands:
       - echo "Export of the image tag for build and push purposes"
       - echo "CODEBUILD_WEBHOOK_HEAD_REF=${CODEBUILD_WEBHOOK_HEAD_REF} CODEBUILD_WEBHOOK_BASE_REF=${CODEBUILD_WEBHOOK_BASE_REF}"
-      - export GITHUB_BRANCH="${CODEBUILD_WEBHOOK_HEAD_REF#refs/heads/}"
+      - |
+        if [[ -n "${CODEBUILD_WEBHOOK_HEAD_REF}" ]]; then
+          export GITHUB_BRANCH="${CODEBUILD_WEBHOOK_HEAD_REF#refs/heads/}"
+        else
+          # NOTE: For manual build trigger, CODEBUILD_WEBHOOK_HEAD_REF is not set therefore get
+          # the branch name from git command. This is a bit hacky but did not find any other solution
+          export GITHUB_BRANCH=$(git show-ref --heads | grep $(git --no-pager show --format=%H) | head -1 | awk '{gsub("refs/heads/", ""); print $2}')
+        fi
       - export GITHUB_COMMIT=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - export GITHUB_TAG="$(git describe --tags 2>/dev/null)"
       - echo "GITHUB_BRANCH=${GITHUB_BRANCH} GITHUB_COMMIT=${GITHUB_COMMIT} GITHUB_TAG=${GITHUB_TAG} DOCKER_IMG_TAG=${DOCKER_IMG_TAG}"
