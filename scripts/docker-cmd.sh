@@ -4,7 +4,6 @@ set -euo pipefail
 # fancy output
 green='\e[0;32m'
 red='\e[0;31m'
-yellow='\e[1;33m'
 NC='\e[0m' # No Color
 
 SPHINXINDEX_VOLUME="/var/lib/sphinxsearch/data/index/"
