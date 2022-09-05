@@ -28,19 +28,6 @@ for index in "${array_orphaned[@]}"; do
     fi
 done
 
-# create missing indexes
-echo -e "${green}check all index from sphinx.conf and create them if they dont exist on filesystem. ${NC}"
-for index in "${array_config[@]}"; do
-    # skip empty elements
-    [[ -z ${index} ]] && continue
-    if ! ls "${SPHINXINDEX_EFS}${index}".* &> /dev/null; then
-        echo -e "\t${yellow}creating index ${index}${NC}"
-        indexer "${index}" &> /dev/null
-        # sync missing indexes back to EFS
-        rsync --update -av --include "${index}.*" --exclude '*' /${SPHINXINDEX_VOLUME} ${SPHINXINDEX_EFS}
-    fi
-done
-
 # remove lock files in volume
 rm ${SPHINXINDEX_VOLUME}*.spl 2> /dev/null || :
 
