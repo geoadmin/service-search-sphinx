@@ -164,7 +164,7 @@ source src_swissnames3d : src_swisssearch
     SELECT \
         coalesce(b.feature_id,s.feature_id) as feature_id, \
         remove_accents(coalesce(b.name,s.name)) as detail, \
-        coalesce(b.objectclass ,s.objectclass) as objectclass, \
+        coalesce(b.objektklasse ,s.objectclass) as objectclass, \
         coalesce(b.bgdi_label_sphinx,s.bgdi_label_sphinx) as label, \
         'gazetteer' as origin,  \
         coalesce(b.bgdi_quadindex,s.bgdi_quadindex) as geom_quadindex, \
@@ -185,7 +185,7 @@ source src_swissnames3d : src_swisssearch
     SELECT \
         b.feature_id  as feature_id, \
         remove_accents(b.name) as detail, \
-        remove_accents(b.objectclass) as objectclass, \
+        remove_accents(b.objektklasse) as objectclass, \
         b.bgdi_label_sphinx as label, \
         'gazetteer' as origin, \
         b.bgdi_quadindex  as geom_quadindex, \
