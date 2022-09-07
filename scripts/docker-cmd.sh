@@ -1,10 +1,15 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 set -euo pipefail
+
+source checker.sh
+
+# Capture Exit Code
+trap clean_probe_files EXIT
 
 # fancy output
 green='\e[0;32m'
 red='\e[0;31m'
-yellow='\e[1;33m'
 NC='\e[0m' # No Color
 
 SPHINXINDEX_VOLUME="/var/lib/sphinxsearch/data/index/"
@@ -23,21 +28,8 @@ for index in "${array_orphaned[@]}"; do
     [[ -z ${index} ]] && continue
     # skip .new files, we need them to sighup searchd / rotate index updates
     if [[ ! $index == *.new ]]; then
-        echo -e "\t${red} deleting orphaned index ${index} from filesystem. ${NC}"
+        echo -e "\\t${red} deleting orphaned index ${index} from filesystem. ${NC}"
         rm -rf "${SPHINXINDEX_EFS}${index}".*
-    fi
-done
-
-# create missing indexes
-echo -e "${green}check all index from sphinx.conf and create them if they dont exist on filesystem. ${NC}"
-for index in "${array_config[@]}"; do
-    # skip empty elements
-    [[ -z ${index} ]] && continue
-    if ! ls "${SPHINXINDEX_EFS}${index}".* &> /dev/null; then
-        echo -e "\t${yellow}creating index ${index}${NC}"
-        indexer "${index}" &> /dev/null
-        # sync missing indexes back to EFS
-        rsync --update -av --include "${index}.*" --exclude '*' /${SPHINXINDEX_VOLUME} ${SPHINXINDEX_EFS}
     fi
 done
 
