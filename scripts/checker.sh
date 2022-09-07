@@ -7,7 +7,7 @@ set -o pipefail
 MOUNT=$(realpath "${PROBE_MOUNTPOINT:-/tmp}")
 READY_FILE="${MOUNT}/checker_ready.txt"
 BOOTSTRAP_FILE="${MOUNT}/bootstrapped.txt"
-PRECACHING_SECONDS=900
+PRECACHING_SECONDS=1800
 
 # get file age in seconds
 function fileAge
