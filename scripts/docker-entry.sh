@@ -1,7 +1,7 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 set -euo pipefail
 
-# shellcheck source=checker.sh
 source checker.sh
 # geodata has to have rw access on probe mountpoint
 chown -R geodata:geodata "${MOUNT}"
