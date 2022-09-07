@@ -44,19 +44,7 @@ rsync --update --delete -av --exclude "*.tmp.*" --stats ${SPHINXINDEX_EFS} ${SPH
 service cron start || exit 1
 crontab < docker-crontab
 
-# once the initial sync and index creation is done the docker volume is ready / bootstrapped
-# from now on the liveness probe is checking the searchd status
-touch "${BOOTSTRAP_FILE}"
-echo "bootstrap finished $(date +"%F %T"), start precaching indexes" > "${READY_FILE}"
-
 # starting the searchd service
 # will load the sphinx indexes from EFS --sync--> Volume --> into memory
-# precaching can take up to 15m
 echo -e "${green}starting searchd service ...${NC}"
-/usr/bin/searchd  "$@"
-
-# this inifite loop is necessary to trap docker signals SIGHUP SIGTERM
-# and do the clean-up in the volume with the trap function
-while true; do
-    sleep 10
-done
+/usr/bin/searchd --nodetach "$@"
