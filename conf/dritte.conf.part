@@ -61,7 +61,7 @@ index ch_pronatura_waldreservate
     type = plain
     dict=crc
     source = src_ch_pronatura_waldreservate
-    path = /var/lib/sphinxsearch/data/index/ch_pronatura_waldreservate
+    path = /var/lib/manticore/data/index/ch_pronatura_waldreservate
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -70,13 +70,13 @@ index ch_pronatura_waldreservate
 index ch_sem_sachplan_asyl_anhoerung : ch_pronatura_waldreservate
 {
     source = src_ch_sem_sachplan_asyl_anhoerung
-    path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan_asyl_anhoerung
+    path = /var/lib/manticore/data/index/ch_sem_sachplan_asyl_anhoerung
 }
 
 
 index ch_sem_sachplan_asyl_kraft : ch_pronatura_waldreservate
 {
     source = src_ch_sem_sachplan_asyl_kraft
-    path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan_asyl_kraft
+    path = /var/lib/manticore/data/index/ch_sem_sachplan_asyl_kraft
 }
 

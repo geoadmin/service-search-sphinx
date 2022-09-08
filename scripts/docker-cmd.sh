@@ -12,9 +12,9 @@ green='\e[0;32m'
 red='\e[0;31m'
 NC='\e[0m' # No Color
 
-SPHINXINDEX_VOLUME="/var/lib/sphinxsearch/data/index/"
-SPHINXINDEX_EFS="/var/lib/sphinxsearch/data/index_efs/"
-SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
+SPHINXINDEX_VOLUME="/var/lib/manticore/data/index/"
+SPHINXINDEX_EFS="/var/lib/manticore/data/index_efs/"
+SPHINXCONFIG="/etc/manticore/manticore.conf"
 
 # index arrays config, filesystem and orphaned
 mapfile -t array_config < <(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}' | sed -n -e 's|^.*/||p')

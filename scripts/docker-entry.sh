@@ -3,18 +3,16 @@
 set -euo pipefail
 
 source checker.sh
-# geodata has to have rw access on probe mountpoint
-chown -R geodata:geodata "${MOUNT}"
 
 # build sphinx config with current environment
-cat conf/*.part > conf/sphinx.conf.in
-envsubst < conf/sphinx.conf.in > conf/sphinx.conf
+cat conf/*.part > conf/manticore.conf.in
+envsubst < conf/manticore.conf.in > conf/manticore.conf
 
 # copy sphinx config and wordforms from github / image content into docker volume
-cp -f conf/sphinx.conf /etc/sphinxsearch/sphinx.conf
-cp -f conf/wordforms_main.txt /etc/sphinxsearch/wordforms_main.txt
+cp -f conf/manticore.conf /etc/manticore/manticore.conf
+cp -f conf/wordforms_main.txt /etc/manticore/wordforms_main.txt
 
 # always remove lock files from mounted shared storage
-rm -rf /var/lib/sphinxsearch/data/index/*.spl 2> /dev/null || :
+rm -rf /var/lib/manticore/data/index/*.spl 2> /dev/null || :
 
-exec gosu geodata "$@"
+exec "$@"

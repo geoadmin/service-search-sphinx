@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  search-manticore:
+    build: .
+    volumes:
+      - ${SPHINX_EFS:?err}:/var/lib/manticore/index_efs/
+      - sphinx_index:/var/lib/manticore/index/
+      - container_probes:/var/lib/container_probes
+    env_file:
+      - dev_sphinx.env
+    environment:
+      - PGUSER=${BOD_DB_USER:?err}
+      - PGPASS=${BOD_DB_PASSWD:?err}
+      - CPUS=${CPUS:?err}
+    healthcheck:
+      test:  ./checker.sh
+      interval: 3s
+      timeout: 1s
+      retries: 3
+      start_period: 3600s
+    restart: always
+
+volumes:
+  sphinx_index:
+    external: false
+  container_probes:
+    external: false

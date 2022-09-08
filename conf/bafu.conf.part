@@ -1162,7 +1162,7 @@ index ch_bafu_hydrologie_wassertemperaturmessstationen
     type = plain
     dict=crc
     source = src_ch_bafu_hydrologie_wassertemperaturmessstationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_wassertemperaturmessstationen
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_wassertemperaturmessstationen
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -1170,376 +1170,376 @@ index ch_bafu_hydrologie_wassertemperaturmessstationen
 index ch_bafu_alpweiden_herdenschutzhunde : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_alpweiden_herdenschutzhunde
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_alpweiden_herdenschutzhunde
+    path = /var/lib/manticore/data/index/ch_bafu_alpweiden_herdenschutzhunde
 }
 
 index ch_bafu_karst_einzugsgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_karst_einzugsgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_einzugsgebiete
+    path = /var/lib/manticore/data/index/ch_bafu_karst_einzugsgebiete
 }
 
 index ch_bafu_karst_unterirdische_fliesswege : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_karst_unterirdische_fliesswege
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_unterirdische_fliesswege
+    path = /var/lib/manticore/data/index/ch_bafu_karst_unterirdische_fliesswege
 }
 
 index ch_bafu_karst_einzugsgebietseinheiten : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_karst_einzugsgebietseinheiten
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_einzugsgebietseinheiten
+    path = /var/lib/manticore/data/index/ch_bafu_karst_einzugsgebietseinheiten
 }
 
 index ch_bafu_karst_ausdehnung_grundwasservorkommen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_karst_ausdehnung_grundwasservorkommen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_ausdehnung_grundwasservorkommen
+    path = /var/lib/manticore/data/index/ch_bafu_karst_ausdehnung_grundwasservorkommen
 }
 
 index ch_bafu_bundesinventare_bln : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_bln
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_bln
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_bln
 }
 
 index ch_bafu_karst_quellen_schwinden : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_karst_quellen_schwinden
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_karst_quellen_schwinden
+    path = /var/lib/manticore/data/index/ch_bafu_karst_quellen_schwinden
 }
 index ch_bafu_wrz_wildruhezonen_portal : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_wrz_wildruhezonen_portal
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz_wildruhezonen_portal
+    path = /var/lib/manticore/data/index/ch_bafu_wrz_wildruhezonen_portal
 }
 
 index ch_bafu_wrz_jagdbanngebiete_select : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_wrz_jagdbanngebiete_select
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz_jagdbanngebiete_select
+    path = /var/lib/manticore/data/index/ch_bafu_wrz_jagdbanngebiete_select
 }
 
 index ch_bafu_gewaesserschutz_klaeranlagen_anteilq347 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_gewaesserschutz_klaeranlagen_anteilq347
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_klaeranlagen_anteilq347
+    path = /var/lib/manticore/data/index/ch_bafu_gewaesserschutz_klaeranlagen_anteilq347
 }
 
 index ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse
+    path = /var/lib/manticore/data/index/ch_bafu_gewaesserschutz_klaeranlagen_ausbaugroesse
 }
 
 index ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp
+    path = /var/lib/manticore/data/index/ch_bafu_gewaesserschutz_klaeranlagen_reinigungstyp
 }
 
 index ch_bafu_vec25_gewaessernetz_2000 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_vec25_gewaessernetz_2000
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_vec25_gewaessernetz_2000
+    path = /var/lib/manticore/data/index/ch_bafu_vec25_gewaessernetz_2000
 }
 
 index ch_bafu_vec25_seen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_vec25_seen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_vec25_seen
+    path = /var/lib/manticore/data/index/ch_bafu_vec25_seen
 }
 
 index ch_bafu_hydrologischer_atlas_flussgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologischer_atlas_flussgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer_atlas_flussgebiete
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologischer_atlas_flussgebiete
 }
 
 index ch_bafu_hydrologischer_atlas_bilanzgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologischer_atlas_bilanzgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer_atlas_bilanzgebiete
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologischer_atlas_bilanzgebiete
 }
 
 index ch_bafu_hydrologischer_atlas_basisgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologischer_atlas_basisgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer_atlas_basisgebiete
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologischer_atlas_basisgebiete
 }
 
 index ch_bafu_hydrologie_gewaesserzustandsmessstationen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_gewaesserzustandsmessstationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_gewaesserzustandsmessstationen
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_gewaesserzustandsmessstationen
 }
 
 index ch_bafu_hydrologie_q347 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_q347
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_q347
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_q347
 }
 
 index ch_bafu_wasser_teileinzugsgebiete_2 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_wasser_teileinzugsgebiete_2
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser_teileinzugsgebiete_2
+    path = /var/lib/manticore/data/index/ch_bafu_wasser_teileinzugsgebiete_2
 }
 
 index ch_bafu_hydrologie_niedrigwasserstatistik : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_niedrigwasserstatistik
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_niedrigwasserstatistik
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_niedrigwasserstatistik
 }
 
 index ch_bafu_typisierung_fliessgewaesser : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_typisierung_fliessgewaesser
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_typisierung_fliessgewaesser
+    path = /var/lib/manticore/data/index/ch_bafu_typisierung_fliessgewaesser
 }
 
 index ch_bafu_bundesinventare_auen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_auen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_auen
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_auen
 }
 
 index ch_bafu_bundesinventare_auen_anhang2 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_auen_anhang2
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_auen_anhang2
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_auen_anhang2
 }
 
 index ch_bafu_bundesinventare_auen_vegetation_alpin : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_auen_vegetation_alpin
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_auen_vegetation_alpin
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_auen_vegetation_alpin
 }
 
 index ch_bafu_bundesinventare_amphibien : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_amphibien
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_amphibien
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_amphibien
 }
 
 index ch_bafu_bundesinventare_amphibien_anhang4 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_amphibien_anhang4
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_amphibien_anhang4
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_amphibien_anhang4
 }
 
 index ch_bafu_bundesinventare_amphibien_wanderobjekte : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_amphibien_wanderobjekte
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_amphibien_wanderobjekte
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_amphibien_wanderobjekte
 }
 
 index ch_bafu_amphibienwanderung_verkehrskonflikte : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_amphibienwanderung_verkehrskonflikte
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_amphibienwanderung_verkehrskonflikte
+    path = /var/lib/manticore/data/index/ch_bafu_amphibienwanderung_verkehrskonflikte
 }
 
 index ch_bafu_bundesinventare_flachmoore : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_flachmoore
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_flachmoore
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_flachmoore
 }
 
 index ch_bafu_bundesinventare_hochmoore : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_hochmoore
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_hochmoore
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_hochmoore
 }
 
 index ch_bafu_bundesinventare_moorlandschaften : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_moorlandschaften
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_moorlandschaften
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_moorlandschaften
 }
 
 index ch_bafu_bundesinventare_trockenwiesen_trockenweiden : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_trockenwiesen_trockenweiden
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_trockenwiesen_trockenweiden
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_trockenwiesen_trockenweiden
 }
 
 index ch_bafu_bundesinventare_trockenwiesen_trockenweiden_anhang2 : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_trockenwiesen_trockenweiden_anhang2
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_trockenwiesen_trockenweiden_anhang2
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_trockenwiesen_trockenweiden_anhang2
 }
 
 index ch_bafu_waldreservate : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_waldreservate
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_waldreservate
+    path = /var/lib/manticore/data/index/ch_bafu_waldreservate
 }
 
 index ch_bafu_hydrologie_untersuchungsgebiete_stationen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_untersuchungsgebiete_stationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_untersuchungsgebiete_stationen
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_untersuchungsgebiete_stationen
 }
 
 index ch_bafu_hydrologie_untersuchungsgebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_untersuchungsgebiete
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_untersuchungsgebiete
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_untersuchungsgebiete
 }
 
 index ch_bafu_hydrologie_hochwassergrenzwertpegel : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_hochwassergrenzwertpegel
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_hochwassergrenzwertpegel
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_hochwassergrenzwertpegel
 }
 
 index ch_bafu_hydrologischer_atlas_kantonale_messstationen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologischer_atlas_kantonale_messstationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologischer_atlas_kantonale_messstationen
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologischer_atlas_kantonale_messstationen
 }
 
 index ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_daueruntersuchung_fliessgewaesser
 }
 
 index ch_bafu_gewaesserschutz_badewasserqualitaet : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_gewaesserschutz_badewasserqualitaet
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_badewasserqualitaet
+    path = /var/lib/manticore/data/index/ch_bafu_gewaesserschutz_badewasserqualitaet
 }
 
 index ch_bafu_strukturguete_hochrhein_sohle : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_strukturguete_hochrhein_sohle
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_sohle
+    path = /var/lib/manticore/data/index/ch_bafu_strukturguete_hochrhein_sohle
 }
 
 index ch_bafu_strukturguete_hochrhein_linkesufer : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_strukturguete_hochrhein_linkesufer
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_linkesufer
+    path = /var/lib/manticore/data/index/ch_bafu_strukturguete_hochrhein_linkesufer
 }
 
 index ch_bafu_strukturguete_hochrhein_linkesumfeld : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_strukturguete_hochrhein_linkesumfeld
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_linkesumfeld
+    path = /var/lib/manticore/data/index/ch_bafu_strukturguete_hochrhein_linkesumfeld
 }
 
 index ch_bafu_strukturguete_hochrhein_rechtesumfeld : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_strukturguete_hochrhein_rechtesumfeld
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_rechtesumfeld
+    path = /var/lib/manticore/data/index/ch_bafu_strukturguete_hochrhein_rechtesumfeld
 }
 
 index ch_bafu_strukturguete_hochrhein_rechtesufer : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_strukturguete_hochrhein_rechtesufer
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_strukturguete_hochrhein_rechtesufer
+    path = /var/lib/manticore/data/index/ch_bafu_strukturguete_hochrhein_rechtesufer
 }
 
 index ch_bafu_mittlere_abfluesse : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_mittlere_abfluesse
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_mittlere_abfluesse
+    path = /var/lib/manticore/data/index/ch_bafu_mittlere_abfluesse
 }
 
 index ch_bafu_mittlere_abfluesse_zukunft : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_mittlere_abfluesse_zukunft
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_mittlere_abfluesse_zukunft
+    path = /var/lib/manticore/data/index/ch_bafu_mittlere_abfluesse_zukunft
 }
 
 index ch_bafu_feststoffe_geschiebemessnetz : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_feststoffe_geschiebemessnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_feststoffe_geschiebemessnetz
+    path = /var/lib/manticore/data/index/ch_bafu_feststoffe_geschiebemessnetz
 }
 
 index ch_bafu_hydrologie_hochwasserstatistik : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_hochwasserstatistik
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_hochwasserstatistik
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_hochwasserstatistik
 }
 
 index ch_bafu_auen_vegetationskarten : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_auen_vegetationskarten
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_auen_vegetationskarten
+    path = /var/lib/manticore/data/index/ch_bafu_auen_vegetationskarten
 }
 
 index ch_bafu_schutzgebiete_paerke_nationaler_bedeutung : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_schutzgebiete_paerke_nationaler_bedeutung
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete_paerke_nationaler_bedeutung
+    path = /var/lib/manticore/data/index/ch_bafu_schutzgebiete_paerke_nationaler_bedeutung
 }
 
 index ch_bafu_schutzgebiete_paerke_nationaler_bedeutung_perimeter : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_schutzgebiete_paerke_nationaler_bedeutung_perimeter
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_schutzgebiete_paerke_nationaler_bedeutung_perimeter
+    path = /var/lib/manticore/data/index/ch_bafu_schutzgebiete_paerke_nationaler_bedeutung_perimeter
 }
 
 index ch_bafu_hydrogeologie_markierversuche : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrogeologie_markierversuche
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrogeologie_markierversuche
+    path = /var/lib/manticore/data/index/ch_bafu_hydrogeologie_markierversuche
 }
 
 index ch_bafu_bundesinventare_vogelreservate : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_bundesinventare_vogelreservate
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventare_vogelreservate
+    path = /var/lib/manticore/data/index/ch_bafu_bundesinventare_vogelreservate
 }
 
 index ch_bafu_grundwasserkoerper : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_grundwasserkoerper
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_grundwasserkoerper
+    path = /var/lib/manticore/data/index/ch_bafu_grundwasserkoerper
 }
 
 index ch_bafu_fauna_wildtierkorridor_national : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_fauna_wildtierkorridor_national
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_fauna_wildtierkorridor_national
+    path = /var/lib/manticore/data/index/ch_bafu_fauna_wildtierkorridor_national
 }
 
 index ch_bafu_auen_ausserhalb_bundesinventar : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_auen_ausserhalb_bundesinventar
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_auen_ausserhalb_bundesinventar
+    path = /var/lib/manticore/data/index/ch_bafu_auen_ausserhalb_bundesinventar
 }
 
 index ch_bafu_auen_ausserhalb_bundesinventar_alpin : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_auen_ausserhalb_bundesinventar_alpin
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_auen_ausserhalb_bundesinventar_alpin
+    path = /var/lib/manticore/data/index/ch_bafu_auen_ausserhalb_bundesinventar_alpin
 }
 
 index ch_bafu_wasser_vorfluter : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_wasser_vorfluter
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser_vorfluter
+    path = /var/lib/manticore/data/index/ch_bafu_wasser_vorfluter
 }
 
 index ch_bafu_wasser_gebietsauslaesse : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_wasser_gebietsauslaesse
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_wasser_gebietsauslaesse
+    path = /var/lib/manticore/data/index/ch_bafu_wasser_gebietsauslaesse
 }
 
 index ch_bafu_hydrologie_hydromessstationen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_hydrologie_hydromessstationen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_hydromessstationen
+    path = /var/lib/manticore/data/index/ch_bafu_hydrologie_hydromessstationen
 }
 
 index ch_bafu_gefahren_gefaehrdungszonen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_gefahren_gefaehrdungszonen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gefahren_gefaehrdungszonen
+    path = /var/lib/manticore/data/index/ch_bafu_gefahren_gefaehrdungszonen
 }

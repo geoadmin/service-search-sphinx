@@ -46,11 +46,11 @@ index ch_swisstopo_fixpunkte_hfp2
     min_infix_len = 2
     expand_keywords = 1
     source = src_ch_swisstopo_fixpunkte_hfp2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp2
+    path = /var/lib/manticore/data/index/ch_swisstopo_fixpunkte_hfp2
 }
 
 index ch_swisstopo_fixpunkte_lfp2 : ch_swisstopo_fixpunkte_hfp2
 {
     source = src_ch_swisstopo_fixpunkte_lfp2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp2
+    path = /var/lib/manticore/data/index/ch_swisstopo_fixpunkte_lfp2
 }

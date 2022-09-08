@@ -2,8 +2,8 @@
 # executed as cronjob every 15 minutes
 # shellcheck disable=SC2068
 set -eu
-SPHINX_EFS="/var/lib/sphinxsearch/data/index_efs/"
-SPHINX_VOLUME="/var/lib/sphinxsearch/data/index/"
+SPHINX_EFS="/var/lib/manticore/data/index_efs/"
+SPHINX_VOLUME="/var/lib/manticore/data/index/"
 SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
 RSYNC_INCLUDE="/tmp/include.txt"
 LOG_PREFIX="[ $$ - $(date +"%F %T")] "

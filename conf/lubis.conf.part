@@ -159,7 +159,7 @@ index ch_swisstopo_lubis_bildstreifen
     type = plain
     dict=crc
     source = src_ch_swisstopo_lubis_bildstreifen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_bildstreifen
+    path = /var/lib/manticore/data/index/ch_swisstopo_lubis_bildstreifen
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -167,41 +167,41 @@ index ch_swisstopo_lubis_bildstreifen
 index ch_swisstopo_lubis_luftbilder_schraegaufnahmen : ch_swisstopo_lubis_bildstreifen
 {
     source = src_ch_swisstopo_lubis_luftbilder_schraegaufnahmen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_schraegaufnahmen
+    path = /var/lib/manticore/data/index/ch_swisstopo_lubis_luftbilder_schraegaufnahmen
 }
 
 index ch_swisstopo_lubis_luftbilder_farbe : ch_swisstopo_lubis_bildstreifen
 {
     source = src_ch_swisstopo_lubis_luftbilder_farbe
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_farbe
+    path = /var/lib/manticore/data/index/ch_swisstopo_lubis_luftbilder_farbe
 }
 
 index ch_swisstopo_lubis_luftbilder_schwarzweiss : ch_swisstopo_lubis_luftbilder_farbe
 {
     source = src_ch_swisstopo_lubis_luftbilder_schwarzweiss
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_schwarzweiss
+    path = /var/lib/manticore/data/index/ch_swisstopo_lubis_luftbilder_schwarzweiss
 }
 
 index ch_swisstopo_lubis_luftbilder_infrarot : ch_swisstopo_lubis_luftbilder_farbe
 {
     source = src_ch_swisstopo_lubis_luftbilder_infrarot
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_infrarot
+    path = /var/lib/manticore/data/index/ch_swisstopo_lubis_luftbilder_infrarot
 }
 
 index ch_swisstopo_lubis_luftbilder_dritte_kantone : ch_swisstopo_lubis_luftbilder_farbe
 {
     source = src_ch_swisstopo_lubis_luftbilder_dritte_kantone
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_dritte_kantone
+    path = /var/lib/manticore/data/index/ch_swisstopo_lubis_luftbilder_dritte_kantone
 }
 
 index ch_swisstopo_lubis_luftbilder_dritte_firmen : ch_swisstopo_lubis_luftbilder_farbe
 {
     source = src_ch_swisstopo_lubis_luftbilder_dritte_firmen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_dritte_firmen
+    path = /var/lib/manticore/data/index/ch_swisstopo_lubis_luftbilder_dritte_firmen
 }
 
 index ch_swisstopo_lubis_terrestrische_aufnahmen : ch_swisstopo_lubis_luftbilder_farbe
 {
     source = src_ch_swisstopo_lubis_terrestrische_aufnahmen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_terrestrische_aufnahmen
+    path = /var/lib/manticore/data/index/ch_swisstopo_lubis_terrestrische_aufnahmen
 }

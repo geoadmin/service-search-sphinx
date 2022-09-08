@@ -39,7 +39,7 @@ Object            | Path
 **PID:**          | /var/run/sphinxsearch.pid         |
 **Searchd Log**   | /var/log/sphinxsearch/searchd.log |
 **Query Log:**    | /var/log/sphinxsearch/query.log   |
-**Indexes:**      | /var/lib/sphinxsearch/data/index/ |
+**Indexes:**      | /var/lib/manticore/data/index/ |
 **Configuration:**| /etc/sphinxsearch/sphinx.conf     |
 
 ### Search Daemon:
@@ -167,6 +167,6 @@ $ make deploy-int-config db=zeitreihen
 You can use this command to synchronize the remote sphinx config with the remote indices:
 * create all the missing indexes
 * remove orphaned indexes
-The sphinx configuration will not be deployed. The command can be used with integration or production: 
+The sphinx configuration will not be deployed. The command can be used with integration or production:
 * ``$ make deploy-int-clean_index``
 * ``$ make deploy-prod-clean_index``

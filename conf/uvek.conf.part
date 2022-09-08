@@ -1732,7 +1732,7 @@ index ch_astra_ivs_nat
     type = plain
     dict=crc
     source = src_ch_astra_ivs_nat
-    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs_nat
+    path = /var/lib/manticore/data/index/ch_astra_ivs_nat
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -1740,229 +1740,229 @@ index ch_astra_ivs_nat
 index ch_astra_ivs_nat_verlaeufe : ch_astra_ivs_nat
 {
     source = src_ch_astra_ivs_nat_verlaeufe
-    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs_nat_verlaeufe
+    path = /var/lib/manticore/data/index/ch_astra_ivs_nat_verlaeufe
 }
 
 index ch_astra_ivs_reg_loc : ch_astra_ivs_nat
 {
     source = src_ch_astra_ivs_reg_loc
-    path = /var/lib/sphinxsearch/data/index/ch_astra_ivs_reg_loc
+    path = /var/lib/manticore/data/index/ch_astra_ivs_reg_loc
 }
 
 index ch_bav_schienennetz : ch_astra_ivs_nat
 {
     source = src_ch_bav_schienennetz
-    path = /var/lib/sphinxsearch/data/index/ch_bav_schienennetz
+    path = /var/lib/manticore/data/index/ch_bav_schienennetz
 }
 
 index ch_bav_haltestellen_oev : ch_astra_ivs_nat
 {
     source = src_ch_bav_haltestellen_oev
-    path = /var/lib/sphinxsearch/data/index/ch_bav_haltestellen_oev
+    path = /var/lib/manticore/data/index/ch_bav_haltestellen_oev
 }
 
 index ch_bav_seilbahnen_bundeskonzession : ch_astra_ivs_nat
 {
     source = src_ch_bav_seilbahnen_bundeskonzession
-    path = /var/lib/sphinxsearch/data/index/ch_bav_seilbahnen_bundeskonzession
+    path = /var/lib/manticore/data/index/ch_bav_seilbahnen_bundeskonzession
 }
 
 index ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet : ch_astra_ivs_nat
 {
     source = src_ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet
-    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet
+    path = /var/lib/manticore/data/index/ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet
 }
 
 index ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal : ch_astra_ivs_nat
 {
     source = src_ch_astra_strassenverkehrszaehlung_lokal
-    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal
+    path = /var/lib/manticore/data/index/ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal
 }
 
 index ch_astra_strassenverkehrszaehlung_uebergeordnet : ch_astra_ivs_nat
 {
     source = src_ch_astra_strassenverkehrszaehlung_uebergeordnet
-    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_uebergeordnet
+    path = /var/lib/manticore/data/index/ch_astra_strassenverkehrszaehlung_uebergeordnet
 }
 
 index ch_astra_unfaelle_personenschaeden_motorraeder : ch_astra_ivs_nat
 {
     source = src_ch_astra_unfaelle_personenschaeden_motorraeder
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_motorraeder
+    path = /var/lib/manticore/data/index/ch_astra_unfaelle_personenschaeden_motorraeder
 }
 
 index ch_astra_unfaelle_personenschaeden_fussgaenger : ch_astra_ivs_nat
 {
     source = src_ch_astra_unfaelle_personenschaeden_fussgaenger
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_fussgaenger
+    path = /var/lib/manticore/data/index/ch_astra_unfaelle_personenschaeden_fussgaenger
 }
 
 index ch_astra_unfaelle_personenschaeden_fahrraeder : ch_astra_ivs_nat
 {
     source = src_ch_astra_unfaelle_personenschaeden_fahrraeder
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_fahrraeder
+    path = /var/lib/manticore/data/index/ch_astra_unfaelle_personenschaeden_fahrraeder
 }
 
 index ch_astra_unfaelle_personenschaeden_getoetete : ch_astra_ivs_nat
 {
     source = src_ch_astra_unfaelle_personenschaeden_getoetete
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_getoetete
+    path = /var/lib/manticore/data/index/ch_astra_unfaelle_personenschaeden_getoetete
 }
 
 index ch_astra_unfaelle_personenschaeden_alle : ch_astra_ivs_nat
 {
     source = src_ch_astra_unfaelle_personenschaeden_alle
-    path = /var/lib/sphinxsearch/data/index/ch_astra_unfaelle_personenschaeden_alle
+    path = /var/lib/manticore/data/index/ch_astra_unfaelle_personenschaeden_alle
 }
 
 index ch_bakom_notruf : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf
+    path = /var/lib/manticore/data/index/ch_bakom_notruf
 }
 
 index ch_bakom_notruf_112_festnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_112_festnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_festnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_112_festnetz
 }
 
 index ch_bakom_notruf_117_festnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_117_festnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_117_festnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_117_festnetz
 }
 
 index ch_bakom_notruf_118_festnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_118_festnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_118_festnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_118_festnetz
 }
 
 index ch_bakom_notruf_143_festnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_143_festnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_143_festnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_143_festnetz
 }
 
 index ch_bakom_notruf_144_festnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_144_festnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_144_festnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_144_festnetz
 }
 
 index ch_bakom_notruf_145_festnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_145_festnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_145_festnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_145_festnetz
 }
 
 index ch_bakom_notruf_147_festnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_147_festnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_147_festnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_147_festnetz
 }
 
 index ch_bakom_notruf_112_mobilnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_112_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_mobilnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_112_mobilnetz
 }
 
 index ch_bakom_notruf_117_mobilnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_117_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_117_mobilnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_117_mobilnetz
 }
 
 index ch_bakom_notruf_118_mobilnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_118_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_118_mobilnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_118_mobilnetz
 }
 
 index ch_bakom_notruf_143_mobilnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_143_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_143_mobilnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_143_mobilnetz
 }
 
 index ch_bakom_notruf_144_mobilnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_144_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_144_mobilnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_144_mobilnetz
 }
 
 index ch_bakom_notruf_145_mobilnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_145_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_145_mobilnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_145_mobilnetz
 }
 
 index ch_bakom_notruf_147_mobilnetz : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_147_mobilnetz
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_147_mobilnetz
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_147_mobilnetz
 }
 
 index ch_bakom_notruf_112_satellit : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf_112_satellit
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_satellit
+    path = /var/lib/manticore/data/index/ch_bakom_notruf_112_satellit
 }
 
 index ch_bakom_radio_fernsehsender : ch_astra_ivs_nat
 {
     source = src_ch_bakom_radio_fernsehsender
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_radio_fernsehsender
+    path = /var/lib/manticore/data/index/ch_bakom_radio_fernsehsender
 }
 
 index ch_bakom_versorgungsgebiet_tv : ch_astra_ivs_nat
 {
     source = src_ch_bakom_versorgungsgebiet_tv
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet_tv
+    path = /var/lib/manticore/data/index/ch_bakom_versorgungsgebiet_tv
 }
 
 index ch_bakom_versorgungsgebiet_ukw : ch_astra_ivs_nat
 {
     source = src_ch_bakom_versorgungsgebiet_ukw
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_versorgungsgebiet_ukw
+    path = /var/lib/manticore/data/index/ch_bakom_versorgungsgebiet_ukw
 }
 
 index ch_bav_sachplan_infrastruktur_schiene_ausgangslage : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schiene_ausgangslage
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_ausgangslage
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schiene_ausgangslage
 }
 
 index ch_bav_kataster_belasteter_standorte_oev : ch_astra_ivs_nat
 {
     source = src_ch_bav_kataster_belasteter_standorte_oev
-    path = /var/lib/sphinxsearch/data/index/ch_bav_kataster_belasteter_standorte_oev
+    path = /var/lib/manticore/data/index/ch_bav_kataster_belasteter_standorte_oev
 }
 
 index ch_bazl_kataster_belasteter_standorte_zivilflugplaetze : ch_astra_ivs_nat
 {
     source = src_ch_bazl_kataster_belasteter_standorte_zivilflugplaetze
-    path = /var/lib/sphinxsearch/data/index/ch_bazl_kataster_belasteter_standorte_zivilflugplaetze
+    path = /var/lib/manticore/data/index/ch_bazl_kataster_belasteter_standorte_zivilflugplaetze
 }
 
 index ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_ausgangslage
 }
 
 index ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1 : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_1
 }
 
 index ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2 : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung_2
 }
 
 index ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung
@@ -1975,13 +1975,13 @@ index ch_bav_sachplan_infrastruktur_schifffahrt_anhoerung
 index ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1 : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_kraft_1
 }
 
 index ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2 : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schifffahrt_kraft_2
 }
 
 index ch_bav_sachplan_infrastruktur_schifffahrt_kraft
@@ -1994,13 +1994,13 @@ index ch_bav_sachplan_infrastruktur_schifffahrt_kraft
 index ch_bav_sachplan_infrastruktur_schiene_anhorung_1 : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schiene_anhorung_1
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_anhorung_1
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schiene_anhorung_1
 }
 
 index ch_bav_sachplan_infrastruktur_schiene_anhorung_2 : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schiene_anhorung_2
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_anhorung_2
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schiene_anhorung_2
 }
 
 index ch_bav_sachplan_infrastruktur_schiene_anhorung
@@ -2013,13 +2013,13 @@ index ch_bav_sachplan_infrastruktur_schiene_anhorung
 index ch_bav_sachplan_infrastruktur_schiene_kraft_1 : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schiene_kraft_1
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_kraft_1
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schiene_kraft_1
 }
 
 index ch_bav_sachplan_infrastruktur_schiene_kraft_2 : ch_astra_ivs_nat
 {
     source = src_ch_bav_sachplan_infrastruktur_schiene_kraft_2
-    path = /var/lib/sphinxsearch/data/index/ch_bav_sachplan_infrastruktur_schiene_kraft_2
+    path = /var/lib/manticore/data/index/ch_bav_sachplan_infrastruktur_schiene_kraft_2
 }
 
 index ch_bav_sachplan_infrastruktur_schiene_kraft
@@ -2032,13 +2032,13 @@ index ch_bav_sachplan_infrastruktur_schiene_kraft
 index ch_bfe_kleinwasserkraftpotentiale : ch_astra_ivs_nat
 {
     source = src_ch_bfe_kleinwasserkraftpotentiale
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_kleinwasserkraftpotentiale
+    path = /var/lib/manticore/data/index/ch_bfe_kleinwasserkraftpotentiale
 }
 
 index ch_bfe_stauanlagen_bundesaufsicht : ch_astra_ivs_nat
 {
     source = src_ch_bfe_stauanlagen_bundesaufsicht
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_stauanlagen_bundesaufsicht
+    path = /var/lib/manticore/data/index/ch_bfe_stauanlagen_bundesaufsicht
 }
 
 index ch_bfe_sachplan_geologie_tiefenlager_thematische_darstellung
@@ -2052,73 +2052,73 @@ index ch_bfe_sachplan_geologie_tiefenlager_thematische_darstellung
 index ch_bfe_statistik_wasserkraftanlagen : ch_astra_ivs_nat
 {
     source = src_ch_bfe_statistik_wasserkraftanlagen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_statistik_wasserkraftanlagen
+    path = /var/lib/manticore/data/index/ch_bfe_statistik_wasserkraftanlagen
 }
 
 index ch_bfe_abgeltung_wasserkraftnutzung : ch_astra_ivs_nat
 {
     source = src_ch_bfe_abgeltung_wasserkraftnutzung
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_abgeltung_wasserkraftnutzung
+    path = /var/lib/manticore/data/index/ch_bfe_abgeltung_wasserkraftnutzung
 }
 
 index ch_bfe_kernkraftwerke : ch_astra_ivs_nat
 {
     source = src_ch_bfe_kernkraftwerke
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_kernkraftwerke
+    path = /var/lib/manticore/data/index/ch_bfe_kernkraftwerke
 }
 
 index ch_bfe_energiestaedte : ch_astra_ivs_nat
 {
     source = src_ch_bfe_energiestaedte
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte
+    path = /var/lib/manticore/data/index/ch_bfe_energiestaedte
 }
 
 index ch_bfe_energiestaedte_2000watt_areale : ch_astra_ivs_nat
 {
     source = src_ch_bfe_energiestaedte_2000watt_areale
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energiestaedte_2000watt_areale
+    path = /var/lib/manticore/data/index/ch_bfe_energiestaedte_2000watt_areale
 }
 
 index ch_bazl_luftfahrthindernis : ch_astra_ivs_nat
 {
     source = src_ch_bazl_luftfahrthindernis
-    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis
+    path = /var/lib/manticore/data/index/ch_bazl_luftfahrthindernis
 }
 
 index ch_bazl_luftfahrthindernis_aenderungen : ch_astra_ivs_nat
 {
     source = src_ch_bazl_luftfahrthindernis_aenderungen
-    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis_aenderungen
+    path = /var/lib/manticore/data/index/ch_bazl_luftfahrthindernis_aenderungen
 }
 
 index ch_bfe_windenergieanlagen : ch_astra_ivs_nat
 {
     source = src_ch_bfe_windenergieanlagen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_windenergieanlagen
+    path = /var/lib/manticore/data/index/ch_bfe_windenergieanlagen
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_anhorung_1 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_1
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_1
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_1
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_anhorung_2 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_2
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_2
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_2
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_anhorung_3 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_3
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_3
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_3
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_anhorung_4 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_uebertragungsleitungen_anhorung_4
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_4
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_uebertragungsleitungen_anhorung_4
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_anhorung
@@ -2133,25 +2133,25 @@ index ch_bfe_sachplan_uebertragungsleitungen_anhorung
 index ch_bfe_sachplan_uebertragungsleitungen_kraft_1 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_uebertragungsleitungen_kraft_1
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_1
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_1
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_kraft_2 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_uebertragungsleitungen_kraft_2
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_2
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_2
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_kraft_3 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_uebertragungsleitungen_kraft_3
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_3
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_3
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_kraft_4 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_uebertragungsleitungen_kraft_4
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_4
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_uebertragungsleitungen_kraft_4
 }
 
 index ch_bfe_sachplan_uebertragungsleitungen_kraft
@@ -2166,133 +2166,133 @@ index ch_bfe_sachplan_uebertragungsleitungen_kraft
 index ch_bfe_energieforschung : ch_astra_ivs_nat
 {
     source = src_ch_bfe_energieforschung
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_energieforschung
+    path = /var/lib/manticore/data/index/ch_bfe_energieforschung
 }
 
 index ch_astra_wanderland : ch_astra_ivs_nat
 {
     source = src_ch_astra_wanderland
-    path = /var/lib/sphinxsearch/data/index/ch_astra_wanderland
+    path = /var/lib/manticore/data/index/ch_astra_wanderland
 }
 
 index ch_astra_veloland : ch_astra_ivs_nat
 {
     source = src_ch_astra_veloland
-    path = /var/lib/sphinxsearch/data/index/ch_astra_veloland
+    path = /var/lib/manticore/data/index/ch_astra_veloland
 }
 
 index ch_astra_skatingland : ch_astra_ivs_nat
 {
     source = src_ch_astra_skatingland
-    path = /var/lib/sphinxsearch/data/index/ch_astra_skatingland
+    path = /var/lib/manticore/data/index/ch_astra_skatingland
 }
 
 index ch_astra_mountainbikeland : ch_astra_ivs_nat
 {
     source = src_ch_astra_mountainbikeland
-    path = /var/lib/sphinxsearch/data/index/ch_astra_mountainbikeland
+    path = /var/lib/manticore/data/index/ch_astra_mountainbikeland
 }
 
 index ch_astra_wanderland_sperrungen_umleitungen : ch_astra_ivs_nat
 {
     source = src_ch_astra_wanderland_sperrungen_umleitungen
-    path = /var/lib/sphinxsearch/data/index/ch_astra_wanderland_sperrungen_umleitungen
+    path = /var/lib/manticore/data/index/ch_astra_wanderland_sperrungen_umleitungen
 }
 
 index ch_astra_veloland_sperrungen_umleitungen : ch_astra_ivs_nat
 {
     source = src_ch_astra_veloland_sperrungen_umleitungen
-    path = /var/lib/sphinxsearch/data/index/ch_astra_veloland_sperrungen_umleitungen
+    path = /var/lib/manticore/data/index/ch_astra_veloland_sperrungen_umleitungen
 }
 
 index ch_astra_skatingland_sperrungen_umleitungen : ch_astra_ivs_nat
 {
     source = src_ch_astra_skatingland_sperrungen_umleitungen
-    path = /var/lib/sphinxsearch/data/index/ch_astra_skatingland_sperrungen_umleitungen
+    path = /var/lib/manticore/data/index/ch_astra_skatingland_sperrungen_umleitungen
 }
 
 index ch_astra_mountainbikeland_sperrungen_umleitungen : ch_astra_ivs_nat
 {
     source = src_ch_astra_mountainbikeland_sperrungen_umleitungen
-    path = /var/lib/sphinxsearch/data/index/ch_astra_mountainbikeland_sperrungen_umleitungen
+    path = /var/lib/manticore/data/index/ch_astra_mountainbikeland_sperrungen_umleitungen
 }
 
 index ch_swisstopo_schneeschuhwandern : ch_astra_ivs_nat
 {
     source = src_ch_swisstopo_schneeschuhwandern
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_schneeschuhwandern
+    path = /var/lib/manticore/data/index/ch_swisstopo_schneeschuhwandern
 }
 
 index ch_astra_schwerverunfallte_kanton_alkohol : ch_astra_ivs_nat
 {
     source = src_ch_astra_schwerverunfallte_kanton_alkohol
-    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte_kanton_alkohol
+    path = /var/lib/manticore/data/index/ch_astra_schwerverunfallte_kanton_alkohol
 }
 
 index ch_astra_schwerverunfallte_kanton_geschwindigkeit : ch_astra_ivs_nat
 {
     source = src_ch_astra_schwerverunfallte_kanton_geschwindigkeit
-    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte_kanton_geschwindigkeit
+    path = /var/lib/manticore/data/index/ch_astra_schwerverunfallte_kanton_geschwindigkeit
 }
 
 index ch_astra_schwerverunfallte_kanton_jahresvergleich : ch_astra_ivs_nat
 {
     source = src_ch_astra_schwerverunfallte_kanton_jahresvergleich
-    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte_kanton_jahresvergleich
+    path = /var/lib/manticore/data/index/ch_astra_schwerverunfallte_kanton_jahresvergleich
 }
 
 index ch_astra_schwerverunfallte_kanton_pro_einwohner : ch_astra_ivs_nat
 {
     source = src_ch_astra_schwerverunfallte_kanton_pro_einwohner
-    path = /var/lib/sphinxsearch/data/index/ch_astra_schwerverunfallte_kanton_pro_einwohner
+    path = /var/lib/manticore/data/index/ch_astra_schwerverunfallte_kanton_pro_einwohner
 }
 
 index ch_astra_nationalstrassenachsen : ch_astra_ivs_nat
 {
     source = src_ch_astra_nationalstrassenachsen
-    path = /var/lib/sphinxsearch/data/index/ch_astra_nationalstrassenachsen
+    path = /var/lib/manticore/data/index/ch_astra_nationalstrassenachsen
 }
 
 index ch_bfe_fernwaerme_angebot : ch_astra_ivs_nat
 {
     source = src_ch_bfe_fernwaerme_angebot
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_fernwaerme_angebot
+    path = /var/lib/manticore/data/index/ch_bfe_fernwaerme_angebot
 }
 
 index ch_bfe_biomasse_verholzt : ch_astra_ivs_nat
 {
     source = src_ch_bfe_biomasse_verholzt
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_biomasse_verholzt
+    path = /var/lib/manticore/data/index/ch_bfe_biomasse_verholzt
 }
 
 index ch_bfe_biomasse_nicht_verholzt : ch_astra_ivs_nat
 {
     source = src_ch_bfe_biomasse_nicht_verholzt
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_biomasse_nicht_verholzt
+    path = /var/lib/manticore/data/index/ch_bfe_biomasse_nicht_verholzt
 }
 
 index ch_bfe_kehrichtverbrennungsanlagen : ch_astra_ivs_nat
 {
     source = src_ch_bfe_kehrichtverbrennungsanlagen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_kehrichtverbrennungsanlagen
+    path = /var/lib/manticore/data/index/ch_bfe_kehrichtverbrennungsanlagen
 }
 
 index ch_bfe_sachplan_geologie_tiefenlager_1 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_geologie_tiefenlager_1
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_1
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_geologie_tiefenlager_1
 }
 
 index ch_bfe_sachplan_geologie_tiefenlager_2 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_geologie_tiefenlager_2
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_2
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_geologie_tiefenlager_2
 }
 
 index ch_bfe_sachplan_geologie_tiefenlager_3 : ch_astra_ivs_nat
 {
     source = src_ch_bfe_sachplan_geologie_tiefenlager_3
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_sachplan_geologie_tiefenlager_3
+    path = /var/lib/manticore/data/index/ch_bfe_sachplan_geologie_tiefenlager_3
 }
 
 index ch_bfe_sachplan_geologie_tiefenlager
@@ -2306,47 +2306,47 @@ index ch_bfe_sachplan_geologie_tiefenlager
 index ch_bav_anlagen_schienengueterverkehr : ch_astra_ivs_nat
 {
     source = src_ch_bav_anlagen_schienengueterverkehr
-    path = /var/lib/sphinxsearch/data/index/ch_bav_anlagen_schienengueterverkehr
+    path = /var/lib/manticore/data/index/ch_bav_anlagen_schienengueterverkehr
 }
 
 index ch_bfe_biogasanlagen : ch_astra_ivs_nat
 {
     source = src_ch_bfe_biogasanlagen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_biogasanlagen
+    path = /var/lib/manticore/data/index/ch_bfe_biogasanlagen
 }
 
 index ch_bfe_erneuerbarheizen : ch_astra_ivs_nat
 {
     source = src_ch_bfe_erneuerbarheizen
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_erneuerbarheizen
+    path = /var/lib/manticore/data/index/ch_bfe_erneuerbarheizen
 }
 
 index ch_bfe_erneuerbarheizen_mehrfamilienhaeuser  : ch_astra_ivs_nat
 {
     source = src_ch_bfe_erneuerbarheizen_mehrfamilienhaeuser
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_erneuerbarheizen_mehrfamilienhaeuser
+    path = /var/lib/manticore/data/index/ch_bfe_erneuerbarheizen_mehrfamilienhaeuser
 }
 
 index ch_bfe_komo_projekte : ch_astra_ivs_nat
 {
     source = src_ch_bfe_komo_projekte
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_komo_projekte
+    path = /var/lib/manticore/data/index/ch_bfe_komo_projekte
 }
 
 index ch_bfe_thermische_netze : ch_astra_ivs_nat
 {
     source = src_ch_bfe_thermische_netze
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_thermische_netze
+    path = /var/lib/manticore/data/index/ch_bfe_thermische_netze
 }
 
 index ch_bfe_waermepotential_gewaesser : ch_astra_ivs_nat
 {
     source = src_ch_bfe_waermepotential_gewaesser
-    path = /var/lib/sphinxsearch/data/index/ch_bfe_waermepotential_gewaesser
+    path = /var/lib/manticore/data/index/ch_bfe_waermepotential_gewaesser
 }
 
 index ch_bazl_gebietsbeschraenkungen_drohnen : ch_astra_ivs_nat
 {
     source = src_ch_bazl_gebietsbeschraenkungen_drohnen
-    path = /var/lib/sphinxsearch/data/index/ch_bazl_gebietsbeschraenkungen_drohnen
+    path = /var/lib/manticore/data/index/ch_bazl_gebietsbeschraenkungen_drohnen
 }
