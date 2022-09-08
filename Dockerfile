@@ -5,8 +5,10 @@ RUN apt-get update && \
     cron \
     gettext \
     libpq-dev \
+    manticore-converter \
     python3-pip \
-    rsync && \
+    rsync \
+    vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     # set up cron for non root user
