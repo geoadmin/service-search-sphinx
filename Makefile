@@ -222,7 +222,7 @@ endif
 
 .PHONY: check-config-local
 check-config-local: dockerbuild config
-	$(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf | grep "config valid" || $(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
+	$(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/manticoresearch/manticore.conf | grep "config valid" || $(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/manticoresearch/manticore.conf
 	DOCKER_EXEC_LOCAL="$(DOCKER_EXEC_LOCAL)" ./scripts/check-config-local.sh
 
 

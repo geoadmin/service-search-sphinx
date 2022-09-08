@@ -166,7 +166,7 @@ index ch_bfs_gebaeude_wohnungs_register : ch_bfs_generalisierte_grenzen_agglomer
     min_infix_len = 1
     source = src_ch_bfs_gebaeude_wohnungs_register
     path = /var/lib/manticore/data/index/ch_bfs_gebaeude_wohnungs_register
-    ondisk_attrs = 0
+    access_plain_attrs = mmap = 0
 }
 
 index ch_bak_bundesinventar_schuetzenswerte_ortsbilder : ch_bfs_generalisierte_grenzen_agglomerationen_g1

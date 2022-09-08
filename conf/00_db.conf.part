@@ -41,12 +41,9 @@ searchd
     listen = /var/run/mysqld/mysqld.sock:mysql41
     listen = 127.0.0.1:9312
     listen = 9308:http
-    # syslog -> logstash -> kibana
-    #log = /var/log/sphinxsearch/searchd.log
-    # syslog -> logstash -> kibana
-    #query_log = /var/log/sphinxsearch/query.log
-    #pid_file = /var/run/sphinxsearch/searchd.pid
-    pid_file = manticoresearch.pid
+    log = /var/log/manticore/searchd.log
+    query_log = /var/log/manticore/query.log
+    pid_file = /var/run/manticore/searchd.pid
     # mysql listener
     listen = localhost:9306:mysql41
     preopen_indexes = 0

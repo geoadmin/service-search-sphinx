@@ -4,7 +4,7 @@
 set -eu
 SPHINX_EFS="/var/lib/manticore/data/index_efs/"
 SPHINX_VOLUME="/var/lib/manticore/data/index/"
-SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
+SPHINXCONFIG="/etc/manticoresearch/manticore.conf"
 RSYNC_INCLUDE="/tmp/include.txt"
 LOG_PREFIX="[ $$ - $(date +"%F %T")] "
 

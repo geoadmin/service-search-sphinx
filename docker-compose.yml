@@ -3,8 +3,8 @@ services:
   search-manticore:
     build: .
     volumes:
-      - ${SPHINX_EFS:?err}:/var/lib/manticore/index_efs/
-      - sphinx_index:/var/lib/manticore/index/
+      - ${SPHINX_EFS:?err}:/var/lib/manticore/data/index_efs/
+      - sphinx_index:/var/lib/manticore/data/index/
       - container_probes:/var/lib/container_probes
     env_file:
       - dev_sphinx.env
