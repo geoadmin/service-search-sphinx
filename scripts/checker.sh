@@ -3,9 +3,8 @@ set -e
 set -u
 set -o pipefail
 
-# mountpoint with readiness probe file
-MOUNT=$(realpath "${PROBE_MOUNTPOINT:-/tmp}")
-READY_FILE="${MOUNT}/checker_ready.txt"
+# readiness probe file
+READY_FILE="/var/lib/container_probes/checker_ready.txt"
 
 clean_probe_files() {
     rm -f "${READY_FILE}" || :

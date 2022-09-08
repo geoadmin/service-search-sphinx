@@ -25,6 +25,7 @@ RUN groupadd -r geodata -g 2500 && \
     # create mountpoint folders with geodata ownership
     install -o geodata -g geodata -d /var/lib/sphinxsearch/data/index/ && \
     install -o geodata -p geodata -d /var/lib/sphinxsearch/data/index_efs/ && \
+    install -o geodata -p geodata -d /var/lib/container_probes/ && \
     # TODO: redirect logs to stdout # only working if container is running as root
     # ln -sv /dev/stdout /var/log/sphinxsearch/query.log && \
     # ln -sv /dev/stdout /var/log/sphinxsearch/searchd.log && \
@@ -41,6 +42,8 @@ FROM sphinxsearch_geodata
 # copy sphinxsearch config and maintenance code
 COPY --chown=geodata:geodata scripts/docker-* scripts/index-sync-rotate.sh scripts/pg2sphinx_trigger.py scripts/checker.sh /
 COPY --chown=geodata:geodata conf /conf/
+
+USER geodata
 
 # default CMD
 ENTRYPOINT [ "/docker-entry.sh" ]
