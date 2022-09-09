@@ -2,16 +2,24 @@ version: "3.8"
 services:
   search-manticore:
     build: .
+    env_file:
+      - dev_sphinx.env
     volumes:
       - ${SPHINX_EFS:?err}:/var/lib/manticore/data/index_efs/
       - sphinx_index:/var/lib/manticore/data/index/
       - container_probes:/var/lib/container_probes
-    env_file:
-      - dev_sphinx.env
     environment:
       - PGUSER=${BOD_DB_USER:?err}
       - PGPASS=${BOD_DB_PASSWD:?err}
       - CPUS=${CPUS:?err}
+    ulimits:
+      nproc: 65535
+      nofile:
+         soft: 65535
+         hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
     healthcheck:
       test:  ./checker.sh
       interval: 3s
@@ -19,7 +27,15 @@ services:
       retries: 3
       start_period: 3600s
     restart: always
-
+  auto-heal:
+    image: willfarrell/autoheal
+    environment:
+      AUTOHEAL_CONTAINER_LABEL: all
+      AUTOHEAL_INTERVAL: 10
+      AUTOHEAL_START_PERIOD: 3600
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
 volumes:
   sphinx_index:
     external: false
