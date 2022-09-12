@@ -4,6 +4,8 @@ services:
     build: .
     env_file:
       - dev_sphinx.env
+    ports:
+      - 9308:9308
     volumes:
       - ${SPHINX_EFS:?err}:/var/lib/manticore/data/index_efs/
       - sphinx_index:/var/lib/manticore/data/index/
