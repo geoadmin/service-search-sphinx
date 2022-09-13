@@ -1,5 +1,10 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 set -euo pipefail
+
+source checker.sh
+# geodata has to have rw access on probe mountpoint
+chown -R geodata:geodata "${MOUNT}"
 
 # build sphinx config with current environment
 cat conf/*.part > conf/sphinx.conf.in
