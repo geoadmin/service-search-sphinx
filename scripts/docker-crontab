@@ -9,4 +9,6 @@ SHELL="/bin/bash"
 USER="geodata"
 
 */5 * * * * bash /index-sync-rotate.sh
+# truncate query logs once a day
+0 0 * * * : > /var/log/sphinxsearch/query.log
 # it is important to add a new-line
