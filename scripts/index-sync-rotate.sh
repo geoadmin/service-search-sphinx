@@ -6,7 +6,6 @@ SPHINX_EFS="/var/lib/sphinxsearch/data/index_efs/"
 SPHINX_VOLUME="/var/lib/sphinxsearch/data/index/"
 SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
 RSYNC_INCLUDE="/tmp/include.txt"
-LOG_PREFIX="[ $$ - $(date +"%F %T")] "
 
 # every 15 minutes
     # lock only one script instance should be running
@@ -35,6 +34,26 @@ LOG_PREFIX="[ $$ - $(date +"%F %T")] "
     # .spp
     # .sps
 
+
+
+json_logger() {
+    log_level=$1
+    timestamp=$(date --utc +%FT%T.%3NZ)
+    self=$(readlink -f "${BASH_SOURCE[0]}")
+    self=$(basename "$self")
+    jq --raw-input --compact-output --monochrome-output \
+    '{ "app":
+        {
+            "time": "'"${timestamp}"'",
+            "level": "'"${log_level}"'",
+            "logger": "'"${self}"'",
+            "pidTid": "'$$'",
+            "function": "'"${FUNCNAME[0]}"'",
+            "message": .
+      }
+    }'
+}
+
 SPHINX_FILE_EXTENSIONS=('spa' 'spd' 'spe' 'sph' 'spi' 'spk' 'spm' 'spp' 'sps')
 SPHINX_INDEX_READY=('spd' 'spe' 'sph' 'spi' 'spp' 'sps')
 SPHINX_INDEXES=$(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}' | sed -n -e 's|^.*/||p')
@@ -49,7 +68,7 @@ _no_more_locking()  { _lock u; _lock xn && rm -f "$LOCKFILE"; }
 _prepare_locking()  { eval "exec $LOCKFD>\"$LOCKFILE\""; trap _no_more_locking EXIT; }
 
 # do not continue if searchd is not running for crash or precaching reasons...
-searchd --status &> /dev/null || { echo "${LOG_PREFIX}-> $(date +"%F %T") searchd service is not running, skip rsync"; exit 0; }
+searchd --status &> /dev/null || { echo "searchd service is not running, skip rsync" | json_logger INFO; exit 0; }
 
 # ON START
 _prepare_locking
@@ -58,8 +77,8 @@ _prepare_locking
 exlock_now()        { _lock xn; }  # obtain an exclusive lock immediately or fail
 
 # avoiding running multiple instances of script.
-exlock_now || { echo "${LOG_PREFIX}-> $(date +"%F %T") locked"; exit 1; }
-echo "${LOG_PREFIX}-> $(date +"%F %T") start"
+exlock_now || { echo "locked" | json_logger INFO; exit 1; }
+echo "start" | json_logger INFO
 
 check_if_index_is_ready() {
     # input:
@@ -112,10 +131,10 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
     (( ${#new_files[@]} )) || continue
 
     # check if index has been fully updated on EFS
-    check_if_index_is_ready "${sphinx_index}" || { echo "${LOG_PREFIX}-> $(date +"%F %T") skipping partially updated index: ${sphinx_index} ..."; continue; }
+    check_if_index_is_ready "${sphinx_index}" || { echo "skipping partially updated index: ${sphinx_index} ..." | json_logger INFO; continue; }
 
     # sync EFS to VOLUME
-    echo "${LOG_PREFIX}-> $(date +"%F %T") start sync and rename files in target folder: ${sphinx_index} ..."
+    echo "start sync and rename files in target folder: ${sphinx_index} ..." | json_logger INFO
     tmp_array=()
 
     while IFS= read -r -d '' new_file; do
@@ -131,11 +150,11 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
         IFS=" " read -r -a new_files_merged <<< ${tmp_array[@]}
         if ((${#new_files_merged[@]})); then
             # start index rotation
-            echo "${LOG_PREFIX}-> $(date +"%F %T") restart searchd for index rotation..."
+            echo "restart searchd for index rotation..." | json_logger INFO
             pkill -1 searchd
 
             # wait until all files new_files and locally renamed files have been renamed / rotated in SPHINX_VOLUME
-            echo "${LOG_PREFIX}-> $(date +"%F %T") wait for index rotation..."
+            echo "wait for index rotation..." | json_logger INFO
             all_files_are_gone=false
             while ! ${all_files_are_gone}; do
                 all_files_are_gone=true
@@ -151,4 +170,4 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
 done
 
 
-echo "${LOG_PREFIX}-> $(date +"%F %T") finished"
+echo "finished" | json_logger INFO

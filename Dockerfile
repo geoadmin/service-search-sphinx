@@ -6,6 +6,7 @@ RUN apt-get update && \
     default-mysql-client \
     gettext-base \
     gosu \
+    jq \
     procps \
     rsync \
     sphinxsearch && \
