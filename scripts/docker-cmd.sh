@@ -47,4 +47,11 @@ crontab < docker-crontab
 # starting the searchd service
 # will load the sphinx indexes from EFS --sync--> Volume --> into memory
 echo -e "${green}starting searchd service ...${NC}"
-/usr/bin/searchd --nodetach "$@"
+
+# prepare the applogs for output on /proc/1/fd/1
+rm -rf /var/log/sphinxsearch/query.log /var/log/sphinxsearch/searchd.log
+tail --pid $$ -F /var/log/sphinxsearch/searchd.log &
+tail --pid $$ -F /var/log/sphinxsearch/query.log &
+
+# searchd will own pid 1
+exec /usr/bin/searchd  --nodetach "$@"
