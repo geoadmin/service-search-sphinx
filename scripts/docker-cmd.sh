@@ -49,9 +49,14 @@ crontab < docker-crontab
 echo -e "${green}starting searchd service ...${NC}"
 
 # prepare the applogs for output on /proc/1/fd/1
-rm -rf /var/log/sphinxsearch/query.log /var/log/sphinxsearch/searchd.log
 tail --pid $$ -F /var/log/sphinxsearch/searchd.log &
 tail --pid $$ -F /var/log/sphinxsearch/query.log &
+
+# prepare the logs for the cronjobs
+# Have the main Docker process tail the files to produce stdout and stderr
+# for the main process that Docker will actually show in docker logs.
+tail -f /tmp/stdout &
+tail -f /tmp/stderr >&2 &
 
 # searchd will own pid 1
 exec /usr/bin/searchd  --nodetach "$@"

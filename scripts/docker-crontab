@@ -8,7 +8,7 @@
 SHELL="/bin/bash"
 USER="geodata"
 
-*/5 * * * * bash /index-sync-rotate.sh
+*/5 * * * * bash /index-sync-rotate.sh 1>/tmp/stdout 2>/tmp/stderr
 
 # truncate sphinx logs
 0 0 * * * : > /var/log/sphinxsearch/searchd.log
