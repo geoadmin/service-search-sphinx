@@ -144,7 +144,7 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
         new_file_renamed=$(sed 's/\.sp\(\w\)$/.new.sp\1/' <<< "${new_file}")
         cp -fa "${SPHINX_EFS}${new_file}" "${SPHINX_VOLUME}${new_file_renamed}"
         tmp_array+=("${new_file_renamed}")
-    done <   <(find "${SPHINX_EFS}" -name "${sphinx_index}*" -print0)
+    done <   <(find "${SPHINX_EFS}" -name "${sphinx_index}.*" -print0)
 
     if ((${#tmp_array[@]})); then
         # remove blank strings from array
