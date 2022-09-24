@@ -37,7 +37,7 @@ def pg_get_tables(sql_query, sql_db):
                 t.append(sql_db + '.' + table_i)
         t = list(set(t))  # get rid of duplicate entries in the list and sorting
         return ','.join(sorted(t))
-    except psycopg2.OperationalError as err:
+    except (psycopg2.ProgrammingError, psycopg2.OperationalError) as err:
         sys.stderr.write(
             f"ERROR: wrong query detected in database: {sql_query}"\
             f"\nquery:\n{sql_query}\nerror:\n{err}\n"
