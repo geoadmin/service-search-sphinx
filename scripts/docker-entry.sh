@@ -2,8 +2,6 @@
 # shellcheck disable=SC1091
 set -euo pipefail
 
-source checker.sh
-
 # build sphinx config with current environment
 cat conf/*.part > conf/sphinx.conf.in
 envsubst < conf/sphinx.conf.in > conf/sphinx.conf
