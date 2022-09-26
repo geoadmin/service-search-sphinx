@@ -138,12 +138,13 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
     tmp_array=()
 
     while IFS= read -r -d '' new_file; do
+        echo "copy new file: $new_file" | json_logger INFO
         new_file=$(basename "${new_file}")
         # shellcheck disable=2001
         new_file_renamed=$(sed 's/\.sp\(\w\)$/.new.sp\1/' <<< "${new_file}")
         cp -fa "${SPHINX_EFS}${new_file}" "${SPHINX_VOLUME}${new_file_renamed}"
         tmp_array+=("${new_file_renamed}")
-    done <   <(find "${SPHINX_EFS}" -name "${sphinx_index}*" -print0)
+    done <   <(find "${SPHINX_EFS}" -name "${sphinx_index}.*" -print0)
 
     if ((${#tmp_array[@]})); then
         # remove blank strings from array
@@ -158,11 +159,14 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
             all_files_are_gone=false
             while ! ${all_files_are_gone}; do
                 all_files_are_gone=true
+                echo "about to rotate ${sphinx_index}, waiting for ${new_files_merged[*]} to disappear" | json_logger INFO
                 for new_file in ${new_files_merged[@]}; do
                     # skip empty elements
                     [[ -z ${new_file} ]] && continue
                     [ -f "${SPHINX_VOLUME}${new_file}" ] && all_files_are_gone=false
                 done
+                # shellcheck disable=SC2046
+                ${all_files_are_gone} || echo "still exist:" $( cd "${SPHINX_VOLUME}"; ls "${new_files_merged[@]}" 2> /dev/null ) | json_logger INFO
                 sleep 5
             done
         fi
