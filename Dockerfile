@@ -9,7 +9,8 @@ RUN apt-get update && \
     jq \
     procps \
     rsync \
-    sphinxsearch && \
+    sphinxsearch \
+    vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     gosu nobody true && \
