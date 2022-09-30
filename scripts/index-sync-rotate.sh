@@ -136,7 +136,10 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
     # sync EFS to VOLUME
     echo "start sync and rename files in target folder: ${sphinx_index} ..." | json_logger INFO
     tmp_array=()
-
+    # find and copy only files with valid file extension
+    # find will be expanded to:
+    # find /var/local/geodata/service-sphinxsearch/prod/index/ -regex "^.*/layers_de.\(spa\|spd\|spe\|sph\|spi\|spk\|spm\|spp\)$^
+    find_extensions="${SPHINX_FILE_EXTENSIONS[*]}"
     while IFS= read -r -d '' new_file; do
         echo "copy new file: $new_file" | json_logger INFO
         new_file=$(basename "${new_file}")
@@ -144,7 +147,7 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
         new_file_renamed=$(sed 's/\.sp\(\w\)$/.new.sp\1/' <<< "${new_file}")
         cp -fa "${SPHINX_EFS}${new_file}" "${SPHINX_VOLUME}${new_file_renamed}"
         tmp_array+=("${new_file_renamed}")
-    done <   <(find "${SPHINX_EFS}" -name "${sphinx_index}.*" -print0)
+    done <   <(find "${SPHINX_EFS}" -regex "^.*/${sphinx_index}.\(${find_extensions// /\\|}\)$" -print0)
 
     if ((${#tmp_array[@]})); then
         # remove blank strings from array
