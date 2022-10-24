@@ -9,7 +9,8 @@ RUN apt-get update && \
     jq \
     procps \
     rsync \
-    sphinxsearch && \
+    sphinxsearch \
+    vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     gosu nobody true && \
@@ -41,6 +42,8 @@ FROM sphinxsearch_geodata
 # copy sphinxsearch config and maintenance code
 COPY --chown=geodata:geodata scripts/docker-* scripts/index-sync-rotate.sh scripts/pg2sphinx_trigger.py scripts/checker.sh /
 COPY --chown=geodata:geodata conf /conf/
+
+USER geodata
 
 # default CMD
 ENTRYPOINT [ "/docker-entry.sh" ]

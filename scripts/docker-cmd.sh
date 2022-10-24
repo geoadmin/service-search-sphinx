@@ -2,11 +2,6 @@
 # shellcheck disable=SC1091
 set -euo pipefail
 
-source checker.sh
-
-# Capture Exit Code
-trap clean_probe_files EXIT
-
 # fancy output
 green='\e[0;32m'
 red='\e[0;31m'
