@@ -12,6 +12,7 @@ RUN apt-get update && \
     vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
+    gosu nobody true && \
     # set up cron for non root user
     chmod gu+rw /var/run && \
     chmod gu+s /usr/sbin/cron &&\
