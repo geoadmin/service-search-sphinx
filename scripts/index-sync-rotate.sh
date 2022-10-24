@@ -58,7 +58,6 @@ SPHINX_FILE_EXTENSIONS=('spa' 'spd' 'spe' 'sph' 'spi' 'spk' 'spm' 'spp' 'sps')
 SPHINX_INDEX_READY=('spd' 'spe' 'sph' 'spi' 'spp' 'sps')
 SPHINX_INDEXES=$(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}' | sed -n -e 's|^.*/||p')
 
-# global locking, no parallel syncing from efs into docker volumes
 LOCKFILE="/tmp/$(basename "$0")"
 LOCKFD=99
 
