@@ -403,7 +403,7 @@ index ch_blw_klimaeignung_typ
     type = plain
     dict=crc
     source = src_ch_blw_klimaeignung_typ
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_typ
+    path = /var/lib/manticore/data/index/ch_blw_klimaeignung_typ
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -411,125 +411,125 @@ index ch_blw_klimaeignung_typ
 index ch_blw_klimaeignung_koernermais : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_klimaeignung_koernermais
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_koernermais
+    path = /var/lib/manticore/data/index/ch_blw_klimaeignung_koernermais
 }
 
 index ch_blw_klimaeignung_spezialkulturen : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_klimaeignung_spezialkulturen
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_spezialkulturen
+    path = /var/lib/manticore/data/index/ch_blw_klimaeignung_spezialkulturen
 }
 
 index ch_blw_klimaeignung_zwischenfruchtbau : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_klimaeignung_zwischenfruchtbau
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_zwischenfruchtbau
+    path = /var/lib/manticore/data/index/ch_blw_klimaeignung_zwischenfruchtbau
 }
 
 index ch_blw_klimaeignung_kartoffeln : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_klimaeignung_kartoffeln
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_kartoffeln
+    path = /var/lib/manticore/data/index/ch_blw_klimaeignung_kartoffeln
 }
 
 index ch_blw_klimaeignung_getreidebau : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_klimaeignung_getreidebau
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_getreidebau
+    path = /var/lib/manticore/data/index/ch_blw_klimaeignung_getreidebau
 }
 
 index ch_blw_klimaeignung_futterbau : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_klimaeignung_futterbau
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_futterbau
+    path = /var/lib/manticore/data/index/ch_blw_klimaeignung_futterbau
 }
 
 index ch_blw_klimaeignung_kulturland : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_klimaeignung_kulturland
-    path = /var/lib/sphinxsearch/data/index/ch_blw_klimaeignung_kulturland
+    path = /var/lib/manticore/data/index/ch_blw_klimaeignung_kulturland
 }
 
 index ch_blw_niederschlagshaushalt : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_niederschlagshaushalt
-    path = /var/lib/sphinxsearch/data/index/ch_blw_niederschlagshaushalt
+    path = /var/lib/manticore/data/index/ch_blw_niederschlagshaushalt
 }
 
 index ch_blw_bodeneignung_kulturtyp : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_bodeneignung_kulturtyp
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_kulturtyp
+    path = /var/lib/manticore/data/index/ch_blw_bodeneignung_kulturtyp
 }
 
 index ch_blw_bodeneignung_gruendigkeit : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_bodeneignung_gruendigkeit
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_gruendigkeit
+    path = /var/lib/manticore/data/index/ch_blw_bodeneignung_gruendigkeit
 }
 
 index ch_blw_bodeneignung_skelettgehalt : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_bodeneignung_skelettgehalt
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_skelettgehalt
+    path = /var/lib/manticore/data/index/ch_blw_bodeneignung_skelettgehalt
 }
 
 index ch_blw_bodeneignung_wasserspeichervermoegen : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_bodeneignung_wasserspeichervermoegen
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_wasserspeichervermoegen
+    path = /var/lib/manticore/data/index/ch_blw_bodeneignung_wasserspeichervermoegen
 }
 
 index ch_blw_bodeneignung_naehrstoffspeichervermoegen : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_bodeneignung_naehrstoffspeichervermoegen
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_naehrstoffspeichervermoegen
+    path = /var/lib/manticore/data/index/ch_blw_bodeneignung_naehrstoffspeichervermoegen
 }
 
 index ch_blw_bodeneignung_wasserdurchlaessigkeit : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_bodeneignung_wasserdurchlaessigkeit
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_wasserdurchlaessigkeit
+    path = /var/lib/manticore/data/index/ch_blw_bodeneignung_wasserdurchlaessigkeit
 }
 
 index ch_blw_bodeneignung_vernaessung : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_bodeneignung_vernaessung
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_vernaessung
+    path = /var/lib/manticore/data/index/ch_blw_bodeneignung_vernaessung
 }
 
 index ch_blw_bodeneignung_kulturland : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_bodeneignung_kulturland
-    path = /var/lib/sphinxsearch/data/index/ch_blw_bodeneignung_kulturland
+    path = /var/lib/manticore/data/index/ch_blw_bodeneignung_kulturland
 }
 
 index ch_blw_ursprungsbezeichnungen_fleisch : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_ursprungsbezeichnungen_fleisch
-    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_fleisch
+    path = /var/lib/manticore/data/index/ch_blw_ursprungsbezeichnungen_fleisch
 }
 
 index ch_blw_ursprungsbezeichnungen_kaese : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_ursprungsbezeichnungen_kaese
-    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_kaese
+    path = /var/lib/manticore/data/index/ch_blw_ursprungsbezeichnungen_kaese
 }
 
 index ch_blw_ursprungsbezeichnungen_konditoreiwaren : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_ursprungsbezeichnungen_konditoreiwaren
-    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_konditoreiwaren
+    path = /var/lib/manticore/data/index/ch_blw_ursprungsbezeichnungen_konditoreiwaren
 }
 
 index ch_blw_ursprungsbezeichnungen_pflanzen : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_ursprungsbezeichnungen_pflanzen
-    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_pflanzen
+    path = /var/lib/manticore/data/index/ch_blw_ursprungsbezeichnungen_pflanzen
 }
 
 index ch_blw_ursprungsbezeichnungen_spirituosen : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_ursprungsbezeichnungen_spirituosen
-    path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_spirituosen
+    path = /var/lib/manticore/data/index/ch_blw_ursprungsbezeichnungen_spirituosen
 }

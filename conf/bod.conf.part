@@ -117,30 +117,30 @@ index layers
 index layers_de : layers
 {
     source = src_layers_de
-    path = /var/lib/sphinxsearch/data/index/layers_de
+    path = /var/lib/manticore/data/index/layers_de
     preopen = 1
 }
 
 index layers_fr : layers
 {
     source = src_layers_fr
-    path = /var/lib/sphinxsearch/data/index/layers_fr
+    path = /var/lib/manticore/data/index/layers_fr
 }
 
 index layers_en : layers
 {
     source = src_layers_en
-    path = /var/lib/sphinxsearch/data/index/layers_en
+    path = /var/lib/manticore/data/index/layers_en
 }
 
 index layers_it : layers
 {
     source = src_layers_it
-    path = /var/lib/sphinxsearch/data/index/layers_it
+    path = /var/lib/manticore/data/index/layers_it
 }
 
 index layers_rm : layers
 {
     source = src_layers_rm
-    path = /var/lib/sphinxsearch/data/index/layers_rm
+    path = /var/lib/manticore/data/index/layers_rm
 }

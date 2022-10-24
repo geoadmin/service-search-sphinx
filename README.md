@@ -36,11 +36,11 @@ $ sudo -u root systemctl start sphinxsearch
 
 Object            | Path
 ------------------|-----------------------------------|
-**PID:**          | /var/run/sphinxsearch.pid         |
-**Searchd Log**   | /var/log/sphinxsearch/searchd.log |
-**Query Log:**    | /var/log/sphinxsearch/query.log   |
-**Indexes:**      | /var/lib/sphinxsearch/data/index/ |
-**Configuration:**| /etc/sphinxsearch/sphinx.conf     |
+**PID:**          | /var/run/manticore.pid         |
+**Searchd Log**   | /var/log/manticore/searchd.log |
+**Query Log:**    | /var/log/manticore/query.log   |
+**Indexes:**      | /var/lib/manticore/data/index/ |
+**Configuration:**| /etc/manticoresearch/manticore.conf     |
 
 ### Search Daemon:
 
@@ -59,7 +59,7 @@ $ sudo -u root systemctl start sphinxsearch
 #### validate config
 
 ```
-$ indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
+$ indextool --checkconfig -c /etc/manticoresearch/manticore.conf
 ```
 
 ### Rebuild / update Indexes:
@@ -67,13 +67,13 @@ $ indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
 There will be a service restart after every index
 
 ```bash
-$ sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf index1 index2 index3
+$ sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config /etc/manticoresearch/manticore.conf index1 index2 index3
 ```
 
 #### rebuild / build all indexes
 
 ```bash
-$ sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf --all
+$ sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config /etc/manticoresearch/manticore.conf --all
 ```
 multithread indexer is not possible: http://sphinxsearch.com/forum/view.html?id=3936a
 
@@ -167,6 +167,6 @@ $ make deploy-int-config db=zeitreihen
 You can use this command to synchronize the remote sphinx config with the remote indices:
 * create all the missing indexes
 * remove orphaned indexes
-The sphinx configuration will not be deployed. The command can be used with integration or production: 
+The sphinx configuration will not be deployed. The command can be used with integration or production:
 * ``$ make deploy-int-clean_index``
 * ``$ make deploy-prod-clean_index``

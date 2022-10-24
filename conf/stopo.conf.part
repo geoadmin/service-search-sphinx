@@ -881,7 +881,7 @@ index ch_swisstopo_verschiebungsvektoren_tsp1
     type = plain
     dict=crc
     source = src_ch_swisstopo_verschiebungsvektoren_tsp1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren_tsp1
+    path = /var/lib/manticore/data/index/ch_swisstopo_verschiebungsvektoren_tsp1
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -889,281 +889,281 @@ index ch_swisstopo_verschiebungsvektoren_tsp1
 index ch_swisstopo_landesschwerenetz : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_landesschwerenetz
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landesschwerenetz
+    path = /var/lib/manticore/data/index/ch_swisstopo_landesschwerenetz
 }
 
 index ch_swisstopo_verschiebungsvektoren_tsp2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_verschiebungsvektoren_tsp2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_verschiebungsvektoren_tsp2
+    path = /var/lib/manticore/data/index/ch_swisstopo_verschiebungsvektoren_tsp2
 }
 
 index ch_swisstopo_swissboundaries3d_bezirk_flaeche_fill : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_swissboundaries3d_bezirk_flaeche_fill
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d_bezirk_flaeche_fill
+    path = /var/lib/manticore/data/index/ch_swisstopo_swissboundaries3d_bezirk_flaeche_fill
 }
 
 index ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill
+    path = /var/lib/manticore/data/index/ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill
 }
 
 index ch_swisstopo_swissboundaries3d_kanton_flaeche_fill : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_swissboundaries3d_kanton_flaeche_fill
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swissboundaries3d_kanton_flaeche_fill
+    path = /var/lib/manticore/data/index/ch_swisstopo_swissboundaries3d_kanton_flaeche_fill
 }
 
 index ch_swisstopo_vd_ortschaftenverzeichnis_plz : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_vd_ortschaftenverzeichnis_plz
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vd_ortschaftenverzeichnis_plz
+    path = /var/lib/manticore/data/index/ch_swisstopo_vd_ortschaftenverzeichnis_plz
 }
 
 index ch_swisstopo_vec200_names_namedlocation : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_vec200_names_namedlocation
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec200_names_namedlocation
+    path = /var/lib/manticore/data/index/ch_swisstopo_vec200_names_namedlocation
 }
 
 index ch_swisstopo_geologie_bohrungen_tiefer_500 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_bohrungen_tiefer_500
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_bohrungen_tiefer_500
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_bohrungen_tiefer_500
 }
 
 index ch_swisstopo_geologie_geoevents_demnaechst : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_geoevents_demnaechst
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geoevents_demnaechst
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_geoevents_demnaechst
 }
 
 index ch_swisstopo_geologie_geoevents_anfrage : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_geoevents_anfrage
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geoevents_anfrage
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_geoevents_anfrage
 }
 
 index ch_swisstopo_geologie_geowege : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_geowege
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geowege
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_geowege
 }
 
 index ch_swisstopo_geologie_geosites : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_geosites
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geosites
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_geosites
 }
 
 index ch_swisstopo_geologie_geothermische_potenzialstudien_regional : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_geothermische_potenzialstudien_reg
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geothermische_potenzialstudien_regional
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_geothermische_potenzialstudien_regional
 }
 
 index ch_swisstopo_geologie_geotechnik_ziegeleien_1907 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_geotechnik_ziegeleien_1907
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geotechnik_ziegeleien_1907
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_geotechnik_ziegeleien_1907
 }
 
 index ch_swisstopo_geologie_rohstoffe_vererzungen : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_vererzungen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_vererzungen
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_vererzungen
 }
 
 index ch_swisstopo_geologie_rohstoffe_industrieminerale : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_industrieminerale
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_industrieminerale
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_industrieminerale
 }
 
 index ch_swisstopo_geologie_rohstoffe_kohlen_bitumen_erdgas : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_kohlen_bitumen_erdgas
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_kohlen_bitumen_erdgas
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_kohlen_bitumen_erdgas
 }
 
 index ch_swisstopo_geologie_rohstoffe_naturwerksteine_abbau : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_naturwerksteine_abbau
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_naturwerksteine_abbau
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_naturwerksteine_abbau
 }
 
 index ch_swisstopo_geologie_rohstoffe_gebrochene_gesteine_abbau : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_gebrochene_gesteine_abbau
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_gebrochene_gesteine_abbau
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_gebrochene_gesteine_abbau
 }
 
 index ch_swisstopo_geologie_rohstoffe_gips_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_gips_abbau_verarbeitung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_gips_abbau_verarbeitung
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_gips_abbau_verarbeitung
 }
 
 index ch_swisstopo_geologie_rohstoffe_salz_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_salz_abbau_verarbeitung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_salz_abbau_verarbeitung
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_salz_abbau_verarbeitung
 }
 
 index ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung
 }
 
 index ch_swisstopo_geologie_rohstoffe_ziegel_verarbeitung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_ziegel_verarbeitung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_ziegel_verarbeitung
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_ziegel_verarbeitung
 }
 
 index ch_swisstopo_geologie_rohstoffe_ziegel_abbau : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_rohstoffe_ziegel_abbau
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_ziegel_abbau
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_rohstoffe_ziegel_abbau
 }
 
 index ch_swisstopo_geologie_gisgeol_punkte : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_punkte
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_punkte
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_punkte
 }
 
 index ch_swisstopo_geologie_gisgeol_linien : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_linien
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_linien
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_linien
 }
 
 index ch_swisstopo_geologie_gisgeol_flaechen_1x1km : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_flaechen_1x1km
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_1x1km
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_flaechen_1x1km
 }
 
 index ch_swisstopo_geologie_gisgeol_flaechen_10x10km : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_flaechen_10x10km
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_10x10km
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_flaechen_10x10km
 }
 
 index ch_swisstopo_geologie_gisgeol_flaechen_10to100km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_flaechen_10to100km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_10to100km2
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_flaechen_10to100km2
 }
 
 index ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_flaechen_100to1000km2
 }
 
 index ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_flaechen_1000to21000km2
 }
 
 index ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_flaechen_gt21000km2
 }
 
 index ch_swisstopo_geologie_gisgeol_flaechen_lt10km2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gisgeol_flaechen_lt10km2
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gisgeol_flaechen_lt10km2
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gisgeol_flaechen_lt10km2
 }
 
 index ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte
 }
 
 index ch_swisstopo_geologie_tiefengeothermie_projekte : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_tiefengeothermie_projekte
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_tiefengeothermie_projekte
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_tiefengeothermie_projekte
 }
 
 index ch_swisstopo_vd_geometa_periodische_nachfuehrung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_vd_geometa_periodische_nachfuehrung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vd_geometa_periodische_nachfuehrung
+    path = /var/lib/manticore/data/index/ch_swisstopo_vd_geometa_periodische_nachfuehrung
 }
 
 index ch_swisstopo_transformation_bezugsrahmen_hoehe : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_transformation_bezugsrahmen_hoehe
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_transformation_bezugsrahmen_hoehe
+    path = /var/lib/manticore/data/index/ch_swisstopo_transformation_bezugsrahmen_hoehe
 }
 
 index ch_swisstopo_geologie_geologischer_atlas_profile : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_geologischer_atlas_profile
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_geologischer_atlas_profile
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_geologischer_atlas_profile
 }
 
 index ch_swisstopo_hebungsraten : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_hebungsraten
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hebungsraten
+    path = /var/lib/manticore/data/index/ch_swisstopo_hebungsraten
 }
 
 index ch_swisstopo_lotabweichungen : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_lotabweichungen
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lotabweichungen
+    path = /var/lib/manticore/data/index/ch_swisstopo_lotabweichungen
 }
 
 index ch_swisstopo_amtliches_strassenverzeichnis : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_amtliches_strassenverzeichnis
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_strassenverzeichnis
+    path = /var/lib/manticore/data/index/ch_swisstopo_amtliches_strassenverzeichnis
 }
 
 index ch_swisstopo_amtliches_gebaeudeadressverzeichnis : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_gebaeudeadressverzeichnis
+    path = /var/lib/manticore/data/index/ch_swisstopo_amtliches_gebaeudeadressverzeichnis
 }
 
 index ch_swisstopo_vec25_gewaessernetz_referenz : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_vec25_gewaessernetz_referenz
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_vec25_gewaessernetz_referenz
+    path = /var/lib/manticore/data/index/ch_swisstopo_vec25_gewaessernetz_referenz
 }
 
 index ch_swisstopo_geologie_felslabore : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_felslabore
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_felslabore
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_felslabore
 }
 
 index ch_swisstopo_geologie_gletscherausdehnung : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_geologie_gletscherausdehnung
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_gletscherausdehnung
+    path = /var/lib/manticore/data/index/ch_swisstopo_geologie_gletscherausdehnung
 }
 
 index ch_swisstopo_fixpunkte_hfp1 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_fixpunkte_hfp1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp1
+    path = /var/lib/manticore/data/index/ch_swisstopo_fixpunkte_hfp1
 }
 
 index ch_swisstopo_fixpunkte_lfp1 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_fixpunkte_lfp1
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp1
+    path = /var/lib/manticore/data/index/ch_swisstopo_fixpunkte_lfp1
 }

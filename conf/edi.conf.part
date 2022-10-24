@@ -144,7 +144,7 @@ index ch_bfs_generalisierte_grenzen_agglomerationen_g1
     type = plain
     dict=crc
     source = src_ch_bfs_generalisierte_grenzen_agglomerationen_g1
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_generalisierte_grenzen_agglomerationen_g1
+    path = /var/lib/manticore/data/index/ch_bfs_generalisierte_grenzen_agglomerationen_g1
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -152,37 +152,37 @@ index ch_bfs_generalisierte_grenzen_agglomerationen_g1
 index ch_bfs_generalisierte_grenzen_agglomerationen_g2 : ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     source = src_ch_bfs_generalisierte_grenzen_agglomerationen_g2
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_generalisierte_grenzen_agglomerationen_g2
+    path = /var/lib/manticore/data/index/ch_bfs_generalisierte_grenzen_agglomerationen_g2
 }
 
 index ch_bfs_landschaftswandel : ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     source = src_ch_bfs_landschaftswandel
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_landschaftswandel
+    path = /var/lib/manticore/data/index/ch_bfs_landschaftswandel
 }
 
 index ch_bfs_gebaeude_wohnungs_register : ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     min_infix_len = 1
     source = src_ch_bfs_gebaeude_wohnungs_register
-    path = /var/lib/sphinxsearch/data/index/ch_bfs_gebaeude_wohnungs_register
-    ondisk_attrs = 0
+    path = /var/lib/manticore/data/index/ch_bfs_gebaeude_wohnungs_register
+    access_plain_attrs = mmap
 }
 
 index ch_bak_bundesinventar_schuetzenswerte_ortsbilder : ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     source = src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder
-    path = /var/lib/sphinxsearch/data/index/ch_bak_bundesinventar_schuetzenswerte_ortsbilder
+    path = /var/lib/manticore/data/index/ch_bak_bundesinventar_schuetzenswerte_ortsbilder
 }
 
 index ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos : ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     source = src_ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos
-    path = /var/lib/sphinxsearch/data/index/ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos
+    path = /var/lib/manticore/data/index/ch_bak_bundesinventar_schuetzenswerte_ortsbilder_fotos
 }
 
 index ch_bag_radioaktivitaet_atmosphaere : ch_bfs_generalisierte_grenzen_agglomerationen_g1
 {
     source = src_ch_bag_radioaktivitaet_atmosphaere
-    path = /var/lib/sphinxsearch/data/index/ch_bag_radioaktivitaet_atmosphaere
+    path = /var/lib/manticore/data/index/ch_bag_radioaktivitaet_atmosphaere
 }

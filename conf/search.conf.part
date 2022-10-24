@@ -340,8 +340,8 @@ source src_haltestellen : src_swisssearch
 index zipcode
 {
     source = src_zipcode
-    wordforms = /var/lib/sphinxsearch/data/index/wordforms_main.txt
-    path = /var/lib/sphinxsearch/data/index/zipcode
+    wordforms = /var/lib/manticore/data/index/wordforms_main.txt
+    path = /var/lib/manticore/data/index/zipcode
     type = plain
     min_infix_len = 1
     preopen = 1
@@ -352,50 +352,50 @@ index zipcode
 index district : zipcode
 {
     source = src_district
-    path = /var/lib/sphinxsearch/data/index/district
-    ondisk_attrs = 0
+    path = /var/lib/manticore/data/index/district
+    access_plain_attrs = mmap_preread
 }
 
 index kantone : zipcode
 {
     source = src_kantone
-    path = /var/lib/sphinxsearch/data/index/kantone
-    ondisk_attrs = 0
+    path = /var/lib/manticore/data/index/kantone
+    access_plain_attrs = mmap_preread
 }
 
 index gg25 : zipcode
 {
     source = src_gg25
-    path = /var/lib/sphinxsearch/data/index/gg25
-    ondisk_attrs = 0
+    path = /var/lib/manticore/data/index/gg25
+    access_plain_attrs = mmap_preread
 }
 
 index swissnames3d : zipcode
 {
     source = src_swissnames3d
-    path = /var/lib/sphinxsearch/data/index/swissnames3d
-    ondisk_attrs = 0
+    path = /var/lib/manticore/data/index/swissnames3d
+    access_plain_attrs = mmap_preread
 }
 
 index haltestellen : zipcode
 {
     source = src_haltestellen
-    path = /var/lib/sphinxsearch/data/index/haltestellen
-    ondisk_attrs = 0
+    path = /var/lib/manticore/data/index/haltestellen
+    access_plain_attrs = mmap_preread
 }
 
 index parcel : zipcode
 {
     source = src_parcel
-    path = /var/lib/sphinxsearch/data/index/parcel
-    ondisk_attrs = 0
+    path = /var/lib/manticore/data/index/parcel
+    access_plain_attrs = mmap_preread
 }
 
 index address : zipcode
 {
     source = src_address
-    path = /var/lib/sphinxsearch/data/index/address
-    ondisk_attrs = 0
+    path = /var/lib/manticore/data/index/address
+    access_plain_attrs = mmap_preread
 }
 
 # swisssearch fuzzy metaphone
@@ -403,55 +403,55 @@ index district_metaphone : zipcode
 {
     morphology = metaphone
     source = src_district
-    path = /var/lib/sphinxsearch/data/index/district_metaphone
-    preopen = 0
+    path = /var/lib/manticore/data/index/district_metaphone
+    access_plain_attrs = mmap_preread
 }
 
 index kantone_metaphone : zipcode
 {
     morphology = metaphone
     source = src_kantone
-    path = /var/lib/sphinxsearch/data/index/kantone_metaphone
-    preopen = 0
+    path = /var/lib/manticore/data/index/kantone_metaphone
+    access_plain_attrs = mmap_preread
 }
 
 index gg25_metaphone : zipcode
 {
     morphology = metaphone
     source = src_gg25
-    path = /var/lib/sphinxsearch/data/index/gg25_metaphone
-    preopen = 0
+    path = /var/lib/manticore/data/index/gg25_metaphone
+    access_plain_attrs = mmap_preread
 }
 
 index swissnames3d_metaphone : zipcode
 {
     morphology = metaphone
     source = src_swissnames3d
-    path = /var/lib/sphinxsearch/data/index/swissnames3d_metaphone
-    preopen = 0
+    path = /var/lib/manticore/data/index/swissnames3d_metaphone
+    access_plain_attrs = mmap_preread
 }
 
 index haltestellen_metaphone : zipcode
 {
     morphology = metaphone
     source = src_haltestellen
-    path = /var/lib/sphinxsearch/data/index/haltestellen_metaphone
-    preopen = 0
+    path = /var/lib/manticore/data/index/haltestellen_metaphone
+    access_plain_attrs = mmap_preread
 }
 
 index address_metaphone: zipcode
 {
     morphology = metaphone
     source = src_address
-    path = /var/lib/sphinxsearch/data/index/address_metaphone
-    preopen = 0
+    path = /var/lib/manticore/data/index/address_metaphone
+    access_plain_attrs = mmap_preread
 }
 
 # only create on demand
 #index address_geocoding : zipcode
 #{
 #    source = src_address_geocoding
-#    path = /var/lib/sphinxsearch/data/index/address_geocoding
+#    path = /var/lib/manticore/data/index/address_geocoding
 #}
 
 index swisssearch

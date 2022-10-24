@@ -171,7 +171,7 @@ index ch_babs_kulturgueter
     type = plain
     dict=crc
     source = src_ch_babs_kulturgueter
-    path = /var/lib/sphinxsearch/data/index/ch_babs_kulturgueter
+    path = /var/lib/manticore/data/index/ch_babs_kulturgueter
     min_infix_len = 2
     expand_keywords = 1
 }
@@ -179,47 +179,47 @@ index ch_babs_kulturgueter
 index ch_vbs_kataster_belasteter_standorte_militaer : ch_babs_kulturgueter
 {
     source = src_ch_vbs_kataster_belasteter_standorte_militaer
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_kataster_belasteter_standorte_militaer
+    path = /var/lib/manticore/data/index/ch_vbs_kataster_belasteter_standorte_militaer
 }
 
 index ch_vbs_armeelogistikcenter : ch_babs_kulturgueter
 {
     source = src_ch_vbs_armeelogistikcenter
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_armeelogistikcenter
+    path = /var/lib/manticore/data/index/ch_vbs_armeelogistikcenter
 }
 
 index ch_vbs_waldschadenkarte : ch_babs_kulturgueter
 {
     source = src_ch_vbs_waldschadenkarte
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_waldschadenkarte
+    path = /var/lib/manticore/data/index/ch_vbs_waldschadenkarte
 }
 
 index ch_vbs_bundestankstellen_bebeco : ch_babs_kulturgueter
 {
     source = src_ch_vbs_bundestankstellen_bebeco
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_bundestankstellen_bebeco
+    path = /var/lib/manticore/data/index/ch_vbs_bundestankstellen_bebeco
 }
 
 index ch_vbs_logistikraeume_armeelogistikcenter : ch_babs_kulturgueter
 {
     source = src_ch_vbs_logistikraeume_armeelogistikcenter
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_logistikraeume_armeelogistikcenter
+    path = /var/lib/manticore/data/index/ch_vbs_logistikraeume_armeelogistikcenter
 }
 
 index ch_vbs_retablierungsstellen : ch_babs_kulturgueter
 {
     source = src_ch_vbs_retablierungsstellen
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_retablierungsstellen
+    path = /var/lib/manticore/data/index/ch_vbs_retablierungsstellen
 }
 
 index ch_vbs_schiessanzeigen : ch_babs_kulturgueter
 {
     source = src_ch_vbs_schiessanzeigen
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_schiessanzeigen
+    path = /var/lib/manticore/data/index/ch_vbs_schiessanzeigen
 }
 
 index ch_vbs_armee_kriegsdenkmaeler : ch_babs_kulturgueter
 {
     source = src_ch_vbs_armee_kriegsdenkmaeler
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_armee_kriegsdenkmaeler
+    path = /var/lib/manticore/data/index/ch_vbs_armee_kriegsdenkmaeler
 }

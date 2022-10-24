@@ -7,9 +7,9 @@ green='\e[0;32m'
 red='\e[0;31m'
 NC='\e[0m' # No Color
 
-SPHINXINDEX_VOLUME="/var/lib/sphinxsearch/data/index/"
-SPHINXINDEX_EFS="/var/lib/sphinxsearch/data/index_efs/"
-SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
+SPHINXINDEX_VOLUME="/var/lib/manticore/data/index/"
+SPHINXINDEX_EFS="/var/lib/manticore/data/index_efs/"
+SPHINXCONFIG="/etc/manticoresearch/manticore.conf"
 
 # index arrays config, filesystem and orphaned
 mapfile -t array_config < <(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}' | sed -n -e 's|^.*/||p')
@@ -24,7 +24,7 @@ for index in "${array_orphaned[@]}"; do
     # skip .new files, we need them to sighup searchd / rotate index updates
     if [[ ! $index == *.new ]]; then
         echo -e "\\t${red} deleting orphaned index ${index} from filesystem. ${NC}"
-        rm -rf "${SPHINXINDEX_EFS}${index}".*
+        #rm -rf "${SPHINXINDEX_EFS}${index}".*
     fi
 done
 
@@ -36,8 +36,9 @@ rsync --update --delete -av --exclude "*.tmp.*" --stats ${SPHINXINDEX_EFS} ${SPH
 
 # start cron service as geodata user only if container is started in service mode (no cmd has been passed to docker run)
 # cron will sync every n minutes EFS to Docker volume and send a SIGHUP to searchd service
-service cron start || exit 1
-crontab < docker-crontab
+# TODO: index-sync-rotate.sh has to be adapted first before activating the cronjob
+#service cron start || exit 1
+#crontab < docker-crontab
 
 # starting the searchd service
 # will load the sphinx indexes from EFS --sync--> Volume --> into memory
