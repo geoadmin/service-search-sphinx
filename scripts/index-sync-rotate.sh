@@ -6,7 +6,6 @@ SPHINX_EFS="/var/lib/manticore/data/index_efs/"
 SPHINX_VOLUME="/var/lib/manticore/data/index/"
 SPHINXCONFIG="/etc/manticoresearch/manticore.conf"
 RSYNC_INCLUDE="/tmp/include.txt"
-LOG_PREFIX="[ $$ - $(date +"%F %T")] "
 
 # every 15 minutes
     # lock only one script instance should be running
@@ -35,11 +34,31 @@ LOG_PREFIX="[ $$ - $(date +"%F %T")] "
     # .spp
     # .sps
 
+
+
+json_logger() {
+    log_level=$1
+    timestamp=$(date --utc +%FT%T.%3NZ)
+    self=$(readlink -f "${BASH_SOURCE[0]}")
+    self=$(basename "$self")
+    jq --raw-input --compact-output --monochrome-output \
+    '{ "app":
+        {
+            "time": "'"${timestamp}"'",
+            "level": "'"${log_level}"'",
+            "logger": "'"${self}"'",
+            "pidTid": "'$$'",
+            "function": "'"${FUNCNAME[0]}"'",
+            "message": .
+      }
+    }'
+}
+
 SPHINX_FILE_EXTENSIONS=('spa' 'spd' 'spe' 'sph' 'spi' 'spk' 'spm' 'spp' 'sps')
 SPHINX_INDEX_READY=('spd' 'spe' 'sph' 'spi' 'spp' 'sps')
 SPHINX_INDEXES=$(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}' | sed -n -e 's|^.*/||p')
 
-LOCKFILE="/var/lock/$(basename "$0")"
+LOCKFILE="/tmp/$(basename "$0")"
 LOCKFD=99
 
 # PRIVATE
@@ -48,7 +67,7 @@ _no_more_locking()  { _lock u; _lock xn && rm -f "$LOCKFILE"; }
 _prepare_locking()  { eval "exec $LOCKFD>\"$LOCKFILE\""; trap _no_more_locking EXIT; }
 
 # do not continue if searchd is not running for crash or precaching reasons...
-searchd --status &> /dev/null || { echo "${LOG_PREFIX}-> $(date +"%F %T") searchd service is not running, skip rsync"; exit 0; }
+searchd --status &> /dev/null || { echo "searchd service is not running, skip rsync" | json_logger INFO; exit 0; }
 
 # ON START
 _prepare_locking
@@ -57,10 +76,10 @@ _prepare_locking
 exlock_now()        { _lock xn; }  # obtain an exclusive lock immediately or fail
 
 # avoiding running multiple instances of script.
-exlock_now || { echo "${LOG_PREFIX}-> $(date +"%F %T") locked"; exit 1; }
-echo "${LOG_PREFIX}-> $(date +"%F %T") start"
+exlock_now || { echo "locked" | json_logger INFO; exit 1; }
+echo "start" | json_logger INFO
 
-check_if_index_is_ready() {
+check_if_efs_index_is_ready() {
     # input:
     #   $1: index name
     #   ${SPHINX_INDEX_READY} array of mandatory file extensions
@@ -93,6 +112,37 @@ check_if_index_is_ready() {
     return ${ready}
 }
 
+check_if_local_index_is_ready() {
+    # input:
+    #   $1: index name
+    #   ${SPHINX_INDEX_READY} array of mandatory file extensions
+    # 
+    # output: true|false if index is ready for rotation
+    #   all the extensions from the Array SPHINX_INDEX_READY have to exist in the array and should not be empty
+    #   if one of the mandatory extensions has been updated between test check_if_efs_index_is_ready and copy, skip the rotation and remove the new files in the local volume
+    #   this has to be done to avoid an eternal loop in the following clean-up
+    #   p.e. WARNING: rotating index 'layers_fr': prealloc: failed to load /var/lib/sphinxsearch/data/index/layers_fr.new.spi: bad size 0 (at least 1 bytes expected); using old index
+    #   the index will never be rotated and the new files are blocking the successful termination of the script
+
+    local index_name ready
+    index_name="$1"
+    ready=0
+
+    pushd "${SPHINX_VOLUME}"
+    for extension in ${SPHINX_INDEX_READY[@]}; do
+        mandatory_file=${index_name}.new.${extension}
+        test -s "$mandatory_file" || {
+            echo "mandatory file ${mandatory_file} is missing or empty..." | json_logger INFO
+            ready=1
+        }
+    done
+    if ((ready == 1)); then
+        rm "${index_name}".new.* -rf &> /dev/null || :
+    fi
+    popd
+    return ${ready}
+}
+
 # loop through all indexes from sphinx config and sync them if the have been fully updated on efs
 for sphinx_index in ${SPHINX_INDEXES[@]}; do
     # create include-from file from sphinx config for selective rsync from EFS -> LOCAL
@@ -111,64 +161,55 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
     (( ${#new_files[@]} )) || continue
 
     # check if index has been fully updated on EFS
-    check_if_index_is_ready "${sphinx_index}" || { echo "${LOG_PREFIX}-> $(date +"%F %T") skipping partially updated index: ${sphinx_index} ..."; continue; }
+    check_if_efs_index_is_ready "${sphinx_index}" || { echo "skipping partially updated index: ${sphinx_index} ..." | json_logger INFO; continue; }
 
     # sync EFS to VOLUME
-    # do not delete anything in local volume, in case the efs has been cleaned / removed indexes will still exist in local storage
-    echo "${LOG_PREFIX}-> $(date +"%F %T") start sync: ${sphinx_index} ..."
-    rsync --update -av --include-from "${RSYNC_INCLUDE}" --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME}
-
-    # rename new files from *.sp* to .*.new.sp*
-    echo "${LOG_PREFIX}-> $(date +"%F %T") rename already rotated, new index files: ${new_files[*]}..."
-    # strip file extension from filename and expand it to the full list of existing files in SPHINX Volume
-    pushd "${SPHINX_VOLUME}"
+    echo "start sync and rename files in target folder: ${sphinx_index} ..." | json_logger INFO
     tmp_array=()
-    for new_file in "${new_files[@]}";do
-        # skip empty elements
-        [[ -z ${new_file} ]] && continue
-        # skip names with *.new.* in it
-        [[ "${new_file}" == *.new.* ]] && continue
-        base=${new_file%.*}
-        tmp_array+=("${base}"*)
-    done
+    # find and copy only files with valid file extension
+    # find will be expanded to:
+    # find /var/local/geodata/service-sphinxsearch/prod/index/ -regex "^.*/layers_de.\(spa\|spd\|spe\|sph\|spi\|spk\|spm\|spp\)$^
+    find_extensions="${SPHINX_FILE_EXTENSIONS[*]}"
+    while IFS= read -r -d '' new_file; do
+        echo "copy new file: $new_file" | json_logger INFO
+        new_file=$(basename "${new_file}")
+        # shellcheck disable=2001
+        new_file_renamed=$(sed 's/\.sp\(\w\)$/.new.sp\1/' <<< "${new_file}")
+        cp -fa "${SPHINX_EFS}${new_file}" "${SPHINX_VOLUME}${new_file_renamed}"
+        tmp_array+=("${new_file_renamed}")
+    done <   <(find "${SPHINX_EFS}" -regex "^.*/${sphinx_index}.\(${find_extensions// /\\|}\)$" -print0)
+
     if ((${#tmp_array[@]})); then
-        mapfile -t local_new_files < <(printf "%s\\n" "${tmp_array[@]}" | sort -u | tr '\n' ' ')
-        for rotated in ${local_new_files[@]}; do # shellcheck disable=SC2068
-            # skip empty elements
-            [[ -z ${rotated} ]] && continue
-            # skip names with *.new.* in it
-            [[ "${rotated}" == *.new.* ]] && continue
-            base=${rotated%.*}
-            extension=${rotated##*.}
-            new_file="${base}.new.${extension}"
-            mv -f "${rotated}" "${new_file}"
-            new_files_merged+=("${new_file}")
-        done
+        check_if_local_index_is_ready "${sphinx_index}" || {
+            echo "skipping rotation of local index: ${sphinx_index} ..." | json_logger INFO
+            continue
+        }
+
+        # remove blank strings from array
+        IFS=" " read -r -a new_files_merged <<< ${tmp_array[@]}
+        if ((${#new_files_merged[@]})); then
+            # start index rotation
+            echo "restart searchd for index rotation..." | json_logger INFO
+            pkill -1 searchd
+
+            # wait until all files new_files and locally renamed files have been renamed / rotated in SPHINX_VOLUME
+            echo "wait for index rotation ${sphinx_index}..." | json_logger INFO
+            all_files_are_gone=false
+            while ! ${all_files_are_gone}; do
+                all_files_are_gone=true
+                echo "about to rotate ${sphinx_index}, waiting for ${new_files_merged[*]} to disappear" | json_logger INFO
+                for new_file in ${new_files_merged[@]}; do
+                    # skip empty elements
+                    [[ -z ${new_file} ]] && continue
+                    [ -f "${SPHINX_VOLUME}${new_file}" ] && all_files_are_gone=false
+                done
+                # shellcheck disable=SC2046
+                ${all_files_are_gone} || echo "still exist:" $( cd "${SPHINX_VOLUME}"; ls "${new_files_merged[@]}" 2> /dev/null ) | json_logger INFO
+                sleep 5
+            done
+        fi
     fi
-    popd
 done
 
-# remove duplicates from array with new index files
-mapfile -t new_files_merged < <(printf "%s\\n" "${new_files_merged[@]}" | sort -u | tr '\n' ' ')
-# remove blank strings from array
-IFS=" " read -r -a new_files_merged <<< ${new_files_merged[@]}
-if ((${#new_files_merged[@]})); then
-    # start index rotation if new files have been synced
-    echo "${LOG_PREFIX}-> $(date +"%F %T") restart searchd for index rotation..."
-    pkill -1 searchd
 
-    # wait until all files new_files and locally renamed files have been renamed / rotated in SPHINX_VOLUME
-    echo "${LOG_PREFIX}-> $(date +"%F %T") wait for index rotation..."
-    all_files_are_gone=false
-    while ! ${all_files_are_gone}; do
-        all_files_are_gone=true
-        for new_file in ${new_files_merged[@]}; do
-            # skip empty elements
-            [[ -z ${new_file} ]] && continue
-            [ -f "${SPHINX_VOLUME}${new_file}" ] && all_files_are_gone=false
-        done
-        sleep 5
-    done
-fi
-
-echo "${LOG_PREFIX}-> $(date +"%F %T") finished"
+echo "finished" | json_logger INFO

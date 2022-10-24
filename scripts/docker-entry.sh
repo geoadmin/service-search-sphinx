@@ -2,8 +2,6 @@
 # shellcheck disable=SC1091
 set -euo pipefail
 
-source checker.sh
-
 # build sphinx config with current environment
 cat conf/*.part > conf/manticore.conf.in
 envsubst < conf/manticore.conf.in > conf/manticore.conf
