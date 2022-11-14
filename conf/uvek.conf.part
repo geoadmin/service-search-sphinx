@@ -1164,7 +1164,25 @@ source src_ch_bazl_luftfahrthindernis : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , bgdi_id::text as feature_id \
-        FROM bazl.view_obstacles
+        FROM bazl.view_obstacles_big
+}
+
+source src_ch_bazl_luftfahrthindernis_klein : def_searchable_features
+{
+    sql_db = uvek_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , registrationnumber::text as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', registrationnumber)) as detail \
+            , 'ch.bazl.luftfahrthindernis-klein' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        FROM bazl.view_obstacles_small
 }
 
 source src_ch_bazl_luftfahrthindernis_aenderungen : def_searchable_features
@@ -2083,6 +2101,12 @@ index ch_bazl_luftfahrthindernis : ch_astra_ivs_nat
 {
     source = src_ch_bazl_luftfahrthindernis
     path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis
+}
+
+index ch_bazl_luftfahrthindernis_klein : ch_astra_ivs_nat
+{
+    source = src_ch_bazl_luftfahrthindernis_klein
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_luftfahrthindernis_klein
 }
 
 index ch_bazl_luftfahrthindernis_aenderungen : ch_astra_ivs_nat
