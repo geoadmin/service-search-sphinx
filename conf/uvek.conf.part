@@ -1725,7 +1725,7 @@ source src_ch_bfe_waermepotential_gewaesser : def_searchable_features
          from bfe.waermepotential_gewaesser
  }
 
-source src_ch_bazl_einschraenkungen_drohnen_zone_name : def_searchable_features
+source src_ch_bazl_einschraenkungen_drohnen : def_searchable_features
  {
      sql_db = uvek_dev
      sql_query = \
@@ -2371,6 +2371,6 @@ index ch_bfe_waermepotential_gewaesser : ch_astra_ivs_nat
 
 index ch_bazl_einschraenkungen_drohnen : ch_astra_ivs_nat
 {
-    source = src_ch_bazl_einschraenkungen_drohnen_zone_name
+    source = src_ch_bazl_einschraenkungen_drohnen
     path = /var/lib/sphinxsearch/data/index/ch_bazl_einschraenkungen_drohnen
 }
