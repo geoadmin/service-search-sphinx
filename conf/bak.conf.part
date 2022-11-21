@@ -7,7 +7,7 @@ source src_ch_bak_halteplaetze_jenische_sinti_roma : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , standort as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', standort_de, standort_fr, standort_it)) as detail \
+            , remove_accents(standort) as detail \
             , 'ch.bak.halteplaetze-jenische_sinti_roma' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
