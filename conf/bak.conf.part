@@ -1,0 +1,30 @@
+## SOURCES
+
+source src_ch_bak_halteplaetze_jenische_sinti_roma : def_searchable_features
+{
+    sql_db = bak_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , standort as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', standort_de, standort_fr, standort_it)) as detail \
+            , 'ch.bak.halteplaetze-jenische_sinti_roma' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from public.halteplaetze_jenische_sinti_roma
+}
+
+
+## INDICES
+
+index ch_bak_halteplaetze_jenische_sinti_roma
+{
+    source = src_ch_bak_halteplaetze_jenische_sinti_roma
+    path = /var/lib/sphinxsearch/data/index/ch_bak_halteplaetze_jenische_sinti_roma
+}
+
+
