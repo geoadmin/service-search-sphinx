@@ -1726,22 +1726,22 @@ source src_ch_bfe_waermepotential_gewaesser : def_searchable_features
  }
 
 source src_ch_bazl_einschraenkungen_drohnen : def_searchable_features
- {
-     sql_db = uvek_dev
-     sql_query = \
-         SELECT bgdi_id as id \
-             , zone_name_de as label \
-             , 'feature' as origin \
-             , remove_accents(concat_ws(' ', zone_name_de, zone_name_fr, zone_name_it, zone_name_en)) as  detail \
-             , 'ch.bazl.einschraenkungen-drohnen' as layer \
-             , quadindex(the_geom) as geom_quadindex \
-             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-             , bgdi_id::text as feature_id \
-         from bazl.gebietsbeschraenkungen_drohnen
- }
+{
+    sql_db = uvek_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , zone_name_de as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', zone_name_de, zone_name_fr, zone_name_it, zone_name_en)) as  detail \
+            , 'ch.bazl.einschraenkungen-drohnen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bazl.gebietsbeschraenkungen_drohnen
+}
 
 ## INDICES
 
