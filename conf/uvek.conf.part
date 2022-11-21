@@ -1725,15 +1725,15 @@ source src_ch_bfe_waermepotential_gewaesser : def_searchable_features
          from bfe.waermepotential_gewaesser
  }
 
-source src_ch_bazl_gebietsbeschraenkungen_drohnen : def_searchable_features
+source src_ch_bazl_einschraenkungen_drohnen_zone_name : def_searchable_features
  {
      sql_db = uvek_dev
      sql_query = \
          SELECT bgdi_id as id \
              , zone_name_de as label \
              , 'feature' as origin \
-             , remove_accents(zone_name_de) as  detail \
-             , 'ch.bazl.gebietsbeschraenkungen-drohnen' as layer \
+             , remove_accents(concat_ws(' ', zone_name_de, zone_name_fr, zone_name_it, zone_name_en)) as  detail \
+             , 'ch.bazl.einschraenkungen-drohnen' as layer \
              , quadindex(the_geom) as geom_quadindex \
              , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
              , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
@@ -2369,8 +2369,8 @@ index ch_bfe_waermepotential_gewaesser : ch_astra_ivs_nat
     path = /var/lib/sphinxsearch/data/index/ch_bfe_waermepotential_gewaesser
 }
 
-index ch_bazl_gebietsbeschraenkungen_drohnen : ch_astra_ivs_nat
+index ch_bazl_einschraenkungen_drohnen : ch_astra_ivs_nat
 {
-    source = src_ch_bazl_gebietsbeschraenkungen_drohnen
-    path = /var/lib/sphinxsearch/data/index/ch_bazl_gebietsbeschraenkungen_drohnen
+    source = src_ch_bazl_einschraenkungen_drohnen_zone_name
+    path = /var/lib/sphinxsearch/data/index/ch_bazl_einschraenkungen_drohnen
 }
