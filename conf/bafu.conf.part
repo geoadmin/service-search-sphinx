@@ -1155,6 +1155,24 @@ source src_ch_bafu_gefahren_gefaehrdungszonen : def_searchable_features
         from gefahren.gefaehrdungszonen
 }
 
+source src_ch_bafu_gewaesser_uferbestockung : def_searchable_features
+{
+    sql_db = bafu_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', name, gwl_nr)) as  detail \
+            , 'ch.bafu.gewaesser-uferbestockung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , zone::text as feature_id  \
+        from wasser.gewaesser_uferbestockung
+}
+
 ## INDICES
 
 index ch_bafu_hydrologie_wassertemperaturmessstationen
@@ -1542,4 +1560,10 @@ index ch_bafu_gefahren_gefaehrdungszonen : ch_bafu_hydrologie_wassertemperaturme
 {
     source = src_ch_bafu_gefahren_gefaehrdungszonen
     path = /var/lib/sphinxsearch/data/index/ch_bafu_gefahren_gefaehrdungszonen
+}
+
+index ch_bafu_gewaesser_uferbestockung : ch_bafu_hydrologie_wassertemperaturmessstationen
+{
+    source = src_ch_bafu_gewaesser_uferbestockung
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesser_uferbestockung
 }
