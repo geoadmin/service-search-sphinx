@@ -23,6 +23,10 @@ source src_ch_bak_halteplaetze_jenische_sinti_roma : def_searchable_features
 
 index ch_bak_halteplaetze_jenische_sinti_roma
 {
+    type = plain
+    dict=crc
+    min_infix_len = 2
+    expand_keywords = 1
     source = src_ch_bak_halteplaetze_jenische_sinti_roma
     path = /var/lib/sphinxsearch/data/index/ch_bak_halteplaetze_jenische_sinti_roma
 }
