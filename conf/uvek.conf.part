@@ -155,42 +155,6 @@ source src_ch_astra_ivs_reg_loc : def_searchable_features
         from astra.ivs_reg_loc
 }
 
-source src_ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet : def_searchable_features
-{
-    sql_db = uvek_${DBSTAGING}
-    sql_query = \
-        SELECT nr::bigint as id \
-            , zaehlstellen_bezeichnung as label \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ', nr, zaehlstellen_bezeichnung)) as detail \
-            , 'ch.astra.strassenverkehrszaehlung_messstellen-uebergeordnet' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , nr::text as feature_id \
-        from astra.verkehr_ueber
-}
-
-source src_ch_astra_strassenverkehrszaehlung_lokal : def_searchable_features
-{
-    sql_db = uvek_${DBSTAGING}
-    sql_query = \
-        SELECT nr::bigint as id \
-            , zaehlstellen_bezeichnung as label \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ', nr, zaehlstellen_bezeichnung)) as detail \
-            , 'ch.astra.strassenverkehrszaehlung_messstellen-regional_lokal' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , nr::text as feature_id \
-        from astra.verkehr_reg_loc
-}
-
 source src_ch_astra_strassenverkehrszaehlung_uebergeordnet : def_searchable_features
 {
     sql_db = uvek_${DBSTAGING}
@@ -1783,18 +1747,6 @@ index ch_bav_seilbahnen_bundeskonzession : ch_astra_ivs_nat
 {
     source = src_ch_bav_seilbahnen_bundeskonzession
     path = /var/lib/sphinxsearch/data/index/ch_bav_seilbahnen_bundeskonzession
-}
-
-index ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet : ch_astra_ivs_nat
-{
-    source = src_ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet
-    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen_uebergeordnet
-}
-
-index ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal : ch_astra_ivs_nat
-{
-    source = src_ch_astra_strassenverkehrszaehlung_lokal
-    path = /var/lib/sphinxsearch/data/index/ch_astra_strassenverkehrszaehlung_messstellen_regional_lokal
 }
 
 index ch_astra_strassenverkehrszaehlung_uebergeordnet : ch_astra_ivs_nat
