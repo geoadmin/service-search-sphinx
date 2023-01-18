@@ -1209,6 +1209,24 @@ source src_bafu_tranquillity_gebiete : def_searchable_features
         from schutzge.tranquillity_gebiete
 }
 
+source src_ch_bafu_klima_co2_ausstoss_gebaeude : def_searchable_features
+{
+    sql_db = bafu_dev
+    sql_query = \
+        SELECT bgdi_id as id \
+            , egid as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', egid)) as detail \
+            , 'ch.bafu.klima-co2_ausstoss_gebaeude' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from klima.co2_ausstoss_gebaeude
+}
+
 ## INDICES
 
 index ch_bafu_hydrologie_wassertemperaturmessstationen
@@ -1614,4 +1632,10 @@ index ch_bafu_tranquillity_gebiete : ch_bafu_hydrologie_wassertemperaturmessstat
 {
     source = src_bafu_tranquillity_gebiete
     path = /var/lib/sphinxsearch/data/index/ch_bafu_tranquillity_gebiete
+}
+
+index ch_bafu_klima_co2_ausstoss_gebaeude : ch_astra_ivs_nat
+{
+    source = src_ch_bafu_klima_co2_ausstoss_gebaeude
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_klima_co2_ausstoss_gebaeude
 }
