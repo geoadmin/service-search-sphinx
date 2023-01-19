@@ -1211,7 +1211,7 @@ source src_bafu_tranquillity_gebiete : def_searchable_features
 
 source src_ch_bafu_klima_co2_ausstoss_gebaeude : def_searchable_features
 {
-    sql_db = bafu_dev
+    sql_db = bafu_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , egid as label \
@@ -1634,7 +1634,7 @@ index ch_bafu_tranquillity_gebiete : ch_bafu_hydrologie_wassertemperaturmessstat
     path = /var/lib/sphinxsearch/data/index/ch_bafu_tranquillity_gebiete
 }
 
-index ch_bafu_klima_co2_ausstoss_gebaeude : ch_astra_ivs_nat
+index ch_bafu_klima_co2_ausstoss_gebaeude : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_klima_co2_ausstoss_gebaeude
     path = /var/lib/sphinxsearch/data/index/ch_bafu_klima_co2_ausstoss_gebaeude
