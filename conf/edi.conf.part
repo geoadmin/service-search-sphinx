@@ -137,6 +137,25 @@ source src_ch_bag_radioaktivitaet_atmosphaere : def_searchable_features
 }
 
 
+source src_ch_bfs_gebaeude_wohnungs_register_waermequelle_heizung : def_searchable_features
+{
+    sql_db = edi_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , egid as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ',egid,strname,dplzname)) as detail \
+            , 'ch.bfs.gebaeude_wohnungs_register_waermequelle_heizung' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , egid::text as feature_id \
+        from bfs.gebaeude_wohnungs_register_waermequelle
+}
+
+
 ## INDICES
 
 index ch_bfs_generalisierte_grenzen_agglomerationen_g1
@@ -185,4 +204,10 @@ index ch_bag_radioaktivitaet_atmosphaere : ch_bfs_generalisierte_grenzen_agglome
 {
     source = src_ch_bag_radioaktivitaet_atmosphaere
     path = /var/lib/sphinxsearch/data/index/ch_bag_radioaktivitaet_atmosphaere
+}
+
+index ch_bfs_gebaeude_wohnungs_register_waermequelle_heizung : ch_bfs_generalisierte_grenzen_agglomerationen_g1
+{
+    source = src_ch_bfs_gebaeude_wohnungs_register_waermequelle_heizung
+    path = /var/lib/sphinxsearch/data/index/ch_bfs_gebaeude_wohnungs_register_waermequelle_heizung
 }
