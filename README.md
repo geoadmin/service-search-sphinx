@@ -10,163 +10,77 @@ Sphinx Search service for RE3
 - http://sphinxsearch.com/docs/current.html
 - http://sphinxsearch.com/docs/archives/2.1.5/
 
-### SPHINX Service Adresses:
+### Setup
+The fsdi sphinxsearch consists of the following services:
+* [service-search-wsgi](https://github.com/geoadmin/service-search-wsgi) (port 80)
+* [service-sphinxsearch](https://github.com/geoadmin/service-sphinxsearch) (port 9312)
+
+The service configuration is in this [docker-compose](https://github.com/geoadmin/infra-vhost/blob/master/systems/api3/service-search/base/docker-compose.yml) file:
+
+### service-search-wsgi adresses
 
 Staging          | URL
 -----------------|------------------------------------------|
-**Dev:**         | http://service-sphinxsearch.dev.bgdi.ch  |
-**Int:**         | http://service-sphinxsearch.int.bgdi.ch  |
-**Prod:**        | http://service-sphinxsearch.prod.bgdi.ch |
-**Prod public:** | http://search.geo.admin.ch               |
+**Dev:**         | https://sys-api3.dev.bgdi.ch/rest/services/api/SearchServer  |
+**Int:**         | https://sys-api3.int.bgdi.ch/rest/services/api/SearchServer  |
+**Prod:**        | https://api.geo.admin.ch/rest/services/api/SearchServer |
 
-### Service Setup (update cycle)
+### service-sphinxsearch container setup
 
-```bash
-$ make template
-$ make move-template
-$ sudo -u root systemctl stop sphinxsearch
-$ sudo -u root systemctl start sphinxsearch
-```
+The sphinxsearch container/image can be operated in
+* **maintenance mode** (index creation / update)
+* **service mode** (sphinxsearch service on port 9312)
 
-### Service Details:
-
-**Port:**           9312
-
-### Service paths:
+### Service paths inside the running container
 
 Object            | Path
 ------------------|-----------------------------------|
-**PID:**          | /var/run/sphinxsearch.pid         |
+**PID:**          | /var/run/sphinxsearch/searchd.pid |
 **Searchd Log**   | /var/log/sphinxsearch/searchd.log |
 **Query Log:**    | /var/log/sphinxsearch/query.log   |
 **Indexes:**      | /var/lib/sphinxsearch/data/index/ |
 **Configuration:**| /etc/sphinxsearch/sphinx.conf     |
 
-### Search Daemon:
-
-#### stop
-
+### maintenance mode
+#### local index config validation
 ```bash
-$ sudo -u root systemctl stop sphinxsearch
+make check-config-local
 ```
+This check is automatically executed with Codebuild for each Pull request.
 
-#### start
-
+#### local index creation
 ```bash
-$ sudo -u root systemctl start sphinxsearch
+STAGING=dev DB=bod_dev make pg2sphinx
 ```
+For this command you need read-write access to `${SPHINX_EFS}`.
+This command is executed/triggered by the database deploy script on `geodatasync.prod.bgdi.ch`.
 
-#### validate config
-
-```
-$ indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
-```
-
-### Rebuild / update Indexes:
-#### rebuild / build some indexes index1 index2 index3
-There will be a service restart after every index
-
+### service mode
+#### local sphinxsearch server
+you can run a local sphinxsearch server on port 913 with the following make targets:
 ```bash
-$ sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf index1 index2 index3
+make dockerrun
+make dockerrundebug
 ```
 
-#### rebuild / build all indexes
+the initial start of this local container will copy all the index files from the efs folder to a local docker volume. This initial ramp up process can take up to an hour! You will need at least **70 GB of free diskspace** on your host.
 
-```bash
-$ sudo -u sphinxsearch indexer --verbose --rotate --sighup-each --config /etc/sphinxsearch/sphinx.conf --all
-```
-multithread indexer is not possible: http://sphinxsearch.com/forum/view.html?id=3936a
+In the running service container, the indexes are synced every 15 minutes from efs to the local volume and rotated. This is done with the script index-sync-rotate.sh.
 
-#### Alternative
+The sphinxsearch logs (searchd and query logs) and the index-sync-rotate.sh logs are redirected to stdout inside the container and are visible with `docker logs`.
 
-You can use the makefile in any directory containing this repository
+### Deploy
+Since the service is operated on vhosts, the deploy of the search stack (service-search-wsgi and service-sphinxsearch) is done with this [deploy script](https://github.com/geoadmin/infra-vhost/blob/master/deploy.sh).
 
-To see options of make
+See [here](https://github.com/geoadmin/doc-guidelines/blob/master/DEPLOY.md#1-sphinx-search---int) for more information.
 
-```
-$ make
-```
-
-#### Wordforms
+### Wordform
 
 Wordforms are part of the sphinx conf.
 The swisssearch index (zipcodes) has to be computed after a wordforms update.
 
 ### Command line debugging with python sphinx api
-
 ```bash
-$ cd test
-$ python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
+cd test
+python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
 ```
-
-### Make Deploy
-
-Before the deploy make sure that the following steps have been done
-* ```make template```
-* ```make move-template```
-
-#### Deploy config to Integration, no indexes will be built
-
-```bash
-$ make deploy-int-config
-```
-
-#### Deploy config to Integration, build all the indexes which are using the database lubis
-
-```bash
-$ make deploy-int-config db=lubis
-```
-
-#### Deploy config to Integration, build all the indexes with the given prefix
-
-```bash
-$ make deploy-int-config index=ch_tamedia_schweizerfamilie-feuerstellen
-```
-
-#### Deploy config to Integration, build all the indexes from config
-
-You can use one of the following commands to recreate all the indexes on the deploy target from the config file. This may take a while.
-
-```bash
-$ make deploy-int-config index=all
-```
-
-```bash
-$ make deploy-int-config db=all
-```
-
-The same commands can be used with ```make deploy-prod-config```.
-
-#### Deploy config and wordforms to Integration, build all the indexes which are using wordforms
-
-You can use the following commands to deploy the config and the wordform files and recreate all the indexes which are using wordforms. You can find the indexes with wordforms in the config files. Actually the distributed index ``swisssearch``and the indexes ``layers_**`` are using wordforms.
-
-```bash
-$ make deploy-int-config index=swisssearch
-```
-
-```bash
-$ make deploy-int-config index=layers
-```
-
-The same commands can be used with ```make deploy-prod-config```.
-
-#### Deploy config to Integration, create all indexes related to specific database
-
-```bash
-$ cd service-sphinxsearch/
-$ git checkout master
-$ git pull origin master
-$ make template
-$ make move-template
-$ make deploy-int-config db=zeitreihen
-```
-
-#### Deploy **clean_index** to Integration
-
-You can use this command to synchronize the remote sphinx config with the remote indices:
-* create all the missing indexes
-* remove orphaned indexes
-The sphinx configuration will not be deployed. The command can be used with integration or production: 
-* ``$ make deploy-int-clean_index``
-* ``$ make deploy-prod-clean_index``
