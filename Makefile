@@ -129,6 +129,7 @@ help:
 	@echo "${BOLD}${BLUE}sphinxsearch config and index creation targets:${RESET}"
 	@echo "- pg2sphinx                 Create / Update indices based on DB or INDEX pattern, EFS index will be synced to docker volumes (does NOT re-create config file)"
 	@echo "                            (STAGING=(dev|int|prod) DB= or INDEX= ) p.e. STAGING=dev DB=bod_dev make pg2sphinx"
+	@echo "                            NOTE: for this target, you need read-write access to EFS ${YELLOW}${SPHINX_EFS}${RESET}"
 	@echo "- check-config-local        build and check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET} and the queries"
 	@echo
 	@echo "${BOLD}${BLUE}general targets:${RESET}"
