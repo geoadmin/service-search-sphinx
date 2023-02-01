@@ -132,9 +132,6 @@ help:
 	@echo "                            NOTE: for this target, you need read-write access to EFS ${YELLOW}${SPHINX_EFS}${RESET}"
 	@echo "- check-config-local        build and check the local sphinx config: ${YELLOW}$(CURRENT_DIR)/conf/sphinx.conf${RESET} and the queries"
 	@echo
-	@echo "${BOLD}${BLUE}general targets:${RESET}"
-	@echo "- git_hook                  install pre-commit git hook"
-	@echo
 	@echo "VARIABLES"
 	@echo "-----------"
 	@echo "- GIT_HASH:                 ${YELLOW}${GIT_HASH}${RESET}"
@@ -225,17 +222,6 @@ endif
 check-config-local: dockerbuild config
 	$(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf | grep "config valid" || $(DOCKER_EXEC_LOCAL) indextool --checkconfig -c /etc/sphinxsearch/sphinx.conf
 	DOCKER_EXEC_LOCAL="$(DOCKER_EXEC_LOCAL)" ./scripts/check-config-local.sh
-
-
-.PHONY: git_hook
-git_hook:
-	cmp -s scripts/pre-commit.sh ${HOOK_DIR}/pre-commit; \
-	RETVAL=$$?; \
-	if [[ $$RETVAL -ne 0 ]]; then \
-		echo "install/update git hook"; \
-		mkdir -p ${HOOK_DIR}; \
-		cp -f scripts/pre-commit.sh ${HOOK_DIR}/pre-commit && chmod +x ${HOOK_DIR}/pre-commit; \
-	fi
 
 
 .PHONY: config
