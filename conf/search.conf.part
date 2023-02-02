@@ -291,7 +291,7 @@ source src_zipcode : src_swisssearch
         gid as id \
         , os_uuid::text as feature_id \
         , plz::text as detail \
-        , concat('<b>', plz, ' - ', trim(langtext), ' (', trim(canton), ')</b>') as label \
+        , concat('<b>', plz, ' - ', trim(langtext), '</b>') as label \
         , NULL as objectclass \
         , 'zipcode' as origin \
         , quadindex(the_geom) as geom_quadindex \
