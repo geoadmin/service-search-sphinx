@@ -8,6 +8,12 @@ docker_is_logged_in() {
     docker pull "${DOCKER_IMG_LOCAL_TAG}" &> /dev/null
 }
 
+# check if we have read-write access to the efs
+if ! /bin/test -d "${SPHINX_EFS}" -a -w "${SPHINX_EFS}"; then
+    >&2 echo "no read-write access to folder ${SPHINX_EFS} available"
+    exit 1
+fi
+
 # check if we are already logged in
 if ! docker_is_logged_in; then
     make dockerlogin

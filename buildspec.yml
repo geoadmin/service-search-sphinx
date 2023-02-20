@@ -44,6 +44,8 @@ phases:
       - make lint
       - echo "shellcheck bash"
       - make shellcheck
+      - echo "check queries"
+      - make check-config-local
       - echo Build started on $(date)
       - export DOCKER_IMG_TAG=${REGISTRY}/${IMAGE_BASE_NAME}:${GITHUB_TAG}
       - export DOCKER_IMG_TAG_LATEST=${REGISTRY}/${IMAGE_BASE_NAME}:${GITHUB_BRANCH//\//_}.latest
