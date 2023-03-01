@@ -873,6 +873,41 @@ source src_ch_swisstopo_fixpunkte_lfp1 : def_searchable_features
         from fida.punkt_lage_lfp1
 }
 
+source src_ch_swisstopo_fixpunkte_lfp2 : def_searchable_features
+{
+    sql_db = stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , nbident_nummer as label \
+            , 'feature' as origin \
+            , remove_accents(nbident_nummer) as detail \
+            , 'ch.swisstopo.fixpunkte-lfp2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , nbident_nummer::text as feature_id \
+        from vd.fixpunkte_lfp2
+}
+
+source src_ch_swisstopo_fixpunkte_hfp2 : def_searchable_features
+{
+    sql_db = stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , nbident_nummer as label \
+            , 'feature' as origin \
+            , remove_accents(nbident_nummer) as detail \
+            , 'ch.swisstopo.fixpunkte-hfp2' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , nbident_nummer::text as feature_id \
+        from vd.fixpunkte_hfp2
+}
 
 ## INDICES
 
@@ -1166,4 +1201,16 @@ index ch_swisstopo_fixpunkte_lfp1 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_fixpunkte_lfp1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp1
+}
+
+index ch_swisstopo_fixpunkte_hfp2 : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_fixpunkte_hfp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_hfp2
+}
+
+index ch_swisstopo_fixpunkte_lfp2 : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_fixpunkte_lfp2
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp2
 }
