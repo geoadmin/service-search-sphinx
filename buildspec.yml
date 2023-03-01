@@ -34,7 +34,7 @@ phases:
       - export GITHUB_COMMIT=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - export GITHUB_TAG="$(git describe --tags 2>/dev/null)"
       - echo "GITHUB_BRANCH=${GITHUB_BRANCH} GITHUB_COMMIT=${GITHUB_COMMIT} GITHUB_TAG=${GITHUB_TAG} DOCKER_IMG_TAG=${DOCKER_IMG_TAG}"
-      - echo "Creating a clean environment"
+      - echo "Creating a clean environment ==="
       - make ci
   build:
     commands:
