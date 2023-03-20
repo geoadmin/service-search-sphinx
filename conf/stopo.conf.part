@@ -880,7 +880,7 @@ source src_ch_swisstopo_fixpunkte_lfp2 : def_searchable_features
         SELECT bgdi_id as id \
             , nbident_nummer as label \
             , 'feature' as origin \
-            , remove_accents(nbident_nummer) as detail \
+            , remove_accents(concat_ws(' ', nbident_nummer, nbident, nummer)) as detail \
             , 'ch.swisstopo.fixpunkte-lfp2' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -898,7 +898,7 @@ source src_ch_swisstopo_fixpunkte_hfp2 : def_searchable_features
         SELECT bgdi_id as id \
             , nbident_nummer as label \
             , 'feature' as origin \
-            , remove_accents(nbident_nummer) as detail \
+            , remove_accents(concat_ws(' ', nbident_nummer, nbident, nummer)) as detail \
             , 'ch.swisstopo.fixpunkte-hfp2' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
