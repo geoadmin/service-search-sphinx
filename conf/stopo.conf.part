@@ -367,7 +367,7 @@ source src_ch_swisstopo_geologie_bohrungen_tiefer_500 : def_searchable_features
         SELECT  bgdi_id as id \
             , COALESCE(name, '') as label \
             , 'feature' as origin \
-            , remove_accents(COALESCE(name, '')) as detail \
+            , remove_accents(concat_ws(' ', name, fm_at_td, purpose_d, purpose_f, purpose_e, discover_d, discover_f, discover_e)) as detail \
             , 'ch.swisstopo.geologie-bohrungen_tiefer_500' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
