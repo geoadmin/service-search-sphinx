@@ -914,7 +914,7 @@ source src_ch_swisstopo_swisstne_base_point : def_searchable_features
     sql_db = stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
-            , uuid as label \
+            , uuid::text as label \
             , 'feature' as origin \
             , remove_accents(uuid::text) as detail \
             , 'ch.swisstopo.swisstne-base' as layer \
@@ -932,7 +932,7 @@ source src_ch_swisstopo_swisstne_base_line : def_searchable_features
     sql_db = stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
-            , uuid as label \
+            , uuid::text as label \
             , 'feature' as origin \
             , remove_accents(uuid::text) as detail \
             , 'ch.swisstopo.swisstne-base' as layer \
@@ -950,7 +950,7 @@ source src_ch_swisstopo_swisstne_base_poly : def_searchable_features
     sql_db = stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
-            , uuid as label \
+            , uuid::text as label \
             , 'feature' as origin \
             , remove_accents(uuid::text) as detail \
             , 'ch.swisstopo.swisstne-base' as layer \
