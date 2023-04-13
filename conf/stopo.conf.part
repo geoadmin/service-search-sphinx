@@ -909,6 +909,60 @@ source src_ch_swisstopo_fixpunkte_hfp2 : def_searchable_features
         from vd.fixpunkte_hfp2
 }
 
+source src_ch_swisstopo_swisstne_base_point : def_searchable_features
+{
+    sql_db = stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , uuid as label \
+            , 'feature' as origin \
+            , remove_accents(uuid) as detail \
+            , 'ch.swisstopo.swisstne-base' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , uuid::text as feature_id \
+        from tlm.swisstne_base_point
+}
+
+source src_ch_swisstopo_swisstne_base_line : def_searchable_features
+{
+    sql_db = stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , uuid as label \
+            , 'feature' as origin \
+            , remove_accents(uuid) as detail \
+            , 'ch.swisstopo.swisstne-base' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , uuid::text as feature_id \
+        from tlm.swisstne_base_line
+}
+
+source src_ch_swisstopo_swisstne_base_poly : def_searchable_features
+{
+    sql_db = stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , uuid as label \
+            , 'feature' as origin \
+            , remove_accents(uuid) as detail \
+            , 'ch.swisstopo.swisstne-base' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , uuid::text as feature_id \
+        from tlm.swisstne_base_poly
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren_tsp1
@@ -1213,4 +1267,22 @@ index ch_swisstopo_fixpunkte_lfp2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_fixpunkte_lfp2
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_fixpunkte_lfp2
+}
+
+index ch_swisstopo_swisstne_base_point : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_swisstne_base_point
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swisstne_base_point
+}
+
+index ch_swisstopo_swisstne_base_line : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_swisstne_base_line
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swisstne_base_line
+}
+
+index ch_swisstopo_swisstne_base_poly : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_swisstne_base_poly
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swisstne_base_poly
 }
