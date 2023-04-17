@@ -340,7 +340,7 @@ source src_haltestellen : src_swisssearch
 index zipcode
 {
     source = src_zipcode
-    wordforms = /var/lib/sphinxsearch/data/index/wordforms_main.txt
+    wordforms = /etc/sphinxsearch/wordforms_main.txt
     path = /var/lib/sphinxsearch/data/index/zipcode
     type = plain
     min_infix_len = 1

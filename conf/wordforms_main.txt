@@ -3,7 +3,10 @@ w > weg
 al > allee
 str > strasse
 gi > industriegebiet
-
+sankt > st
+conrad > c
+ferdinand > f
+charles > c
 # francais
 ch > chemin
 av > avenue
@@ -15,11 +18,21 @@ fbg > faubourg
 r > rue
 sent > sentier
 pass > passage
-# zi > zone industrielle (need 2.2.4 update)
-
+zi > zone industrielle
+saint > st
+sainte > ste
+jean > j
+jacques > j
+guillaume > g
+henri > h
 # italiano
 v > viale
 p > piazza
-
+santo > s
+san > s
+santa > sta
+gian > g
+giacomo > g
+marietta > m
 # agnostic
 pl > pla
