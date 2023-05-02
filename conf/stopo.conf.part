@@ -916,7 +916,7 @@ source src_ch_swisstopo_swisstne_base : def_searchable_features
         SELECT bgdi_id as id \
             , uuid as label \
             , 'feature' as origin \
-            , remove_accents(uuid) as detail \
+            , remove_accents(concat_ws(' ', uuid, from_node_uuid, to_node_uuid)) as detail \
             , 'ch.swisstopo.swisstne-base' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
