@@ -319,7 +319,7 @@ source src_haltestellen : src_swisssearch
         , remove_accents(concat_ws(' ', name, nummer, betriebspunkttyp_bezeichnung_de, verkehrsmittel_bezeichnung_de))::text as detail \
         , NULL as objectclass \
         , concat_ws('','<i>', lower(concat_ws('_','Haltestellen', trim(verkehrsmittel_bezeichnung_de))) , '</i> ','<b>',trim(name),'</b>') as label \
-        , 'gazetteer'::text as origin \
+        , 'haltestellen'::text as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
         , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
