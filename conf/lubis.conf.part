@@ -43,7 +43,7 @@ source src_ch_swisstopo_lubis_luftbilder_farbe : def_searchable_features_with_ye
     sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', concat_ws(', ', ort, ebkey), ')' ) as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder_farbe' as layer \
@@ -62,7 +62,7 @@ source src_ch_swisstopo_lubis_luftbilder_schwarzweiss: def_searchable_features_w
     sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', concat_ws(', ', ort, ebkey), ')' ) as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder_schwarzweiss' as layer \
@@ -81,7 +81,7 @@ source src_ch_swisstopo_lubis_luftbilder_infrarot: def_searchable_features_with_
     sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', concat_ws(', ', ort, ebkey), ')' ) as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder_infrarot' as layer \
@@ -100,7 +100,7 @@ source src_ch_swisstopo_lubis_luftbilder_dritte_kantone : def_searchable_feature
     sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', concat_ws(', ', ort, ebkey), ')' ) as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder-dritte-kantone' as layer \
@@ -119,7 +119,7 @@ source src_ch_swisstopo_lubis_luftbilder_dritte_firmen : def_searchable_features
     sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , concat(flugdatum, ' ', bildnummer, ' (', ort, ', ', ebkey, ')' ) as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', concat_ws(', ', ort, ebkey), ')' ) as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder-dritte-firmen' as layer \
