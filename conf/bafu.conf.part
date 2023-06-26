@@ -530,7 +530,7 @@ source src_ch_bafu_gewaesserschutz_badewasserqualitaet : def_searchable_features
         SELECT row_number() OVER(ORDER BY bgdi_id) as id \
             , bwname as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', bwid, bwname, groupid, nwunitname, rbdsuname, gemeinde, canton, bwatercat, qualitaet_eua)) as detail \
+            , remove_accents(concat_ws(' ', bwid, bwname)) as detail \
             , 'ch.bafu.gewaesserschutz-badewasserqualitaet' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
