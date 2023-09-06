@@ -1661,5 +1661,5 @@ index ch_bafu_klima_co2_ausstoss_gebaeude : ch_bafu_hydrologie_wassertemperaturm
 index ch_bafu_fauna_wildtierpassagen : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_fauna_wildtierpassagen
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_klima_co2_ausstoss_gebaeude
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_fauna_wildtierpassagen
 }
