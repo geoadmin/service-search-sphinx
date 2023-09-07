@@ -1234,7 +1234,7 @@ source src_ch_bafu_fauna_wildtierpassagen : def_searchable_features
         SELECT bgdi_id as id \
             , name as label \
             , 'feature' as origin \
-            , remove_accents(name) as detail \
+            , name as detail \
             , 'ch.bafu.fauna-wildtierpassagen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
