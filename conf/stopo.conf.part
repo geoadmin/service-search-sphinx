@@ -932,7 +932,7 @@ source src_ch_swisstopo_geologie_reflexionsseismik : def_searchable_features
     sql_db = stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
-            , bgdi_id as label \
+            , name as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', name, alias, survey, owner)) as detail \
             , 'ch.swisstopo.geologie-reflexionsseismik' as layer \
