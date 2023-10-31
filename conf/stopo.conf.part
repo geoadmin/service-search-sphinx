@@ -927,6 +927,24 @@ source src_ch_swisstopo_swisstne_base : def_searchable_features
         from tlm.swisstne_base_sphinx
 }
 
+source src_ch_swisstopo_geologie_reflexionsseismik : def_searchable_features
+{
+    sql_db = stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , name as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', name, alias, survey, owner)) as detail \
+            , 'ch.swisstopo.geologie-reflexionsseismik' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id as feature_id \
+        from geol.view_geologie_reflexionsseismik_sphinx
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren_tsp1
@@ -1237,4 +1255,10 @@ index ch_swisstopo_swisstne_base : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_swisstne_base
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_swisstne_base
+}
+
+index ch_swisstopo_geologie_reflexionsseismik : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_geologie_reflexionsseismik
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_reflexionsseismik
 }
