@@ -1,23 +1,5 @@
 ## SOURCES
 
-source src_ch_pronatura_waldreservate : def_searchable_features
-{
-    sql_db = dritte_${DBSTAGING}
-    sql_query = \
-        SELECT bgdi_id as id \
-            , name::text as label \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ', objnummer, name, mcpfe)) as detail \
-            , 'ch.pronatura.waldreservate' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
-        from pronatura.waldreservate
-}
-
 source src_ch_sem_sachplan_asyl_anhoerung : def_searchable_features
 {
     sql_db = dritte_${DBSTAGING}
@@ -56,25 +38,18 @@ source src_ch_sem_sachplan_asyl_kraft : def_searchable_features
 
 
 ## INDICES
-index ch_pronatura_waldreservate
+index ch_sem_sachplan_asyl_anhoerung
 {
     type = plain
     dict=crc
-    source = src_ch_pronatura_waldreservate
-    path = /var/lib/sphinxsearch/data/index/ch_pronatura_waldreservate
+    source = src_ch_sem_sachplan_asyl_anhoerung
+    path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan_asyl_anhoerung
     min_infix_len = 2
     expand_keywords = 1
 }
 
 
-index ch_sem_sachplan_asyl_anhoerung : ch_pronatura_waldreservate
-{
-    source = src_ch_sem_sachplan_asyl_anhoerung
-    path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan_asyl_anhoerung
-}
-
-
-index ch_sem_sachplan_asyl_kraft : ch_pronatura_waldreservate
+index ch_sem_sachplan_asyl_kraft : ch_sem_sachplan_asyl_anhoerung
 {
     source = src_ch_sem_sachplan_asyl_kraft
     path = /var/lib/sphinxsearch/data/index/ch_sem_sachplan_asyl_kraft
