@@ -277,7 +277,7 @@ source src_ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung : def_searc
         SELECT bgdi_id as id \
             , obname as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', obname, cpkind)) as detail \
+            , remove_accents(concat_ws(' ', obname, cpkind, edkinds)) as detail \
             , 'ch.swisstopo.geologie-rohstoffe-zement_abbau_verarbeitung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
