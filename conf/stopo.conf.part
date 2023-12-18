@@ -40,18 +40,19 @@ source src_ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill : def_searchable
 {
     sql_db = stopo_${DBSTAGING}
     sql_query = \
-        SELECT id as id \
+        SELECT object_id as id \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ',gemname, id)) as detail \
+            , remove_accents(concat_ws(' ', gde_name, object_id)) as detail \
             , 'ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
             , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , gemname::text as label \
-            , id::text as feature_id \
-        FROM tlm.swissboundaries_gemeinden
+            , gde_name::text as label \
+            , object_id::text as feature_id \
+        FROM tlm.swissboundaries_gemeinden_hist_chsdi \
+        WHERE is_current_jahr = true
 }
 
 source src_ch_swisstopo_swissboundaries3d_kanton_flaeche_fill : def_searchable_features
@@ -273,17 +274,17 @@ source src_ch_swisstopo_geologie_rohstoffe_zement_abbau_verarbeitung : def_searc
 {
     sql_db = stopo_${DBSTAGING}
     sql_query = \
-        SELECT obid::bigint as id \
+        SELECT bgdi_id as id \
             , obname as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', obname, tckinds, ltkinds, emkinds, pckind)) as detail \
+            , remove_accents(concat_ws(' ', obname, cpkind, edkinds)) as detail \
             , 'ch.swisstopo.geologie-rohstoffe-zement_abbau_verarbeitung' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , obid::text as feature_id \
+            , bgdi_id::text as feature_id \
         from geol.rohstoffe_zementabbauverarbeitung
 }
 
@@ -312,7 +313,7 @@ source src_ch_swisstopo_geologie_rohstoffe_ziegel_abbau : def_searchable_feature
         SELECT bgdi_id as id \
             , obname as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', obname, tckinds, ltkinds)) as detail \
+            , remove_accents(concat_ws(' ', obname, cpkind)) as detail \
             , 'ch.swisstopo.geologie-rohstoffe-ziegel_abbau' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
