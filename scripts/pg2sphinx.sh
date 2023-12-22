@@ -30,7 +30,7 @@ if [ -n "${INDEX:-}" ]; then
 fi
 
 mapfile -t array_config < <(${DOCKER_EXEC} cat /etc/sphinxsearch/sphinx.conf | grep -E "^[^#]+ path"  | awk -F"=" '{print $2}' | sed -n 's|^.*/||p' | sed 's/\r$//')
-mapfile -t array_file < <(find "${SPHINX_EFS}" -maxdepth 1 -name "*.spd" | sed 's|.spd$||g' | sed -n -e 's|^.*/||p' )
+mapfile -t array_file < <(find "${SPHINX_EFS}" -maxdepth 1 -name "*.spd" 2> /dev/null | sed 's|.spd$||g' | sed -n -e 's|^.*/||p' )
 mapfile -t array_orphaned < <(comm -13 --nocheck-order <(printf '%s\n' "${array_config[@]}" | LC_ALL=C sort) <(printf '%s\n' "${array_file[@]}" | LC_ALL=C sort))
 
 # remove orphaned indexes from EFS
