@@ -52,8 +52,7 @@ source src_ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill : def_searchable
             , gde_name::text as label \
             , jahr as year \
             , object_id::text as feature_id \
-        FROM tlm.swissboundaries_gemeinden_hist_chsdi \
-        WHERE is_current_jahr = true
+        FROM tlm.swissboundaries_gemeinden_hist_chsdi
 }
 
 source src_ch_swisstopo_swissboundaries3d_kanton_flaeche_fill : def_searchable_features
