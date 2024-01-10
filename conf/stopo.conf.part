@@ -42,7 +42,7 @@ source src_ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill : def_searchable
     sql_query = \
         SELECT object_id as id \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', gde_name, object_id)) as detail \
+            , remove_accents(concat_ws(' ', gde_name, gde_nr)) as detail \
             , 'ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
