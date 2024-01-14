@@ -28,7 +28,7 @@ RSYNC_INCLUDE="/tmp/include.txt"
     # .sps stores string attribute data.
 
 # only indexes will be synced to docker volume that have been updated completely updated on EFS,
-# a completely updated index consists of the following 7 new files:
+# a completely updated index consists of the following new files:
     # .spd
     # .spe
     # .sph
@@ -43,15 +43,13 @@ json_logger() {
     self=$(readlink -f "${BASH_SOURCE[0]}")
     self=$(basename "$self")
     jq --raw-input --compact-output --monochrome-output \
-    '{ "app":
-        {
-            "time": "'"${timestamp}"'",
-            "level": "'"${log_level}"'",
-            "logger": "'"${self}"'",
-            "pidTid": "'$$'",
-            "function": "'"${FUNCNAME[0]}"'",
-            "message": .
-      }
+    '{
+        "time": "'"${timestamp}"'",
+        "level": "'"${log_level}"'",
+        "logger": "'"${self}"'",
+        "pidTid": "'$$'",
+        "function": "'"${FUNCNAME[0]}"'",
+        "message": .
     }'
 }
 
