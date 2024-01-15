@@ -59,6 +59,7 @@ SPHINX_INDEXES=$(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}
 
 LOCKFILE="/tmp/$(basename "$0")"
 LOCKFD=99
+touch /tmp/last_sync_start.txt || :
 
 # PRIVATE
 _lock()             { flock -"$1" "$LOCKFD"; }
@@ -230,3 +231,4 @@ done
 
 
 echo "finished" | json_logger INFO
+touch /tmp/last_sync_finished.txt || :
