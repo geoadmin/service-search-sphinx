@@ -3,6 +3,8 @@
 # shellcheck disable=SC2068
 set -eu
 SPHINX_EFS="/var/lib/sphinxsearch/data/index_efs/"
+K8S_EFS="/var/local/geodata/service-sphinxsearch/${DBSTAGING}/index/"
+
 SPHINX_VOLUME="/var/lib/sphinxsearch/data/index/"
 SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
 RSYNC_INCLUDE="/tmp/include.txt"
@@ -26,7 +28,7 @@ RSYNC_INCLUDE="/tmp/include.txt"
     # .sps stores string attribute data.
 
 # only indexes will be synced to docker volume that have been updated completely updated on EFS,
-# a completely updated index consists of the following 7 new files:
+# a completely updated index consists of the following new files:
     # .spd
     # .spe
     # .sph
@@ -35,22 +37,19 @@ RSYNC_INCLUDE="/tmp/include.txt"
     # .sps
 
 
-
 json_logger() {
     log_level=$1
     timestamp=$(date --utc +%FT%T.%3NZ)
     self=$(readlink -f "${BASH_SOURCE[0]}")
     self=$(basename "$self")
     jq --raw-input --compact-output --monochrome-output \
-    '{ "app":
-        {
-            "time": "'"${timestamp}"'",
-            "level": "'"${log_level}"'",
-            "logger": "'"${self}"'",
-            "pidTid": "'$$'",
-            "function": "'"${FUNCNAME[0]}"'",
-            "message": .
-      }
+    '{
+        "time": "'"${timestamp}"'",
+        "level": "'"${log_level}"'",
+        "logger": "'"${self}"'",
+        "pidTid": "'$$'",
+        "function": "'"${FUNCNAME[0]}"'",
+        "message": .
     }'
 }
 
@@ -60,6 +59,7 @@ SPHINX_INDEXES=$(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}
 
 LOCKFILE="/tmp/$(basename "$0")"
 LOCKFD=99
+touch /tmp/last_sync_start.txt || :
 
 # PRIVATE
 _lock()             { flock -"$1" "$LOCKFD"; }
@@ -78,6 +78,22 @@ exlock_now()        { _lock xn; }  # obtain an exclusive lock immediately or fai
 # avoiding running multiple instances of script.
 exlock_now || { echo "locked" | json_logger INFO; exit 1; }
 echo "start" | json_logger INFO
+
+# TODO: This switch can be removed after the migration to k8s
+# in k8s we have to use /var/local/ as mountpoint for the index files from geodata efs
+# /var/local/geodata/service-sphinxsearch/${DBSTAGING}/index/
+set_efs_source() {
+    # input:
+    #   ${SPHINX_EFS} mountpoint of efs index files
+    # 
+    # output: SPHINX_EFS
+    #   if the index files are available on the k8s mountpoint, the k8s mountpoint will be used
+    #   as efs index source
+    if [ -d "${K8S_EFS}" ]; then
+        echo "service is running on k8s, index files have been found on ${K8S_EFS}." | json_logger INFO
+        SPHINX_EFS="${K8S_EFS}"
+    fi
+}
 
 check_if_efs_index_is_ready() {
     # input:
@@ -143,6 +159,8 @@ check_if_local_index_is_ready() {
     return ${ready}
 }
 
+set_efs_source
+
 # loop through all indexes from sphinx config and sync them if the have been fully updated on efs
 for sphinx_index in ${SPHINX_INDEXES[@]}; do
     # create include-from file from sphinx config for selective rsync from EFS -> LOCAL
@@ -155,7 +173,7 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
     # we have to detect the following use cases:
         # index files are new on efs and not yet rotated on local docker volume
     # this is the array of all index files that are new on EFS and outdated in the local volume
-    mapfile -t new_files < <(rsync --update -avin --delete --include-from "${RSYNC_INCLUDE}" --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME} | grep -E '^>.*.sp.*$' | awk '{print $2}')
+    mapfile -t new_files < <(rsync --update -avin --delete --include-from "${RSYNC_INCLUDE}" --exclude '*' "${SPHINX_EFS}" ${SPHINX_VOLUME} | grep -E '^>.*.sp.*$' | awk '{print $2}')
 
     # skip if new_files is empty no new files have been found with that pattern on EFS
     (( ${#new_files[@]} )) || continue
@@ -213,3 +231,4 @@ done
 
 
 echo "finished" | json_logger INFO
+touch /tmp/last_sync_finished.txt || :
