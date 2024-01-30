@@ -1727,7 +1727,7 @@ source src_ch_bfe_waermepotential_gewaesser : def_searchable_features
 
 source src_ch_bazl_einschraenkungen_drohnen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , zone_name_de as label \
@@ -1745,7 +1745,7 @@ source src_ch_bazl_einschraenkungen_drohnen : def_searchable_features
 
 source src_ch_bav_lage_stoerfallverordnung_eisenbahnanlagen : def_searchable_features
 {
-    sql_db = uvek_dev
+    sql_db = uvek_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
             , name as label \
