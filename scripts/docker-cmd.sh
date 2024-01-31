@@ -7,16 +7,7 @@ green='\e[0;32m'
 NC='\e[0m' # No Color
 
 SPHINXINDEX_VOLUME="/var/lib/sphinxsearch/data/index/"
-SPHINXINDEX_EFS="/var/lib/sphinxsearch/data/index_efs/"
-K8S_EFS="/var/local/geodata/service-sphinxsearch/${DBSTAGING}/index/"
-
-# TODO: This switch can be removed after the migration to k8s
-# in k8s we have to use /var/local/ as mountpoint for the index files from geodata efs
-# /var/local/geodata/service-sphinxsearch/${DBSTAGING}/index/
-if [ -d "${K8S_EFS}" ]; then
-    echo "service is running on k8s, index files have been found on ${K8S_EFS}."
-    SPHINXINDEX_EFS="${K8S_EFS}"
-fi
+SPHINXINDEX_EFS="/var/local/geodata/service-sphinxsearch/${DBSTAGING}/index/"
 
 # remove lock files in volume
 rm ${SPHINXINDEX_VOLUME}*.spl 2> /dev/null || :
