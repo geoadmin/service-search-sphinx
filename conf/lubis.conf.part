@@ -45,7 +45,7 @@ source src_ch_swisstopo_lubis_luftbilder_farbe : def_searchable_features_with_ye
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , concat(flugdatum, ' ', bildnummer, ' (', concat_ws(', ', ort, ebkey), ')' ) as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
+            , remove_accents(concat_ws(' ', ebkey, ort, ebkey_old)) as detail \
             , 'ch.swisstopo.lubis-luftbilder_farbe' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
