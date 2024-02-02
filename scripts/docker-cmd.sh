@@ -29,10 +29,6 @@ rsync --update --delete -av --exclude "*.tmp.*" --stats "${SPHINXINDEX_EFS}" ${S
 service cron start || exit 1
 envsubst < docker-crontab | crontab # DBSTAGING will be read from container environment
 
-# starting the searchd service
-# will load the sphinx indexes from EFS --sync--> Volume --> into memory
-echo -e "${green}starting searchd service ...${NC}"
-
 # prepare the applogs for output on /proc/1/fd/1
 tail --pid $$ -F /var/log/sphinxsearch/searchd.log &
 tail --pid $$ -F /var/log/sphinxsearch/query.log &
@@ -42,6 +38,11 @@ tail --pid $$ -F /var/log/sphinxsearch/query.log &
 # for the main process that Docker will actually show in docker logs.
 tail -f /tmp/stdout &
 tail -f /tmp/stderr >&2 &
+
+# starting the searchd service
+# will load the sphinx indexes from EFS --sync--> Volume --> into memory
+# activate stdout fifo
+echo -e "${green}starting searchd service ...${NC}" > /tmp/stdout
 
 # searchd will own pid 1
 exec /usr/bin/searchd  --nodetach "$@"
