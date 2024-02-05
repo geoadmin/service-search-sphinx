@@ -17,6 +17,8 @@ MAX_AGE=300 # max age in seconds should be the same interval as the cron setting
 # check if index sync status file exists
 if [[ ! -f "${LAST_SYNC}" ]]; then
     echo "index sync status file does not exist ${LAST_SYNC}"
+    # reload cron / restart in case it has not been activated correctly during initial container start
+    envsubst < docker-crontab | crontab
     exit 1
 fi
 
