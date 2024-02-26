@@ -77,7 +77,7 @@ source src_ch_swisstopo_vd_ortschaftenverzeichnis_plz : def_searchable_features
 {
     sql_db = stopo_${DBSTAGING}
     sql_query = \
-        SELECT bgdi_id::int as id \
+        SELECT os_uuid::int as id \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', plz, langtext)) as detail \
             , 'ch.swisstopo-vd.ortschaftenverzeichnis_plz' as layer \
