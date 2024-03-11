@@ -26,7 +26,7 @@ source src_ch_swisstopo_lubis_luftbilder_schraegaufnahmen : def_searchable_featu
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
             , concat_ws(' ',flightdate::date, ebkey::text)  as label \
             , 'feature' as origin \
-            , concat_ws(' ',flightdate::date, ebkey::text)  as detail \
+            , concat_ws(' ',flightdate::date, ebkey::text, ebkey_old)  as detail \
             , 'ch.swisstopo.lubis-luftbilder_schraegaufnahmen' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -81,7 +81,7 @@ source src_ch_swisstopo_lubis_luftbilder_infrarot: def_searchable_features_with_
     sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , concat(flugdatum, ' ', bildnummer, ' (', concat_ws(', ', ort, ebkey), ')' ) as label \
+            , concat(flugdatum, ' ', bildnummer, ' (', concat_ws(', ', ort, ebkey, ebkey_old), ')' ) as label \
             , 'feature' as origin \
             , remove_accents(concat_ws(' ', ebkey, ort)) as detail \
             , 'ch.swisstopo.lubis-luftbilder_infrarot' as layer \
@@ -140,7 +140,7 @@ source src_ch_swisstopo_lubis_terrestrische_aufnahmen : def_searchable_features_
         SELECT row_number() OVER(ORDER BY inventory_number asc) as id \
             , lpad(bilder.inventory_number::text, 14, '0'::text) as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', inventory_number, image_number, station, operate_name, year)) as detail \
+            , remove_accents(concat_ws(' ', inventory_number, image_number, station, operate_name, year, inventarnummer_old)) as detail \
             , 'ch.swisstopo.lubis-terrestrische_aufnahmen' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -149,7 +149,7 @@ source src_ch_swisstopo_lubis_terrestrische_aufnahmen : def_searchable_features_
             , box2d(st_transform(the_geom_hilight, 2056)) as geom_st_box2d_lv95 \
             , year \
             , lpad(bilder.inventory_number::text, 14, '0'::text)::text as feature_id \
-        FROM swisstopo_terrestrial.bilder
+        FROM swisstopo_terrestrial.view_bilder bilder
 }
 
 ## INDICES
