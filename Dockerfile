@@ -28,9 +28,6 @@ RUN groupadd -r geodata -g 2500 && \
     useradd -u 2500 -r -g geodata -s /sbin/nologin --create-home geodata && \
     # create mountpoint for Amazon EFS CSI driver
     install -o geodata -g geodata -d /var/local/ && \
-    # create mountpoint for EFS mount in infra-vhost
-    # TODO: this mountpoint can be removed after the migration to k8s
-    install -o geodata -p geodata -d /var/lib/sphinxsearch/data/index_efs/ && \
     # create mountpoint folder for infra-vhost/k8s ebs/ssd volume
     install -o geodata -g geodata -d /var/lib/sphinxsearch/data/index/ && \
     # change ownerships to geodata which will run the service or the maintenance scripts
