@@ -47,7 +47,20 @@ json_logger() {
         "logger": "'"${self}"'",
         "pidTid": "'$$'",
         "function": "'"${FUNCNAME[0]}"'",
-        "message": .
+        "message": .,
+        "event": {
+            "created": "'"${timestamp}"'"
+        },
+        "log": {
+            "level": "'"${log_level}"'",
+            "logger": "'"${self}"'",
+            "origin": {
+                "function": "'"${FUNCNAME[0]}"'"
+            }
+        },
+        "process": {
+            "pid": "'$$'"
+        }
     }'
 }
 
