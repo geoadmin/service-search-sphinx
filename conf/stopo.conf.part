@@ -973,7 +973,7 @@ source src_ch_swisstopo_geologie_tektonische_karte_line : def_searchable_feature
    sql_db = stopo_${DBSTAGING}
    sql_query = \
       SELECT bgdi_id as id \
-          , sphinx_index as label \
+          , name_de as label \
           , 'feature' as origin \
           , remove_accents(concat_ws(' ', name_de, name_fr, name_it, name_en)) as detail \
           , 'ch.swisstopo.geologie-tektonische_karte' as layer \
@@ -991,7 +991,7 @@ source src_ch_swisstopo_geologie_tektonische_karte_unit : def_searchable_feature
    sql_db = stopo_${DBSTAGING}
    sql_query = \
       SELECT bgdi_id as id \
-          , sphinx_index as label \
+          , tecto_3_de as label \
           , 'feature' as origin \
           , remove_accents(concat_ws(' ', tecto_3_de, tecto_3_fr, tecto_3_it, tecto_3_en, tecto_4_de, tecto_4_fr, tecto_4_it, tecto_4_en )) as detail \
           , 'ch.swisstopo.geologie-tektonische_karte' as layer \
