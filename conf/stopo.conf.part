@@ -972,7 +972,7 @@ source src_ch_swisstopo_geologie_tektonische_karte_line : def_searchable_feature
 {
    sql_db = stopo_${DBSTAGING}
    sql_query = \
-      SELECT bgdi_id as id \
+      SELECT fid as id \
           , name_de as label \
           , 'feature' as origin \
           , remove_accents(concat_ws(' ', name_de, name_fr, name_it, name_en)) as detail \
@@ -982,7 +982,7 @@ source src_ch_swisstopo_geologie_tektonische_karte_line : def_searchable_feature
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , bgdi_id::text as feature_id \
+          , fid::text as feature_id \
       from geol.tektonische_karte_line
 }
 
@@ -990,7 +990,7 @@ source src_ch_swisstopo_geologie_tektonische_karte_unit : def_searchable_feature
 {
    sql_db = stopo_${DBSTAGING}
    sql_query = \
-      SELECT bgdi_id as id \
+      SELECT fid as id \
           , tecto_3_de as label \
           , 'feature' as origin \
           , remove_accents(concat_ws(' ', tecto_3_de, tecto_3_fr, tecto_3_it, tecto_3_en, tecto_4_de, tecto_4_fr, tecto_4_it, tecto_4_en )) as detail \
@@ -1000,7 +1000,7 @@ source src_ch_swisstopo_geologie_tektonische_karte_unit : def_searchable_feature
           , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , bgdi_id::text as feature_id \
+          , fid::text as feature_id \
       from geol.tektonische_karte_units
 }
 
