@@ -993,7 +993,7 @@ source src_ch_swisstopo_geologie_tektonische_karte_unit : def_searchable_feature
       SELECT fid as id \
           , tecto_3_de as label \
           , 'feature' as origin \
-          , remove_accents(concat_ws(' ', tecto_3_de, tecto_3_fr, tecto_3_it, tecto_3_en, tecto_4_de, tecto_4_fr, tecto_4_it, tecto_4_en )) as detail \
+          , remove_accents(concat_ws(' ', tecto_3_de, tecto_3_fr, tecto_3_it, tecto_3_en, tecto_4_de, tecto_4_fr, tecto_4_it, tecto_4_en)) as detail \
           , 'ch.swisstopo.geologie-tektonische_karte' as layer \
           , quadindex(the_geom) as geom_quadindex \
           , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
