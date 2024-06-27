@@ -1339,3 +1339,10 @@ index ch_swisstopo_geologie_tektonische_karte_unit : ch_swisstopo_verschiebungsv
     source = src_ch_swisstopo_geologie_tektonische_karte_unit
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_tektonische_karte_unit
 }
+
+index ch_swisstopo_geologie_tektonische_karte
+{
+    type = distributed
+    local = ch_swisstopo_geologie_tektonische_karte_line
+    local = ch_swisstopo_geologie_tektonische_karte_unit
+}
