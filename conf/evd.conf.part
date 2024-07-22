@@ -396,6 +396,24 @@ source src_ch_blw_ursprungsbezeichnungen_spirituosen : def_searchable_features
         from blw.ursprungsbezeichnungen_spirituosen
 }
 
+source src_ch_blw_landwirtschaftliche_nutzungsflaechen : def_searchable_features
+{
+    sql_db = evd_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , t_id as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', bur_nr, lnf_code, nutzungsidentifikator)) as detail \
+            , 'ch.blw.landwirtschaftliche-nutzungsflaechen' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from blw.landwirtschaftliche_nutzungsflaechen
+}
+
 ## INDICES
 
 index ch_blw_klimaeignung_typ
@@ -532,4 +550,10 @@ index ch_blw_ursprungsbezeichnungen_spirituosen : ch_blw_klimaeignung_typ
 {
     source = src_ch_blw_ursprungsbezeichnungen_spirituosen
     path = /var/lib/sphinxsearch/data/index/ch_blw_ursprungsbezeichnungen_spirituosen
+}
+
+index ch_blw_landwirtschaftliche_nutzungsflaechen : ch_blw_klimaeignung_typ
+{
+    source = src_ch_blw_landwirtschaftliche_nutzungsflaechen
+    path = /var/lib/sphinxsearch/data/index/ch_blw_landwirtschaftliche_nutzungsflaechen
 }
