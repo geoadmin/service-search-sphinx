@@ -403,7 +403,7 @@ source src_ch_blw_landwirtschaftliche_nutzungsflaechen : def_searchable_features
         SELECT bgdi_id::bigint as id \
             , t_id as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', bur_nr, lnf_code, nutzungsidentifikator)) as detail \
+            , remove_accents(concat_ws(' ', bur_nr, nutzungsidentifikator)) as detail \
             , 'ch.blw.landwirtschaftliche-nutzungsflaechen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
