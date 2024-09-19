@@ -219,10 +219,10 @@ index ch_vbs_kataster_belasteter_standorte_militaer : ch_babs_kulturgueter
     path = /var/lib/sphinxsearch/data/index/ch_vbs_kataster_belasteter_standorte_militaer
 }
 
-index ch_vbs_notfalltreffpunkte : ch_babs_kulturgueter
+index ch_babs_notfalltreffpunkte : ch_babs_kulturgueter
 {
     source = src_ch_babs_notfalltreffpunkte
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_notfalltreffpunkte
+    path = /var/lib/sphinxsearch/data/index/ch_babs_notfalltreffpunkte
 }
 
 index ch_vbs_armeelogistikcenter : ch_babs_kulturgueter
