@@ -22,10 +22,10 @@ source src_ch_babs_notfalltreffpunkte : def_searchable_features
 {
     sql_db = vbs_${DBSTAGING}
     sql_query = \
-        SELECT ntp_id as id \
+        SELECT bgdi_id::int as id \
             ,  ntp_id as label \
             , 'feature' as origin \
-            , (concat_ws(' ',ntp_id, gebbezeichnung)) as detail \
+            , remove_accents(concat_ws(' ',ntp_id, gebbezeichnung)) as detail \
             , 'ch.babs.notfalltreffpunkte' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
