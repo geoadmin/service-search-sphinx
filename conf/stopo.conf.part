@@ -1019,7 +1019,7 @@ source src_ch_swisstopo_geologie_thermale_waesser : def_searchable_features
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
           , primary_key::text as feature_id \
-      from geol.thermale_waters
+      from geol.thermal_waters
 }
 
 ## INDICES
