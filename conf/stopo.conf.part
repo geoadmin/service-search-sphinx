@@ -132,9 +132,9 @@ source src_ch_swisstopo_karto_skitouren : def_searchable_features
     sql_db = stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
-            , remove_accents(target_name) as label \
+            , remove_accents(coalesce(target_name, '')) as label \
             , 'feature' as origin \
-            , remove_accents(target_name) as detail \
+            , remove_accents(coalesce(target_name, '')) as detail \
             , 'ch.swisstopo-karto.skitouren' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -150,9 +150,9 @@ source src_ch_swisstopo_karto_schneeschuhrouten : def_searchable_features
     sql_db = stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
-            , remove_accents(target_name) as label \
+            , remove_accents(coalesce(target_name, '')) as label \
             , 'feature' as origin \
-            , remove_accents(target_name) as detail \
+            , remove_accents(coalesce(target_name, '')) as detail \
             , 'ch.swisstopo-karto.schneeschuhrouten' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
