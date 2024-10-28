@@ -127,6 +127,42 @@ source src_ch_swisstopo_vec25_gewaessernetz_referenz : def_searchable_features
         FROM public.v25_gewaessernetz_ref
 }
 
+source src_ch_swisstopo_karto_skitouren : def_searchable_features
+{
+    sql_db = stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , remove_accents(target_name) as label \
+            , 'feature' as origin \
+            , remove_accents(target_name) as detail \
+            , 'ch.swisstopo-karto.skitouren' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , route_uuid::text as feature_id \
+        FROM karto.ski_routes
+}
+
+source src_ch_swisstopo_karto_schneeschuhrouten : def_searchable_features
+{
+    sql_db = stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , remove_accents(target_name) as label \
+            , 'feature' as origin \
+            , remove_accents(target_name) as detail \
+            , 'ch.swisstopo-karto.schneeschuhrouten' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , route_uuid::text as feature_id \
+        FROM karto.snowshoe_routes
+}
+
 source src_ch_swisstopo_geologie_gravimetrischer_atlas_messpunkte : def_searchable_features
 {
     sql_db = stopo_${DBSTAGING}
@@ -1021,6 +1057,19 @@ index ch_swisstopo_landesschwerenetz : ch_swisstopo_verschiebungsvektoren_tsp1
     source = src_ch_swisstopo_landesschwerenetz
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landesschwerenetz
 }
+
+index swisstopo_karto_skitouren : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_karto_skitouren
+    path = /var/lib/sphinxsearch/data/index/swisstopo_karto_skitouren
+}
+
+index ch_swisstopo_karto_schneeschuhrouten : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_karto_schneeschuhrouten
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_karto_schneeschuhrouten
+}
+
 
 index ch_swisstopo_verschiebungsvektoren_tsp2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
