@@ -132,7 +132,7 @@ source src_ch_swisstopo_karto_skitouren : def_searchable_features
     sql_db = stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
-            , remove_accents(coalesce(target_name, '')) as label \
+            , coalesce(target_name, '') as label \
             , 'feature' as origin \
             , remove_accents(coalesce(target_name, '')) as detail \
             , 'ch.swisstopo-karto.skitouren' as layer \
@@ -150,7 +150,7 @@ source src_ch_swisstopo_karto_schneeschuhrouten : def_searchable_features
     sql_db = stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id as id \
-            , remove_accents(coalesce(target_name, '')) as label \
+            , coalesce(target_name, '') as label \
             , 'feature' as origin \
             , remove_accents(coalesce(target_name, '')) as detail \
             , 'ch.swisstopo-karto.schneeschuhrouten' as layer \
