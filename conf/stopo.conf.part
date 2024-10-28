@@ -1076,7 +1076,7 @@ index ch_swisstopo_landesschwerenetz : ch_swisstopo_verschiebungsvektoren_tsp1
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_landesschwerenetz
 }
 
-index swisstopo_karto_skitouren : ch_swisstopo_verschiebungsvektoren_tsp1
+index ch_swisstopo_karto_skitouren : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_karto_skitouren
     path = /var/lib/sphinxsearch/data/index/swisstopo_karto_skitouren
@@ -1087,7 +1087,6 @@ index ch_swisstopo_karto_schneeschuhrouten : ch_swisstopo_verschiebungsvektoren_
     source = src_ch_swisstopo_karto_schneeschuhrouten
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_karto_schneeschuhrouten
 }
-
 
 index ch_swisstopo_verschiebungsvektoren_tsp2 : ch_swisstopo_verschiebungsvektoren_tsp1
 {
