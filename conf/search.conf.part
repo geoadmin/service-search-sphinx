@@ -445,6 +445,7 @@ index address_metaphone: zipcode
     source = src_address
     path = /var/lib/sphinxsearch/data/index/address_metaphone
     preopen = 0
+    expand_keywords = 1
 }
 
 # only create on demand
