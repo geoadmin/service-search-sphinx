@@ -406,6 +406,7 @@ index district_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/district_metaphone
     preopen = 0
     wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index kantone_metaphone : zipcode
@@ -415,6 +416,7 @@ index kantone_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/kantone_metaphone
     preopen = 0
     wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index gg25_metaphone : zipcode
@@ -424,6 +426,7 @@ index gg25_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/gg25_metaphone
     preopen = 0
     wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index swissnames3d_metaphone : zipcode
@@ -433,6 +436,7 @@ index swissnames3d_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/swissnames3d_metaphone
     preopen = 0
     wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index haltestellen_metaphone : zipcode
@@ -442,6 +446,7 @@ index haltestellen_metaphone : zipcode
     path = /var/lib/sphinxsearch/data/index/haltestellen_metaphone
     preopen = 0
     wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index address_metaphone: zipcode
@@ -451,6 +456,7 @@ index address_metaphone: zipcode
     path = /var/lib/sphinxsearch/data/index/address_metaphone
     preopen = 0
     wordforms = /dev/null
+    expand_keywords = 1
 }
 
 # only create on demand
