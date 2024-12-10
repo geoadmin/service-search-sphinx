@@ -74,8 +74,8 @@ endif
 PPID := $(shell echo $$PPID)
 
 # Docker resosource throttling
-# we allow 50% of the currently available memory to be used by sphinx indexer per job
-PERCENTAGE := 50
+# we allow 70% of the currently available memory to be used by sphinx indexer per job
+PERCENTAGE := 70
 free_mem := $(shell free -m | awk '/Mem:/{print $$4}')
 export DOCKER_FREE_MEM := $(shell echo $$(( ${free_mem} * ${PERCENTAGE} / 100 ))m)
 
