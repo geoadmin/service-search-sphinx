@@ -8,6 +8,16 @@ docker_is_logged_in() {
     docker pull "${DOCKER_IMG_LOCAL_TAG}" &> /dev/null
 }
 
+throw_error() {
+    error=$1
+    echo "index generation failed"
+    echo "the docker command was: ${DOCKER_EXEC}"
+    free -m
+    docker stats --no-stream
+    echo "original error code: ${error}"
+    exit "${error}"
+}
+
 # check if we have read-write access to the efs
 if ! /bin/test -d "${SPHINX_EFS}" -a -w "${SPHINX_EFS}"; then
     >&2 echo "no read-write access to folder ${SPHINX_EFS} available"
@@ -21,12 +31,12 @@ fi
 
 if [ -n "${DB:-}" ]; then
     # call pg2sphinx trigger with DATABASE pattern
-    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -d "${DB}"
+    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -d "${DB}" || { throw_error $?; }
 fi
 
 if [ -n "${INDEX:-}" ]; then
     # call pg2sphinx trigger with INDEX pattern
-    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -i "${INDEX}"
+    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -i "${INDEX}" || { throw_error $?; }
 fi
 
 mapfile -t array_config < <(${DOCKER_EXEC} cat /etc/sphinxsearch/sphinx.conf | grep -E "^[^#]+ path"  | awk -F"=" '{print $2}' | sed -n 's|^.*/||p' | sed 's/\r$//')

@@ -73,11 +73,18 @@ endif
 
 PPID := $(shell echo $$PPID)
 
+# Docker resosource throttling
+# we allow 70% of the currently available memory to be used by sphinx indexer per job
+PERCENTAGE := 70
+free_mem := $(shell free -m | awk '/Mem:/{print $$4}')
+export DOCKER_FREE_MEM := $(shell echo $$(( ${free_mem} * ${PERCENTAGE} / 100 ))m)
+
 # Maintenance / Index Commands
 # EFS Index will be mounted as bind mount
 # DOCKER_EXEC will always check if a newer image exists on ecr -> develop.latest support
 export DOCKER_EXEC :=  docker run \
 				--rm \
+				--memory=$(DOCKER_FREE_MEM) \
 				-t \
 				-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index/ \
 				--env-file $(ENV_FILE) \
@@ -86,6 +93,7 @@ export DOCKER_EXEC :=  docker run \
 
 export DOCKER_EXEC_LOCAL :=  docker run \
 				--rm \
+				--memory=$(DOCKER_FREE_MEM) \
 				-t \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
 				--env-file $(ENV_FILE) \
@@ -153,6 +161,7 @@ help:
 	@echo
 	@echo "- CPUS:                     ${YELLOW}${CPUS}${RESET}"
 	@echo "- DB_ACCESS:                ${YELLOW}${DB_ACCESS}${RESET}"
+	@echo "- DOCKER_FREE_MEM:          ${YELLOW}${DOCKER_FREE_MEM}${RESET}"
 
 
 # Build targets. Calling setup is all that is needed for the local files to be installed as needed.
