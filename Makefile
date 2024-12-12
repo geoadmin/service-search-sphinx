@@ -84,7 +84,6 @@ export DOCKER_FREE_MEM := $(shell echo $$(( ${free_mem} * ${PERCENTAGE} / 100 ))
 # DOCKER_EXEC will always check if a newer image exists on ecr -> develop.latest support
 export DOCKER_EXEC :=  docker run \
 				--rm \
-				--memory=$(DOCKER_FREE_MEM) \
 				-t \
 				-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index/ \
 				--env-file $(ENV_FILE) \
@@ -93,7 +92,6 @@ export DOCKER_EXEC :=  docker run \
 
 export DOCKER_EXEC_LOCAL :=  docker run \
 				--rm \
-				--memory=$(DOCKER_FREE_MEM) \
 				-t \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
 				--env-file $(ENV_FILE) \
