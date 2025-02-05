@@ -2,7 +2,8 @@
 # executed as cronjob every 15 minutes
 # shellcheck disable=SC2068
 set -eu
-SPHINX_EFS="/var/lib/sphinxsearch/data/index_efs/"
+SPHINX_EFS="/var/local/geodata/service-sphinxsearch/${DBSTAGING}/index/"
+
 SPHINX_VOLUME="/var/lib/sphinxsearch/data/index/"
 SPHINXCONFIG="/etc/sphinxsearch/sphinx.conf"
 RSYNC_INCLUDE="/tmp/include.txt"
@@ -26,7 +27,7 @@ RSYNC_INCLUDE="/tmp/include.txt"
     # .sps stores string attribute data.
 
 # only indexes will be synced to docker volume that have been updated completely updated on EFS,
-# a completely updated index consists of the following 7 new files:
+# a completely updated index consists of the following new files:
     # .spd
     # .spe
     # .sph
@@ -34,23 +35,32 @@ RSYNC_INCLUDE="/tmp/include.txt"
     # .spp
     # .sps
 
-
-
 json_logger() {
     log_level=$1
     timestamp=$(date --utc +%FT%T.%3NZ)
     self=$(readlink -f "${BASH_SOURCE[0]}")
     self=$(basename "$self")
     jq --raw-input --compact-output --monochrome-output \
-    '{ "app":
-        {
-            "time": "'"${timestamp}"'",
+    '{
+        "time": "'"${timestamp}"'",
+        "level": "'"${log_level}"'",
+        "logger": "'"${self}"'",
+        "pidTid": "'$$'",
+        "function": "'"${FUNCNAME[0]}"'",
+        "message": .,
+        "event": {
+            "created": "'"${timestamp}"'"
+        },
+        "log": {
             "level": "'"${log_level}"'",
             "logger": "'"${self}"'",
-            "pidTid": "'$$'",
-            "function": "'"${FUNCNAME[0]}"'",
-            "message": .
-      }
+            "origin": {
+                "function": "'"${FUNCNAME[0]}"'"
+            }
+        },
+        "process": {
+            "pid": "'$$'"
+        }
     }'
 }
 
@@ -60,6 +70,7 @@ SPHINX_INDEXES=$(grep -E "^[^#]+ path" "${SPHINXCONFIG}" | awk -F"=" '{print $2}
 
 LOCKFILE="/tmp/$(basename "$0")"
 LOCKFD=99
+touch /tmp/last_sync_start.txt || :
 
 # PRIVATE
 _lock()             { flock -"$1" "$LOCKFD"; }
@@ -155,7 +166,7 @@ for sphinx_index in ${SPHINX_INDEXES[@]}; do
     # we have to detect the following use cases:
         # index files are new on efs and not yet rotated on local docker volume
     # this is the array of all index files that are new on EFS and outdated in the local volume
-    mapfile -t new_files < <(rsync --update -avin --delete --include-from "${RSYNC_INCLUDE}" --exclude '*' ${SPHINX_EFS} ${SPHINX_VOLUME} | grep -E '^>.*.sp.*$' | awk '{print $2}')
+    mapfile -t new_files < <(rsync --update -avin --delete --include-from "${RSYNC_INCLUDE}" --exclude '*' "${SPHINX_EFS}" ${SPHINX_VOLUME} | grep -E '^>.*.sp.*$' | awk '{print $2}')
 
     # skip if new_files is empty no new files have been found with that pattern on EFS
     (( ${#new_files[@]} )) || continue
@@ -213,3 +224,4 @@ done
 
 
 echo "finished" | json_logger INFO
+touch /tmp/last_sync_finished.txt || :

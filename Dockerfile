@@ -26,9 +26,10 @@ FROM sphinxsearch_base as sphinxsearch_geodata
     # add geodata user, same uid/gid as the EFS owner is needed here
 RUN groupadd -r geodata -g 2500 && \
     useradd -u 2500 -r -g geodata -s /sbin/nologin --create-home geodata && \
-    # create mountpoint folders with geodata ownership
+    # create mountpoint for Amazon EFS CSI driver
+    install -o geodata -g geodata -d /var/local/ && \
+    # create mountpoint folder for infra-vhost/k8s ebs/ssd volume
     install -o geodata -g geodata -d /var/lib/sphinxsearch/data/index/ && \
-    install -o geodata -p geodata -d /var/lib/sphinxsearch/data/index_efs/ && \
     # change ownerships to geodata which will run the service or the maintenance scripts
     # and mount the efs folder
     chown -R geodata:geodata /var/run/sphinxsearch/ && \

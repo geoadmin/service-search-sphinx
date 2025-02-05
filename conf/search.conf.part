@@ -288,7 +288,7 @@ source src_zipcode : src_swisssearch
     sql_db=stopo_${DBSTAGING}
     sql_query = \
         SELECT \
-        gid as id \
+        os_uuid::int as id \
         , os_uuid::text as feature_id \
         , plz::text as detail \
         , concat('<b>', plz, ' - ', trim(langtext), '</b>') as label \
@@ -296,17 +296,17 @@ source src_zipcode : src_swisssearch
         , 'zipcode' as origin \
         , quadindex(the_geom) as geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-        , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+        , box2d(the_geom) as geom_st_box2d_lv95 \
         , 1::integer as rank \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),2056),21781)) as x \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),2056),21781)) as y \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),2056),2056)) as x_lv95 \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),2056),2056)) as y_lv95 \
-        , st_y(st_transform(st_setsrid(st_point(label_x,label_y),2056),4326)) as lat \
-        , st_x(st_transform(st_setsrid(st_point(label_x,label_y),2056),4326)) as lon \
+        , st_y(st_transform(ST_PointOnSurface(the_geom),21781)) as x \
+        , st_x(st_transform(ST_PointOnSurface(the_geom),21781)) as y \
+        , st_y(ST_PointOnSurface(the_geom)) as x_lv95 \
+        , st_x(ST_PointOnSurface(the_geom)) as y_lv95 \
+        , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
+        , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , -1 as zoomlevel \
         , 1 as num \
-        FROM vd.gabmo_plz p
+        FROM vd.amtovz_ortschaften p
 }
 
 source src_haltestellen : src_swisssearch
@@ -405,6 +405,8 @@ index district_metaphone : zipcode
     source = src_district
     path = /var/lib/sphinxsearch/data/index/district_metaphone
     preopen = 0
+    wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index kantone_metaphone : zipcode
@@ -413,6 +415,8 @@ index kantone_metaphone : zipcode
     source = src_kantone
     path = /var/lib/sphinxsearch/data/index/kantone_metaphone
     preopen = 0
+    wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index gg25_metaphone : zipcode
@@ -421,6 +425,8 @@ index gg25_metaphone : zipcode
     source = src_gg25
     path = /var/lib/sphinxsearch/data/index/gg25_metaphone
     preopen = 0
+    wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index swissnames3d_metaphone : zipcode
@@ -429,6 +435,8 @@ index swissnames3d_metaphone : zipcode
     source = src_swissnames3d
     path = /var/lib/sphinxsearch/data/index/swissnames3d_metaphone
     preopen = 0
+    wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index haltestellen_metaphone : zipcode
@@ -437,6 +445,8 @@ index haltestellen_metaphone : zipcode
     source = src_haltestellen
     path = /var/lib/sphinxsearch/data/index/haltestellen_metaphone
     preopen = 0
+    wordforms = /dev/null
+    expand_keywords = 1
 }
 
 index address_metaphone: zipcode
@@ -445,6 +455,8 @@ index address_metaphone: zipcode
     source = src_address
     path = /var/lib/sphinxsearch/data/index/address_metaphone
     preopen = 0
+    wordforms = /dev/null
+    expand_keywords = 1
 }
 
 # only create on demand

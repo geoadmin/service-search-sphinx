@@ -8,6 +8,16 @@ docker_is_logged_in() {
     docker pull "${DOCKER_IMG_LOCAL_TAG}" &> /dev/null
 }
 
+throw_error() {
+    error=$1
+    echo "index generation failed"
+    echo "the docker command was: ${DOCKER_EXEC}"
+    free -m
+    docker stats --no-stream
+    echo "original error code: ${error}"
+    exit "${error}"
+}
+
 # check if we have read-write access to the efs
 if ! /bin/test -d "${SPHINX_EFS}" -a -w "${SPHINX_EFS}"; then
     >&2 echo "no read-write access to folder ${SPHINX_EFS} available"
@@ -21,12 +31,28 @@ fi
 
 if [ -n "${DB:-}" ]; then
     # call pg2sphinx trigger with DATABASE pattern
-    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -d "${DB}"
+    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -d "${DB}" || { throw_error $?; }
 fi
 
 if [ -n "${INDEX:-}" ]; then
     # call pg2sphinx trigger with INDEX pattern
-    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -i "${INDEX}"
+    ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -i "${INDEX}" || { throw_error $?; }
 fi
+
+mapfile -t array_config < <(${DOCKER_EXEC} cat /etc/sphinxsearch/sphinx.conf | grep -E "^[^#]+ path"  | awk -F"=" '{print $2}' | sed -n 's|^.*/||p' | sed 's/\r$//')
+mapfile -t array_file < <(find "${SPHINX_EFS}" -maxdepth 1 -name "*.spd" 2> /dev/null | sed 's|.spd$||g' | sed -n -e 's|^.*/||p' )
+mapfile -t array_orphaned < <(comm -13 --nocheck-order <(printf '%s\n' "${array_config[@]}" | LC_ALL=C sort) <(printf '%s\n' "${array_file[@]}" | LC_ALL=C sort))
+
+# remove orphaned indexes from EFS
+echo "looking for orphaned indexes in filesystem."
+for index in "${array_orphaned[@]}"; do
+    # skip empty elements
+    [[ -z ${index} ]] && continue
+    # skip .new files, we need them to sighup searchd / rotate index updates
+    if [[ ! $index == *.new ]]; then
+        echo "deleting orphaned index ${index} from filesystem."
+        rm -rf "${SPHINX_EFS}${index}".* || :
+    fi
+done
 
 echo "finished"
