@@ -57,7 +57,7 @@ This command is executed/triggered by the database deploy script on `geodatasync
 
 ### service mode
 #### local sphinxsearch server
-you can run a local sphinxsearch server on port 913 with the following make targets:
+You can run a local sphinxsearch server on port 9312 with the following make targets:
 ```bash
 make dockerrun
 make dockerrundebug
