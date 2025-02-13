@@ -12,7 +12,9 @@ searchd --status 1> /dev/null || exit 1
 
 # check if index files are up-to-date
 LAST_SYNC="/tmp/last_sync_finished.txt"
-MAX_AGE=300 # max age in seconds should be the same interval as the cron settings
+# max age in seconds, default value should be at least the same interval as the cron settings in docker-crontab, default 5 minutes (300 seconds)
+# in productive systems it is better to use a higher value, e.g. 2x300s = 600s
+MAX_AGE=${MAX_AGE:-300}
 
 # check if index sync status file exists
 if [[ ! -f "${LAST_SYNC}" ]]; then
@@ -22,13 +24,16 @@ if [[ ! -f "${LAST_SYNC}" ]]; then
     exit 1
 fi
 
-# Calculate the time  MAX_AGE seconds ago in seconds
-five_mins_ago=$(( $(date +%s) - MAX_AGE ))
-# Get the file's last modification time in seconds
-file_mtime=$(stat -c %Y "${LAST_SYNC}")
+# check if index-sync-rotate.sh is currently running with the lock file
+# if a sync is currently running, further tests should not be executed
+LOCK_FILE="/tmp/index-sync-rotate.sh"
+if ! flock -n "${LOCK_FILE}" true ; then
+    echo "$(basename "${LOCK_FILE}") is currently running. Exiting."
+    exit 0
+fi
 
 # check if index sync status file is up-to-date
-if [[ $file_mtime -lt $five_mins_ago ]]; then
+if [[ $(stat -c %Y "${LAST_SYNC}") -lt $(( $(date +%s) - MAX_AGE )) ]]; then
     echo "index sync status file is outdated: ${LAST_SYNC}"
     exit 1
 fi
