@@ -27,8 +27,8 @@ fi
 # check if index-sync-rotate.sh is currently running with the lock file
 # if a sync is currently running, further tests should not be executed
 LOCK_FILE="/tmp/index-sync-rotate.sh"
-if [[ -f "${LOCK_FILE}" ]]; then
-	echo "$(basename "${LOCK_FILE}") is currently running. Exiting."
+if ! flock -n "${LOCK_FILE}" true ; then
+    echo "$(basename "${LOCK_FILE}") is currently running. Exiting."
     exit 0
 fi
 
