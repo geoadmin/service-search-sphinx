@@ -84,3 +84,5 @@ The swisssearch index (zipcodes) has to be computed after a wordforms update.
 cd test
 python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
 ```
+
+dummy update
