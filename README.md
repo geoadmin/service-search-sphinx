@@ -86,3 +86,4 @@ python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
 ```
 
 dummy update
+dummy update 2
