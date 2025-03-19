@@ -40,6 +40,23 @@ RUN groupadd -r geodata -g 2500 && \
 
 FROM sphinxsearch_geodata
 
+# Define the build argument with a default value
+ARG VERSION="unknown"
+# Make the argument available for use in the Dockerfile
+ENV VERSION=${VERSION}
+# Create the directory if it doesn't exist and save the value of the VERSION argument to /usr/local/share/app/version.txt
+RUN mkdir -p /usr/local/share/app && echo "${VERSION}" > /usr/local/share/app/version.txt && chown -R geodata:geodata /usr/local/share/app
+
+ARG GIT_HASH=unknown
+ARG GIT_BRANCH=unknown
+ARG GIT_DIRTY=""
+ARG AUTHOR=unknown
+LABEL git.hash=$GIT_HASH
+LABEL git.branch=$GIT_BRANCH
+LABEL git.dirty="$GIT_DIRTY"
+LABEL author=$AUTHOR
+LABEL version=$VERSION
+
 # copy sphinxsearch config and maintenance code
 COPY --chown=geodata:geodata scripts/docker-* scripts/index-sync-rotate.sh scripts/pg2sphinx_trigger.py scripts/checker.sh /
 COPY --chown=geodata:geodata conf /conf/

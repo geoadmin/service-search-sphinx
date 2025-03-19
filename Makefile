@@ -249,7 +249,8 @@ dockerbuild:
 		-q \
 		--build-arg GIT_HASH="${GIT_HASH}" \
 		--build-arg GIT_BRANCH="${GIT_BRANCH}" \
-		--build-arg VERSION="${GIT_TAG}" \
+		--build-arg GIT_DIRTY=$(GIT_DIRTY) \
+		--build-arg VERSION="${DOCKER_LOCAL_TAG}" \
 		--build-arg AUTHOR="${AUTHOR}" \
 		--tag $(DOCKER_IMG_LOCAL_TAG) .
 
