@@ -1,23 +1,5 @@
 ## SOURCES
 
-source src_ch_babs_kulturgueter : def_searchable_features
-{
-    sql_db = vbs_${DBSTAGING}
-    sql_query = \
-        SELECT kgs_nr::bigint as id \
-            , zkob as label \
-            , 'feature' as origin \
-            , remove_accents(zkob) as detail \
-            , 'ch.babs.kulturgueter' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , kgs_nr::text as feature_id \
-        from babs.kgs
-}
-
 source src_ch_babs_notfalltreffpunkte : def_searchable_features
 {
     sql_db = vbs_${DBSTAGING}
@@ -203,71 +185,65 @@ source src_ch_vbs_ladestationen : def_searchable_features
 
 ## INDICES
 
-index ch_babs_kulturgueter
+index ch_vbs_kataster_belasteter_standorte_militaer
 {
     type = plain
     dict=crc
-    source = src_ch_babs_kulturgueter
-    path = /var/lib/sphinxsearch/data/index/ch_babs_kulturgueter
+    source = src_ch_vbs_kataster_belasteter_standorte_militaer
+    path = /var/lib/sphinxsearch/data/index/ch_vbs_kataster_belasteter_standorte_militaer
     min_infix_len = 2
     expand_keywords = 1
 }
 
-index ch_vbs_kataster_belasteter_standorte_militaer : ch_babs_kulturgueter
-{
-    source = src_ch_vbs_kataster_belasteter_standorte_militaer
-    path = /var/lib/sphinxsearch/data/index/ch_vbs_kataster_belasteter_standorte_militaer
-}
-
-index ch_babs_notfalltreffpunkte : ch_babs_kulturgueter
+index ch_babs_notfalltreffpunkte : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_babs_notfalltreffpunkte
     path = /var/lib/sphinxsearch/data/index/ch_babs_notfalltreffpunkte
 }
 
-index ch_vbs_armeelogistikcenter : ch_babs_kulturgueter
+index ch_vbs_armeelogistikcenter : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_vbs_armeelogistikcenter
     path = /var/lib/sphinxsearch/data/index/ch_vbs_armeelogistikcenter
 }
 
-index ch_vbs_waldschadenkarte : ch_babs_kulturgueter
+index ch_vbs_waldschadenkarte : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_vbs_waldschadenkarte
     path = /var/lib/sphinxsearch/data/index/ch_vbs_waldschadenkarte
 }
 
-index ch_vbs_bundestankstellen_bebeco : ch_babs_kulturgueter
+index ch_vbs_bundestankstellen_bebeco : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_vbs_bundestankstellen_bebeco
     path = /var/lib/sphinxsearch/data/index/ch_vbs_bundestankstellen_bebeco
 }
 
-index ch_vbs_logistikraeume_armeelogistikcenter : ch_babs_kulturgueter
+index ch_vbs_logistikraeume_armeelogistikcenter : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_vbs_logistikraeume_armeelogistikcenter
     path = /var/lib/sphinxsearch/data/index/ch_vbs_logistikraeume_armeelogistikcenter
 }
 
-index ch_vbs_retablierungsstellen : ch_babs_kulturgueter
+index ch_vbs_retablierungsstellen : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_vbs_retablierungsstellen
     path = /var/lib/sphinxsearch/data/index/ch_vbs_retablierungsstellen
 }
 
-index ch_vbs_schiessanzeigen : ch_babs_kulturgueter
+index ch_vbs_schiessanzeigen : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_vbs_schiessanzeigen
     path = /var/lib/sphinxsearch/data/index/ch_vbs_schiessanzeigen
 }
 
-index ch_vbs_armee_kriegsdenkmaeler : ch_babs_kulturgueter
+index ch_vbs_armee_kriegsdenkmaeler : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_vbs_armee_kriegsdenkmaeler
     path = /var/lib/sphinxsearch/data/index/ch_vbs_armee_kriegsdenkmaeler
 }
 
-index ch_vbs_ladestationen : ch_babs_kulturgueter
+index ch_vbs_ladestationen : ch_vbs_kataster_belasteter_standorte_militaer
 {
     source = src_ch_vbs_ladestationen
     path = /var/lib/sphinxsearch/data/index/ch_vbs_ladestationen
