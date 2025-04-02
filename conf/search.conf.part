@@ -21,6 +21,31 @@ source src_swisssearch : def_pqsql
     sql_field_string = geom_quadindex
 }
 
+source src_address_preview : src_swisssearch
+{
+    sql_db=stopo_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id AS id \
+        , concat_ws('_', adr_egaid, adr_edid) AS feature_id \
+        , remove_accents(concat_ws(' ', stn_label, adr_number, zip_label, com_fosnr, com_name, 'ch', com_kanton )) as detail \
+        , concat(stn_label, ' ', adr_number,' ', '<b>', zip_label ,'</b>') as label \
+        , NULL as objectclass \
+        , 'address_preview'::text AS origin \
+        , geom_quadindex \
+        , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
+        , box2d(st_transform(the_geom, 2056)) AS geom_st_box2d_lv95 \
+        , 99::integer as rank \
+        , st_y(st_transform(the_geom, 21781)) AS x \
+        , st_x(st_transform(the_geom, 21781)) AS y \
+        , st_x(st_transform(the_geom, 2056)) AS y_lv95 \
+        , st_y(st_transform(the_geom, 2056)) AS x_lv95 \
+        , st_y(st_transform(the_geom,4326)) as lat \
+        , st_x(st_transform(the_geom,4326)) as lon \
+        , NULLIF(regexp_replace(adr_number::text, '[^0-9]'::text, ''::text, 'g'::text), ''::text)::integer AS num \
+        , 10 as zoomlevel \
+        FROM vd.addressverzeichnis
+}
+
 source src_address : src_swisssearch
 {
     sql_db=edi_${DBSTAGING}
@@ -398,6 +423,12 @@ index address : zipcode
     ondisk_attrs = 0
 }
 
+index src_address_preview : zipcode
+{
+    source = src_address_preview
+    path = /var/lib/sphinxsearch/data/index/address_preview
+    ondisk_attrs = 0
+}
 # swisssearch fuzzy metaphone
 index district_metaphone : zipcode
 {
@@ -459,12 +490,16 @@ index address_metaphone: zipcode
     expand_keywords = 1
 }
 
-# only create on demand
-#index address_geocoding : zipcode
-#{
-#    source = src_address_geocoding
-#    path = /var/lib/sphinxsearch/data/index/address_geocoding
-#}
+index address_preview_metaphone: zipcode
+{
+    morphology = metaphone
+    source = src_address_preview
+    path = /var/lib/sphinxsearch/data/index/address_preview_metaphone
+    preopen = 0
+    wordforms = /dev/null
+    expand_keywords = 1
+}
+
 
 index swisssearch
 {
@@ -477,6 +512,7 @@ index swisssearch
     local = haltestellen
     local = parcel
     local = address
+    local = address_preview
 }
 
 index swisssearch_fuzzy
@@ -488,4 +524,5 @@ index swisssearch_fuzzy
     local = swissnames3d_metaphone
     local = haltestellen_metaphone
     local = address_metaphone
+    local = address_preview
 }
