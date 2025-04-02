@@ -423,7 +423,7 @@ index address : zipcode
     ondisk_attrs = 0
 }
 
-index src_address_preview : zipcode
+index address_preview : zipcode
 {
     source = src_address_preview
     path = /var/lib/sphinxsearch/data/index/address_preview
@@ -524,5 +524,5 @@ index swisssearch_fuzzy
     local = swissnames3d_metaphone
     local = haltestellen_metaphone
     local = address_metaphone
-    local = address_preview
+    local = address_preview_metaphone
 }
