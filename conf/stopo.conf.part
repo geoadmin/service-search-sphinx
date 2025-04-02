@@ -847,7 +847,7 @@ source src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis : def_searchable_fea
           , 'feature' as origin  \
           , remove_accents(concat_ws(' ', adr_egaid, bdg_egid, adr_edid, str_esid, stn_label, adr_number)) as detail  \
           , 'ch.swisstopo.amtliches-gebaeudeadressverzeichnis' as layer  \
-          , quadindex(the_geom) as geom_quadindex  \
+          , geom_quadindex  \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon  \
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
