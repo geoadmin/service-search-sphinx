@@ -1076,6 +1076,24 @@ source src_ch_swisstopo_unterkuenfte_winter : def_searchable_features
       from karto.unterkuenfte_winter
 }
 
+source src_ch_swisstopo_hoheitsgrenzpunkte_landesvermessung : def_searchable_features
+{
+   sql_db = stopo_${DBSTAGING}
+   sql_query = \
+      SELECT bgdi_id as id \
+          , nummer as label \
+          , 'feature' as origin \
+          , remove_accents(nummer) as detail \
+          , 'ch.swisstopo.hoheitsgrenzpunkte-landesvermessung' as layer \
+          , quadindex(the_geom) as geom_quadindex \
+          , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+          , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id \
+      from hoheitsgrenze.hoheitsgrenzpunkte_landesvermessung
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren_tsp1
@@ -1441,4 +1459,10 @@ index ch_swisstopo_unterkuenfte_winter : ch_swisstopo_verschiebungsvektoren_tsp1
 {
     source = src_ch_swisstopo_unterkuenfte_winter
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_unterkuenfte_winter
+}
+
+index ch_swisstopo_hoheitsgrenzpunkte_landesvermessung : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_hoheitsgrenzpunkte_landesvermessung
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_hoheitsgrenzpunkte_landesvermessung
 }
