@@ -187,7 +187,7 @@ source src_ch_babs_kulturgueter : def_searchable_features
 {
     sql_db = vbs_${DBSTAGING}
     sql_query = \
-        SELECT kgs_nr as id \
+        SELECT bgdi_id as id \
             ,  beschreibung as label \
             , 'feature' as origin \
             , remove_accents(beschreibung) as detail \
