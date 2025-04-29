@@ -190,7 +190,7 @@ source src_ch_babs_kulturgueter : def_searchable_features
         SELECT bgdi_id as id \
             ,  beschreibung as label \
             , 'feature' as origin \
-            , remove_accents(beschreibung) as detail \
+            , remove_accents(concat_ws(' ', beschreibung, objekt_nr)) as detail \
             , 'ch.babs.kulturgueter' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
