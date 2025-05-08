@@ -197,7 +197,7 @@ source src_ch_babs_kulturgueter : def_searchable_features
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , kgs_nr::text as feature_id \
+            , objekt_nr::text as feature_id \
         from babs.kgs
 }
 
