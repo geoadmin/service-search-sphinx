@@ -145,7 +145,7 @@ source src_ch_bafu_wrz_jagdbanngebiete_select : def_searchable_features
         from wrzportal.jgd_select_flaechen
 }
 
-source src_ch_bafu_bundesinventar_jagdbanngebiete_select : def_searchable_features
+source src_ch_bafu_bundesinventar_jagdbanngebiete : def_searchable_features
 {
     sql_db = bafu_${DBSTAGING}
     sql_query = \
@@ -1310,10 +1310,10 @@ index ch_bafu_wrz_jagdbanngebiete_select : ch_bafu_hydrologie_wassertemperaturme
     path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz_jagdbanngebiete_select
 }
 
-index ch_bafu_bundesinventar_jagdbanngebiete_select : ch_bafu_hydrologie_wassertemperaturmessstationen
+index ch_bafu_bundesinventar_jagdbanngebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
-    source = src_ch_bafu_bundesinventar_jagdbanngebiete_select
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventar_jagdbanngebiete_select
+    source = src_ch_bafu_bundesinventar_jagdbanngebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventar_jagdbanngebiete
 }
 
 index ch_bafu_gewaesserschutz_klaeranlagen_anteilq347 : ch_bafu_hydrologie_wassertemperaturmessstationen
