@@ -145,6 +145,24 @@ source src_ch_bafu_wrz_jagdbanngebiete_select : def_searchable_features
         from wrzportal.jgd_select_flaechen
 }
 
+source src_ch_bafu_bundesinventar_jagdbanngebiete : def_searchable_features
+{
+    sql_db = bafu_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , gebietsname as label \
+            , 'feature' as origin \
+            , remove_accents(concat_ws(' ', gebietsname, objektnummer)) as detail \
+            , 'ch.bafu.bundesinventare-jagdbanngebiete' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from bundinv.jagdbanngebiete
+}
+
 source src_ch_bafu_typisierung_fliessgewaesser : def_searchable_features
 {
     sql_db = bafu_${DBSTAGING}
@@ -1290,6 +1308,12 @@ index ch_bafu_wrz_jagdbanngebiete_select : ch_bafu_hydrologie_wassertemperaturme
 {
     source = src_ch_bafu_wrz_jagdbanngebiete_select
     path = /var/lib/sphinxsearch/data/index/ch_bafu_wrz_jagdbanngebiete_select
+}
+
+index ch_bafu_bundesinventar_jagdbanngebiete : ch_bafu_hydrologie_wassertemperaturmessstationen
+{
+    source = src_ch_bafu_bundesinventar_jagdbanngebiete
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_bundesinventar_jagdbanngebiete
 }
 
 index ch_bafu_gewaesserschutz_klaeranlagen_anteilq347 : ch_bafu_hydrologie_wassertemperaturmessstationen
