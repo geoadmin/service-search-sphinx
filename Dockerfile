@@ -1,4 +1,4 @@
-FROM python:3.9.9-slim-buster as sphinxsearch_base
+FROM python:3.9-slim-bookworm as sphinxsearch_base
 
 RUN apt-get update && \
     apt-get install -y \
