@@ -14,11 +14,11 @@ import sys
 import psycopg2
 
 
-def pg_get_tables(sql_query, sql_db):
+def pg_get_tables(sql_query, sql_db, host, user, password):
     # add 'EXPLAIN VERBOSE ' to sql string
     sql_query = 'EXPLAIN VERBOSE ' + sql_query
 
-    conn_string = f"host='{CONN_HOST}' dbname='{sql_db}' user='{CONN_USER}' password='{CONN_PWD}'"
+    conn_string = f"host='{host}' dbname='{sql_db}' user='{user}' password='{password}'"
 
     # get a connection, if a connect cannot be made an exception will be raised here
     conn = psycopg2.connect(conn_string)
@@ -199,7 +199,9 @@ if __name__ == '__main__':
     # Parent : Child1  -> ('Parent', 'Child1')
     # Parent2: Child2  -> ('Parent2', 'Child2')
     # Parent           -> ('Parent', None)
-    parsing_func = lambda x: [p.strip() for p in x.split(':')] if ':' in x else (x.strip(), None)
+    def parsing_func(x):
+        return [p.strip() for p in x.split(':')] if ':' in x else (x.strip(), None)
+
     for i in reg_source.finditer(data):
         source, source_parent = parsing_func(i.groupdict()['source'])
         # step 2 extract sql_db and sql_query from curly braced content
@@ -311,7 +313,9 @@ if __name__ == '__main__':
                     # if db filter is more detailed, we have to analyze the sql
                     # queries with postgres ANALZYE VERBOSE
                 elif database_filter.split(".", maxsplit=1)[0] == row['database']:
-                    table = pg_get_tables(row['sql'], row['database'])
+                    table = pg_get_tables(
+                        row['sql'], row['database'], CONN_HOST, CONN_USER, CONN_PWD
+                    )
                     db = row['database'] if database_filter in table else None
             # indice filter
             # -i pattern

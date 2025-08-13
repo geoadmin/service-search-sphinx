@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 # added for pylint on scripts/pg2sphinx_trigger.py import-error
-psycopg2-binary = "~=2.9.2"
+psycopg2-binary = "~=2.9.10"
 
 [dev-packages]
 six = "*"
@@ -14,4 +14,4 @@ pylint = "*"
 shellcheck-py = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.13"
