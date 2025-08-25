@@ -1,4 +1,4 @@
-FROM python:3.9.9-slim-buster as sphinxsearch_base
+FROM python:3.13-slim-bookworm as sphinxsearch_base
 
 RUN apt-get update && \
     apt-get install -y \
@@ -35,8 +35,9 @@ RUN groupadd -r geodata -g 2500 && \
     chown -R geodata:geodata /var/run/sphinxsearch/ && \
     chown -R geodata:geodata /var/log/sphinxsearch/ && \
     chown -R geodata:geodata /etc/sphinxsearch && \
-    # install pip3 psycopg2, python3.9 does not (yet) support python3-psycopg2 package
-    gosu geodata pip3 install psycopg2-binary==2.9.2
+    # install psycopg2 via pip, because the apt package (python3-psycopg2) is built for Debian's
+    # default python3.11, not the python version used in this image (3.13).
+    gosu geodata pip3 install psycopg2-binary==2.9.10
 
 FROM sphinxsearch_geodata
 
