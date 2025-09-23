@@ -289,24 +289,6 @@ source src_ch_bafu_hydrologie_hochwasserstatistik : def_searchable_features
         from hydrologie.hochwasserstatistik
 }
 
-source src_ch_bafu_hydrologie_hochwassergrenzwertpegel : def_searchable_features
-{
-    sql_db = bafu_${DBSTAGING}
-    sql_query = \
-        SELECT bgdi_id as id \
-            ,  name as label \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ', name, hoehe, fluss, einzugsgebietsflaeche, m_beginn, m_ende)) as detail \
-            , 'ch.bafu.hydrologie-hochwassergrenzwertpegel' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
-        from hydrologie.hochwassergrenzwertpegel
-}
-
 source src_ch_bafu_hydrologie_untersuchungsgebiete : def_searchable_features
 {
     sql_db = bafu_${DBSTAGING}
@@ -1482,12 +1464,6 @@ index ch_bafu_hydrologie_untersuchungsgebiete : ch_bafu_hydrologie_wassertempera
 {
     source = src_ch_bafu_hydrologie_untersuchungsgebiete
     path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_untersuchungsgebiete
-}
-
-index ch_bafu_hydrologie_hochwassergrenzwertpegel : ch_bafu_hydrologie_wassertemperaturmessstationen
-{
-    source = src_ch_bafu_hydrologie_hochwassergrenzwertpegel
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_hydrologie_hochwassergrenzwertpegel
 }
 
 index ch_bafu_hydrologischer_atlas_kantonale_messstationen : ch_bafu_hydrologie_wassertemperaturmessstationen
