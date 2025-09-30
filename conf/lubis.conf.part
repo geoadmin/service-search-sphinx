@@ -24,9 +24,9 @@ source src_ch_swisstopo_lubis_luftbilder_schraegaufnahmen : def_searchable_featu
     sql_db = lubis_${DBSTAGING}
     sql_query = \
         SELECT row_number() OVER(ORDER BY ebkey asc) as id \
-            , concat_ws(' ',flightdate::date, ebkey::text)  as label \
+            , concat_ws(' ',flightdate, ebkey::text)  as label \
             , 'feature' as origin \
-            , concat_ws(' ',flightdate::date, ebkey::text, ebkey_old)  as detail \
+            , concat_ws(' ',flightdate, ebkey::text, ebkey_old)  as detail \
             , 'ch.swisstopo.lubis-luftbilder_schraegaufnahmen' as layer \
             , bgdi_quadindex as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
