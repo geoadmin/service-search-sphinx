@@ -21,7 +21,7 @@ source src_swisssearch : def_pqsql
     sql_field_string = geom_quadindex
 }
 
-source src_address_preview : src_swisssearch
+source src_address : src_swisssearch
 {
     sql_db=stopo_${DBSTAGING}
     sql_query = \
@@ -30,7 +30,7 @@ source src_address_preview : src_swisssearch
         , remove_accents(concat_ws(' ', stn_label, adr_number, zip_label, com_fosnr, com_name, 'ch', com_kanton )) as detail \
         , concat(stn_label, ' ', adr_number,' ', '<b>', zip_label ,'</b>') as label \
         , NULL as objectclass \
-        , 'address_preview'::text AS origin \
+        , 'address'::text AS origin \
         , geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
         , box2d(st_transform(the_geom, 2056)) AS geom_st_box2d_lv95 \
@@ -44,31 +44,6 @@ source src_address_preview : src_swisssearch
         , NULLIF(regexp_replace(adr_number::text, '[^0-9]'::text, ''::text, 'g'::text), ''::text)::integer AS num \
         , 10 as zoomlevel \
         FROM vd.addressverzeichnis
-}
-
-source src_address : src_swisssearch
-{
-    sql_db=edi_${DBSTAGING}
-    sql_query = \
-        SELECT bgdi_id AS id \
-        , egid_edid::character varying(15) AS feature_id \
-        , remove_accents(concat_ws(' ', replace(concat(array_to_string(strname, ' <deinr> '), ' ', deinr),'<deinr>',deinr), dplz4, dplzname, ggdenr, ggdename, 'ch', gdekt)) as detail \
-        , concat(replace(concat(array_to_string(strname, ' <deinr> | '), ' ', deinr),'<deinr>',deinr), ' <b>', dplz4, ' ', dplzname,'</b>') as label \
-        , NULL as objectclass \
-        , 'address'::text AS origin \
-        , geom_quadindex \
-        , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
-        , box2d(st_transform(the_geom, 2056)) AS geom_st_box2d_lv95 \
-        , 7::integer as rank \
-        , st_x(st_transform(the_geom, 21781)) AS x \
-        , st_y(st_transform(the_geom, 21781)) AS y \
-        , st_y(st_transform(the_geom, 2056)) AS y_lv95 \
-        , st_x(st_transform(the_geom, 2056)) AS x_lv95 \
-        , st_y(st_transform(the_geom,4326)) as lat \
-        , st_x(st_transform(the_geom,4326)) as lon \
-        , NULLIF(regexp_replace(deinr::text, '[^0-9]'::text, ''::text, 'g'::text), ''::text)::integer AS num \
-        , 10 as zoomlevel \
-        FROM bfs.gwr_chsdi
 }
 
 source src_parcel : src_swisssearch
@@ -422,13 +397,6 @@ index address : zipcode
     path = /var/lib/sphinxsearch/data/index/address
     ondisk_attrs = 0
 }
-
-index address_preview : zipcode
-{
-    source = src_address_preview
-    path = /var/lib/sphinxsearch/data/index/address_preview
-    ondisk_attrs = 0
-}
 # swisssearch fuzzy metaphone
 index district_metaphone : zipcode
 {
@@ -490,16 +458,6 @@ index address_metaphone: zipcode
     expand_keywords = 1
 }
 
-index address_preview_metaphone: zipcode
-{
-    morphology = metaphone
-    source = src_address_preview
-    path = /var/lib/sphinxsearch/data/index/address_preview_metaphone
-    preopen = 0
-    wordforms = /dev/null
-    expand_keywords = 1
-}
-
 
 index swisssearch
 {
@@ -512,7 +470,6 @@ index swisssearch
     local = haltestellen
     local = parcel
     local = address
-    local = address_preview
 }
 
 index swisssearch_fuzzy
@@ -524,5 +481,4 @@ index swisssearch_fuzzy
     local = swissnames3d_metaphone
     local = haltestellen_metaphone
     local = address_metaphone
-    local = address_preview_metaphone
 }
