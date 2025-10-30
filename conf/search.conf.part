@@ -34,7 +34,7 @@ source src_address : src_swisssearch
         , geom_quadindex \
         , box2d(st_transform(the_geom, 21781)) AS geom_st_box2d \
         , box2d(st_transform(the_geom, 2056)) AS geom_st_box2d_lv95 \
-        , 99::integer as rank \
+        , 7::integer as rank \
         , st_x(st_transform(the_geom, 21781)) AS x \
         , st_y(st_transform(the_geom, 21781)) AS y \
         , st_y(st_transform(the_geom, 2056)) AS y_lv95 \
