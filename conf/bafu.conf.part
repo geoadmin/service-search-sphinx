@@ -55,6 +55,24 @@ source src_ch_bafu_fauna_wildtierkorridor_national : def_searchable_features
         from fauna.wildtierkorridore_national
 }
 
+source src_ch_bafu_unesco_weltnaturerbe : def_searchable_features
+{
+    sql_db = bafu_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id as id \
+            , coalesce(name,'') as label \
+            , 'feature' as origin \
+            , remove_accents(name) as detail \
+            , 'ch.bafu.unesco-weltnaturerbe' as layer \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from schutzge.unesco_weltnaturerbe
+}
+
 source src_ch_bafu_hydrologie_q347 : def_searchable_features
 {
     sql_db = bafu_${DBSTAGING}
@@ -1626,6 +1644,12 @@ index ch_bafu_tranquillity_gebiete : ch_bafu_hydrologie_wassertemperaturmessstat
 {
     source = src_bafu_tranquillity_gebiete
     path = /var/lib/sphinxsearch/data/index/ch_bafu_tranquillity_gebiete
+}
+
+index ch_bafu_unesco_weltnaturerbe : ch_bafu_hydrologie_wassertemperaturmessstationen
+{
+    source = src_ch_bafu_unesco_weltnaturerbe
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_unesco_weltnaturerbe
 }
 
 index ch_bafu_klima_co2_ausstoss_gebaeude : ch_bafu_hydrologie_wassertemperaturmessstationen
