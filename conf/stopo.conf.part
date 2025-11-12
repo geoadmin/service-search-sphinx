@@ -684,7 +684,7 @@ source src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis : def_searchable_fea
       SELECT adr_egaid as id \
           , concat_ws(' ', stn_label, adr_number, zip_label) as label \
           , 'feature' as origin  \
-          , remove_accents(concat_ws(' ', adr_egaid, bdg_egid, adr_edid, str_esid, stn_label, adr_number)) as detail  \
+          , remove_accents(concat_ws(' ', adr_egaid, bdg_egid, adr_edid, str_esid, stn_label, adr_number, com_name)) as detail  \
           , 'ch.swisstopo.amtliches-gebaeudeadressverzeichnis' as layer  \
           , geom_quadindex  \
           , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
