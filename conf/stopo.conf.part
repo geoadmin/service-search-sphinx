@@ -691,7 +691,7 @@ source src_ch_swisstopo_amtliches_gebaeudeadressverzeichnis : def_searchable_fea
           , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon  \
           , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
           , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , adr_egaid::text as feature_id  \
+          , legacy_id as feature_id  \
       from vd.addressverzeichnis
 }
 
