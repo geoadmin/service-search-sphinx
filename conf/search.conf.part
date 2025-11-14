@@ -26,7 +26,7 @@ source src_address : src_swisssearch
     sql_db=stopo_${DBSTAGING}
     sql_query = \
         SELECT bgdi_id AS id \
-        , adr_egaid AS feature_id \
+        , legacy_id AS feature_id \
         , remove_accents(concat_ws(' ', stn_label, adr_number, zip_label, com_fosnr, com_name, 'ch', com_kanton )) as detail \
         , concat(stn_label, ' ', adr_number,' ', '<b>', zip_label ,'</b>') as label \
         , NULL as objectclass \
