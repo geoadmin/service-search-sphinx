@@ -5,12 +5,14 @@ source src_swisssearch : def_pqsql
     sql_attr_uint = num
     sql_attr_uint = rank
     sql_attr_uint = zoomlevel
+    sql_attr_uint = egaid
     sql_attr_string = label
     sql_attr_string = objectclass
     sql_attr_string = feature_id
     sql_attr_string = origin
     sql_attr_string = geom_st_box2d
     sql_attr_string = geom_st_box2d_lv95
+    sql_attr_string = egid_edid
     sql_attr_float = x
     sql_attr_float = y
     sql_attr_float = x_lv95
@@ -43,6 +45,8 @@ source src_address : src_swisssearch
         , st_x(st_transform(the_geom,4326)) as lon \
         , NULLIF(regexp_replace(adr_number::text, '[^0-9]'::text, ''::text, 'g'::text), ''::text)::integer AS num \
         , 10 as zoomlevel \
+        , adr_egaid as egaid \
+        , legacy_id as egid_edid \
         FROM vd.addressverzeichnis
 }
 
@@ -68,6 +72,8 @@ source src_parcel : src_swisssearch
         , st_x(st_transform(the_geom_point,4326)) as lon \
         , num \
         , 10 as zoomlevel \
+        , NULL as egaid \
+        , NULL as egid_edid \
         from vd.parzellen_sphinx
 }
 
@@ -178,7 +184,9 @@ source src_swissnames3d : src_swisssearch
         coalesce(b.lat,s.lat) as lat, \
         coalesce(b.lon,s.lon) as lon, \
         1 as num, \
-        coalesce(b.zoomlevel,s.zoomlevel) as zoomlevel \
+        coalesce(b.zoomlevel,s.zoomlevel) as zoomlevel, \
+        NULL as egaid,  \
+        NULL as egid_edid \
     FROM swissnames_search s \
     left outer join tlm.dkm_search b ON s.feature_id = b.feature_id \
     UNION ALL \
@@ -199,7 +207,9 @@ source src_swissnames3d : src_swisssearch
         b.lat as lat, \
         b.lon as lon, \
         1 as num, \
-        b.zoomlevel as zoomlevel \
+        b.zoomlevel as zoomlevel, \
+        NULL as egaid,  \
+        NULL as egid_edid \
     FROM swissnames_search s \
     inner join tlm.dkm_search b on s.name = b.name and s.objectclass = 'TLM_GEBAEUDE' and s.feature_id <> b.feature_id \
     ) s
@@ -228,6 +238,8 @@ source src_gg25 : src_swisssearch
         , st_x(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lon \
         , -1 as zoomlevel \
         , 1 as num \
+        , NULL as egaid \
+        , NULL as egid_edid \
         FROM tlm.swissboundaries_gemeinden_uebersetzt g left join tlm.swissboundaries_kantone k on k.kantonsnr = g.kantonsnr
 }
 
@@ -254,6 +266,8 @@ source src_kantone : src_swisssearch
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , -1 as zoomlevel \
         , 1 as num \
+        , NULL as egaid \
+        , NULL as egid_edid \
          FROM tlm.swissboundaries_kantone
 }
 
@@ -280,6 +294,8 @@ source src_district : src_swisssearch
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , -1 as zoomlevel \
         , 1 as num \
+        , NULL as egaid \
+        , NULL as egid_edid \
         FROM tlm.swissboundaries_bezirke
 }
 
@@ -306,6 +322,8 @@ source src_zipcode : src_swisssearch
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , -1 as zoomlevel \
         , 1 as num \
+        , NULL as egaid \
+        , NULL as egid_edid \
         FROM vd.amtovz_ortschaften p
 }
 
@@ -332,6 +350,8 @@ source src_haltestellen : src_swisssearch
         , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
         , -1 as zoomlevel \
         , 1 as num \
+        , NULL as egaid \
+        , NULL as egid_edid \
         FROM bav.oev_haltestellen
 }
 
