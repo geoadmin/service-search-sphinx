@@ -134,7 +134,7 @@ source src_ch_vbs_schiessanzeigen : def_searchable_features
         SELECT belplan_id as id \
             ,  bezeichnung as label \
             , 'feature' as origin \
-            , remove_accents(concat_ws(' ', bezeichnung, belplan_id)) as detail \
+            , remove_accents(concat_ws(' ', bezeichnung, belplan_id, belplan_ort_id, bezeichnung_ort)) as detail \
             , 'ch.vbs.schiessanzeigen' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
@@ -142,7 +142,7 @@ source src_ch_vbs_schiessanzeigen : def_searchable_features
             , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
             , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
             , belplan_id::text as feature_id \
-        from public.schiessanzeigen
+        from public.view_schiessanzeigen
 }
 
 
