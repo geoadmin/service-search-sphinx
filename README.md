@@ -84,3 +84,37 @@ The swisssearch index (zipcodes) has to be computed after a wordforms update.
 cd test
 python test.py -h localhost -p 9312 -i swisssearch "birgmattenweg 5"
 ```
+
+### Command line debugging with MYSQL interface
+You can access the Sphinx indexes using the MySQL client from inside the Sphinx pods.
+First, open a bash terminal inside a Sphinx container.
+```bash
+$ kubectx bgdi/dev
+$ kubectl -n service-search exec -it service-search-0 -c sphinx -- bash
+$ mysql -h 127.0.0.1 -P 9306
+
+$ MySQL [(none)]> select count(*) FROM ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill;
++----------+
+| count(*) |
++----------+
+|   546474 |
++----------+
+1 row in set (0.009 sec)
+
+# expanded output for better readability
+MySQL [(none)]> select * FROM ch_swisstopo_swissboundaries3d_gemeinde_flaeche_fill limit 1\G
+*************************** 1. row ***************************
+                id: 1
+            origin: feature
+            detail: aeugst am albis 1
+             layer: ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill
+    geom_quadindex: 0300210
+               lat: 47.274960
+               lon: 8.490504
+     geom_st_box2d: BOX(678109.8793882465 234561.19507542154,681154.069340285 238543.8333016288)
+geom_st_box2d_lv95: BOX(2678110.6950000003 1234561.039999999,2681154.916000001 1238543.664999999)
+             label: Aeugst am Albis 2026
+              year: 2026
+        feature_id: 1
+1 row in set (0.008 sec)
+```
