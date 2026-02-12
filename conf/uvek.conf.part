@@ -1155,24 +1155,6 @@ source src_ch_astra_mountainbikeland_sperrungen_umleitungen : def_searchable_fea
       from astra.v_sperrungen_umleitungen_line_mtbland
 }
 
-source src_ch_swisstopo_schneeschuhwandern : def_searchable_features
-{
-    sql_db = uvek_${DBSTAGING}
-    sql_query = \
-      SELECT id \
-          , title as label \
-          , 'feature' as origin \
-          , remove_accents(concat_ws(' ',full_number,title)) as detail \
-          , 'ch.swisstopo.schneeschuhwandern' as layer \
-          , quadindex(the_geom) as geom_quadindex \
-          , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
-          , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-          , full_number::text as feature_id \
-      from astra.chmobil_schneeschuhwanderland
-}
-
 source src_ch_astra_schwerverunfallte_kanton_alkohol : def_searchable_features
 {
     sql_db = uvek_${DBSTAGING}
@@ -1957,12 +1939,6 @@ index ch_astra_mountainbikeland_sperrungen_umleitungen : ch_astra_ivs_nat
 {
     source = src_ch_astra_mountainbikeland_sperrungen_umleitungen
     path = /var/lib/sphinxsearch/data/index/ch_astra_mountainbikeland_sperrungen_umleitungen
-}
-
-index ch_swisstopo_schneeschuhwandern : ch_astra_ivs_nat
-{
-    source = src_ch_swisstopo_schneeschuhwandern
-    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_schneeschuhwandern
 }
 
 index ch_astra_schwerverunfallte_kanton_alkohol : ch_astra_ivs_nat
