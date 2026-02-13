@@ -321,25 +321,6 @@ source src_ch_bakom_notruf : def_searchable_features
 }
 
 
-source src_ch_bakom_notruf_112_satellit : def_searchable_features
-{
-    sql_db = uvek_${DBSTAGING}
-    sql_query = \
-        SELECT bfs_nummer::bigint as id \
-            ,  name as label \
-            , 'feature' as origin \
-            , remove_accents(concat_ws(' ', phone_number, address)) as detail \
-            , 'ch.bakom.notruf-112_satellit' as layer \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lat \
-            , st_x(st_transform(st_ClosestPoint(the_geom,st_centroid(the_geom)),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bfs_nummer::text as feature_id \
-        from bakom.sa_112_tooltip
-}
-
-
 source src_ch_bakom_radio_fernsehsender : def_searchable_features
 {
     sql_db = uvek_${DBSTAGING}
@@ -1597,12 +1578,6 @@ index ch_bakom_notruf : ch_astra_ivs_nat
 {
     source = src_ch_bakom_notruf
     path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf
-}
-
-index ch_bakom_notruf_112_satellit : ch_astra_ivs_nat
-{
-    source = src_ch_bakom_notruf_112_satellit
-    path = /var/lib/sphinxsearch/data/index/ch_bakom_notruf_112_satellit
 }
 
 index ch_bakom_radio_fernsehsender : ch_astra_ivs_nat
