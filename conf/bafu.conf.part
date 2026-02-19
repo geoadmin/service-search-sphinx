@@ -207,7 +207,7 @@ source src_ch_bafu_gewaesserschutz_chemischer_zustand_phosphat : def_searchable_
             , 'feature' as origin \
             , 'ch.bafu.gewaesserschutz-chemischer_zustand_phosphat' as layer \
             , remove_accents(concat_ws(' ', station_nr, id_nawa)) as detail \
-            , year as label \
+            , jahr as label \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
             , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
