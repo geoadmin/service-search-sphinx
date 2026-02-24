@@ -271,6 +271,42 @@ source src_ch_bafu_gewaesserschutz_chemischer_zustand_ammonium : def_searchable_
         from wasser.gewaesserschutz_ammonium
 }
 
+source src_ch_bafu_gewaesserschutz_chemischer_zustand_nitrit : def_searchable_features
+{
+    sql_db = bafu_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , 'feature' as origin \
+            , 'ch.bafu.gewaesserschutz-chemischer_zustand_nitrit' as layer \
+            , remove_accents(concat_ws(' ', station_nr, id_nawa)) as detail \
+            , jahr as label \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from wasser.gewaesserschutz_nitrit
+}
+
+source src_ch_bafu_gewaesserschutz_chemischer_zustand_nitrat : def_searchable_features
+{
+    sql_db = bafu_${DBSTAGING}
+    sql_query = \
+        SELECT bgdi_id::bigint as id \
+            , 'feature' as origin \
+            , 'ch.bafu.gewaesserschutz-chemischer_zustand_nitrat' as layer \
+            , remove_accents(concat_ws(' ', station_nr, id_nawa)) as detail \
+            , jahr as label \
+            , quadindex(the_geom) as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_id::text as feature_id \
+        from wasser.gewaesserschutz_nitrat
+}
+
 source src_ch_bafu_gewaesserschutz_klaeranlagen_anteilq347 : def_searchable_features
 {
     sql_db = bafu_${DBSTAGING}
@@ -1410,6 +1446,18 @@ index ch_bafu_gewaesserschutz_chemischer_zustand_ammonium : ch_bafu_hydrologie_w
 {
     source = src_ch_bafu_gewaesserschutz_chemischer_zustand_ammonium
     path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_chemischer_zustand_ammonium
+}
+
+index ch_bafu_gewaesserschutz_chemischer_zustand_nitrit : ch_bafu_hydrologie_wassertemperaturmessstationen
+{
+    source = src_ch_bafu_gewaesserschutz_chemischer_zustand_nitrit
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_chemischer_zustand_nitrit
+}
+
+index ch_bafu_gewaesserschutz_chemischer_zustand_nitrat : ch_bafu_hydrologie_wassertemperaturmessstationen
+{
+    source = src_ch_bafu_gewaesserschutz_chemischer_zustand_nitrat
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_chemischer_zustand_nitrat
 }
 
 index ch_bafu_gewaesserschutz_klaeranlagen_anteilq347 : ch_bafu_hydrologie_wassertemperaturmessstationen
