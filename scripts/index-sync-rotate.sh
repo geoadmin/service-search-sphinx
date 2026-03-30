@@ -42,25 +42,12 @@ json_logger() {
     self=$(basename "$self")
     jq --raw-input --compact-output --monochrome-output \
     '{
-        "time": "'"${timestamp}"'",
-        "level": "'"${log_level}"'",
-        "logger": "'"${self}"'",
-        "pidTid": "'$$'",
-        "function": "'"${FUNCNAME[0]}"'",
-        "message": .,
-        "event": {
-            "created": "'"${timestamp}"'"
-        },
-        "log": {
-            "level": "'"${log_level}"'",
-            "logger": "'"${self}"'",
-            "origin": {
-                "function": "'"${FUNCNAME[0]}"'"
-            }
-        },
-        "process": {
-            "pid": "'$$'"
-        }
+        "Timestamp": "'"${timestamp}"'",
+        "severity_text": "'"${log_level}"'",
+        "log.logger": "'"${self}"'",
+        "process.pid": "'$$'",
+        "code.function.name": "'"${FUNCNAME[0]}"'",
+        "body.string": .
     }'
 }
 
