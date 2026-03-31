@@ -59,7 +59,7 @@ LABEL author=$AUTHOR
 LABEL version=$VERSION
 
 # copy sphinxsearch config and maintenance code
-COPY --chown=geodata:geodata scripts/docker-* scripts/index-sync-rotate.sh scripts/pg2sphinx_trigger.py scripts/checker.sh /
+COPY --chown=geodata:geodata scripts/docker-* scripts/index-sync-rotate.sh scripts/pg2sphinx_trigger.py scripts/checker.sh scripts/sphinx_log_to_json.py /
 COPY --chown=geodata:geodata conf /conf/
 
 USER geodata

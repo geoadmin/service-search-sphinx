@@ -21,8 +21,8 @@ service cron start || exit 1
 envsubst < docker-crontab | crontab # DBSTAGING will be read from container environment
 
 # prepare the applogs for output on /proc/1/fd/1
-tail --pid $$ -F /var/log/sphinxsearch/searchd.log | python3 /app/scripts/sphinx_log_to_json.py --logger searchd &
-tail --pid $$ -F /var/log/sphinxsearch/query.log | python3 /app/scripts/sphinx_log_to_json.py --logger query &
+tail --pid $$ -F /var/log/sphinxsearch/searchd.log | python3 /sphinx_log_to_json.py --logger searchd &
+tail --pid $$ -F /var/log/sphinxsearch/query.log | python3 /sphinx_log_to_json.py --logger query &
 
 # prepare the logs for the cronjobs
 # Have the main Docker process tail the files to produce stdout and stderr
