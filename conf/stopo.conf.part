@@ -951,6 +951,24 @@ source src_ch_swisstopo_geologie_rohstoffe_kies_abbau_verarbeitung : def_searcha
         from geol.rohstoffe_kiesabbauverarbeitung
 }
 
+source src_ch_swisstopo_amtliches_strassenverzeichnis_issues : def_searchable_features
+{
+   sql_db = stopo_${DBSTAGING}
+   sql_query = \
+      SELECT bgdi_id as id \
+          , str_esid as label \
+          , 'feature' as origin  \
+          , remove_accents(concat_ws(' ', str_esid, stn_label)) as detail  \
+          , 'ch.swisstopo.amtliches-strassenverzeichnis_issues' as layer  \
+          , quadindex(the_geom) as geom_quadindex  \
+          , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat  \
+          , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon  \
+          , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+          , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+          , bgdi_id::text as feature_id  \
+      from vd.streetnames_issues
+}
+
 ## INDICES
 
 index ch_swisstopo_verschiebungsvektoren_tsp1
@@ -1276,4 +1294,8 @@ index ch_swisstopo_geologie_rohstoffe_kies_abbau_verarbeitung : ch_swisstopo_ver
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_geologie_rohstoffe_kies_abbau_verarbeitung
 }
 
-
+index ch_swisstopo_amtliches_strassenverzeichnis_issues : ch_swisstopo_verschiebungsvektoren_tsp1
+{
+    source = src_ch_swisstopo_amtliches_strassenverzeichnis_issues
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_amtliches_strassenverzeichnis_issues
+}
