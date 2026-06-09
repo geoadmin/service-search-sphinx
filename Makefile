@@ -86,7 +86,7 @@ export DOCKER_EXEC :=  docker run \
 				--rm \
 				-t \
 				-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index/ \
-				--env-file $(ENV_FILE) \
+				--env-file $(CURRENT_DIR)/$(ENV_FILE) \
 				--name $(DOCKER_LOCAL_TAG)_maintenance_$(PPID)\
 				$(DOCKER_IMG_LOCAL_TAG)
 
@@ -94,7 +94,7 @@ export DOCKER_EXEC_LOCAL :=  docker run \
 				--rm \
 				-t \
 				-v $(CURRENT_DIR)/conf/:/var/lib/sphinxsearch/data/index/ \
-				--env-file $(ENV_FILE) \
+				--env-file $(CURRENT_DIR)/$(ENV_FILE) \
 				--name $(DOCKER_LOCAL_TAG)_maintenance_$(PPID) \
 				$(DOCKER_IMG_LOCAL_TAG)
 
@@ -286,7 +286,7 @@ dockerrun: dockerbuild sphinx_efs
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
 		-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index_efs/ \
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
-		--env-file $(ENV_FILE) \
+		--env-file $(CURRENT_DIR)/$(ENV_FILE) \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
 
@@ -299,6 +299,6 @@ dockerrundebug: dockerbuild sphinx_efs
 		-p $(SPHINX_PORT):$(SPHINX_PORT) \
 		-v $(SPHINX_EFS):/var/lib/sphinxsearch/data/index_efs/ \
 		-v ${DOCKER_INDEX_VOLUME}:/var/lib/sphinxsearch/data/index/ \
-		--env-file $(ENV_FILE) \
+		--env-file $(CURRENT_DIR)/$(ENV_FILE) \
 		--name $(DOCKER_LOCAL_TAG) \
 		$(DOCKER_IMG_LOCAL_TAG)
