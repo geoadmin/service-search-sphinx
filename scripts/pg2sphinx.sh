@@ -39,12 +39,26 @@ if [ -n "${INDEX:-}" ]; then
     ${DOCKER_EXEC} python3 pg2sphinx_trigger.py -s /etc/sphinxsearch/sphinx.conf -c update -i "${INDEX}" || { throw_error $?; }
 fi
 
-mapfile -t array_config < <(${DOCKER_EXEC} cat /etc/sphinxsearch/sphinx.conf | grep -E "^[^#]+ path"  | awk -F"=" '{print $2}' | sed -n 's|^.*/||p' | sed 's/\r$//')
+# Read config file to identify valid indexes
+# Safety: If this fails, we must NOT proceed with orphan deletion to avoid removing all indexes
+if ! mapfile -t array_config < <(${DOCKER_EXEC} cat /etc/sphinxsearch/sphinx.conf | grep -E "^[^#]+ path"  | awk -F"=" '{print $2}' | sed -n 's|^.*/||p' | sed 's/\r$//'); then
+    >&2 echo "ERROR: Failed to read sphinx config file. Skipping orphan cleanup to avoid data loss."
+    exit 0
+fi
+
+# Safety check: Ensure we actually got some indexes from the config
+if [[ ${#array_config[@]} -eq 0 ]]; then
+    >&2 echo "ERROR: No indexes found in sphinx config. Skipping orphan cleanup to avoid data loss."
+    exit 0
+fi
+
 mapfile -t array_file < <(find "${SPHINX_EFS}" -maxdepth 1 -name "*.spd" 2> /dev/null | sed 's|.spd$||g' | sed -n -e 's|^.*/||p' )
 mapfile -t array_orphaned < <(comm -13 --nocheck-order <(printf '%s\n' "${array_config[@]}" | LC_ALL=C sort) <(printf '%s\n' "${array_file[@]}" | LC_ALL=C sort))
 
-# remove orphaned indexes from EFS
 echo "looking for orphaned indexes in filesystem."
+echo "Config defines ${#array_config[@]} indexes, filesystem has ${#array_file[@]} indexes, ${#array_orphaned[@]} orphaned."
+
+# remove orphaned indexes from EFS
 for index in "${array_orphaned[@]}"; do
     # skip empty elements
     [[ -z ${index} ]] && continue
