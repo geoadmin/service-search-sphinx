@@ -97,7 +97,7 @@ source src_ch_swisstopo_vec200_names_namedlocation : def_searchable_features
     sql_query = \
         SELECT row_number() OVER(ORDER BY gtdboid asc) as id \
             , 'feature' as origin \
-            , remove_accents(coalesce(objname1,'')) as detail \
+            , remove_accents(concat_ws(' ', objname1, objname2)) as detail \
             , 'ch.swisstopo.vec200-names-namedlocation' as layer \
             , quadindex(the_geom) as geom_quadindex \
             , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
