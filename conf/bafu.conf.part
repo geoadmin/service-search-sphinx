@@ -361,24 +361,6 @@ source src_ch_bafu_gewaesserschutz_biologischer_zustand_makrophyten : def_search
         from wasser.gewaesserschutz_makrophyten
 }
 
-source src_ch_bafu_gewaesserschutz_biologischer_zustand_makrozoobenthos : def_searchable_features
-{
-    sql_db = bafu_${DBSTAGING}
-    sql_query = \
-        SELECT bgdi_id::bigint as id \
-            , 'feature' as origin \
-            , 'ch.bafu.gewaesserschutz-biologischer_zustand_makrozoobenthos' as layer \
-            , remove_accents(concat_ws(' ', station_nr, id_nawa)) as detail \
-            , jahr as label \
-            , quadindex(the_geom) as geom_quadindex \
-            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
-            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
-            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
-            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
-            , bgdi_id::text as feature_id \
-        from wasser.gewaesserschutz_makrozoobenthos
-}
-
 source src_ch_bafu_gewaesserschutz_biologischer_zustand_fische : def_searchable_features
 {
     sql_db = bafu_${DBSTAGING}
@@ -1447,12 +1429,6 @@ index ch_bafu_gewaesserschutz_chemischer_zustand_makrophyten : ch_bafu_hydrologi
 {
     source = src_ch_bafu_gewaesserschutz_chemischer_zustand_makrophyten
     path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_chemischer_zustand_makrophyten
-}
-
-index ch_bafu_gewaesserschutz_chemischer_zustand_makrozoobenthos : ch_bafu_hydrologie_wassertemperaturmessstationen
-{
-    source = src_ch_bafu_gewaesserschutz_chemischer_zustand_makrozoobenthos
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_chemischer_zustand_makrozoobenthos
 }
 
 index ch_bafu_gewaesserschutz_chemischer_zustand_fische : ch_bafu_hydrologie_wassertemperaturmessstationen
