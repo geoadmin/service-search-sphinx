@@ -1449,10 +1449,10 @@ index ch_bafu_gewaesserschutz_biologischer_zustand_makrophyten : ch_bafu_hydrolo
     path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_biologischer_zustand_makrophyten
 }
 
-index ch_bafu_gewaesserschutz_bio_zustand_makrozoobenthos : ch_bafu_hydrologie_wassertemperaturmessstationen
+index ch_bafu_gewaesserschutz_biologischer_zustand_makrozoobenthos : ch_bafu_hydrologie_wassertemperaturmessstationen
 {
     source = src_ch_bafu_gewaesserschutz_bio_zustand_makrozoobenthos
-    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_bio_zustand_makrozoobenthos
+    path = /var/lib/sphinxsearch/data/index/ch_bafu_gewaesserschutz_biologischer_zustand_makrozoobenthos
 }
 
 index ch_bafu_gewaesserschutz_biologischer_zustand_fische : ch_bafu_hydrologie_wassertemperaturmessstationen
