@@ -57,6 +57,25 @@ source src_ch_swisstopo_lubis_luftbilder_farbe : def_searchable_features_with_ye
         from public.luftbilder_swisstopo_color
 }
 
+source src_ch_swisstopo_lubis_luftbilder_digital : def_searchable_features_with_year
+{
+    sql_db = lubis_${DBSTAGING}
+    sql_query = \
+        SELECT row_number() OVER(ORDER BY feature_id asc) as id \
+            , concat_ws(' ', capture_time::text, feature_id) as label \
+            , 'feature' as origin \
+            , remove_accents(feature_id) as detail \
+            , 'ch.swisstopo.lubis-luftbilder_digital' as layer \
+            , bgdi_quadindex as geom_quadindex \
+            , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
+            , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
+            , box2d(st_transform(the_geom, 21781)) as geom_st_box2d \
+            , box2d(st_transform(the_geom, 2056)) as geom_st_box2d_lv95 \
+            , bgdi_flugjahr as year \
+            , feature_id::text as feature_id \
+        from public.luftbilder_swisstopo_digital
+}
+
 source src_ch_swisstopo_lubis_luftbilder_schwarzweiss: def_searchable_features_with_year
 {
     sql_db = lubis_${DBSTAGING}
@@ -180,6 +199,12 @@ index ch_swisstopo_lubis_luftbilder_schwarzweiss : ch_swisstopo_lubis_luftbilder
 {
     source = src_ch_swisstopo_lubis_luftbilder_schwarzweiss
     path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_schwarzweiss
+}
+
+index ch_swisstopo_lubis_luftbilder_digital : ch_swisstopo_lubis_luftbilder_farbe
+{
+    source = src_ch_swisstopo_lubis_luftbilder_digital
+    path = /var/lib/sphinxsearch/data/index/ch_swisstopo_lubis_luftbilder_digital
 }
 
 index ch_swisstopo_lubis_luftbilder_infrarot : ch_swisstopo_lubis_luftbilder_farbe

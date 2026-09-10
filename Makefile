@@ -18,22 +18,22 @@ YELLOW := $(shell tput setaf 3)
 BLUE := $(shell tput setaf 6)
 BOLD :=$(shell tput bold)
 
-# Docker metadata dynamic env variables for envsubst etc.
-export GIT_HASH ?= $(shell git rev-parse HEAD)
-export GIT_HASH_SHORT ?= $(shell git rev-parse --short HEAD)
-export GIT_BRANCH ?= $(shell git symbolic-ref HEAD --short 2>/dev/null)
-export GIT_DIRTY ?= "$(shell git status --porcelain | head -n 10)"
-export GIT_TAG ?= $(shell git describe --tags || echo "no version info")
+# Docker metadata dynamic env variables
+# GIT_HASH_SHORT feeds DOCKER_LOCAL_TAG; lazy (=) so it is only evaluated when referenced.
+# The remaining git metadata is scoped to the dockerbuild target (see below).
+GIT_HASH_SHORT = $(shell git rev-parse --short HEAD)
 export AUTHOR ?= $(USER)
 
 # general targets timestamps
 REQUIREMENTS := $(PIP_FILE) $(PIP_FILE_LOCK)
 
 # Find all python files that are not inside a hidden directory (directory starting with .)
-PYTHON_FILES := $(shell find ./* -type f -name "*.py" -print)
+# Lazy (=) so the find only runs for targets that actually reference it.
+PYTHON_FILES = $(shell find ./* -type f -name "*.py" -print)
 
 # Find all bash files that are not inside a hidden directory (directory starting with .)
-BASH_FILES := $(shell find ./* -type f -name "*.sh" -print)
+# Lazy (=) so the find only runs for targets that actually reference it.
+BASH_FILES = $(shell find ./* -type f -name "*.sh" -print)
 
 # PIPENV files
 PIP_FILE = Pipfile
@@ -44,10 +44,6 @@ export DOCKER_REGISTRY ?= 974517877189.dkr.ecr.eu-central-1.amazonaws.com
 export DOCKER_LOCAL_TAG ?= local-$(USER)-$(GIT_HASH_SHORT)
 export DOCKER_IMG_LOCAL_TAG ?= $(DOCKER_REGISTRY)/$(SERVICE_NAME):$(DOCKER_LOCAL_TAG)
 export DOCKER_INDEX_VOLUME ?= sphinx_index_$(STAGING)
-
-# git pre-commit hook
-GIT_DIR := $(shell git rev-parse --git-dir)
-HOOK_DIR := $(GIT_DIR)/hooks
 
 # Commands
 PIPENV_RUN := pipenv run
@@ -140,11 +136,8 @@ help:
 	@echo
 	@echo "VARIABLES"
 	@echo "-----------"
-	@echo "- GIT_HASH:                 ${YELLOW}${GIT_HASH}${RESET}"
 	@echo "- GIT_HASH_SHORT:           ${YELLOW}${GIT_HASH_SHORT}${RESET}"
-	@echo "- GIT_BRANCH:               ${YELLOW}${GIT_BRANCH}${RESET}"
-	@echo "- GIT_TAG:                  ${YELLOW}${GIT_TAG}${RESET}"
-	@echo "- GIT_DIRTY:                ${YELLOW}${GIT_DIRTY}${RESET}"
+	@echo "                            (full git metadata is only computed for the dockerbuild target)"
 	@echo
 	@echo "- AUTHOR/USER:              ${YELLOW}${AUTHOR}/${USER}${RESET}"
 	@echo "- DOCKER_REGISTRY:          ${YELLOW}${DOCKER_REGISTRY}${RESET}"
@@ -244,12 +237,18 @@ dockerlogin:
 
 
 .PHONY: dockerbuild
+# git metadata is computed only when this target runs (target-specific vars)
+dockerbuild: export GIT_HASH = $(shell git rev-parse HEAD)
+dockerbuild: export GIT_BRANCH = $(shell git symbolic-ref HEAD --short 2>/dev/null)
+dockerbuild: export GIT_DIRTY = $(shell git status --porcelain | head -n 10)
+dockerbuild: export GIT_TAG = $(shell git describe --tags || echo "no version info")
 dockerbuild:
 	docker build \
 		-q \
 		--build-arg GIT_HASH="${GIT_HASH}" \
 		--build-arg GIT_BRANCH="${GIT_BRANCH}" \
-		--build-arg GIT_DIRTY=$(GIT_DIRTY) \
+		--build-arg GIT_DIRTY="$(GIT_DIRTY)" \
+		--build-arg GIT_TAG="${GIT_TAG}" \
 		--build-arg VERSION="${DOCKER_LOCAL_TAG}" \
 		--build-arg AUTHOR="${AUTHOR}" \
 		--tag $(DOCKER_IMG_LOCAL_TAG) .
