@@ -51,10 +51,12 @@ RUN mkdir -p /usr/local/share/app && echo "${VERSION}" > /usr/local/share/app/ve
 ARG GIT_HASH=unknown
 ARG GIT_BRANCH=unknown
 ARG GIT_DIRTY=""
+ARG GIT_TAG=unknown
 ARG AUTHOR=unknown
 LABEL git.hash=$GIT_HASH
 LABEL git.branch=$GIT_BRANCH
 LABEL git.dirty="$GIT_DIRTY"
+LABEL git.tag=$GIT_TAG
 LABEL author=$AUTHOR
 LABEL version=$VERSION
 
